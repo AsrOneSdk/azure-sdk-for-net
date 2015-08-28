@@ -162,6 +162,17 @@ namespace Microsoft.Azure.Management.SiteRecovery
             get { return this._recoveryPlan; }
         }
         
+        private IReplicationProtectedItemOperations _replicationProtectedItem;
+        
+        /// <summary>
+        /// Definition of Replication protected item operations for the Site
+        /// Recovery extension.
+        /// </summary>
+        public virtual IReplicationProtectedItemOperations ReplicationProtectedItem
+        {
+            get { return this._replicationProtectedItem; }
+        }
+        
         private IServerOperations _servers;
         
         /// <summary>
@@ -184,6 +195,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             this._protectionEntity = new ProtectionEntityOperations(this);
             this._protectionProfile = new ProtectionProfileOperations(this);
             this._recoveryPlan = new RecoveryPlanOperations(this);
+            this._replicationProtectedItem = new ReplicationProtectedItemOperations(this);
             this._servers = new ServerOperations(this);
             this._apiVersion = "2015-01-01";
             this._longRunningOperationInitialTimeout = -1;
@@ -306,6 +318,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             this._protectionEntity = new ProtectionEntityOperations(this);
             this._protectionProfile = new ProtectionProfileOperations(this);
             this._recoveryPlan = new RecoveryPlanOperations(this);
+            this._replicationProtectedItem = new ReplicationProtectedItemOperations(this);
             this._servers = new ServerOperations(this);
             this._apiVersion = "2015-01-01";
             this._longRunningOperationInitialTimeout = -1;
