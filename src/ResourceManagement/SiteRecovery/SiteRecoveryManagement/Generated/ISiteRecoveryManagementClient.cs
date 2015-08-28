@@ -130,6 +130,15 @@ namespace Microsoft.Azure.Management.SiteRecovery
         }
         
         /// <summary>
+        /// Definition of Replication protected item operations for the Site
+        /// Recovery extension.
+        /// </summary>
+        IReplicationProtectedItemOperations ReplicationProtectedItem
+        {
+            get; 
+        }
+        
+        /// <summary>
         /// Definition of server operations for the Site Recovery extension.
         /// </summary>
         IServerOperations Servers

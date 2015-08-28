@@ -24,6 +24,7 @@
     <Compile Include="Generated\IProtectionProfileOperations.cs" />
     <Compile Include="Generated\IRecoveryPlanOperations.cs" />
     <Compile Include="Generated\IRecoveryServicesManagementClient.cs" />
+    <Compile Include="Generated\IReplicationProtectedItemOperations.cs" />
     <Compile Include="Generated\IResourceGroupsOperations.cs" />
     <Compile Include="Generated\IServerOperations.cs" />
     <Compile Include="Generated\ISiteRecoveryManagementClient.cs" />
@@ -48,8 +49,10 @@
     </Compile>
     <Compile Include="Generated\Models\HyperVReplicaAzureProtectionProfileDetails.cs" />
     <Compile Include="Generated\Models\HyperVReplicaAzureProtectionProfileInput.cs" />
+    <Compile Include="Generated\Models\HyperVReplicaAzureReplicationProtectedItemDetails.cs" />
     <Compile Include="Generated\Models\HyperVReplicaProtectionProfileDetails.cs" />
     <Compile Include="Generated\Models\HyperVReplicaProtectionProfileInput.cs" />
+    <Compile Include="Generated\Models\HyperVReplicaReplicationProtectedItemDetails.cs" />
     <Compile Include="Generated\Models\JobListResponse.cs" />
     <Compile Include="Generated\Models\JobQueryParameter.cs" />
     <Compile Include="Generated\Models\OnPremProtectionEntityProviderSettings.cs" />
@@ -66,6 +69,11 @@
     <Compile Include="Generated\Models\RecoveryPlanResponse.cs" />
     <Compile Include="Generated\Models\RecoveryPlanXmlData.cs" />
     <Compile Include="Generated\Models\RecoveryPlanXmlOuput.cs" />
+    <Compile Include="Generated\Models\ReplicationProtectedItem.cs" />
+    <Compile Include="Generated\Models\ReplicationProtectedItemListResponse.cs" />
+    <Compile Include="Generated\Models\ReplicationProtectedItemProperties.cs" />
+    <Compile Include="Generated\Models\ReplicationProtectedItemProviderDetails.cs" />
+    <Compile Include="Generated\Models\ReplicationProtectedItemResponse.cs" />
     <Compile Include="Generated\Models\ReprotectOperationResponse.cs" />
     <Compile Include="Generated\Models\ReprotectRequest.cs" />
     <Compile Include="Generated\Models\ResourceExtendedInformation.cs" />
@@ -153,6 +161,8 @@
     <Compile Include="Generated\RecoveryPlanOperationsExtensions.cs" />
     <Compile Include="Generated\RecoveryServicesManagementClient.cs" />
     <Compile Include="Generated\RecoveryServicesManagementClientExtensions.cs" />
+    <Compile Include="Generated\ReplicationProtectedItemOperations.cs" />
+    <Compile Include="Generated\ReplicationProtectedItemOperationsExtensions.cs" />
     <Compile Include="Generated\ResourceGroupsOperations.cs" />
     <Compile Include="Generated\ResourceGroupsOperationsExtensions.cs" />
     <Compile Include="Generated\ServerOperations.cs" />
