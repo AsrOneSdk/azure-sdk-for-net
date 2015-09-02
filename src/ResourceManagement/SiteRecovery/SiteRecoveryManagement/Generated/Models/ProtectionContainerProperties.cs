@@ -32,15 +32,15 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class ProtectionContainerProperties
     {
-        private IList<ProtectionProfile> _availableProtectionProfiles;
+        private IList<Policy> _availablePolicies;
         
         /// <summary>
-        /// Required. AvailableProtectionProfiles of protection container.
+        /// Required. Available Policy of protection container.
         /// </summary>
-        public IList<ProtectionProfile> AvailableProtectionProfiles
+        public IList<Policy> AvailablePolicies
         {
-            get { return this._availableProtectionProfiles; }
-            set { this._availableProtectionProfiles = value; }
+            get { return this._availablePolicies; }
+            set { this._availablePolicies = value; }
         }
         
         private string _fabricObjectId;
@@ -104,7 +104,7 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         /// </summary>
         public ProtectionContainerProperties()
         {
-            this.AvailableProtectionProfiles = new LazyList<ProtectionProfile>();
+            this.AvailablePolicies = new LazyList<Policy>();
         }
     }
 }

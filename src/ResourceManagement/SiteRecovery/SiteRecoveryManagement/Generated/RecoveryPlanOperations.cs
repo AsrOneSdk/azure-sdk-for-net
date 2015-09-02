@@ -119,7 +119,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(name);
             url = url + "/Commit";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2015-08-10");
+            queryParameters.Add("api-version=2015-11-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);
@@ -282,7 +282,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/RecoveryPlans";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2015-08-10");
+            queryParameters.Add("api-version=2015-11-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);
@@ -455,7 +455,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/RecoveryPlans/";
             url = url + Uri.EscapeDataString(name);
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2015-08-10");
+            queryParameters.Add("api-version=2015-11-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);
@@ -624,7 +624,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(name);
             url = url + "/PlannedFailover";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2015-08-10");
+            queryParameters.Add("api-version=2015-11-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);
@@ -827,7 +827,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(name);
             url = url + "/TestFailover";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2015-08-10");
+            queryParameters.Add("api-version=2015-11-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);
@@ -1030,7 +1030,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(name);
             url = url + "/UnplannedFailover";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2015-08-10");
+            queryParameters.Add("api-version=2015-11-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);
@@ -1219,7 +1219,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(name);
             url = url + "/Reprotect";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2015-08-10");
+            queryParameters.Add("api-version=2015-11-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);
@@ -1382,7 +1382,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/RecoveryPlans";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2015-08-10");
+            queryParameters.Add("api-version=2015-11-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);
@@ -1744,7 +1744,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/RecoveryPlans/";
             url = url + Uri.EscapeDataString(name);
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2015-08-10");
+            queryParameters.Add("api-version=2015-11-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);
@@ -3733,7 +3733,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(name);
             url = url + "/RecoveryPlanXml";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2015-08-10");
+            queryParameters.Add("api-version=2015-11-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);
@@ -4140,7 +4140,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/RecoveryPlans";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2015-08-10");
+            queryParameters.Add("api-version=2015-11-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);

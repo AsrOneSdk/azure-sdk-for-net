@@ -36,15 +36,15 @@ namespace SiteRecovery.Tests
                 context.Start();
                 var client = GetSiteRecoveryClient(CustomHttpHandler);
 
-                var response = client.Servers.List(RequestHeaders);
+                var response = client.Fabrics.List(RequestHeaders);
 
-                Assert.True(response.Servers.Count > 0, "Servers count can't be less than 1");
+                Assert.True(response.Fabrics.Count > 0, "Servers count can't be less than 1");
                 Assert.True(
-                    response.Servers.All(
+                    response.Fabrics.All(
                     server => !string.IsNullOrEmpty(server.Name)),
                     "Server name can't be null or empty");
                 Assert.True(
-                    response.Servers.All(
+                    response.Fabrics.All(
                     server => !string.IsNullOrEmpty(server.Id)),
                     "Server Id can't be null or empty");
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -59,7 +59,7 @@ namespace SiteRecovery.Tests
                 context.Start();
                 var client = GetSiteRecoveryClient(CustomHttpHandler);
 
-                var response = client.ProtectionContainer.List(RequestHeaders);
+                var response = client.ProtectionContainer.List("",RequestHeaders);
 
                 Assert.True(
                     response.ProtectionContainers.Count > 0,

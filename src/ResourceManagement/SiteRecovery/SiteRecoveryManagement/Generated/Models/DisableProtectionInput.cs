@@ -30,15 +30,15 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class DisableProtectionInput
     {
-        private string _protectionProfileId;
+        private string _policyName;
         
         /// <summary>
-        /// Optional. The ProtectionProfileId.
+        /// Optional. The RPolicy Name.
         /// </summary>
-        public string ProtectionProfileId
+        public string PolicyName
         {
-            get { return this._protectionProfileId; }
-            set { this._protectionProfileId = value; }
+            get { return this._policyName; }
+            set { this._policyName = value; }
         }
         
         private DisableProtectionProviderSpecificInput _providerSettings;

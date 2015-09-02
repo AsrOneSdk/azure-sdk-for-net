@@ -86,9 +86,25 @@ namespace Microsoft.Azure.Management.SiteRecovery
         }
         
         /// <summary>
+        /// Definition of fabric operations for the Site Recovery extension.
+        /// </summary>
+        IFabricOperations Fabrics
+        {
+            get; 
+        }
+        
+        /// <summary>
         /// Definition for Job Operations.
         /// </summary>
         IJobOperations Jobs
+        {
+            get; 
+        }
+        
+        /// <summary>
+        /// Definition of Policy operations for the Site Recovery extension.
+        /// </summary>
+        IPolicyOperations Policies
         {
             get; 
         }
@@ -112,15 +128,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
         }
         
         /// <summary>
-        /// Definition of Protection Profile operations for the Site Recovery
-        /// extension.
-        /// </summary>
-        IProtectionProfileOperations ProtectionProfile
-        {
-            get; 
-        }
-        
-        /// <summary>
         /// Definition of recoveryplan operations for the Site Recovery
         /// extension.
         /// </summary>
@@ -130,9 +137,18 @@ namespace Microsoft.Azure.Management.SiteRecovery
         }
         
         /// <summary>
-        /// Definition of server operations for the Site Recovery extension.
+        /// Definition of provider operations for the Site Recovery extension.
         /// </summary>
-        IServerOperations Servers
+        IRecoveryServicesProviderOperations RecoveryServicesProvider
+        {
+            get; 
+        }
+        
+        /// <summary>
+        /// Definition of Replication protected item operations for the Site
+        /// Recovery extension.
+        /// </summary>
+        IReplicationProtectedItemOperations ReplicationProtectedItem
         {
             get; 
         }

@@ -32,13 +32,13 @@ namespace SiteRecovery.Tests
                 context.Start();
                 var client = GetSiteRecoveryClient(CustomHttpHandler);
 
-                var responseServers = client.Servers.List(RequestHeaders);
+                var responseServers = client.Fabrics.List(RequestHeaders);
 
-                var response = client.Servers.Get(responseServers.Servers[0].Name, RequestHeaders);
+                var response = client.Fabrics.Get(responseServers.Fabrics[0].Name, RequestHeaders);
 
-                Assert.NotNull(response.Server);
-                Assert.NotNull(response.Server.Name);
-                Assert.NotNull(response.Server.Id);
+                Assert.NotNull(response.Fabric);
+                Assert.NotNull(response.Fabric.Name);
+                Assert.NotNull(response.Fabric.Id);
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             }
         }
@@ -51,8 +51,8 @@ namespace SiteRecovery.Tests
                 context.Start();
                 var client = GetSiteRecoveryClient(CustomHttpHandler);
 
-                var protectionContainerList = client.ProtectionContainer.List(RequestHeaders);
-                var response = client.ProtectionContainer.Get(
+                var protectionContainerList = client.ProtectionContainer.List("",RequestHeaders);
+                var response = client.ProtectionContainer.Get("",
                     protectionContainerList.ProtectionContainers[0].Name,
                     RequestHeaders);
 

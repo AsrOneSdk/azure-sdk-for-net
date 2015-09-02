@@ -77,6 +77,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._friendlyName = value; }
         }
         
+        private Policy _policy;
+        
+        /// <summary>
+        /// Optional. Policy
+        /// </summary>
+        public Policy Policy
+        {
+            get { return this._policy; }
+            set { this._policy = value; }
+        }
+        
         private string _protectionContainerId;
         
         /// <summary>
@@ -86,17 +97,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         {
             get { return this._protectionContainerId; }
             set { this._protectionContainerId = value; }
-        }
-        
-        private ProtectionProfile _protectionProfile;
-        
-        /// <summary>
-        /// Optional. Protection Profile
-        /// </summary>
-        public ProtectionProfile ProtectionProfile
-        {
-            get { return this._protectionProfile; }
-            set { this._protectionProfile = value; }
         }
         
         private string _protectionStateDescription;
