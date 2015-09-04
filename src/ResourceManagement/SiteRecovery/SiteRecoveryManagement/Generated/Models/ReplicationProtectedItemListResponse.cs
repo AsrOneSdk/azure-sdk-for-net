@@ -29,14 +29,14 @@ using Microsoft.Azure.Management.SiteRecovery.Models;
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// The response model for the list ReplicationProtectedItem operation.
+    /// The response model for the list replicated protected items.
     /// </summary>
     public partial class ReplicationProtectedItemListResponse : AzureOperationResponse
     {
         private string _nextLink;
         
         /// <summary>
-        /// Optional. The next link.
+        /// Optional. Next Link.
         /// </summary>
         public string NextLink
         {
@@ -47,8 +47,7 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         private IList<ReplicationProtectedItem> _replicationProtectedItems;
         
         /// <summary>
-        /// Optional. The list of ReplicationProtectedItems under given
-        /// protection Container.
+        /// Optional. The list of servers for the given vault.
         /// </summary>
         public IList<ReplicationProtectedItem> ReplicationProtectedItems
         {

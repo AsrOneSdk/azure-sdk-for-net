@@ -30,26 +30,15 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class EnableProtectionInput
     {
-        private string _policyName;
+        private EnableProtectionInputProperties _properties;
         
         /// <summary>
-        /// Optional. The Policy name.
+        /// Optional. Enable protection input properties.
         /// </summary>
-        public string PolicyName
+        public EnableProtectionInputProperties Properties
         {
-            get { return this._policyName; }
-            set { this._policyName = value; }
-        }
-        
-        private EnableProtectionProviderSpecificInput _providerSettings;
-        
-        /// <summary>
-        /// Optional. Gets or sets the ProviderSettings.
-        /// </summary>
-        public EnableProtectionProviderSpecificInput ProviderSettings
-        {
-            get { return this._providerSettings; }
-            set { this._providerSettings = value; }
+            get { return this._properties; }
+            set { this._properties = value; }
         }
         
         /// <summary>

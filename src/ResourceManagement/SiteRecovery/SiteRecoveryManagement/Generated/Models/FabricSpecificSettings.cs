@@ -21,19 +21,18 @@
 
 using System;
 using System.Linq;
-using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// The Planned failover request object.
+    /// Fabric specific details.
     /// </summary>
-    public partial class PlannedFailoverRequest : FailoverRequest
+    public partial class FabricSpecificSettings
     {
         /// <summary>
-        /// Initializes a new instance of the PlannedFailoverRequest class.
+        /// Initializes a new instance of the FabricSpecificSettings class.
         /// </summary>
-        public PlannedFailoverRequest()
+        public FabricSpecificSettings()
         {
         }
     }

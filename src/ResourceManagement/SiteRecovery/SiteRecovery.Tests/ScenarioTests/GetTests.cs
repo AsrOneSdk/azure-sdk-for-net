@@ -62,5 +62,20 @@ namespace SiteRecovery.Tests
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             }
         }
+
+        [Fact]
+        public void GetReplicationProtectedItems()
+        {
+            using (UndoContext context = UndoContext.Current)
+            {
+                context.Start();
+                var client = GetSiteRecoveryClient(CustomHttpHandler);
+
+                string fabricId = "6adf9420-b02f-4377-8ab7-ff384e6d792f";
+                string containerId = "4f94127d-2eb3-449d-a708-250752e93cb4";
+
+                var response = client.ReplicationProtectedItem.List(fabricId, containerId, RequestHeaders);
+            }
+        }
     }
 }

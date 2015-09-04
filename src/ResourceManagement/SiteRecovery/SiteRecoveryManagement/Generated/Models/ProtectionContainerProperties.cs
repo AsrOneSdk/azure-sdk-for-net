@@ -32,43 +32,76 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class ProtectionContainerProperties
     {
-        private IList<Policy> _availablePolicies;
+        private IList<PairingDetails> _associationDetails;
         
         /// <summary>
-        /// Required. Available Policy of protection container.
+        /// Optional. Pairing details.
         /// </summary>
-        public IList<Policy> AvailablePolicies
+        public IList<PairingDetails> AssociationDetails
         {
-            get { return this._availablePolicies; }
-            set { this._availablePolicies = value; }
+            get { return this._associationDetails; }
+            set { this._associationDetails = value; }
         }
         
-        private string _fabricObjectId;
+        private IList<ReplicationProviders> _availableReplicationProviders;
         
         /// <summary>
-        /// Required. FabricObjectId of the protection container.
+        /// Optional. Avaliable replication providers.
         /// </summary>
-        public string FabricObjectId
+        public IList<ReplicationProviders> AvailableReplicationProviders
         {
-            get { return this._fabricObjectId; }
-            set { this._fabricObjectId = value; }
+            get { return this._availableReplicationProviders; }
+            set { this._availableReplicationProviders = value; }
         }
         
-        private string _fabricType;
+        private string _blockUnpairingPECount;
         
         /// <summary>
-        /// Required. FabricType of protection container.
+        /// Optional. Number of PEs blocking unpairing.
         /// </summary>
-        public string FabricType
+        public string BlockUnpairingPECount
         {
-            get { return this._fabricType; }
-            set { this._fabricType = value; }
+            get { return this._blockUnpairingPECount; }
+            set { this._blockUnpairingPECount = value; }
+        }
+        
+        private string _blockUnpairingRGCount;
+        
+        /// <summary>
+        /// Optional. Number of RGs blocking unpairing.
+        /// </summary>
+        public string BlockUnpairingRGCount
+        {
+            get { return this._blockUnpairingRGCount; }
+            set { this._blockUnpairingRGCount = value; }
+        }
+        
+        private string _fabricBackingStatus;
+        
+        /// <summary>
+        /// Optional. Container fabric backing status.
+        /// </summary>
+        public string FabricBackingStatus
+        {
+            get { return this._fabricBackingStatus; }
+            set { this._fabricBackingStatus = value; }
+        }
+        
+        private string _fabricFriendlyName;
+        
+        /// <summary>
+        /// Optional. Fabric friendly name.
+        /// </summary>
+        public string FabricFriendlyName
+        {
+            get { return this._fabricFriendlyName; }
+            set { this._fabricFriendlyName = value; }
         }
         
         private string _friendlyName;
         
         /// <summary>
-        /// Required. FriendlyName of protection container.
+        /// Optional. Gets or sets the friendly name.
         /// </summary>
         public string FriendlyName
         {
@@ -76,26 +109,26 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._friendlyName = value; }
         }
         
-        private string _role;
+        private string _protectedPECount;
         
         /// <summary>
-        /// Required. Role of protection container.
+        /// Optional. Number of protected PEs.
         /// </summary>
-        public string Role
+        public string ProtectedPECount
         {
-            get { return this._role; }
-            set { this._role = value; }
+            get { return this._protectedPECount; }
+            set { this._protectedPECount = value; }
         }
         
-        private string _serverId;
+        private string _protectedRGCount;
         
         /// <summary>
-        /// Required. ID of the parent server
+        /// Optional. Number of protected RGs
         /// </summary>
-        public string ServerId
+        public string ProtectedRGCount
         {
-            get { return this._serverId; }
-            set { this._serverId = value; }
+            get { return this._protectedRGCount; }
+            set { this._protectedRGCount = value; }
         }
         
         /// <summary>
@@ -104,7 +137,8 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         /// </summary>
         public ProtectionContainerProperties()
         {
-            this.AvailablePolicies = new LazyList<Policy>();
+            this.AssociationDetails = new LazyList<PairingDetails>();
+            this.AvailableReplicationProviders = new LazyList<ReplicationProviders>();
         }
     }
 }

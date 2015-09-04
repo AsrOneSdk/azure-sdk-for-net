@@ -34,36 +34,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
     public partial interface IProtectionContainerOperations
     {
         /// <summary>
-        /// Refreshes a provider
-        /// </summary>
-        /// <param name='fabricName'>
-        /// Name of container's fabric
-        /// </param>
-        /// <param name='containerName'>
-        /// Name of container
-        /// </param>
-        /// <param name='input'>
-        /// Name of container
-        /// </param>
-        /// <param name='customRequestHeaders'>
-        /// Request header parameters.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// Cancellation token.
-        /// </param>
-        /// <returns>
-        /// A standard service response for long running operations.
-        /// </returns>
-        Task<LongRunningOperationResponse> BeginRefreshingAsync(string fabricName, string containerName, ProtectionContainerPairingManagementInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
-        
-        /// <summary>
         /// Get the protected container by Id.
         /// </summary>
-        /// <param name='fabricId'>
-        /// Fabric ID.
+        /// <param name='fabricName'>
+        /// Fabric Name.
         /// </param>
-        /// <param name='protectionContainerId'>
-        /// Protection Container ID.
+        /// <param name='protectionContainerName'>
+        /// Protection Container Name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Request header parameters.
@@ -74,30 +51,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// The response model for the Protection Container object.
         /// </returns>
-        Task<ProtectionContainerResponse> GetAsync(string fabricId, string protectionContainerId, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
-        
-        /// <summary>
-        /// The Get Operation Status operation returns the status of the
-        /// specified operation. After calling an asynchronous operation, you
-        /// can call Get Operation Status to determine whether the operation
-        /// has succeeded, failed, or is still in progress.
-        /// </summary>
-        /// <param name='operationStatusLink'>
-        /// Location value returned by the Begin operation.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// Cancellation token.
-        /// </param>
-        /// <returns>
-        /// A standard service response for long running operations.
-        /// </returns>
-        Task<LongRunningOperationResponse> GetRefreshStatusAsync(string operationStatusLink, CancellationToken cancellationToken);
+        Task<ProtectionContainerResponse> GetAsync(string fabricName, string protectionContainerName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
         
         /// <summary>
         /// Get the list of all ProtectionContainers for the given server.
         /// </summary>
-        /// <param name='fabricId'>
-        /// Fabric ID.
+        /// <param name='fabricName'>
+        /// Fabric Unique name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Request header parameters.
@@ -108,29 +68,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// The response model for the list ProtectionContainers operation.
         /// </returns>
-        Task<ProtectionContainerListResponse> ListAsync(string fabricId, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
-        
-        /// <summary>
-        /// Refreshes a provider
-        /// </summary>
-        /// <param name='fabricName'>
-        /// Name of container's fabric
-        /// </param>
-        /// <param name='containerName'>
-        /// Name of container
-        /// </param>
-        /// <param name='input'>
-        /// Name of container
-        /// </param>
-        /// <param name='customRequestHeaders'>
-        /// Request header parameters.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// Cancellation token.
-        /// </param>
-        /// <returns>
-        /// A standard service response for long running operations.
-        /// </returns>
-        Task<LongRunningOperationResponse> RefreshAsync(string fabricName, string containerName, ProtectionContainerPairingManagementInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        Task<ProtectionContainerListResponse> ListAsync(string fabricName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
     }
 }

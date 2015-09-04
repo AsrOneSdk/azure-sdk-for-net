@@ -776,11 +776,17 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     }
                                 }
                                 
-                                JToken instanceTypeValue = propertiesValue["instanceType"];
-                                if (instanceTypeValue != null && instanceTypeValue.Type != JTokenType.Null)
+                                JToken fabricTypeValue = propertiesValue["fabricType"];
+                                if (fabricTypeValue != null && fabricTypeValue.Type != JTokenType.Null)
                                 {
-                                    string instanceTypeInstance = ((string)instanceTypeValue);
-                                    propertiesInstance.InstanceType = instanceTypeInstance;
+                                    string fabricTypeInstance = ((string)fabricTypeValue);
+                                    propertiesInstance.FabricType = fabricTypeInstance;
+                                }
+                                
+                                JToken fabricSpecificSettingsValue = propertiesValue["fabricSpecificSettings"];
+                                if (fabricSpecificSettingsValue != null && fabricSpecificSettingsValue.Type != JTokenType.Null)
+                                {
+                                    string typeName = ((string)fabricSpecificSettingsValue["__type"]);
                                 }
                             }
                             
@@ -1024,11 +1030,17 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     }
                                 }
                                 
-                                JToken instanceTypeValue = propertiesValue["instanceType"];
-                                if (instanceTypeValue != null && instanceTypeValue.Type != JTokenType.Null)
+                                JToken fabricTypeValue = propertiesValue["fabricType"];
+                                if (fabricTypeValue != null && fabricTypeValue.Type != JTokenType.Null)
                                 {
-                                    string instanceTypeInstance = ((string)instanceTypeValue);
-                                    propertiesInstance.InstanceType = instanceTypeInstance;
+                                    string fabricTypeInstance = ((string)fabricTypeValue);
+                                    propertiesInstance.FabricType = fabricTypeInstance;
+                                }
+                                
+                                JToken fabricSpecificSettingsValue = propertiesValue["fabricSpecificSettings"];
+                                if (fabricSpecificSettingsValue != null && fabricSpecificSettingsValue.Type != JTokenType.Null)
+                                {
+                                    string typeName = ((string)fabricSpecificSettingsValue["__type"]);
                                 }
                             }
                             
@@ -1532,11 +1544,17 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken instanceTypeValue = propertiesValue["instanceType"];
-                                        if (instanceTypeValue != null && instanceTypeValue.Type != JTokenType.Null)
+                                        JToken fabricTypeValue = propertiesValue["fabricType"];
+                                        if (fabricTypeValue != null && fabricTypeValue.Type != JTokenType.Null)
                                         {
-                                            string instanceTypeInstance = ((string)instanceTypeValue);
-                                            propertiesInstance.InstanceType = instanceTypeInstance;
+                                            string fabricTypeInstance = ((string)fabricTypeValue);
+                                            propertiesInstance.FabricType = fabricTypeInstance;
+                                        }
+                                        
+                                        JToken fabricSpecificSettingsValue = propertiesValue["fabricSpecificSettings"];
+                                        if (fabricSpecificSettingsValue != null && fabricSpecificSettingsValue.Type != JTokenType.Null)
+                                        {
+                                            string typeName = ((string)fabricSpecificSettingsValue["__type"]);
                                         }
                                     }
                                     

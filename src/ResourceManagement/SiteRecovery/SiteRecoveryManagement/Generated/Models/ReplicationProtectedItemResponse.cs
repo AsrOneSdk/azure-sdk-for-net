@@ -27,14 +27,14 @@ using Microsoft.Azure.Management.SiteRecovery.Models;
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// The response model for the ReplicationProtectedItem object.
+    /// The response model for the fabric object
     /// </summary>
     public partial class ReplicationProtectedItemResponse : AzureOperationResponse
     {
         private ReplicationProtectedItem _replicationProtectedItem;
         
         /// <summary>
-        /// Optional. Replication protected item object
+        /// Optional. The ReplicationProtectedItem object
         /// </summary>
         public ReplicationProtectedItem ReplicationProtectedItem
         {

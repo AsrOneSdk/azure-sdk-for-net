@@ -21,31 +21,30 @@
 
 using System;
 using System.Linq;
-using Microsoft.Azure;
 using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// The response model for the Vm object.
+    /// Service response for enable DR operation.
     /// </summary>
-    public partial class ProtectionEntityResponse : AzureOperationResponse
+    public partial class EnableProtectionResponse : LongRunningOperationResponse
     {
-        private ProtectionEntity _protectionEntity;
+        private ReplicationProtectedItem _replicationProtectedItem;
         
         /// <summary>
-        /// Optional. Protection Entity object
+        /// Optional. Protected object.
         /// </summary>
-        public ProtectionEntity ProtectionEntity
+        public ReplicationProtectedItem ReplicationProtectedItem
         {
-            get { return this._protectionEntity; }
-            set { this._protectionEntity = value; }
+            get { return this._replicationProtectedItem; }
+            set { this._replicationProtectedItem = value; }
         }
         
         /// <summary>
-        /// Initializes a new instance of the ProtectionEntityResponse class.
+        /// Initializes a new instance of the EnableProtectionResponse class.
         /// </summary>
-        public ProtectionEntityResponse()
+        public EnableProtectionResponse()
         {
         }
     }

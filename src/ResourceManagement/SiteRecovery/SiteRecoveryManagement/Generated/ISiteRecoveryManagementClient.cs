@@ -119,15 +119,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
         }
         
         /// <summary>
-        /// Definition of protection entity operations for the Site Recovery
-        /// extension.
-        /// </summary>
-        IProtectionEntityOperations ProtectionEntity
-        {
-            get; 
-        }
-        
-        /// <summary>
         /// Definition of recoveryplan operations for the Site Recovery
         /// extension.
         /// </summary>

@@ -22,28 +22,39 @@
 using System;
 using System.Linq;
 
-namespace Microsoft.Azure.Management.RecoveryServices.Models
+namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// The definition of a Sku object.
+    /// Policy details for pairing.
     /// </summary>
-    public partial class Sku
+    public partial class PolicyDetails
     {
-        private string _name;
+        private string _associationStatus;
         
         /// <summary>
-        /// Optional. Name
+        /// Optional. Association Status
         /// </summary>
-        public string Name
+        public string AssociationStatus
         {
-            get { return this._name; }
-            set { this._name = value; }
+            get { return this._associationStatus; }
+            set { this._associationStatus = value; }
+        }
+        
+        private string _policyArmId;
+        
+        /// <summary>
+        /// Optional. Policy ARM Id.
+        /// </summary>
+        public string PolicyArmId
+        {
+            get { return this._policyArmId; }
+            set { this._policyArmId = value; }
         }
         
         /// <summary>
-        /// Initializes a new instance of the Sku class.
+        /// Initializes a new instance of the PolicyDetails class.
         /// </summary>
-        public Sku()
+        public PolicyDetails()
         {
         }
     }

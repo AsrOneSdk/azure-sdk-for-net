@@ -21,46 +21,20 @@
 
 using System;
 using System.Linq;
-using Microsoft.Azure;
-using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// The definition of a Server object.
+    /// Provider specific entity details.
     /// </summary>
-    public partial class Server : ResourceBaseExtended
+    public partial class ReplicationProviderSpecificSettings
     {
-        private ServerProperties _properties;
-        
         /// <summary>
-        /// Optional. Server properties.
+        /// Initializes a new instance of the
+        /// ReplicationProviderSpecificSettings class.
         /// </summary>
-        public ServerProperties Properties
+        public ReplicationProviderSpecificSettings()
         {
-            get { return this._properties; }
-            set { this._properties = value; }
-        }
-        
-        /// <summary>
-        /// Initializes a new instance of the Server class.
-        /// </summary>
-        public Server()
-        {
-        }
-        
-        /// <summary>
-        /// Initializes a new instance of the Server class with required
-        /// arguments.
-        /// </summary>
-        public Server(string location)
-            : this()
-        {
-            if (location == null)
-            {
-                throw new ArgumentNullException("location");
-            }
-            this.Location = location;
         }
     }
 }

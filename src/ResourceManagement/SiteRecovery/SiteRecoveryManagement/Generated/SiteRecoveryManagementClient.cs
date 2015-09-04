@@ -149,17 +149,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
             get { return this._protectionContainer; }
         }
         
-        private IProtectionEntityOperations _protectionEntity;
-        
-        /// <summary>
-        /// Definition of protection entity operations for the Site Recovery
-        /// extension.
-        /// </summary>
-        public virtual IProtectionEntityOperations ProtectionEntity
-        {
-            get { return this._protectionEntity; }
-        }
-        
         private IRecoveryPlanOperations _recoveryPlan;
         
         /// <summary>
@@ -203,7 +192,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
             this._jobs = new JobOperations(this);
             this._policies = new PolicyOperations(this);
             this._protectionContainer = new ProtectionContainerOperations(this);
-            this._protectionEntity = new ProtectionEntityOperations(this);
             this._recoveryPlan = new RecoveryPlanOperations(this);
             this._recoveryServicesProvider = new RecoveryServicesProviderOperations(this);
             this._replicationProtectedItem = new ReplicationProtectedItemOperations(this);
@@ -327,7 +315,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
             this._jobs = new JobOperations(this);
             this._policies = new PolicyOperations(this);
             this._protectionContainer = new ProtectionContainerOperations(this);
-            this._protectionEntity = new ProtectionEntityOperations(this);
             this._recoveryPlan = new RecoveryPlanOperations(this);
             this._recoveryServicesProvider = new RecoveryServicesProviderOperations(this);
             this._replicationProtectedItem = new ReplicationProtectedItemOperations(this);

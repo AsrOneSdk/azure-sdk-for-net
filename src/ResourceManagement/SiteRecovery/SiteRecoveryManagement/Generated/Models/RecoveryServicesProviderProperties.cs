@@ -52,6 +52,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._fabricName = value; }
         }
         
+        private string _fabricType;
+        
+        /// <summary>
+        /// Optional. Type of the Fabric.
+        /// </summary>
+        public string FabricType
+        {
+            get { return this._fabricType; }
+            set { this._fabricType = value; }
+        }
+        
         private string _friendlyName;
         
         /// <summary>

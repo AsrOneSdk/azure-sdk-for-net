@@ -658,12 +658,12 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             asrTaskInstance.EndTime = endTimeInstance2;
                                         }
                                         
-                                        JToken actionsArray = tasksValue["actions"];
-                                        if (actionsArray != null && actionsArray.Type != JTokenType.Null)
+                                        JToken allowedActionsArray2 = tasksValue["allowedActions"];
+                                        if (allowedActionsArray2 != null && allowedActionsArray2.Type != JTokenType.Null)
                                         {
-                                            foreach (JToken actionsValue in ((JArray)actionsArray))
+                                            foreach (JToken allowedActionsValue2 in ((JArray)allowedActionsArray2))
                                             {
-                                                asrTaskInstance.Actions.Add(((string)actionsValue));
+                                                asrTaskInstance.Actions.Add(((string)allowedActionsValue2));
                                             }
                                         }
                                         
@@ -1134,12 +1134,12 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             asrTaskInstance.EndTime = endTimeInstance2;
                                         }
                                         
-                                        JToken actionsArray = tasksValue["actions"];
-                                        if (actionsArray != null && actionsArray.Type != JTokenType.Null)
+                                        JToken allowedActionsArray2 = tasksValue["allowedActions"];
+                                        if (allowedActionsArray2 != null && allowedActionsArray2.Type != JTokenType.Null)
                                         {
-                                            foreach (JToken actionsValue in ((JArray)actionsArray))
+                                            foreach (JToken allowedActionsValue2 in ((JArray)allowedActionsArray2))
                                             {
-                                                asrTaskInstance.Actions.Add(((string)actionsValue));
+                                                asrTaskInstance.Actions.Add(((string)allowedActionsValue2));
                                             }
                                         }
                                         
@@ -1662,12 +1662,12 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             asrTaskInstance.EndTime = endTimeInstance2;
                                         }
                                         
-                                        JToken actionsArray = tasksValue["actions"];
-                                        if (actionsArray != null && actionsArray.Type != JTokenType.Null)
+                                        JToken allowedActionsArray2 = tasksValue["allowedActions"];
+                                        if (allowedActionsArray2 != null && allowedActionsArray2.Type != JTokenType.Null)
                                         {
-                                            foreach (JToken actionsValue in ((JArray)actionsArray))
+                                            foreach (JToken allowedActionsValue2 in ((JArray)allowedActionsArray2))
                                             {
-                                                asrTaskInstance.Actions.Add(((string)actionsValue));
+                                                asrTaskInstance.Actions.Add(((string)allowedActionsValue2));
                                             }
                                         }
                                         
@@ -2225,12 +2225,12 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     asrTaskInstance.EndTime = endTimeInstance2;
                                                 }
                                                 
-                                                JToken actionsArray = tasksValue["actions"];
-                                                if (actionsArray != null && actionsArray.Type != JTokenType.Null)
+                                                JToken allowedActionsArray2 = tasksValue["allowedActions"];
+                                                if (allowedActionsArray2 != null && allowedActionsArray2.Type != JTokenType.Null)
                                                 {
-                                                    foreach (JToken actionsValue in ((JArray)actionsArray))
+                                                    foreach (JToken allowedActionsValue2 in ((JArray)allowedActionsArray2))
                                                     {
-                                                        asrTaskInstance.Actions.Add(((string)actionsValue));
+                                                        asrTaskInstance.Actions.Add(((string)allowedActionsValue2));
                                                     }
                                                 }
                                                 

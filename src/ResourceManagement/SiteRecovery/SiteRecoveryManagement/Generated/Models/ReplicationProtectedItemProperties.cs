@@ -28,14 +28,14 @@ using Microsoft.Azure.Management.SiteRecovery.Models;
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// The definition of a Replication protected item properties object.
+    /// The definition of a Fabric properties.
     /// </summary>
     public partial class ReplicationProtectedItemProperties
     {
         private string _activeLocation;
         
         /// <summary>
-        /// Required. Active location of protection entity.
+        /// Optional. Gets or sets the Current active location of the PE.
         /// </summary>
         public string ActiveLocation
         {
@@ -43,33 +43,33 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._activeLocation = value; }
         }
         
-        private IList<string> _allowedOperations;
+        private IList<AllowedOperations> _allowedOperations;
         
         /// <summary>
-        /// Required. Gets or sets the allowed operations on the protection
-        /// entity.
+        /// Optional. Gets or sets the allowed operations on the Replication
+        /// protected item.
         /// </summary>
-        public IList<string> AllowedOperations
+        public IList<AllowedOperations> AllowedOperations
         {
             get { return this._allowedOperations; }
             set { this._allowedOperations = value; }
         }
         
-        private string _fabricObjectId;
+        private ReplicationProviderSpecificSettings _customSettings;
         
         /// <summary>
-        /// Required. Fabric ID of the object
+        /// Optional. Gets or sets the Replication provider custom settings.
         /// </summary>
-        public string FabricObjectId
+        public ReplicationProviderSpecificSettings CustomSettings
         {
-            get { return this._fabricObjectId; }
-            set { this._fabricObjectId = value; }
+            get { return this._customSettings; }
+            set { this._customSettings = value; }
         }
         
         private string _friendlyName;
         
         /// <summary>
-        /// Required. Friendly name
+        /// Optional. Gets or sets the name.
         /// </summary>
         public string FriendlyName
         {
@@ -77,43 +77,32 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._friendlyName = value; }
         }
         
-        private string _protectionContainerId;
+        private string _policyArmID;
         
         /// <summary>
-        /// Required. Protection container ID of the object
+        /// Optional. Gets or sets the ID of Policy governing this PE.
         /// </summary>
-        public string ProtectionContainerId
+        public string PolicyArmID
         {
-            get { return this._protectionContainerId; }
-            set { this._protectionContainerId = value; }
+            get { return this._policyArmID; }
+            set { this._policyArmID = value; }
         }
         
-        private Policy _protectionProfile;
+        private string _policyFriendlyName;
         
         /// <summary>
-        /// Optional. Protection Profile
+        /// Optional. Gets or sets the name of Policy governing this PE.
         /// </summary>
-        public Policy ProtectionProfile
+        public string PolicyFriendlyName
         {
-            get { return this._protectionProfile; }
-            set { this._protectionProfile = value; }
-        }
-        
-        private string _protectionStateDescription;
-        
-        /// <summary>
-        /// Required. Protection state description of the protected entity
-        /// </summary>
-        public string ProtectionStateDescription
-        {
-            get { return this._protectionStateDescription; }
-            set { this._protectionStateDescription = value; }
+            get { return this._policyFriendlyName; }
+            set { this._policyFriendlyName = value; }
         }
         
         private string _protectionStatus;
         
         /// <summary>
-        /// Required. Gets or sets the protection entity status.
+        /// Optional. Gets or sets the protection status.
         /// </summary>
         public string ProtectionStatus
         {
@@ -121,13 +110,21 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._protectionStatus = value; }
         }
         
+        private string _recoveryProviderName;
+        
+        /// <summary>
+        /// Optional. Gets or sets the recovery provider name.
+        /// </summary>
+        public string RecoveryProviderName
+        {
+            get { return this._recoveryProviderName; }
+            set { this._recoveryProviderName = value; }
+        }
+        
         private string _replicationHealth;
         
         /// <summary>
-        /// Required. Gets or sets the consolidated protection health for the
-        /// VM taking any issues with SRS as well as all the replication units
-        /// associated with the VM's replication group into account. This is a
-        /// string representation of the ProtectionHealth enumeration
+        /// Optional. Gets or sets the consolidated protection health
         /// </summary>
         public string ReplicationHealth
         {
@@ -138,8 +135,8 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         private string _replicationProvider;
         
         /// <summary>
-        /// Required. Name of the Replication Provider used to protect the
-        /// virtual machine. Null if not protected
+        /// Optional.  Gets or sets the Replication provider governing this PE
+        /// currently.
         /// </summary>
         public string ReplicationProvider
         {
@@ -147,32 +144,10 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._replicationProvider = value; }
         }
         
-        private ReplicationProtectedItemProviderDetails _replicationProviderSettings;
-        
-        /// <summary>
-        /// Required. The replication provider settings.
-        /// </summary>
-        public ReplicationProtectedItemProviderDetails ReplicationProviderSettings
-        {
-            get { return this._replicationProviderSettings; }
-            set { this._replicationProviderSettings = value; }
-        }
-        
-        private string _serverId;
-        
-        /// <summary>
-        /// Required. Server ID of the object
-        /// </summary>
-        public string ServerId
-        {
-            get { return this._serverId; }
-            set { this._serverId = value; }
-        }
-        
         private string _testFailoverStateDescription;
         
         /// <summary>
-        /// Required. Test failover state description.
+        /// Optional. Gets or sets the Test failover state description.
         /// </summary>
         public string TestFailoverStateDescription
         {
@@ -186,7 +161,7 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         /// </summary>
         public ReplicationProtectedItemProperties()
         {
-            this.AllowedOperations = new LazyList<string>();
+            this.AllowedOperations = new LazyList<AllowedOperations>();
         }
     }
 }

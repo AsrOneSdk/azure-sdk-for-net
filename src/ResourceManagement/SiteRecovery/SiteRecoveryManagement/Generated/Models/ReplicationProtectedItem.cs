@@ -27,14 +27,14 @@ using Microsoft.Azure.Management.SiteRecovery.Models;
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// The definition of a ReplicationProtectedItem object.
+    /// The definition of a Fabric object.
     /// </summary>
     public partial class ReplicationProtectedItem : ResourceBaseExtended
     {
         private ReplicationProtectedItemProperties _properties;
         
         /// <summary>
-        /// Required. Properties of the Replication protected item.
+        /// Required. Properties of the replicated protected item.
         /// </summary>
         public ReplicationProtectedItemProperties Properties
         {

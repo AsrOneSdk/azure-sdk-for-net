@@ -42,8 +42,8 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <param name='protectionContainerName'>
         /// Protection container name.
         /// </param>
-        /// <param name='replicationProtectedItemName'>
-        /// Replication protected item name.
+        /// <param name='input'>
+        /// Disable protection input.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Request header parameters.
@@ -54,7 +54,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        Task<LongRunningOperationResponse> DisableProtectionAsync(string fabricName, string protectionContainerName, string replicationProtectedItemName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        Task<LongRunningOperationResponse> BeginDisableProtectionAsync(string fabricName, string protectionContainerName, DisableProtectionInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
         
         /// <summary>
         /// Enable Protection for the given Replication protected item.
@@ -65,11 +65,8 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <param name='protectionContainerName'>
         /// Protection container name.
         /// </param>
-        /// <param name='replicationProtectedItemName'>
-        /// Replication protected item name.
-        /// </param>
         /// <param name='input'>
-        /// Protection entity ID.
+        /// Enable protection input.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Request header parameters.
@@ -80,10 +77,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        Task<LongRunningOperationResponse> EnableProtectionAsync(string fabricName, string protectionContainerName, string replicationProtectedItemName, EnableProtectionInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        Task<LongRunningOperationResponse> BeginEnableProtectionAsync(string fabricName, string protectionContainerName, EnableProtectionInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
         
         /// <summary>
-        /// Get the Replication protected item object by Id.
+        /// Disable Protection for the given Replication protected item.
         /// </summary>
         /// <param name='fabricName'>
         /// Fabric name.
@@ -91,8 +88,8 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <param name='protectionContainerName'>
         /// Protection container name.
         /// </param>
-        /// <param name='replicationProtectedItemName'>
-        /// Replication protected item name.
+        /// <param name='input'>
+        /// Disable protection input.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Request header parameters.
@@ -101,18 +98,98 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// Cancellation token.
         /// </param>
         /// <returns>
-        /// The response model for the ReplicationProtectedItem object.
+        /// A standard service response for long running operations.
+        /// </returns>
+        Task<LongRunningOperationResponse> DisableProtectionAsync(string fabricName, string protectionContainerName, DisableProtectionInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        
+        /// <summary>
+        /// Enable Protection for the given Replication protected item.
+        /// </summary>
+        /// <param name='fabricName'>
+        /// Fabric name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Protection container name.
+        /// </param>
+        /// <param name='input'>
+        /// Enable protection input.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Request header parameters.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
+        /// A standard service response for long running operations.
+        /// </returns>
+        Task<LongRunningOperationResponse> EnableProtectionAsync(string fabricName, string protectionContainerName, EnableProtectionInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        
+        /// <summary>
+        /// Get the replication protected object by Id.
+        /// </summary>
+        /// <param name='fabricName'>
+        /// Fabric unique name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Protection container unique name.
+        /// </param>
+        /// <param name='replicationProtectedItemName'>
+        /// Replication protected item unique name.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Request header parameters.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
+        /// The response model for the fabric object
         /// </returns>
         Task<ReplicationProtectedItemResponse> GetAsync(string fabricName, string protectionContainerName, string replicationProtectedItemName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
         
         /// <summary>
-        /// Get the list of all Replication protected items.
+        /// The Get Operation Status operation returns the status of the
+        /// specified operation. After calling an asynchronous operation, you
+        /// can call Get Operation Status to determine whether the operation
+        /// has succeeded, failed, or is still in progress.
+        /// </summary>
+        /// <param name='operationStatusLink'>
+        /// Location value returned by the Begin operation.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
+        /// A standard service response for long running operations.
+        /// </returns>
+        Task<LongRunningOperationResponse> GetDisableStatusAsync(string operationStatusLink, CancellationToken cancellationToken);
+        
+        /// <summary>
+        /// The Get Operation Status operation returns the status of the
+        /// specified operation. After calling an asynchronous operation, you
+        /// can call Get Operation Status to determine whether the operation
+        /// has succeeded, failed, or is still in progress.
+        /// </summary>
+        /// <param name='operationStatusLink'>
+        /// Location value returned by the Begin operation.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
+        /// Service response for enable DR operation.
+        /// </returns>
+        Task<EnableProtectionResponse> GetEnableStatusAsync(string operationStatusLink, CancellationToken cancellationToken);
+        
+        /// <summary>
+        /// Get the replication protected object by Id.
         /// </summary>
         /// <param name='fabricName'>
-        /// Fabric name.
+        /// Fabric unique name.
         /// </param>
         /// <param name='protectionContainerName'>
-        /// Protection container name.
+        /// Protection container unique name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Request header parameters.
@@ -121,7 +198,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// Cancellation token.
         /// </param>
         /// <returns>
-        /// The response model for the list ReplicationProtectedItem operation.
+        /// The response model for the list replicated protected items.
         /// </returns>
         Task<ReplicationProtectedItemListResponse> ListAsync(string fabricName, string protectionContainerName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
     }

@@ -21,31 +21,29 @@
 
 using System;
 using System.Linq;
-using Microsoft.Azure;
-using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// The response model for the server object
+    /// Replication provider name.
     /// </summary>
-    public partial class ServerResponse : AzureOperationResponse
+    public partial class ReplicationProviders
     {
-        private Server _server;
+        private string _replicationProviderName;
         
         /// <summary>
-        /// Optional. The server object
+        /// Optional. Replication provider name.
         /// </summary>
-        public Server Server
+        public string ReplicationProviderName
         {
-            get { return this._server; }
-            set { this._server = value; }
+            get { return this._replicationProviderName; }
+            set { this._replicationProviderName = value; }
         }
         
         /// <summary>
-        /// Initializes a new instance of the ServerResponse class.
+        /// Initializes a new instance of the ReplicationProviders class.
         /// </summary>
-        public ServerResponse()
+        public ReplicationProviders()
         {
         }
     }

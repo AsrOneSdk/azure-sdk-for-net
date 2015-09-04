@@ -21,19 +21,30 @@
 
 using System;
 using System.Linq;
-using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// The Reprotect request object.
+    /// Hyper V Replica Provider network details.
     /// </summary>
-    public partial class ReprotectRequest : FailoverRequest
+    public partial class HyperVReplicaProviderNetworkDetails
     {
+        private string _networkInterfaceType;
+        
         /// <summary>
-        /// Initializes a new instance of the ReprotectRequest class.
+        /// Optional. Gets or sets the Network interface type.
         /// </summary>
-        public ReprotectRequest()
+        public string NetworkInterfaceType
+        {
+            get { return this._networkInterfaceType; }
+            set { this._networkInterfaceType = value; }
+        }
+        
+        /// <summary>
+        /// Initializes a new instance of the
+        /// HyperVReplicaProviderNetworkDetails class.
+        /// </summary>
+        public HyperVReplicaProviderNetworkDetails()
         {
         }
     }

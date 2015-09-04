@@ -1200,6 +1200,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             ushort replicationFrequencyInSecondsInstance = ((ushort)replicationFrequencyInSecondsValue);
                                             hyperVReplicaPolicyDetailsInstance.ReplicationFrequencyInSeconds = replicationFrequencyInSecondsInstance;
                                         }
+                                        
+                                        JToken typeValue = replicationProviderSettingsValue["__type"];
+                                        if (typeValue != null && typeValue.Type != JTokenType.Null)
+                                        {
+                                            string typeInstance = ((string)typeValue);
+                                            hyperVReplicaPolicyDetailsInstance.Type = typeInstance;
+                                        }
                                         propertiesInstance.ReplicationProviderSettings = hyperVReplicaPolicyDetailsInstance;
                                     }
                                     if (typeName == "HyperVReplicaAzurePolicyDetails")
@@ -1261,6 +1268,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 activeStorageAccountInstance.SubscriptionId = subscriptionIdInstance;
                                             }
                                         }
+                                        
+                                        JToken typeValue2 = replicationProviderSettingsValue["__type"];
+                                        if (typeValue2 != null && typeValue2.Type != JTokenType.Null)
+                                        {
+                                            string typeInstance2 = ((string)typeValue2);
+                                            hyperVReplicaAzurePolicyDetailsInstance.Type = typeInstance2;
+                                        }
                                         propertiesInstance.ReplicationProviderSettings = hyperVReplicaAzurePolicyDetailsInstance;
                                     }
                                 }
@@ -1318,11 +1332,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 policyInstance.Name = nameInstance;
                             }
                             
-                            JToken typeValue = responseDoc["type"];
-                            if (typeValue != null && typeValue.Type != JTokenType.Null)
+                            JToken typeValue3 = responseDoc["type"];
+                            if (typeValue3 != null && typeValue3.Type != JTokenType.Null)
                             {
-                                string typeInstance = ((string)typeValue);
-                                policyInstance.Type = typeInstance;
+                                string typeInstance3 = ((string)typeValue3);
+                                policyInstance.Type = typeInstance3;
                             }
                             
                             JToken locationValue = responseDoc["location"];
@@ -1586,6 +1600,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             ushort replicationFrequencyInSecondsInstance = ((ushort)replicationFrequencyInSecondsValue);
                                             hyperVReplicaPolicyDetailsInstance.ReplicationFrequencyInSeconds = replicationFrequencyInSecondsInstance;
                                         }
+                                        
+                                        JToken typeValue = replicationProviderSettingsValue["__type"];
+                                        if (typeValue != null && typeValue.Type != JTokenType.Null)
+                                        {
+                                            string typeInstance = ((string)typeValue);
+                                            hyperVReplicaPolicyDetailsInstance.Type = typeInstance;
+                                        }
                                         propertiesInstance.ReplicationProviderSettings = hyperVReplicaPolicyDetailsInstance;
                                     }
                                     if (typeName == "HyperVReplicaAzurePolicyDetails")
@@ -1647,6 +1668,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 activeStorageAccountInstance.SubscriptionId = subscriptionIdInstance;
                                             }
                                         }
+                                        
+                                        JToken typeValue2 = replicationProviderSettingsValue["__type"];
+                                        if (typeValue2 != null && typeValue2.Type != JTokenType.Null)
+                                        {
+                                            string typeInstance2 = ((string)typeValue2);
+                                            hyperVReplicaAzurePolicyDetailsInstance.Type = typeInstance2;
+                                        }
                                         propertiesInstance.ReplicationProviderSettings = hyperVReplicaAzurePolicyDetailsInstance;
                                     }
                                 }
@@ -1704,11 +1732,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 policyInstance.Name = nameInstance;
                             }
                             
-                            JToken typeValue = responseDoc["type"];
-                            if (typeValue != null && typeValue.Type != JTokenType.Null)
+                            JToken typeValue3 = responseDoc["type"];
+                            if (typeValue3 != null && typeValue3.Type != JTokenType.Null)
                             {
-                                string typeInstance = ((string)typeValue);
-                                policyInstance.Type = typeInstance;
+                                string typeInstance3 = ((string)typeValue3);
+                                policyInstance.Type = typeInstance3;
                             }
                             
                             JToken locationValue = responseDoc["location"];
@@ -2205,6 +2233,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             ushort replicationFrequencyInSecondsInstance = ((ushort)replicationFrequencyInSecondsValue);
                                             hyperVReplicaPolicyDetailsInstance.ReplicationFrequencyInSeconds = replicationFrequencyInSecondsInstance;
                                         }
+                                        
+                                        JToken typeValue = replicationProviderSettingsValue["__type"];
+                                        if (typeValue != null && typeValue.Type != JTokenType.Null)
+                                        {
+                                            string typeInstance = ((string)typeValue);
+                                            hyperVReplicaPolicyDetailsInstance.Type = typeInstance;
+                                        }
                                         propertiesInstance.ReplicationProviderSettings = hyperVReplicaPolicyDetailsInstance;
                                     }
                                     if (typeName == "HyperVReplicaAzurePolicyDetails")
@@ -2266,6 +2301,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 activeStorageAccountInstance.SubscriptionId = subscriptionIdInstance;
                                             }
                                         }
+                                        
+                                        JToken typeValue2 = replicationProviderSettingsValue["__type"];
+                                        if (typeValue2 != null && typeValue2.Type != JTokenType.Null)
+                                        {
+                                            string typeInstance2 = ((string)typeValue2);
+                                            hyperVReplicaAzurePolicyDetailsInstance.Type = typeInstance2;
+                                        }
                                         propertiesInstance.ReplicationProviderSettings = hyperVReplicaAzurePolicyDetailsInstance;
                                     }
                                 }
@@ -2323,11 +2365,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 policyInstance.Name = nameInstance;
                             }
                             
-                            JToken typeValue = responseDoc["type"];
-                            if (typeValue != null && typeValue.Type != JTokenType.Null)
+                            JToken typeValue3 = responseDoc["type"];
+                            if (typeValue3 != null && typeValue3.Type != JTokenType.Null)
                             {
-                                string typeInstance = ((string)typeValue);
-                                policyInstance.Type = typeInstance;
+                                string typeInstance3 = ((string)typeValue3);
+                                policyInstance.Type = typeInstance3;
                             }
                             
                             JToken locationValue = responseDoc["location"];
@@ -2670,6 +2712,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     ushort replicationFrequencyInSecondsInstance = ((ushort)replicationFrequencyInSecondsValue);
                                                     hyperVReplicaPolicyDetailsInstance.ReplicationFrequencyInSeconds = replicationFrequencyInSecondsInstance;
                                                 }
+                                                
+                                                JToken typeValue = replicationProviderSettingsValue["__type"];
+                                                if (typeValue != null && typeValue.Type != JTokenType.Null)
+                                                {
+                                                    string typeInstance = ((string)typeValue);
+                                                    hyperVReplicaPolicyDetailsInstance.Type = typeInstance;
+                                                }
                                                 propertiesInstance.ReplicationProviderSettings = hyperVReplicaPolicyDetailsInstance;
                                             }
                                             if (typeName == "HyperVReplicaAzurePolicyDetails")
@@ -2731,6 +2780,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                         activeStorageAccountInstance.SubscriptionId = subscriptionIdInstance;
                                                     }
                                                 }
+                                                
+                                                JToken typeValue2 = replicationProviderSettingsValue["__type"];
+                                                if (typeValue2 != null && typeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string typeInstance2 = ((string)typeValue2);
+                                                    hyperVReplicaAzurePolicyDetailsInstance.Type = typeInstance2;
+                                                }
                                                 propertiesInstance.ReplicationProviderSettings = hyperVReplicaAzurePolicyDetailsInstance;
                                             }
                                         }
@@ -2788,11 +2844,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         policyInstance.Name = nameInstance;
                                     }
                                     
-                                    JToken typeValue = valueValue["type"];
-                                    if (typeValue != null && typeValue.Type != JTokenType.Null)
+                                    JToken typeValue3 = valueValue["type"];
+                                    if (typeValue3 != null && typeValue3.Type != JTokenType.Null)
                                     {
-                                        string typeInstance = ((string)typeValue);
-                                        policyInstance.Type = typeInstance;
+                                        string typeInstance3 = ((string)typeValue3);
+                                        policyInstance.Type = typeInstance3;
                                     }
                                     
                                     JToken locationValue = valueValue["location"];

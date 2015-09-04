@@ -33,6 +33,26 @@ namespace Microsoft.Azure.Management.SiteRecovery
     public partial interface IRecoveryServicesProviderOperations
     {
         /// <summary>
+        /// Deletes a provider
+        /// </summary>
+        /// <param name='fabricName'>
+        /// Name of provider's fabric
+        /// </param>
+        /// <param name='input'>
+        /// Provider Deletion input
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Request header parameters.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
+        /// A standard service response for long running operations.
+        /// </returns>
+        Task<LongRunningOperationResponse> BeginDeletingAsync(string fabricName, RecoveryServicesProviderDeletionInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        
+        /// <summary>
         /// Refreshes a provider
         /// </summary>
         /// <param name='fabricName'>
@@ -53,6 +73,26 @@ namespace Microsoft.Azure.Management.SiteRecovery
         Task<LongRunningOperationResponse> BeginRefreshingAsync(string fabricName, string providerName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
         
         /// <summary>
+        /// Deletes a provider
+        /// </summary>
+        /// <param name='fabricName'>
+        /// Name of provider's fabric
+        /// </param>
+        /// <param name='input'>
+        /// Provider Deletion input
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Request header parameters.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
+        /// A standard service response for long running operations.
+        /// </returns>
+        Task<LongRunningOperationResponse> DeleteAsync(string fabricName, RecoveryServicesProviderDeletionInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        
+        /// <summary>
         /// Get the server object by Id.
         /// </summary>
         /// <param name='fabricId'>
@@ -71,6 +111,23 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// The response model for the provider object
         /// </returns>
         Task<RecoveryServicesProviderResponse> GetAsync(string fabricId, string providerId, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        
+        /// <summary>
+        /// The Get Operation Status operation returns the status of the
+        /// specified operation. After calling an asynchronous operation, you
+        /// can call Get Operation Status to determine whether the operation
+        /// has succeeded, failed, or is still in progress.
+        /// </summary>
+        /// <param name='operationStatusLink'>
+        /// Location value returned by the Begin operation.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
+        /// A standard service response for long running operations.
+        /// </returns>
+        Task<LongRunningOperationResponse> GetDeleteStatusAsync(string operationStatusLink, CancellationToken cancellationToken);
         
         /// <summary>
         /// The Get Operation Status operation returns the status of the

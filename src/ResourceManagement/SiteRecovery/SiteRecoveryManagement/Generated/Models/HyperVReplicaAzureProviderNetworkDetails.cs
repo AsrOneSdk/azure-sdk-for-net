@@ -21,19 +21,30 @@
 
 using System;
 using System.Linq;
-using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// This is the class which defines the Commit failover input..
+    /// Hyper V Replica Provider network details.
     /// </summary>
-    public partial class CommitFailoverRequest : FailoverRequest
+    public partial class HyperVReplicaAzureProviderNetworkDetails
     {
+        private string _networkInterfaceType;
+        
         /// <summary>
-        /// Initializes a new instance of the CommitFailoverRequest class.
+        /// Optional. Gets or sets the Network interface type.
         /// </summary>
-        public CommitFailoverRequest()
+        public string NetworkInterfaceType
+        {
+            get { return this._networkInterfaceType; }
+            set { this._networkInterfaceType = value; }
+        }
+        
+        /// <summary>
+        /// Initializes a new instance of the
+        /// HyperVReplicaAzureProviderNetworkDetails class.
+        /// </summary>
+        public HyperVReplicaAzureProviderNetworkDetails()
         {
         }
     }

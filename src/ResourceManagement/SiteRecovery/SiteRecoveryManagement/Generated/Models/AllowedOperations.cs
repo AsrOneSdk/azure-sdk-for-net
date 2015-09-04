@@ -20,47 +20,31 @@
 // code is regenerated.
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using Hyak.Common;
-using Microsoft.Azure;
-using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// The response model for the list servers operation.
+    /// Replication provider name.
     /// </summary>
-    public partial class ServerListResponse : AzureOperationResponse
+    public partial class AllowedOperations
     {
-        private string _nextLink;
+        private string _operation;
         
         /// <summary>
-        /// Optional. Next Link.
+        /// Optional. Allowed operation name.
         /// </summary>
-        public string NextLink
+        public string Operation
         {
-            get { return this._nextLink; }
-            set { this._nextLink = value; }
-        }
-        
-        private IList<Server> _servers;
-        
-        /// <summary>
-        /// Optional. The list of servers for the given vault.
-        /// </summary>
-        public IList<Server> Servers
-        {
-            get { return this._servers; }
-            set { this._servers = value; }
+            get { return this._operation; }
+            set { this._operation = value; }
         }
         
         /// <summary>
-        /// Initializes a new instance of the ServerListResponse class.
+        /// Initializes a new instance of the AllowedOperations class.
         /// </summary>
-        public ServerListResponse()
+        public AllowedOperations()
         {
-            this.Servers = new LazyList<Server>();
         }
     }
 }

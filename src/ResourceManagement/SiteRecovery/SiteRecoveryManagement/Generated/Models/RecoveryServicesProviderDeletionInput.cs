@@ -26,37 +26,26 @@ using Microsoft.Azure.Management.SiteRecovery.Models;
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// The Azure protection entity provider settings.
+    /// The definition of a provider deletion object.
     /// </summary>
-    public partial class HyperVReplicaAzureReplicationProtectedItemDetails : ReplicationProtectedItemProviderDetails
+    public partial class RecoveryServicesProviderDeletionInput
     {
-        private AzureVmDiskDetails _vMDiskDetails;
+        private RecoveryServicesProviderDeletionInputProperties _properties;
         
         /// <summary>
-        /// Optional.
+        /// Optional. Properties of the provider deletion input.
         /// </summary>
-        public AzureVmDiskDetails VMDiskDetails
+        public RecoveryServicesProviderDeletionInputProperties Properties
         {
-            get { return this._vMDiskDetails; }
-            set { this._vMDiskDetails = value; }
-        }
-        
-        private VMProperties _vMProperties;
-        
-        /// <summary>
-        /// Optional.
-        /// </summary>
-        public VMProperties VMProperties
-        {
-            get { return this._vMProperties; }
-            set { this._vMProperties = value; }
+            get { return this._properties; }
+            set { this._properties = value; }
         }
         
         /// <summary>
         /// Initializes a new instance of the
-        /// HyperVReplicaAzureReplicationProtectedItemDetails class.
+        /// RecoveryServicesProviderDeletionInput class.
         /// </summary>
-        public HyperVReplicaAzureReplicationProtectedItemDetails()
+        public RecoveryServicesProviderDeletionInput()
         {
         }
     }

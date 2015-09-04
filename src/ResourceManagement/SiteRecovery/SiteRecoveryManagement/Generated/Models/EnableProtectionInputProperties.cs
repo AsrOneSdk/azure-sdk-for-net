@@ -21,30 +21,31 @@
 
 using System;
 using System.Linq;
+using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
     /// The definition of a Protection Container pairing management object
-    /// configuration.
+    /// properties.
     /// </summary>
-    public partial class ProtectionContainerPairingManagementConfiguration
+    public partial class EnableProtectionInputProperties
     {
-        private string _operation;
+        private string _name;
         
         /// <summary>
-        /// Required. Operation to be performed.
+        /// Optional. Unique name of the replication protectable item.
         /// </summary>
-        public string Operation
+        public string Name
         {
-            get { return this._operation; }
-            set { this._operation = value; }
+            get { return this._name; }
+            set { this._name = value; }
         }
         
         private string _policyId;
         
         /// <summary>
-        /// Required. ID of the policy
+        /// Optional. The Policy ID.
         /// </summary>
         public string PolicyId
         {
@@ -52,32 +53,34 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._policyId = value; }
         }
         
+        private string _protectableItemId;
+        
         /// <summary>
-        /// Initializes a new instance of the
-        /// ProtectionContainerPairingManagementConfiguration class.
+        /// Optional. Protectable item ID.
         /// </summary>
-        public ProtectionContainerPairingManagementConfiguration()
+        public string ProtectableItemId
         {
+            get { return this._protectableItemId; }
+            set { this._protectableItemId = value; }
+        }
+        
+        private EnableProtectionProviderSpecificInput _providerSettings;
+        
+        /// <summary>
+        /// Optional. Gets or sets the ProviderSettings.
+        /// </summary>
+        public EnableProtectionProviderSpecificInput ProviderSettings
+        {
+            get { return this._providerSettings; }
+            set { this._providerSettings = value; }
         }
         
         /// <summary>
-        /// Initializes a new instance of the
-        /// ProtectionContainerPairingManagementConfiguration class with
-        /// required arguments.
+        /// Initializes a new instance of the EnableProtectionInputProperties
+        /// class.
         /// </summary>
-        public ProtectionContainerPairingManagementConfiguration(string policyId, string operation)
-            : this()
+        public EnableProtectionInputProperties()
         {
-            if (policyId == null)
-            {
-                throw new ArgumentNullException("policyId");
-            }
-            if (operation == null)
-            {
-                throw new ArgumentNullException("operation");
-            }
-            this.PolicyId = policyId;
-            this.Operation = operation;
         }
     }
 }

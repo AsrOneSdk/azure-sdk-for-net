@@ -21,41 +21,41 @@
 
 using System;
 using System.Linq;
-using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// The SAN disable protection input.
+    /// The definition of a provider deletion object.
     /// </summary>
-    public partial class SanDisableProtectionInput : DisableProtectionProviderSpecificInput
+    public partial class RecoveryServicesProviderDeletionInputProperties
     {
-        private bool _deleteReplicaLuns;
+        private string _name;
         
         /// <summary>
-        /// Optional.
+        /// Optional. Unique Id of the provider.
         /// </summary>
-        public bool DeleteReplicaLuns
+        public string Name
         {
-            get { return this._deleteReplicaLuns; }
-            set { this._deleteReplicaLuns = value; }
+            get { return this._name; }
+            set { this._name = value; }
         }
         
-        private string _targetCloudIdForLunDeletion;
+        private string _removalMethod;
         
         /// <summary>
-        /// Optional.
+        /// Optional. Value indicating whether purge is to be run or not.
         /// </summary>
-        public string TargetCloudIdForLunDeletion
+        public string RemovalMethod
         {
-            get { return this._targetCloudIdForLunDeletion; }
-            set { this._targetCloudIdForLunDeletion = value; }
+            get { return this._removalMethod; }
+            set { this._removalMethod = value; }
         }
         
         /// <summary>
-        /// Initializes a new instance of the SanDisableProtectionInput class.
+        /// Initializes a new instance of the
+        /// RecoveryServicesProviderDeletionInputProperties class.
         /// </summary>
-        public SanDisableProtectionInput()
+        public RecoveryServicesProviderDeletionInputProperties()
         {
         }
     }

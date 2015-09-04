@@ -26,42 +26,38 @@ using Microsoft.Azure.Management.SiteRecovery.Models;
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// The definition of a Protection Container pairing management object.
+    /// The definition of a DisableProtectionInput properties object.
     /// </summary>
-    public partial class ProtectionContainerPairingManagementInput
+    public partial class DisableProtectionInputProperties
     {
-        private ProtectionContainerPairingManagementInputProperties _properties;
+        private DisableProtectionProviderSpecificInput _providerSettings;
         
         /// <summary>
-        /// Required. Pairing management properties.
+        /// Optional. Gets or sets the ProviderSettings.
         /// </summary>
-        public ProtectionContainerPairingManagementInputProperties Properties
+        public DisableProtectionProviderSpecificInput ProviderSettings
         {
-            get { return this._properties; }
-            set { this._properties = value; }
+            get { return this._providerSettings; }
+            set { this._providerSettings = value; }
+        }
+        
+        private string _replicationProtectedItemName;
+        
+        /// <summary>
+        /// Optional. Replication protected item unique name.
+        /// </summary>
+        public string ReplicationProtectedItemName
+        {
+            get { return this._replicationProtectedItemName; }
+            set { this._replicationProtectedItemName = value; }
         }
         
         /// <summary>
-        /// Initializes a new instance of the
-        /// ProtectionContainerPairingManagementInput class.
+        /// Initializes a new instance of the DisableProtectionInputProperties
+        /// class.
         /// </summary>
-        public ProtectionContainerPairingManagementInput()
+        public DisableProtectionInputProperties()
         {
-        }
-        
-        /// <summary>
-        /// Initializes a new instance of the
-        /// ProtectionContainerPairingManagementInput class with required
-        /// arguments.
-        /// </summary>
-        public ProtectionContainerPairingManagementInput(ProtectionContainerPairingManagementInputProperties properties)
-            : this()
-        {
-            if (properties == null)
-            {
-                throw new ArgumentNullException("properties");
-            }
-            this.Properties = properties;
         }
     }
 }
