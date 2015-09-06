@@ -26,14 +26,14 @@ using Microsoft.Azure.Management.SiteRecovery.Models;
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// The definition of a server object.
+    /// Policy creation properties.
     /// </summary>
-    public partial class PolicyProperties
+    public partial class CreatePolicyInputProperties
     {
         private string _friendlyName;
         
         /// <summary>
-        /// Required. Name of replication provider
+        /// Optional. Friendly Name.
         /// </summary>
         public string FriendlyName
         {
@@ -41,10 +41,21 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._friendlyName = value; }
         }
         
+        private string _name;
+        
+        /// <summary>
+        /// Optional. the Name of Profile.
+        /// </summary>
+        public string Name
+        {
+            get { return this._name; }
+            set { this._name = value; }
+        }
+        
         private string _replicationProvider;
         
         /// <summary>
-        /// Required. Name of replication provider
+        /// Optional. the replication provider.
         /// </summary>
         public string ReplicationProvider
         {
@@ -52,46 +63,22 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._replicationProvider = value; }
         }
         
-        private PolicyProviderSettingsDetails _replicationProviderSettings;
+        private PolicyProviderSpecificInput _replicationProviderSettings;
         
         /// <summary>
-        /// Required. the replication provider settings
+        /// Optional. the replication provider settings.
         /// </summary>
-        public PolicyProviderSettingsDetails ReplicationProviderSettings
+        public PolicyProviderSpecificInput ReplicationProviderSettings
         {
             get { return this._replicationProviderSettings; }
             set { this._replicationProviderSettings = value; }
         }
         
         /// <summary>
-        /// Initializes a new instance of the PolicyProperties class.
+        /// Initializes a new instance of the CreatePolicyInputProperties class.
         /// </summary>
-        public PolicyProperties()
+        public CreatePolicyInputProperties()
         {
-        }
-        
-        /// <summary>
-        /// Initializes a new instance of the PolicyProperties class with
-        /// required arguments.
-        /// </summary>
-        public PolicyProperties(string friendlyName, string replicationProvider, PolicyProviderSettingsDetails replicationProviderSettings)
-            : this()
-        {
-            if (friendlyName == null)
-            {
-                throw new ArgumentNullException("friendlyName");
-            }
-            if (replicationProvider == null)
-            {
-                throw new ArgumentNullException("replicationProvider");
-            }
-            if (replicationProviderSettings == null)
-            {
-                throw new ArgumentNullException("replicationProviderSettings");
-            }
-            this.FriendlyName = friendlyName;
-            this.ReplicationProvider = replicationProvider;
-            this.ReplicationProviderSettings = replicationProviderSettings;
         }
     }
 }

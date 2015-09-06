@@ -30,37 +30,15 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class CreatePolicyInput
     {
-        private string _name;
+        private CreatePolicyInputProperties _properties;
         
         /// <summary>
-        /// Optional. the Name of Profile.
+        /// Optional. Policy creation properties object.
         /// </summary>
-        public string Name
+        public CreatePolicyInputProperties Properties
         {
-            get { return this._name; }
-            set { this._name = value; }
-        }
-        
-        private string _replicationProvider;
-        
-        /// <summary>
-        /// Optional. the replication provider.
-        /// </summary>
-        public string ReplicationProvider
-        {
-            get { return this._replicationProvider; }
-            set { this._replicationProvider = value; }
-        }
-        
-        private PolicyProviderSpecificInput _replicationProviderSettings;
-        
-        /// <summary>
-        /// Optional. the replication provider settings.
-        /// </summary>
-        public PolicyProviderSpecificInput ReplicationProviderSettings
-        {
-            get { return this._replicationProviderSettings; }
-            set { this._replicationProviderSettings = value; }
+            get { return this._properties; }
+            set { this._properties = value; }
         }
         
         /// <summary>

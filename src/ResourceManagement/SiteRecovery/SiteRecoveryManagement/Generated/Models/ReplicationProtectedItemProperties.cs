@@ -77,17 +77,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._friendlyName = value; }
         }
         
-        private string _policyArmID;
-        
-        /// <summary>
-        /// Optional. Gets or sets the ID of Policy governing this PE.
-        /// </summary>
-        public string PolicyArmID
-        {
-            get { return this._policyArmID; }
-            set { this._policyArmID = value; }
-        }
-        
         private string _policyFriendlyName;
         
         /// <summary>
@@ -97,6 +86,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         {
             get { return this._policyFriendlyName; }
             set { this._policyFriendlyName = value; }
+        }
+        
+        private string _policyID;
+        
+        /// <summary>
+        /// Optional. Gets or sets the ID of Policy governing this PE.
+        /// </summary>
+        public string PolicyID
+        {
+            get { return this._policyID; }
+            set { this._policyID = value; }
         }
         
         private string _protectionStatus;

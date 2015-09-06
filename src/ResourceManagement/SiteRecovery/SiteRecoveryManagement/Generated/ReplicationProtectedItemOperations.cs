@@ -2143,7 +2143,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 if (policyIdValue != null && policyIdValue.Type != JTokenType.Null)
                                 {
                                     string policyIdInstance = ((string)policyIdValue);
-                                    propertiesInstance.PolicyArmID = policyIdInstance;
+                                    propertiesInstance.PolicyID = policyIdInstance;
                                 }
                                 
                                 JToken policyFriendlyNameValue = propertiesValue["policyFriendlyName"];
@@ -2587,7 +2587,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 if (policyIdValue != null && policyIdValue.Type != JTokenType.Null)
                                 {
                                     string policyIdInstance = ((string)policyIdValue);
-                                    propertiesInstance.PolicyArmID = policyIdInstance;
+                                    propertiesInstance.PolicyID = policyIdInstance;
                                 }
                                 
                                 JToken policyFriendlyNameValue = propertiesValue["policyFriendlyName"];
@@ -3264,7 +3264,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 if (policyIdValue != null && policyIdValue.Type != JTokenType.Null)
                                 {
                                     string policyIdInstance = ((string)policyIdValue);
-                                    propertiesInstance.PolicyArmID = policyIdInstance;
+                                    propertiesInstance.PolicyID = policyIdInstance;
                                 }
                                 
                                 JToken policyFriendlyNameValue = propertiesValue["policyFriendlyName"];
@@ -3760,7 +3760,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 if (policyIdValue != null && policyIdValue.Type != JTokenType.Null)
                                 {
                                     string policyIdInstance = ((string)policyIdValue);
-                                    propertiesInstance.PolicyArmID = policyIdInstance;
+                                    propertiesInstance.PolicyID = policyIdInstance;
                                 }
                                 
                                 JToken policyFriendlyNameValue = propertiesValue["policyFriendlyName"];
@@ -4256,7 +4256,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 if (policyIdValue != null && policyIdValue.Type != JTokenType.Null)
                                 {
                                     string policyIdInstance = ((string)policyIdValue);
-                                    propertiesInstance.PolicyArmID = policyIdInstance;
+                                    propertiesInstance.PolicyID = policyIdInstance;
                                 }
                                 
                                 JToken policyFriendlyNameValue = propertiesValue["policyFriendlyName"];
@@ -4752,7 +4752,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 if (policyIdValue != null && policyIdValue.Type != JTokenType.Null)
                                 {
                                     string policyIdInstance = ((string)policyIdValue);
-                                    propertiesInstance.PolicyArmID = policyIdInstance;
+                                    propertiesInstance.PolicyID = policyIdInstance;
                                 }
                                 
                                 JToken policyFriendlyNameValue = propertiesValue["policyFriendlyName"];
@@ -5248,7 +5248,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 if (policyIdValue != null && policyIdValue.Type != JTokenType.Null)
                                 {
                                     string policyIdInstance = ((string)policyIdValue);
-                                    propertiesInstance.PolicyArmID = policyIdInstance;
+                                    propertiesInstance.PolicyID = policyIdInstance;
                                 }
                                 
                                 JToken policyFriendlyNameValue = propertiesValue["policyFriendlyName"];
@@ -5791,7 +5791,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         if (policyIdValue != null && policyIdValue.Type != JTokenType.Null)
                                         {
                                             string policyIdInstance = ((string)policyIdValue);
-                                            propertiesInstance.PolicyArmID = policyIdInstance;
+                                            propertiesInstance.PolicyID = policyIdInstance;
                                         }
                                         
                                         JToken policyFriendlyNameValue = propertiesValue["policyFriendlyName"];

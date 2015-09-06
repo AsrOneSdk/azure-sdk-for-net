@@ -30,15 +30,15 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class UpdatePolicyInput
     {
-        private PolicyProviderSpecificInput _replicationProviderSettings;
+        private UpdatePolicyProperties _properties;
         
         /// <summary>
-        /// Required. the replication provider settings.
+        /// Optional. Update Policy properties object.
         /// </summary>
-        public PolicyProviderSpecificInput ReplicationProviderSettings
+        public UpdatePolicyProperties Properties
         {
-            get { return this._replicationProviderSettings; }
-            set { this._replicationProviderSettings = value; }
+            get { return this._properties; }
+            set { this._properties = value; }
         }
         
         /// <summary>
@@ -46,20 +46,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         /// </summary>
         public UpdatePolicyInput()
         {
-        }
-        
-        /// <summary>
-        /// Initializes a new instance of the UpdatePolicyInput class with
-        /// required arguments.
-        /// </summary>
-        public UpdatePolicyInput(PolicyProviderSpecificInput replicationProviderSettings)
-            : this()
-        {
-            if (replicationProviderSettings == null)
-            {
-                throw new ArgumentNullException("replicationProviderSettings");
-            }
-            this.ReplicationProviderSettings = replicationProviderSettings;
         }
     }
 }

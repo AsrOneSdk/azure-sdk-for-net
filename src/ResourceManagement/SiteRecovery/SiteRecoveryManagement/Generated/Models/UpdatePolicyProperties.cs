@@ -26,71 +26,39 @@ using Microsoft.Azure.Management.SiteRecovery.Models;
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// The definition of a server object.
+    /// The definition of update Policy properties object.
     /// </summary>
-    public partial class PolicyProperties
+    public partial class UpdatePolicyProperties
     {
-        private string _friendlyName;
+        private PolicyProviderSpecificInput _replicationProviderSettings;
         
         /// <summary>
-        /// Required. Name of replication provider
+        /// Required. the replication provider settings.
         /// </summary>
-        public string FriendlyName
-        {
-            get { return this._friendlyName; }
-            set { this._friendlyName = value; }
-        }
-        
-        private string _replicationProvider;
-        
-        /// <summary>
-        /// Required. Name of replication provider
-        /// </summary>
-        public string ReplicationProvider
-        {
-            get { return this._replicationProvider; }
-            set { this._replicationProvider = value; }
-        }
-        
-        private PolicyProviderSettingsDetails _replicationProviderSettings;
-        
-        /// <summary>
-        /// Required. the replication provider settings
-        /// </summary>
-        public PolicyProviderSettingsDetails ReplicationProviderSettings
+        public PolicyProviderSpecificInput ReplicationProviderSettings
         {
             get { return this._replicationProviderSettings; }
             set { this._replicationProviderSettings = value; }
         }
         
         /// <summary>
-        /// Initializes a new instance of the PolicyProperties class.
+        /// Initializes a new instance of the UpdatePolicyProperties class.
         /// </summary>
-        public PolicyProperties()
+        public UpdatePolicyProperties()
         {
         }
         
         /// <summary>
-        /// Initializes a new instance of the PolicyProperties class with
+        /// Initializes a new instance of the UpdatePolicyProperties class with
         /// required arguments.
         /// </summary>
-        public PolicyProperties(string friendlyName, string replicationProvider, PolicyProviderSettingsDetails replicationProviderSettings)
+        public UpdatePolicyProperties(PolicyProviderSpecificInput replicationProviderSettings)
             : this()
         {
-            if (friendlyName == null)
-            {
-                throw new ArgumentNullException("friendlyName");
-            }
-            if (replicationProvider == null)
-            {
-                throw new ArgumentNullException("replicationProvider");
-            }
             if (replicationProviderSettings == null)
             {
                 throw new ArgumentNullException("replicationProviderSettings");
             }
-            this.FriendlyName = friendlyName;
-            this.ReplicationProvider = replicationProvider;
             this.ReplicationProviderSettings = replicationProviderSettings;
         }
     }

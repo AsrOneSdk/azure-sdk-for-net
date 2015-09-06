@@ -116,9 +116,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/";
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationPolicies/";
-            if (input.Name != null)
+            if (input.Properties != null && input.Properties.Name != null)
             {
-                url = url + Uri.EscapeDataString(input.Name);
+                url = url + Uri.EscapeDataString(input.Properties.Name);
             }
             List<string> queryParameters = new List<string>();
             queryParameters.Add("api-version=2015-11-10");
@@ -164,133 +164,144 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 JObject createPolicyInputValue = new JObject();
                 requestDoc = createPolicyInputValue;
                 
-                if (input.Name != null)
+                if (input.Properties != null)
                 {
-                    createPolicyInputValue["name"] = input.Name;
-                }
-                
-                if (input.ReplicationProvider != null)
-                {
-                    createPolicyInputValue["replicationProvider"] = input.ReplicationProvider;
-                }
-                
-                if (input.ReplicationProviderSettings != null)
-                {
-                    JObject replicationProviderSettingsValue = new JObject();
-                    createPolicyInputValue["replicationProviderSettings"] = replicationProviderSettingsValue;
-                    if (input.ReplicationProviderSettings is HyperVReplicaPolicyInput)
+                    JObject propertiesValue = new JObject();
+                    createPolicyInputValue["properties"] = propertiesValue;
+                    
+                    if (input.Properties.Name != null)
                     {
-                        replicationProviderSettingsValue["__type"] = "HyperVReplicaPolicyInput";
-                        HyperVReplicaPolicyInput derived = ((HyperVReplicaPolicyInput)input.ReplicationProviderSettings);
-                        
-                        replicationProviderSettingsValue["replicationFrequencyInSeconds"] = derived.ReplicationFrequencyInSeconds;
-                        
-                        replicationProviderSettingsValue["recoveryPoints"] = derived.RecoveryPoints;
-                        
-                        replicationProviderSettingsValue["applicationConsistentSnapshotFrequencyInHours"] = derived.ApplicationConsistentSnapshotFrequencyInHours;
-                        
-                        if (derived.Compression != null)
-                        {
-                            replicationProviderSettingsValue["compression"] = derived.Compression;
-                        }
-                        
-                        if (derived.InitialReplicationMethod != null)
-                        {
-                            replicationProviderSettingsValue["initialReplicationMethod"] = derived.InitialReplicationMethod;
-                        }
-                        
-                        if (derived.OnlineReplicationStartTime != null)
-                        {
-                            replicationProviderSettingsValue["onlineReplicationStartTime"] = derived.OnlineReplicationStartTime.Value.ToString();
-                        }
-                        
-                        if (derived.OfflineReplicationImportPath != null)
-                        {
-                            replicationProviderSettingsValue["offlineReplicationImportPath"] = derived.OfflineReplicationImportPath;
-                        }
-                        
-                        if (derived.OfflineReplicationExportPath != null)
-                        {
-                            replicationProviderSettingsValue["offlineReplicationExportPath"] = derived.OfflineReplicationExportPath;
-                        }
-                        
-                        replicationProviderSettingsValue["replicationPort"] = derived.ReplicationPort;
-                        
-                        replicationProviderSettingsValue["allowedAuthenticationType"] = derived.AllowedAuthenticationType;
-                        
-                        if (derived.ReplicaDeletion != null)
-                        {
-                            replicationProviderSettingsValue["replicaDeletion"] = derived.ReplicaDeletion;
-                        }
+                        propertiesValue["name"] = input.Properties.Name;
                     }
-                    if (input.ReplicationProviderSettings is HyperVReplicaAzurePolicyInput)
+                    
+                    if (input.Properties.FriendlyName != null)
                     {
-                        replicationProviderSettingsValue["__type"] = "HyperVReplicaAzurePolicyInput";
-                        HyperVReplicaAzurePolicyInput derived2 = ((HyperVReplicaAzurePolicyInput)input.ReplicationProviderSettings);
-                        
-                        replicationProviderSettingsValue["recoveryPointHistoryDuration"] = derived2.RecoveryPointHistoryDuration;
-                        
-                        replicationProviderSettingsValue["applicationConsistentSnapshotFrequencyInHours"] = derived2.ApplicationConsistentSnapshotFrequencyInHours;
-                        
-                        replicationProviderSettingsValue["replicationInterval"] = derived2.ReplicationInterval;
-                        
-                        if (derived2.OnlineIrStartTime != null)
+                        propertiesValue["friendlyName"] = input.Properties.FriendlyName;
+                    }
+                    
+                    if (input.Properties.ReplicationProvider != null)
+                    {
+                        propertiesValue["replicationProvider"] = input.Properties.ReplicationProvider;
+                    }
+                    
+                    if (input.Properties.ReplicationProviderSettings != null)
+                    {
+                        JObject replicationProviderSettingsValue = new JObject();
+                        propertiesValue["replicationProviderSettings"] = replicationProviderSettingsValue;
+                        if (input.Properties.ReplicationProviderSettings is HyperVReplicaPolicyInput)
                         {
-                            replicationProviderSettingsValue["onlineReplicationStartTime"] = derived2.OnlineIrStartTime.Value.ToString();
-                        }
-                        
-                        if (derived2.StorageAccounts != null)
-                        {
-                            if (derived2.StorageAccounts is ILazyCollection == false || ((ILazyCollection)derived2.StorageAccounts).IsInitialized)
+                            replicationProviderSettingsValue["__type"] = "HyperVReplicaPolicyInput";
+                            HyperVReplicaPolicyInput derived = ((HyperVReplicaPolicyInput)input.Properties.ReplicationProviderSettings);
+                            
+                            replicationProviderSettingsValue["replicationFrequencyInSeconds"] = derived.ReplicationFrequencyInSeconds;
+                            
+                            replicationProviderSettingsValue["recoveryPoints"] = derived.RecoveryPoints;
+                            
+                            replicationProviderSettingsValue["applicationConsistentSnapshotFrequencyInHours"] = derived.ApplicationConsistentSnapshotFrequencyInHours;
+                            
+                            if (derived.Compression != null)
                             {
-                                JArray storageAccountsArray = new JArray();
-                                foreach (CustomerStorageAccount storageAccountsItem in derived2.StorageAccounts)
-                                {
-                                    JObject customerStorageAccountValue = new JObject();
-                                    storageAccountsArray.Add(customerStorageAccountValue);
-                                    
-                                    if (storageAccountsItem.StorageAccountName != null)
-                                    {
-                                        customerStorageAccountValue["storageAccountName"] = storageAccountsItem.StorageAccountName;
-                                    }
-                                    
-                                    if (storageAccountsItem.SubscriptionId != null)
-                                    {
-                                        customerStorageAccountValue["subscriptionId"] = storageAccountsItem.SubscriptionId;
-                                    }
-                                }
-                                replicationProviderSettingsValue["storageAccounts"] = storageAccountsArray;
+                                replicationProviderSettingsValue["compression"] = derived.Compression;
+                            }
+                            
+                            if (derived.InitialReplicationMethod != null)
+                            {
+                                replicationProviderSettingsValue["initialReplicationMethod"] = derived.InitialReplicationMethod;
+                            }
+                            
+                            if (derived.OnlineReplicationStartTime != null)
+                            {
+                                replicationProviderSettingsValue["onlineReplicationStartTime"] = derived.OnlineReplicationStartTime.Value.ToString();
+                            }
+                            
+                            if (derived.OfflineReplicationImportPath != null)
+                            {
+                                replicationProviderSettingsValue["offlineReplicationImportPath"] = derived.OfflineReplicationImportPath;
+                            }
+                            
+                            if (derived.OfflineReplicationExportPath != null)
+                            {
+                                replicationProviderSettingsValue["offlineReplicationExportPath"] = derived.OfflineReplicationExportPath;
+                            }
+                            
+                            replicationProviderSettingsValue["replicationPort"] = derived.ReplicationPort;
+                            
+                            replicationProviderSettingsValue["allowedAuthenticationType"] = derived.AllowedAuthenticationType;
+                            
+                            if (derived.ReplicaDeletion != null)
+                            {
+                                replicationProviderSettingsValue["replicaDeletion"] = derived.ReplicaDeletion;
                             }
                         }
-                        
-                        if (derived2.Encryption != null)
+                        if (input.Properties.ReplicationProviderSettings is HyperVReplicaAzurePolicyInput)
                         {
-                            replicationProviderSettingsValue["encryption"] = derived2.Encryption;
+                            replicationProviderSettingsValue["__type"] = "HyperVReplicaAzurePolicyInput";
+                            HyperVReplicaAzurePolicyInput derived2 = ((HyperVReplicaAzurePolicyInput)input.Properties.ReplicationProviderSettings);
+                            
+                            replicationProviderSettingsValue["recoveryPointHistoryDuration"] = derived2.RecoveryPointHistoryDuration;
+                            
+                            replicationProviderSettingsValue["applicationConsistentSnapshotFrequencyInHours"] = derived2.ApplicationConsistentSnapshotFrequencyInHours;
+                            
+                            replicationProviderSettingsValue["replicationInterval"] = derived2.ReplicationInterval;
+                            
+                            if (derived2.OnlineIrStartTime != null)
+                            {
+                                replicationProviderSettingsValue["onlineReplicationStartTime"] = derived2.OnlineIrStartTime.Value.ToString();
+                            }
+                            
+                            if (derived2.StorageAccounts != null)
+                            {
+                                if (derived2.StorageAccounts is ILazyCollection == false || ((ILazyCollection)derived2.StorageAccounts).IsInitialized)
+                                {
+                                    JArray storageAccountsArray = new JArray();
+                                    foreach (CustomerStorageAccount storageAccountsItem in derived2.StorageAccounts)
+                                    {
+                                        JObject customerStorageAccountValue = new JObject();
+                                        storageAccountsArray.Add(customerStorageAccountValue);
+                                        
+                                        if (storageAccountsItem.StorageAccountName != null)
+                                        {
+                                            customerStorageAccountValue["storageAccountName"] = storageAccountsItem.StorageAccountName;
+                                        }
+                                        
+                                        if (storageAccountsItem.SubscriptionId != null)
+                                        {
+                                            customerStorageAccountValue["subscriptionId"] = storageAccountsItem.SubscriptionId;
+                                        }
+                                    }
+                                    replicationProviderSettingsValue["storageAccounts"] = storageAccountsArray;
+                                }
+                            }
+                            
+                            if (derived2.Encryption != null)
+                            {
+                                replicationProviderSettingsValue["encryption"] = derived2.Encryption;
+                            }
                         }
-                    }
-                    if (input.ReplicationProviderSettings is SanPolicyInput)
-                    {
-                        replicationProviderSettingsValue["__type"] = "SanPolicyInput";
-                        SanPolicyInput derived3 = ((SanPolicyInput)input.ReplicationProviderSettings);
-                        
-                        if (derived3.CloudId != null)
+                        if (input.Properties.ReplicationProviderSettings is SanPolicyInput)
                         {
-                            replicationProviderSettingsValue["cloudId"] = derived3.CloudId;
-                        }
-                        
-                        if (derived3.RemoteCloudId != null)
-                        {
-                            replicationProviderSettingsValue["remoteCloudId"] = derived3.RemoteCloudId;
-                        }
-                        
-                        if (derived3.ArrayUniqueId != null)
-                        {
-                            replicationProviderSettingsValue["arrayUniqueId"] = derived3.ArrayUniqueId;
-                        }
-                        
-                        if (derived3.RemoteArrayUniqueId != null)
-                        {
-                            replicationProviderSettingsValue["remoteArrayUniqueId"] = derived3.RemoteArrayUniqueId;
+                            replicationProviderSettingsValue["__type"] = "SanPolicyInput";
+                            SanPolicyInput derived3 = ((SanPolicyInput)input.Properties.ReplicationProviderSettings);
+                            
+                            if (derived3.CloudId != null)
+                            {
+                                replicationProviderSettingsValue["cloudId"] = derived3.CloudId;
+                            }
+                            
+                            if (derived3.RemoteCloudId != null)
+                            {
+                                replicationProviderSettingsValue["remoteCloudId"] = derived3.RemoteCloudId;
+                            }
+                            
+                            if (derived3.ArrayUniqueId != null)
+                            {
+                                replicationProviderSettingsValue["arrayUniqueId"] = derived3.ArrayUniqueId;
+                            }
+                            
+                            if (derived3.RemoteArrayUniqueId != null)
+                            {
+                                replicationProviderSettingsValue["remoteArrayUniqueId"] = derived3.RemoteArrayUniqueId;
+                            }
                         }
                     }
                 }
@@ -555,9 +566,12 @@ namespace Microsoft.Azure.Management.SiteRecovery
             {
                 throw new ArgumentNullException("input");
             }
-            if (input.ReplicationProviderSettings == null)
+            if (input.Properties != null)
             {
-                throw new ArgumentNullException("input.ReplicationProviderSettings");
+                if (input.Properties.ReplicationProviderSettings == null)
+                {
+                    throw new ArgumentNullException("input.Properties.ReplicationProviderSettings");
+                }
             }
             if (policyName == null)
             {
@@ -638,121 +652,127 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 JObject updatePolicyInputValue = new JObject();
                 requestDoc = updatePolicyInputValue;
                 
-                JObject replicationProviderSettingsValue = new JObject();
-                updatePolicyInputValue["replicationProviderSettings"] = replicationProviderSettingsValue;
-                if (input.ReplicationProviderSettings is HyperVReplicaPolicyInput)
+                if (input.Properties != null)
                 {
-                    replicationProviderSettingsValue["__type"] = "HyperVReplicaPolicyInput";
-                    HyperVReplicaPolicyInput derived = ((HyperVReplicaPolicyInput)input.ReplicationProviderSettings);
+                    JObject propertiesValue = new JObject();
+                    updatePolicyInputValue["properties"] = propertiesValue;
                     
-                    replicationProviderSettingsValue["replicationFrequencyInSeconds"] = derived.ReplicationFrequencyInSeconds;
-                    
-                    replicationProviderSettingsValue["recoveryPoints"] = derived.RecoveryPoints;
-                    
-                    replicationProviderSettingsValue["applicationConsistentSnapshotFrequencyInHours"] = derived.ApplicationConsistentSnapshotFrequencyInHours;
-                    
-                    if (derived.Compression != null)
+                    JObject replicationProviderSettingsValue = new JObject();
+                    propertiesValue["replicationProviderSettings"] = replicationProviderSettingsValue;
+                    if (input.Properties.ReplicationProviderSettings is HyperVReplicaPolicyInput)
                     {
-                        replicationProviderSettingsValue["compression"] = derived.Compression;
-                    }
-                    
-                    if (derived.InitialReplicationMethod != null)
-                    {
-                        replicationProviderSettingsValue["initialReplicationMethod"] = derived.InitialReplicationMethod;
-                    }
-                    
-                    if (derived.OnlineReplicationStartTime != null)
-                    {
-                        replicationProviderSettingsValue["onlineReplicationStartTime"] = derived.OnlineReplicationStartTime.Value.ToString();
-                    }
-                    
-                    if (derived.OfflineReplicationImportPath != null)
-                    {
-                        replicationProviderSettingsValue["offlineReplicationImportPath"] = derived.OfflineReplicationImportPath;
-                    }
-                    
-                    if (derived.OfflineReplicationExportPath != null)
-                    {
-                        replicationProviderSettingsValue["offlineReplicationExportPath"] = derived.OfflineReplicationExportPath;
-                    }
-                    
-                    replicationProviderSettingsValue["replicationPort"] = derived.ReplicationPort;
-                    
-                    replicationProviderSettingsValue["allowedAuthenticationType"] = derived.AllowedAuthenticationType;
-                    
-                    if (derived.ReplicaDeletion != null)
-                    {
-                        replicationProviderSettingsValue["replicaDeletion"] = derived.ReplicaDeletion;
-                    }
-                }
-                if (input.ReplicationProviderSettings is HyperVReplicaAzurePolicyInput)
-                {
-                    replicationProviderSettingsValue["__type"] = "HyperVReplicaAzurePolicyInput";
-                    HyperVReplicaAzurePolicyInput derived2 = ((HyperVReplicaAzurePolicyInput)input.ReplicationProviderSettings);
-                    
-                    replicationProviderSettingsValue["recoveryPointHistoryDuration"] = derived2.RecoveryPointHistoryDuration;
-                    
-                    replicationProviderSettingsValue["applicationConsistentSnapshotFrequencyInHours"] = derived2.ApplicationConsistentSnapshotFrequencyInHours;
-                    
-                    replicationProviderSettingsValue["replicationInterval"] = derived2.ReplicationInterval;
-                    
-                    if (derived2.OnlineIrStartTime != null)
-                    {
-                        replicationProviderSettingsValue["onlineReplicationStartTime"] = derived2.OnlineIrStartTime.Value.ToString();
-                    }
-                    
-                    if (derived2.StorageAccounts != null)
-                    {
-                        if (derived2.StorageAccounts is ILazyCollection == false || ((ILazyCollection)derived2.StorageAccounts).IsInitialized)
+                        replicationProviderSettingsValue["__type"] = "HyperVReplicaPolicyInput";
+                        HyperVReplicaPolicyInput derived = ((HyperVReplicaPolicyInput)input.Properties.ReplicationProviderSettings);
+                        
+                        replicationProviderSettingsValue["replicationFrequencyInSeconds"] = derived.ReplicationFrequencyInSeconds;
+                        
+                        replicationProviderSettingsValue["recoveryPoints"] = derived.RecoveryPoints;
+                        
+                        replicationProviderSettingsValue["applicationConsistentSnapshotFrequencyInHours"] = derived.ApplicationConsistentSnapshotFrequencyInHours;
+                        
+                        if (derived.Compression != null)
                         {
-                            JArray storageAccountsArray = new JArray();
-                            foreach (CustomerStorageAccount storageAccountsItem in derived2.StorageAccounts)
-                            {
-                                JObject customerStorageAccountValue = new JObject();
-                                storageAccountsArray.Add(customerStorageAccountValue);
-                                
-                                if (storageAccountsItem.StorageAccountName != null)
-                                {
-                                    customerStorageAccountValue["storageAccountName"] = storageAccountsItem.StorageAccountName;
-                                }
-                                
-                                if (storageAccountsItem.SubscriptionId != null)
-                                {
-                                    customerStorageAccountValue["subscriptionId"] = storageAccountsItem.SubscriptionId;
-                                }
-                            }
-                            replicationProviderSettingsValue["storageAccounts"] = storageAccountsArray;
+                            replicationProviderSettingsValue["compression"] = derived.Compression;
+                        }
+                        
+                        if (derived.InitialReplicationMethod != null)
+                        {
+                            replicationProviderSettingsValue["initialReplicationMethod"] = derived.InitialReplicationMethod;
+                        }
+                        
+                        if (derived.OnlineReplicationStartTime != null)
+                        {
+                            replicationProviderSettingsValue["onlineReplicationStartTime"] = derived.OnlineReplicationStartTime.Value.ToString();
+                        }
+                        
+                        if (derived.OfflineReplicationImportPath != null)
+                        {
+                            replicationProviderSettingsValue["offlineReplicationImportPath"] = derived.OfflineReplicationImportPath;
+                        }
+                        
+                        if (derived.OfflineReplicationExportPath != null)
+                        {
+                            replicationProviderSettingsValue["offlineReplicationExportPath"] = derived.OfflineReplicationExportPath;
+                        }
+                        
+                        replicationProviderSettingsValue["replicationPort"] = derived.ReplicationPort;
+                        
+                        replicationProviderSettingsValue["allowedAuthenticationType"] = derived.AllowedAuthenticationType;
+                        
+                        if (derived.ReplicaDeletion != null)
+                        {
+                            replicationProviderSettingsValue["replicaDeletion"] = derived.ReplicaDeletion;
                         }
                     }
-                    
-                    if (derived2.Encryption != null)
+                    if (input.Properties.ReplicationProviderSettings is HyperVReplicaAzurePolicyInput)
                     {
-                        replicationProviderSettingsValue["encryption"] = derived2.Encryption;
+                        replicationProviderSettingsValue["__type"] = "HyperVReplicaAzurePolicyInput";
+                        HyperVReplicaAzurePolicyInput derived2 = ((HyperVReplicaAzurePolicyInput)input.Properties.ReplicationProviderSettings);
+                        
+                        replicationProviderSettingsValue["recoveryPointHistoryDuration"] = derived2.RecoveryPointHistoryDuration;
+                        
+                        replicationProviderSettingsValue["applicationConsistentSnapshotFrequencyInHours"] = derived2.ApplicationConsistentSnapshotFrequencyInHours;
+                        
+                        replicationProviderSettingsValue["replicationInterval"] = derived2.ReplicationInterval;
+                        
+                        if (derived2.OnlineIrStartTime != null)
+                        {
+                            replicationProviderSettingsValue["onlineReplicationStartTime"] = derived2.OnlineIrStartTime.Value.ToString();
+                        }
+                        
+                        if (derived2.StorageAccounts != null)
+                        {
+                            if (derived2.StorageAccounts is ILazyCollection == false || ((ILazyCollection)derived2.StorageAccounts).IsInitialized)
+                            {
+                                JArray storageAccountsArray = new JArray();
+                                foreach (CustomerStorageAccount storageAccountsItem in derived2.StorageAccounts)
+                                {
+                                    JObject customerStorageAccountValue = new JObject();
+                                    storageAccountsArray.Add(customerStorageAccountValue);
+                                    
+                                    if (storageAccountsItem.StorageAccountName != null)
+                                    {
+                                        customerStorageAccountValue["storageAccountName"] = storageAccountsItem.StorageAccountName;
+                                    }
+                                    
+                                    if (storageAccountsItem.SubscriptionId != null)
+                                    {
+                                        customerStorageAccountValue["subscriptionId"] = storageAccountsItem.SubscriptionId;
+                                    }
+                                }
+                                replicationProviderSettingsValue["storageAccounts"] = storageAccountsArray;
+                            }
+                        }
+                        
+                        if (derived2.Encryption != null)
+                        {
+                            replicationProviderSettingsValue["encryption"] = derived2.Encryption;
+                        }
                     }
-                }
-                if (input.ReplicationProviderSettings is SanPolicyInput)
-                {
-                    replicationProviderSettingsValue["__type"] = "SanPolicyInput";
-                    SanPolicyInput derived3 = ((SanPolicyInput)input.ReplicationProviderSettings);
-                    
-                    if (derived3.CloudId != null)
+                    if (input.Properties.ReplicationProviderSettings is SanPolicyInput)
                     {
-                        replicationProviderSettingsValue["cloudId"] = derived3.CloudId;
-                    }
-                    
-                    if (derived3.RemoteCloudId != null)
-                    {
-                        replicationProviderSettingsValue["remoteCloudId"] = derived3.RemoteCloudId;
-                    }
-                    
-                    if (derived3.ArrayUniqueId != null)
-                    {
-                        replicationProviderSettingsValue["arrayUniqueId"] = derived3.ArrayUniqueId;
-                    }
-                    
-                    if (derived3.RemoteArrayUniqueId != null)
-                    {
-                        replicationProviderSettingsValue["remoteArrayUniqueId"] = derived3.RemoteArrayUniqueId;
+                        replicationProviderSettingsValue["__type"] = "SanPolicyInput";
+                        SanPolicyInput derived3 = ((SanPolicyInput)input.Properties.ReplicationProviderSettings);
+                        
+                        if (derived3.CloudId != null)
+                        {
+                            replicationProviderSettingsValue["cloudId"] = derived3.CloudId;
+                        }
+                        
+                        if (derived3.RemoteCloudId != null)
+                        {
+                            replicationProviderSettingsValue["remoteCloudId"] = derived3.RemoteCloudId;
+                        }
+                        
+                        if (derived3.ArrayUniqueId != null)
+                        {
+                            replicationProviderSettingsValue["arrayUniqueId"] = derived3.ArrayUniqueId;
+                        }
+                        
+                        if (derived3.RemoteArrayUniqueId != null)
+                        {
+                            replicationProviderSettingsValue["remoteArrayUniqueId"] = derived3.RemoteArrayUniqueId;
+                        }
                     }
                 }
                 
@@ -1102,13 +1122,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.FriendlyName = friendlyNameInstance;
                                 }
                                 
-                                JToken protectedEntityCountValue = propertiesValue["protectedEntityCount"];
-                                if (protectedEntityCountValue != null && protectedEntityCountValue.Type != JTokenType.Null)
-                                {
-                                    int protectedEntityCountInstance = ((int)protectedEntityCountValue);
-                                    propertiesInstance.ProtectedEntityCount = protectedEntityCountInstance;
-                                }
-                                
                                 JToken replicationProviderValue = propertiesValue["replicationProvider"];
                                 if (replicationProviderValue != null && replicationProviderValue.Type != JTokenType.Null)
                                 {
@@ -1276,44 +1289,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             hyperVReplicaAzurePolicyDetailsInstance.Type = typeInstance2;
                                         }
                                         propertiesInstance.ReplicationProviderSettings = hyperVReplicaAzurePolicyDetailsInstance;
-                                    }
-                                }
-                                
-                                JToken associationStatusValue = propertiesValue["associationStatus"];
-                                if (associationStatusValue != null && associationStatusValue.Type != JTokenType.Null)
-                                {
-                                    string associationStatusInstance = ((string)associationStatusValue);
-                                    propertiesInstance.AssociationStatus = associationStatusInstance;
-                                }
-                                
-                                JToken associationDetailArray = propertiesValue["associationDetail"];
-                                if (associationDetailArray != null && associationDetailArray.Type != JTokenType.Null)
-                                {
-                                    foreach (JToken associationDetailValue in ((JArray)associationDetailArray))
-                                    {
-                                        PolicyAssociationDetails policyAssociationDetailsInstance = new PolicyAssociationDetails();
-                                        propertiesInstance.AssociationDetail.Add(policyAssociationDetailsInstance);
-                                        
-                                        JToken primaryProtectionContainerIdValue = associationDetailValue["primaryProtectionContainerId"];
-                                        if (primaryProtectionContainerIdValue != null && primaryProtectionContainerIdValue.Type != JTokenType.Null)
-                                        {
-                                            string primaryProtectionContainerIdInstance = ((string)primaryProtectionContainerIdValue);
-                                            policyAssociationDetailsInstance.PrimaryProtectionContainerId = primaryProtectionContainerIdInstance;
-                                        }
-                                        
-                                        JToken recoveryProtectionContainerIdValue = associationDetailValue["recoveryProtectionContainerId"];
-                                        if (recoveryProtectionContainerIdValue != null && recoveryProtectionContainerIdValue.Type != JTokenType.Null)
-                                        {
-                                            string recoveryProtectionContainerIdInstance = ((string)recoveryProtectionContainerIdValue);
-                                            policyAssociationDetailsInstance.RecoveryProtectionContainerId = recoveryProtectionContainerIdInstance;
-                                        }
-                                        
-                                        JToken associationStatusValue2 = associationDetailValue["associationStatus"];
-                                        if (associationStatusValue2 != null && associationStatusValue2.Type != JTokenType.Null)
-                                        {
-                                            string associationStatusInstance2 = ((string)associationStatusValue2);
-                                            policyAssociationDetailsInstance.AssociationStatus = associationStatusInstance2;
-                                        }
                                     }
                                 }
                             }
@@ -1502,13 +1477,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.FriendlyName = friendlyNameInstance;
                                 }
                                 
-                                JToken protectedEntityCountValue = propertiesValue["protectedEntityCount"];
-                                if (protectedEntityCountValue != null && protectedEntityCountValue.Type != JTokenType.Null)
-                                {
-                                    int protectedEntityCountInstance = ((int)protectedEntityCountValue);
-                                    propertiesInstance.ProtectedEntityCount = protectedEntityCountInstance;
-                                }
-                                
                                 JToken replicationProviderValue = propertiesValue["replicationProvider"];
                                 if (replicationProviderValue != null && replicationProviderValue.Type != JTokenType.Null)
                                 {
@@ -1676,44 +1644,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             hyperVReplicaAzurePolicyDetailsInstance.Type = typeInstance2;
                                         }
                                         propertiesInstance.ReplicationProviderSettings = hyperVReplicaAzurePolicyDetailsInstance;
-                                    }
-                                }
-                                
-                                JToken associationStatusValue = propertiesValue["associationStatus"];
-                                if (associationStatusValue != null && associationStatusValue.Type != JTokenType.Null)
-                                {
-                                    string associationStatusInstance = ((string)associationStatusValue);
-                                    propertiesInstance.AssociationStatus = associationStatusInstance;
-                                }
-                                
-                                JToken associationDetailArray = propertiesValue["associationDetail"];
-                                if (associationDetailArray != null && associationDetailArray.Type != JTokenType.Null)
-                                {
-                                    foreach (JToken associationDetailValue in ((JArray)associationDetailArray))
-                                    {
-                                        PolicyAssociationDetails policyAssociationDetailsInstance = new PolicyAssociationDetails();
-                                        propertiesInstance.AssociationDetail.Add(policyAssociationDetailsInstance);
-                                        
-                                        JToken primaryProtectionContainerIdValue = associationDetailValue["primaryProtectionContainerId"];
-                                        if (primaryProtectionContainerIdValue != null && primaryProtectionContainerIdValue.Type != JTokenType.Null)
-                                        {
-                                            string primaryProtectionContainerIdInstance = ((string)primaryProtectionContainerIdValue);
-                                            policyAssociationDetailsInstance.PrimaryProtectionContainerId = primaryProtectionContainerIdInstance;
-                                        }
-                                        
-                                        JToken recoveryProtectionContainerIdValue = associationDetailValue["recoveryProtectionContainerId"];
-                                        if (recoveryProtectionContainerIdValue != null && recoveryProtectionContainerIdValue.Type != JTokenType.Null)
-                                        {
-                                            string recoveryProtectionContainerIdInstance = ((string)recoveryProtectionContainerIdValue);
-                                            policyAssociationDetailsInstance.RecoveryProtectionContainerId = recoveryProtectionContainerIdInstance;
-                                        }
-                                        
-                                        JToken associationStatusValue2 = associationDetailValue["associationStatus"];
-                                        if (associationStatusValue2 != null && associationStatusValue2.Type != JTokenType.Null)
-                                        {
-                                            string associationStatusInstance2 = ((string)associationStatusValue2);
-                                            policyAssociationDetailsInstance.AssociationStatus = associationStatusInstance2;
-                                        }
                                     }
                                 }
                             }
@@ -2135,13 +2065,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.FriendlyName = friendlyNameInstance;
                                 }
                                 
-                                JToken protectedEntityCountValue = propertiesValue["protectedEntityCount"];
-                                if (protectedEntityCountValue != null && protectedEntityCountValue.Type != JTokenType.Null)
-                                {
-                                    int protectedEntityCountInstance = ((int)protectedEntityCountValue);
-                                    propertiesInstance.ProtectedEntityCount = protectedEntityCountInstance;
-                                }
-                                
                                 JToken replicationProviderValue = propertiesValue["replicationProvider"];
                                 if (replicationProviderValue != null && replicationProviderValue.Type != JTokenType.Null)
                                 {
@@ -2309,44 +2232,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             hyperVReplicaAzurePolicyDetailsInstance.Type = typeInstance2;
                                         }
                                         propertiesInstance.ReplicationProviderSettings = hyperVReplicaAzurePolicyDetailsInstance;
-                                    }
-                                }
-                                
-                                JToken associationStatusValue = propertiesValue["associationStatus"];
-                                if (associationStatusValue != null && associationStatusValue.Type != JTokenType.Null)
-                                {
-                                    string associationStatusInstance = ((string)associationStatusValue);
-                                    propertiesInstance.AssociationStatus = associationStatusInstance;
-                                }
-                                
-                                JToken associationDetailArray = propertiesValue["associationDetail"];
-                                if (associationDetailArray != null && associationDetailArray.Type != JTokenType.Null)
-                                {
-                                    foreach (JToken associationDetailValue in ((JArray)associationDetailArray))
-                                    {
-                                        PolicyAssociationDetails policyAssociationDetailsInstance = new PolicyAssociationDetails();
-                                        propertiesInstance.AssociationDetail.Add(policyAssociationDetailsInstance);
-                                        
-                                        JToken primaryProtectionContainerIdValue = associationDetailValue["primaryProtectionContainerId"];
-                                        if (primaryProtectionContainerIdValue != null && primaryProtectionContainerIdValue.Type != JTokenType.Null)
-                                        {
-                                            string primaryProtectionContainerIdInstance = ((string)primaryProtectionContainerIdValue);
-                                            policyAssociationDetailsInstance.PrimaryProtectionContainerId = primaryProtectionContainerIdInstance;
-                                        }
-                                        
-                                        JToken recoveryProtectionContainerIdValue = associationDetailValue["recoveryProtectionContainerId"];
-                                        if (recoveryProtectionContainerIdValue != null && recoveryProtectionContainerIdValue.Type != JTokenType.Null)
-                                        {
-                                            string recoveryProtectionContainerIdInstance = ((string)recoveryProtectionContainerIdValue);
-                                            policyAssociationDetailsInstance.RecoveryProtectionContainerId = recoveryProtectionContainerIdInstance;
-                                        }
-                                        
-                                        JToken associationStatusValue2 = associationDetailValue["associationStatus"];
-                                        if (associationStatusValue2 != null && associationStatusValue2.Type != JTokenType.Null)
-                                        {
-                                            string associationStatusInstance2 = ((string)associationStatusValue2);
-                                            policyAssociationDetailsInstance.AssociationStatus = associationStatusInstance2;
-                                        }
                                     }
                                 }
                             }
@@ -2614,13 +2499,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             propertiesInstance.FriendlyName = friendlyNameInstance;
                                         }
                                         
-                                        JToken protectedEntityCountValue = propertiesValue["protectedEntityCount"];
-                                        if (protectedEntityCountValue != null && protectedEntityCountValue.Type != JTokenType.Null)
-                                        {
-                                            int protectedEntityCountInstance = ((int)protectedEntityCountValue);
-                                            propertiesInstance.ProtectedEntityCount = protectedEntityCountInstance;
-                                        }
-                                        
                                         JToken replicationProviderValue = propertiesValue["replicationProvider"];
                                         if (replicationProviderValue != null && replicationProviderValue.Type != JTokenType.Null)
                                         {
@@ -2788,44 +2666,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     hyperVReplicaAzurePolicyDetailsInstance.Type = typeInstance2;
                                                 }
                                                 propertiesInstance.ReplicationProviderSettings = hyperVReplicaAzurePolicyDetailsInstance;
-                                            }
-                                        }
-                                        
-                                        JToken associationStatusValue = propertiesValue["associationStatus"];
-                                        if (associationStatusValue != null && associationStatusValue.Type != JTokenType.Null)
-                                        {
-                                            string associationStatusInstance = ((string)associationStatusValue);
-                                            propertiesInstance.AssociationStatus = associationStatusInstance;
-                                        }
-                                        
-                                        JToken associationDetailArray = propertiesValue["associationDetail"];
-                                        if (associationDetailArray != null && associationDetailArray.Type != JTokenType.Null)
-                                        {
-                                            foreach (JToken associationDetailValue in ((JArray)associationDetailArray))
-                                            {
-                                                PolicyAssociationDetails policyAssociationDetailsInstance = new PolicyAssociationDetails();
-                                                propertiesInstance.AssociationDetail.Add(policyAssociationDetailsInstance);
-                                                
-                                                JToken primaryProtectionContainerIdValue = associationDetailValue["primaryProtectionContainerId"];
-                                                if (primaryProtectionContainerIdValue != null && primaryProtectionContainerIdValue.Type != JTokenType.Null)
-                                                {
-                                                    string primaryProtectionContainerIdInstance = ((string)primaryProtectionContainerIdValue);
-                                                    policyAssociationDetailsInstance.PrimaryProtectionContainerId = primaryProtectionContainerIdInstance;
-                                                }
-                                                
-                                                JToken recoveryProtectionContainerIdValue = associationDetailValue["recoveryProtectionContainerId"];
-                                                if (recoveryProtectionContainerIdValue != null && recoveryProtectionContainerIdValue.Type != JTokenType.Null)
-                                                {
-                                                    string recoveryProtectionContainerIdInstance = ((string)recoveryProtectionContainerIdValue);
-                                                    policyAssociationDetailsInstance.RecoveryProtectionContainerId = recoveryProtectionContainerIdInstance;
-                                                }
-                                                
-                                                JToken associationStatusValue2 = associationDetailValue["associationStatus"];
-                                                if (associationStatusValue2 != null && associationStatusValue2.Type != JTokenType.Null)
-                                                {
-                                                    string associationStatusInstance2 = ((string)associationStatusValue2);
-                                                    policyAssociationDetailsInstance.AssociationStatus = associationStatusInstance2;
-                                                }
                                             }
                                         }
                                     }

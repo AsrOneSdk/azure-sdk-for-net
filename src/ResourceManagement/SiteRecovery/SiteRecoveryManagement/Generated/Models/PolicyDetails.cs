@@ -40,15 +40,15 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._associationStatus = value; }
         }
         
-        private string _policyArmId;
+        private string _policyId;
         
         /// <summary>
         /// Optional. Policy ARM Id.
         /// </summary>
-        public string PolicyArmId
+        public string PolicyId
         {
-            get { return this._policyArmId; }
-            set { this._policyArmId = value; }
+            get { return this._policyId; }
+            set { this._policyId = value; }
         }
         
         /// <summary>

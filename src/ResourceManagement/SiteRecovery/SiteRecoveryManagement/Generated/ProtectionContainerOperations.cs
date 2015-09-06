@@ -1170,7 +1170,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 if (policyIdValue != null && policyIdValue.Type != JTokenType.Null)
                                                 {
                                                     string policyIdInstance = ((string)policyIdValue);
-                                                    policyDetailsInstance.PolicyArmId = policyIdInstance;
+                                                    policyDetailsInstance.PolicyId = policyIdInstance;
                                                 }
                                                 
                                                 JToken associationStatusValue = policyDetailsValue["associationStatus"];
@@ -1557,7 +1557,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 if (policyIdValue != null && policyIdValue.Type != JTokenType.Null)
                                                 {
                                                     string policyIdInstance = ((string)policyIdValue);
-                                                    policyDetailsInstance.PolicyArmId = policyIdInstance;
+                                                    policyDetailsInstance.PolicyId = policyIdInstance;
                                                 }
                                                 
                                                 JToken associationStatusValue = policyDetailsValue["associationStatus"];
@@ -1996,7 +1996,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 if (policyIdValue != null && policyIdValue.Type != JTokenType.Null)
                                                 {
                                                     string policyIdInstance = ((string)policyIdValue);
-                                                    policyDetailsInstance.PolicyArmId = policyIdInstance;
+                                                    policyDetailsInstance.PolicyId = policyIdInstance;
                                                 }
                                                 
                                                 JToken associationStatusValue = policyDetailsValue["associationStatus"];
@@ -2435,7 +2435,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 if (policyIdValue != null && policyIdValue.Type != JTokenType.Null)
                                                 {
                                                     string policyIdInstance = ((string)policyIdValue);
-                                                    policyDetailsInstance.PolicyArmId = policyIdInstance;
+                                                    policyDetailsInstance.PolicyId = policyIdInstance;
                                                 }
                                                 
                                                 JToken associationStatusValue = policyDetailsValue["associationStatus"];
@@ -2910,7 +2910,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                         if (policyIdValue != null && policyIdValue.Type != JTokenType.Null)
                                                         {
                                                             string policyIdInstance = ((string)policyIdValue);
-                                                            policyDetailsInstance.PolicyArmId = policyIdInstance;
+                                                            policyDetailsInstance.PolicyId = policyIdInstance;
                                                         }
                                                         
                                                         JToken associationStatusValue = policyDetailsValue["associationStatus"];
