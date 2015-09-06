@@ -26,15 +26,26 @@ using Microsoft.Azure.Management.SiteRecovery.Models;
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// A standard service response for long running operations.
+    /// Service response for replication protected items operation.
     /// </summary>
-    public partial class TestFailoverOperationResponse : FailoverOperationResponse
+    public partial class ReplicationProtectedItemOperationResponse : LongRunningOperationResponse
     {
+        private ReplicationProtectedItem _replicationProtectedItem;
+        
         /// <summary>
-        /// Initializes a new instance of the TestFailoverOperationResponse
-        /// class.
+        /// Optional. Protected object.
         /// </summary>
-        public TestFailoverOperationResponse()
+        public ReplicationProtectedItem ReplicationProtectedItem
+        {
+            get { return this._replicationProtectedItem; }
+            set { this._replicationProtectedItem = value; }
+        }
+        
+        /// <summary>
+        /// Initializes a new instance of the
+        /// ReplicationProtectedItemOperationResponse class.
+        /// </summary>
+        public ReplicationProtectedItemOperationResponse()
         {
         }
     }

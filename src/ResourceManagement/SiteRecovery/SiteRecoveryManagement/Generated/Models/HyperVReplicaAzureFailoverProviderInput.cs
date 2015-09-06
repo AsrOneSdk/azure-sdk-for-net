@@ -21,51 +21,54 @@
 
 using System;
 using System.Linq;
-using Microsoft.Azure;
 using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// The definition of a ProtectionEntity object.
+    /// HvrA provider specific input for failover.
     /// </summary>
-    public partial class ProtectionEntity : ResourceBaseExtended
+    public partial class HyperVReplicaAzureFailoverProviderInput : ProviderSpecificFailoverInput
     {
-        private ProtectionEntityProperties _properties;
+        private string _primaryKekCertificatePfx;
         
         /// <summary>
-        /// Required. Properties of the protection entity.
+        /// Optional. Gets or sets Primary kek certificate pfx.
         /// </summary>
-        public ProtectionEntityProperties Properties
+        public string PrimaryKekCertificatePfx
         {
-            get { return this._properties; }
-            set { this._properties = value; }
+            get { return this._primaryKekCertificatePfx; }
+            set { this._primaryKekCertificatePfx = value; }
+        }
+        
+        private string _secondaryKekCertificatePfx;
+        
+        /// <summary>
+        /// Optional. Gets or sets Secondary kek certificate pfx.
+        /// </summary>
+        public string SecondaryKekCertificatePfx
+        {
+            get { return this._secondaryKekCertificatePfx; }
+            set { this._secondaryKekCertificatePfx = value; }
+        }
+        
+        private string _vaultLocation;
+        
+        /// <summary>
+        /// Optional. Gets or sets Location of the vault.
+        /// </summary>
+        public string VaultLocation
+        {
+            get { return this._vaultLocation; }
+            set { this._vaultLocation = value; }
         }
         
         /// <summary>
-        /// Initializes a new instance of the ProtectionEntity class.
+        /// Initializes a new instance of the
+        /// HyperVReplicaAzureFailoverProviderInput class.
         /// </summary>
-        public ProtectionEntity()
+        public HyperVReplicaAzureFailoverProviderInput()
         {
-        }
-        
-        /// <summary>
-        /// Initializes a new instance of the ProtectionEntity class with
-        /// required arguments.
-        /// </summary>
-        public ProtectionEntity(ProtectionEntityProperties properties, string location)
-            : this()
-        {
-            if (properties == null)
-            {
-                throw new ArgumentNullException("properties");
-            }
-            if (location == null)
-            {
-                throw new ArgumentNullException("location");
-            }
-            this.Properties = properties;
-            this.Location = location;
         }
     }
 }

@@ -21,20 +21,19 @@
 
 using System;
 using System.Linq;
-using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// A standard service response for long running operations.
+    /// Failover provider specific input.
     /// </summary>
-    public partial class CommitFailoverOperationResponse : FailoverOperationResponse
+    public partial class ProviderSpecificFailoverInput
     {
         /// <summary>
-        /// Initializes a new instance of the CommitFailoverOperationResponse
+        /// Initializes a new instance of the ProviderSpecificFailoverInput
         /// class.
         /// </summary>
-        public CommitFailoverOperationResponse()
+        public ProviderSpecificFailoverInput()
         {
         }
     }

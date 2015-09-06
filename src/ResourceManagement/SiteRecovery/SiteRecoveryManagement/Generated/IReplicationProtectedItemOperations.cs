@@ -34,6 +34,29 @@ namespace Microsoft.Azure.Management.SiteRecovery
     public partial interface IReplicationProtectedItemOperations
     {
         /// <summary>
+        /// Execute commit failover for the given Replication protected item.
+        /// </summary>
+        /// <param name='fabricName'>
+        /// Fabric name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Protection container name.
+        /// </param>
+        /// <param name='replicationProtectedItemName'>
+        /// Replication protected item name.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Request header parameters.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
+        /// A standard service response for long running operations.
+        /// </returns>
+        Task<LongRunningOperationResponse> BeginCommitFailoverAsync(string fabricName, string protectionContainerName, string replicationProtectedItemName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        
+        /// <summary>
         /// Disable Protection for the given Replication protected item.
         /// </summary>
         /// <param name='fabricName'>
@@ -78,6 +101,133 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// A standard service response for long running operations.
         /// </returns>
         Task<LongRunningOperationResponse> BeginEnableProtectionAsync(string fabricName, string protectionContainerName, EnableProtectionInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        
+        /// <summary>
+        /// Execute planned failover for the given Replication protected item.
+        /// </summary>
+        /// <param name='fabricName'>
+        /// Fabric name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Protection container name.
+        /// </param>
+        /// <param name='replicationProtectedItemName'>
+        /// Replication protected item name.
+        /// </param>
+        /// <param name='input'>
+        /// Planned failover input.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Request header parameters.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
+        /// A standard service response for long running operations.
+        /// </returns>
+        Task<LongRunningOperationResponse> BeginPlannedFailoverAsync(string fabricName, string protectionContainerName, string replicationProtectedItemName, PlannedFailoverInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        
+        /// <summary>
+        /// Execute reprotect for the given Replication protected item.
+        /// </summary>
+        /// <param name='fabricName'>
+        /// Fabric name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Protection container name.
+        /// </param>
+        /// <param name='replicationProtectedItemName'>
+        /// Replication protected item name.
+        /// </param>
+        /// <param name='input'>
+        /// Reprotect input.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Request header parameters.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
+        /// A standard service response for long running operations.
+        /// </returns>
+        Task<LongRunningOperationResponse> BeginReprotectAsync(string fabricName, string protectionContainerName, string replicationProtectedItemName, ReverseReplicationInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        
+        /// <summary>
+        /// Execute Test failover for the given Replication protected item.
+        /// </summary>
+        /// <param name='fabricName'>
+        /// Fabric name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Protection container name.
+        /// </param>
+        /// <param name='replicationProtectedItemName'>
+        /// Replication protected item name.
+        /// </param>
+        /// <param name='input'>
+        /// Test failover input.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Request header parameters.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
+        /// A standard service response for long running operations.
+        /// </returns>
+        Task<LongRunningOperationResponse> BeginTestFailoverAsync(string fabricName, string protectionContainerName, string replicationProtectedItemName, TestFailoverInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        
+        /// <summary>
+        /// Execute unplanned failover for the given Replication protected item.
+        /// </summary>
+        /// <param name='fabricName'>
+        /// Fabric name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Protection container name.
+        /// </param>
+        /// <param name='replicationProtectedItemName'>
+        /// Replication protected item name.
+        /// </param>
+        /// <param name='input'>
+        /// Unplanned failover input.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Request header parameters.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
+        /// A standard service response for long running operations.
+        /// </returns>
+        Task<LongRunningOperationResponse> BeginUnplannedFailoverAsync(string fabricName, string protectionContainerName, string replicationProtectedItemName, UnplannedFailoverInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        
+        /// <summary>
+        /// Execute commit failover for the given Replication protected item.
+        /// </summary>
+        /// <param name='fabricName'>
+        /// Fabric name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Protection container name.
+        /// </param>
+        /// <param name='replicationProtectedItemName'>
+        /// Replication protected item name.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Request header parameters.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
+        /// A standard service response for long running operations.
+        /// </returns>
+        Task<LongRunningOperationResponse> CommitFailoverAsync(string fabricName, string protectionContainerName, string replicationProtectedItemName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
         
         /// <summary>
         /// Disable Protection for the given Replication protected item.
@@ -161,6 +311,23 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// Cancellation token.
         /// </param>
         /// <returns>
+        /// Service response for replication protected items operation.
+        /// </returns>
+        Task<ReplicationProtectedItemOperationResponse> GetCommitFailoverStatusAsync(string operationStatusLink, CancellationToken cancellationToken);
+        
+        /// <summary>
+        /// The Get Operation Status operation returns the status of the
+        /// specified operation. After calling an asynchronous operation, you
+        /// can call Get Operation Status to determine whether the operation
+        /// has succeeded, failed, or is still in progress.
+        /// </summary>
+        /// <param name='operationStatusLink'>
+        /// Location value returned by the Begin operation.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
         Task<LongRunningOperationResponse> GetDisableStatusAsync(string operationStatusLink, CancellationToken cancellationToken);
@@ -178,9 +345,77 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// Cancellation token.
         /// </param>
         /// <returns>
-        /// Service response for enable DR operation.
+        /// Service response for replication protected items operation.
         /// </returns>
-        Task<EnableProtectionResponse> GetEnableStatusAsync(string operationStatusLink, CancellationToken cancellationToken);
+        Task<ReplicationProtectedItemOperationResponse> GetEnableStatusAsync(string operationStatusLink, CancellationToken cancellationToken);
+        
+        /// <summary>
+        /// The Get Operation Status operation returns the status of the
+        /// specified operation. After calling an asynchronous operation, you
+        /// can call Get Operation Status to determine whether the operation
+        /// has succeeded, failed, or is still in progress.
+        /// </summary>
+        /// <param name='operationStatusLink'>
+        /// Location value returned by the Begin operation.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
+        /// Service response for replication protected items operation.
+        /// </returns>
+        Task<ReplicationProtectedItemOperationResponse> GetPlannedFailoverStatusAsync(string operationStatusLink, CancellationToken cancellationToken);
+        
+        /// <summary>
+        /// The Get Operation Status operation returns the status of the
+        /// specified operation. After calling an asynchronous operation, you
+        /// can call Get Operation Status to determine whether the operation
+        /// has succeeded, failed, or is still in progress.
+        /// </summary>
+        /// <param name='operationStatusLink'>
+        /// Location value returned by the Begin operation.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
+        /// Service response for replication protected items operation.
+        /// </returns>
+        Task<ReplicationProtectedItemOperationResponse> GetReprotectStatusAsync(string operationStatusLink, CancellationToken cancellationToken);
+        
+        /// <summary>
+        /// The Get Operation Status operation returns the status of the
+        /// specified operation. After calling an asynchronous operation, you
+        /// can call Get Operation Status to determine whether the operation
+        /// has succeeded, failed, or is still in progress.
+        /// </summary>
+        /// <param name='operationStatusLink'>
+        /// Location value returned by the Begin operation.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
+        /// Service response for replication protected items operation.
+        /// </returns>
+        Task<ReplicationProtectedItemOperationResponse> GetTestFailoverStatusAsync(string operationStatusLink, CancellationToken cancellationToken);
+        
+        /// <summary>
+        /// The Get Operation Status operation returns the status of the
+        /// specified operation. After calling an asynchronous operation, you
+        /// can call Get Operation Status to determine whether the operation
+        /// has succeeded, failed, or is still in progress.
+        /// </summary>
+        /// <param name='operationStatusLink'>
+        /// Location value returned by the Begin operation.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
+        /// Service response for replication protected items operation.
+        /// </returns>
+        Task<ReplicationProtectedItemOperationResponse> GetUnplannedFailoverStatusAsync(string operationStatusLink, CancellationToken cancellationToken);
         
         /// <summary>
         /// Get the replication protected object by Id.
@@ -201,5 +436,109 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// The response model for the list replicated protected items.
         /// </returns>
         Task<ReplicationProtectedItemListResponse> ListAsync(string fabricName, string protectionContainerName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        
+        /// <summary>
+        /// Execute planned failover for the given Replication protected item.
+        /// </summary>
+        /// <param name='fabricName'>
+        /// Fabric name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Protection container name.
+        /// </param>
+        /// <param name='replicationProtectedItemName'>
+        /// Replication protected item name.
+        /// </param>
+        /// <param name='input'>
+        /// Planned failover input.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Request header parameters.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
+        /// A standard service response for long running operations.
+        /// </returns>
+        Task<LongRunningOperationResponse> PlannedFailoverAsync(string fabricName, string protectionContainerName, string replicationProtectedItemName, PlannedFailoverInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        
+        /// <summary>
+        /// Execute reprotect for the given Replication protected item.
+        /// </summary>
+        /// <param name='fabricName'>
+        /// Fabric name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Protection container name.
+        /// </param>
+        /// <param name='replicationProtectedItemName'>
+        /// Replication protected item name.
+        /// </param>
+        /// <param name='input'>
+        /// Reprotect input.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Request header parameters.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
+        /// A standard service response for long running operations.
+        /// </returns>
+        Task<LongRunningOperationResponse> ReprotectAsync(string fabricName, string protectionContainerName, string replicationProtectedItemName, ReverseReplicationInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        
+        /// <summary>
+        /// Execute Test failover for the given Replication protected item.
+        /// </summary>
+        /// <param name='fabricName'>
+        /// Fabric name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Protection container name.
+        /// </param>
+        /// <param name='replicationProtectedItemName'>
+        /// Replication protected item name.
+        /// </param>
+        /// <param name='input'>
+        /// Test failover input.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Request header parameters.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
+        /// A standard service response for long running operations.
+        /// </returns>
+        Task<LongRunningOperationResponse> TestFailoverAsync(string fabricName, string protectionContainerName, string replicationProtectedItemName, TestFailoverInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        
+        /// <summary>
+        /// Execute unplanned failover for the given Replication protected item.
+        /// </summary>
+        /// <param name='fabricName'>
+        /// Fabric name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Protection container name.
+        /// </param>
+        /// <param name='replicationProtectedItemName'>
+        /// Replication protected item name.
+        /// </param>
+        /// <param name='input'>
+        /// Unplanned failover input.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Request header parameters.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
+        /// A standard service response for long running operations.
+        /// </returns>
+        Task<LongRunningOperationResponse> UnplannedFailoverAsync(string fabricName, string protectionContainerName, string replicationProtectedItemName, UnplannedFailoverInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
     }
 }

@@ -23,6 +23,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Hyak.Common;
+using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
@@ -31,23 +32,23 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class JobQueryParameter
     {
-        private IList<string> _affectedObjectTypes;
+        private IList<AffectedObjectType> _affectedObjectTypes;
         
         /// <summary>
         /// Optional. List of type of objects to fetch jobs for.
         /// </summary>
-        public IList<string> AffectedObjectTypes
+        public IList<AffectedObjectType> AffectedObjectTypes
         {
             get { return this._affectedObjectTypes; }
             set { this._affectedObjectTypes = value; }
         }
         
-        private long _endTime;
+        private string _endTime;
         
         /// <summary>
         /// Optional. End range of start UTC time in seconds.
         /// </summary>
-        public long EndTime
+        public string EndTime
         {
             get { return this._endTime; }
             set { this._endTime = value; }
@@ -75,12 +76,12 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._jobStatus = value; }
         }
         
-        private long _startTime;
+        private string _startTime;
         
         /// <summary>
         /// Optional. Start UTC time in seconds.
         /// </summary>
-        public long StartTime
+        public string StartTime
         {
             get { return this._startTime; }
             set { this._startTime = value; }
@@ -91,7 +92,7 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         /// </summary>
         public JobQueryParameter()
         {
-            this.AffectedObjectTypes = new LazyList<string>();
+            this.AffectedObjectTypes = new LazyList<AffectedObjectType>();
             this.JobStatus = new LazyList<string>();
         }
     }

@@ -21,20 +21,19 @@
 
 using System;
 using System.Linq;
-using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// A standard service response for long running operations.
+    /// Reverse replication provider specific input.
     /// </summary>
-    public partial class UnplannedFailoverOperationResponse : FailoverOperationResponse
+    public partial class ReverseReplicationProviderSpecificInput
     {
         /// <summary>
         /// Initializes a new instance of the
-        /// UnplannedFailoverOperationResponse class.
+        /// ReverseReplicationProviderSpecificInput class.
         /// </summary>
-        public UnplannedFailoverOperationResponse()
+        public ReverseReplicationProviderSpecificInput()
         {
         }
     }

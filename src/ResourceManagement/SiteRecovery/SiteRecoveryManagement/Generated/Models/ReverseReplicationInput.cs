@@ -26,25 +26,25 @@ using Microsoft.Azure.Management.SiteRecovery.Models;
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// Service response for enable DR operation.
+    /// The definition of a ReverseReplicationInput object.
     /// </summary>
-    public partial class EnableProtectionResponse : LongRunningOperationResponse
+    public partial class ReverseReplicationInput
     {
-        private ReplicationProtectedItem _replicationProtectedItem;
+        private ReverseReplicationInputProperties _properties;
         
         /// <summary>
-        /// Optional. Protected object.
+        /// Optional. Gets or sets Reverse replication properties.
         /// </summary>
-        public ReplicationProtectedItem ReplicationProtectedItem
+        public ReverseReplicationInputProperties Properties
         {
-            get { return this._replicationProtectedItem; }
-            set { this._replicationProtectedItem = value; }
+            get { return this._properties; }
+            set { this._properties = value; }
         }
         
         /// <summary>
-        /// Initializes a new instance of the EnableProtectionResponse class.
+        /// Initializes a new instance of the ReverseReplicationInput class.
         /// </summary>
-        public EnableProtectionResponse()
+        public ReverseReplicationInput()
         {
         }
     }

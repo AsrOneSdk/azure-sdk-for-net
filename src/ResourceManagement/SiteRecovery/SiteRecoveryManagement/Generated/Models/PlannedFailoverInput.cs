@@ -26,15 +26,25 @@ using Microsoft.Azure.Management.SiteRecovery.Models;
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// A standard service response for long running operations.
+    /// The definition of a PlannedFailoverInput object.
     /// </summary>
-    public partial class PlannedFailoverOperationResponse : FailoverOperationResponse
+    public partial class PlannedFailoverInput
     {
+        private PlannedFailoverInputProperties _properties;
+        
         /// <summary>
-        /// Initializes a new instance of the PlannedFailoverOperationResponse
-        /// class.
+        /// Optional. Gets or sets Planned failover input properties.
         /// </summary>
-        public PlannedFailoverOperationResponse()
+        public PlannedFailoverInputProperties Properties
+        {
+            get { return this._properties; }
+            set { this._properties = value; }
+        }
+        
+        /// <summary>
+        /// Initializes a new instance of the PlannedFailoverInput class.
+        /// </summary>
+        public PlannedFailoverInput()
         {
         }
     }

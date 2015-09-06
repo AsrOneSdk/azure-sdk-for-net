@@ -20,68 +20,66 @@
 // code is regenerated.
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using Hyak.Common;
 using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// The definition of a Update VM properties input object.
+    /// The definition of a PlannedFailoverInput properties object.
     /// </summary>
-    public partial class VMProperties
+    public partial class TestFailoverInputProperties
     {
-        private string _recoveryAzureVMName;
+        private string _failoverDirection;
         
         /// <summary>
-        /// Optional. Recovery Azure VM given name
+        /// Optional. Gets or sets Failover direction
         /// </summary>
-        public string RecoveryAzureVMName
+        public string FailoverDirection
         {
-            get { return this._recoveryAzureVMName; }
-            set { this._recoveryAzureVMName = value; }
+            get { return this._failoverDirection; }
+            set { this._failoverDirection = value; }
         }
         
-        private string _recoveryAzureVMSize;
+        private string _networkId;
         
         /// <summary>
-        /// Optional. Recovery Azure VM size
+        /// Optional. Gets or sets the id of the network to be used for test
+        /// failover.
         /// </summary>
-        public string RecoveryAzureVMSize
+        public string NetworkId
         {
-            get { return this._recoveryAzureVMSize; }
-            set { this._recoveryAzureVMSize = value; }
+            get { return this._networkId; }
+            set { this._networkId = value; }
         }
         
-        private string _selectedRecoveryAzureNetworkId;
+        private string _networkType;
         
         /// <summary>
-        /// Optional. Selected Primary NIC Id
+        /// Optional. Gets or sets network type to be used for test failover.
         /// </summary>
-        public string SelectedRecoveryAzureNetworkId
+        public string NetworkType
         {
-            get { return this._selectedRecoveryAzureNetworkId; }
-            set { this._selectedRecoveryAzureNetworkId = value; }
+            get { return this._networkType; }
+            set { this._networkType = value; }
         }
         
-        private IList<VMNicDetails> _vMNics;
+        private ProviderSpecificFailoverInput _providerConfigurationSettings;
         
         /// <summary>
-        /// Optional. Recovery Azure Network Id
+        /// Optional. Gets or sets Provider specific settings.
         /// </summary>
-        public IList<VMNicDetails> VMNics
+        public ProviderSpecificFailoverInput ProviderConfigurationSettings
         {
-            get { return this._vMNics; }
-            set { this._vMNics = value; }
+            get { return this._providerConfigurationSettings; }
+            set { this._providerConfigurationSettings = value; }
         }
         
         /// <summary>
-        /// Initializes a new instance of the VMProperties class.
+        /// Initializes a new instance of the TestFailoverInputProperties class.
         /// </summary>
-        public VMProperties()
+        public TestFailoverInputProperties()
         {
-            this.VMNics = new LazyList<VMNicDetails>();
         }
     }
 }

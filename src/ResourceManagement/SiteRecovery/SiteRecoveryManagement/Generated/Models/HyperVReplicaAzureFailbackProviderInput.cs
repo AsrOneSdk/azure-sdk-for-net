@@ -26,26 +26,48 @@ using Microsoft.Azure.Management.SiteRecovery.Models;
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// The Azure protection entity provider settings.
+    /// HvrA provider specific input for failback.
     /// </summary>
-    public partial class OnPremProtectionEntityProviderSettings : ProtectionEntityProviderSettings
+    public partial class HyperVReplicaAzureFailbackProviderInput : ProviderSpecificFailoverInput
     {
-        private AzureVmDiskDetails _vMDiskDetails;
+        private string _dataSyncOption;
         
         /// <summary>
         /// Optional.
         /// </summary>
-        public AzureVmDiskDetails VMDiskDetails
+        public string DataSyncOption
         {
-            get { return this._vMDiskDetails; }
-            set { this._vMDiskDetails = value; }
+            get { return this._dataSyncOption; }
+            set { this._dataSyncOption = value; }
+        }
+        
+        private string _providerIdForAlternateRecovery;
+        
+        /// <summary>
+        /// Optional.
+        /// </summary>
+        public string ProviderIdForAlternateRecovery
+        {
+            get { return this._providerIdForAlternateRecovery; }
+            set { this._providerIdForAlternateRecovery = value; }
+        }
+        
+        private string _recoveryVmCreationOption;
+        
+        /// <summary>
+        /// Optional.
+        /// </summary>
+        public string RecoveryVmCreationOption
+        {
+            get { return this._recoveryVmCreationOption; }
+            set { this._recoveryVmCreationOption = value; }
         }
         
         /// <summary>
         /// Initializes a new instance of the
-        /// OnPremProtectionEntityProviderSettings class.
+        /// HyperVReplicaAzureFailbackProviderInput class.
         /// </summary>
-        public OnPremProtectionEntityProviderSettings()
+        public HyperVReplicaAzureFailbackProviderInput()
         {
         }
     }

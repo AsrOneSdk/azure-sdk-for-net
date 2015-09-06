@@ -26,37 +26,48 @@ using Microsoft.Azure.Management.SiteRecovery.Models;
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// The Azure protection entity provider settings.
+    /// The definition of a UnplannedFailoverInput properties object.
     /// </summary>
-    public partial class AzureProtectionEntityProviderSettings : ProtectionEntityProviderSettings
+    public partial class UnplannedFailoverInputProperties
     {
-        private AzureVmDiskDetails _vMDiskDetails;
+        private string _failoverDirection;
         
         /// <summary>
-        /// Optional.
+        /// Optional. Gets or sets Failover direction
         /// </summary>
-        public AzureVmDiskDetails VMDiskDetails
+        public string FailoverDirection
         {
-            get { return this._vMDiskDetails; }
-            set { this._vMDiskDetails = value; }
+            get { return this._failoverDirection; }
+            set { this._failoverDirection = value; }
         }
         
-        private VMProperties _vMProperties;
+        private ProviderSpecificFailoverInput _providerConfigurationSettings;
         
         /// <summary>
-        /// Optional.
+        /// Optional. Gets or sets Provider specific settings.
         /// </summary>
-        public VMProperties VMProperties
+        public ProviderSpecificFailoverInput ProviderConfigurationSettings
         {
-            get { return this._vMProperties; }
-            set { this._vMProperties = value; }
+            get { return this._providerConfigurationSettings; }
+            set { this._providerConfigurationSettings = value; }
+        }
+        
+        private string _sourceSiteOperations;
+        
+        /// <summary>
+        /// Optional. Gets or sets source site operations status.
+        /// </summary>
+        public string SourceSiteOperations
+        {
+            get { return this._sourceSiteOperations; }
+            set { this._sourceSiteOperations = value; }
         }
         
         /// <summary>
-        /// Initializes a new instance of the
-        /// AzureProtectionEntityProviderSettings class.
+        /// Initializes a new instance of the UnplannedFailoverInputProperties
+        /// class.
         /// </summary>
-        public AzureProtectionEntityProviderSettings()
+        public UnplannedFailoverInputProperties()
         {
         }
     }

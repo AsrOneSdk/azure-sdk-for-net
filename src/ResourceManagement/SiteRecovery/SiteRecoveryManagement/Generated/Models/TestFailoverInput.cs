@@ -21,19 +21,30 @@
 
 using System;
 using System.Linq;
+using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// Protection entity provider settings.
+    /// The definition of a TestFailoverInput object.
     /// </summary>
-    public partial class ProtectionEntityProviderSettings
+    public partial class TestFailoverInput
     {
+        private TestFailoverInputProperties _properties;
+        
         /// <summary>
-        /// Initializes a new instance of the ProtectionEntityProviderSettings
-        /// class.
+        /// Optional. Gets or sets Planned failover input properties.
         /// </summary>
-        public ProtectionEntityProviderSettings()
+        public TestFailoverInputProperties Properties
+        {
+            get { return this._properties; }
+            set { this._properties = value; }
+        }
+        
+        /// <summary>
+        /// Initializes a new instance of the TestFailoverInput class.
+        /// </summary>
+        public TestFailoverInput()
         {
         }
     }

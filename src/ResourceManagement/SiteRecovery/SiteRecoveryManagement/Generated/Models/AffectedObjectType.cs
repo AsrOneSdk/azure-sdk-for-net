@@ -21,30 +21,29 @@
 
 using System;
 using System.Linq;
-using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// A standard service response for long running operations.
+    /// Affected object name.
     /// </summary>
-    public partial class FailoverOperationResponse : LongRunningOperationResponse
+    public partial class AffectedObjectType
     {
-        private ProtectionEntity _protectionEntity;
+        private string _affectedObject;
         
         /// <summary>
-        /// Optional. The Protection Entity.
+        /// Optional. Affected object name.
         /// </summary>
-        public ProtectionEntity ProtectionEntity
+        public string AffectedObject
         {
-            get { return this._protectionEntity; }
-            set { this._protectionEntity = value; }
+            get { return this._affectedObject; }
+            set { this._affectedObject = value; }
         }
         
         /// <summary>
-        /// Initializes a new instance of the FailoverOperationResponse class.
+        /// Initializes a new instance of the AffectedObjectType class.
         /// </summary>
-        public FailoverOperationResponse()
+        public AffectedObjectType()
         {
         }
     }

@@ -26,80 +26,81 @@ using Microsoft.Azure.Management.SiteRecovery.Models;
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// The SAN enable protection input.
+    /// The Azure reprotect input.
     /// </summary>
-    public partial class SanEnableProtectionInput : EnableProtectionProviderSpecificInput
+    public partial class HyperVReplicaAzureReprotectInput : ReverseReplicationProviderSpecificInput
     {
-        private string _cloudId;
+        private string _hvHostVmId;
         
         /// <summary>
         /// Optional.
         /// </summary>
-        public string CloudId
+        public string HvHostVmId
         {
-            get { return this._cloudId; }
-            set { this._cloudId = value; }
+            get { return this._hvHostVmId; }
+            set { this._hvHostVmId = value; }
         }
         
-        private string _fabricId;
+        private string _oSType;
         
         /// <summary>
         /// Optional.
         /// </summary>
-        public string FabricId
+        public string OSType
         {
-            get { return this._fabricId; }
-            set { this._fabricId = value; }
+            get { return this._oSType; }
+            set { this._oSType = value; }
         }
         
-        private string _fabricReplicationGroupId;
+        private string _storageAccountName;
+        
+        /// <summary>
+        /// Optional. Gets or sets the storage account name.
+        /// </summary>
+        public string StorageAccountName
+        {
+            get { return this._storageAccountName; }
+            set { this._storageAccountName = value; }
+        }
+        
+        private string _storageAccountSubscriptionId;
+        
+        /// <summary>
+        /// Optional. Gets or sets the Storage account subscription id.
+        /// </summary>
+        public string StorageAccountSubscriptionId
+        {
+            get { return this._storageAccountSubscriptionId; }
+            set { this._storageAccountSubscriptionId = value; }
+        }
+        
+        private string _vHDId;
         
         /// <summary>
         /// Optional.
         /// </summary>
-        public string FabricReplicationGroupId
+        public string VHDId
         {
-            get { return this._fabricReplicationGroupId; }
-            set { this._fabricReplicationGroupId = value; }
+            get { return this._vHDId; }
+            set { this._vHDId = value; }
         }
         
-        private int _recoveryPointObjective;
+        private string _vmName;
         
         /// <summary>
         /// Optional.
         /// </summary>
-        public int RecoveryPointObjective
+        public string VmName
         {
-            get { return this._recoveryPointObjective; }
-            set { this._recoveryPointObjective = value; }
-        }
-        
-        private string _remoteArrayId;
-        
-        /// <summary>
-        /// Optional.
-        /// </summary>
-        public string RemoteArrayId
-        {
-            get { return this._remoteArrayId; }
-            set { this._remoteArrayId = value; }
-        }
-        
-        private string _replicationType;
-        
-        /// <summary>
-        /// Optional.
-        /// </summary>
-        public string ReplicationType
-        {
-            get { return this._replicationType; }
-            set { this._replicationType = value; }
+            get { return this._vmName; }
+            set { this._vmName = value; }
         }
         
         /// <summary>
-        /// Initializes a new instance of the SanEnableProtectionInput class.
+        /// Initializes a new instance of the HyperVReplicaAzureReprotectInput
+        /// class.
         /// </summary>
-        public SanEnableProtectionInput()
+        public HyperVReplicaAzureReprotectInput()
         {
         }
     }

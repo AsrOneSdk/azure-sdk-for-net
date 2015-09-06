@@ -38,44 +38,54 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 {
                     object propValue = property.GetValue(obj, null);
 
-                    // IList is the only one we are handling since it is the only once
-                    // allowed in Hydra for now.
-                    var elems = propValue as IList;
-                    if (elems != null)
+                    if (propValue != null)
                     {
-                        JArray jarray = new JArray();
-                        foreach (var item in elems)
+
+                        // IList is the only one we are handling since it is the only once
+                        // allowed in Hydra for now.
+                        var elems = propValue as IList;
+                        if (elems != null)
                         {
-                            JObject jObjectList = new JObject();
-                            Type itemType = item.GetType();
-
-                            // For primitive types we directly put in array. Rest are again
-                            // iterated upon to generate object.
-                            if (itemType.IsPrimitive || itemType.Equals(typeof(string)))
+                            JArray jarray = new JArray();
+                            foreach (var item in elems)
                             {
-                                JValue jval = new JValue(item.ToString());
-                                jarray.Add(jval);
-                            }
-                            else
-                            {
-                                ConvertToJson(item, jObjectList);
-                                jarray.Add(jObject);
-                            }
-                        }
+                                JObject jObjectList = new JObject();
+                                Type itemType = item.GetType();
 
-                        jObject[property.Name] = jarray;
-                    }
+                                // For primitive types we directly put in array. Rest are again
+                                // iterated upon to generate object.
+                                if (itemType.IsPrimitive || itemType.Equals(typeof(string)))
+                                {
+                                    JValue jval = new JValue(item.ToString());
+                                    jarray.Add(jval);
+                                }
+                                else
+                                {
+                                    ConvertToJson(item, jObjectList);
+                                    jarray.Add(jObject);
+                                }
+                            }
 
-                    else
-                    {
-                        // This will not cut-off System.Collections because of the first check
-                        if (property.PropertyType.Assembly == objType.Assembly)
-                        {
-                            ConvertToJson(propValue, jObject);
+                            jObject[property.Name] = jarray;
                         }
                         else
                         {
-                            jObject[property.Name] = propValue.ToString();
+                            // This will not cut-off System.Collections because of the first check
+                            if (property.PropertyType.Assembly == objType.Assembly)
+                            {
+                                ConvertToJson(propValue, jObject);
+                            }
+                            else
+                            {
+                                if (propValue.ToString().Contains("Hyak.Common.LazyList"))
+                                {
+                                    // Just skip the property.
+                                }
+                                else
+                                {
+                                    jObject[property.Name] = propValue.ToString();
+                                }
+                            }
                         }
                     }
                 }
