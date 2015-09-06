@@ -30,6 +30,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class RecoveryServicesProviderProperties
     {
+        private RecoveryServicesProviderSpecificSettings _configurationSettings;
+        
+        /// <summary>
+        /// Optional. Fabric specific creation input
+        /// </summary>
+        public RecoveryServicesProviderSpecificSettings ConfigurationSettings
+        {
+            get { return this._configurationSettings; }
+            set { this._configurationSettings = value; }
+        }
+        
         private string _connectionStatus;
         
         /// <summary>
@@ -41,15 +52,15 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._connectionStatus = value; }
         }
         
-        private string _fabricName;
+        private string _fabricFriendlyName;
         
         /// <summary>
         /// Optional. Unique name of the Fabric.
         /// </summary>
-        public string FabricName
+        public string FabricFriendlyName
         {
-            get { return this._fabricName; }
-            set { this._fabricName = value; }
+            get { return this._fabricFriendlyName; }
+            set { this._fabricFriendlyName = value; }
         }
         
         private string _fabricType;
@@ -74,49 +85,82 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._friendlyName = value; }
         }
         
-        private System.DateTime? _lastHeartBeatReceived;
+        private System.DateTime? _lastHeartbeat;
         
         /// <summary>
         /// Optional. Time when last heartbeat was sent by the DRA.
         /// </summary>
-        public System.DateTime? LastHeartBeatReceived
+        public System.DateTime? LastHeartbeat
         {
-            get { return this._lastHeartBeatReceived; }
-            set { this._lastHeartBeatReceived = value; }
+            get { return this._lastHeartbeat; }
+            set { this._lastHeartbeat = value; }
         }
         
-        private string _refreshSupport;
-        
-        /// <summary>
-        /// Optional. Indicates whether the DRA supports refresh operation.
-        /// </summary>
-        public string RefreshSupport
-        {
-            get { return this._refreshSupport; }
-            set { this._refreshSupport = value; }
-        }
-        
-        private int _replicationPECount;
+        private int _protectedItemCount;
         
         /// <summary>
         /// Optional. Number of protected entities currently managed by the
         /// provider.
         /// </summary>
-        public int ReplicationPECount
+        public int ProtectedItemCount
         {
-            get { return this._replicationPECount; }
-            set { this._replicationPECount = value; }
+            get { return this._protectedItemCount; }
+            set { this._protectedItemCount = value; }
         }
         
-        private RecoveryServicesProviderVersionDetails _versionDetails;
+        private string _providerVersion;
         
         /// <summary>
         /// Optional. Version details of the DRA.
         /// </summary>
-        public RecoveryServicesProviderVersionDetails VersionDetails
+        public string ProviderVersion
         {
-            get { return this._versionDetails; }
-            set { this._versionDetails = value; }
+            get { return this._providerVersion; }
+            set { this._providerVersion = value; }
+        }
+        
+        private string _providerVersionState;
+        
+        /// <summary>
+        /// Optional. Version Sate of the DRA.
+        /// </summary>
+        public string ProviderVersionState
+        {
+            get { return this._providerVersionState; }
+            set { this._providerVersionState = value; }
+        }
+        
+        private string _purge;
+        
+        /// <summary>
+        /// Optional. Indicates whether the DRA supports purge operation.
+        /// </summary>
+        public string Purge
+        {
+            get { return this._purge; }
+            set { this._purge = value; }
+        }
+        
+        private string _refresh;
+        
+        /// <summary>
+        /// Optional. Indicates whether the DRA supports refresh operation.
+        /// </summary>
+        public string Refresh
+        {
+            get { return this._refresh; }
+            set { this._refresh = value; }
+        }
+        
+        private string _serverVersion;
+        
+        /// <summary>
+        /// Optional. Version details of the Server
+        /// </summary>
+        public string ServerVersion
+        {
+            get { return this._serverVersion; }
+            set { this._serverVersion = value; }
         }
         
         /// <summary>

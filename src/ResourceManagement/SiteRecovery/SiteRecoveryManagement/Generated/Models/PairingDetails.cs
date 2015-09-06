@@ -32,6 +32,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class PairingDetails
     {
+        private string _associationStatus;
+        
+        /// <summary>
+        /// Optional. Association Status
+        /// </summary>
+        public string AssociationStatus
+        {
+            get { return this._associationStatus; }
+            set { this._associationStatus = value; }
+        }
+        
         private string _health;
         
         /// <summary>
@@ -65,28 +76,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._pairedFabricFriendlyName = value; }
         }
         
-        private IList<PolicyDetails> _pairedPolicyDetails;
-        
-        /// <summary>
-        /// Optional. Policy details for this pairing.
-        /// </summary>
-        public IList<PolicyDetails> PairedPolicyDetails
-        {
-            get { return this._pairedPolicyDetails; }
-            set { this._pairedPolicyDetails = value; }
-        }
-        
-        private string _pairedProtectionContainerArmId;
-        
-        /// <summary>
-        /// Optional. Paired protection container ID.
-        /// </summary>
-        public string PairedProtectionContainerArmId
-        {
-            get { return this._pairedProtectionContainerArmId; }
-            set { this._pairedProtectionContainerArmId = value; }
-        }
-        
         private string _pairedProtectionContainerFriendlyName;
         
         /// <summary>
@@ -96,6 +85,28 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         {
             get { return this._pairedProtectionContainerFriendlyName; }
             set { this._pairedProtectionContainerFriendlyName = value; }
+        }
+        
+        private string _pairedProtectionContainerId;
+        
+        /// <summary>
+        /// Optional. Paired protection container ID.
+        /// </summary>
+        public string PairedProtectionContainerId
+        {
+            get { return this._pairedProtectionContainerId; }
+            set { this._pairedProtectionContainerId = value; }
+        }
+        
+        private string _policyId;
+        
+        /// <summary>
+        /// Optional. Policy ARM Id.
+        /// </summary>
+        public string PolicyId
+        {
+            get { return this._policyId; }
+            set { this._policyId = value; }
         }
         
         private string _providerSpecificSettings;
@@ -126,7 +137,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         public PairingDetails()
         {
             this.HealthErrorDetails = new LazyList<HealthError>();
-            this.PairedPolicyDetails = new LazyList<PolicyDetails>();
         }
     }
 }

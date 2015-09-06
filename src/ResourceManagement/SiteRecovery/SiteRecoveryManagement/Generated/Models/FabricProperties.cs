@@ -30,6 +30,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class FabricProperties
     {
+        private FabricSpecificSettings _configurationSettings;
+        
+        /// <summary>
+        /// Optional. Type of the fabric.
+        /// </summary>
+        public FabricSpecificSettings ConfigurationSettings
+        {
+            get { return this._configurationSettings; }
+            set { this._configurationSettings = value; }
+        }
+        
         private KekDetails _encryptionDetails;
         
         /// <summary>
@@ -39,17 +50,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         {
             get { return this._encryptionDetails; }
             set { this._encryptionDetails = value; }
-        }
-        
-        private FabricSpecificSettings _fabricSpecificSettings;
-        
-        /// <summary>
-        /// Optional. Type of the fabric.
-        /// </summary>
-        public FabricSpecificSettings FabricSpecificSettings
-        {
-            get { return this._fabricSpecificSettings; }
-            set { this._fabricSpecificSettings = value; }
         }
         
         private string _fabricType;

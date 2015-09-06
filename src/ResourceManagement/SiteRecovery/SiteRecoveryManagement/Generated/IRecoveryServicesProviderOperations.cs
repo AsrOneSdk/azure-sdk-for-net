@@ -38,8 +38,8 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <param name='fabricName'>
         /// Name of provider's fabric
         /// </param>
-        /// <param name='input'>
-        /// Provider Deletion input
+        /// <param name='providerName'>
+        /// Provider Name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Request header parameters.
@@ -50,7 +50,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        Task<LongRunningOperationResponse> BeginDeletingAsync(string fabricName, RecoveryServicesProviderDeletionInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        Task<LongRunningOperationResponse> BeginDeletingAsync(string fabricName, string providerName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
         
         /// <summary>
         /// Refreshes a provider
@@ -78,8 +78,8 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <param name='fabricName'>
         /// Name of provider's fabric
         /// </param>
-        /// <param name='input'>
-        /// Provider Deletion input
+        /// <param name='providerName'>
+        /// Provider Name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Request header parameters.
@@ -90,16 +90,16 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        Task<LongRunningOperationResponse> DeleteAsync(string fabricName, RecoveryServicesProviderDeletionInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        Task<LongRunningOperationResponse> DeleteAsync(string fabricName, string providerName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
         
         /// <summary>
         /// Get the server object by Id.
         /// </summary>
-        /// <param name='fabricId'>
-        /// Fabric ID.
+        /// <param name='fabricName'>
+        /// Fabric Name.
         /// </param>
-        /// <param name='providerId'>
-        /// Provider ID.
+        /// <param name='providerName'>
+        /// Provider Name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Request header parameters.
@@ -110,7 +110,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// The response model for the provider object
         /// </returns>
-        Task<RecoveryServicesProviderResponse> GetAsync(string fabricId, string providerId, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        Task<RecoveryServicesProviderResponse> GetAsync(string fabricName, string providerName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
         
         /// <summary>
         /// The Get Operation Status operation returns the status of the
@@ -149,8 +149,8 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <summary>
         /// Get the list of all servers under the vault.
         /// </summary>
-        /// <param name='fabricId'>
-        /// Fabric ID.
+        /// <param name='fabricName'>
+        /// Fabric Name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Request header parameters.
@@ -161,7 +161,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// The response model for the list servers operation.
         /// </returns>
-        Task<RecoveryServicesProviderListResponse> ListAsync(string fabricId, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        Task<RecoveryServicesProviderListResponse> ListAsync(string fabricName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
         
         /// <summary>
         /// Refreshes a provider

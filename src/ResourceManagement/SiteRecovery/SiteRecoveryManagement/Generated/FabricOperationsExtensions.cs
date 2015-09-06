@@ -83,8 +83,8 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// Reference to the
         /// Microsoft.Azure.Management.SiteRecovery.IFabricOperations.
         /// </param>
-        /// <param name='input'>
-        /// Required. Input to delete fabric
+        /// <param name='fabricName'>
+        /// Required. Fabric Name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -92,11 +92,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public static LongRunningOperationResponse BeginDeleting(this IFabricOperations operations, FabricDeletionInput input, CustomRequestHeaders customRequestHeaders)
+        public static LongRunningOperationResponse BeginDeleting(this IFabricOperations operations, string fabricName, CustomRequestHeaders customRequestHeaders)
         {
             return Task.Factory.StartNew((object s) => 
             {
-                return ((IFabricOperations)s).BeginDeletingAsync(input, customRequestHeaders);
+                return ((IFabricOperations)s).BeginDeletingAsync(fabricName, customRequestHeaders);
             }
             , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
         }
@@ -108,8 +108,8 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// Reference to the
         /// Microsoft.Azure.Management.SiteRecovery.IFabricOperations.
         /// </param>
-        /// <param name='input'>
-        /// Required. Input to delete fabric
+        /// <param name='fabricName'>
+        /// Required. Fabric Name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -117,9 +117,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public static Task<LongRunningOperationResponse> BeginDeletingAsync(this IFabricOperations operations, FabricDeletionInput input, CustomRequestHeaders customRequestHeaders)
+        public static Task<LongRunningOperationResponse> BeginDeletingAsync(this IFabricOperations operations, string fabricName, CustomRequestHeaders customRequestHeaders)
         {
-            return operations.BeginDeletingAsync(input, customRequestHeaders, CancellationToken.None);
+            return operations.BeginDeletingAsync(fabricName, customRequestHeaders, CancellationToken.None);
         }
         
         /// <summary>
@@ -175,8 +175,8 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// Reference to the
         /// Microsoft.Azure.Management.SiteRecovery.IFabricOperations.
         /// </param>
-        /// <param name='input'>
-        /// Required. Input to delete fabric
+        /// <param name='fabricName'>
+        /// Required. Fabric Name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -184,11 +184,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public static LongRunningOperationResponse Delete(this IFabricOperations operations, FabricDeletionInput input, CustomRequestHeaders customRequestHeaders)
+        public static LongRunningOperationResponse Delete(this IFabricOperations operations, string fabricName, CustomRequestHeaders customRequestHeaders)
         {
             return Task.Factory.StartNew((object s) => 
             {
-                return ((IFabricOperations)s).DeleteAsync(input, customRequestHeaders);
+                return ((IFabricOperations)s).DeleteAsync(fabricName, customRequestHeaders);
             }
             , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
         }
@@ -200,8 +200,8 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// Reference to the
         /// Microsoft.Azure.Management.SiteRecovery.IFabricOperations.
         /// </param>
-        /// <param name='input'>
-        /// Required. Input to delete fabric
+        /// <param name='fabricName'>
+        /// Required. Fabric Name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -209,9 +209,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public static Task<LongRunningOperationResponse> DeleteAsync(this IFabricOperations operations, FabricDeletionInput input, CustomRequestHeaders customRequestHeaders)
+        public static Task<LongRunningOperationResponse> DeleteAsync(this IFabricOperations operations, string fabricName, CustomRequestHeaders customRequestHeaders)
         {
-            return operations.DeleteAsync(input, customRequestHeaders, CancellationToken.None);
+            return operations.DeleteAsync(fabricName, customRequestHeaders, CancellationToken.None);
         }
         
         /// <summary>
@@ -221,8 +221,8 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// Reference to the
         /// Microsoft.Azure.Management.SiteRecovery.IFabricOperations.
         /// </param>
-        /// <param name='fabricId'>
-        /// Required. Fabric ID.
+        /// <param name='fabricName'>
+        /// Required. Fabric Name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -230,11 +230,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// The response model for the fabric object
         /// </returns>
-        public static FabricResponse Get(this IFabricOperations operations, string fabricId, CustomRequestHeaders customRequestHeaders)
+        public static FabricResponse Get(this IFabricOperations operations, string fabricName, CustomRequestHeaders customRequestHeaders)
         {
             return Task.Factory.StartNew((object s) => 
             {
-                return ((IFabricOperations)s).GetAsync(fabricId, customRequestHeaders);
+                return ((IFabricOperations)s).GetAsync(fabricName, customRequestHeaders);
             }
             , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
         }
@@ -246,8 +246,8 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// Reference to the
         /// Microsoft.Azure.Management.SiteRecovery.IFabricOperations.
         /// </param>
-        /// <param name='fabricId'>
-        /// Required. Fabric ID.
+        /// <param name='fabricName'>
+        /// Required. Fabric Name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -255,9 +255,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// The response model for the fabric object
         /// </returns>
-        public static Task<FabricResponse> GetAsync(this IFabricOperations operations, string fabricId, CustomRequestHeaders customRequestHeaders)
+        public static Task<FabricResponse> GetAsync(this IFabricOperations operations, string fabricName, CustomRequestHeaders customRequestHeaders)
         {
-            return operations.GetAsync(fabricId, customRequestHeaders, CancellationToken.None);
+            return operations.GetAsync(fabricName, customRequestHeaders, CancellationToken.None);
         }
         
         /// <summary>

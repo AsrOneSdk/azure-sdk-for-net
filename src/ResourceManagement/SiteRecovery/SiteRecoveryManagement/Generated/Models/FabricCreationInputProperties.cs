@@ -21,6 +21,7 @@
 
 using System;
 using System.Linq;
+using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
@@ -29,6 +30,28 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class FabricCreationInputProperties
     {
+        private FabricSpecificCreationSettings _configurationSettings;
+        
+        /// <summary>
+        /// Optional. Fabric specific creation input
+        /// </summary>
+        public FabricSpecificCreationSettings ConfigurationSettings
+        {
+            get { return this._configurationSettings; }
+            set { this._configurationSettings = value; }
+        }
+        
+        private string _fabricType;
+        
+        /// <summary>
+        /// Optional. Type of fabric.
+        /// </summary>
+        public string FabricType
+        {
+            get { return this._fabricType; }
+            set { this._fabricType = value; }
+        }
+        
         private string _friendlyName;
         
         /// <summary>
@@ -40,21 +63,10 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._friendlyName = value; }
         }
         
-        private string _instanceType;
-        
-        /// <summary>
-        /// Optional. Type of fabric.
-        /// </summary>
-        public string InstanceType
-        {
-            get { return this._instanceType; }
-            set { this._instanceType = value; }
-        }
-        
         private string _name;
         
         /// <summary>
-        /// Optional. Unique Id of the fabric.
+        /// Optional. Name of the fabric.
         /// </summary>
         public string Name
         {

@@ -52,8 +52,8 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <summary>
         /// Deletes a Fabric
         /// </summary>
-        /// <param name='input'>
-        /// Input to delete fabric
+        /// <param name='fabricName'>
+        /// Fabric Name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Request header parameters.
@@ -64,7 +64,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        Task<LongRunningOperationResponse> BeginDeletingAsync(FabricDeletionInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        Task<LongRunningOperationResponse> BeginDeletingAsync(string fabricName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
         
         /// <summary>
         /// Creates a fabric
@@ -86,8 +86,8 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <summary>
         /// Deletes a fabric
         /// </summary>
-        /// <param name='input'>
-        /// Input to delete fabric
+        /// <param name='fabricName'>
+        /// Fabric Name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Request header parameters.
@@ -98,13 +98,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        Task<LongRunningOperationResponse> DeleteAsync(FabricDeletionInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        Task<LongRunningOperationResponse> DeleteAsync(string fabricName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
         
         /// <summary>
         /// Get the server object by Id.
         /// </summary>
-        /// <param name='fabricId'>
-        /// Fabric ID.
+        /// <param name='fabricName'>
+        /// Fabric Name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Request header parameters.
@@ -115,7 +115,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// The response model for the fabric object
         /// </returns>
-        Task<FabricResponse> GetAsync(string fabricId, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        Task<FabricResponse> GetAsync(string fabricName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
         
         /// <summary>
         /// The Get Operation Status operation returns the status of the

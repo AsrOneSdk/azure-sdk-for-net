@@ -40,8 +40,8 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <param name='fabricName'>
         /// Required. Name of provider's fabric
         /// </param>
-        /// <param name='input'>
-        /// Required. Provider Deletion input
+        /// <param name='providerName'>
+        /// Required. Provider Name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -49,11 +49,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public static LongRunningOperationResponse BeginDeleting(this IRecoveryServicesProviderOperations operations, string fabricName, RecoveryServicesProviderDeletionInput input, CustomRequestHeaders customRequestHeaders)
+        public static LongRunningOperationResponse BeginDeleting(this IRecoveryServicesProviderOperations operations, string fabricName, string providerName, CustomRequestHeaders customRequestHeaders)
         {
             return Task.Factory.StartNew((object s) => 
             {
-                return ((IRecoveryServicesProviderOperations)s).BeginDeletingAsync(fabricName, input, customRequestHeaders);
+                return ((IRecoveryServicesProviderOperations)s).BeginDeletingAsync(fabricName, providerName, customRequestHeaders);
             }
             , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
         }
@@ -68,8 +68,8 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <param name='fabricName'>
         /// Required. Name of provider's fabric
         /// </param>
-        /// <param name='input'>
-        /// Required. Provider Deletion input
+        /// <param name='providerName'>
+        /// Required. Provider Name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -77,9 +77,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public static Task<LongRunningOperationResponse> BeginDeletingAsync(this IRecoveryServicesProviderOperations operations, string fabricName, RecoveryServicesProviderDeletionInput input, CustomRequestHeaders customRequestHeaders)
+        public static Task<LongRunningOperationResponse> BeginDeletingAsync(this IRecoveryServicesProviderOperations operations, string fabricName, string providerName, CustomRequestHeaders customRequestHeaders)
         {
-            return operations.BeginDeletingAsync(fabricName, input, customRequestHeaders, CancellationToken.None);
+            return operations.BeginDeletingAsync(fabricName, providerName, customRequestHeaders, CancellationToken.None);
         }
         
         /// <summary>
@@ -144,8 +144,8 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <param name='fabricName'>
         /// Required. Name of provider's fabric
         /// </param>
-        /// <param name='input'>
-        /// Required. Provider Deletion input
+        /// <param name='providerName'>
+        /// Required. Provider Name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -153,11 +153,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public static LongRunningOperationResponse Delete(this IRecoveryServicesProviderOperations operations, string fabricName, RecoveryServicesProviderDeletionInput input, CustomRequestHeaders customRequestHeaders)
+        public static LongRunningOperationResponse Delete(this IRecoveryServicesProviderOperations operations, string fabricName, string providerName, CustomRequestHeaders customRequestHeaders)
         {
             return Task.Factory.StartNew((object s) => 
             {
-                return ((IRecoveryServicesProviderOperations)s).DeleteAsync(fabricName, input, customRequestHeaders);
+                return ((IRecoveryServicesProviderOperations)s).DeleteAsync(fabricName, providerName, customRequestHeaders);
             }
             , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
         }
@@ -172,8 +172,8 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <param name='fabricName'>
         /// Required. Name of provider's fabric
         /// </param>
-        /// <param name='input'>
-        /// Required. Provider Deletion input
+        /// <param name='providerName'>
+        /// Required. Provider Name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -181,9 +181,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public static Task<LongRunningOperationResponse> DeleteAsync(this IRecoveryServicesProviderOperations operations, string fabricName, RecoveryServicesProviderDeletionInput input, CustomRequestHeaders customRequestHeaders)
+        public static Task<LongRunningOperationResponse> DeleteAsync(this IRecoveryServicesProviderOperations operations, string fabricName, string providerName, CustomRequestHeaders customRequestHeaders)
         {
-            return operations.DeleteAsync(fabricName, input, customRequestHeaders, CancellationToken.None);
+            return operations.DeleteAsync(fabricName, providerName, customRequestHeaders, CancellationToken.None);
         }
         
         /// <summary>
@@ -193,11 +193,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// Reference to the
         /// Microsoft.Azure.Management.SiteRecovery.IRecoveryServicesProviderOperations.
         /// </param>
-        /// <param name='fabricId'>
-        /// Required. Fabric ID.
+        /// <param name='fabricName'>
+        /// Required. Fabric Name.
         /// </param>
-        /// <param name='providerId'>
-        /// Required. Provider ID.
+        /// <param name='providerName'>
+        /// Required. Provider Name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -205,11 +205,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// The response model for the provider object
         /// </returns>
-        public static RecoveryServicesProviderResponse Get(this IRecoveryServicesProviderOperations operations, string fabricId, string providerId, CustomRequestHeaders customRequestHeaders)
+        public static RecoveryServicesProviderResponse Get(this IRecoveryServicesProviderOperations operations, string fabricName, string providerName, CustomRequestHeaders customRequestHeaders)
         {
             return Task.Factory.StartNew((object s) => 
             {
-                return ((IRecoveryServicesProviderOperations)s).GetAsync(fabricId, providerId, customRequestHeaders);
+                return ((IRecoveryServicesProviderOperations)s).GetAsync(fabricName, providerName, customRequestHeaders);
             }
             , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
         }
@@ -221,11 +221,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// Reference to the
         /// Microsoft.Azure.Management.SiteRecovery.IRecoveryServicesProviderOperations.
         /// </param>
-        /// <param name='fabricId'>
-        /// Required. Fabric ID.
+        /// <param name='fabricName'>
+        /// Required. Fabric Name.
         /// </param>
-        /// <param name='providerId'>
-        /// Required. Provider ID.
+        /// <param name='providerName'>
+        /// Required. Provider Name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -233,9 +233,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// The response model for the provider object
         /// </returns>
-        public static Task<RecoveryServicesProviderResponse> GetAsync(this IRecoveryServicesProviderOperations operations, string fabricId, string providerId, CustomRequestHeaders customRequestHeaders)
+        public static Task<RecoveryServicesProviderResponse> GetAsync(this IRecoveryServicesProviderOperations operations, string fabricName, string providerName, CustomRequestHeaders customRequestHeaders)
         {
-            return operations.GetAsync(fabricId, providerId, customRequestHeaders, CancellationToken.None);
+            return operations.GetAsync(fabricName, providerName, customRequestHeaders, CancellationToken.None);
         }
         
         /// <summary>
@@ -337,8 +337,8 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// Reference to the
         /// Microsoft.Azure.Management.SiteRecovery.IRecoveryServicesProviderOperations.
         /// </param>
-        /// <param name='fabricId'>
-        /// Required. Fabric ID.
+        /// <param name='fabricName'>
+        /// Required. Fabric Name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -346,11 +346,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// The response model for the list servers operation.
         /// </returns>
-        public static RecoveryServicesProviderListResponse List(this IRecoveryServicesProviderOperations operations, string fabricId, CustomRequestHeaders customRequestHeaders)
+        public static RecoveryServicesProviderListResponse List(this IRecoveryServicesProviderOperations operations, string fabricName, CustomRequestHeaders customRequestHeaders)
         {
             return Task.Factory.StartNew((object s) => 
             {
-                return ((IRecoveryServicesProviderOperations)s).ListAsync(fabricId, customRequestHeaders);
+                return ((IRecoveryServicesProviderOperations)s).ListAsync(fabricName, customRequestHeaders);
             }
             , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
         }
@@ -362,8 +362,8 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// Reference to the
         /// Microsoft.Azure.Management.SiteRecovery.IRecoveryServicesProviderOperations.
         /// </param>
-        /// <param name='fabricId'>
-        /// Required. Fabric ID.
+        /// <param name='fabricName'>
+        /// Required. Fabric Name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -371,9 +371,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// The response model for the list servers operation.
         /// </returns>
-        public static Task<RecoveryServicesProviderListResponse> ListAsync(this IRecoveryServicesProviderOperations operations, string fabricId, CustomRequestHeaders customRequestHeaders)
+        public static Task<RecoveryServicesProviderListResponse> ListAsync(this IRecoveryServicesProviderOperations operations, string fabricName, CustomRequestHeaders customRequestHeaders)
         {
-            return operations.ListAsync(fabricId, customRequestHeaders, CancellationToken.None);
+            return operations.ListAsync(fabricName, customRequestHeaders, CancellationToken.None);
         }
         
         /// <summary>

@@ -170,7 +170,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     
                     if (input.Properties.Name != null)
                     {
-                        propertiesValue["Name"] = input.Properties.Name;
+                        propertiesValue["name"] = input.Properties.Name;
                     }
                     
                     if (input.Properties.FriendlyName != null)
@@ -178,9 +178,15 @@ namespace Microsoft.Azure.Management.SiteRecovery
                         propertiesValue["friendlyName"] = input.Properties.FriendlyName;
                     }
                     
-                    if (input.Properties.InstanceType != null)
+                    if (input.Properties.FabricType != null)
                     {
-                        propertiesValue["instanceType"] = input.Properties.InstanceType;
+                        propertiesValue["fabricType"] = input.Properties.FabricType;
+                    }
+                    
+                    if (input.Properties.ConfigurationSettings != null)
+                    {
+                        JObject configurationSettingsValue = new JObject();
+                        propertiesValue["configurationSettings"] = configurationSettingsValue;
                     }
                 }
                 
@@ -262,8 +268,8 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <summary>
         /// Deletes a Fabric
         /// </summary>
-        /// <param name='input'>
-        /// Required. Input to delete fabric
+        /// <param name='fabricName'>
+        /// Required. Fabric Name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -274,24 +280,12 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public async Task<LongRunningOperationResponse> BeginDeletingAsync(FabricDeletionInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        public async Task<LongRunningOperationResponse> BeginDeletingAsync(string fabricName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
         {
             // Validate
-            if (input == null)
+            if (fabricName == null)
             {
-                throw new ArgumentNullException("input");
-            }
-            if (input.Properties == null)
-            {
-                throw new ArgumentNullException("input.Properties");
-            }
-            if (input.Properties.Name == null)
-            {
-                throw new ArgumentNullException("input.Properties.Name");
-            }
-            if (input.Properties.RemovalMethod == null)
-            {
-                throw new ArgumentNullException("input.Properties.RemovalMethod");
+                throw new ArgumentNullException("fabricName");
             }
             
             // Tracing
@@ -301,7 +295,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             {
                 invocationId = TracingAdapter.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("input", input);
+                tracingParameters.Add("fabricName", fabricName);
                 tracingParameters.Add("customRequestHeaders", customRequestHeaders);
                 TracingAdapter.Enter(invocationId, this, "BeginDeletingAsync", tracingParameters);
             }
@@ -322,7 +316,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/";
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationFabrics/";
-            url = url + Uri.EscapeDataString(input.Properties.Name);
+            url = url + Uri.EscapeDataString(fabricName);
             List<string> queryParameters = new List<string>();
             queryParameters.Add("api-version=2015-11-10");
             if (queryParameters.Count > 0)
@@ -360,24 +354,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 cancellationToken.ThrowIfCancellationRequested();
                 await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
                 
-                // Serialize Request
-                string requestContent = null;
-                JToken requestDoc = null;
-                
-                JObject fabricDeletionInputValue = new JObject();
-                requestDoc = fabricDeletionInputValue;
-                
-                JObject propertiesValue = new JObject();
-                fabricDeletionInputValue["properties"] = propertiesValue;
-                
-                propertiesValue["Name"] = input.Properties.Name;
-                
-                propertiesValue["removalMethod"] = input.Properties.RemovalMethod;
-                
-                requestContent = requestDoc.ToString(Newtonsoft.Json.Formatting.Indented);
-                httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
-                httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/Json");
-                
                 // Send Request
                 HttpResponseMessage httpResponse = null;
                 try
@@ -396,7 +372,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     if (statusCode != HttpStatusCode.OK && statusCode != HttpStatusCode.Accepted)
                     {
                         cancellationToken.ThrowIfCancellationRequested();
-                        CloudException ex = CloudException.Create(httpRequest, requestContent, httpResponse, await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false));
+                        CloudException ex = CloudException.Create(httpRequest, null, httpResponse, await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false));
                         if (shouldTrace)
                         {
                             TracingAdapter.Error(invocationId, ex);
@@ -515,8 +491,8 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <summary>
         /// Deletes a fabric
         /// </summary>
-        /// <param name='input'>
-        /// Required. Input to delete fabric
+        /// <param name='fabricName'>
+        /// Required. Fabric Name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -527,7 +503,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public async Task<LongRunningOperationResponse> DeleteAsync(FabricDeletionInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        public async Task<LongRunningOperationResponse> DeleteAsync(string fabricName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
         {
             SiteRecoveryManagementClient client = this.Client;
             bool shouldTrace = TracingAdapter.IsEnabled;
@@ -536,13 +512,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
             {
                 invocationId = TracingAdapter.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("input", input);
+                tracingParameters.Add("fabricName", fabricName);
                 tracingParameters.Add("customRequestHeaders", customRequestHeaders);
                 TracingAdapter.Enter(invocationId, this, "DeleteAsync", tracingParameters);
             }
             
             cancellationToken.ThrowIfCancellationRequested();
-            LongRunningOperationResponse response = await client.Fabrics.BeginDeletingAsync(input, customRequestHeaders, cancellationToken).ConfigureAwait(false);
+            LongRunningOperationResponse response = await client.Fabrics.BeginDeletingAsync(fabricName, customRequestHeaders, cancellationToken).ConfigureAwait(false);
             if (response.Status == OperationStatus.Succeeded)
             {
                 return response;
@@ -578,8 +554,8 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <summary>
         /// Get the server object by Id.
         /// </summary>
-        /// <param name='fabricId'>
-        /// Required. Fabric ID.
+        /// <param name='fabricName'>
+        /// Required. Fabric Name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -590,12 +566,12 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// The response model for the fabric object
         /// </returns>
-        public async Task<FabricResponse> GetAsync(string fabricId, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        public async Task<FabricResponse> GetAsync(string fabricName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
         {
             // Validate
-            if (fabricId == null)
+            if (fabricName == null)
             {
-                throw new ArgumentNullException("fabricId");
+                throw new ArgumentNullException("fabricName");
             }
             
             // Tracing
@@ -605,7 +581,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             {
                 invocationId = TracingAdapter.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("fabricId", fabricId);
+                tracingParameters.Add("fabricName", fabricName);
                 tracingParameters.Add("customRequestHeaders", customRequestHeaders);
                 TracingAdapter.Enter(invocationId, this, "GetAsync", tracingParameters);
             }
@@ -626,7 +602,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/";
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationFabrics/";
-            url = url + Uri.EscapeDataString(fabricId);
+            url = url + Uri.EscapeDataString(fabricName);
             List<string> queryParameters = new List<string>();
             queryParameters.Add("api-version=2015-11-10");
             if (queryParameters.Count > 0)
@@ -720,6 +696,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.FriendlyName = friendlyNameInstance;
                                 }
                                 
+                                JToken fabricTypeValue = propertiesValue["fabricType"];
+                                if (fabricTypeValue != null && fabricTypeValue.Type != JTokenType.Null)
+                                {
+                                    string fabricTypeInstance = ((string)fabricTypeValue);
+                                    propertiesInstance.FabricType = fabricTypeInstance;
+                                }
+                                
                                 JToken encryptionDetailsValue = propertiesValue["encryptionDetails"];
                                 if (encryptionDetailsValue != null && encryptionDetailsValue.Type != JTokenType.Null)
                                 {
@@ -776,17 +759,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     }
                                 }
                                 
-                                JToken fabricTypeValue = propertiesValue["fabricType"];
-                                if (fabricTypeValue != null && fabricTypeValue.Type != JTokenType.Null)
+                                JToken configurationSettingsValue = propertiesValue["configurationSettings"];
+                                if (configurationSettingsValue != null && configurationSettingsValue.Type != JTokenType.Null)
                                 {
-                                    string fabricTypeInstance = ((string)fabricTypeValue);
-                                    propertiesInstance.FabricType = fabricTypeInstance;
-                                }
-                                
-                                JToken fabricSpecificSettingsValue = propertiesValue["fabricSpecificSettings"];
-                                if (fabricSpecificSettingsValue != null && fabricSpecificSettingsValue.Type != JTokenType.Null)
-                                {
-                                    string typeName = ((string)fabricSpecificSettingsValue["__type"]);
+                                    string typeName = ((string)configurationSettingsValue["__type"]);
                                 }
                             }
                             
@@ -974,6 +950,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.FriendlyName = friendlyNameInstance;
                                 }
                                 
+                                JToken fabricTypeValue = propertiesValue["fabricType"];
+                                if (fabricTypeValue != null && fabricTypeValue.Type != JTokenType.Null)
+                                {
+                                    string fabricTypeInstance = ((string)fabricTypeValue);
+                                    propertiesInstance.FabricType = fabricTypeInstance;
+                                }
+                                
                                 JToken encryptionDetailsValue = propertiesValue["encryptionDetails"];
                                 if (encryptionDetailsValue != null && encryptionDetailsValue.Type != JTokenType.Null)
                                 {
@@ -1030,17 +1013,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     }
                                 }
                                 
-                                JToken fabricTypeValue = propertiesValue["fabricType"];
-                                if (fabricTypeValue != null && fabricTypeValue.Type != JTokenType.Null)
+                                JToken configurationSettingsValue = propertiesValue["configurationSettings"];
+                                if (configurationSettingsValue != null && configurationSettingsValue.Type != JTokenType.Null)
                                 {
-                                    string fabricTypeInstance = ((string)fabricTypeValue);
-                                    propertiesInstance.FabricType = fabricTypeInstance;
-                                }
-                                
-                                JToken fabricSpecificSettingsValue = propertiesValue["fabricSpecificSettings"];
-                                if (fabricSpecificSettingsValue != null && fabricSpecificSettingsValue.Type != JTokenType.Null)
-                                {
-                                    string typeName = ((string)fabricSpecificSettingsValue["__type"]);
+                                    string typeName = ((string)configurationSettingsValue["__type"]);
                                 }
                             }
                             
@@ -1488,6 +1464,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             propertiesInstance.FriendlyName = friendlyNameInstance;
                                         }
                                         
+                                        JToken fabricTypeValue = propertiesValue["fabricType"];
+                                        if (fabricTypeValue != null && fabricTypeValue.Type != JTokenType.Null)
+                                        {
+                                            string fabricTypeInstance = ((string)fabricTypeValue);
+                                            propertiesInstance.FabricType = fabricTypeInstance;
+                                        }
+                                        
                                         JToken encryptionDetailsValue = propertiesValue["encryptionDetails"];
                                         if (encryptionDetailsValue != null && encryptionDetailsValue.Type != JTokenType.Null)
                                         {
@@ -1544,17 +1527,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken fabricTypeValue = propertiesValue["fabricType"];
-                                        if (fabricTypeValue != null && fabricTypeValue.Type != JTokenType.Null)
+                                        JToken configurationSettingsValue = propertiesValue["configurationSettings"];
+                                        if (configurationSettingsValue != null && configurationSettingsValue.Type != JTokenType.Null)
                                         {
-                                            string fabricTypeInstance = ((string)fabricTypeValue);
-                                            propertiesInstance.FabricType = fabricTypeInstance;
-                                        }
-                                        
-                                        JToken fabricSpecificSettingsValue = propertiesValue["fabricSpecificSettings"];
-                                        if (fabricSpecificSettingsValue != null && fabricSpecificSettingsValue.Type != JTokenType.Null)
-                                        {
-                                            string typeName = ((string)fabricSpecificSettingsValue["__type"]);
+                                            string typeName = ((string)configurationSettingsValue["__type"]);
                                         }
                                     }
                                     
