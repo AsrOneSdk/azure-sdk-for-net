@@ -37,6 +37,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// Reference to the
         /// Microsoft.Azure.Management.SiteRecovery.IFabricOperations.
         /// </param>
+        /// <param name='fabricName'>
+        /// Required. Fabric Name.
+        /// </param>
         /// <param name='input'>
         /// Required. Input to create fabric
         /// </param>
@@ -46,11 +49,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public static LongRunningOperationResponse BeginCreating(this IFabricOperations operations, FabricCreationInput input, CustomRequestHeaders customRequestHeaders)
+        public static LongRunningOperationResponse BeginCreating(this IFabricOperations operations, string fabricName, FabricCreationInput input, CustomRequestHeaders customRequestHeaders)
         {
             return Task.Factory.StartNew((object s) => 
             {
-                return ((IFabricOperations)s).BeginCreatingAsync(input, customRequestHeaders);
+                return ((IFabricOperations)s).BeginCreatingAsync(fabricName, input, customRequestHeaders);
             }
             , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
         }
@@ -62,6 +65,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// Reference to the
         /// Microsoft.Azure.Management.SiteRecovery.IFabricOperations.
         /// </param>
+        /// <param name='fabricName'>
+        /// Required. Fabric Name.
+        /// </param>
         /// <param name='input'>
         /// Required. Input to create fabric
         /// </param>
@@ -71,9 +77,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public static Task<LongRunningOperationResponse> BeginCreatingAsync(this IFabricOperations operations, FabricCreationInput input, CustomRequestHeaders customRequestHeaders)
+        public static Task<LongRunningOperationResponse> BeginCreatingAsync(this IFabricOperations operations, string fabricName, FabricCreationInput input, CustomRequestHeaders customRequestHeaders)
         {
-            return operations.BeginCreatingAsync(input, customRequestHeaders, CancellationToken.None);
+            return operations.BeginCreatingAsync(fabricName, input, customRequestHeaders, CancellationToken.None);
         }
         
         /// <summary>
@@ -129,6 +135,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// Reference to the
         /// Microsoft.Azure.Management.SiteRecovery.IFabricOperations.
         /// </param>
+        /// <param name='fabricName'>
+        /// Required. Fabric Name.
+        /// </param>
         /// <param name='input'>
         /// Required. Input to create fabric
         /// </param>
@@ -138,11 +147,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public static LongRunningOperationResponse Create(this IFabricOperations operations, FabricCreationInput input, CustomRequestHeaders customRequestHeaders)
+        public static LongRunningOperationResponse Create(this IFabricOperations operations, string fabricName, FabricCreationInput input, CustomRequestHeaders customRequestHeaders)
         {
             return Task.Factory.StartNew((object s) => 
             {
-                return ((IFabricOperations)s).CreateAsync(input, customRequestHeaders);
+                return ((IFabricOperations)s).CreateAsync(fabricName, input, customRequestHeaders);
             }
             , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
         }
@@ -154,6 +163,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// Reference to the
         /// Microsoft.Azure.Management.SiteRecovery.IFabricOperations.
         /// </param>
+        /// <param name='fabricName'>
+        /// Required. Fabric Name.
+        /// </param>
         /// <param name='input'>
         /// Required. Input to create fabric
         /// </param>
@@ -163,9 +175,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public static Task<LongRunningOperationResponse> CreateAsync(this IFabricOperations operations, FabricCreationInput input, CustomRequestHeaders customRequestHeaders)
+        public static Task<LongRunningOperationResponse> CreateAsync(this IFabricOperations operations, string fabricName, FabricCreationInput input, CustomRequestHeaders customRequestHeaders)
         {
-            return operations.CreateAsync(input, customRequestHeaders, CancellationToken.None);
+            return operations.CreateAsync(fabricName, input, customRequestHeaders, CancellationToken.None);
         }
         
         /// <summary>

@@ -35,6 +35,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <summary>
         /// Creates a profile
         /// </summary>
+        /// <param name='policyName'>
+        /// Policy Name.
+        /// </param>
         /// <param name='input'>
         /// Input to create profile
         /// </param>
@@ -47,7 +50,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        Task<LongRunningOperationResponse> BeginCreatingAsync(CreatePolicyInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        Task<LongRunningOperationResponse> BeginCreatingAsync(string policyName, CreatePolicyInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
         
         /// <summary>
         /// Deletes a Policy
@@ -89,6 +92,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <summary>
         /// Creates a profile
         /// </summary>
+        /// <param name='policyName'>
+        /// Policy Name.
+        /// </param>
         /// <param name='input'>
         /// Input to create profile
         /// </param>
@@ -101,7 +107,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        Task<LongRunningOperationResponse> CreateAsync(CreatePolicyInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        Task<LongRunningOperationResponse> CreateAsync(string policyName, CreatePolicyInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
         
         /// <summary>
         /// Deletes a Policy

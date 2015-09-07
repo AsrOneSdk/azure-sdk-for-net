@@ -35,6 +35,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <summary>
         /// Creates a Fabric
         /// </summary>
+        /// <param name='fabricName'>
+        /// Fabric Name.
+        /// </param>
         /// <param name='input'>
         /// Input to create fabric
         /// </param>
@@ -47,7 +50,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        Task<LongRunningOperationResponse> BeginCreatingAsync(FabricCreationInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        Task<LongRunningOperationResponse> BeginCreatingAsync(string fabricName, FabricCreationInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
         
         /// <summary>
         /// Deletes a Fabric
@@ -69,6 +72,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <summary>
         /// Creates a fabric
         /// </summary>
+        /// <param name='fabricName'>
+        /// Fabric Name.
+        /// </param>
         /// <param name='input'>
         /// Input to create fabric
         /// </param>
@@ -81,7 +87,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        Task<LongRunningOperationResponse> CreateAsync(FabricCreationInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        Task<LongRunningOperationResponse> CreateAsync(string fabricName, FabricCreationInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
         
         /// <summary>
         /// Deletes a fabric

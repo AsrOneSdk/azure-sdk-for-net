@@ -37,6 +37,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// Reference to the
         /// Microsoft.Azure.Management.SiteRecovery.IPolicyOperations.
         /// </param>
+        /// <param name='policyName'>
+        /// Required. Policy Name.
+        /// </param>
         /// <param name='input'>
         /// Required. Input to create profile
         /// </param>
@@ -46,11 +49,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public static LongRunningOperationResponse BeginCreating(this IPolicyOperations operations, CreatePolicyInput input, CustomRequestHeaders customRequestHeaders)
+        public static LongRunningOperationResponse BeginCreating(this IPolicyOperations operations, string policyName, CreatePolicyInput input, CustomRequestHeaders customRequestHeaders)
         {
             return Task.Factory.StartNew((object s) => 
             {
-                return ((IPolicyOperations)s).BeginCreatingAsync(input, customRequestHeaders);
+                return ((IPolicyOperations)s).BeginCreatingAsync(policyName, input, customRequestHeaders);
             }
             , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
         }
@@ -62,6 +65,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// Reference to the
         /// Microsoft.Azure.Management.SiteRecovery.IPolicyOperations.
         /// </param>
+        /// <param name='policyName'>
+        /// Required. Policy Name.
+        /// </param>
         /// <param name='input'>
         /// Required. Input to create profile
         /// </param>
@@ -71,9 +77,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public static Task<LongRunningOperationResponse> BeginCreatingAsync(this IPolicyOperations operations, CreatePolicyInput input, CustomRequestHeaders customRequestHeaders)
+        public static Task<LongRunningOperationResponse> BeginCreatingAsync(this IPolicyOperations operations, string policyName, CreatePolicyInput input, CustomRequestHeaders customRequestHeaders)
         {
-            return operations.BeginCreatingAsync(input, customRequestHeaders, CancellationToken.None);
+            return operations.BeginCreatingAsync(policyName, input, customRequestHeaders, CancellationToken.None);
         }
         
         /// <summary>
@@ -181,6 +187,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// Reference to the
         /// Microsoft.Azure.Management.SiteRecovery.IPolicyOperations.
         /// </param>
+        /// <param name='policyName'>
+        /// Required. Policy Name.
+        /// </param>
         /// <param name='input'>
         /// Required. Input to create profile
         /// </param>
@@ -190,11 +199,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public static LongRunningOperationResponse Create(this IPolicyOperations operations, CreatePolicyInput input, CustomRequestHeaders customRequestHeaders)
+        public static LongRunningOperationResponse Create(this IPolicyOperations operations, string policyName, CreatePolicyInput input, CustomRequestHeaders customRequestHeaders)
         {
             return Task.Factory.StartNew((object s) => 
             {
-                return ((IPolicyOperations)s).CreateAsync(input, customRequestHeaders);
+                return ((IPolicyOperations)s).CreateAsync(policyName, input, customRequestHeaders);
             }
             , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
         }
@@ -206,6 +215,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// Reference to the
         /// Microsoft.Azure.Management.SiteRecovery.IPolicyOperations.
         /// </param>
+        /// <param name='policyName'>
+        /// Required. Policy Name.
+        /// </param>
         /// <param name='input'>
         /// Required. Input to create profile
         /// </param>
@@ -215,9 +227,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public static Task<LongRunningOperationResponse> CreateAsync(this IPolicyOperations operations, CreatePolicyInput input, CustomRequestHeaders customRequestHeaders)
+        public static Task<LongRunningOperationResponse> CreateAsync(this IPolicyOperations operations, string policyName, CreatePolicyInput input, CustomRequestHeaders customRequestHeaders)
         {
-            return operations.CreateAsync(input, customRequestHeaders, CancellationToken.None);
+            return operations.CreateAsync(policyName, input, customRequestHeaders, CancellationToken.None);
         }
         
         /// <summary>

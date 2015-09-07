@@ -63,17 +63,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._friendlyName = value; }
         }
         
-        private string _name;
-        
-        /// <summary>
-        /// Optional. Name of the fabric.
-        /// </summary>
-        public string Name
-        {
-            get { return this._name; }
-            set { this._name = value; }
-        }
-        
         /// <summary>
         /// Initializes a new instance of the FabricCreationInputProperties
         /// class.

@@ -41,17 +41,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._friendlyName = value; }
         }
         
-        private string _name;
-        
-        /// <summary>
-        /// Optional. the Name of Profile.
-        /// </summary>
-        public string Name
-        {
-            get { return this._name; }
-            set { this._name = value; }
-        }
-        
         private string _replicationProvider;
         
         /// <summary>

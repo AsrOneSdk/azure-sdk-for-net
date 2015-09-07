@@ -67,6 +67,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <summary>
         /// Creates a Fabric
         /// </summary>
+        /// <param name='fabricName'>
+        /// Required. Fabric Name.
+        /// </param>
         /// <param name='input'>
         /// Required. Input to create fabric
         /// </param>
@@ -79,9 +82,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public async Task<LongRunningOperationResponse> BeginCreatingAsync(FabricCreationInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        public async Task<LongRunningOperationResponse> BeginCreatingAsync(string fabricName, FabricCreationInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
         {
             // Validate
+            if (fabricName == null)
+            {
+                throw new ArgumentNullException("fabricName");
+            }
             if (input == null)
             {
                 throw new ArgumentNullException("input");
@@ -94,6 +101,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             {
                 invocationId = TracingAdapter.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("fabricName", fabricName);
                 tracingParameters.Add("input", input);
                 tracingParameters.Add("customRequestHeaders", customRequestHeaders);
                 TracingAdapter.Enter(invocationId, this, "BeginCreatingAsync", tracingParameters);
@@ -115,10 +123,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/";
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationFabrics/";
-            if (input.Properties != null && input.Properties.Name != null)
-            {
-                url = url + Uri.EscapeDataString(input.Properties.Name);
-            }
+            url = url + Uri.EscapeDataString(fabricName);
             List<string> queryParameters = new List<string>();
             queryParameters.Add("api-version=2015-11-10");
             if (queryParameters.Count > 0)
@@ -167,11 +172,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 {
                     JObject propertiesValue = new JObject();
                     fabricCreationInputValue["properties"] = propertiesValue;
-                    
-                    if (input.Properties.Name != null)
-                    {
-                        propertiesValue["name"] = input.Properties.Name;
-                    }
                     
                     if (input.Properties.FriendlyName != null)
                     {
@@ -428,6 +428,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <summary>
         /// Creates a fabric
         /// </summary>
+        /// <param name='fabricName'>
+        /// Required. Fabric Name.
+        /// </param>
         /// <param name='input'>
         /// Required. Input to create fabric
         /// </param>
@@ -440,7 +443,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public async Task<LongRunningOperationResponse> CreateAsync(FabricCreationInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        public async Task<LongRunningOperationResponse> CreateAsync(string fabricName, FabricCreationInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
         {
             SiteRecoveryManagementClient client = this.Client;
             bool shouldTrace = TracingAdapter.IsEnabled;
@@ -449,13 +452,14 @@ namespace Microsoft.Azure.Management.SiteRecovery
             {
                 invocationId = TracingAdapter.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("fabricName", fabricName);
                 tracingParameters.Add("input", input);
                 tracingParameters.Add("customRequestHeaders", customRequestHeaders);
                 TracingAdapter.Enter(invocationId, this, "CreateAsync", tracingParameters);
             }
             
             cancellationToken.ThrowIfCancellationRequested();
-            LongRunningOperationResponse response = await client.Fabrics.BeginCreatingAsync(input, customRequestHeaders, cancellationToken).ConfigureAwait(false);
+            LongRunningOperationResponse response = await client.Fabrics.BeginCreatingAsync(fabricName, input, customRequestHeaders, cancellationToken).ConfigureAwait(false);
             if (response.Status == OperationStatus.Succeeded)
             {
                 return response;

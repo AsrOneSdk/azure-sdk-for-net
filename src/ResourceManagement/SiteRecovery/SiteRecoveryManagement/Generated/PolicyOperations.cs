@@ -68,6 +68,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <summary>
         /// Creates a profile
         /// </summary>
+        /// <param name='policyName'>
+        /// Required. Policy Name.
+        /// </param>
         /// <param name='input'>
         /// Required. Input to create profile
         /// </param>
@@ -80,9 +83,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public async Task<LongRunningOperationResponse> BeginCreatingAsync(CreatePolicyInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        public async Task<LongRunningOperationResponse> BeginCreatingAsync(string policyName, CreatePolicyInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
         {
             // Validate
+            if (policyName == null)
+            {
+                throw new ArgumentNullException("policyName");
+            }
             if (input == null)
             {
                 throw new ArgumentNullException("input");
@@ -95,6 +102,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             {
                 invocationId = TracingAdapter.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("policyName", policyName);
                 tracingParameters.Add("input", input);
                 tracingParameters.Add("customRequestHeaders", customRequestHeaders);
                 TracingAdapter.Enter(invocationId, this, "BeginCreatingAsync", tracingParameters);
@@ -116,10 +124,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/";
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationPolicies/";
-            if (input.Properties != null && input.Properties.Name != null)
-            {
-                url = url + Uri.EscapeDataString(input.Properties.Name);
-            }
+            url = url + Uri.EscapeDataString(policyName);
             List<string> queryParameters = new List<string>();
             queryParameters.Add("api-version=2015-11-10");
             if (queryParameters.Count > 0)
@@ -168,11 +173,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 {
                     JObject propertiesValue = new JObject();
                     createPolicyInputValue["properties"] = propertiesValue;
-                    
-                    if (input.Properties.Name != null)
-                    {
-                        propertiesValue["name"] = input.Properties.Name;
-                    }
                     
                     if (input.Properties.FriendlyName != null)
                     {
@@ -854,6 +854,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <summary>
         /// Creates a profile
         /// </summary>
+        /// <param name='policyName'>
+        /// Required. Policy Name.
+        /// </param>
         /// <param name='input'>
         /// Required. Input to create profile
         /// </param>
@@ -866,7 +869,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public async Task<LongRunningOperationResponse> CreateAsync(CreatePolicyInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        public async Task<LongRunningOperationResponse> CreateAsync(string policyName, CreatePolicyInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
         {
             SiteRecoveryManagementClient client = this.Client;
             bool shouldTrace = TracingAdapter.IsEnabled;
@@ -875,13 +878,14 @@ namespace Microsoft.Azure.Management.SiteRecovery
             {
                 invocationId = TracingAdapter.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("policyName", policyName);
                 tracingParameters.Add("input", input);
                 tracingParameters.Add("customRequestHeaders", customRequestHeaders);
                 TracingAdapter.Enter(invocationId, this, "CreateAsync", tracingParameters);
             }
             
             cancellationToken.ThrowIfCancellationRequested();
-            LongRunningOperationResponse response = await client.Policies.BeginCreatingAsync(input, customRequestHeaders, cancellationToken).ConfigureAwait(false);
+            LongRunningOperationResponse response = await client.Policies.BeginCreatingAsync(policyName, input, customRequestHeaders, cancellationToken).ConfigureAwait(false);
             if (response.Status == OperationStatus.Succeeded)
             {
                 return response;
