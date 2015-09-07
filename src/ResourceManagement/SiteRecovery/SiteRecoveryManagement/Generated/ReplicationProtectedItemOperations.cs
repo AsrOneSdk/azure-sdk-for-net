@@ -2152,11 +2152,70 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.ReplicationHealth = replicationHealthInstance;
                                 }
                                 
-                                JToken replicationHealthErrorsValue = propertiesValue["replicationHealthErrors"];
-                                if (replicationHealthErrorsValue != null && replicationHealthErrorsValue.Type != JTokenType.Null)
+                                JToken replicationHealthErrorsArray = propertiesValue["replicationHealthErrors"];
+                                if (replicationHealthErrorsArray != null && replicationHealthErrorsArray.Type != JTokenType.Null)
                                 {
-                                    List<HealthError> replicationHealthErrorsInstance = ((string)replicationHealthErrorsValue);
-                                    propertiesInstance.ReplicationHealthErrors = replicationHealthErrorsInstance;
+                                    foreach (JToken replicationHealthErrorsValue in ((JArray)replicationHealthErrorsArray))
+                                    {
+                                        HealthError healthErrorInstance = new HealthError();
+                                        propertiesInstance.ReplicationHealthErrors.Add(healthErrorInstance);
+                                        
+                                        JToken errorLevelValue = replicationHealthErrorsValue["errorLevel"];
+                                        if (errorLevelValue != null && errorLevelValue.Type != JTokenType.Null)
+                                        {
+                                            string errorLevelInstance = ((string)errorLevelValue);
+                                            healthErrorInstance.ErrorLevel = errorLevelInstance;
+                                        }
+                                        
+                                        JToken errorCodeValue = replicationHealthErrorsValue["errorCode"];
+                                        if (errorCodeValue != null && errorCodeValue.Type != JTokenType.Null)
+                                        {
+                                            string errorCodeInstance = ((string)errorCodeValue);
+                                            healthErrorInstance.ErrorCode = errorCodeInstance;
+                                        }
+                                        
+                                        JToken errorMessageValue = replicationHealthErrorsValue["errorMessage"];
+                                        if (errorMessageValue != null && errorMessageValue.Type != JTokenType.Null)
+                                        {
+                                            string errorMessageInstance = ((string)errorMessageValue);
+                                            healthErrorInstance.ErrorMessage = errorMessageInstance;
+                                        }
+                                        
+                                        JToken possibleCausesValue = replicationHealthErrorsValue["possibleCauses"];
+                                        if (possibleCausesValue != null && possibleCausesValue.Type != JTokenType.Null)
+                                        {
+                                            string possibleCausesInstance = ((string)possibleCausesValue);
+                                            healthErrorInstance.PossibleCauses = possibleCausesInstance;
+                                        }
+                                        
+                                        JToken recommendedActionValue = replicationHealthErrorsValue["recommendedAction"];
+                                        if (recommendedActionValue != null && recommendedActionValue.Type != JTokenType.Null)
+                                        {
+                                            string recommendedActionInstance = ((string)recommendedActionValue);
+                                            healthErrorInstance.RecommendedAction = recommendedActionInstance;
+                                        }
+                                        
+                                        JToken creationTimeUtcValue = replicationHealthErrorsValue["creationTimeUtc"];
+                                        if (creationTimeUtcValue != null && creationTimeUtcValue.Type != JTokenType.Null)
+                                        {
+                                            string creationTimeUtcInstance = ((string)creationTimeUtcValue);
+                                            healthErrorInstance.CreationTimeUtc = creationTimeUtcInstance;
+                                        }
+                                        
+                                        JToken recoveryProviderErrorMessageValue = replicationHealthErrorsValue["recoveryProviderErrorMessage"];
+                                        if (recoveryProviderErrorMessageValue != null && recoveryProviderErrorMessageValue.Type != JTokenType.Null)
+                                        {
+                                            string recoveryProviderErrorMessageInstance = ((string)recoveryProviderErrorMessageValue);
+                                            healthErrorInstance.RecoveryProviderErrorMessage = recoveryProviderErrorMessageInstance;
+                                        }
+                                        
+                                        JToken entityIdValue = replicationHealthErrorsValue["entityId"];
+                                        if (entityIdValue != null && entityIdValue.Type != JTokenType.Null)
+                                        {
+                                            string entityIdInstance = ((string)entityIdValue);
+                                            healthErrorInstance.EntityId = entityIdInstance;
+                                        }
+                                    }
                                 }
                                 
                                 JToken replicationProviderValue = propertiesValue["replicationProvider"];
@@ -2634,11 +2693,70 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.ReplicationHealth = replicationHealthInstance;
                                 }
                                 
-                                JToken replicationHealthErrorsValue = propertiesValue["replicationHealthErrors"];
-                                if (replicationHealthErrorsValue != null && replicationHealthErrorsValue.Type != JTokenType.Null)
+                                JToken replicationHealthErrorsArray = propertiesValue["replicationHealthErrors"];
+                                if (replicationHealthErrorsArray != null && replicationHealthErrorsArray.Type != JTokenType.Null)
                                 {
-                                    List<HealthError> replicationHealthErrorsInstance = ((string)replicationHealthErrorsValue);
-                                    propertiesInstance.ReplicationHealthErrors = replicationHealthErrorsInstance;
+                                    foreach (JToken replicationHealthErrorsValue in ((JArray)replicationHealthErrorsArray))
+                                    {
+                                        HealthError healthErrorInstance = new HealthError();
+                                        propertiesInstance.ReplicationHealthErrors.Add(healthErrorInstance);
+                                        
+                                        JToken errorLevelValue = replicationHealthErrorsValue["errorLevel"];
+                                        if (errorLevelValue != null && errorLevelValue.Type != JTokenType.Null)
+                                        {
+                                            string errorLevelInstance = ((string)errorLevelValue);
+                                            healthErrorInstance.ErrorLevel = errorLevelInstance;
+                                        }
+                                        
+                                        JToken errorCodeValue = replicationHealthErrorsValue["errorCode"];
+                                        if (errorCodeValue != null && errorCodeValue.Type != JTokenType.Null)
+                                        {
+                                            string errorCodeInstance = ((string)errorCodeValue);
+                                            healthErrorInstance.ErrorCode = errorCodeInstance;
+                                        }
+                                        
+                                        JToken errorMessageValue = replicationHealthErrorsValue["errorMessage"];
+                                        if (errorMessageValue != null && errorMessageValue.Type != JTokenType.Null)
+                                        {
+                                            string errorMessageInstance = ((string)errorMessageValue);
+                                            healthErrorInstance.ErrorMessage = errorMessageInstance;
+                                        }
+                                        
+                                        JToken possibleCausesValue = replicationHealthErrorsValue["possibleCauses"];
+                                        if (possibleCausesValue != null && possibleCausesValue.Type != JTokenType.Null)
+                                        {
+                                            string possibleCausesInstance = ((string)possibleCausesValue);
+                                            healthErrorInstance.PossibleCauses = possibleCausesInstance;
+                                        }
+                                        
+                                        JToken recommendedActionValue = replicationHealthErrorsValue["recommendedAction"];
+                                        if (recommendedActionValue != null && recommendedActionValue.Type != JTokenType.Null)
+                                        {
+                                            string recommendedActionInstance = ((string)recommendedActionValue);
+                                            healthErrorInstance.RecommendedAction = recommendedActionInstance;
+                                        }
+                                        
+                                        JToken creationTimeUtcValue = replicationHealthErrorsValue["creationTimeUtc"];
+                                        if (creationTimeUtcValue != null && creationTimeUtcValue.Type != JTokenType.Null)
+                                        {
+                                            string creationTimeUtcInstance = ((string)creationTimeUtcValue);
+                                            healthErrorInstance.CreationTimeUtc = creationTimeUtcInstance;
+                                        }
+                                        
+                                        JToken recoveryProviderErrorMessageValue = replicationHealthErrorsValue["recoveryProviderErrorMessage"];
+                                        if (recoveryProviderErrorMessageValue != null && recoveryProviderErrorMessageValue.Type != JTokenType.Null)
+                                        {
+                                            string recoveryProviderErrorMessageInstance = ((string)recoveryProviderErrorMessageValue);
+                                            healthErrorInstance.RecoveryProviderErrorMessage = recoveryProviderErrorMessageInstance;
+                                        }
+                                        
+                                        JToken entityIdValue = replicationHealthErrorsValue["entityId"];
+                                        if (entityIdValue != null && entityIdValue.Type != JTokenType.Null)
+                                        {
+                                            string entityIdInstance = ((string)entityIdValue);
+                                            healthErrorInstance.EntityId = entityIdInstance;
+                                        }
+                                    }
                                 }
                                 
                                 JToken replicationProviderValue = propertiesValue["replicationProvider"];
@@ -3349,11 +3467,70 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.ReplicationHealth = replicationHealthInstance;
                                 }
                                 
-                                JToken replicationHealthErrorsValue = propertiesValue["replicationHealthErrors"];
-                                if (replicationHealthErrorsValue != null && replicationHealthErrorsValue.Type != JTokenType.Null)
+                                JToken replicationHealthErrorsArray = propertiesValue["replicationHealthErrors"];
+                                if (replicationHealthErrorsArray != null && replicationHealthErrorsArray.Type != JTokenType.Null)
                                 {
-                                    List<HealthError> replicationHealthErrorsInstance = ((string)replicationHealthErrorsValue);
-                                    propertiesInstance.ReplicationHealthErrors = replicationHealthErrorsInstance;
+                                    foreach (JToken replicationHealthErrorsValue in ((JArray)replicationHealthErrorsArray))
+                                    {
+                                        HealthError healthErrorInstance = new HealthError();
+                                        propertiesInstance.ReplicationHealthErrors.Add(healthErrorInstance);
+                                        
+                                        JToken errorLevelValue = replicationHealthErrorsValue["errorLevel"];
+                                        if (errorLevelValue != null && errorLevelValue.Type != JTokenType.Null)
+                                        {
+                                            string errorLevelInstance = ((string)errorLevelValue);
+                                            healthErrorInstance.ErrorLevel = errorLevelInstance;
+                                        }
+                                        
+                                        JToken errorCodeValue = replicationHealthErrorsValue["errorCode"];
+                                        if (errorCodeValue != null && errorCodeValue.Type != JTokenType.Null)
+                                        {
+                                            string errorCodeInstance = ((string)errorCodeValue);
+                                            healthErrorInstance.ErrorCode = errorCodeInstance;
+                                        }
+                                        
+                                        JToken errorMessageValue = replicationHealthErrorsValue["errorMessage"];
+                                        if (errorMessageValue != null && errorMessageValue.Type != JTokenType.Null)
+                                        {
+                                            string errorMessageInstance = ((string)errorMessageValue);
+                                            healthErrorInstance.ErrorMessage = errorMessageInstance;
+                                        }
+                                        
+                                        JToken possibleCausesValue = replicationHealthErrorsValue["possibleCauses"];
+                                        if (possibleCausesValue != null && possibleCausesValue.Type != JTokenType.Null)
+                                        {
+                                            string possibleCausesInstance = ((string)possibleCausesValue);
+                                            healthErrorInstance.PossibleCauses = possibleCausesInstance;
+                                        }
+                                        
+                                        JToken recommendedActionValue = replicationHealthErrorsValue["recommendedAction"];
+                                        if (recommendedActionValue != null && recommendedActionValue.Type != JTokenType.Null)
+                                        {
+                                            string recommendedActionInstance = ((string)recommendedActionValue);
+                                            healthErrorInstance.RecommendedAction = recommendedActionInstance;
+                                        }
+                                        
+                                        JToken creationTimeUtcValue = replicationHealthErrorsValue["creationTimeUtc"];
+                                        if (creationTimeUtcValue != null && creationTimeUtcValue.Type != JTokenType.Null)
+                                        {
+                                            string creationTimeUtcInstance = ((string)creationTimeUtcValue);
+                                            healthErrorInstance.CreationTimeUtc = creationTimeUtcInstance;
+                                        }
+                                        
+                                        JToken recoveryProviderErrorMessageValue = replicationHealthErrorsValue["recoveryProviderErrorMessage"];
+                                        if (recoveryProviderErrorMessageValue != null && recoveryProviderErrorMessageValue.Type != JTokenType.Null)
+                                        {
+                                            string recoveryProviderErrorMessageInstance = ((string)recoveryProviderErrorMessageValue);
+                                            healthErrorInstance.RecoveryProviderErrorMessage = recoveryProviderErrorMessageInstance;
+                                        }
+                                        
+                                        JToken entityIdValue = replicationHealthErrorsValue["entityId"];
+                                        if (entityIdValue != null && entityIdValue.Type != JTokenType.Null)
+                                        {
+                                            string entityIdInstance = ((string)entityIdValue);
+                                            healthErrorInstance.EntityId = entityIdInstance;
+                                        }
+                                    }
                                 }
                                 
                                 JToken replicationProviderValue = propertiesValue["replicationProvider"];
@@ -3883,11 +4060,70 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.ReplicationHealth = replicationHealthInstance;
                                 }
                                 
-                                JToken replicationHealthErrorsValue = propertiesValue["replicationHealthErrors"];
-                                if (replicationHealthErrorsValue != null && replicationHealthErrorsValue.Type != JTokenType.Null)
+                                JToken replicationHealthErrorsArray = propertiesValue["replicationHealthErrors"];
+                                if (replicationHealthErrorsArray != null && replicationHealthErrorsArray.Type != JTokenType.Null)
                                 {
-                                    List<HealthError> replicationHealthErrorsInstance = ((string)replicationHealthErrorsValue);
-                                    propertiesInstance.ReplicationHealthErrors = replicationHealthErrorsInstance;
+                                    foreach (JToken replicationHealthErrorsValue in ((JArray)replicationHealthErrorsArray))
+                                    {
+                                        HealthError healthErrorInstance = new HealthError();
+                                        propertiesInstance.ReplicationHealthErrors.Add(healthErrorInstance);
+                                        
+                                        JToken errorLevelValue = replicationHealthErrorsValue["errorLevel"];
+                                        if (errorLevelValue != null && errorLevelValue.Type != JTokenType.Null)
+                                        {
+                                            string errorLevelInstance = ((string)errorLevelValue);
+                                            healthErrorInstance.ErrorLevel = errorLevelInstance;
+                                        }
+                                        
+                                        JToken errorCodeValue = replicationHealthErrorsValue["errorCode"];
+                                        if (errorCodeValue != null && errorCodeValue.Type != JTokenType.Null)
+                                        {
+                                            string errorCodeInstance = ((string)errorCodeValue);
+                                            healthErrorInstance.ErrorCode = errorCodeInstance;
+                                        }
+                                        
+                                        JToken errorMessageValue = replicationHealthErrorsValue["errorMessage"];
+                                        if (errorMessageValue != null && errorMessageValue.Type != JTokenType.Null)
+                                        {
+                                            string errorMessageInstance = ((string)errorMessageValue);
+                                            healthErrorInstance.ErrorMessage = errorMessageInstance;
+                                        }
+                                        
+                                        JToken possibleCausesValue = replicationHealthErrorsValue["possibleCauses"];
+                                        if (possibleCausesValue != null && possibleCausesValue.Type != JTokenType.Null)
+                                        {
+                                            string possibleCausesInstance = ((string)possibleCausesValue);
+                                            healthErrorInstance.PossibleCauses = possibleCausesInstance;
+                                        }
+                                        
+                                        JToken recommendedActionValue = replicationHealthErrorsValue["recommendedAction"];
+                                        if (recommendedActionValue != null && recommendedActionValue.Type != JTokenType.Null)
+                                        {
+                                            string recommendedActionInstance = ((string)recommendedActionValue);
+                                            healthErrorInstance.RecommendedAction = recommendedActionInstance;
+                                        }
+                                        
+                                        JToken creationTimeUtcValue = replicationHealthErrorsValue["creationTimeUtc"];
+                                        if (creationTimeUtcValue != null && creationTimeUtcValue.Type != JTokenType.Null)
+                                        {
+                                            string creationTimeUtcInstance = ((string)creationTimeUtcValue);
+                                            healthErrorInstance.CreationTimeUtc = creationTimeUtcInstance;
+                                        }
+                                        
+                                        JToken recoveryProviderErrorMessageValue = replicationHealthErrorsValue["recoveryProviderErrorMessage"];
+                                        if (recoveryProviderErrorMessageValue != null && recoveryProviderErrorMessageValue.Type != JTokenType.Null)
+                                        {
+                                            string recoveryProviderErrorMessageInstance = ((string)recoveryProviderErrorMessageValue);
+                                            healthErrorInstance.RecoveryProviderErrorMessage = recoveryProviderErrorMessageInstance;
+                                        }
+                                        
+                                        JToken entityIdValue = replicationHealthErrorsValue["entityId"];
+                                        if (entityIdValue != null && entityIdValue.Type != JTokenType.Null)
+                                        {
+                                            string entityIdInstance = ((string)entityIdValue);
+                                            healthErrorInstance.EntityId = entityIdInstance;
+                                        }
+                                    }
                                 }
                                 
                                 JToken replicationProviderValue = propertiesValue["replicationProvider"];
@@ -4417,11 +4653,70 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.ReplicationHealth = replicationHealthInstance;
                                 }
                                 
-                                JToken replicationHealthErrorsValue = propertiesValue["replicationHealthErrors"];
-                                if (replicationHealthErrorsValue != null && replicationHealthErrorsValue.Type != JTokenType.Null)
+                                JToken replicationHealthErrorsArray = propertiesValue["replicationHealthErrors"];
+                                if (replicationHealthErrorsArray != null && replicationHealthErrorsArray.Type != JTokenType.Null)
                                 {
-                                    List<HealthError> replicationHealthErrorsInstance = ((string)replicationHealthErrorsValue);
-                                    propertiesInstance.ReplicationHealthErrors = replicationHealthErrorsInstance;
+                                    foreach (JToken replicationHealthErrorsValue in ((JArray)replicationHealthErrorsArray))
+                                    {
+                                        HealthError healthErrorInstance = new HealthError();
+                                        propertiesInstance.ReplicationHealthErrors.Add(healthErrorInstance);
+                                        
+                                        JToken errorLevelValue = replicationHealthErrorsValue["errorLevel"];
+                                        if (errorLevelValue != null && errorLevelValue.Type != JTokenType.Null)
+                                        {
+                                            string errorLevelInstance = ((string)errorLevelValue);
+                                            healthErrorInstance.ErrorLevel = errorLevelInstance;
+                                        }
+                                        
+                                        JToken errorCodeValue = replicationHealthErrorsValue["errorCode"];
+                                        if (errorCodeValue != null && errorCodeValue.Type != JTokenType.Null)
+                                        {
+                                            string errorCodeInstance = ((string)errorCodeValue);
+                                            healthErrorInstance.ErrorCode = errorCodeInstance;
+                                        }
+                                        
+                                        JToken errorMessageValue = replicationHealthErrorsValue["errorMessage"];
+                                        if (errorMessageValue != null && errorMessageValue.Type != JTokenType.Null)
+                                        {
+                                            string errorMessageInstance = ((string)errorMessageValue);
+                                            healthErrorInstance.ErrorMessage = errorMessageInstance;
+                                        }
+                                        
+                                        JToken possibleCausesValue = replicationHealthErrorsValue["possibleCauses"];
+                                        if (possibleCausesValue != null && possibleCausesValue.Type != JTokenType.Null)
+                                        {
+                                            string possibleCausesInstance = ((string)possibleCausesValue);
+                                            healthErrorInstance.PossibleCauses = possibleCausesInstance;
+                                        }
+                                        
+                                        JToken recommendedActionValue = replicationHealthErrorsValue["recommendedAction"];
+                                        if (recommendedActionValue != null && recommendedActionValue.Type != JTokenType.Null)
+                                        {
+                                            string recommendedActionInstance = ((string)recommendedActionValue);
+                                            healthErrorInstance.RecommendedAction = recommendedActionInstance;
+                                        }
+                                        
+                                        JToken creationTimeUtcValue = replicationHealthErrorsValue["creationTimeUtc"];
+                                        if (creationTimeUtcValue != null && creationTimeUtcValue.Type != JTokenType.Null)
+                                        {
+                                            string creationTimeUtcInstance = ((string)creationTimeUtcValue);
+                                            healthErrorInstance.CreationTimeUtc = creationTimeUtcInstance;
+                                        }
+                                        
+                                        JToken recoveryProviderErrorMessageValue = replicationHealthErrorsValue["recoveryProviderErrorMessage"];
+                                        if (recoveryProviderErrorMessageValue != null && recoveryProviderErrorMessageValue.Type != JTokenType.Null)
+                                        {
+                                            string recoveryProviderErrorMessageInstance = ((string)recoveryProviderErrorMessageValue);
+                                            healthErrorInstance.RecoveryProviderErrorMessage = recoveryProviderErrorMessageInstance;
+                                        }
+                                        
+                                        JToken entityIdValue = replicationHealthErrorsValue["entityId"];
+                                        if (entityIdValue != null && entityIdValue.Type != JTokenType.Null)
+                                        {
+                                            string entityIdInstance = ((string)entityIdValue);
+                                            healthErrorInstance.EntityId = entityIdInstance;
+                                        }
+                                    }
                                 }
                                 
                                 JToken replicationProviderValue = propertiesValue["replicationProvider"];
@@ -4951,11 +5246,70 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.ReplicationHealth = replicationHealthInstance;
                                 }
                                 
-                                JToken replicationHealthErrorsValue = propertiesValue["replicationHealthErrors"];
-                                if (replicationHealthErrorsValue != null && replicationHealthErrorsValue.Type != JTokenType.Null)
+                                JToken replicationHealthErrorsArray = propertiesValue["replicationHealthErrors"];
+                                if (replicationHealthErrorsArray != null && replicationHealthErrorsArray.Type != JTokenType.Null)
                                 {
-                                    List<HealthError> replicationHealthErrorsInstance = ((string)replicationHealthErrorsValue);
-                                    propertiesInstance.ReplicationHealthErrors = replicationHealthErrorsInstance;
+                                    foreach (JToken replicationHealthErrorsValue in ((JArray)replicationHealthErrorsArray))
+                                    {
+                                        HealthError healthErrorInstance = new HealthError();
+                                        propertiesInstance.ReplicationHealthErrors.Add(healthErrorInstance);
+                                        
+                                        JToken errorLevelValue = replicationHealthErrorsValue["errorLevel"];
+                                        if (errorLevelValue != null && errorLevelValue.Type != JTokenType.Null)
+                                        {
+                                            string errorLevelInstance = ((string)errorLevelValue);
+                                            healthErrorInstance.ErrorLevel = errorLevelInstance;
+                                        }
+                                        
+                                        JToken errorCodeValue = replicationHealthErrorsValue["errorCode"];
+                                        if (errorCodeValue != null && errorCodeValue.Type != JTokenType.Null)
+                                        {
+                                            string errorCodeInstance = ((string)errorCodeValue);
+                                            healthErrorInstance.ErrorCode = errorCodeInstance;
+                                        }
+                                        
+                                        JToken errorMessageValue = replicationHealthErrorsValue["errorMessage"];
+                                        if (errorMessageValue != null && errorMessageValue.Type != JTokenType.Null)
+                                        {
+                                            string errorMessageInstance = ((string)errorMessageValue);
+                                            healthErrorInstance.ErrorMessage = errorMessageInstance;
+                                        }
+                                        
+                                        JToken possibleCausesValue = replicationHealthErrorsValue["possibleCauses"];
+                                        if (possibleCausesValue != null && possibleCausesValue.Type != JTokenType.Null)
+                                        {
+                                            string possibleCausesInstance = ((string)possibleCausesValue);
+                                            healthErrorInstance.PossibleCauses = possibleCausesInstance;
+                                        }
+                                        
+                                        JToken recommendedActionValue = replicationHealthErrorsValue["recommendedAction"];
+                                        if (recommendedActionValue != null && recommendedActionValue.Type != JTokenType.Null)
+                                        {
+                                            string recommendedActionInstance = ((string)recommendedActionValue);
+                                            healthErrorInstance.RecommendedAction = recommendedActionInstance;
+                                        }
+                                        
+                                        JToken creationTimeUtcValue = replicationHealthErrorsValue["creationTimeUtc"];
+                                        if (creationTimeUtcValue != null && creationTimeUtcValue.Type != JTokenType.Null)
+                                        {
+                                            string creationTimeUtcInstance = ((string)creationTimeUtcValue);
+                                            healthErrorInstance.CreationTimeUtc = creationTimeUtcInstance;
+                                        }
+                                        
+                                        JToken recoveryProviderErrorMessageValue = replicationHealthErrorsValue["recoveryProviderErrorMessage"];
+                                        if (recoveryProviderErrorMessageValue != null && recoveryProviderErrorMessageValue.Type != JTokenType.Null)
+                                        {
+                                            string recoveryProviderErrorMessageInstance = ((string)recoveryProviderErrorMessageValue);
+                                            healthErrorInstance.RecoveryProviderErrorMessage = recoveryProviderErrorMessageInstance;
+                                        }
+                                        
+                                        JToken entityIdValue = replicationHealthErrorsValue["entityId"];
+                                        if (entityIdValue != null && entityIdValue.Type != JTokenType.Null)
+                                        {
+                                            string entityIdInstance = ((string)entityIdValue);
+                                            healthErrorInstance.EntityId = entityIdInstance;
+                                        }
+                                    }
                                 }
                                 
                                 JToken replicationProviderValue = propertiesValue["replicationProvider"];
@@ -5485,11 +5839,70 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.ReplicationHealth = replicationHealthInstance;
                                 }
                                 
-                                JToken replicationHealthErrorsValue = propertiesValue["replicationHealthErrors"];
-                                if (replicationHealthErrorsValue != null && replicationHealthErrorsValue.Type != JTokenType.Null)
+                                JToken replicationHealthErrorsArray = propertiesValue["replicationHealthErrors"];
+                                if (replicationHealthErrorsArray != null && replicationHealthErrorsArray.Type != JTokenType.Null)
                                 {
-                                    List<HealthError> replicationHealthErrorsInstance = ((string)replicationHealthErrorsValue);
-                                    propertiesInstance.ReplicationHealthErrors = replicationHealthErrorsInstance;
+                                    foreach (JToken replicationHealthErrorsValue in ((JArray)replicationHealthErrorsArray))
+                                    {
+                                        HealthError healthErrorInstance = new HealthError();
+                                        propertiesInstance.ReplicationHealthErrors.Add(healthErrorInstance);
+                                        
+                                        JToken errorLevelValue = replicationHealthErrorsValue["errorLevel"];
+                                        if (errorLevelValue != null && errorLevelValue.Type != JTokenType.Null)
+                                        {
+                                            string errorLevelInstance = ((string)errorLevelValue);
+                                            healthErrorInstance.ErrorLevel = errorLevelInstance;
+                                        }
+                                        
+                                        JToken errorCodeValue = replicationHealthErrorsValue["errorCode"];
+                                        if (errorCodeValue != null && errorCodeValue.Type != JTokenType.Null)
+                                        {
+                                            string errorCodeInstance = ((string)errorCodeValue);
+                                            healthErrorInstance.ErrorCode = errorCodeInstance;
+                                        }
+                                        
+                                        JToken errorMessageValue = replicationHealthErrorsValue["errorMessage"];
+                                        if (errorMessageValue != null && errorMessageValue.Type != JTokenType.Null)
+                                        {
+                                            string errorMessageInstance = ((string)errorMessageValue);
+                                            healthErrorInstance.ErrorMessage = errorMessageInstance;
+                                        }
+                                        
+                                        JToken possibleCausesValue = replicationHealthErrorsValue["possibleCauses"];
+                                        if (possibleCausesValue != null && possibleCausesValue.Type != JTokenType.Null)
+                                        {
+                                            string possibleCausesInstance = ((string)possibleCausesValue);
+                                            healthErrorInstance.PossibleCauses = possibleCausesInstance;
+                                        }
+                                        
+                                        JToken recommendedActionValue = replicationHealthErrorsValue["recommendedAction"];
+                                        if (recommendedActionValue != null && recommendedActionValue.Type != JTokenType.Null)
+                                        {
+                                            string recommendedActionInstance = ((string)recommendedActionValue);
+                                            healthErrorInstance.RecommendedAction = recommendedActionInstance;
+                                        }
+                                        
+                                        JToken creationTimeUtcValue = replicationHealthErrorsValue["creationTimeUtc"];
+                                        if (creationTimeUtcValue != null && creationTimeUtcValue.Type != JTokenType.Null)
+                                        {
+                                            string creationTimeUtcInstance = ((string)creationTimeUtcValue);
+                                            healthErrorInstance.CreationTimeUtc = creationTimeUtcInstance;
+                                        }
+                                        
+                                        JToken recoveryProviderErrorMessageValue = replicationHealthErrorsValue["recoveryProviderErrorMessage"];
+                                        if (recoveryProviderErrorMessageValue != null && recoveryProviderErrorMessageValue.Type != JTokenType.Null)
+                                        {
+                                            string recoveryProviderErrorMessageInstance = ((string)recoveryProviderErrorMessageValue);
+                                            healthErrorInstance.RecoveryProviderErrorMessage = recoveryProviderErrorMessageInstance;
+                                        }
+                                        
+                                        JToken entityIdValue = replicationHealthErrorsValue["entityId"];
+                                        if (entityIdValue != null && entityIdValue.Type != JTokenType.Null)
+                                        {
+                                            string entityIdInstance = ((string)entityIdValue);
+                                            healthErrorInstance.EntityId = entityIdInstance;
+                                        }
+                                    }
                                 }
                                 
                                 JToken replicationProviderValue = propertiesValue["replicationProvider"];
@@ -6066,11 +6479,70 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             propertiesInstance.ReplicationHealth = replicationHealthInstance;
                                         }
                                         
-                                        JToken replicationHealthErrorsValue = propertiesValue["replicationHealthErrors"];
-                                        if (replicationHealthErrorsValue != null && replicationHealthErrorsValue.Type != JTokenType.Null)
+                                        JToken replicationHealthErrorsArray = propertiesValue["replicationHealthErrors"];
+                                        if (replicationHealthErrorsArray != null && replicationHealthErrorsArray.Type != JTokenType.Null)
                                         {
-                                            List<HealthError> replicationHealthErrorsInstance = ((string)replicationHealthErrorsValue);
-                                            propertiesInstance.ReplicationHealthErrors = replicationHealthErrorsInstance;
+                                            foreach (JToken replicationHealthErrorsValue in ((JArray)replicationHealthErrorsArray))
+                                            {
+                                                HealthError healthErrorInstance = new HealthError();
+                                                propertiesInstance.ReplicationHealthErrors.Add(healthErrorInstance);
+                                                
+                                                JToken errorLevelValue = replicationHealthErrorsValue["errorLevel"];
+                                                if (errorLevelValue != null && errorLevelValue.Type != JTokenType.Null)
+                                                {
+                                                    string errorLevelInstance = ((string)errorLevelValue);
+                                                    healthErrorInstance.ErrorLevel = errorLevelInstance;
+                                                }
+                                                
+                                                JToken errorCodeValue = replicationHealthErrorsValue["errorCode"];
+                                                if (errorCodeValue != null && errorCodeValue.Type != JTokenType.Null)
+                                                {
+                                                    string errorCodeInstance = ((string)errorCodeValue);
+                                                    healthErrorInstance.ErrorCode = errorCodeInstance;
+                                                }
+                                                
+                                                JToken errorMessageValue = replicationHealthErrorsValue["errorMessage"];
+                                                if (errorMessageValue != null && errorMessageValue.Type != JTokenType.Null)
+                                                {
+                                                    string errorMessageInstance = ((string)errorMessageValue);
+                                                    healthErrorInstance.ErrorMessage = errorMessageInstance;
+                                                }
+                                                
+                                                JToken possibleCausesValue = replicationHealthErrorsValue["possibleCauses"];
+                                                if (possibleCausesValue != null && possibleCausesValue.Type != JTokenType.Null)
+                                                {
+                                                    string possibleCausesInstance = ((string)possibleCausesValue);
+                                                    healthErrorInstance.PossibleCauses = possibleCausesInstance;
+                                                }
+                                                
+                                                JToken recommendedActionValue = replicationHealthErrorsValue["recommendedAction"];
+                                                if (recommendedActionValue != null && recommendedActionValue.Type != JTokenType.Null)
+                                                {
+                                                    string recommendedActionInstance = ((string)recommendedActionValue);
+                                                    healthErrorInstance.RecommendedAction = recommendedActionInstance;
+                                                }
+                                                
+                                                JToken creationTimeUtcValue = replicationHealthErrorsValue["creationTimeUtc"];
+                                                if (creationTimeUtcValue != null && creationTimeUtcValue.Type != JTokenType.Null)
+                                                {
+                                                    string creationTimeUtcInstance = ((string)creationTimeUtcValue);
+                                                    healthErrorInstance.CreationTimeUtc = creationTimeUtcInstance;
+                                                }
+                                                
+                                                JToken recoveryProviderErrorMessageValue = replicationHealthErrorsValue["recoveryProviderErrorMessage"];
+                                                if (recoveryProviderErrorMessageValue != null && recoveryProviderErrorMessageValue.Type != JTokenType.Null)
+                                                {
+                                                    string recoveryProviderErrorMessageInstance = ((string)recoveryProviderErrorMessageValue);
+                                                    healthErrorInstance.RecoveryProviderErrorMessage = recoveryProviderErrorMessageInstance;
+                                                }
+                                                
+                                                JToken entityIdValue = replicationHealthErrorsValue["entityId"];
+                                                if (entityIdValue != null && entityIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string entityIdInstance = ((string)entityIdValue);
+                                                    healthErrorInstance.EntityId = entityIdInstance;
+                                                }
+                                            }
                                         }
                                         
                                         JToken replicationProviderValue = propertiesValue["replicationProvider"];
