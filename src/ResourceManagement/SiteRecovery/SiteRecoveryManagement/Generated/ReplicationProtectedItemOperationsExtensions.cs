@@ -101,6 +101,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <param name='protectionContainerName'>
         /// Required. Protection container name.
         /// </param>
+        /// <param name='replicationProtectedItemName'>
+        /// Required. Replication protected item unique name.
+        /// </param>
         /// <param name='input'>
         /// Required. Disable protection input.
         /// </param>
@@ -110,11 +113,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public static LongRunningOperationResponse BeginDisableProtection(this IReplicationProtectedItemOperations operations, string fabricName, string protectionContainerName, DisableProtectionInput input, CustomRequestHeaders customRequestHeaders)
+        public static LongRunningOperationResponse BeginDisableProtection(this IReplicationProtectedItemOperations operations, string fabricName, string protectionContainerName, string replicationProtectedItemName, DisableProtectionInput input, CustomRequestHeaders customRequestHeaders)
         {
             return Task.Factory.StartNew((object s) => 
             {
-                return ((IReplicationProtectedItemOperations)s).BeginDisableProtectionAsync(fabricName, protectionContainerName, input, customRequestHeaders);
+                return ((IReplicationProtectedItemOperations)s).BeginDisableProtectionAsync(fabricName, protectionContainerName, replicationProtectedItemName, input, customRequestHeaders);
             }
             , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
         }
@@ -132,6 +135,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <param name='protectionContainerName'>
         /// Required. Protection container name.
         /// </param>
+        /// <param name='replicationProtectedItemName'>
+        /// Required. Replication protected item unique name.
+        /// </param>
         /// <param name='input'>
         /// Required. Disable protection input.
         /// </param>
@@ -141,9 +147,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public static Task<LongRunningOperationResponse> BeginDisableProtectionAsync(this IReplicationProtectedItemOperations operations, string fabricName, string protectionContainerName, DisableProtectionInput input, CustomRequestHeaders customRequestHeaders)
+        public static Task<LongRunningOperationResponse> BeginDisableProtectionAsync(this IReplicationProtectedItemOperations operations, string fabricName, string protectionContainerName, string replicationProtectedItemName, DisableProtectionInput input, CustomRequestHeaders customRequestHeaders)
         {
-            return operations.BeginDisableProtectionAsync(fabricName, protectionContainerName, input, customRequestHeaders, CancellationToken.None);
+            return operations.BeginDisableProtectionAsync(fabricName, protectionContainerName, replicationProtectedItemName, input, customRequestHeaders, CancellationToken.None);
         }
         
         /// <summary>
@@ -159,6 +165,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <param name='protectionContainerName'>
         /// Required. Protection container name.
         /// </param>
+        /// <param name='replicationProtectedItemName'>
+        /// Required. Replication protected item unique name.
+        /// </param>
         /// <param name='input'>
         /// Required. Enable protection input.
         /// </param>
@@ -168,11 +177,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public static LongRunningOperationResponse BeginEnableProtection(this IReplicationProtectedItemOperations operations, string fabricName, string protectionContainerName, EnableProtectionInput input, CustomRequestHeaders customRequestHeaders)
+        public static LongRunningOperationResponse BeginEnableProtection(this IReplicationProtectedItemOperations operations, string fabricName, string protectionContainerName, string replicationProtectedItemName, EnableProtectionInput input, CustomRequestHeaders customRequestHeaders)
         {
             return Task.Factory.StartNew((object s) => 
             {
-                return ((IReplicationProtectedItemOperations)s).BeginEnableProtectionAsync(fabricName, protectionContainerName, input, customRequestHeaders);
+                return ((IReplicationProtectedItemOperations)s).BeginEnableProtectionAsync(fabricName, protectionContainerName, replicationProtectedItemName, input, customRequestHeaders);
             }
             , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
         }
@@ -190,6 +199,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <param name='protectionContainerName'>
         /// Required. Protection container name.
         /// </param>
+        /// <param name='replicationProtectedItemName'>
+        /// Required. Replication protected item unique name.
+        /// </param>
         /// <param name='input'>
         /// Required. Enable protection input.
         /// </param>
@@ -199,9 +211,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public static Task<LongRunningOperationResponse> BeginEnableProtectionAsync(this IReplicationProtectedItemOperations operations, string fabricName, string protectionContainerName, EnableProtectionInput input, CustomRequestHeaders customRequestHeaders)
+        public static Task<LongRunningOperationResponse> BeginEnableProtectionAsync(this IReplicationProtectedItemOperations operations, string fabricName, string protectionContainerName, string replicationProtectedItemName, EnableProtectionInput input, CustomRequestHeaders customRequestHeaders)
         {
-            return operations.BeginEnableProtectionAsync(fabricName, protectionContainerName, input, customRequestHeaders, CancellationToken.None);
+            return operations.BeginEnableProtectionAsync(fabricName, protectionContainerName, replicationProtectedItemName, input, customRequestHeaders, CancellationToken.None);
         }
         
         /// <summary>
@@ -531,6 +543,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <param name='protectionContainerName'>
         /// Required. Protection container name.
         /// </param>
+        /// <param name='replicationProtectedItemName'>
+        /// Required. Replication protected item unique name.
+        /// </param>
         /// <param name='input'>
         /// Required. Disable protection input.
         /// </param>
@@ -540,11 +555,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public static LongRunningOperationResponse DisableProtection(this IReplicationProtectedItemOperations operations, string fabricName, string protectionContainerName, DisableProtectionInput input, CustomRequestHeaders customRequestHeaders)
+        public static LongRunningOperationResponse DisableProtection(this IReplicationProtectedItemOperations operations, string fabricName, string protectionContainerName, string replicationProtectedItemName, DisableProtectionInput input, CustomRequestHeaders customRequestHeaders)
         {
             return Task.Factory.StartNew((object s) => 
             {
-                return ((IReplicationProtectedItemOperations)s).DisableProtectionAsync(fabricName, protectionContainerName, input, customRequestHeaders);
+                return ((IReplicationProtectedItemOperations)s).DisableProtectionAsync(fabricName, protectionContainerName, replicationProtectedItemName, input, customRequestHeaders);
             }
             , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
         }
@@ -562,6 +577,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <param name='protectionContainerName'>
         /// Required. Protection container name.
         /// </param>
+        /// <param name='replicationProtectedItemName'>
+        /// Required. Replication protected item unique name.
+        /// </param>
         /// <param name='input'>
         /// Required. Disable protection input.
         /// </param>
@@ -571,9 +589,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public static Task<LongRunningOperationResponse> DisableProtectionAsync(this IReplicationProtectedItemOperations operations, string fabricName, string protectionContainerName, DisableProtectionInput input, CustomRequestHeaders customRequestHeaders)
+        public static Task<LongRunningOperationResponse> DisableProtectionAsync(this IReplicationProtectedItemOperations operations, string fabricName, string protectionContainerName, string replicationProtectedItemName, DisableProtectionInput input, CustomRequestHeaders customRequestHeaders)
         {
-            return operations.DisableProtectionAsync(fabricName, protectionContainerName, input, customRequestHeaders, CancellationToken.None);
+            return operations.DisableProtectionAsync(fabricName, protectionContainerName, replicationProtectedItemName, input, customRequestHeaders, CancellationToken.None);
         }
         
         /// <summary>
@@ -589,6 +607,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <param name='protectionContainerName'>
         /// Required. Protection container name.
         /// </param>
+        /// <param name='replicationProtectedItemName'>
+        /// Required. Replication protected item unique name.
+        /// </param>
         /// <param name='input'>
         /// Required. Enable protection input.
         /// </param>
@@ -598,11 +619,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public static LongRunningOperationResponse EnableProtection(this IReplicationProtectedItemOperations operations, string fabricName, string protectionContainerName, EnableProtectionInput input, CustomRequestHeaders customRequestHeaders)
+        public static LongRunningOperationResponse EnableProtection(this IReplicationProtectedItemOperations operations, string fabricName, string protectionContainerName, string replicationProtectedItemName, EnableProtectionInput input, CustomRequestHeaders customRequestHeaders)
         {
             return Task.Factory.StartNew((object s) => 
             {
-                return ((IReplicationProtectedItemOperations)s).EnableProtectionAsync(fabricName, protectionContainerName, input, customRequestHeaders);
+                return ((IReplicationProtectedItemOperations)s).EnableProtectionAsync(fabricName, protectionContainerName, replicationProtectedItemName, input, customRequestHeaders);
             }
             , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
         }
@@ -620,6 +641,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <param name='protectionContainerName'>
         /// Required. Protection container name.
         /// </param>
+        /// <param name='replicationProtectedItemName'>
+        /// Required. Replication protected item unique name.
+        /// </param>
         /// <param name='input'>
         /// Required. Enable protection input.
         /// </param>
@@ -629,9 +653,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public static Task<LongRunningOperationResponse> EnableProtectionAsync(this IReplicationProtectedItemOperations operations, string fabricName, string protectionContainerName, EnableProtectionInput input, CustomRequestHeaders customRequestHeaders)
+        public static Task<LongRunningOperationResponse> EnableProtectionAsync(this IReplicationProtectedItemOperations operations, string fabricName, string protectionContainerName, string replicationProtectedItemName, EnableProtectionInput input, CustomRequestHeaders customRequestHeaders)
         {
-            return operations.EnableProtectionAsync(fabricName, protectionContainerName, input, customRequestHeaders, CancellationToken.None);
+            return operations.EnableProtectionAsync(fabricName, protectionContainerName, replicationProtectedItemName, input, customRequestHeaders, CancellationToken.None);
         }
         
         /// <summary>

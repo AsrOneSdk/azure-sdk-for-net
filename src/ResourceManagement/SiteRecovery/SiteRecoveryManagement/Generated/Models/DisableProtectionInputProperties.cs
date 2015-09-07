@@ -41,17 +41,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._providerSettings = value; }
         }
         
-        private string _replicationProtectedItemName;
-        
-        /// <summary>
-        /// Optional. Replication protected item unique name.
-        /// </summary>
-        public string ReplicationProtectedItemName
-        {
-            get { return this._replicationProtectedItemName; }
-            set { this._replicationProtectedItemName = value; }
-        }
-        
         /// <summary>
         /// Initializes a new instance of the DisableProtectionInputProperties
         /// class.

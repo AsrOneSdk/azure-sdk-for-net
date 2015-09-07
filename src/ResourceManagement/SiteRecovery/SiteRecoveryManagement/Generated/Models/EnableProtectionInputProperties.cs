@@ -31,17 +31,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class EnableProtectionInputProperties
     {
-        private string _name;
-        
-        /// <summary>
-        /// Optional. Unique name of the replication protectable item.
-        /// </summary>
-        public string Name
-        {
-            get { return this._name; }
-            set { this._name = value; }
-        }
-        
         private string _policyId;
         
         /// <summary>
@@ -53,26 +42,15 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._policyId = value; }
         }
         
-        private string _protectableItemId;
-        
-        /// <summary>
-        /// Optional. Protectable item ID.
-        /// </summary>
-        public string ProtectableItemId
-        {
-            get { return this._protectableItemId; }
-            set { this._protectableItemId = value; }
-        }
-        
-        private EnableProtectionProviderSpecificInput _providerSettings;
+        private EnableProtectionProviderSpecificInput _providerConfigurationSettings;
         
         /// <summary>
         /// Optional. Gets or sets the ProviderSettings.
         /// </summary>
-        public EnableProtectionProviderSpecificInput ProviderSettings
+        public EnableProtectionProviderSpecificInput ProviderConfigurationSettings
         {
-            get { return this._providerSettings; }
-            set { this._providerSettings = value; }
+            get { return this._providerConfigurationSettings; }
+            set { this._providerConfigurationSettings = value; }
         }
         
         /// <summary>

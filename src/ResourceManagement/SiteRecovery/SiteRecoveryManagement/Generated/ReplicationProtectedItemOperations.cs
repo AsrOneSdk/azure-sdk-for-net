@@ -255,6 +255,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <param name='protectionContainerName'>
         /// Required. Protection container name.
         /// </param>
+        /// <param name='replicationProtectedItemName'>
+        /// Required. Replication protected item unique name.
+        /// </param>
         /// <param name='input'>
         /// Required. Disable protection input.
         /// </param>
@@ -267,7 +270,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public async Task<LongRunningOperationResponse> BeginDisableProtectionAsync(string fabricName, string protectionContainerName, DisableProtectionInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        public async Task<LongRunningOperationResponse> BeginDisableProtectionAsync(string fabricName, string protectionContainerName, string replicationProtectedItemName, DisableProtectionInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
         {
             // Validate
             if (fabricName == null)
@@ -277,6 +280,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
             if (protectionContainerName == null)
             {
                 throw new ArgumentNullException("protectionContainerName");
+            }
+            if (replicationProtectedItemName == null)
+            {
+                throw new ArgumentNullException("replicationProtectedItemName");
             }
             if (input == null)
             {
@@ -292,6 +299,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("fabricName", fabricName);
                 tracingParameters.Add("protectionContainerName", protectionContainerName);
+                tracingParameters.Add("replicationProtectedItemName", replicationProtectedItemName);
                 tracingParameters.Add("input", input);
                 tracingParameters.Add("customRequestHeaders", customRequestHeaders);
                 TracingAdapter.Enter(invocationId, this, "BeginDisableProtectionAsync", tracingParameters);
@@ -317,10 +325,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/ProtectionContainers/";
             url = url + Uri.EscapeDataString(protectionContainerName);
             url = url + "/ReplicationProtectedItems/";
-            if (input.Properties != null && input.Properties.ReplicationProtectedItemName != null)
-            {
-                url = url + Uri.EscapeDataString(input.Properties.ReplicationProtectedItemName);
-            }
+            url = url + Uri.EscapeDataString(replicationProtectedItemName);
             List<string> queryParameters = new List<string>();
             queryParameters.Add("api-version=2015-11-10");
             if (queryParameters.Count > 0)
@@ -368,8 +373,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 {
                     JObject propertiesValue = new JObject();
                     disableProtectionInputValue["properties"] = propertiesValue;
-                    
-                    propertiesValue["replicationProtectedItemName"] = propertiesValue;
                     
                     JObject replicationProviderInputValue = new JObject();
                     propertiesValue["replicationProviderInput"] = replicationProviderInputValue;
@@ -459,6 +462,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <param name='protectionContainerName'>
         /// Required. Protection container name.
         /// </param>
+        /// <param name='replicationProtectedItemName'>
+        /// Required. Replication protected item unique name.
+        /// </param>
         /// <param name='input'>
         /// Required. Enable protection input.
         /// </param>
@@ -471,7 +477,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public async Task<LongRunningOperationResponse> BeginEnableProtectionAsync(string fabricName, string protectionContainerName, EnableProtectionInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        public async Task<LongRunningOperationResponse> BeginEnableProtectionAsync(string fabricName, string protectionContainerName, string replicationProtectedItemName, EnableProtectionInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
         {
             // Validate
             if (fabricName == null)
@@ -481,6 +487,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
             if (protectionContainerName == null)
             {
                 throw new ArgumentNullException("protectionContainerName");
+            }
+            if (replicationProtectedItemName == null)
+            {
+                throw new ArgumentNullException("replicationProtectedItemName");
             }
             if (input == null)
             {
@@ -496,6 +506,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("fabricName", fabricName);
                 tracingParameters.Add("protectionContainerName", protectionContainerName);
+                tracingParameters.Add("replicationProtectedItemName", replicationProtectedItemName);
                 tracingParameters.Add("input", input);
                 tracingParameters.Add("customRequestHeaders", customRequestHeaders);
                 TracingAdapter.Enter(invocationId, this, "BeginEnableProtectionAsync", tracingParameters);
@@ -521,10 +532,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/ProtectionContainers/";
             url = url + Uri.EscapeDataString(protectionContainerName);
             url = url + "/ReplicationProtectedItems/";
-            if (input.Properties != null && input.Properties.Name != null)
-            {
-                url = url + Uri.EscapeDataString(input.Properties.Name);
-            }
+            url = url + Uri.EscapeDataString(replicationProtectedItemName);
             List<string> queryParameters = new List<string>();
             queryParameters.Add("api-version=2015-11-10");
             if (queryParameters.Count > 0)
@@ -573,48 +581,38 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     JObject propertiesValue = new JObject();
                     enableProtectionInputValue["properties"] = propertiesValue;
                     
-                    if (input.Properties.Name != null)
-                    {
-                        propertiesValue["name"] = input.Properties.Name;
-                    }
-                    
                     if (input.Properties.PolicyId != null)
                     {
                         propertiesValue["policyId"] = input.Properties.PolicyId;
                     }
                     
-                    if (input.Properties.ProtectableItemId != null)
+                    if (input.Properties.ProviderConfigurationSettings != null)
                     {
-                        propertiesValue["protectableItemId"] = input.Properties.ProtectableItemId;
-                    }
-                    
-                    if (input.Properties.ProviderSettings != null)
-                    {
-                        JObject replicationProviderInputValue = new JObject();
-                        propertiesValue["replicationProviderInput"] = replicationProviderInputValue;
-                        if (input.Properties.ProviderSettings is AzureEnableProtectionInput)
+                        JObject providerConfigurationSettingsValue = new JObject();
+                        propertiesValue["providerConfigurationSettings"] = providerConfigurationSettingsValue;
+                        if (input.Properties.ProviderConfigurationSettings is AzureEnableProtectionInput)
                         {
-                            replicationProviderInputValue["__type"] = "AzureEnableProtectionInput";
-                            AzureEnableProtectionInput derived = ((AzureEnableProtectionInput)input.Properties.ProviderSettings);
+                            providerConfigurationSettingsValue["__type"] = "AzureEnableProtectionInput";
+                            AzureEnableProtectionInput derived = ((AzureEnableProtectionInput)input.Properties.ProviderConfigurationSettings);
                             
                             if (derived.HvHostVmId != null)
                             {
-                                replicationProviderInputValue["hvHostVmId"] = derived.HvHostVmId;
+                                providerConfigurationSettingsValue["hvHostVmId"] = derived.HvHostVmId;
                             }
                             
                             if (derived.VmName != null)
                             {
-                                replicationProviderInputValue["vmName"] = derived.VmName;
+                                providerConfigurationSettingsValue["vmName"] = derived.VmName;
                             }
                             
                             if (derived.OSType != null)
                             {
-                                replicationProviderInputValue["osType"] = derived.OSType;
+                                providerConfigurationSettingsValue["osType"] = derived.OSType;
                             }
                             
                             if (derived.VHDId != null)
                             {
-                                replicationProviderInputValue["vHDId"] = derived.VHDId;
+                                providerConfigurationSettingsValue["vHDId"] = derived.VHDId;
                             }
                         }
                     }
@@ -1782,6 +1780,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <param name='protectionContainerName'>
         /// Required. Protection container name.
         /// </param>
+        /// <param name='replicationProtectedItemName'>
+        /// Required. Replication protected item unique name.
+        /// </param>
         /// <param name='input'>
         /// Required. Disable protection input.
         /// </param>
@@ -1794,7 +1795,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public async Task<LongRunningOperationResponse> DisableProtectionAsync(string fabricName, string protectionContainerName, DisableProtectionInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        public async Task<LongRunningOperationResponse> DisableProtectionAsync(string fabricName, string protectionContainerName, string replicationProtectedItemName, DisableProtectionInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
         {
             SiteRecoveryManagementClient client = this.Client;
             bool shouldTrace = TracingAdapter.IsEnabled;
@@ -1805,13 +1806,14 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("fabricName", fabricName);
                 tracingParameters.Add("protectionContainerName", protectionContainerName);
+                tracingParameters.Add("replicationProtectedItemName", replicationProtectedItemName);
                 tracingParameters.Add("input", input);
                 tracingParameters.Add("customRequestHeaders", customRequestHeaders);
                 TracingAdapter.Enter(invocationId, this, "DisableProtectionAsync", tracingParameters);
             }
             
             cancellationToken.ThrowIfCancellationRequested();
-            LongRunningOperationResponse response = await client.ReplicationProtectedItem.BeginDisableProtectionAsync(fabricName, protectionContainerName, input, customRequestHeaders, cancellationToken).ConfigureAwait(false);
+            LongRunningOperationResponse response = await client.ReplicationProtectedItem.BeginDisableProtectionAsync(fabricName, protectionContainerName, replicationProtectedItemName, input, customRequestHeaders, cancellationToken).ConfigureAwait(false);
             if (response.Status == OperationStatus.Succeeded)
             {
                 return response;
@@ -1853,6 +1855,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <param name='protectionContainerName'>
         /// Required. Protection container name.
         /// </param>
+        /// <param name='replicationProtectedItemName'>
+        /// Required. Replication protected item unique name.
+        /// </param>
         /// <param name='input'>
         /// Required. Enable protection input.
         /// </param>
@@ -1865,7 +1870,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public async Task<LongRunningOperationResponse> EnableProtectionAsync(string fabricName, string protectionContainerName, EnableProtectionInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        public async Task<LongRunningOperationResponse> EnableProtectionAsync(string fabricName, string protectionContainerName, string replicationProtectedItemName, EnableProtectionInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
         {
             SiteRecoveryManagementClient client = this.Client;
             bool shouldTrace = TracingAdapter.IsEnabled;
@@ -1876,13 +1881,14 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("fabricName", fabricName);
                 tracingParameters.Add("protectionContainerName", protectionContainerName);
+                tracingParameters.Add("replicationProtectedItemName", replicationProtectedItemName);
                 tracingParameters.Add("input", input);
                 tracingParameters.Add("customRequestHeaders", customRequestHeaders);
                 TracingAdapter.Enter(invocationId, this, "EnableProtectionAsync", tracingParameters);
             }
             
             cancellationToken.ThrowIfCancellationRequested();
-            LongRunningOperationResponse response = await client.ReplicationProtectedItem.BeginEnableProtectionAsync(fabricName, protectionContainerName, input, customRequestHeaders, cancellationToken).ConfigureAwait(false);
+            LongRunningOperationResponse response = await client.ReplicationProtectedItem.BeginEnableProtectionAsync(fabricName, protectionContainerName, replicationProtectedItemName, input, customRequestHeaders, cancellationToken).ConfigureAwait(false);
             if (response.Status == OperationStatus.Succeeded)
             {
                 return response;

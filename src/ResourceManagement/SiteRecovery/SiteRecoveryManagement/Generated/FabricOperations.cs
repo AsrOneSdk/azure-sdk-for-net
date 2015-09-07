@@ -173,11 +173,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     JObject propertiesValue = new JObject();
                     fabricCreationInputValue["properties"] = propertiesValue;
                     
-                    if (input.Properties.FriendlyName != null)
-                    {
-                        propertiesValue["friendlyName"] = input.Properties.FriendlyName;
-                    }
-                    
                     if (input.Properties.FabricType != null)
                     {
                         propertiesValue["fabricType"] = input.Properties.FabricType;

@@ -174,11 +174,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     JObject propertiesValue = new JObject();
                     createPolicyInputValue["properties"] = propertiesValue;
                     
-                    if (input.Properties.FriendlyName != null)
-                    {
-                        propertiesValue["friendlyName"] = input.Properties.FriendlyName;
-                    }
-                    
                     if (input.Properties.ReplicationProvider != null)
                     {
                         propertiesValue["replicationProvider"] = input.Properties.ReplicationProvider;

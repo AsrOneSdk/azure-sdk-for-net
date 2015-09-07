@@ -30,17 +30,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class CreatePolicyInputProperties
     {
-        private string _friendlyName;
-        
-        /// <summary>
-        /// Optional. Friendly Name.
-        /// </summary>
-        public string FriendlyName
-        {
-            get { return this._friendlyName; }
-            set { this._friendlyName = value; }
-        }
-        
         private string _replicationProvider;
         
         /// <summary>
