@@ -123,7 +123,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationFabrics/";
             url = url + Uri.EscapeDataString(fabricName);
-            url = url + "/RecoveryServicesProviders/";
+            url = url + "/replicationRecoveryServicesProviders/";
             url = url + Uri.EscapeDataString(providerName);
             List<string> queryParameters = new List<string>();
             queryParameters.Add("api-version=2015-11-10");
@@ -293,7 +293,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationFabrics/";
             url = url + Uri.EscapeDataString(fabricName);
-            url = url + "/RecoveryServicesProviders/";
+            url = url + "/replicationRecoveryServicesProviders/";
             url = url + Uri.EscapeDataString(providerName);
             url = url + "/RefreshProvider";
             List<string> queryParameters = new List<string>();
@@ -531,7 +531,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationFabrics/";
             url = url + Uri.EscapeDataString(fabricName);
-            url = url + "/RecoveryServicesProviders/";
+            url = url + "/replicationRecoveryServicesProviders/";
             url = url + Uri.EscapeDataString(providerName);
             List<string> queryParameters = new List<string>();
             queryParameters.Add("api-version=2015-11-10");
@@ -1187,7 +1187,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationFabrics/";
             url = url + Uri.EscapeDataString(fabricName);
-            url = url + "/RecoveryServicesProviders";
+            url = url + "/replicationRecoveryServicesProviders";
             List<string> queryParameters = new List<string>();
             queryParameters.Add("api-version=2015-11-10");
             if (queryParameters.Count > 0)

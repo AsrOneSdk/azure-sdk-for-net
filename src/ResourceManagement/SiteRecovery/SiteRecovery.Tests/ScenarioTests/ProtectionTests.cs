@@ -27,60 +27,54 @@ namespace SiteRecovery.Tests
         [Fact]
         public void EnableDR()
         {
-            //using (UndoContext context = UndoContext.Current)
-            //{
-            //    context.Start();
-            //    var client = GetSiteRecoveryClient(CustomHttpHandler);
+            using (UndoContext context = UndoContext.Current)
+            {
+                context.Start();
+                var client = GetSiteRecoveryClient(CustomHttpHandler);
 
-            //    string fabricId = "6adf9420-b02f-4377-8ab7-ff384e6d792f";
-            //    string containerId = "4f94127d-2eb3-449d-a708-250752e93cb4";
-            //    //string peId = "4d63fad7-eb47-4f47-8f2b-c789ec853a58";
-            //    string peId = "052ca37a-cdca-441f-82ba-55d22de2409e";
+                string fabricId = "6adf9420-b02f-4377-8ab7-ff384e6d792f";
+                string containerId = "4f94127d-2eb3-449d-a708-250752e93cb4";
+                //string peId = "4d63fad7-eb47-4f47-8f2b-c789ec853a58";
+                string peId = "052ca37a-cdca-441f-82ba-55d22de2409e";
 
-            //    var container = client.ProtectionContainer.Get(fabricId, containerId, RequestHeaders);
+                var container = client.ProtectionContainer.Get(fabricId, containerId, RequestHeaders);
 
-            //    EnableProtectionInputProperties enableDRInputProperties = new EnableProtectionInputProperties()
-            //    {
-            //        PolicyId = container.ProtectionContainer.Properties.AssociationDetails[0].PairedPolicyDetails[0].PolicyArmId,
-            //        ProviderSettings = new EnableProtectionProviderSpecificInput(),
-            //        ProtectableItemId = peId,
-            //        Name = peId
-            //    };
+                EnableProtectionInputProperties enableDRInputProperties = new EnableProtectionInputProperties()
+                {
+                    PolicyId = container.ProtectionContainer.Properties.ProtectionConfigurationSettings[0].PolicyId,
+                    ProviderConfigurationSettings = new EnableProtectionProviderSpecificInput(),
+                    ProtectableItemId = peId,
+                    
+                };
 
-            //    EnableProtectionInput enableDRInput = new EnableProtectionInput()
-            //    {
-            //        Properties = enableDRInputProperties
-            //    };
+                EnableProtectionInput enableDRInput = new EnableProtectionInput()
+                {
+                    Properties = enableDRInputProperties
+                };
 
-            //    var response = client.ReplicationProtectedItem.EnableProtection(fabricId, containerId, enableDRInput, RequestHeaders);
-            //}
+                var response = client.ReplicationProtectedItem.EnableProtection(fabricId, containerId, peId, enableDRInput, RequestHeaders);
+            }
         }
 
         [Fact]
         public void DisableDR()
         {
-            //using (UndoContext context = UndoContext.Current)
-            //{
-            //    context.Start();
-            //    var client = GetSiteRecoveryClient(CustomHttpHandler);
+            using (UndoContext context = UndoContext.Current)
+            {
+                context.Start();
+                var client = GetSiteRecoveryClient(CustomHttpHandler);
 
-            //    string fabricId = "6adf9420-b02f-4377-8ab7-ff384e6d792f";
-            //    string containerId = "4f94127d-2eb3-449d-a708-250752e93cb4";
-            //    string peId = "052ca37a-cdca-441f-82ba-55d22de2409e";
+                string fabricId = "6adf9420-b02f-4377-8ab7-ff384e6d792f";
+                string containerId = "4f94127d-2eb3-449d-a708-250752e93cb4";
+                string peId = "052ca37a-cdca-441f-82ba-55d22de2409e";
 
-            //    DisableProtectionInputProperties disableDRInputProperties = new DisableProtectionInputProperties()
-            //    {
-            //        ReplicationProtectedItemName = peId,
-            //        ProviderSettings = null
-            //    };
+                DisableProtectionInput disableDrInput = new DisableProtectionInput()
+                {
+                    Properties = new DisableProtectionInputProperties()
+                };
 
-            //    DisableProtectionInput disableDrInput = new DisableProtectionInput()
-            //    {
-            //        Properties = disableDRInputProperties
-            //    };
-
-            //    var response = client.ReplicationProtectedItem.DisableProtection(fabricId, containerId, disableDrInput, RequestHeaders);
-            //}
+                var response = client.ReplicationProtectedItem.DisableProtection(fabricId, containerId, peId, disableDrInput, RequestHeaders);
+            }
         }
     }
 }

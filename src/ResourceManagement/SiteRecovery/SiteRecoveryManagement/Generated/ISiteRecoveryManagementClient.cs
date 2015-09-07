@@ -110,6 +110,15 @@ namespace Microsoft.Azure.Management.SiteRecovery
         }
         
         /// <summary>
+        /// Definition of Protectable Item operations for the Site Recovery
+        /// extension.
+        /// </summary>
+        IProtectableItemOperations ProtectableItem
+        {
+            get; 
+        }
+        
+        /// <summary>
         /// Definition of Protection Container operations for the Site Recovery
         /// extension.
         /// </summary>

@@ -135,7 +135,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationFabrics/";
             url = url + Uri.EscapeDataString(fabricName);
-            url = url + "/ProtectionContainers/";
+            url = url + "/replicationProtectionContainers/";
             url = url + Uri.EscapeDataString(protectionContainerName);
             url = url + "/configureProtection";
             List<string> queryParameters = new List<string>();
@@ -365,7 +365,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationFabrics/";
             url = url + Uri.EscapeDataString(fabricName);
-            url = url + "/ProtectionContainers/";
+            url = url + "/replicationProtectionContainers/";
             url = url + Uri.EscapeDataString(protectionContainerName);
             url = url + "/purgeProtectionConfiguration";
             List<string> queryParameters = new List<string>();
@@ -595,7 +595,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationFabrics/";
             url = url + Uri.EscapeDataString(fabricName);
-            url = url + "/ProtectionContainers/";
+            url = url + "/replicationProtectionContainers/";
             url = url + Uri.EscapeDataString(protectionContainerName);
             url = url + "/unconfigureProtection";
             List<string> queryParameters = new List<string>();
@@ -888,7 +888,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationFabrics/";
             url = url + Uri.EscapeDataString(fabricName);
-            url = url + "/protectionContainers/";
+            url = url + "/replicationProtectionContainers/";
             url = url + Uri.EscapeDataString(protectionContainerName);
             List<string> queryParameters = new List<string>();
             queryParameters.Add("api-version=2015-11-10");
@@ -2376,7 +2376,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationFabrics/";
             url = url + Uri.EscapeDataString(fabricName);
-            url = url + "/protectionContainers";
+            url = url + "/replicationProtectionContainers";
             List<string> queryParameters = new List<string>();
             queryParameters.Add("api-version=2015-11-10");
             if (queryParameters.Count > 0)

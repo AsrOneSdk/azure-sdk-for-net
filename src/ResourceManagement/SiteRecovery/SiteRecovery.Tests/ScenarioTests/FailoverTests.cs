@@ -122,9 +122,14 @@ namespace SiteRecovery.Tests
                         client,
                         RequestHeaders);
 
-                ResumeJobParams resumeJobParams = new ResumeJobParams()
+                ResumeJobParamsProperties resJobProp = new ResumeJobParamsProperties()
                 {
                     Comments = "ResumeTfo"
+                };
+
+                ResumeJobParams resumeJobParams = new ResumeJobParams()
+                {
+                    Properties = resJobProp
                 };
 
                 var resumeJob = client.Jobs.Resume(tfoJob.Name, resumeJobParams, RequestHeaders);

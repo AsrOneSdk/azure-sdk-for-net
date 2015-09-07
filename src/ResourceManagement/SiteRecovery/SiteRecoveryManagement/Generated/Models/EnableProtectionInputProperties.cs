@@ -42,6 +42,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._policyId = value; }
         }
         
+        private string _protectableItemId;
+        
+        /// <summary>
+        /// Optional. Protectable item ID.
+        /// </summary>
+        public string ProtectableItemId
+        {
+            get { return this._protectableItemId; }
+            set { this._protectableItemId = value; }
+        }
+        
         private EnableProtectionProviderSpecificInput _providerConfigurationSettings;
         
         /// <summary>

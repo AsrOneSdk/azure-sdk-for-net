@@ -134,7 +134,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationFabrics/";
             url = url + Uri.EscapeDataString(fabricName);
-            url = url + "/ProtectionContainers/";
+            url = url + "/replicationProtectionContainers/";
             url = url + Uri.EscapeDataString(protectionContainerName);
             url = url + "/ReplicationProtectedItems/";
             url = url + Uri.EscapeDataString(replicationProtectedItemName);
@@ -322,7 +322,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationFabrics/";
             url = url + Uri.EscapeDataString(fabricName);
-            url = url + "/ProtectionContainers/";
+            url = url + "/replicationProtectionContainers/";
             url = url + Uri.EscapeDataString(protectionContainerName);
             url = url + "/ReplicationProtectedItems/";
             url = url + Uri.EscapeDataString(replicationProtectedItemName);
@@ -529,7 +529,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationFabrics/";
             url = url + Uri.EscapeDataString(fabricName);
-            url = url + "/ProtectionContainers/";
+            url = url + "/replicationProtectionContainers/";
             url = url + Uri.EscapeDataString(protectionContainerName);
             url = url + "/ReplicationProtectedItems/";
             url = url + Uri.EscapeDataString(replicationProtectedItemName);
@@ -584,6 +584,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     if (input.Properties.PolicyId != null)
                     {
                         propertiesValue["policyId"] = input.Properties.PolicyId;
+                    }
+                    
+                    if (input.Properties.ProtectableItemId != null)
+                    {
+                        propertiesValue["protectableItemId"] = input.Properties.ProtectableItemId;
                     }
                     
                     if (input.Properties.ProviderConfigurationSettings != null)
@@ -769,7 +774,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationFabrics/";
             url = url + Uri.EscapeDataString(fabricName);
-            url = url + "/ProtectionContainers/";
+            url = url + "/replicationProtectionContainers/";
             url = url + Uri.EscapeDataString(protectionContainerName);
             url = url + "/ReplicationProtectedItems/";
             url = url + Uri.EscapeDataString(replicationProtectedItemName);
@@ -1016,7 +1021,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationFabrics/";
             url = url + Uri.EscapeDataString(fabricName);
-            url = url + "/ProtectionContainers/";
+            url = url + "/replicationProtectionContainers/";
             url = url + Uri.EscapeDataString(protectionContainerName);
             url = url + "/ReplicationProtectedItems/";
             url = url + Uri.EscapeDataString(replicationProtectedItemName);
@@ -1267,7 +1272,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationFabrics/";
             url = url + Uri.EscapeDataString(fabricName);
-            url = url + "/ProtectionContainers/";
+            url = url + "/replicationProtectionContainers/";
             url = url + Uri.EscapeDataString(protectionContainerName);
             url = url + "/ReplicationProtectedItems/";
             url = url + Uri.EscapeDataString(replicationProtectedItemName);
@@ -1524,7 +1529,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationFabrics/";
             url = url + Uri.EscapeDataString(fabricName);
-            url = url + "/ProtectionContainers/";
+            url = url + "/replicationProtectionContainers/";
             url = url + Uri.EscapeDataString(protectionContainerName);
             url = url + "/ReplicationProtectedItems/";
             url = url + Uri.EscapeDataString(replicationProtectedItemName);
@@ -1989,7 +1994,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationFabrics/";
             url = url + Uri.EscapeDataString(fabricName);
-            url = url + "/protectionContainers/";
+            url = url + "/replicationProtectionContainers/";
             url = url + Uri.EscapeDataString(protectionContainerName);
             url = url + "/replicationProtectedItems/";
             url = url + Uri.EscapeDataString(replicationProtectedItemName);
@@ -6312,7 +6317,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationFabrics/";
             url = url + Uri.EscapeDataString(fabricName);
-            url = url + "/protectionContainers/";
+            url = url + "/replicationProtectionContainers/";
             url = url + Uri.EscapeDataString(protectionContainerName);
             url = url + "/replicationProtectedItems";
             List<string> queryParameters = new List<string>();

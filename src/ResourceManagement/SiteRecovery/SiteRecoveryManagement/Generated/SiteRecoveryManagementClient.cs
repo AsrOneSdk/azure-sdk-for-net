@@ -138,6 +138,17 @@ namespace Microsoft.Azure.Management.SiteRecovery
             get { return this._policies; }
         }
         
+        private IProtectableItemOperations _protectableItem;
+        
+        /// <summary>
+        /// Definition of Protectable Item operations for the Site Recovery
+        /// extension.
+        /// </summary>
+        public virtual IProtectableItemOperations ProtectableItem
+        {
+            get { return this._protectableItem; }
+        }
+        
         private IProtectionContainerOperations _protectionContainer;
         
         /// <summary>
@@ -191,6 +202,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             this._fabrics = new FabricOperations(this);
             this._jobs = new JobOperations(this);
             this._policies = new PolicyOperations(this);
+            this._protectableItem = new ProtectableItemOperations(this);
             this._protectionContainer = new ProtectionContainerOperations(this);
             this._recoveryPlan = new RecoveryPlanOperations(this);
             this._recoveryServicesProvider = new RecoveryServicesProviderOperations(this);
@@ -314,6 +326,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             this._fabrics = new FabricOperations(this);
             this._jobs = new JobOperations(this);
             this._policies = new PolicyOperations(this);
+            this._protectableItem = new ProtectableItemOperations(this);
             this._protectionContainer = new ProtectionContainerOperations(this);
             this._recoveryPlan = new RecoveryPlanOperations(this);
             this._recoveryServicesProvider = new RecoveryServicesProviderOperations(this);
