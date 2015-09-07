@@ -55,6 +55,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._allowedOperations = value; }
         }
         
+        private string _currentScenario;
+        
+        /// <summary>
+        /// Optional. Gets or sets the current scenario.
+        /// </summary>
+        public string CurrentScenario
+        {
+            get { return this._currentScenario; }
+            set { this._currentScenario = value; }
+        }
+        
         private ReplicationProviderSpecificSettings _customSettings;
         
         /// <summary>
@@ -77,6 +88,28 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._friendlyName = value; }
         }
         
+        private string _lastSuccessfulFailoverTime;
+        
+        /// <summary>
+        /// Optional. Gets or sets the Last successful failover time.
+        /// </summary>
+        public string LastSuccessfulFailoverTime
+        {
+            get { return this._lastSuccessfulFailoverTime; }
+            set { this._lastSuccessfulFailoverTime = value; }
+        }
+        
+        private string _lastSuccessfulTestFailoverTime;
+        
+        /// <summary>
+        /// Optional. Gets or sets the Last successful test failover time.
+        /// </summary>
+        public string LastSuccessfulTestFailoverTime
+        {
+            get { return this._lastSuccessfulTestFailoverTime; }
+            set { this._lastSuccessfulTestFailoverTime = value; }
+        }
+        
         private string _policyFriendlyName;
         
         /// <summary>
@@ -97,6 +130,28 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         {
             get { return this._policyID; }
             set { this._policyID = value; }
+        }
+        
+        private string _protectedItemSourceId;
+        
+        /// <summary>
+        /// Optional. Gets or sets the protected item source Id.
+        /// </summary>
+        public string ProtectedItemSourceId
+        {
+            get { return this._protectedItemSourceId; }
+            set { this._protectedItemSourceId = value; }
+        }
+        
+        private string _protectedItemType;
+        
+        /// <summary>
+        /// Optional. Gets or sets the type of protected item type.
+        /// </summary>
+        public string ProtectedItemType
+        {
+            get { return this._protectedItemType; }
+            set { this._protectedItemType = value; }
         }
         
         private string _protectionStatus;
@@ -132,6 +187,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._replicationHealth = value; }
         }
         
+        private IList<HealthError> _replicationHealthErrors;
+        
+        /// <summary>
+        /// Optional. Gets or sets list of replication health errors.
+        /// </summary>
+        public IList<HealthError> ReplicationHealthErrors
+        {
+            get { return this._replicationHealthErrors; }
+            set { this._replicationHealthErrors = value; }
+        }
+        
         private string _replicationProvider;
         
         /// <summary>
@@ -162,6 +228,7 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         public ReplicationProtectedItemProperties()
         {
             this.AllowedOperations = new LazyList<AllowedOperations>();
+            this.ReplicationHealthErrors = new LazyList<HealthError>();
         }
     }
 }

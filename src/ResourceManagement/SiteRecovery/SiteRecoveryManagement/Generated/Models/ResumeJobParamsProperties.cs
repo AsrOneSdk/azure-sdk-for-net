@@ -21,30 +21,29 @@
 
 using System;
 using System.Linq;
-using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// The definition of a resume job request object.
+    /// The definition of a resume job properties object.
     /// </summary>
-    public partial class ResumeJobParams
+    public partial class ResumeJobParamsProperties
     {
-        private ResumeJobParamsProperties _properties;
+        private string _comments;
         
         /// <summary>
-        /// Optional. Resume job properties.
+        /// Optional. Comments for resume job.
         /// </summary>
-        public ResumeJobParamsProperties Properties
+        public string Comments
         {
-            get { return this._properties; }
-            set { this._properties = value; }
+            get { return this._comments; }
+            set { this._comments = value; }
         }
         
         /// <summary>
-        /// Initializes a new instance of the ResumeJobParams class.
+        /// Initializes a new instance of the ResumeJobParamsProperties class.
         /// </summary>
-        public ResumeJobParams()
+        public ResumeJobParamsProperties()
         {
         }
     }

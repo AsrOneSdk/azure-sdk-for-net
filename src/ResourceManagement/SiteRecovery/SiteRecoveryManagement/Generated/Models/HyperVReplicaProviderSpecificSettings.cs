@@ -32,17 +32,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class HyperVReplicaProviderSpecificSettings : ReplicationProviderSpecificSettings
     {
-        private string _fabricObjectId;
-        
-        /// <summary>
-        /// Optional. Gets or sets the id of the object in fabric.
-        /// </summary>
-        public string FabricObjectId
-        {
-            get { return this._fabricObjectId; }
-            set { this._fabricObjectId = value; }
-        }
-        
         private string _lastReplicatedTime;
         
         /// <summary>
@@ -52,28 +41,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         {
             get { return this._lastReplicatedTime; }
             set { this._lastReplicatedTime = value; }
-        }
-        
-        private string _lastSuccessfulFailoverTime;
-        
-        /// <summary>
-        /// Optional. Gets or sets the Last successful failover time.
-        /// </summary>
-        public string LastSuccessfulFailoverTime
-        {
-            get { return this._lastSuccessfulFailoverTime; }
-            set { this._lastSuccessfulFailoverTime = value; }
-        }
-        
-        private string _lastSuccessfulTestFailoverTime;
-        
-        /// <summary>
-        /// Optional. Gets or sets the Last successful test failover time.
-        /// </summary>
-        public string LastSuccessfulTestFailoverTime
-        {
-            get { return this._lastSuccessfulTestFailoverTime; }
-            set { this._lastSuccessfulTestFailoverTime = value; }
         }
         
         private IList<HyperVReplicaProviderNetworkDetails> _networkDetails;
@@ -87,6 +54,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._networkDetails = value; }
         }
         
+        private IList<OnPremVmDiskDetails> _vMDiskDetails;
+        
+        /// <summary>
+        /// Optional. Gets or sets VM disk details.
+        /// </summary>
+        public IList<OnPremVmDiskDetails> VMDiskDetails
+        {
+            get { return this._vMDiskDetails; }
+            set { this._vMDiskDetails = value; }
+        }
+        
         /// <summary>
         /// Initializes a new instance of the
         /// HyperVReplicaProviderSpecificSettings class.
@@ -94,6 +72,7 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         public HyperVReplicaProviderSpecificSettings()
         {
             this.NetworkDetails = new LazyList<HyperVReplicaProviderNetworkDetails>();
+            this.VMDiskDetails = new LazyList<OnPremVmDiskDetails>();
         }
     }
 }

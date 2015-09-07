@@ -2086,6 +2086,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.FriendlyName = friendlyNameInstance;
                                 }
                                 
+                                JToken protectedItemTypeValue = propertiesValue["protectedItemType"];
+                                if (protectedItemTypeValue != null && protectedItemTypeValue.Type != JTokenType.Null)
+                                {
+                                    string protectedItemTypeInstance = ((string)protectedItemTypeValue);
+                                    propertiesInstance.ProtectedItemType = protectedItemTypeInstance;
+                                }
+                                
+                                JToken protectedItemSourceIdValue = propertiesValue["protectedItemSourceId"];
+                                if (protectedItemSourceIdValue != null && protectedItemSourceIdValue.Type != JTokenType.Null)
+                                {
+                                    string protectedItemSourceIdInstance = ((string)protectedItemSourceIdValue);
+                                    propertiesInstance.ProtectedItemSourceId = protectedItemSourceIdInstance;
+                                }
+                                
                                 JToken recoveryProviderNameValue = propertiesValue["recoveryProviderName"];
                                 if (recoveryProviderNameValue != null && recoveryProviderNameValue.Type != JTokenType.Null)
                                 {
@@ -2138,6 +2152,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.ReplicationHealth = replicationHealthInstance;
                                 }
                                 
+                                JToken replicationHealthErrorsValue = propertiesValue["replicationHealthErrors"];
+                                if (replicationHealthErrorsValue != null && replicationHealthErrorsValue.Type != JTokenType.Null)
+                                {
+                                    List<HealthError> replicationHealthErrorsInstance = ((string)replicationHealthErrorsValue);
+                                    propertiesInstance.ReplicationHealthErrors = replicationHealthErrorsInstance;
+                                }
+                                
                                 JToken replicationProviderValue = propertiesValue["replicationProvider"];
                                 if (replicationProviderValue != null && replicationProviderValue.Type != JTokenType.Null)
                                 {
@@ -2159,6 +2180,27 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.PolicyFriendlyName = policyFriendlyNameInstance;
                                 }
                                 
+                                JToken lastSuccessfulFailoverTimeValue = propertiesValue["lastSuccessfulFailoverTime"];
+                                if (lastSuccessfulFailoverTimeValue != null && lastSuccessfulFailoverTimeValue.Type != JTokenType.Null)
+                                {
+                                    string lastSuccessfulFailoverTimeInstance = ((string)lastSuccessfulFailoverTimeValue);
+                                    propertiesInstance.LastSuccessfulFailoverTime = lastSuccessfulFailoverTimeInstance;
+                                }
+                                
+                                JToken lastSuccessfulTestFailoverTimeValue = propertiesValue["lastSuccessfulTestFailoverTime"];
+                                if (lastSuccessfulTestFailoverTimeValue != null && lastSuccessfulTestFailoverTimeValue.Type != JTokenType.Null)
+                                {
+                                    string lastSuccessfulTestFailoverTimeInstance = ((string)lastSuccessfulTestFailoverTimeValue);
+                                    propertiesInstance.LastSuccessfulTestFailoverTime = lastSuccessfulTestFailoverTimeInstance;
+                                }
+                                
+                                JToken currentScenarioValue = propertiesValue["currentScenario"];
+                                if (currentScenarioValue != null && currentScenarioValue.Type != JTokenType.Null)
+                                {
+                                    string currentScenarioInstance = ((string)currentScenarioValue);
+                                    propertiesInstance.CurrentScenario = currentScenarioInstance;
+                                }
+                                
                                 JToken customSettingValue = propertiesValue["customSetting"];
                                 if (customSettingValue != null && customSettingValue.Type != JTokenType.Null)
                                 {
@@ -2167,13 +2209,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     {
                                         HyperVReplicaProviderSpecificSettings hyperVReplicaProviderSpecificSettingsInstance = new HyperVReplicaProviderSpecificSettings();
                                         
-                                        JToken fabricObjectIdValue = customSettingValue["fabricObjectId"];
-                                        if (fabricObjectIdValue != null && fabricObjectIdValue.Type != JTokenType.Null)
-                                        {
-                                            string fabricObjectIdInstance = ((string)fabricObjectIdValue);
-                                            hyperVReplicaProviderSpecificSettingsInstance.FabricObjectId = fabricObjectIdInstance;
-                                        }
-                                        
                                         JToken lastReplicatedTimeValue = customSettingValue["lastReplicatedTime"];
                                         if (lastReplicatedTimeValue != null && lastReplicatedTimeValue.Type != JTokenType.Null)
                                         {
@@ -2181,18 +2216,42 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             hyperVReplicaProviderSpecificSettingsInstance.LastReplicatedTime = lastReplicatedTimeInstance;
                                         }
                                         
-                                        JToken lastSuccessfulFailoverTimeValue = customSettingValue["lastSuccessfulFailoverTime"];
-                                        if (lastSuccessfulFailoverTimeValue != null && lastSuccessfulFailoverTimeValue.Type != JTokenType.Null)
+                                        JToken vMDiskDetailsArray = customSettingValue["vMDiskDetails"];
+                                        if (vMDiskDetailsArray != null && vMDiskDetailsArray.Type != JTokenType.Null)
                                         {
-                                            string lastSuccessfulFailoverTimeInstance = ((string)lastSuccessfulFailoverTimeValue);
-                                            hyperVReplicaProviderSpecificSettingsInstance.LastSuccessfulFailoverTime = lastSuccessfulFailoverTimeInstance;
-                                        }
-                                        
-                                        JToken lastSuccessfulTestFailoverTimeValue = customSettingValue["lastSuccessfulTestFailoverTime"];
-                                        if (lastSuccessfulTestFailoverTimeValue != null && lastSuccessfulTestFailoverTimeValue.Type != JTokenType.Null)
-                                        {
-                                            string lastSuccessfulTestFailoverTimeInstance = ((string)lastSuccessfulTestFailoverTimeValue);
-                                            hyperVReplicaProviderSpecificSettingsInstance.LastSuccessfulTestFailoverTime = lastSuccessfulTestFailoverTimeInstance;
+                                            foreach (JToken vMDiskDetailsValue in ((JArray)vMDiskDetailsArray))
+                                            {
+                                                OnPremVmDiskDetails onPremVmDiskDetailsInstance = new OnPremVmDiskDetails();
+                                                hyperVReplicaProviderSpecificSettingsInstance.VMDiskDetails.Add(onPremVmDiskDetailsInstance);
+                                                
+                                                JToken maxSizeMBValue = vMDiskDetailsValue["maxSizeMB"];
+                                                if (maxSizeMBValue != null && maxSizeMBValue.Type != JTokenType.Null)
+                                                {
+                                                    ulong maxSizeMBInstance = ((ulong)maxSizeMBValue);
+                                                    onPremVmDiskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
+                                                }
+                                                
+                                                JToken vHDStatusValue = vMDiskDetailsValue["vHDStatus"];
+                                                if (vHDStatusValue != null && vHDStatusValue.Type != JTokenType.Null)
+                                                {
+                                                    string vHDStatusInstance = ((string)vHDStatusValue);
+                                                    onPremVmDiskDetailsInstance.VHDStatus = vHDStatusInstance;
+                                                }
+                                                
+                                                JToken vHDIdValue = vMDiskDetailsValue["vHDId"];
+                                                if (vHDIdValue != null && vHDIdValue.Type != JTokenType.Null)
+                                                {
+                                                    Guid vHDIdInstance = Guid.Parse(((string)vHDIdValue));
+                                                    onPremVmDiskDetailsInstance.VHDId = vHDIdInstance;
+                                                }
+                                                
+                                                JToken vHDNameValue = vMDiskDetailsValue["vHDName"];
+                                                if (vHDNameValue != null && vHDNameValue.Type != JTokenType.Null)
+                                                {
+                                                    string vHDNameInstance = ((string)vHDNameValue);
+                                                    onPremVmDiskDetailsInstance.VHDName = vHDNameInstance;
+                                                }
+                                            }
                                         }
                                         
                                         JToken networkPropertiesArray = customSettingValue["networkProperties"];
@@ -2261,18 +2320,18 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 azureVMDiskDetailsInstance.OsDisk = osDiskInstance;
                                             }
                                             
-                                            JToken vHDIdValue = azureVMDiskDetailsValue["vHDId"];
-                                            if (vHDIdValue != null && vHDIdValue.Type != JTokenType.Null)
+                                            JToken vHDIdValue2 = azureVMDiskDetailsValue["vHDId"];
+                                            if (vHDIdValue2 != null && vHDIdValue2.Type != JTokenType.Null)
                                             {
-                                                string vHDIdInstance = ((string)vHDIdValue);
-                                                azureVMDiskDetailsInstance.VHDId = vHDIdInstance;
+                                                string vHDIdInstance2 = ((string)vHDIdValue2);
+                                                azureVMDiskDetailsInstance.VHDId = vHDIdInstance2;
                                             }
                                             
-                                            JToken maxSizeMBValue = azureVMDiskDetailsValue["maxSizeMB"];
-                                            if (maxSizeMBValue != null && maxSizeMBValue.Type != JTokenType.Null)
+                                            JToken maxSizeMBValue2 = azureVMDiskDetailsValue["maxSizeMB"];
+                                            if (maxSizeMBValue2 != null && maxSizeMBValue2.Type != JTokenType.Null)
                                             {
-                                                ulong maxSizeMBInstance = ((ulong)maxSizeMBValue);
-                                                azureVMDiskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
+                                                ulong maxSizeMBInstance2 = ((ulong)maxSizeMBValue2);
+                                                azureVMDiskDetailsInstance.MaxSizeMB = maxSizeMBInstance2;
                                             }
                                         }
                                         
@@ -2297,32 +2356,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             hyperVReplicaAzureProviderSpecificSettingsInstance.SelectedRecoveryAzureNetworkId = selectedRecoveryAzureNetworkIdInstance;
                                         }
                                         
-                                        JToken fabricObjectIdValue2 = customSettingValue["fabricObjectId"];
-                                        if (fabricObjectIdValue2 != null && fabricObjectIdValue2.Type != JTokenType.Null)
-                                        {
-                                            string fabricObjectIdInstance2 = ((string)fabricObjectIdValue2);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.FabricObjectId = fabricObjectIdInstance2;
-                                        }
-                                        
                                         JToken lastReplicatedTimeValue2 = customSettingValue["lastReplicatedTime"];
                                         if (lastReplicatedTimeValue2 != null && lastReplicatedTimeValue2.Type != JTokenType.Null)
                                         {
                                             string lastReplicatedTimeInstance2 = ((string)lastReplicatedTimeValue2);
                                             hyperVReplicaAzureProviderSpecificSettingsInstance.LastReplicatedTime = lastReplicatedTimeInstance2;
-                                        }
-                                        
-                                        JToken lastSuccessfulFailoverTimeValue2 = customSettingValue["lastSuccessfulFailoverTime"];
-                                        if (lastSuccessfulFailoverTimeValue2 != null && lastSuccessfulFailoverTimeValue2.Type != JTokenType.Null)
-                                        {
-                                            string lastSuccessfulFailoverTimeInstance2 = ((string)lastSuccessfulFailoverTimeValue2);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.LastSuccessfulFailoverTime = lastSuccessfulFailoverTimeInstance2;
-                                        }
-                                        
-                                        JToken lastSuccessfulTestFailoverTimeValue2 = customSettingValue["lastSuccessfulTestFailoverTime"];
-                                        if (lastSuccessfulTestFailoverTimeValue2 != null && lastSuccessfulTestFailoverTimeValue2.Type != JTokenType.Null)
-                                        {
-                                            string lastSuccessfulTestFailoverTimeInstance2 = ((string)lastSuccessfulTestFailoverTimeValue2);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.LastSuccessfulTestFailoverTime = lastSuccessfulTestFailoverTimeInstance2;
                                         }
                                         
                                         JToken networkPropertiesArray2 = customSettingValue["networkProperties"];
@@ -2530,6 +2568,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.FriendlyName = friendlyNameInstance;
                                 }
                                 
+                                JToken protectedItemTypeValue = propertiesValue["protectedItemType"];
+                                if (protectedItemTypeValue != null && protectedItemTypeValue.Type != JTokenType.Null)
+                                {
+                                    string protectedItemTypeInstance = ((string)protectedItemTypeValue);
+                                    propertiesInstance.ProtectedItemType = protectedItemTypeInstance;
+                                }
+                                
+                                JToken protectedItemSourceIdValue = propertiesValue["protectedItemSourceId"];
+                                if (protectedItemSourceIdValue != null && protectedItemSourceIdValue.Type != JTokenType.Null)
+                                {
+                                    string protectedItemSourceIdInstance = ((string)protectedItemSourceIdValue);
+                                    propertiesInstance.ProtectedItemSourceId = protectedItemSourceIdInstance;
+                                }
+                                
                                 JToken recoveryProviderNameValue = propertiesValue["recoveryProviderName"];
                                 if (recoveryProviderNameValue != null && recoveryProviderNameValue.Type != JTokenType.Null)
                                 {
@@ -2582,6 +2634,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.ReplicationHealth = replicationHealthInstance;
                                 }
                                 
+                                JToken replicationHealthErrorsValue = propertiesValue["replicationHealthErrors"];
+                                if (replicationHealthErrorsValue != null && replicationHealthErrorsValue.Type != JTokenType.Null)
+                                {
+                                    List<HealthError> replicationHealthErrorsInstance = ((string)replicationHealthErrorsValue);
+                                    propertiesInstance.ReplicationHealthErrors = replicationHealthErrorsInstance;
+                                }
+                                
                                 JToken replicationProviderValue = propertiesValue["replicationProvider"];
                                 if (replicationProviderValue != null && replicationProviderValue.Type != JTokenType.Null)
                                 {
@@ -2603,6 +2662,27 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.PolicyFriendlyName = policyFriendlyNameInstance;
                                 }
                                 
+                                JToken lastSuccessfulFailoverTimeValue = propertiesValue["lastSuccessfulFailoverTime"];
+                                if (lastSuccessfulFailoverTimeValue != null && lastSuccessfulFailoverTimeValue.Type != JTokenType.Null)
+                                {
+                                    string lastSuccessfulFailoverTimeInstance = ((string)lastSuccessfulFailoverTimeValue);
+                                    propertiesInstance.LastSuccessfulFailoverTime = lastSuccessfulFailoverTimeInstance;
+                                }
+                                
+                                JToken lastSuccessfulTestFailoverTimeValue = propertiesValue["lastSuccessfulTestFailoverTime"];
+                                if (lastSuccessfulTestFailoverTimeValue != null && lastSuccessfulTestFailoverTimeValue.Type != JTokenType.Null)
+                                {
+                                    string lastSuccessfulTestFailoverTimeInstance = ((string)lastSuccessfulTestFailoverTimeValue);
+                                    propertiesInstance.LastSuccessfulTestFailoverTime = lastSuccessfulTestFailoverTimeInstance;
+                                }
+                                
+                                JToken currentScenarioValue = propertiesValue["currentScenario"];
+                                if (currentScenarioValue != null && currentScenarioValue.Type != JTokenType.Null)
+                                {
+                                    string currentScenarioInstance = ((string)currentScenarioValue);
+                                    propertiesInstance.CurrentScenario = currentScenarioInstance;
+                                }
+                                
                                 JToken customSettingValue = propertiesValue["customSetting"];
                                 if (customSettingValue != null && customSettingValue.Type != JTokenType.Null)
                                 {
@@ -2611,13 +2691,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     {
                                         HyperVReplicaProviderSpecificSettings hyperVReplicaProviderSpecificSettingsInstance = new HyperVReplicaProviderSpecificSettings();
                                         
-                                        JToken fabricObjectIdValue = customSettingValue["fabricObjectId"];
-                                        if (fabricObjectIdValue != null && fabricObjectIdValue.Type != JTokenType.Null)
-                                        {
-                                            string fabricObjectIdInstance = ((string)fabricObjectIdValue);
-                                            hyperVReplicaProviderSpecificSettingsInstance.FabricObjectId = fabricObjectIdInstance;
-                                        }
-                                        
                                         JToken lastReplicatedTimeValue = customSettingValue["lastReplicatedTime"];
                                         if (lastReplicatedTimeValue != null && lastReplicatedTimeValue.Type != JTokenType.Null)
                                         {
@@ -2625,18 +2698,42 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             hyperVReplicaProviderSpecificSettingsInstance.LastReplicatedTime = lastReplicatedTimeInstance;
                                         }
                                         
-                                        JToken lastSuccessfulFailoverTimeValue = customSettingValue["lastSuccessfulFailoverTime"];
-                                        if (lastSuccessfulFailoverTimeValue != null && lastSuccessfulFailoverTimeValue.Type != JTokenType.Null)
+                                        JToken vMDiskDetailsArray = customSettingValue["vMDiskDetails"];
+                                        if (vMDiskDetailsArray != null && vMDiskDetailsArray.Type != JTokenType.Null)
                                         {
-                                            string lastSuccessfulFailoverTimeInstance = ((string)lastSuccessfulFailoverTimeValue);
-                                            hyperVReplicaProviderSpecificSettingsInstance.LastSuccessfulFailoverTime = lastSuccessfulFailoverTimeInstance;
-                                        }
-                                        
-                                        JToken lastSuccessfulTestFailoverTimeValue = customSettingValue["lastSuccessfulTestFailoverTime"];
-                                        if (lastSuccessfulTestFailoverTimeValue != null && lastSuccessfulTestFailoverTimeValue.Type != JTokenType.Null)
-                                        {
-                                            string lastSuccessfulTestFailoverTimeInstance = ((string)lastSuccessfulTestFailoverTimeValue);
-                                            hyperVReplicaProviderSpecificSettingsInstance.LastSuccessfulTestFailoverTime = lastSuccessfulTestFailoverTimeInstance;
+                                            foreach (JToken vMDiskDetailsValue in ((JArray)vMDiskDetailsArray))
+                                            {
+                                                OnPremVmDiskDetails onPremVmDiskDetailsInstance = new OnPremVmDiskDetails();
+                                                hyperVReplicaProviderSpecificSettingsInstance.VMDiskDetails.Add(onPremVmDiskDetailsInstance);
+                                                
+                                                JToken maxSizeMBValue = vMDiskDetailsValue["maxSizeMB"];
+                                                if (maxSizeMBValue != null && maxSizeMBValue.Type != JTokenType.Null)
+                                                {
+                                                    ulong maxSizeMBInstance = ((ulong)maxSizeMBValue);
+                                                    onPremVmDiskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
+                                                }
+                                                
+                                                JToken vHDStatusValue = vMDiskDetailsValue["vHDStatus"];
+                                                if (vHDStatusValue != null && vHDStatusValue.Type != JTokenType.Null)
+                                                {
+                                                    string vHDStatusInstance = ((string)vHDStatusValue);
+                                                    onPremVmDiskDetailsInstance.VHDStatus = vHDStatusInstance;
+                                                }
+                                                
+                                                JToken vHDIdValue = vMDiskDetailsValue["vHDId"];
+                                                if (vHDIdValue != null && vHDIdValue.Type != JTokenType.Null)
+                                                {
+                                                    Guid vHDIdInstance = Guid.Parse(((string)vHDIdValue));
+                                                    onPremVmDiskDetailsInstance.VHDId = vHDIdInstance;
+                                                }
+                                                
+                                                JToken vHDNameValue = vMDiskDetailsValue["vHDName"];
+                                                if (vHDNameValue != null && vHDNameValue.Type != JTokenType.Null)
+                                                {
+                                                    string vHDNameInstance = ((string)vHDNameValue);
+                                                    onPremVmDiskDetailsInstance.VHDName = vHDNameInstance;
+                                                }
+                                            }
                                         }
                                         
                                         JToken networkPropertiesArray = customSettingValue["networkProperties"];
@@ -2705,18 +2802,18 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 azureVMDiskDetailsInstance.OsDisk = osDiskInstance;
                                             }
                                             
-                                            JToken vHDIdValue = azureVMDiskDetailsValue["vHDId"];
-                                            if (vHDIdValue != null && vHDIdValue.Type != JTokenType.Null)
+                                            JToken vHDIdValue2 = azureVMDiskDetailsValue["vHDId"];
+                                            if (vHDIdValue2 != null && vHDIdValue2.Type != JTokenType.Null)
                                             {
-                                                string vHDIdInstance = ((string)vHDIdValue);
-                                                azureVMDiskDetailsInstance.VHDId = vHDIdInstance;
+                                                string vHDIdInstance2 = ((string)vHDIdValue2);
+                                                azureVMDiskDetailsInstance.VHDId = vHDIdInstance2;
                                             }
                                             
-                                            JToken maxSizeMBValue = azureVMDiskDetailsValue["maxSizeMB"];
-                                            if (maxSizeMBValue != null && maxSizeMBValue.Type != JTokenType.Null)
+                                            JToken maxSizeMBValue2 = azureVMDiskDetailsValue["maxSizeMB"];
+                                            if (maxSizeMBValue2 != null && maxSizeMBValue2.Type != JTokenType.Null)
                                             {
-                                                ulong maxSizeMBInstance = ((ulong)maxSizeMBValue);
-                                                azureVMDiskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
+                                                ulong maxSizeMBInstance2 = ((ulong)maxSizeMBValue2);
+                                                azureVMDiskDetailsInstance.MaxSizeMB = maxSizeMBInstance2;
                                             }
                                         }
                                         
@@ -2741,32 +2838,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             hyperVReplicaAzureProviderSpecificSettingsInstance.SelectedRecoveryAzureNetworkId = selectedRecoveryAzureNetworkIdInstance;
                                         }
                                         
-                                        JToken fabricObjectIdValue2 = customSettingValue["fabricObjectId"];
-                                        if (fabricObjectIdValue2 != null && fabricObjectIdValue2.Type != JTokenType.Null)
-                                        {
-                                            string fabricObjectIdInstance2 = ((string)fabricObjectIdValue2);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.FabricObjectId = fabricObjectIdInstance2;
-                                        }
-                                        
                                         JToken lastReplicatedTimeValue2 = customSettingValue["lastReplicatedTime"];
                                         if (lastReplicatedTimeValue2 != null && lastReplicatedTimeValue2.Type != JTokenType.Null)
                                         {
                                             string lastReplicatedTimeInstance2 = ((string)lastReplicatedTimeValue2);
                                             hyperVReplicaAzureProviderSpecificSettingsInstance.LastReplicatedTime = lastReplicatedTimeInstance2;
-                                        }
-                                        
-                                        JToken lastSuccessfulFailoverTimeValue2 = customSettingValue["lastSuccessfulFailoverTime"];
-                                        if (lastSuccessfulFailoverTimeValue2 != null && lastSuccessfulFailoverTimeValue2.Type != JTokenType.Null)
-                                        {
-                                            string lastSuccessfulFailoverTimeInstance2 = ((string)lastSuccessfulFailoverTimeValue2);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.LastSuccessfulFailoverTime = lastSuccessfulFailoverTimeInstance2;
-                                        }
-                                        
-                                        JToken lastSuccessfulTestFailoverTimeValue2 = customSettingValue["lastSuccessfulTestFailoverTime"];
-                                        if (lastSuccessfulTestFailoverTimeValue2 != null && lastSuccessfulTestFailoverTimeValue2.Type != JTokenType.Null)
-                                        {
-                                            string lastSuccessfulTestFailoverTimeInstance2 = ((string)lastSuccessfulTestFailoverTimeValue2);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.LastSuccessfulTestFailoverTime = lastSuccessfulTestFailoverTimeInstance2;
                                         }
                                         
                                         JToken networkPropertiesArray2 = customSettingValue["networkProperties"];
@@ -3207,6 +3283,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.FriendlyName = friendlyNameInstance;
                                 }
                                 
+                                JToken protectedItemTypeValue = propertiesValue["protectedItemType"];
+                                if (protectedItemTypeValue != null && protectedItemTypeValue.Type != JTokenType.Null)
+                                {
+                                    string protectedItemTypeInstance = ((string)protectedItemTypeValue);
+                                    propertiesInstance.ProtectedItemType = protectedItemTypeInstance;
+                                }
+                                
+                                JToken protectedItemSourceIdValue = propertiesValue["protectedItemSourceId"];
+                                if (protectedItemSourceIdValue != null && protectedItemSourceIdValue.Type != JTokenType.Null)
+                                {
+                                    string protectedItemSourceIdInstance = ((string)protectedItemSourceIdValue);
+                                    propertiesInstance.ProtectedItemSourceId = protectedItemSourceIdInstance;
+                                }
+                                
                                 JToken recoveryProviderNameValue = propertiesValue["recoveryProviderName"];
                                 if (recoveryProviderNameValue != null && recoveryProviderNameValue.Type != JTokenType.Null)
                                 {
@@ -3259,6 +3349,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.ReplicationHealth = replicationHealthInstance;
                                 }
                                 
+                                JToken replicationHealthErrorsValue = propertiesValue["replicationHealthErrors"];
+                                if (replicationHealthErrorsValue != null && replicationHealthErrorsValue.Type != JTokenType.Null)
+                                {
+                                    List<HealthError> replicationHealthErrorsInstance = ((string)replicationHealthErrorsValue);
+                                    propertiesInstance.ReplicationHealthErrors = replicationHealthErrorsInstance;
+                                }
+                                
                                 JToken replicationProviderValue = propertiesValue["replicationProvider"];
                                 if (replicationProviderValue != null && replicationProviderValue.Type != JTokenType.Null)
                                 {
@@ -3280,6 +3377,27 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.PolicyFriendlyName = policyFriendlyNameInstance;
                                 }
                                 
+                                JToken lastSuccessfulFailoverTimeValue = propertiesValue["lastSuccessfulFailoverTime"];
+                                if (lastSuccessfulFailoverTimeValue != null && lastSuccessfulFailoverTimeValue.Type != JTokenType.Null)
+                                {
+                                    string lastSuccessfulFailoverTimeInstance = ((string)lastSuccessfulFailoverTimeValue);
+                                    propertiesInstance.LastSuccessfulFailoverTime = lastSuccessfulFailoverTimeInstance;
+                                }
+                                
+                                JToken lastSuccessfulTestFailoverTimeValue = propertiesValue["lastSuccessfulTestFailoverTime"];
+                                if (lastSuccessfulTestFailoverTimeValue != null && lastSuccessfulTestFailoverTimeValue.Type != JTokenType.Null)
+                                {
+                                    string lastSuccessfulTestFailoverTimeInstance = ((string)lastSuccessfulTestFailoverTimeValue);
+                                    propertiesInstance.LastSuccessfulTestFailoverTime = lastSuccessfulTestFailoverTimeInstance;
+                                }
+                                
+                                JToken currentScenarioValue = propertiesValue["currentScenario"];
+                                if (currentScenarioValue != null && currentScenarioValue.Type != JTokenType.Null)
+                                {
+                                    string currentScenarioInstance = ((string)currentScenarioValue);
+                                    propertiesInstance.CurrentScenario = currentScenarioInstance;
+                                }
+                                
                                 JToken customSettingValue = propertiesValue["customSetting"];
                                 if (customSettingValue != null && customSettingValue.Type != JTokenType.Null)
                                 {
@@ -3288,13 +3406,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     {
                                         HyperVReplicaProviderSpecificSettings hyperVReplicaProviderSpecificSettingsInstance = new HyperVReplicaProviderSpecificSettings();
                                         
-                                        JToken fabricObjectIdValue = customSettingValue["fabricObjectId"];
-                                        if (fabricObjectIdValue != null && fabricObjectIdValue.Type != JTokenType.Null)
-                                        {
-                                            string fabricObjectIdInstance = ((string)fabricObjectIdValue);
-                                            hyperVReplicaProviderSpecificSettingsInstance.FabricObjectId = fabricObjectIdInstance;
-                                        }
-                                        
                                         JToken lastReplicatedTimeValue = customSettingValue["lastReplicatedTime"];
                                         if (lastReplicatedTimeValue != null && lastReplicatedTimeValue.Type != JTokenType.Null)
                                         {
@@ -3302,18 +3413,42 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             hyperVReplicaProviderSpecificSettingsInstance.LastReplicatedTime = lastReplicatedTimeInstance;
                                         }
                                         
-                                        JToken lastSuccessfulFailoverTimeValue = customSettingValue["lastSuccessfulFailoverTime"];
-                                        if (lastSuccessfulFailoverTimeValue != null && lastSuccessfulFailoverTimeValue.Type != JTokenType.Null)
+                                        JToken vMDiskDetailsArray = customSettingValue["vMDiskDetails"];
+                                        if (vMDiskDetailsArray != null && vMDiskDetailsArray.Type != JTokenType.Null)
                                         {
-                                            string lastSuccessfulFailoverTimeInstance = ((string)lastSuccessfulFailoverTimeValue);
-                                            hyperVReplicaProviderSpecificSettingsInstance.LastSuccessfulFailoverTime = lastSuccessfulFailoverTimeInstance;
-                                        }
-                                        
-                                        JToken lastSuccessfulTestFailoverTimeValue = customSettingValue["lastSuccessfulTestFailoverTime"];
-                                        if (lastSuccessfulTestFailoverTimeValue != null && lastSuccessfulTestFailoverTimeValue.Type != JTokenType.Null)
-                                        {
-                                            string lastSuccessfulTestFailoverTimeInstance = ((string)lastSuccessfulTestFailoverTimeValue);
-                                            hyperVReplicaProviderSpecificSettingsInstance.LastSuccessfulTestFailoverTime = lastSuccessfulTestFailoverTimeInstance;
+                                            foreach (JToken vMDiskDetailsValue in ((JArray)vMDiskDetailsArray))
+                                            {
+                                                OnPremVmDiskDetails onPremVmDiskDetailsInstance = new OnPremVmDiskDetails();
+                                                hyperVReplicaProviderSpecificSettingsInstance.VMDiskDetails.Add(onPremVmDiskDetailsInstance);
+                                                
+                                                JToken maxSizeMBValue = vMDiskDetailsValue["maxSizeMB"];
+                                                if (maxSizeMBValue != null && maxSizeMBValue.Type != JTokenType.Null)
+                                                {
+                                                    ulong maxSizeMBInstance = ((ulong)maxSizeMBValue);
+                                                    onPremVmDiskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
+                                                }
+                                                
+                                                JToken vHDStatusValue = vMDiskDetailsValue["vHDStatus"];
+                                                if (vHDStatusValue != null && vHDStatusValue.Type != JTokenType.Null)
+                                                {
+                                                    string vHDStatusInstance = ((string)vHDStatusValue);
+                                                    onPremVmDiskDetailsInstance.VHDStatus = vHDStatusInstance;
+                                                }
+                                                
+                                                JToken vHDIdValue = vMDiskDetailsValue["vHDId"];
+                                                if (vHDIdValue != null && vHDIdValue.Type != JTokenType.Null)
+                                                {
+                                                    Guid vHDIdInstance = Guid.Parse(((string)vHDIdValue));
+                                                    onPremVmDiskDetailsInstance.VHDId = vHDIdInstance;
+                                                }
+                                                
+                                                JToken vHDNameValue = vMDiskDetailsValue["vHDName"];
+                                                if (vHDNameValue != null && vHDNameValue.Type != JTokenType.Null)
+                                                {
+                                                    string vHDNameInstance = ((string)vHDNameValue);
+                                                    onPremVmDiskDetailsInstance.VHDName = vHDNameInstance;
+                                                }
+                                            }
                                         }
                                         
                                         JToken networkPropertiesArray = customSettingValue["networkProperties"];
@@ -3382,18 +3517,18 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 azureVMDiskDetailsInstance.OsDisk = osDiskInstance;
                                             }
                                             
-                                            JToken vHDIdValue = azureVMDiskDetailsValue["vHDId"];
-                                            if (vHDIdValue != null && vHDIdValue.Type != JTokenType.Null)
+                                            JToken vHDIdValue2 = azureVMDiskDetailsValue["vHDId"];
+                                            if (vHDIdValue2 != null && vHDIdValue2.Type != JTokenType.Null)
                                             {
-                                                string vHDIdInstance = ((string)vHDIdValue);
-                                                azureVMDiskDetailsInstance.VHDId = vHDIdInstance;
+                                                string vHDIdInstance2 = ((string)vHDIdValue2);
+                                                azureVMDiskDetailsInstance.VHDId = vHDIdInstance2;
                                             }
                                             
-                                            JToken maxSizeMBValue = azureVMDiskDetailsValue["maxSizeMB"];
-                                            if (maxSizeMBValue != null && maxSizeMBValue.Type != JTokenType.Null)
+                                            JToken maxSizeMBValue2 = azureVMDiskDetailsValue["maxSizeMB"];
+                                            if (maxSizeMBValue2 != null && maxSizeMBValue2.Type != JTokenType.Null)
                                             {
-                                                ulong maxSizeMBInstance = ((ulong)maxSizeMBValue);
-                                                azureVMDiskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
+                                                ulong maxSizeMBInstance2 = ((ulong)maxSizeMBValue2);
+                                                azureVMDiskDetailsInstance.MaxSizeMB = maxSizeMBInstance2;
                                             }
                                         }
                                         
@@ -3418,32 +3553,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             hyperVReplicaAzureProviderSpecificSettingsInstance.SelectedRecoveryAzureNetworkId = selectedRecoveryAzureNetworkIdInstance;
                                         }
                                         
-                                        JToken fabricObjectIdValue2 = customSettingValue["fabricObjectId"];
-                                        if (fabricObjectIdValue2 != null && fabricObjectIdValue2.Type != JTokenType.Null)
-                                        {
-                                            string fabricObjectIdInstance2 = ((string)fabricObjectIdValue2);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.FabricObjectId = fabricObjectIdInstance2;
-                                        }
-                                        
                                         JToken lastReplicatedTimeValue2 = customSettingValue["lastReplicatedTime"];
                                         if (lastReplicatedTimeValue2 != null && lastReplicatedTimeValue2.Type != JTokenType.Null)
                                         {
                                             string lastReplicatedTimeInstance2 = ((string)lastReplicatedTimeValue2);
                                             hyperVReplicaAzureProviderSpecificSettingsInstance.LastReplicatedTime = lastReplicatedTimeInstance2;
-                                        }
-                                        
-                                        JToken lastSuccessfulFailoverTimeValue2 = customSettingValue["lastSuccessfulFailoverTime"];
-                                        if (lastSuccessfulFailoverTimeValue2 != null && lastSuccessfulFailoverTimeValue2.Type != JTokenType.Null)
-                                        {
-                                            string lastSuccessfulFailoverTimeInstance2 = ((string)lastSuccessfulFailoverTimeValue2);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.LastSuccessfulFailoverTime = lastSuccessfulFailoverTimeInstance2;
-                                        }
-                                        
-                                        JToken lastSuccessfulTestFailoverTimeValue2 = customSettingValue["lastSuccessfulTestFailoverTime"];
-                                        if (lastSuccessfulTestFailoverTimeValue2 != null && lastSuccessfulTestFailoverTimeValue2.Type != JTokenType.Null)
-                                        {
-                                            string lastSuccessfulTestFailoverTimeInstance2 = ((string)lastSuccessfulTestFailoverTimeValue2);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.LastSuccessfulTestFailoverTime = lastSuccessfulTestFailoverTimeInstance2;
                                         }
                                         
                                         JToken networkPropertiesArray2 = customSettingValue["networkProperties"];
@@ -3703,6 +3817,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.FriendlyName = friendlyNameInstance;
                                 }
                                 
+                                JToken protectedItemTypeValue = propertiesValue["protectedItemType"];
+                                if (protectedItemTypeValue != null && protectedItemTypeValue.Type != JTokenType.Null)
+                                {
+                                    string protectedItemTypeInstance = ((string)protectedItemTypeValue);
+                                    propertiesInstance.ProtectedItemType = protectedItemTypeInstance;
+                                }
+                                
+                                JToken protectedItemSourceIdValue = propertiesValue["protectedItemSourceId"];
+                                if (protectedItemSourceIdValue != null && protectedItemSourceIdValue.Type != JTokenType.Null)
+                                {
+                                    string protectedItemSourceIdInstance = ((string)protectedItemSourceIdValue);
+                                    propertiesInstance.ProtectedItemSourceId = protectedItemSourceIdInstance;
+                                }
+                                
                                 JToken recoveryProviderNameValue = propertiesValue["recoveryProviderName"];
                                 if (recoveryProviderNameValue != null && recoveryProviderNameValue.Type != JTokenType.Null)
                                 {
@@ -3755,6 +3883,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.ReplicationHealth = replicationHealthInstance;
                                 }
                                 
+                                JToken replicationHealthErrorsValue = propertiesValue["replicationHealthErrors"];
+                                if (replicationHealthErrorsValue != null && replicationHealthErrorsValue.Type != JTokenType.Null)
+                                {
+                                    List<HealthError> replicationHealthErrorsInstance = ((string)replicationHealthErrorsValue);
+                                    propertiesInstance.ReplicationHealthErrors = replicationHealthErrorsInstance;
+                                }
+                                
                                 JToken replicationProviderValue = propertiesValue["replicationProvider"];
                                 if (replicationProviderValue != null && replicationProviderValue.Type != JTokenType.Null)
                                 {
@@ -3776,6 +3911,27 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.PolicyFriendlyName = policyFriendlyNameInstance;
                                 }
                                 
+                                JToken lastSuccessfulFailoverTimeValue = propertiesValue["lastSuccessfulFailoverTime"];
+                                if (lastSuccessfulFailoverTimeValue != null && lastSuccessfulFailoverTimeValue.Type != JTokenType.Null)
+                                {
+                                    string lastSuccessfulFailoverTimeInstance = ((string)lastSuccessfulFailoverTimeValue);
+                                    propertiesInstance.LastSuccessfulFailoverTime = lastSuccessfulFailoverTimeInstance;
+                                }
+                                
+                                JToken lastSuccessfulTestFailoverTimeValue = propertiesValue["lastSuccessfulTestFailoverTime"];
+                                if (lastSuccessfulTestFailoverTimeValue != null && lastSuccessfulTestFailoverTimeValue.Type != JTokenType.Null)
+                                {
+                                    string lastSuccessfulTestFailoverTimeInstance = ((string)lastSuccessfulTestFailoverTimeValue);
+                                    propertiesInstance.LastSuccessfulTestFailoverTime = lastSuccessfulTestFailoverTimeInstance;
+                                }
+                                
+                                JToken currentScenarioValue = propertiesValue["currentScenario"];
+                                if (currentScenarioValue != null && currentScenarioValue.Type != JTokenType.Null)
+                                {
+                                    string currentScenarioInstance = ((string)currentScenarioValue);
+                                    propertiesInstance.CurrentScenario = currentScenarioInstance;
+                                }
+                                
                                 JToken customSettingValue = propertiesValue["customSetting"];
                                 if (customSettingValue != null && customSettingValue.Type != JTokenType.Null)
                                 {
@@ -3784,13 +3940,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     {
                                         HyperVReplicaProviderSpecificSettings hyperVReplicaProviderSpecificSettingsInstance = new HyperVReplicaProviderSpecificSettings();
                                         
-                                        JToken fabricObjectIdValue = customSettingValue["fabricObjectId"];
-                                        if (fabricObjectIdValue != null && fabricObjectIdValue.Type != JTokenType.Null)
-                                        {
-                                            string fabricObjectIdInstance = ((string)fabricObjectIdValue);
-                                            hyperVReplicaProviderSpecificSettingsInstance.FabricObjectId = fabricObjectIdInstance;
-                                        }
-                                        
                                         JToken lastReplicatedTimeValue = customSettingValue["lastReplicatedTime"];
                                         if (lastReplicatedTimeValue != null && lastReplicatedTimeValue.Type != JTokenType.Null)
                                         {
@@ -3798,18 +3947,42 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             hyperVReplicaProviderSpecificSettingsInstance.LastReplicatedTime = lastReplicatedTimeInstance;
                                         }
                                         
-                                        JToken lastSuccessfulFailoverTimeValue = customSettingValue["lastSuccessfulFailoverTime"];
-                                        if (lastSuccessfulFailoverTimeValue != null && lastSuccessfulFailoverTimeValue.Type != JTokenType.Null)
+                                        JToken vMDiskDetailsArray = customSettingValue["vMDiskDetails"];
+                                        if (vMDiskDetailsArray != null && vMDiskDetailsArray.Type != JTokenType.Null)
                                         {
-                                            string lastSuccessfulFailoverTimeInstance = ((string)lastSuccessfulFailoverTimeValue);
-                                            hyperVReplicaProviderSpecificSettingsInstance.LastSuccessfulFailoverTime = lastSuccessfulFailoverTimeInstance;
-                                        }
-                                        
-                                        JToken lastSuccessfulTestFailoverTimeValue = customSettingValue["lastSuccessfulTestFailoverTime"];
-                                        if (lastSuccessfulTestFailoverTimeValue != null && lastSuccessfulTestFailoverTimeValue.Type != JTokenType.Null)
-                                        {
-                                            string lastSuccessfulTestFailoverTimeInstance = ((string)lastSuccessfulTestFailoverTimeValue);
-                                            hyperVReplicaProviderSpecificSettingsInstance.LastSuccessfulTestFailoverTime = lastSuccessfulTestFailoverTimeInstance;
+                                            foreach (JToken vMDiskDetailsValue in ((JArray)vMDiskDetailsArray))
+                                            {
+                                                OnPremVmDiskDetails onPremVmDiskDetailsInstance = new OnPremVmDiskDetails();
+                                                hyperVReplicaProviderSpecificSettingsInstance.VMDiskDetails.Add(onPremVmDiskDetailsInstance);
+                                                
+                                                JToken maxSizeMBValue = vMDiskDetailsValue["maxSizeMB"];
+                                                if (maxSizeMBValue != null && maxSizeMBValue.Type != JTokenType.Null)
+                                                {
+                                                    ulong maxSizeMBInstance = ((ulong)maxSizeMBValue);
+                                                    onPremVmDiskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
+                                                }
+                                                
+                                                JToken vHDStatusValue = vMDiskDetailsValue["vHDStatus"];
+                                                if (vHDStatusValue != null && vHDStatusValue.Type != JTokenType.Null)
+                                                {
+                                                    string vHDStatusInstance = ((string)vHDStatusValue);
+                                                    onPremVmDiskDetailsInstance.VHDStatus = vHDStatusInstance;
+                                                }
+                                                
+                                                JToken vHDIdValue = vMDiskDetailsValue["vHDId"];
+                                                if (vHDIdValue != null && vHDIdValue.Type != JTokenType.Null)
+                                                {
+                                                    Guid vHDIdInstance = Guid.Parse(((string)vHDIdValue));
+                                                    onPremVmDiskDetailsInstance.VHDId = vHDIdInstance;
+                                                }
+                                                
+                                                JToken vHDNameValue = vMDiskDetailsValue["vHDName"];
+                                                if (vHDNameValue != null && vHDNameValue.Type != JTokenType.Null)
+                                                {
+                                                    string vHDNameInstance = ((string)vHDNameValue);
+                                                    onPremVmDiskDetailsInstance.VHDName = vHDNameInstance;
+                                                }
+                                            }
                                         }
                                         
                                         JToken networkPropertiesArray = customSettingValue["networkProperties"];
@@ -3878,18 +4051,18 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 azureVMDiskDetailsInstance.OsDisk = osDiskInstance;
                                             }
                                             
-                                            JToken vHDIdValue = azureVMDiskDetailsValue["vHDId"];
-                                            if (vHDIdValue != null && vHDIdValue.Type != JTokenType.Null)
+                                            JToken vHDIdValue2 = azureVMDiskDetailsValue["vHDId"];
+                                            if (vHDIdValue2 != null && vHDIdValue2.Type != JTokenType.Null)
                                             {
-                                                string vHDIdInstance = ((string)vHDIdValue);
-                                                azureVMDiskDetailsInstance.VHDId = vHDIdInstance;
+                                                string vHDIdInstance2 = ((string)vHDIdValue2);
+                                                azureVMDiskDetailsInstance.VHDId = vHDIdInstance2;
                                             }
                                             
-                                            JToken maxSizeMBValue = azureVMDiskDetailsValue["maxSizeMB"];
-                                            if (maxSizeMBValue != null && maxSizeMBValue.Type != JTokenType.Null)
+                                            JToken maxSizeMBValue2 = azureVMDiskDetailsValue["maxSizeMB"];
+                                            if (maxSizeMBValue2 != null && maxSizeMBValue2.Type != JTokenType.Null)
                                             {
-                                                ulong maxSizeMBInstance = ((ulong)maxSizeMBValue);
-                                                azureVMDiskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
+                                                ulong maxSizeMBInstance2 = ((ulong)maxSizeMBValue2);
+                                                azureVMDiskDetailsInstance.MaxSizeMB = maxSizeMBInstance2;
                                             }
                                         }
                                         
@@ -3914,32 +4087,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             hyperVReplicaAzureProviderSpecificSettingsInstance.SelectedRecoveryAzureNetworkId = selectedRecoveryAzureNetworkIdInstance;
                                         }
                                         
-                                        JToken fabricObjectIdValue2 = customSettingValue["fabricObjectId"];
-                                        if (fabricObjectIdValue2 != null && fabricObjectIdValue2.Type != JTokenType.Null)
-                                        {
-                                            string fabricObjectIdInstance2 = ((string)fabricObjectIdValue2);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.FabricObjectId = fabricObjectIdInstance2;
-                                        }
-                                        
                                         JToken lastReplicatedTimeValue2 = customSettingValue["lastReplicatedTime"];
                                         if (lastReplicatedTimeValue2 != null && lastReplicatedTimeValue2.Type != JTokenType.Null)
                                         {
                                             string lastReplicatedTimeInstance2 = ((string)lastReplicatedTimeValue2);
                                             hyperVReplicaAzureProviderSpecificSettingsInstance.LastReplicatedTime = lastReplicatedTimeInstance2;
-                                        }
-                                        
-                                        JToken lastSuccessfulFailoverTimeValue2 = customSettingValue["lastSuccessfulFailoverTime"];
-                                        if (lastSuccessfulFailoverTimeValue2 != null && lastSuccessfulFailoverTimeValue2.Type != JTokenType.Null)
-                                        {
-                                            string lastSuccessfulFailoverTimeInstance2 = ((string)lastSuccessfulFailoverTimeValue2);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.LastSuccessfulFailoverTime = lastSuccessfulFailoverTimeInstance2;
-                                        }
-                                        
-                                        JToken lastSuccessfulTestFailoverTimeValue2 = customSettingValue["lastSuccessfulTestFailoverTime"];
-                                        if (lastSuccessfulTestFailoverTimeValue2 != null && lastSuccessfulTestFailoverTimeValue2.Type != JTokenType.Null)
-                                        {
-                                            string lastSuccessfulTestFailoverTimeInstance2 = ((string)lastSuccessfulTestFailoverTimeValue2);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.LastSuccessfulTestFailoverTime = lastSuccessfulTestFailoverTimeInstance2;
                                         }
                                         
                                         JToken networkPropertiesArray2 = customSettingValue["networkProperties"];
@@ -4199,6 +4351,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.FriendlyName = friendlyNameInstance;
                                 }
                                 
+                                JToken protectedItemTypeValue = propertiesValue["protectedItemType"];
+                                if (protectedItemTypeValue != null && protectedItemTypeValue.Type != JTokenType.Null)
+                                {
+                                    string protectedItemTypeInstance = ((string)protectedItemTypeValue);
+                                    propertiesInstance.ProtectedItemType = protectedItemTypeInstance;
+                                }
+                                
+                                JToken protectedItemSourceIdValue = propertiesValue["protectedItemSourceId"];
+                                if (protectedItemSourceIdValue != null && protectedItemSourceIdValue.Type != JTokenType.Null)
+                                {
+                                    string protectedItemSourceIdInstance = ((string)protectedItemSourceIdValue);
+                                    propertiesInstance.ProtectedItemSourceId = protectedItemSourceIdInstance;
+                                }
+                                
                                 JToken recoveryProviderNameValue = propertiesValue["recoveryProviderName"];
                                 if (recoveryProviderNameValue != null && recoveryProviderNameValue.Type != JTokenType.Null)
                                 {
@@ -4251,6 +4417,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.ReplicationHealth = replicationHealthInstance;
                                 }
                                 
+                                JToken replicationHealthErrorsValue = propertiesValue["replicationHealthErrors"];
+                                if (replicationHealthErrorsValue != null && replicationHealthErrorsValue.Type != JTokenType.Null)
+                                {
+                                    List<HealthError> replicationHealthErrorsInstance = ((string)replicationHealthErrorsValue);
+                                    propertiesInstance.ReplicationHealthErrors = replicationHealthErrorsInstance;
+                                }
+                                
                                 JToken replicationProviderValue = propertiesValue["replicationProvider"];
                                 if (replicationProviderValue != null && replicationProviderValue.Type != JTokenType.Null)
                                 {
@@ -4272,6 +4445,27 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.PolicyFriendlyName = policyFriendlyNameInstance;
                                 }
                                 
+                                JToken lastSuccessfulFailoverTimeValue = propertiesValue["lastSuccessfulFailoverTime"];
+                                if (lastSuccessfulFailoverTimeValue != null && lastSuccessfulFailoverTimeValue.Type != JTokenType.Null)
+                                {
+                                    string lastSuccessfulFailoverTimeInstance = ((string)lastSuccessfulFailoverTimeValue);
+                                    propertiesInstance.LastSuccessfulFailoverTime = lastSuccessfulFailoverTimeInstance;
+                                }
+                                
+                                JToken lastSuccessfulTestFailoverTimeValue = propertiesValue["lastSuccessfulTestFailoverTime"];
+                                if (lastSuccessfulTestFailoverTimeValue != null && lastSuccessfulTestFailoverTimeValue.Type != JTokenType.Null)
+                                {
+                                    string lastSuccessfulTestFailoverTimeInstance = ((string)lastSuccessfulTestFailoverTimeValue);
+                                    propertiesInstance.LastSuccessfulTestFailoverTime = lastSuccessfulTestFailoverTimeInstance;
+                                }
+                                
+                                JToken currentScenarioValue = propertiesValue["currentScenario"];
+                                if (currentScenarioValue != null && currentScenarioValue.Type != JTokenType.Null)
+                                {
+                                    string currentScenarioInstance = ((string)currentScenarioValue);
+                                    propertiesInstance.CurrentScenario = currentScenarioInstance;
+                                }
+                                
                                 JToken customSettingValue = propertiesValue["customSetting"];
                                 if (customSettingValue != null && customSettingValue.Type != JTokenType.Null)
                                 {
@@ -4280,13 +4474,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     {
                                         HyperVReplicaProviderSpecificSettings hyperVReplicaProviderSpecificSettingsInstance = new HyperVReplicaProviderSpecificSettings();
                                         
-                                        JToken fabricObjectIdValue = customSettingValue["fabricObjectId"];
-                                        if (fabricObjectIdValue != null && fabricObjectIdValue.Type != JTokenType.Null)
-                                        {
-                                            string fabricObjectIdInstance = ((string)fabricObjectIdValue);
-                                            hyperVReplicaProviderSpecificSettingsInstance.FabricObjectId = fabricObjectIdInstance;
-                                        }
-                                        
                                         JToken lastReplicatedTimeValue = customSettingValue["lastReplicatedTime"];
                                         if (lastReplicatedTimeValue != null && lastReplicatedTimeValue.Type != JTokenType.Null)
                                         {
@@ -4294,18 +4481,42 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             hyperVReplicaProviderSpecificSettingsInstance.LastReplicatedTime = lastReplicatedTimeInstance;
                                         }
                                         
-                                        JToken lastSuccessfulFailoverTimeValue = customSettingValue["lastSuccessfulFailoverTime"];
-                                        if (lastSuccessfulFailoverTimeValue != null && lastSuccessfulFailoverTimeValue.Type != JTokenType.Null)
+                                        JToken vMDiskDetailsArray = customSettingValue["vMDiskDetails"];
+                                        if (vMDiskDetailsArray != null && vMDiskDetailsArray.Type != JTokenType.Null)
                                         {
-                                            string lastSuccessfulFailoverTimeInstance = ((string)lastSuccessfulFailoverTimeValue);
-                                            hyperVReplicaProviderSpecificSettingsInstance.LastSuccessfulFailoverTime = lastSuccessfulFailoverTimeInstance;
-                                        }
-                                        
-                                        JToken lastSuccessfulTestFailoverTimeValue = customSettingValue["lastSuccessfulTestFailoverTime"];
-                                        if (lastSuccessfulTestFailoverTimeValue != null && lastSuccessfulTestFailoverTimeValue.Type != JTokenType.Null)
-                                        {
-                                            string lastSuccessfulTestFailoverTimeInstance = ((string)lastSuccessfulTestFailoverTimeValue);
-                                            hyperVReplicaProviderSpecificSettingsInstance.LastSuccessfulTestFailoverTime = lastSuccessfulTestFailoverTimeInstance;
+                                            foreach (JToken vMDiskDetailsValue in ((JArray)vMDiskDetailsArray))
+                                            {
+                                                OnPremVmDiskDetails onPremVmDiskDetailsInstance = new OnPremVmDiskDetails();
+                                                hyperVReplicaProviderSpecificSettingsInstance.VMDiskDetails.Add(onPremVmDiskDetailsInstance);
+                                                
+                                                JToken maxSizeMBValue = vMDiskDetailsValue["maxSizeMB"];
+                                                if (maxSizeMBValue != null && maxSizeMBValue.Type != JTokenType.Null)
+                                                {
+                                                    ulong maxSizeMBInstance = ((ulong)maxSizeMBValue);
+                                                    onPremVmDiskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
+                                                }
+                                                
+                                                JToken vHDStatusValue = vMDiskDetailsValue["vHDStatus"];
+                                                if (vHDStatusValue != null && vHDStatusValue.Type != JTokenType.Null)
+                                                {
+                                                    string vHDStatusInstance = ((string)vHDStatusValue);
+                                                    onPremVmDiskDetailsInstance.VHDStatus = vHDStatusInstance;
+                                                }
+                                                
+                                                JToken vHDIdValue = vMDiskDetailsValue["vHDId"];
+                                                if (vHDIdValue != null && vHDIdValue.Type != JTokenType.Null)
+                                                {
+                                                    Guid vHDIdInstance = Guid.Parse(((string)vHDIdValue));
+                                                    onPremVmDiskDetailsInstance.VHDId = vHDIdInstance;
+                                                }
+                                                
+                                                JToken vHDNameValue = vMDiskDetailsValue["vHDName"];
+                                                if (vHDNameValue != null && vHDNameValue.Type != JTokenType.Null)
+                                                {
+                                                    string vHDNameInstance = ((string)vHDNameValue);
+                                                    onPremVmDiskDetailsInstance.VHDName = vHDNameInstance;
+                                                }
+                                            }
                                         }
                                         
                                         JToken networkPropertiesArray = customSettingValue["networkProperties"];
@@ -4374,18 +4585,18 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 azureVMDiskDetailsInstance.OsDisk = osDiskInstance;
                                             }
                                             
-                                            JToken vHDIdValue = azureVMDiskDetailsValue["vHDId"];
-                                            if (vHDIdValue != null && vHDIdValue.Type != JTokenType.Null)
+                                            JToken vHDIdValue2 = azureVMDiskDetailsValue["vHDId"];
+                                            if (vHDIdValue2 != null && vHDIdValue2.Type != JTokenType.Null)
                                             {
-                                                string vHDIdInstance = ((string)vHDIdValue);
-                                                azureVMDiskDetailsInstance.VHDId = vHDIdInstance;
+                                                string vHDIdInstance2 = ((string)vHDIdValue2);
+                                                azureVMDiskDetailsInstance.VHDId = vHDIdInstance2;
                                             }
                                             
-                                            JToken maxSizeMBValue = azureVMDiskDetailsValue["maxSizeMB"];
-                                            if (maxSizeMBValue != null && maxSizeMBValue.Type != JTokenType.Null)
+                                            JToken maxSizeMBValue2 = azureVMDiskDetailsValue["maxSizeMB"];
+                                            if (maxSizeMBValue2 != null && maxSizeMBValue2.Type != JTokenType.Null)
                                             {
-                                                ulong maxSizeMBInstance = ((ulong)maxSizeMBValue);
-                                                azureVMDiskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
+                                                ulong maxSizeMBInstance2 = ((ulong)maxSizeMBValue2);
+                                                azureVMDiskDetailsInstance.MaxSizeMB = maxSizeMBInstance2;
                                             }
                                         }
                                         
@@ -4410,32 +4621,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             hyperVReplicaAzureProviderSpecificSettingsInstance.SelectedRecoveryAzureNetworkId = selectedRecoveryAzureNetworkIdInstance;
                                         }
                                         
-                                        JToken fabricObjectIdValue2 = customSettingValue["fabricObjectId"];
-                                        if (fabricObjectIdValue2 != null && fabricObjectIdValue2.Type != JTokenType.Null)
-                                        {
-                                            string fabricObjectIdInstance2 = ((string)fabricObjectIdValue2);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.FabricObjectId = fabricObjectIdInstance2;
-                                        }
-                                        
                                         JToken lastReplicatedTimeValue2 = customSettingValue["lastReplicatedTime"];
                                         if (lastReplicatedTimeValue2 != null && lastReplicatedTimeValue2.Type != JTokenType.Null)
                                         {
                                             string lastReplicatedTimeInstance2 = ((string)lastReplicatedTimeValue2);
                                             hyperVReplicaAzureProviderSpecificSettingsInstance.LastReplicatedTime = lastReplicatedTimeInstance2;
-                                        }
-                                        
-                                        JToken lastSuccessfulFailoverTimeValue2 = customSettingValue["lastSuccessfulFailoverTime"];
-                                        if (lastSuccessfulFailoverTimeValue2 != null && lastSuccessfulFailoverTimeValue2.Type != JTokenType.Null)
-                                        {
-                                            string lastSuccessfulFailoverTimeInstance2 = ((string)lastSuccessfulFailoverTimeValue2);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.LastSuccessfulFailoverTime = lastSuccessfulFailoverTimeInstance2;
-                                        }
-                                        
-                                        JToken lastSuccessfulTestFailoverTimeValue2 = customSettingValue["lastSuccessfulTestFailoverTime"];
-                                        if (lastSuccessfulTestFailoverTimeValue2 != null && lastSuccessfulTestFailoverTimeValue2.Type != JTokenType.Null)
-                                        {
-                                            string lastSuccessfulTestFailoverTimeInstance2 = ((string)lastSuccessfulTestFailoverTimeValue2);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.LastSuccessfulTestFailoverTime = lastSuccessfulTestFailoverTimeInstance2;
                                         }
                                         
                                         JToken networkPropertiesArray2 = customSettingValue["networkProperties"];
@@ -4695,6 +4885,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.FriendlyName = friendlyNameInstance;
                                 }
                                 
+                                JToken protectedItemTypeValue = propertiesValue["protectedItemType"];
+                                if (protectedItemTypeValue != null && protectedItemTypeValue.Type != JTokenType.Null)
+                                {
+                                    string protectedItemTypeInstance = ((string)protectedItemTypeValue);
+                                    propertiesInstance.ProtectedItemType = protectedItemTypeInstance;
+                                }
+                                
+                                JToken protectedItemSourceIdValue = propertiesValue["protectedItemSourceId"];
+                                if (protectedItemSourceIdValue != null && protectedItemSourceIdValue.Type != JTokenType.Null)
+                                {
+                                    string protectedItemSourceIdInstance = ((string)protectedItemSourceIdValue);
+                                    propertiesInstance.ProtectedItemSourceId = protectedItemSourceIdInstance;
+                                }
+                                
                                 JToken recoveryProviderNameValue = propertiesValue["recoveryProviderName"];
                                 if (recoveryProviderNameValue != null && recoveryProviderNameValue.Type != JTokenType.Null)
                                 {
@@ -4747,6 +4951,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.ReplicationHealth = replicationHealthInstance;
                                 }
                                 
+                                JToken replicationHealthErrorsValue = propertiesValue["replicationHealthErrors"];
+                                if (replicationHealthErrorsValue != null && replicationHealthErrorsValue.Type != JTokenType.Null)
+                                {
+                                    List<HealthError> replicationHealthErrorsInstance = ((string)replicationHealthErrorsValue);
+                                    propertiesInstance.ReplicationHealthErrors = replicationHealthErrorsInstance;
+                                }
+                                
                                 JToken replicationProviderValue = propertiesValue["replicationProvider"];
                                 if (replicationProviderValue != null && replicationProviderValue.Type != JTokenType.Null)
                                 {
@@ -4768,6 +4979,27 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.PolicyFriendlyName = policyFriendlyNameInstance;
                                 }
                                 
+                                JToken lastSuccessfulFailoverTimeValue = propertiesValue["lastSuccessfulFailoverTime"];
+                                if (lastSuccessfulFailoverTimeValue != null && lastSuccessfulFailoverTimeValue.Type != JTokenType.Null)
+                                {
+                                    string lastSuccessfulFailoverTimeInstance = ((string)lastSuccessfulFailoverTimeValue);
+                                    propertiesInstance.LastSuccessfulFailoverTime = lastSuccessfulFailoverTimeInstance;
+                                }
+                                
+                                JToken lastSuccessfulTestFailoverTimeValue = propertiesValue["lastSuccessfulTestFailoverTime"];
+                                if (lastSuccessfulTestFailoverTimeValue != null && lastSuccessfulTestFailoverTimeValue.Type != JTokenType.Null)
+                                {
+                                    string lastSuccessfulTestFailoverTimeInstance = ((string)lastSuccessfulTestFailoverTimeValue);
+                                    propertiesInstance.LastSuccessfulTestFailoverTime = lastSuccessfulTestFailoverTimeInstance;
+                                }
+                                
+                                JToken currentScenarioValue = propertiesValue["currentScenario"];
+                                if (currentScenarioValue != null && currentScenarioValue.Type != JTokenType.Null)
+                                {
+                                    string currentScenarioInstance = ((string)currentScenarioValue);
+                                    propertiesInstance.CurrentScenario = currentScenarioInstance;
+                                }
+                                
                                 JToken customSettingValue = propertiesValue["customSetting"];
                                 if (customSettingValue != null && customSettingValue.Type != JTokenType.Null)
                                 {
@@ -4776,13 +5008,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     {
                                         HyperVReplicaProviderSpecificSettings hyperVReplicaProviderSpecificSettingsInstance = new HyperVReplicaProviderSpecificSettings();
                                         
-                                        JToken fabricObjectIdValue = customSettingValue["fabricObjectId"];
-                                        if (fabricObjectIdValue != null && fabricObjectIdValue.Type != JTokenType.Null)
-                                        {
-                                            string fabricObjectIdInstance = ((string)fabricObjectIdValue);
-                                            hyperVReplicaProviderSpecificSettingsInstance.FabricObjectId = fabricObjectIdInstance;
-                                        }
-                                        
                                         JToken lastReplicatedTimeValue = customSettingValue["lastReplicatedTime"];
                                         if (lastReplicatedTimeValue != null && lastReplicatedTimeValue.Type != JTokenType.Null)
                                         {
@@ -4790,18 +5015,42 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             hyperVReplicaProviderSpecificSettingsInstance.LastReplicatedTime = lastReplicatedTimeInstance;
                                         }
                                         
-                                        JToken lastSuccessfulFailoverTimeValue = customSettingValue["lastSuccessfulFailoverTime"];
-                                        if (lastSuccessfulFailoverTimeValue != null && lastSuccessfulFailoverTimeValue.Type != JTokenType.Null)
+                                        JToken vMDiskDetailsArray = customSettingValue["vMDiskDetails"];
+                                        if (vMDiskDetailsArray != null && vMDiskDetailsArray.Type != JTokenType.Null)
                                         {
-                                            string lastSuccessfulFailoverTimeInstance = ((string)lastSuccessfulFailoverTimeValue);
-                                            hyperVReplicaProviderSpecificSettingsInstance.LastSuccessfulFailoverTime = lastSuccessfulFailoverTimeInstance;
-                                        }
-                                        
-                                        JToken lastSuccessfulTestFailoverTimeValue = customSettingValue["lastSuccessfulTestFailoverTime"];
-                                        if (lastSuccessfulTestFailoverTimeValue != null && lastSuccessfulTestFailoverTimeValue.Type != JTokenType.Null)
-                                        {
-                                            string lastSuccessfulTestFailoverTimeInstance = ((string)lastSuccessfulTestFailoverTimeValue);
-                                            hyperVReplicaProviderSpecificSettingsInstance.LastSuccessfulTestFailoverTime = lastSuccessfulTestFailoverTimeInstance;
+                                            foreach (JToken vMDiskDetailsValue in ((JArray)vMDiskDetailsArray))
+                                            {
+                                                OnPremVmDiskDetails onPremVmDiskDetailsInstance = new OnPremVmDiskDetails();
+                                                hyperVReplicaProviderSpecificSettingsInstance.VMDiskDetails.Add(onPremVmDiskDetailsInstance);
+                                                
+                                                JToken maxSizeMBValue = vMDiskDetailsValue["maxSizeMB"];
+                                                if (maxSizeMBValue != null && maxSizeMBValue.Type != JTokenType.Null)
+                                                {
+                                                    ulong maxSizeMBInstance = ((ulong)maxSizeMBValue);
+                                                    onPremVmDiskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
+                                                }
+                                                
+                                                JToken vHDStatusValue = vMDiskDetailsValue["vHDStatus"];
+                                                if (vHDStatusValue != null && vHDStatusValue.Type != JTokenType.Null)
+                                                {
+                                                    string vHDStatusInstance = ((string)vHDStatusValue);
+                                                    onPremVmDiskDetailsInstance.VHDStatus = vHDStatusInstance;
+                                                }
+                                                
+                                                JToken vHDIdValue = vMDiskDetailsValue["vHDId"];
+                                                if (vHDIdValue != null && vHDIdValue.Type != JTokenType.Null)
+                                                {
+                                                    Guid vHDIdInstance = Guid.Parse(((string)vHDIdValue));
+                                                    onPremVmDiskDetailsInstance.VHDId = vHDIdInstance;
+                                                }
+                                                
+                                                JToken vHDNameValue = vMDiskDetailsValue["vHDName"];
+                                                if (vHDNameValue != null && vHDNameValue.Type != JTokenType.Null)
+                                                {
+                                                    string vHDNameInstance = ((string)vHDNameValue);
+                                                    onPremVmDiskDetailsInstance.VHDName = vHDNameInstance;
+                                                }
+                                            }
                                         }
                                         
                                         JToken networkPropertiesArray = customSettingValue["networkProperties"];
@@ -4870,18 +5119,18 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 azureVMDiskDetailsInstance.OsDisk = osDiskInstance;
                                             }
                                             
-                                            JToken vHDIdValue = azureVMDiskDetailsValue["vHDId"];
-                                            if (vHDIdValue != null && vHDIdValue.Type != JTokenType.Null)
+                                            JToken vHDIdValue2 = azureVMDiskDetailsValue["vHDId"];
+                                            if (vHDIdValue2 != null && vHDIdValue2.Type != JTokenType.Null)
                                             {
-                                                string vHDIdInstance = ((string)vHDIdValue);
-                                                azureVMDiskDetailsInstance.VHDId = vHDIdInstance;
+                                                string vHDIdInstance2 = ((string)vHDIdValue2);
+                                                azureVMDiskDetailsInstance.VHDId = vHDIdInstance2;
                                             }
                                             
-                                            JToken maxSizeMBValue = azureVMDiskDetailsValue["maxSizeMB"];
-                                            if (maxSizeMBValue != null && maxSizeMBValue.Type != JTokenType.Null)
+                                            JToken maxSizeMBValue2 = azureVMDiskDetailsValue["maxSizeMB"];
+                                            if (maxSizeMBValue2 != null && maxSizeMBValue2.Type != JTokenType.Null)
                                             {
-                                                ulong maxSizeMBInstance = ((ulong)maxSizeMBValue);
-                                                azureVMDiskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
+                                                ulong maxSizeMBInstance2 = ((ulong)maxSizeMBValue2);
+                                                azureVMDiskDetailsInstance.MaxSizeMB = maxSizeMBInstance2;
                                             }
                                         }
                                         
@@ -4906,32 +5155,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             hyperVReplicaAzureProviderSpecificSettingsInstance.SelectedRecoveryAzureNetworkId = selectedRecoveryAzureNetworkIdInstance;
                                         }
                                         
-                                        JToken fabricObjectIdValue2 = customSettingValue["fabricObjectId"];
-                                        if (fabricObjectIdValue2 != null && fabricObjectIdValue2.Type != JTokenType.Null)
-                                        {
-                                            string fabricObjectIdInstance2 = ((string)fabricObjectIdValue2);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.FabricObjectId = fabricObjectIdInstance2;
-                                        }
-                                        
                                         JToken lastReplicatedTimeValue2 = customSettingValue["lastReplicatedTime"];
                                         if (lastReplicatedTimeValue2 != null && lastReplicatedTimeValue2.Type != JTokenType.Null)
                                         {
                                             string lastReplicatedTimeInstance2 = ((string)lastReplicatedTimeValue2);
                                             hyperVReplicaAzureProviderSpecificSettingsInstance.LastReplicatedTime = lastReplicatedTimeInstance2;
-                                        }
-                                        
-                                        JToken lastSuccessfulFailoverTimeValue2 = customSettingValue["lastSuccessfulFailoverTime"];
-                                        if (lastSuccessfulFailoverTimeValue2 != null && lastSuccessfulFailoverTimeValue2.Type != JTokenType.Null)
-                                        {
-                                            string lastSuccessfulFailoverTimeInstance2 = ((string)lastSuccessfulFailoverTimeValue2);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.LastSuccessfulFailoverTime = lastSuccessfulFailoverTimeInstance2;
-                                        }
-                                        
-                                        JToken lastSuccessfulTestFailoverTimeValue2 = customSettingValue["lastSuccessfulTestFailoverTime"];
-                                        if (lastSuccessfulTestFailoverTimeValue2 != null && lastSuccessfulTestFailoverTimeValue2.Type != JTokenType.Null)
-                                        {
-                                            string lastSuccessfulTestFailoverTimeInstance2 = ((string)lastSuccessfulTestFailoverTimeValue2);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.LastSuccessfulTestFailoverTime = lastSuccessfulTestFailoverTimeInstance2;
                                         }
                                         
                                         JToken networkPropertiesArray2 = customSettingValue["networkProperties"];
@@ -5191,6 +5419,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.FriendlyName = friendlyNameInstance;
                                 }
                                 
+                                JToken protectedItemTypeValue = propertiesValue["protectedItemType"];
+                                if (protectedItemTypeValue != null && protectedItemTypeValue.Type != JTokenType.Null)
+                                {
+                                    string protectedItemTypeInstance = ((string)protectedItemTypeValue);
+                                    propertiesInstance.ProtectedItemType = protectedItemTypeInstance;
+                                }
+                                
+                                JToken protectedItemSourceIdValue = propertiesValue["protectedItemSourceId"];
+                                if (protectedItemSourceIdValue != null && protectedItemSourceIdValue.Type != JTokenType.Null)
+                                {
+                                    string protectedItemSourceIdInstance = ((string)protectedItemSourceIdValue);
+                                    propertiesInstance.ProtectedItemSourceId = protectedItemSourceIdInstance;
+                                }
+                                
                                 JToken recoveryProviderNameValue = propertiesValue["recoveryProviderName"];
                                 if (recoveryProviderNameValue != null && recoveryProviderNameValue.Type != JTokenType.Null)
                                 {
@@ -5243,6 +5485,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.ReplicationHealth = replicationHealthInstance;
                                 }
                                 
+                                JToken replicationHealthErrorsValue = propertiesValue["replicationHealthErrors"];
+                                if (replicationHealthErrorsValue != null && replicationHealthErrorsValue.Type != JTokenType.Null)
+                                {
+                                    List<HealthError> replicationHealthErrorsInstance = ((string)replicationHealthErrorsValue);
+                                    propertiesInstance.ReplicationHealthErrors = replicationHealthErrorsInstance;
+                                }
+                                
                                 JToken replicationProviderValue = propertiesValue["replicationProvider"];
                                 if (replicationProviderValue != null && replicationProviderValue.Type != JTokenType.Null)
                                 {
@@ -5264,6 +5513,27 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.PolicyFriendlyName = policyFriendlyNameInstance;
                                 }
                                 
+                                JToken lastSuccessfulFailoverTimeValue = propertiesValue["lastSuccessfulFailoverTime"];
+                                if (lastSuccessfulFailoverTimeValue != null && lastSuccessfulFailoverTimeValue.Type != JTokenType.Null)
+                                {
+                                    string lastSuccessfulFailoverTimeInstance = ((string)lastSuccessfulFailoverTimeValue);
+                                    propertiesInstance.LastSuccessfulFailoverTime = lastSuccessfulFailoverTimeInstance;
+                                }
+                                
+                                JToken lastSuccessfulTestFailoverTimeValue = propertiesValue["lastSuccessfulTestFailoverTime"];
+                                if (lastSuccessfulTestFailoverTimeValue != null && lastSuccessfulTestFailoverTimeValue.Type != JTokenType.Null)
+                                {
+                                    string lastSuccessfulTestFailoverTimeInstance = ((string)lastSuccessfulTestFailoverTimeValue);
+                                    propertiesInstance.LastSuccessfulTestFailoverTime = lastSuccessfulTestFailoverTimeInstance;
+                                }
+                                
+                                JToken currentScenarioValue = propertiesValue["currentScenario"];
+                                if (currentScenarioValue != null && currentScenarioValue.Type != JTokenType.Null)
+                                {
+                                    string currentScenarioInstance = ((string)currentScenarioValue);
+                                    propertiesInstance.CurrentScenario = currentScenarioInstance;
+                                }
+                                
                                 JToken customSettingValue = propertiesValue["customSetting"];
                                 if (customSettingValue != null && customSettingValue.Type != JTokenType.Null)
                                 {
@@ -5272,13 +5542,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     {
                                         HyperVReplicaProviderSpecificSettings hyperVReplicaProviderSpecificSettingsInstance = new HyperVReplicaProviderSpecificSettings();
                                         
-                                        JToken fabricObjectIdValue = customSettingValue["fabricObjectId"];
-                                        if (fabricObjectIdValue != null && fabricObjectIdValue.Type != JTokenType.Null)
-                                        {
-                                            string fabricObjectIdInstance = ((string)fabricObjectIdValue);
-                                            hyperVReplicaProviderSpecificSettingsInstance.FabricObjectId = fabricObjectIdInstance;
-                                        }
-                                        
                                         JToken lastReplicatedTimeValue = customSettingValue["lastReplicatedTime"];
                                         if (lastReplicatedTimeValue != null && lastReplicatedTimeValue.Type != JTokenType.Null)
                                         {
@@ -5286,18 +5549,42 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             hyperVReplicaProviderSpecificSettingsInstance.LastReplicatedTime = lastReplicatedTimeInstance;
                                         }
                                         
-                                        JToken lastSuccessfulFailoverTimeValue = customSettingValue["lastSuccessfulFailoverTime"];
-                                        if (lastSuccessfulFailoverTimeValue != null && lastSuccessfulFailoverTimeValue.Type != JTokenType.Null)
+                                        JToken vMDiskDetailsArray = customSettingValue["vMDiskDetails"];
+                                        if (vMDiskDetailsArray != null && vMDiskDetailsArray.Type != JTokenType.Null)
                                         {
-                                            string lastSuccessfulFailoverTimeInstance = ((string)lastSuccessfulFailoverTimeValue);
-                                            hyperVReplicaProviderSpecificSettingsInstance.LastSuccessfulFailoverTime = lastSuccessfulFailoverTimeInstance;
-                                        }
-                                        
-                                        JToken lastSuccessfulTestFailoverTimeValue = customSettingValue["lastSuccessfulTestFailoverTime"];
-                                        if (lastSuccessfulTestFailoverTimeValue != null && lastSuccessfulTestFailoverTimeValue.Type != JTokenType.Null)
-                                        {
-                                            string lastSuccessfulTestFailoverTimeInstance = ((string)lastSuccessfulTestFailoverTimeValue);
-                                            hyperVReplicaProviderSpecificSettingsInstance.LastSuccessfulTestFailoverTime = lastSuccessfulTestFailoverTimeInstance;
+                                            foreach (JToken vMDiskDetailsValue in ((JArray)vMDiskDetailsArray))
+                                            {
+                                                OnPremVmDiskDetails onPremVmDiskDetailsInstance = new OnPremVmDiskDetails();
+                                                hyperVReplicaProviderSpecificSettingsInstance.VMDiskDetails.Add(onPremVmDiskDetailsInstance);
+                                                
+                                                JToken maxSizeMBValue = vMDiskDetailsValue["maxSizeMB"];
+                                                if (maxSizeMBValue != null && maxSizeMBValue.Type != JTokenType.Null)
+                                                {
+                                                    ulong maxSizeMBInstance = ((ulong)maxSizeMBValue);
+                                                    onPremVmDiskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
+                                                }
+                                                
+                                                JToken vHDStatusValue = vMDiskDetailsValue["vHDStatus"];
+                                                if (vHDStatusValue != null && vHDStatusValue.Type != JTokenType.Null)
+                                                {
+                                                    string vHDStatusInstance = ((string)vHDStatusValue);
+                                                    onPremVmDiskDetailsInstance.VHDStatus = vHDStatusInstance;
+                                                }
+                                                
+                                                JToken vHDIdValue = vMDiskDetailsValue["vHDId"];
+                                                if (vHDIdValue != null && vHDIdValue.Type != JTokenType.Null)
+                                                {
+                                                    Guid vHDIdInstance = Guid.Parse(((string)vHDIdValue));
+                                                    onPremVmDiskDetailsInstance.VHDId = vHDIdInstance;
+                                                }
+                                                
+                                                JToken vHDNameValue = vMDiskDetailsValue["vHDName"];
+                                                if (vHDNameValue != null && vHDNameValue.Type != JTokenType.Null)
+                                                {
+                                                    string vHDNameInstance = ((string)vHDNameValue);
+                                                    onPremVmDiskDetailsInstance.VHDName = vHDNameInstance;
+                                                }
+                                            }
                                         }
                                         
                                         JToken networkPropertiesArray = customSettingValue["networkProperties"];
@@ -5366,18 +5653,18 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 azureVMDiskDetailsInstance.OsDisk = osDiskInstance;
                                             }
                                             
-                                            JToken vHDIdValue = azureVMDiskDetailsValue["vHDId"];
-                                            if (vHDIdValue != null && vHDIdValue.Type != JTokenType.Null)
+                                            JToken vHDIdValue2 = azureVMDiskDetailsValue["vHDId"];
+                                            if (vHDIdValue2 != null && vHDIdValue2.Type != JTokenType.Null)
                                             {
-                                                string vHDIdInstance = ((string)vHDIdValue);
-                                                azureVMDiskDetailsInstance.VHDId = vHDIdInstance;
+                                                string vHDIdInstance2 = ((string)vHDIdValue2);
+                                                azureVMDiskDetailsInstance.VHDId = vHDIdInstance2;
                                             }
                                             
-                                            JToken maxSizeMBValue = azureVMDiskDetailsValue["maxSizeMB"];
-                                            if (maxSizeMBValue != null && maxSizeMBValue.Type != JTokenType.Null)
+                                            JToken maxSizeMBValue2 = azureVMDiskDetailsValue["maxSizeMB"];
+                                            if (maxSizeMBValue2 != null && maxSizeMBValue2.Type != JTokenType.Null)
                                             {
-                                                ulong maxSizeMBInstance = ((ulong)maxSizeMBValue);
-                                                azureVMDiskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
+                                                ulong maxSizeMBInstance2 = ((ulong)maxSizeMBValue2);
+                                                azureVMDiskDetailsInstance.MaxSizeMB = maxSizeMBInstance2;
                                             }
                                         }
                                         
@@ -5402,32 +5689,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             hyperVReplicaAzureProviderSpecificSettingsInstance.SelectedRecoveryAzureNetworkId = selectedRecoveryAzureNetworkIdInstance;
                                         }
                                         
-                                        JToken fabricObjectIdValue2 = customSettingValue["fabricObjectId"];
-                                        if (fabricObjectIdValue2 != null && fabricObjectIdValue2.Type != JTokenType.Null)
-                                        {
-                                            string fabricObjectIdInstance2 = ((string)fabricObjectIdValue2);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.FabricObjectId = fabricObjectIdInstance2;
-                                        }
-                                        
                                         JToken lastReplicatedTimeValue2 = customSettingValue["lastReplicatedTime"];
                                         if (lastReplicatedTimeValue2 != null && lastReplicatedTimeValue2.Type != JTokenType.Null)
                                         {
                                             string lastReplicatedTimeInstance2 = ((string)lastReplicatedTimeValue2);
                                             hyperVReplicaAzureProviderSpecificSettingsInstance.LastReplicatedTime = lastReplicatedTimeInstance2;
-                                        }
-                                        
-                                        JToken lastSuccessfulFailoverTimeValue2 = customSettingValue["lastSuccessfulFailoverTime"];
-                                        if (lastSuccessfulFailoverTimeValue2 != null && lastSuccessfulFailoverTimeValue2.Type != JTokenType.Null)
-                                        {
-                                            string lastSuccessfulFailoverTimeInstance2 = ((string)lastSuccessfulFailoverTimeValue2);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.LastSuccessfulFailoverTime = lastSuccessfulFailoverTimeInstance2;
-                                        }
-                                        
-                                        JToken lastSuccessfulTestFailoverTimeValue2 = customSettingValue["lastSuccessfulTestFailoverTime"];
-                                        if (lastSuccessfulTestFailoverTimeValue2 != null && lastSuccessfulTestFailoverTimeValue2.Type != JTokenType.Null)
-                                        {
-                                            string lastSuccessfulTestFailoverTimeInstance2 = ((string)lastSuccessfulTestFailoverTimeValue2);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.LastSuccessfulTestFailoverTime = lastSuccessfulTestFailoverTimeInstance2;
                                         }
                                         
                                         JToken networkPropertiesArray2 = customSettingValue["networkProperties"];
@@ -5734,6 +6000,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             propertiesInstance.FriendlyName = friendlyNameInstance;
                                         }
                                         
+                                        JToken protectedItemTypeValue = propertiesValue["protectedItemType"];
+                                        if (protectedItemTypeValue != null && protectedItemTypeValue.Type != JTokenType.Null)
+                                        {
+                                            string protectedItemTypeInstance = ((string)protectedItemTypeValue);
+                                            propertiesInstance.ProtectedItemType = protectedItemTypeInstance;
+                                        }
+                                        
+                                        JToken protectedItemSourceIdValue = propertiesValue["protectedItemSourceId"];
+                                        if (protectedItemSourceIdValue != null && protectedItemSourceIdValue.Type != JTokenType.Null)
+                                        {
+                                            string protectedItemSourceIdInstance = ((string)protectedItemSourceIdValue);
+                                            propertiesInstance.ProtectedItemSourceId = protectedItemSourceIdInstance;
+                                        }
+                                        
                                         JToken recoveryProviderNameValue = propertiesValue["recoveryProviderName"];
                                         if (recoveryProviderNameValue != null && recoveryProviderNameValue.Type != JTokenType.Null)
                                         {
@@ -5786,6 +6066,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             propertiesInstance.ReplicationHealth = replicationHealthInstance;
                                         }
                                         
+                                        JToken replicationHealthErrorsValue = propertiesValue["replicationHealthErrors"];
+                                        if (replicationHealthErrorsValue != null && replicationHealthErrorsValue.Type != JTokenType.Null)
+                                        {
+                                            List<HealthError> replicationHealthErrorsInstance = ((string)replicationHealthErrorsValue);
+                                            propertiesInstance.ReplicationHealthErrors = replicationHealthErrorsInstance;
+                                        }
+                                        
                                         JToken replicationProviderValue = propertiesValue["replicationProvider"];
                                         if (replicationProviderValue != null && replicationProviderValue.Type != JTokenType.Null)
                                         {
@@ -5807,6 +6094,27 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             propertiesInstance.PolicyFriendlyName = policyFriendlyNameInstance;
                                         }
                                         
+                                        JToken lastSuccessfulFailoverTimeValue = propertiesValue["lastSuccessfulFailoverTime"];
+                                        if (lastSuccessfulFailoverTimeValue != null && lastSuccessfulFailoverTimeValue.Type != JTokenType.Null)
+                                        {
+                                            string lastSuccessfulFailoverTimeInstance = ((string)lastSuccessfulFailoverTimeValue);
+                                            propertiesInstance.LastSuccessfulFailoverTime = lastSuccessfulFailoverTimeInstance;
+                                        }
+                                        
+                                        JToken lastSuccessfulTestFailoverTimeValue = propertiesValue["lastSuccessfulTestFailoverTime"];
+                                        if (lastSuccessfulTestFailoverTimeValue != null && lastSuccessfulTestFailoverTimeValue.Type != JTokenType.Null)
+                                        {
+                                            string lastSuccessfulTestFailoverTimeInstance = ((string)lastSuccessfulTestFailoverTimeValue);
+                                            propertiesInstance.LastSuccessfulTestFailoverTime = lastSuccessfulTestFailoverTimeInstance;
+                                        }
+                                        
+                                        JToken currentScenarioValue = propertiesValue["currentScenario"];
+                                        if (currentScenarioValue != null && currentScenarioValue.Type != JTokenType.Null)
+                                        {
+                                            string currentScenarioInstance = ((string)currentScenarioValue);
+                                            propertiesInstance.CurrentScenario = currentScenarioInstance;
+                                        }
+                                        
                                         JToken customSettingValue = propertiesValue["customSetting"];
                                         if (customSettingValue != null && customSettingValue.Type != JTokenType.Null)
                                         {
@@ -5815,13 +6123,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             {
                                                 HyperVReplicaProviderSpecificSettings hyperVReplicaProviderSpecificSettingsInstance = new HyperVReplicaProviderSpecificSettings();
                                                 
-                                                JToken fabricObjectIdValue = customSettingValue["fabricObjectId"];
-                                                if (fabricObjectIdValue != null && fabricObjectIdValue.Type != JTokenType.Null)
-                                                {
-                                                    string fabricObjectIdInstance = ((string)fabricObjectIdValue);
-                                                    hyperVReplicaProviderSpecificSettingsInstance.FabricObjectId = fabricObjectIdInstance;
-                                                }
-                                                
                                                 JToken lastReplicatedTimeValue = customSettingValue["lastReplicatedTime"];
                                                 if (lastReplicatedTimeValue != null && lastReplicatedTimeValue.Type != JTokenType.Null)
                                                 {
@@ -5829,18 +6130,42 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     hyperVReplicaProviderSpecificSettingsInstance.LastReplicatedTime = lastReplicatedTimeInstance;
                                                 }
                                                 
-                                                JToken lastSuccessfulFailoverTimeValue = customSettingValue["lastSuccessfulFailoverTime"];
-                                                if (lastSuccessfulFailoverTimeValue != null && lastSuccessfulFailoverTimeValue.Type != JTokenType.Null)
+                                                JToken vMDiskDetailsArray = customSettingValue["vMDiskDetails"];
+                                                if (vMDiskDetailsArray != null && vMDiskDetailsArray.Type != JTokenType.Null)
                                                 {
-                                                    string lastSuccessfulFailoverTimeInstance = ((string)lastSuccessfulFailoverTimeValue);
-                                                    hyperVReplicaProviderSpecificSettingsInstance.LastSuccessfulFailoverTime = lastSuccessfulFailoverTimeInstance;
-                                                }
-                                                
-                                                JToken lastSuccessfulTestFailoverTimeValue = customSettingValue["lastSuccessfulTestFailoverTime"];
-                                                if (lastSuccessfulTestFailoverTimeValue != null && lastSuccessfulTestFailoverTimeValue.Type != JTokenType.Null)
-                                                {
-                                                    string lastSuccessfulTestFailoverTimeInstance = ((string)lastSuccessfulTestFailoverTimeValue);
-                                                    hyperVReplicaProviderSpecificSettingsInstance.LastSuccessfulTestFailoverTime = lastSuccessfulTestFailoverTimeInstance;
+                                                    foreach (JToken vMDiskDetailsValue in ((JArray)vMDiskDetailsArray))
+                                                    {
+                                                        OnPremVmDiskDetails onPremVmDiskDetailsInstance = new OnPremVmDiskDetails();
+                                                        hyperVReplicaProviderSpecificSettingsInstance.VMDiskDetails.Add(onPremVmDiskDetailsInstance);
+                                                        
+                                                        JToken maxSizeMBValue = vMDiskDetailsValue["maxSizeMB"];
+                                                        if (maxSizeMBValue != null && maxSizeMBValue.Type != JTokenType.Null)
+                                                        {
+                                                            ulong maxSizeMBInstance = ((ulong)maxSizeMBValue);
+                                                            onPremVmDiskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
+                                                        }
+                                                        
+                                                        JToken vHDStatusValue = vMDiskDetailsValue["vHDStatus"];
+                                                        if (vHDStatusValue != null && vHDStatusValue.Type != JTokenType.Null)
+                                                        {
+                                                            string vHDStatusInstance = ((string)vHDStatusValue);
+                                                            onPremVmDiskDetailsInstance.VHDStatus = vHDStatusInstance;
+                                                        }
+                                                        
+                                                        JToken vHDIdValue = vMDiskDetailsValue["vHDId"];
+                                                        if (vHDIdValue != null && vHDIdValue.Type != JTokenType.Null)
+                                                        {
+                                                            Guid vHDIdInstance = Guid.Parse(((string)vHDIdValue));
+                                                            onPremVmDiskDetailsInstance.VHDId = vHDIdInstance;
+                                                        }
+                                                        
+                                                        JToken vHDNameValue = vMDiskDetailsValue["vHDName"];
+                                                        if (vHDNameValue != null && vHDNameValue.Type != JTokenType.Null)
+                                                        {
+                                                            string vHDNameInstance = ((string)vHDNameValue);
+                                                            onPremVmDiskDetailsInstance.VHDName = vHDNameInstance;
+                                                        }
+                                                    }
                                                 }
                                                 
                                                 JToken networkPropertiesArray = customSettingValue["networkProperties"];
@@ -5909,18 +6234,18 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                         azureVMDiskDetailsInstance.OsDisk = osDiskInstance;
                                                     }
                                                     
-                                                    JToken vHDIdValue = azureVMDiskDetailsValue["vHDId"];
-                                                    if (vHDIdValue != null && vHDIdValue.Type != JTokenType.Null)
+                                                    JToken vHDIdValue2 = azureVMDiskDetailsValue["vHDId"];
+                                                    if (vHDIdValue2 != null && vHDIdValue2.Type != JTokenType.Null)
                                                     {
-                                                        string vHDIdInstance = ((string)vHDIdValue);
-                                                        azureVMDiskDetailsInstance.VHDId = vHDIdInstance;
+                                                        string vHDIdInstance2 = ((string)vHDIdValue2);
+                                                        azureVMDiskDetailsInstance.VHDId = vHDIdInstance2;
                                                     }
                                                     
-                                                    JToken maxSizeMBValue = azureVMDiskDetailsValue["maxSizeMB"];
-                                                    if (maxSizeMBValue != null && maxSizeMBValue.Type != JTokenType.Null)
+                                                    JToken maxSizeMBValue2 = azureVMDiskDetailsValue["maxSizeMB"];
+                                                    if (maxSizeMBValue2 != null && maxSizeMBValue2.Type != JTokenType.Null)
                                                     {
-                                                        ulong maxSizeMBInstance = ((ulong)maxSizeMBValue);
-                                                        azureVMDiskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
+                                                        ulong maxSizeMBInstance2 = ((ulong)maxSizeMBValue2);
+                                                        azureVMDiskDetailsInstance.MaxSizeMB = maxSizeMBInstance2;
                                                     }
                                                 }
                                                 
@@ -5945,32 +6270,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     hyperVReplicaAzureProviderSpecificSettingsInstance.SelectedRecoveryAzureNetworkId = selectedRecoveryAzureNetworkIdInstance;
                                                 }
                                                 
-                                                JToken fabricObjectIdValue2 = customSettingValue["fabricObjectId"];
-                                                if (fabricObjectIdValue2 != null && fabricObjectIdValue2.Type != JTokenType.Null)
-                                                {
-                                                    string fabricObjectIdInstance2 = ((string)fabricObjectIdValue2);
-                                                    hyperVReplicaAzureProviderSpecificSettingsInstance.FabricObjectId = fabricObjectIdInstance2;
-                                                }
-                                                
                                                 JToken lastReplicatedTimeValue2 = customSettingValue["lastReplicatedTime"];
                                                 if (lastReplicatedTimeValue2 != null && lastReplicatedTimeValue2.Type != JTokenType.Null)
                                                 {
                                                     string lastReplicatedTimeInstance2 = ((string)lastReplicatedTimeValue2);
                                                     hyperVReplicaAzureProviderSpecificSettingsInstance.LastReplicatedTime = lastReplicatedTimeInstance2;
-                                                }
-                                                
-                                                JToken lastSuccessfulFailoverTimeValue2 = customSettingValue["lastSuccessfulFailoverTime"];
-                                                if (lastSuccessfulFailoverTimeValue2 != null && lastSuccessfulFailoverTimeValue2.Type != JTokenType.Null)
-                                                {
-                                                    string lastSuccessfulFailoverTimeInstance2 = ((string)lastSuccessfulFailoverTimeValue2);
-                                                    hyperVReplicaAzureProviderSpecificSettingsInstance.LastSuccessfulFailoverTime = lastSuccessfulFailoverTimeInstance2;
-                                                }
-                                                
-                                                JToken lastSuccessfulTestFailoverTimeValue2 = customSettingValue["lastSuccessfulTestFailoverTime"];
-                                                if (lastSuccessfulTestFailoverTimeValue2 != null && lastSuccessfulTestFailoverTimeValue2.Type != JTokenType.Null)
-                                                {
-                                                    string lastSuccessfulTestFailoverTimeInstance2 = ((string)lastSuccessfulTestFailoverTimeValue2);
-                                                    hyperVReplicaAzureProviderSpecificSettingsInstance.LastSuccessfulTestFailoverTime = lastSuccessfulTestFailoverTimeInstance2;
                                                 }
                                                 
                                                 JToken networkPropertiesArray2 = customSettingValue["networkProperties"];

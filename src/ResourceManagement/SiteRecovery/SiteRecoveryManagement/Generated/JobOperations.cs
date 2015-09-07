@@ -324,9 +324,15 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     JObject resumeJobParamsValue = new JObject();
                     requestDoc = resumeJobParamsValue;
                     
-                    if (resumeJobParameters.Comments != null)
+                    if (resumeJobParameters.Properties != null)
                     {
-                        resumeJobParamsValue["Comments"] = resumeJobParameters.Comments;
+                        JObject propertiesValue = new JObject();
+                        resumeJobParamsValue["properties"] = propertiesValue;
+                        
+                        if (resumeJobParameters.Properties.Comments != null)
+                        {
+                            propertiesValue["comments"] = resumeJobParameters.Properties.Comments;
+                        }
                     }
                 }
                 

@@ -43,17 +43,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._azureVMDiskDetails = value; }
         }
         
-        private string _fabricObjectId;
-        
-        /// <summary>
-        /// Optional. Gets or sets the id of the object in fabric.
-        /// </summary>
-        public string FabricObjectId
-        {
-            get { return this._fabricObjectId; }
-            set { this._fabricObjectId = value; }
-        }
-        
         private string _lastReplicatedTime;
         
         /// <summary>
@@ -63,28 +52,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         {
             get { return this._lastReplicatedTime; }
             set { this._lastReplicatedTime = value; }
-        }
-        
-        private string _lastSuccessfulFailoverTime;
-        
-        /// <summary>
-        /// Optional. Gets or sets the Last successful failover time.
-        /// </summary>
-        public string LastSuccessfulFailoverTime
-        {
-            get { return this._lastSuccessfulFailoverTime; }
-            set { this._lastSuccessfulFailoverTime = value; }
-        }
-        
-        private string _lastSuccessfulTestFailoverTime;
-        
-        /// <summary>
-        /// Optional. Gets or sets the Last successful test failover time.
-        /// </summary>
-        public string LastSuccessfulTestFailoverTime
-        {
-            get { return this._lastSuccessfulTestFailoverTime; }
-            set { this._lastSuccessfulTestFailoverTime = value; }
         }
         
         private IList<HyperVReplicaAzureProviderNetworkDetails> _networkDetails;
