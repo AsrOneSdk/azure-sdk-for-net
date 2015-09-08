@@ -725,7 +725,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     JToken kekCertExpiryDateValue = encryptionDetailsValue["kekCertExpiryDate"];
                                     if (kekCertExpiryDateValue != null && kekCertExpiryDateValue.Type != JTokenType.Null)
                                     {
-                                        DateTime kekCertExpiryDateInstance = ((DateTime)kekCertExpiryDateValue);
+                                        string kekCertExpiryDateInstance = ((string)kekCertExpiryDateValue);
                                         encryptionDetailsInstance.KekCertExpiryDate = kekCertExpiryDateInstance;
                                     }
                                 }
@@ -753,7 +753,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     JToken kekCertExpiryDateValue2 = rolloverEncryptionDetailsValue["kekCertExpiryDate"];
                                     if (kekCertExpiryDateValue2 != null && kekCertExpiryDateValue2.Type != JTokenType.Null)
                                     {
-                                        DateTime kekCertExpiryDateInstance2 = ((DateTime)kekCertExpiryDateValue2);
+                                        string kekCertExpiryDateInstance2 = ((string)kekCertExpiryDateValue2);
                                         rolloverEncryptionDetailsInstance.KekCertExpiryDate = kekCertExpiryDateInstance2;
                                     }
                                 }
@@ -979,7 +979,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     JToken kekCertExpiryDateValue = encryptionDetailsValue["kekCertExpiryDate"];
                                     if (kekCertExpiryDateValue != null && kekCertExpiryDateValue.Type != JTokenType.Null)
                                     {
-                                        DateTime kekCertExpiryDateInstance = ((DateTime)kekCertExpiryDateValue);
+                                        string kekCertExpiryDateInstance = ((string)kekCertExpiryDateValue);
                                         encryptionDetailsInstance.KekCertExpiryDate = kekCertExpiryDateInstance;
                                     }
                                 }
@@ -1007,7 +1007,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     JToken kekCertExpiryDateValue2 = rolloverEncryptionDetailsValue["kekCertExpiryDate"];
                                     if (kekCertExpiryDateValue2 != null && kekCertExpiryDateValue2.Type != JTokenType.Null)
                                     {
-                                        DateTime kekCertExpiryDateInstance2 = ((DateTime)kekCertExpiryDateValue2);
+                                        string kekCertExpiryDateInstance2 = ((string)kekCertExpiryDateValue2);
                                         rolloverEncryptionDetailsInstance.KekCertExpiryDate = kekCertExpiryDateInstance2;
                                     }
                                 }
@@ -1493,7 +1493,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             JToken kekCertExpiryDateValue = encryptionDetailsValue["kekCertExpiryDate"];
                                             if (kekCertExpiryDateValue != null && kekCertExpiryDateValue.Type != JTokenType.Null)
                                             {
-                                                DateTime kekCertExpiryDateInstance = ((DateTime)kekCertExpiryDateValue);
+                                                string kekCertExpiryDateInstance = ((string)kekCertExpiryDateValue);
                                                 encryptionDetailsInstance.KekCertExpiryDate = kekCertExpiryDateInstance;
                                             }
                                         }
@@ -1521,7 +1521,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             JToken kekCertExpiryDateValue2 = rolloverEncryptionDetailsValue["kekCertExpiryDate"];
                                             if (kekCertExpiryDateValue2 != null && kekCertExpiryDateValue2.Type != JTokenType.Null)
                                             {
-                                                DateTime kekCertExpiryDateInstance2 = ((DateTime)kekCertExpiryDateValue2);
+                                                string kekCertExpiryDateInstance2 = ((string)kekCertExpiryDateValue2);
                                                 rolloverEncryptionDetailsInstance.KekCertExpiryDate = kekCertExpiryDateInstance2;
                                             }
                                         }

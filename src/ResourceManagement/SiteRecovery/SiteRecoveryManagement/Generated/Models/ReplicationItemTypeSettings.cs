@@ -21,41 +21,18 @@
 
 using System;
 using System.Linq;
-using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// The HyperV Azure failback input.
+    /// Provider specific entity details.
     /// </summary>
-    public partial class AzureFailbackInput : FailoverReplicationProviderSpecificInput
+    public partial class ReplicationItemTypeSettings
     {
-        private bool _createRecoveryVmIfDoesntExist;
-        
         /// <summary>
-        /// Optional. Secondary key encryption key certificate.
+        /// Initializes a new instance of the ReplicationItemTypeSettings class.
         /// </summary>
-        public bool CreateRecoveryVmIfDoesntExist
-        {
-            get { return this._createRecoveryVmIfDoesntExist; }
-            set { this._createRecoveryVmIfDoesntExist = value; }
-        }
-        
-        private bool _skipDataSync;
-        
-        /// <summary>
-        /// Optional. Secondary key encryption key certificate.
-        /// </summary>
-        public bool SkipDataSync
-        {
-            get { return this._skipDataSync; }
-            set { this._skipDataSync = value; }
-        }
-        
-        /// <summary>
-        /// Initializes a new instance of the AzureFailbackInput class.
-        /// </summary>
-        public AzureFailbackInput()
+        public ReplicationItemTypeSettings()
         {
         }
     }

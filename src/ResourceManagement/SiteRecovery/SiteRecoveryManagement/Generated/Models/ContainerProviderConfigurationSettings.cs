@@ -21,31 +21,19 @@
 
 using System;
 using System.Linq;
-using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// A standard service response for long running operations.
+    /// Container provider specific input.
     /// </summary>
-    public partial class RecoveryPlanOperationResponse : LongRunningOperationResponse
+    public partial class ContainerProviderConfigurationSettings
     {
-        private RecoveryPlan _recoveryPlan;
-        
         /// <summary>
-        /// Optional. The Recovery Plan.
+        /// Initializes a new instance of the
+        /// ContainerProviderConfigurationSettings class.
         /// </summary>
-        public RecoveryPlan RecoveryPlan
-        {
-            get { return this._recoveryPlan; }
-            set { this._recoveryPlan = value; }
-        }
-        
-        /// <summary>
-        /// Initializes a new instance of the RecoveryPlanOperationResponse
-        /// class.
-        /// </summary>
-        public RecoveryPlanOperationResponse()
+        public ContainerProviderConfigurationSettings()
         {
         }
     }

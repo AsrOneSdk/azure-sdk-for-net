@@ -20,54 +20,57 @@
 // code is regenerated.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using Hyak.Common;
 using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// The definition of a recovery plan planned failover request object.
+    /// Hyper V Replica Provider specific entity details.
     /// </summary>
-    public partial class RpPlannedFailoverRequest
+    public partial class VirtualMachineDetails : ReplicationItemTypeSettings
     {
-        private string _failoverDirection;
+        private IList<DiskDetails> _diskDetailsList;
         
         /// <summary>
-        /// Optional. Failover direction.
+        /// Optional. Gets or sets the DiskDetailsList.
         /// </summary>
-        public string FailoverDirection
+        public IList<DiskDetails> DiskDetailsList
         {
-            get { return this._failoverDirection; }
-            set { this._failoverDirection = value; }
+            get { return this._diskDetailsList; }
+            set { this._diskDetailsList = value; }
         }
         
-        private string _replicationProvider;
+        private string _generation;
         
         /// <summary>
-        /// Optional. Replication provider name.
+        /// Optional. Gets or sets the Generation.
         /// </summary>
-        public string ReplicationProvider
+        public string Generation
         {
-            get { return this._replicationProvider; }
-            set { this._replicationProvider = value; }
+            get { return this._generation; }
+            set { this._generation = value; }
         }
         
-        private FailoverReplicationProviderSpecificInput _replicationProviderSettings;
+        private OSDetails _oSDetails;
         
         /// <summary>
-        /// Optional. Replication provider settings.
+        /// Optional. Gets or sets the OSDetails.
         /// </summary>
-        public FailoverReplicationProviderSpecificInput ReplicationProviderSettings
+        public OSDetails OSDetails
         {
-            get { return this._replicationProviderSettings; }
-            set { this._replicationProviderSettings = value; }
+            get { return this._oSDetails; }
+            set { this._oSDetails = value; }
         }
         
         /// <summary>
-        /// Initializes a new instance of the RpPlannedFailoverRequest class.
+        /// Initializes a new instance of the VirtualMachineDetails class.
         /// </summary>
-        public RpPlannedFailoverRequest()
+        public VirtualMachineDetails()
         {
+            this.DiskDetailsList = new LazyList<DiskDetails>();
         }
     }
 }

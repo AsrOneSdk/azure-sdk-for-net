@@ -20,48 +20,33 @@
 // code is regenerated.
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using Hyak.Common;
 using Microsoft.Azure;
 using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// The response model for the list recoveryplans operation.
+    /// The response model for the fabric object
     /// </summary>
-    public partial class RecoveryPlanListResponse : AzureOperationResponse
+    public partial class ProtectableItemResponse : AzureOperationResponse
     {
-        private string _nextLink;
+        private ProtectableItem _protectableItem;
         
         /// <summary>
-        /// Optional. The nextLink value.
+        /// Optional. The ProtectableItem object
         /// </summary>
-        public string NextLink
+        public ProtectableItem ProtectableItem
         {
-            get { return this._nextLink; }
-            set { this._nextLink = value; }
-        }
-        
-        private IList<RecoveryPlan> _recoveryPlans;
-        
-        /// <summary>
-        /// Optional. The list of recoveryplans for the given cloud service and
-        /// resource.
-        /// </summary>
-        public IList<RecoveryPlan> RecoveryPlans
-        {
-            get { return this._recoveryPlans; }
-            set { this._recoveryPlans = value; }
+            get { return this._protectableItem; }
+            set { this._protectableItem = value; }
         }
         
         /// <summary>
-        /// Initializes a new instance of the RecoveryPlanListResponse class.
+        /// Initializes a new instance of the ProtectableItemResponse class.
         /// </summary>
-        public RecoveryPlanListResponse()
+        public ProtectableItemResponse()
         {
-            this.RecoveryPlans = new LazyList<RecoveryPlan>();
         }
     }
 }

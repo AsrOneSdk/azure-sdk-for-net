@@ -20,31 +20,47 @@
 // code is regenerated.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using Hyak.Common;
+using Microsoft.Azure;
+using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// Replication provider name.
+    /// The response model for the list replicated protected items.
     /// </summary>
-    public partial class ReplicationProviders
+    public partial class ProtectableItemListResponse : AzureOperationResponse
     {
-        private string _replicationProviderName;
+        private string _nextLink;
         
         /// <summary>
-        /// Optional. Replication provider name.
+        /// Optional. Next Link.
         /// </summary>
-        public string ReplicationProviderName
+        public string NextLink
         {
-            get { return this._replicationProviderName; }
-            set { this._replicationProviderName = value; }
+            get { return this._nextLink; }
+            set { this._nextLink = value; }
+        }
+        
+        private IList<ProtectableItem> _protectableItems;
+        
+        /// <summary>
+        /// Optional. The list of servers for the given vault.
+        /// </summary>
+        public IList<ProtectableItem> ProtectableItems
+        {
+            get { return this._protectableItems; }
+            set { this._protectableItems = value; }
         }
         
         /// <summary>
-        /// Initializes a new instance of the ReplicationProviders class.
+        /// Initializes a new instance of the ProtectableItemListResponse class.
         /// </summary>
-        public ReplicationProviders()
+        public ProtectableItemListResponse()
         {
+            this.ProtectableItems = new LazyList<ProtectableItem>();
         }
     }
 }

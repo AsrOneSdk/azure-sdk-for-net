@@ -21,41 +21,19 @@
 
 using System;
 using System.Linq;
+using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// The definition of a provider deletion object.
+    /// Replication Item Type specific settings.
     /// </summary>
-    public partial class RecoveryServicesProviderDeletionInputProperties
+    public partial class ReplicationGroupDetails : ReplicationItemTypeSettings
     {
-        private string _name;
-        
         /// <summary>
-        /// Optional. Unique Id of the provider.
+        /// Initializes a new instance of the ReplicationGroupDetails class.
         /// </summary>
-        public string Name
-        {
-            get { return this._name; }
-            set { this._name = value; }
-        }
-        
-        private string _removalMethod;
-        
-        /// <summary>
-        /// Optional. Value indicating whether purge is to be run or not.
-        /// </summary>
-        public string RemovalMethod
-        {
-            get { return this._removalMethod; }
-            set { this._removalMethod = value; }
-        }
-        
-        /// <summary>
-        /// Initializes a new instance of the
-        /// RecoveryServicesProviderDeletionInputProperties class.
-        /// </summary>
-        public RecoveryServicesProviderDeletionInputProperties()
+        public ReplicationGroupDetails()
         {
         }
     }

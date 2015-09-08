@@ -21,31 +21,19 @@
 
 using System;
 using System.Linq;
-using Microsoft.Azure;
-using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// The response model for the Recovery Plan object.
+    /// Container fabric specific settings.
     /// </summary>
-    public partial class RecoveryPlanResponse : AzureOperationResponse
+    public partial class ContainerFabricConfigurationSettings
     {
-        private RecoveryPlan _recoveryPlan;
-        
         /// <summary>
-        /// Optional. The recovery plan object for the given recovery plan name.
+        /// Initializes a new instance of the
+        /// ContainerFabricConfigurationSettings class.
         /// </summary>
-        public RecoveryPlan RecoveryPlan
-        {
-            get { return this._recoveryPlan; }
-            set { this._recoveryPlan = value; }
-        }
-        
-        /// <summary>
-        /// Initializes a new instance of the RecoveryPlanResponse class.
-        /// </summary>
-        public RecoveryPlanResponse()
+        public ContainerFabricConfigurationSettings()
         {
         }
     }

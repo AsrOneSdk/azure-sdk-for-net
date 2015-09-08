@@ -21,46 +21,63 @@
 
 using System;
 using System.Linq;
-using Microsoft.Azure;
-using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// The definition of a Recovery Plan object.
+    /// OS details.
     /// </summary>
-    public partial class RecoveryPlan : ResourceBaseExtended
+    public partial class OSDetails
     {
-        private RecoveryPlanProperties _customData;
+        private ulong _maxSizeMB;
         
         /// <summary>
-        /// Optional. Recovery Plan custom data.
+        /// Optional.
         /// </summary>
-        public RecoveryPlanProperties CustomData
+        public ulong MaxSizeMB
         {
-            get { return this._customData; }
-            set { this._customData = value; }
+            get { return this._maxSizeMB; }
+            set { this._maxSizeMB = value; }
+        }
+        
+        private string _oSEdition;
+        
+        /// <summary>
+        /// Optional.
+        /// </summary>
+        public string OSEdition
+        {
+            get { return this._oSEdition; }
+            set { this._oSEdition = value; }
+        }
+        
+        private string _osType;
+        
+        /// <summary>
+        /// Optional.
+        /// </summary>
+        public string OsType
+        {
+            get { return this._osType; }
+            set { this._osType = value; }
+        }
+        
+        private string _productType;
+        
+        /// <summary>
+        /// Optional.
+        /// </summary>
+        public string ProductType
+        {
+            get { return this._productType; }
+            set { this._productType = value; }
         }
         
         /// <summary>
-        /// Initializes a new instance of the RecoveryPlan class.
+        /// Initializes a new instance of the OSDetails class.
         /// </summary>
-        public RecoveryPlan()
+        public OSDetails()
         {
-        }
-        
-        /// <summary>
-        /// Initializes a new instance of the RecoveryPlan class with required
-        /// arguments.
-        /// </summary>
-        public RecoveryPlan(string location)
-            : this()
-        {
-            if (location == null)
-            {
-                throw new ArgumentNullException("location");
-            }
-            this.Location = location;
         }
     }
 }

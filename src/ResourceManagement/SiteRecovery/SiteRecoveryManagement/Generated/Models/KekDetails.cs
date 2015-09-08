@@ -29,13 +29,13 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class KekDetails
     {
-        private System.DateTime? _kekCertExpiryDate;
+        private string _kekCertExpiryDate;
         
         /// <summary>
         /// Optional. Gets or sets the key encryption key certificate expiry
         /// date.
         /// </summary>
-        public System.DateTime? KekCertExpiryDate
+        public string KekCertExpiryDate
         {
             get { return this._kekCertExpiryDate; }
             set { this._kekCertExpiryDate = value; }

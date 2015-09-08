@@ -32,15 +32,15 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class PairingDetails
     {
-        private string _associationStatus;
+        private string _configurationState;
         
         /// <summary>
         /// Optional. Association Status
         /// </summary>
-        public string AssociationStatus
+        public string ConfigurationState
         {
-            get { return this._associationStatus; }
-            set { this._associationStatus = value; }
+            get { return this._configurationState; }
+            set { this._configurationState = value; }
         }
         
         private string _health;
@@ -65,39 +65,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._healthErrorDetails = value; }
         }
         
-        private string _pairedFabricFriendlyName;
-        
-        /// <summary>
-        /// Optional. Paired fabric name.
-        /// </summary>
-        public string PairedFabricFriendlyName
-        {
-            get { return this._pairedFabricFriendlyName; }
-            set { this._pairedFabricFriendlyName = value; }
-        }
-        
-        private string _pairedProtectionContainerFriendlyName;
-        
-        /// <summary>
-        /// Optional. Friendly name of paired container.
-        /// </summary>
-        public string PairedProtectionContainerFriendlyName
-        {
-            get { return this._pairedProtectionContainerFriendlyName; }
-            set { this._pairedProtectionContainerFriendlyName = value; }
-        }
-        
-        private string _pairedProtectionContainerId;
-        
-        /// <summary>
-        /// Optional. Paired protection container ID.
-        /// </summary>
-        public string PairedProtectionContainerId
-        {
-            get { return this._pairedProtectionContainerId; }
-            set { this._pairedProtectionContainerId = value; }
-        }
-        
         private string _policyId;
         
         /// <summary>
@@ -109,26 +76,37 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._policyId = value; }
         }
         
-        private string _providerSpecificSettings;
+        private ContainerProviderConfigurationSettings _providerConfigurationSettings;
         
         /// <summary>
-        /// Optional. Provider specific provider details.
+        /// Optional. Association Status
         /// </summary>
-        public string ProviderSpecificSettings
+        public ContainerProviderConfigurationSettings ProviderConfigurationSettings
         {
-            get { return this._providerSpecificSettings; }
-            set { this._providerSpecificSettings = value; }
+            get { return this._providerConfigurationSettings; }
+            set { this._providerConfigurationSettings = value; }
         }
         
-        private string _role;
+        private string _targetProtectionContainerFriendlyName;
         
         /// <summary>
-        /// Optional. Pairing role.
+        /// Optional. Friendly name of paired container.
         /// </summary>
-        public string Role
+        public string TargetProtectionContainerFriendlyName
         {
-            get { return this._role; }
-            set { this._role = value; }
+            get { return this._targetProtectionContainerFriendlyName; }
+            set { this._targetProtectionContainerFriendlyName = value; }
+        }
+        
+        private string _targetProtectionContainerId;
+        
+        /// <summary>
+        /// Optional. Paired protection container ID.
+        /// </summary>
+        public string TargetProtectionContainerId
+        {
+            get { return this._targetProtectionContainerId; }
+            set { this._targetProtectionContainerId = value; }
         }
         
         /// <summary>

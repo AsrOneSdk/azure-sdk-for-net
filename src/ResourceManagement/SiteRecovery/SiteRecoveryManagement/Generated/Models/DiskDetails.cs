@@ -25,36 +25,58 @@ using System.Linq;
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// Policy details for pairing.
+    /// disk details.
     /// </summary>
-    public partial class PolicyDetails
+    public partial class DiskDetails
     {
-        private string _associationStatus;
+        private string _maxSizeMB;
         
         /// <summary>
-        /// Optional. Association Status
+        /// Optional.
         /// </summary>
-        public string AssociationStatus
+        public string MaxSizeMB
         {
-            get { return this._associationStatus; }
-            set { this._associationStatus = value; }
+            get { return this._maxSizeMB; }
+            set { this._maxSizeMB = value; }
         }
         
-        private string _policyId;
+        private string _vhdId;
         
         /// <summary>
-        /// Optional. Policy ARM Id.
+        /// Optional.
         /// </summary>
-        public string PolicyId
+        public string VhdId
         {
-            get { return this._policyId; }
-            set { this._policyId = value; }
+            get { return this._vhdId; }
+            set { this._vhdId = value; }
+        }
+        
+        private string _vhdName;
+        
+        /// <summary>
+        /// Optional.
+        /// </summary>
+        public string VhdName
+        {
+            get { return this._vhdName; }
+            set { this._vhdName = value; }
+        }
+        
+        private string _vhdType;
+        
+        /// <summary>
+        /// Optional.
+        /// </summary>
+        public string VhdType
+        {
+            get { return this._vhdType; }
+            set { this._vhdType = value; }
         }
         
         /// <summary>
-        /// Initializes a new instance of the PolicyDetails class.
+        /// Initializes a new instance of the DiskDetails class.
         /// </summary>
-        public PolicyDetails()
+        public DiskDetails()
         {
         }
     }

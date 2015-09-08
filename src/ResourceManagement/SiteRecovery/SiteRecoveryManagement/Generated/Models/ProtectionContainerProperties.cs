@@ -32,6 +32,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class ProtectionContainerProperties
     {
+        private ContainerFabricConfigurationSettings _fabricConfigurationSettings;
+        
+        /// <summary>
+        /// Optional. Fabric configuration settings for container.
+        /// </summary>
+        public ContainerFabricConfigurationSettings FabricConfigurationSettings
+        {
+            get { return this._fabricConfigurationSettings; }
+            set { this._fabricConfigurationSettings = value; }
+        }
+        
         private string _fabricFriendlyName;
         
         /// <summary>

@@ -55,17 +55,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._allowedActions = value; }
         }
         
-        private string _displayName;
-        
-        /// <summary>
-        /// Required. Display name.
-        /// </summary>
-        public string DisplayName
-        {
-            get { return this._displayName; }
-            set { this._displayName = value; }
-        }
-        
         private System.DateTime? _endTime;
         
         /// <summary>
@@ -86,6 +75,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         {
             get { return this._errors; }
             set { this._errors = value; }
+        }
+        
+        private string _friendlyName;
+        
+        /// <summary>
+        /// Required. Display name.
+        /// </summary>
+        public string FriendlyName
+        {
+            get { return this._friendlyName; }
+            set { this._friendlyName = value; }
         }
         
         private string _scenarioName;

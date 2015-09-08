@@ -556,11 +556,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.ScenarioName = scenarioNameInstance;
                                 }
                                 
-                                JToken displayNameValue = propertiesValue["displayName"];
-                                if (displayNameValue != null && displayNameValue.Type != JTokenType.Null)
+                                JToken friendlyNameValue = propertiesValue["friendlyName"];
+                                if (friendlyNameValue != null && friendlyNameValue.Type != JTokenType.Null)
                                 {
-                                    string displayNameInstance = ((string)displayNameValue);
-                                    propertiesInstance.DisplayName = displayNameInstance;
+                                    string friendlyNameInstance = ((string)friendlyNameValue);
+                                    propertiesInstance.FriendlyName = friendlyNameInstance;
                                 }
                                 
                                 JToken activityIdValue = propertiesValue["activityId"];
@@ -673,11 +673,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken friendlyNameValue = tasksValue["friendlyName"];
-                                        if (friendlyNameValue != null && friendlyNameValue.Type != JTokenType.Null)
+                                        JToken friendlyNameValue2 = tasksValue["friendlyName"];
+                                        if (friendlyNameValue2 != null && friendlyNameValue2.Type != JTokenType.Null)
                                         {
-                                            string friendlyNameInstance = ((string)friendlyNameValue);
-                                            asrTaskInstance.TaskFriendlyName = friendlyNameInstance;
+                                            string friendlyNameInstance2 = ((string)friendlyNameValue2);
+                                            asrTaskInstance.TaskFriendlyName = friendlyNameInstance2;
                                         }
                                         
                                         JToken stateValue2 = tasksValue["state"];
@@ -1032,11 +1032,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.ScenarioName = scenarioNameInstance;
                                 }
                                 
-                                JToken displayNameValue = propertiesValue["displayName"];
-                                if (displayNameValue != null && displayNameValue.Type != JTokenType.Null)
+                                JToken friendlyNameValue = propertiesValue["friendlyName"];
+                                if (friendlyNameValue != null && friendlyNameValue.Type != JTokenType.Null)
                                 {
-                                    string displayNameInstance = ((string)displayNameValue);
-                                    propertiesInstance.DisplayName = displayNameInstance;
+                                    string friendlyNameInstance = ((string)friendlyNameValue);
+                                    propertiesInstance.FriendlyName = friendlyNameInstance;
                                 }
                                 
                                 JToken activityIdValue = propertiesValue["activityId"];
@@ -1149,11 +1149,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken friendlyNameValue = tasksValue["friendlyName"];
-                                        if (friendlyNameValue != null && friendlyNameValue.Type != JTokenType.Null)
+                                        JToken friendlyNameValue2 = tasksValue["friendlyName"];
+                                        if (friendlyNameValue2 != null && friendlyNameValue2.Type != JTokenType.Null)
                                         {
-                                            string friendlyNameInstance = ((string)friendlyNameValue);
-                                            asrTaskInstance.TaskFriendlyName = friendlyNameInstance;
+                                            string friendlyNameInstance2 = ((string)friendlyNameValue2);
+                                            asrTaskInstance.TaskFriendlyName = friendlyNameInstance2;
                                         }
                                         
                                         JToken stateValue2 = tasksValue["state"];
@@ -1560,11 +1560,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.ScenarioName = scenarioNameInstance;
                                 }
                                 
-                                JToken displayNameValue = propertiesValue["displayName"];
-                                if (displayNameValue != null && displayNameValue.Type != JTokenType.Null)
+                                JToken friendlyNameValue = propertiesValue["friendlyName"];
+                                if (friendlyNameValue != null && friendlyNameValue.Type != JTokenType.Null)
                                 {
-                                    string displayNameInstance = ((string)displayNameValue);
-                                    propertiesInstance.DisplayName = displayNameInstance;
+                                    string friendlyNameInstance = ((string)friendlyNameValue);
+                                    propertiesInstance.FriendlyName = friendlyNameInstance;
                                 }
                                 
                                 JToken activityIdValue = propertiesValue["activityId"];
@@ -1677,11 +1677,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken friendlyNameValue = tasksValue["friendlyName"];
-                                        if (friendlyNameValue != null && friendlyNameValue.Type != JTokenType.Null)
+                                        JToken friendlyNameValue2 = tasksValue["friendlyName"];
+                                        if (friendlyNameValue2 != null && friendlyNameValue2.Type != JTokenType.Null)
                                         {
-                                            string friendlyNameInstance = ((string)friendlyNameValue);
-                                            asrTaskInstance.TaskFriendlyName = friendlyNameInstance;
+                                            string friendlyNameInstance2 = ((string)friendlyNameValue2);
+                                            asrTaskInstance.TaskFriendlyName = friendlyNameInstance2;
                                         }
                                         
                                         JToken stateValue2 = tasksValue["state"];
@@ -2123,11 +2123,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             propertiesInstance.ScenarioName = scenarioNameInstance;
                                         }
                                         
-                                        JToken displayNameValue = propertiesValue["displayName"];
-                                        if (displayNameValue != null && displayNameValue.Type != JTokenType.Null)
+                                        JToken friendlyNameValue = propertiesValue["friendlyName"];
+                                        if (friendlyNameValue != null && friendlyNameValue.Type != JTokenType.Null)
                                         {
-                                            string displayNameInstance = ((string)displayNameValue);
-                                            propertiesInstance.DisplayName = displayNameInstance;
+                                            string friendlyNameInstance = ((string)friendlyNameValue);
+                                            propertiesInstance.FriendlyName = friendlyNameInstance;
                                         }
                                         
                                         JToken activityIdValue = propertiesValue["activityId"];
@@ -2240,11 +2240,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     }
                                                 }
                                                 
-                                                JToken friendlyNameValue = tasksValue["friendlyName"];
-                                                if (friendlyNameValue != null && friendlyNameValue.Type != JTokenType.Null)
+                                                JToken friendlyNameValue2 = tasksValue["friendlyName"];
+                                                if (friendlyNameValue2 != null && friendlyNameValue2.Type != JTokenType.Null)
                                                 {
-                                                    string friendlyNameInstance = ((string)friendlyNameValue);
-                                                    asrTaskInstance.TaskFriendlyName = friendlyNameInstance;
+                                                    string friendlyNameInstance2 = ((string)friendlyNameValue2);
+                                                    asrTaskInstance.TaskFriendlyName = friendlyNameInstance2;
                                                 }
                                                 
                                                 JToken stateValue2 = tasksValue["state"];

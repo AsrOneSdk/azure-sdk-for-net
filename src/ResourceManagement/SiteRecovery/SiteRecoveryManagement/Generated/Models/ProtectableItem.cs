@@ -22,44 +22,50 @@
 using System;
 using System.Linq;
 using Microsoft.Azure;
+using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// The xml output for the recoveryplan object.
+    /// The definition of a Fabric object.
     /// </summary>
-    public partial class RecoveryPlanXmlOuput : AzureOperationResponse
+    public partial class ProtectableItem : ResourceBaseExtended
     {
-        private string _recoveryPlanXml;
+        private ProtectableItemProperties _properties;
         
         /// <summary>
-        /// Required. The recovery plan XML data.
+        /// Required. Properties of the replicated protected item.
         /// </summary>
-        public string RecoveryPlanXml
+        public ProtectableItemProperties Properties
         {
-            get { return this._recoveryPlanXml; }
-            set { this._recoveryPlanXml = value; }
+            get { return this._properties; }
+            set { this._properties = value; }
         }
         
         /// <summary>
-        /// Initializes a new instance of the RecoveryPlanXmlOuput class.
+        /// Initializes a new instance of the ProtectableItem class.
         /// </summary>
-        public RecoveryPlanXmlOuput()
+        public ProtectableItem()
         {
         }
         
         /// <summary>
-        /// Initializes a new instance of the RecoveryPlanXmlOuput class with
+        /// Initializes a new instance of the ProtectableItem class with
         /// required arguments.
         /// </summary>
-        public RecoveryPlanXmlOuput(string recoveryPlanXml)
+        public ProtectableItem(ProtectableItemProperties properties, string location)
             : this()
         {
-            if (recoveryPlanXml == null)
+            if (properties == null)
             {
-                throw new ArgumentNullException("recoveryPlanXml");
+                throw new ArgumentNullException("properties");
             }
-            this.RecoveryPlanXml = recoveryPlanXml;
+            if (location == null)
+            {
+                throw new ArgumentNullException("location");
+            }
+            this.Properties = properties;
+            this.Location = location;
         }
     }
 }

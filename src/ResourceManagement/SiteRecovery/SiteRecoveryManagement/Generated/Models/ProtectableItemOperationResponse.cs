@@ -21,19 +21,31 @@
 
 using System;
 using System.Linq;
+using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// Create profile provider specific input.
+    /// Service response for Protectable items operation.
     /// </summary>
-    public partial class FailoverReplicationProviderSpecificInput
+    public partial class ProtectableItemOperationResponse : LongRunningOperationResponse
     {
+        private ProtectableItem _protectableItem;
+        
         /// <summary>
-        /// Initializes a new instance of the
-        /// FailoverReplicationProviderSpecificInput class.
+        /// Optional. Protectable object.
         /// </summary>
-        public FailoverReplicationProviderSpecificInput()
+        public ProtectableItem ProtectableItem
+        {
+            get { return this._protectableItem; }
+            set { this._protectableItem = value; }
+        }
+        
+        /// <summary>
+        /// Initializes a new instance of the ProtectableItemOperationResponse
+        /// class.
+        /// </summary>
+        public ProtectableItemOperationResponse()
         {
         }
     }

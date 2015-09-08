@@ -128,15 +128,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
         }
         
         /// <summary>
-        /// Definition of recoveryplan operations for the Site Recovery
-        /// extension.
-        /// </summary>
-        IRecoveryPlanOperations RecoveryPlan
-        {
-            get; 
-        }
-        
-        /// <summary>
         /// Definition of provider operations for the Site Recovery extension.
         /// </summary>
         IRecoveryServicesProviderOperations RecoveryServicesProvider
