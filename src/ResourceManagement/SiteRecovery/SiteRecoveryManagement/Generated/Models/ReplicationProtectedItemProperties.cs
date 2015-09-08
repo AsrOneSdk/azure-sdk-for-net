@@ -165,15 +165,15 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._protectionStatus = value; }
         }
         
-        private string _recoveryProviderName;
+        private string _recoveryServicesProviderName;
         
         /// <summary>
         /// Optional. Gets or sets the recovery provider name.
         /// </summary>
-        public string RecoveryProviderName
+        public string RecoveryServicesProviderName
         {
-            get { return this._recoveryProviderName; }
-            set { this._recoveryProviderName = value; }
+            get { return this._recoveryServicesProviderName; }
+            set { this._recoveryServicesProviderName = value; }
         }
         
         private string _replicationHealth;

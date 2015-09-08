@@ -32,12 +32,12 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class VirtualMachineDetails : ReplicationItemTypeSettings
     {
-        private IList<DiskDetails> _diskDetailsList;
+        private IList<OnPremVmDiskDetails> _diskDetailsList;
         
         /// <summary>
-        /// Optional. Gets or sets the DiskDetailsList.
+        /// Optional. Gets or sets the DiskDetails.
         /// </summary>
-        public IList<DiskDetails> DiskDetailsList
+        public IList<OnPremVmDiskDetails> DiskDetailsList
         {
             get { return this._diskDetailsList; }
             set { this._diskDetailsList = value; }
@@ -70,7 +70,7 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         /// </summary>
         public VirtualMachineDetails()
         {
-            this.DiskDetailsList = new LazyList<DiskDetails>();
+            this.DiskDetailsList = new LazyList<OnPremVmDiskDetails>();
         }
     }
 }

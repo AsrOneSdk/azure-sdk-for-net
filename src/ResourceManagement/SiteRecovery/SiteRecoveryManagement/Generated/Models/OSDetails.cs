@@ -29,17 +29,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class OSDetails
     {
-        private ulong _maxSizeMB;
-        
-        /// <summary>
-        /// Optional.
-        /// </summary>
-        public ulong MaxSizeMB
-        {
-            get { return this._maxSizeMB; }
-            set { this._maxSizeMB = value; }
-        }
-        
         private string _oSEdition;
         
         /// <summary>
@@ -51,6 +40,28 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._oSEdition = value; }
         }
         
+        private string _oSMajorVersion;
+        
+        /// <summary>
+        /// Optional.
+        /// </summary>
+        public string OSMajorVersion
+        {
+            get { return this._oSMajorVersion; }
+            set { this._oSMajorVersion = value; }
+        }
+        
+        private string _oSMinorVersion;
+        
+        /// <summary>
+        /// Optional.
+        /// </summary>
+        public string OSMinorVersion
+        {
+            get { return this._oSMinorVersion; }
+            set { this._oSMinorVersion = value; }
+        }
+        
         private string _osType;
         
         /// <summary>
@@ -60,6 +71,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         {
             get { return this._osType; }
             set { this._osType = value; }
+        }
+        
+        private string _oSVersion;
+        
+        /// <summary>
+        /// Optional.
+        /// </summary>
+        public string OSVersion
+        {
+            get { return this._oSVersion; }
+            set { this._oSVersion = value; }
         }
         
         private string _productType;

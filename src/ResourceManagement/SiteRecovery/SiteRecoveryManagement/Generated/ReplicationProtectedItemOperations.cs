@@ -2109,7 +2109,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 if (recoveryProviderNameValue != null && recoveryProviderNameValue.Type != JTokenType.Null)
                                 {
                                     string recoveryProviderNameInstance = ((string)recoveryProviderNameValue);
-                                    propertiesInstance.RecoveryProviderName = recoveryProviderNameInstance;
+                                    propertiesInstance.RecoveryServicesProviderName = recoveryProviderNameInstance;
                                 }
                                 
                                 JToken protectionStatusValue = propertiesValue["protectionStatus"];
@@ -2650,7 +2650,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 if (recoveryProviderNameValue != null && recoveryProviderNameValue.Type != JTokenType.Null)
                                 {
                                     string recoveryProviderNameInstance = ((string)recoveryProviderNameValue);
-                                    propertiesInstance.RecoveryProviderName = recoveryProviderNameInstance;
+                                    propertiesInstance.RecoveryServicesProviderName = recoveryProviderNameInstance;
                                 }
                                 
                                 JToken protectionStatusValue = propertiesValue["protectionStatus"];
@@ -3424,7 +3424,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 if (recoveryProviderNameValue != null && recoveryProviderNameValue.Type != JTokenType.Null)
                                 {
                                     string recoveryProviderNameInstance = ((string)recoveryProviderNameValue);
-                                    propertiesInstance.RecoveryProviderName = recoveryProviderNameInstance;
+                                    propertiesInstance.RecoveryServicesProviderName = recoveryProviderNameInstance;
                                 }
                                 
                                 JToken protectionStatusValue = propertiesValue["protectionStatus"];
@@ -4017,7 +4017,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 if (recoveryProviderNameValue != null && recoveryProviderNameValue.Type != JTokenType.Null)
                                 {
                                     string recoveryProviderNameInstance = ((string)recoveryProviderNameValue);
-                                    propertiesInstance.RecoveryProviderName = recoveryProviderNameInstance;
+                                    propertiesInstance.RecoveryServicesProviderName = recoveryProviderNameInstance;
                                 }
                                 
                                 JToken protectionStatusValue = propertiesValue["protectionStatus"];
@@ -4610,7 +4610,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 if (recoveryProviderNameValue != null && recoveryProviderNameValue.Type != JTokenType.Null)
                                 {
                                     string recoveryProviderNameInstance = ((string)recoveryProviderNameValue);
-                                    propertiesInstance.RecoveryProviderName = recoveryProviderNameInstance;
+                                    propertiesInstance.RecoveryServicesProviderName = recoveryProviderNameInstance;
                                 }
                                 
                                 JToken protectionStatusValue = propertiesValue["protectionStatus"];
@@ -5203,7 +5203,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 if (recoveryProviderNameValue != null && recoveryProviderNameValue.Type != JTokenType.Null)
                                 {
                                     string recoveryProviderNameInstance = ((string)recoveryProviderNameValue);
-                                    propertiesInstance.RecoveryProviderName = recoveryProviderNameInstance;
+                                    propertiesInstance.RecoveryServicesProviderName = recoveryProviderNameInstance;
                                 }
                                 
                                 JToken protectionStatusValue = propertiesValue["protectionStatus"];
@@ -5796,7 +5796,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 if (recoveryProviderNameValue != null && recoveryProviderNameValue.Type != JTokenType.Null)
                                 {
                                     string recoveryProviderNameInstance = ((string)recoveryProviderNameValue);
-                                    propertiesInstance.RecoveryProviderName = recoveryProviderNameInstance;
+                                    propertiesInstance.RecoveryServicesProviderName = recoveryProviderNameInstance;
                                 }
                                 
                                 JToken protectionStatusValue = propertiesValue["protectionStatus"];
@@ -6436,7 +6436,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         if (recoveryProviderNameValue != null && recoveryProviderNameValue.Type != JTokenType.Null)
                                         {
                                             string recoveryProviderNameInstance = ((string)recoveryProviderNameValue);
-                                            propertiesInstance.RecoveryProviderName = recoveryProviderNameInstance;
+                                            propertiesInstance.RecoveryServicesProviderName = recoveryProviderNameInstance;
                                         }
                                         
                                         JToken protectionStatusValue = propertiesValue["protectionStatus"];

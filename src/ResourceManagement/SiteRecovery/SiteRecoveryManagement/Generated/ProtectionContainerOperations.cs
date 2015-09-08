@@ -1018,6 +1018,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             pairingDetailsInstance.TargetProtectionContainerFriendlyName = targetProtectionContainerFriendlyNameInstance;
                                         }
                                         
+                                        JToken roleValue = protectionConfigurationSettingsValue["role"];
+                                        if (roleValue != null && roleValue.Type != JTokenType.Null)
+                                        {
+                                            string roleInstance = ((string)roleValue);
+                                            pairingDetailsInstance.Role = roleInstance;
+                                        }
+                                        
                                         JToken healthValue = protectionConfigurationSettingsValue["health"];
                                         if (healthValue != null && healthValue.Type != JTokenType.Null)
                                         {
@@ -1332,6 +1339,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             string targetProtectionContainerFriendlyNameInstance = ((string)targetProtectionContainerFriendlyNameValue);
                                             pairingDetailsInstance.TargetProtectionContainerFriendlyName = targetProtectionContainerFriendlyNameInstance;
+                                        }
+                                        
+                                        JToken roleValue = protectionConfigurationSettingsValue["role"];
+                                        if (roleValue != null && roleValue.Type != JTokenType.Null)
+                                        {
+                                            string roleInstance = ((string)roleValue);
+                                            pairingDetailsInstance.Role = roleInstance;
                                         }
                                         
                                         JToken healthValue = protectionConfigurationSettingsValue["health"];
@@ -1702,6 +1716,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             pairingDetailsInstance.TargetProtectionContainerFriendlyName = targetProtectionContainerFriendlyNameInstance;
                                         }
                                         
+                                        JToken roleValue = protectionConfigurationSettingsValue["role"];
+                                        if (roleValue != null && roleValue.Type != JTokenType.Null)
+                                        {
+                                            string roleInstance = ((string)roleValue);
+                                            pairingDetailsInstance.Role = roleInstance;
+                                        }
+                                        
                                         JToken healthValue = protectionConfigurationSettingsValue["health"];
                                         if (healthValue != null && healthValue.Type != JTokenType.Null)
                                         {
@@ -2068,6 +2089,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             string targetProtectionContainerFriendlyNameInstance = ((string)targetProtectionContainerFriendlyNameValue);
                                             pairingDetailsInstance.TargetProtectionContainerFriendlyName = targetProtectionContainerFriendlyNameInstance;
+                                        }
+                                        
+                                        JToken roleValue = protectionConfigurationSettingsValue["role"];
+                                        if (roleValue != null && roleValue.Type != JTokenType.Null)
+                                        {
+                                            string roleInstance = ((string)roleValue);
+                                            pairingDetailsInstance.Role = roleInstance;
                                         }
                                         
                                         JToken healthValue = protectionConfigurationSettingsValue["health"];
@@ -2472,6 +2500,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 {
                                                     string targetProtectionContainerFriendlyNameInstance = ((string)targetProtectionContainerFriendlyNameValue);
                                                     pairingDetailsInstance.TargetProtectionContainerFriendlyName = targetProtectionContainerFriendlyNameInstance;
+                                                }
+                                                
+                                                JToken roleValue = protectionConfigurationSettingsValue["role"];
+                                                if (roleValue != null && roleValue.Type != JTokenType.Null)
+                                                {
+                                                    string roleInstance = ((string)roleValue);
+                                                    pairingDetailsInstance.Role = roleInstance;
                                                 }
                                                 
                                                 JToken healthValue = protectionConfigurationSettingsValue["health"];

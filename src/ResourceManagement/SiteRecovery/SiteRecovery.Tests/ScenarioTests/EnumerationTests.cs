@@ -97,5 +97,21 @@ namespace SiteRecovery.Tests
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             }
         }
+        
+        [Fact]
+        public void EnumerateProtectableItems()
+        {
+            using (UndoContext context = UndoContext.Current)
+            {
+                context.Start();
+                var client = GetSiteRecoveryClient(CustomHttpHandler);
+
+                string fabricId = "6adf9420-b02f-4377-8ab7-ff384e6d792f";
+                //string containerId = "4f94127d-2eb3-449d-a708-250752e93cb4";
+                string containerId = "8cc5a958-d437-41d0-9411-fad0841c0445";
+
+                var response = client.ProtectableItem.List(fabricId, containerId, "All", RequestHeaders);
+            }
+        }
     }
 }

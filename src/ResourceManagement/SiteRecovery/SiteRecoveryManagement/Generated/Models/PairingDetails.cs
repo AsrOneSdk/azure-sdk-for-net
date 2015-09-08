@@ -87,6 +87,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._providerConfigurationSettings = value; }
         }
         
+        private string _role;
+        
+        /// <summary>
+        /// Optional. Pairing role.
+        /// </summary>
+        public string Role
+        {
+            get { return this._role; }
+            set { this._role = value; }
+        }
+        
         private string _targetProtectionContainerFriendlyName;
         
         /// <summary>
