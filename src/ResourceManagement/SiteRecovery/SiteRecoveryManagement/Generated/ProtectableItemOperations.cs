@@ -240,6 +240,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.ProtectionStatus = protectionStatusInstance;
                                 }
                                 
+                                JToken replicationProtectedItemIdValue = propertiesValue["replicationProtectedItemId"];
+                                if (replicationProtectedItemIdValue != null && replicationProtectedItemIdValue.Type != JTokenType.Null)
+                                {
+                                    string replicationProtectedItemIdInstance = ((string)replicationProtectedItemIdValue);
+                                    propertiesInstance.ReplicationProtectedItemId = replicationProtectedItemIdInstance;
+                                }
+                                
                                 JToken protectionReadinessErrorsArray = propertiesValue["protectionReadinessErrors"];
                                 if (protectionReadinessErrorsArray != null && protectionReadinessErrorsArray.Type != JTokenType.Null)
                                 {
@@ -613,6 +620,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             string protectionStatusInstance = ((string)protectionStatusValue);
                                             propertiesInstance.ProtectionStatus = protectionStatusInstance;
+                                        }
+                                        
+                                        JToken replicationProtectedItemIdValue = propertiesValue["replicationProtectedItemId"];
+                                        if (replicationProtectedItemIdValue != null && replicationProtectedItemIdValue.Type != JTokenType.Null)
+                                        {
+                                            string replicationProtectedItemIdInstance = ((string)replicationProtectedItemIdValue);
+                                            propertiesInstance.ReplicationProtectedItemId = replicationProtectedItemIdInstance;
                                         }
                                         
                                         JToken protectionReadinessErrorsArray = propertiesValue["protectionReadinessErrors"];

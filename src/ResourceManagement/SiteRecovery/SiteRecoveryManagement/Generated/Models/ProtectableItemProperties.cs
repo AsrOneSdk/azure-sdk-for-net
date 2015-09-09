@@ -87,6 +87,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._protectionStatus = value; }
         }
         
+        private string _replicationProtectedItemId;
+        
+        /// <summary>
+        /// Optional. Gets or sets the ARM resource Id of protected items.
+        /// </summary>
+        public string ReplicationProtectedItemId
+        {
+            get { return this._replicationProtectedItemId; }
+            set { this._replicationProtectedItemId = value; }
+        }
+        
         /// <summary>
         /// Initializes a new instance of the ProtectableItemProperties class.
         /// </summary>
