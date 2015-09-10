@@ -147,7 +147,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         Task<LongRunningOperationResponse> GetRefreshStatusAsync(string operationStatusLink, CancellationToken cancellationToken);
         
         /// <summary>
-        /// Get the list of all servers under the vault.
+        /// Get the list of all servers under the vault for given fabric.
         /// </summary>
         /// <param name='fabricName'>
         /// Fabric Name.
@@ -162,6 +162,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// The response model for the list servers operation.
         /// </returns>
         Task<RecoveryServicesProviderListResponse> ListAsync(string fabricName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        
+        /// <summary>
+        /// Get the list of all servers under the vault.
+        /// </summary>
+        /// <param name='customRequestHeaders'>
+        /// Request header parameters.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
+        /// The response model for the list servers operation.
+        /// </returns>
+        Task<RecoveryServicesProviderListResponse> ListAllAsync(CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
         
         /// <summary>
         /// Refreshes a provider
