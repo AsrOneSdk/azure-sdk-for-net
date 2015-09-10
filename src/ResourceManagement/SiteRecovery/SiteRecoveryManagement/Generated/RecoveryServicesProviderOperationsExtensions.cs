@@ -331,7 +331,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         }
         
         /// <summary>
-        /// Get the list of all servers under the vault.
+        /// Get the list of all servers under the vault for given fabric.
         /// </summary>
         /// <param name='operations'>
         /// Reference to the
@@ -356,7 +356,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         }
         
         /// <summary>
-        /// Get the list of all servers under the vault.
+        /// Get the list of all servers under the vault for given fabric.
         /// </summary>
         /// <param name='operations'>
         /// Reference to the
@@ -374,6 +374,46 @@ namespace Microsoft.Azure.Management.SiteRecovery
         public static Task<RecoveryServicesProviderListResponse> ListAsync(this IRecoveryServicesProviderOperations operations, string fabricName, CustomRequestHeaders customRequestHeaders)
         {
             return operations.ListAsync(fabricName, customRequestHeaders, CancellationToken.None);
+        }
+        
+        /// <summary>
+        /// Get the list of all servers under the vault.
+        /// </summary>
+        /// <param name='operations'>
+        /// Reference to the
+        /// Microsoft.Azure.Management.SiteRecovery.IRecoveryServicesProviderOperations.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Optional. Request header parameters.
+        /// </param>
+        /// <returns>
+        /// The response model for the list servers operation.
+        /// </returns>
+        public static RecoveryServicesProviderListResponse ListAll(this IRecoveryServicesProviderOperations operations, CustomRequestHeaders customRequestHeaders)
+        {
+            return Task.Factory.StartNew((object s) => 
+            {
+                return ((IRecoveryServicesProviderOperations)s).ListAllAsync(customRequestHeaders);
+            }
+            , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+        }
+        
+        /// <summary>
+        /// Get the list of all servers under the vault.
+        /// </summary>
+        /// <param name='operations'>
+        /// Reference to the
+        /// Microsoft.Azure.Management.SiteRecovery.IRecoveryServicesProviderOperations.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Optional. Request header parameters.
+        /// </param>
+        /// <returns>
+        /// The response model for the list servers operation.
+        /// </returns>
+        public static Task<RecoveryServicesProviderListResponse> ListAllAsync(this IRecoveryServicesProviderOperations operations, CustomRequestHeaders customRequestHeaders)
+        {
+            return operations.ListAllAsync(customRequestHeaders, CancellationToken.None);
         }
         
         /// <summary>

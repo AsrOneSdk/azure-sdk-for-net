@@ -55,7 +55,7 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         private string _fabricFriendlyName;
         
         /// <summary>
-        /// Optional. Unique name of the Fabric.
+        /// Optional. Friendly name of the Fabric.
         /// </summary>
         public string FabricFriendlyName
         {
@@ -117,6 +117,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         {
             get { return this._providerVersion; }
             set { this._providerVersion = value; }
+        }
+        
+        private System.DateTime? _providerVersionExpiryDate;
+        
+        /// <summary>
+        /// Optional. Provider expiry date if the version is deprecated.
+        /// </summary>
+        public System.DateTime? ProviderVersionExpiryDate
+        {
+            get { return this._providerVersionExpiryDate; }
+            set { this._providerVersionExpiryDate = value; }
         }
         
         private string _providerVersionState;
