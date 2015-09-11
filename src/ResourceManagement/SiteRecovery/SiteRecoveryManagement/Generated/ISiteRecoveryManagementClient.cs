@@ -85,6 +85,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
             get; set; 
         }
         
+        string ResourceType
+        {
+            get; set; 
+        }
+        
         /// <summary>
         /// Definition of fabric operations for the Site Recovery extension.
         /// </summary>
