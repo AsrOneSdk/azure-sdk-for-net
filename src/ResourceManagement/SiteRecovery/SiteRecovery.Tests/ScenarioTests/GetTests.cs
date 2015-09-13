@@ -51,8 +51,20 @@ namespace SiteRecovery.Tests
                 context.Start();
                 var client = GetSiteRecoveryClient(CustomHttpHandler);
 
-                var protectionContainerList = client.ProtectionContainer.List("",RequestHeaders);
-                var response = client.ProtectionContainer.Get("",
+                var responseServers = client.Fabrics.List(RequestHeaders);
+
+                Fabric selectedfabric = null;
+                foreach (var fabric in responseServers.Fabrics)
+                {
+                    if (fabric.Properties.FabricType.Contains("HyperV"))
+                    {
+                        selectedfabric = fabric;
+                        break;
+                    }
+                }
+
+                var protectionContainerList = client.ProtectionContainer.List(selectedfabric.Name, RequestHeaders);
+                var response = client.ProtectionContainer.Get(selectedfabric.Name,
                     protectionContainerList.ProtectionContainers[0].Name,
                     RequestHeaders);
 

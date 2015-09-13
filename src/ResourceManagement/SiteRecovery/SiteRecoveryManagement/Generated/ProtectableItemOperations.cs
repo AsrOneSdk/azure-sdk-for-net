@@ -271,6 +271,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             virtualMachineDetailsInstance.Generation = generationInstance;
                                         }
                                         
+                                        JToken sourceItemIdValue = configurationSettingsValue["sourceItemId"];
+                                        if (sourceItemIdValue != null && sourceItemIdValue.Type != JTokenType.Null)
+                                        {
+                                            string sourceItemIdInstance = ((string)sourceItemIdValue);
+                                            virtualMachineDetailsInstance.SourceItemId = sourceItemIdInstance;
+                                        }
+                                        
                                         JToken osDetailsValue = configurationSettingsValue["osDetails"];
                                         if (osDetailsValue != null && osDetailsValue.Type != JTokenType.Null)
                                         {
@@ -325,35 +332,35 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             foreach (JToken diskDetailsValue in ((JArray)diskDetailsArray))
                                             {
-                                                OnPremVmDiskDetails onPremVmDiskDetailsInstance = new OnPremVmDiskDetails();
-                                                virtualMachineDetailsInstance.DiskDetailsList.Add(onPremVmDiskDetailsInstance);
+                                                DiskDetails diskDetailsInstance = new DiskDetails();
+                                                virtualMachineDetailsInstance.DiskDetailsList.Add(diskDetailsInstance);
                                                 
                                                 JToken maxSizeMBValue = diskDetailsValue["maxSizeMB"];
                                                 if (maxSizeMBValue != null && maxSizeMBValue.Type != JTokenType.Null)
                                                 {
                                                     ulong maxSizeMBInstance = ((ulong)maxSizeMBValue);
-                                                    onPremVmDiskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
+                                                    diskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
                                                 }
                                                 
                                                 JToken vHDStatusValue = diskDetailsValue["vHDStatus"];
                                                 if (vHDStatusValue != null && vHDStatusValue.Type != JTokenType.Null)
                                                 {
                                                     string vHDStatusInstance = ((string)vHDStatusValue);
-                                                    onPremVmDiskDetailsInstance.VHDStatus = vHDStatusInstance;
+                                                    diskDetailsInstance.VHDStatus = vHDStatusInstance;
                                                 }
                                                 
                                                 JToken vHDIdValue = diskDetailsValue["vHDId"];
                                                 if (vHDIdValue != null && vHDIdValue.Type != JTokenType.Null)
                                                 {
-                                                    Guid vHDIdInstance = Guid.Parse(((string)vHDIdValue));
-                                                    onPremVmDiskDetailsInstance.VHDId = vHDIdInstance;
+                                                    string vHDIdInstance = ((string)vHDIdValue);
+                                                    diskDetailsInstance.VHDId = vHDIdInstance;
                                                 }
                                                 
                                                 JToken vHDNameValue = diskDetailsValue["vHDName"];
                                                 if (vHDNameValue != null && vHDNameValue.Type != JTokenType.Null)
                                                 {
                                                     string vHDNameInstance = ((string)vHDNameValue);
-                                                    onPremVmDiskDetailsInstance.VHDName = vHDNameInstance;
+                                                    diskDetailsInstance.VHDName = vHDNameInstance;
                                                 }
                                             }
                                         }
@@ -653,6 +660,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     virtualMachineDetailsInstance.Generation = generationInstance;
                                                 }
                                                 
+                                                JToken sourceItemIdValue = configurationSettingsValue["sourceItemId"];
+                                                if (sourceItemIdValue != null && sourceItemIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string sourceItemIdInstance = ((string)sourceItemIdValue);
+                                                    virtualMachineDetailsInstance.SourceItemId = sourceItemIdInstance;
+                                                }
+                                                
                                                 JToken osDetailsValue = configurationSettingsValue["osDetails"];
                                                 if (osDetailsValue != null && osDetailsValue.Type != JTokenType.Null)
                                                 {
@@ -707,35 +721,35 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 {
                                                     foreach (JToken diskDetailsValue in ((JArray)diskDetailsArray))
                                                     {
-                                                        OnPremVmDiskDetails onPremVmDiskDetailsInstance = new OnPremVmDiskDetails();
-                                                        virtualMachineDetailsInstance.DiskDetailsList.Add(onPremVmDiskDetailsInstance);
+                                                        DiskDetails diskDetailsInstance = new DiskDetails();
+                                                        virtualMachineDetailsInstance.DiskDetailsList.Add(diskDetailsInstance);
                                                         
                                                         JToken maxSizeMBValue = diskDetailsValue["maxSizeMB"];
                                                         if (maxSizeMBValue != null && maxSizeMBValue.Type != JTokenType.Null)
                                                         {
                                                             ulong maxSizeMBInstance = ((ulong)maxSizeMBValue);
-                                                            onPremVmDiskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
+                                                            diskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
                                                         }
                                                         
                                                         JToken vHDStatusValue = diskDetailsValue["vHDStatus"];
                                                         if (vHDStatusValue != null && vHDStatusValue.Type != JTokenType.Null)
                                                         {
                                                             string vHDStatusInstance = ((string)vHDStatusValue);
-                                                            onPremVmDiskDetailsInstance.VHDStatus = vHDStatusInstance;
+                                                            diskDetailsInstance.VHDStatus = vHDStatusInstance;
                                                         }
                                                         
                                                         JToken vHDIdValue = diskDetailsValue["vHDId"];
                                                         if (vHDIdValue != null && vHDIdValue.Type != JTokenType.Null)
                                                         {
-                                                            Guid vHDIdInstance = Guid.Parse(((string)vHDIdValue));
-                                                            onPremVmDiskDetailsInstance.VHDId = vHDIdInstance;
+                                                            string vHDIdInstance = ((string)vHDIdValue);
+                                                            diskDetailsInstance.VHDId = vHDIdInstance;
                                                         }
                                                         
                                                         JToken vHDNameValue = diskDetailsValue["vHDName"];
                                                         if (vHDNameValue != null && vHDNameValue.Type != JTokenType.Null)
                                                         {
                                                             string vHDNameInstance = ((string)vHDNameValue);
-                                                            onPremVmDiskDetailsInstance.VHDName = vHDNameInstance;
+                                                            diskDetailsInstance.VHDName = vHDNameInstance;
                                                         }
                                                     }
                                                 }

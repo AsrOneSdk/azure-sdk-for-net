@@ -61,7 +61,7 @@ namespace Microsoft.Azure.Test
                     IgnoreCertificateErrorHandler;
             }
 
-            TestEnvironment environment = new CSMTestEnvironmentFactory().GetTestEnvironment();
+            TestEnvironment environment = new RDFETestEnvironmentFactory().GetTestEnvironment();
             environment.BaseUri = new Uri("https://ramjsing-2:8443/Rdfeproxy.svc");
 
             SiteRecoveryTestsBase.MyCloudService = (HttpMockServer.Mode == HttpRecorderMode.Playback) ?

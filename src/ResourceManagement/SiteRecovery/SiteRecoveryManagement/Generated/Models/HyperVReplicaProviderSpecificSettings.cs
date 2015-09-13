@@ -54,12 +54,12 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._networkDetails = value; }
         }
         
-        private IList<OnPremVmDiskDetails> _vMDiskDetails;
+        private IList<DiskDetails> _vMDiskDetails;
         
         /// <summary>
         /// Optional. Gets or sets VM disk details.
         /// </summary>
-        public IList<OnPremVmDiskDetails> VMDiskDetails
+        public IList<DiskDetails> VMDiskDetails
         {
             get { return this._vMDiskDetails; }
             set { this._vMDiskDetails = value; }
@@ -72,7 +72,7 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         public HyperVReplicaProviderSpecificSettings()
         {
             this.NetworkDetails = new LazyList<HyperVReplicaProviderNetworkDetails>();
-            this.VMDiskDetails = new LazyList<OnPremVmDiskDetails>();
+            this.VMDiskDetails = new LazyList<DiskDetails>();
         }
     }
 }

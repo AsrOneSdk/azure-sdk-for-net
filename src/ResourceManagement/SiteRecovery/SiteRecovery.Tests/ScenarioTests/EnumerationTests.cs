@@ -113,5 +113,18 @@ namespace SiteRecovery.Tests
                 var response = client.ProtectableItem.List(fabricId, containerId, "All", RequestHeaders);
             }
         }
+
+        [Fact]
+        public void EnumeratePolicies()
+        {
+            using (UndoContext context = UndoContext.Current)
+            {
+                context.Start();
+                var client = GetSiteRecoveryClient(CustomHttpHandler);
+
+                var response = client.Policies.List(RequestHeaders);
+
+            }
+        }
     }
 }
