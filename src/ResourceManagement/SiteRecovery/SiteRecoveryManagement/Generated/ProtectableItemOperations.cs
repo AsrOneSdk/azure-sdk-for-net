@@ -124,7 +124,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/providers/";
             url = url + Uri.EscapeDataString(this.Client.ResourceNamespace);
             url = url + "/";
-            url = url + null;
+            url = url + Uri.EscapeDataString(this.Client.ResourceType);
             url = url + "/";
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationFabrics/";
@@ -498,7 +498,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/providers/";
             url = url + Uri.EscapeDataString(this.Client.ResourceNamespace);
             url = url + "/";
-            url = url + null;
+            url = url + Uri.EscapeDataString(this.Client.ResourceType);
             url = url + "/";
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationFabrics/";
