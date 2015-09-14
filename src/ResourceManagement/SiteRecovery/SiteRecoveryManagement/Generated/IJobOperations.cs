@@ -33,10 +33,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
     public partial interface IJobOperations
     {
         /// <summary>
-        /// Restart the job .
+        /// Cancel the job .
         /// </summary>
-        /// <param name='jobId'>
-        /// Job ID.
+        /// <param name='jobName'>
+        /// Job Name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Request header parameters.
@@ -47,7 +47,24 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        Task<LongRunningOperationResponse> BeginRestartingAsync(string jobId, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        Task<LongRunningOperationResponse> BeginCancellingAsync(string jobName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        
+        /// <summary>
+        /// Restart the job .
+        /// </summary>
+        /// <param name='jobName'>
+        /// Job Name.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Request header parameters.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
+        /// A standard service response for long running operations.
+        /// </returns>
+        Task<LongRunningOperationResponse> BeginRestartingAsync(string jobName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
         
         /// <summary>
         /// Resume the job .
@@ -70,6 +87,23 @@ namespace Microsoft.Azure.Management.SiteRecovery
         Task<LongRunningOperationResponse> BeginResumingAsync(string jobId, ResumeJobParams resumeJobParameters, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
         
         /// <summary>
+        /// Cancel the job .
+        /// </summary>
+        /// <param name='jobName'>
+        /// Job Name.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Request header parameters.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
+        /// A standard service response for long running operations.
+        /// </returns>
+        Task<LongRunningOperationResponse> CancelAsync(string jobName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        
+        /// <summary>
         /// Get the job details.
         /// </summary>
         /// <param name='jobId'>
@@ -85,6 +119,23 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// The response model for the Job details object.
         /// </returns>
         Task<JobResponse> GetAsync(string jobId, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        
+        /// <summary>
+        /// The Get Operation Status operation returns the status of the
+        /// specified operation. After calling an asynchronous operation, you
+        /// can call Get Operation Status to determine whether the operation
+        /// has succeeded, failed, or is still in progress.
+        /// </summary>
+        /// <param name='operationStatusLink'>
+        /// Location value returned by the Begin operation.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
+        /// A standard service response for long running operations.
+        /// </returns>
+        Task<LongRunningOperationResponse> GetCancelStatusAsync(string operationStatusLink, CancellationToken cancellationToken);
         
         /// <summary>
         /// The Get Operation Status operation returns the status of the
@@ -140,8 +191,8 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <summary>
         /// Restart the job .
         /// </summary>
-        /// <param name='jobId'>
-        /// Job ID.
+        /// <param name='jobName'>
+        /// Job Name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Request header parameters.
@@ -152,7 +203,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        Task<LongRunningOperationResponse> RestartAsync(string jobId, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        Task<LongRunningOperationResponse> RestartAsync(string jobName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
         
         /// <summary>
         /// Resume the job .
