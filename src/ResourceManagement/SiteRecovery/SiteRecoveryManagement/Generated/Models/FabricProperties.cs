@@ -74,6 +74,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._friendlyName = value; }
         }
         
+        private string _internalIdentifier;
+        
+        /// <summary>
+        /// Optional. Internal Identifier.
+        /// </summary>
+        public string InternalIdentifier
+        {
+            get { return this._internalIdentifier; }
+            set { this._internalIdentifier = value; }
+        }
+        
         private KekDetails _rolloverEncryptionDetails;
         
         /// <summary>

@@ -702,6 +702,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.FabricType = fabricTypeInstance;
                                 }
                                 
+                                JToken internalIdentifierValue = propertiesValue["internalIdentifier"];
+                                if (internalIdentifierValue != null && internalIdentifierValue.Type != JTokenType.Null)
+                                {
+                                    string internalIdentifierInstance = ((string)internalIdentifierValue);
+                                    propertiesInstance.InternalIdentifier = internalIdentifierInstance;
+                                }
+                                
                                 JToken encryptionDetailsValue = propertiesValue["encryptionDetails"];
                                 if (encryptionDetailsValue != null && encryptionDetailsValue.Type != JTokenType.Null)
                                 {
@@ -954,6 +961,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 {
                                     string fabricTypeInstance = ((string)fabricTypeValue);
                                     propertiesInstance.FabricType = fabricTypeInstance;
+                                }
+                                
+                                JToken internalIdentifierValue = propertiesValue["internalIdentifier"];
+                                if (internalIdentifierValue != null && internalIdentifierValue.Type != JTokenType.Null)
+                                {
+                                    string internalIdentifierInstance = ((string)internalIdentifierValue);
+                                    propertiesInstance.InternalIdentifier = internalIdentifierInstance;
                                 }
                                 
                                 JToken encryptionDetailsValue = propertiesValue["encryptionDetails"];
@@ -1286,15 +1300,15 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     {
                         result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
                     }
-                    if (statusCode == HttpStatusCode.NoContent)
-                    {
-                        result.Status = OperationStatus.Failed;
-                    }
                     if (statusCode == HttpStatusCode.Accepted)
                     {
                         result.Status = OperationStatus.InProgress;
                     }
                     if (statusCode == HttpStatusCode.OK)
+                    {
+                        result.Status = OperationStatus.Succeeded;
+                    }
+                    if (statusCode == HttpStatusCode.NoContent)
                     {
                         result.Status = OperationStatus.Succeeded;
                     }
@@ -1468,6 +1482,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             string fabricTypeInstance = ((string)fabricTypeValue);
                                             propertiesInstance.FabricType = fabricTypeInstance;
+                                        }
+                                        
+                                        JToken internalIdentifierValue = propertiesValue["internalIdentifier"];
+                                        if (internalIdentifierValue != null && internalIdentifierValue.Type != JTokenType.Null)
+                                        {
+                                            string internalIdentifierInstance = ((string)internalIdentifierValue);
+                                            propertiesInstance.InternalIdentifier = internalIdentifierInstance;
                                         }
                                         
                                         JToken encryptionDetailsValue = propertiesValue["encryptionDetails"];
