@@ -132,6 +132,8 @@ namespace SiteRecovery.Tests
         public const string CommitFailoverJobName = "CommitFailover";
 
         public const string TestFailoverJobName = "TestFailover";
+
+        public const string UnplannedFailoverJobName = "UnplannedFailover";
         #endregion
 
         #region Cloud pairing jobs
@@ -144,13 +146,11 @@ namespace SiteRecovery.Tests
         /// Monitors jobs for specific object id.
         /// </summary>
         /// <param name="jobName">Name of the job to monitor.</param>
-        /// <param name="objectId">Object id of the affected object.</param>
         /// <param name="startTime">Start time of job</param>
         /// <param name="client">SiteRecovery client.</param>
         /// <param name="requestHeaders">Request headers.</param>
         public static void MonitorJobs(
             string jobName,
-            string objectId,
             DateTime startTime,
             SiteRecoveryManagementClient client,
             CustomRequestHeaders requestHeaders)
@@ -190,14 +190,12 @@ namespace SiteRecovery.Tests
         /// Returns job id of the job.
         /// </summary>
         /// <param name="jobName">Name of the job to check for.</param>
-        /// <param name="objectId">Object id of the affected object.</param>
         /// <param name="startTime">Start time of job</param>
         /// <param name="client">SiteRecovery client.</param>
         /// <param name="requestHeaders">Request headers.</param>
         /// <returns>Job object of the job queried.</returns>
         public static Job GetJobId(
             string jobName,
-            string objectId,
             DateTime startTime,
             SiteRecoveryManagementClient client,
             CustomRequestHeaders requestHeaders)

@@ -117,7 +117,6 @@ namespace SiteRecovery.Tests
 
                 Job tfoJob = MonitoringHelper.GetJobId(
                         MonitoringHelper.TestFailoverJobName,
-                        pgs.ReplicationProtectedItems[0].Name,
                         startTfoTime,
                         client,
                         RequestHeaders);
