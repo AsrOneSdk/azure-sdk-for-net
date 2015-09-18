@@ -20,6 +20,7 @@ using System.Net;
 using Xunit;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 
 namespace SiteRecovery.Tests
@@ -62,11 +63,10 @@ namespace SiteRecovery.Tests
                 string priCld = string.Empty;
                 string recCldGuid = string.Empty;
                 string recCld = string.Empty;
-                string policyName = "Hydra200" + (new Random()).Next();
+                string policyName = "Hydra" + (new Random()).Next();
                 string replicationProtectedItemName = "PE" + (new Random()).Next();
                 string enableDRVmName = string.Empty;
                 List<ApplicablePolicy> applicablePolicies = new List<ApplicablePolicy>();
-                Policy existingPolicy = null;
                 Policy currentPolicy = null;
 
                 var policies = client.Policies.List(RequestHeaders);
@@ -89,22 +89,6 @@ namespace SiteRecovery.Tests
                                 recCldGuid = container.Name;
                             }
                         }
-                        else
-                        {
-                            if (existingPolicy == null)
-                            {
-                                string existingPolicyId = container.Properties.ProtectionConfigurationSettings[0].PolicyId;
-
-                                foreach (var policy in policies.Policies)
-                                {
-                                    if (policy.Properties.ReplicationProvider.ToLower().Equals("hypervreplica")
-                                        && policy.Id.Equals(existingPolicyId, StringComparison.InvariantCultureIgnoreCase))
-                                    {
-                                        existingPolicy = policy;
-                                    }
-                                }
-                            }
-                        }
                     }
                 }
                 else
@@ -114,24 +98,22 @@ namespace SiteRecovery.Tests
 
                 if (pairClouds)
                 {
-                    HyperVReplicaPolicyDetails policyDet = (HyperVReplicaPolicyDetails)existingPolicy.Properties.ReplicationProviderSettings;
-
                     HyperVReplicaPolicyInput hvrProfileInput = new HyperVReplicaPolicyInput()
                     {
-                        ApplicationConsistentSnapshotFrequencyInHours = policyDet.ApplicationConsistentSnapshotFrequencyInHours,
-                        AllowedAuthenticationType = policyDet.AllowedAuthenticationType,
+                        ApplicationConsistentSnapshotFrequencyInHours = 0,
+                        AllowedAuthenticationType = 1,
                         Compression = "Enable",
                         InitialReplicationMethod = "OverNetwork",
                         OnlineReplicationStartTime = null,
-                        RecoveryPoints = policyDet.RecoveryPoints,
+                        RecoveryPoints = 0,
                         ReplicaDeletion = "Required",
-                        ReplicationFrequencyInSeconds = policyDet.ReplicationFrequencyInSeconds,
-                        ReplicationPort = policyDet.ReplicationPort
+                        ReplicationFrequencyInSeconds = 30,
+                        ReplicationPort = 8083
                     };
 
                     CreatePolicyInputProperties policyCreationProp = new CreatePolicyInputProperties()
                     {
-                        ReplicationProvider = existingPolicy.Properties.ReplicationProvider,
+                        ReplicationProvider = "HyperVReplica",
                         ReplicationProviderSettings = hvrProfileInput
                     };
 
@@ -212,13 +194,12 @@ namespace SiteRecovery.Tests
 
                     var enableDRresp = client.ReplicationProtectedItem.EnableProtection(selectedFabric.Name, priCld, replicationProtectedItemName, enableInput, RequestHeaders);
 
-                    MonitoringHelper.MonitorJobs(MonitoringHelper.SecondaryIrJobName, "", enableDRStartTime, client, RequestHeaders);
+                    MonitoringHelper.MonitorJobs(MonitoringHelper.SecondaryIrJobName, enableDRStartTime, client, RequestHeaders);
                 }
 
-                /////////////////////////////
+                ///////////////////////////// PFO ////////////////////////////////
                 PlannedFailoverInputProperties plannedFailoverProp = new PlannedFailoverInputProperties()
                 {
-                    FailoverDirection = "PrimaryToRecovery",
                     ProviderConfigurationSettings = new ProviderSpecificFailoverInput()
                 };
 
@@ -226,10 +207,9 @@ namespace SiteRecovery.Tests
                 {
                     Properties = plannedFailoverProp
                 };
-                //////////////////////////////
+                ////////////////////////////// RR ////////////////////////////////
                 ReverseReplicationInputProperties rrProp = new ReverseReplicationInputProperties()
                 {
-                    FailoverDirection = "",
                     ProviderConfigurationSettings = new ReverseReplicationProviderSpecificInput()
                 };
 
@@ -237,7 +217,7 @@ namespace SiteRecovery.Tests
                 {
                     Properties = rrProp
                 };
-                //////////////////////////////////
+                ////////////////////////////////// UFO /////////////////////////////
                 UnplannedFailoverInputProperties ufoProp = new UnplannedFailoverInputProperties()
                 {
                     ProviderConfigurationSettings = new ProviderSpecificFailoverInput(),
@@ -248,7 +228,7 @@ namespace SiteRecovery.Tests
                 {
                     Properties = ufoProp
                 };
-                ///////////////////////////////////
+                /////////////////////////////////// TFO //////////////////////////////
                 TestFailoverInputProperties tfoProp = new TestFailoverInputProperties()
                 {
                     ProviderConfigurationSettings = new ProviderSpecificFailoverInput()
@@ -276,9 +256,9 @@ namespace SiteRecovery.Tests
 
                 if (pfoReverse)
                 {
-                    //var unplannedFailoverReverse = client.ReplicationProtectedItem.UnplannedFailover(selectedFabric.Name, priCld, replicationProtectedItems.ReplicationProtectedItems[0].Name, ufoInput, RequestHeaders);
+                    var unplannedFailoverReverse = client.ReplicationProtectedItem.UnplannedFailover(selectedFabric.Name, priCld, replicationProtectedItemName, ufoInput, RequestHeaders);
 
-                    var plannedFailoverReverse = client.ReplicationProtectedItem.PlannedFailover(selectedFabric.Name, priCld, replicationProtectedItemName, plannedFailoverInput, RequestHeaders);
+                    //var plannedFailoverReverse = client.ReplicationProtectedItem.PlannedFailover(selectedFabric.Name, priCld, replicationProtectedItemName, plannedFailoverInput, RequestHeaders);
                 }
 
                 if (commitReverse)
@@ -288,7 +268,28 @@ namespace SiteRecovery.Tests
 
                 if (rrReverse)
                 {
-                    var rrReverseOp = client.ReplicationProtectedItem.Reprotect(selectedFabric.Name, priCld, replicationProtectedItemName, rrInput, RequestHeaders);
+                    DateTime rrPostUfoStartTime = DateTime.UtcNow;
+                    var rrReverseOp = client.ReplicationProtectedItem.ReprotectAsync(selectedFabric.Name, priCld, replicationProtectedItemName, rrInput, RequestHeaders);
+
+                    while (true)
+                    {
+                        Thread.Sleep(5000 * 60);
+                        Job ufoJob = MonitoringHelper.GetJobId(
+                            MonitoringHelper.ReverseReplicationJobName, 
+                            rrPostUfoStartTime, 
+                            client, 
+                            RequestHeaders);
+
+                        if (ufoJob.Properties.StateDescription.Equals(
+                            "WaitingForFinalizeProtection", 
+                            StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            break;
+                        }
+                    }
+
+                    MonitoringHelper.MonitorJobs(MonitoringHelper.PrimaryIrJobName, rrPostUfoStartTime, client, RequestHeaders);
+                    MonitoringHelper.MonitorJobs(MonitoringHelper.SecondaryIrJobName, rrPostUfoStartTime, client, RequestHeaders);
                 }
 
                 if (tfo)
@@ -297,7 +298,7 @@ namespace SiteRecovery.Tests
 
                     var tfoOp = client.ReplicationProtectedItem.TestFailover(selectedFabric.Name, priCld, replicationProtectedItemName, tfoInput, RequestHeaders);
 
-                    var jobs = MonitoringHelper.GetJobId(MonitoringHelper.TestFailoverJobName, "", startTFO, client, RequestHeaders);
+                    var jobs = MonitoringHelper.GetJobId(MonitoringHelper.TestFailoverJobName, startTFO, client, RequestHeaders);
 
                     ResumeJobParamsProperties resProp = new ResumeJobParamsProperties()
                     {
@@ -636,7 +637,7 @@ namespace SiteRecovery.Tests
                         var reprotectStartTime = DateTime.UtcNow;
                         var rrReverseOp = client.ReplicationProtectedItem.Reprotect(selectedFabric.Name, primaryCloud.Name, protectedItem.Name, rrInput, RequestHeaders);
 
-                        MonitoringHelper.MonitorJobs(MonitoringHelper.AzureIrJobName, "", reprotectStartTime, client, RequestHeaders);
+                        MonitoringHelper.MonitorJobs(MonitoringHelper.AzureIrJobName, reprotectStartTime, client, RequestHeaders);
                     }
 
                     if (tfo)
@@ -645,7 +646,7 @@ namespace SiteRecovery.Tests
 
                         var tfoOp = client.ReplicationProtectedItem.TestFailover(selectedFabric.Name, primaryCloud.Name, protectedItem.Name, tfoInput, RequestHeaders);
 
-                        var jobs = MonitoringHelper.GetJobId(MonitoringHelper.TestFailoverJobName, "", startTFO, client, RequestHeaders);
+                        var jobs = MonitoringHelper.GetJobId(MonitoringHelper.TestFailoverJobName, startTFO, client, RequestHeaders);
 
                         ResumeJobParamsProperties resProp = new ResumeJobParamsProperties()
                         {
@@ -861,7 +862,7 @@ namespace SiteRecovery.Tests
                             enableDRInput,
                             RequestHeaders) as ReplicationProtectedItemOperationResponse).ReplicationProtectedItem;
 
-                    MonitoringHelper.MonitorJobs(MonitoringHelper.AzureIrJobName, "", enablStartTime, client, RequestHeaders);
+                    MonitoringHelper.MonitorJobs(MonitoringHelper.AzureIrJobName, enablStartTime, client, RequestHeaders);
                 }
 
                 if (pfo || commit || tfo || pfoReverse || commitReverse || reprotect || disableDR)
@@ -974,7 +975,7 @@ namespace SiteRecovery.Tests
                         var reprotectStartTime = DateTime.UtcNow;
                         var rrReverseOp = client.ReplicationProtectedItem.Reprotect(selectedFabric.Name, primaryCloud.Name, protectedItem.Name, rrInput, RequestHeaders);
 
-                        MonitoringHelper.MonitorJobs(MonitoringHelper.AzureIrJobName, "", reprotectStartTime, client, RequestHeaders);
+                        MonitoringHelper.MonitorJobs(MonitoringHelper.AzureIrJobName,reprotectStartTime, client, RequestHeaders);
                     }
 
                     if (tfo)
@@ -983,7 +984,7 @@ namespace SiteRecovery.Tests
 
                         var tfoOp = client.ReplicationProtectedItem.TestFailover(selectedFabric.Name, primaryCloud.Name, protectedItem.Name, tfoInput, RequestHeaders);
 
-                        var jobs = MonitoringHelper.GetJobId(MonitoringHelper.TestFailoverJobName, "", startTFO, client, RequestHeaders);
+                        var jobs = MonitoringHelper.GetJobId(MonitoringHelper.TestFailoverJobName, startTFO, client, RequestHeaders);
 
                         ResumeJobParamsProperties resProp = new ResumeJobParamsProperties()
                         {
