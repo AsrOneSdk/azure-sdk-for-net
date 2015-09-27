@@ -25,7 +25,7 @@ using System.Linq;
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// The definition of a Protection Container pairing health object.
+    /// The definition of a Protection Container mapping health object.
     /// </summary>
     public partial class HealthError
     {

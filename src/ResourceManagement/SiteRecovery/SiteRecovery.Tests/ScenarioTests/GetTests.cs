@@ -89,5 +89,20 @@ namespace SiteRecovery.Tests
                 var response = client.ReplicationProtectedItem.List(fabricId, containerId, RequestHeaders);
             }
         }
+
+        [Fact]
+        public void GetContainerMappings()
+        {
+            using (UndoContext context = UndoContext.Current)
+            {
+                context.Start();
+                var client = GetSiteRecoveryClient(CustomHttpHandler);
+
+                string fabricId = "Vmm;6adf9420-b02f-4377-8ab7-ff384e6d792f";
+                string containerId = "8cc5a958-d437-41d0-9411-fad0841c0445";
+
+                var response = client.ProtectionContainerMapping.List(fabricId, containerId, RequestHeaders);
+            }
+        }
     }
 }

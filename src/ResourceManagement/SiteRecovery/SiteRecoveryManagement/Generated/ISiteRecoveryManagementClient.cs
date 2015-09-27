@@ -124,6 +124,15 @@ namespace Microsoft.Azure.Management.SiteRecovery
         }
         
         /// <summary>
+        /// Definition of Protection Container mapping operations for the Site
+        /// Recovery extension.
+        /// </summary>
+        IProtectionContainerMappingOperations ProtectionContainerMapping
+        {
+            get; 
+        }
+        
+        /// <summary>
         /// Definition of Protection Container operations for the Site Recovery
         /// extension.
         /// </summary>

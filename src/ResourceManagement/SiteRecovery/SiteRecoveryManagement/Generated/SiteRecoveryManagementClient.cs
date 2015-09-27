@@ -157,6 +157,17 @@ namespace Microsoft.Azure.Management.SiteRecovery
             get { return this._protectableItem; }
         }
         
+        private IProtectionContainerMappingOperations _protectionContainerMapping;
+        
+        /// <summary>
+        /// Definition of Protection Container mapping operations for the Site
+        /// Recovery extension.
+        /// </summary>
+        public virtual IProtectionContainerMappingOperations ProtectionContainerMapping
+        {
+            get { return this._protectionContainerMapping; }
+        }
+        
         private IProtectionContainerOperations _protectionContainer;
         
         /// <summary>
@@ -200,6 +211,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             this._jobs = new JobOperations(this);
             this._policies = new PolicyOperations(this);
             this._protectableItem = new ProtectableItemOperations(this);
+            this._protectionContainerMapping = new ProtectionContainerMappingOperations(this);
             this._protectionContainer = new ProtectionContainerOperations(this);
             this._recoveryServicesProvider = new RecoveryServicesProviderOperations(this);
             this._replicationProtectedItem = new ReplicationProtectedItemOperations(this);
@@ -339,6 +351,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             this._jobs = new JobOperations(this);
             this._policies = new PolicyOperations(this);
             this._protectableItem = new ProtectableItemOperations(this);
+            this._protectionContainerMapping = new ProtectionContainerMappingOperations(this);
             this._protectionContainer = new ProtectionContainerOperations(this);
             this._recoveryServicesProvider = new RecoveryServicesProviderOperations(this);
             this._replicationProtectedItem = new ReplicationProtectedItemOperations(this);

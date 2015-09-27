@@ -695,18 +695,18 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.FriendlyName = friendlyNameInstance;
                                 }
                                 
-                                JToken fabricTypeValue = propertiesValue["fabricType"];
-                                if (fabricTypeValue != null && fabricTypeValue.Type != JTokenType.Null)
-                                {
-                                    string fabricTypeInstance = ((string)fabricTypeValue);
-                                    propertiesInstance.FabricType = fabricTypeInstance;
-                                }
-                                
                                 JToken internalIdentifierValue = propertiesValue["internalIdentifier"];
                                 if (internalIdentifierValue != null && internalIdentifierValue.Type != JTokenType.Null)
                                 {
                                     string internalIdentifierInstance = ((string)internalIdentifierValue);
                                     propertiesInstance.InternalIdentifier = internalIdentifierInstance;
+                                }
+                                
+                                JToken fabricTypeValue = propertiesValue["fabricType"];
+                                if (fabricTypeValue != null && fabricTypeValue.Type != JTokenType.Null)
+                                {
+                                    string fabricTypeInstance = ((string)fabricTypeValue);
+                                    propertiesInstance.FabricType = fabricTypeInstance;
                                 }
                                 
                                 JToken encryptionDetailsValue = propertiesValue["encryptionDetails"];
@@ -956,18 +956,18 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.FriendlyName = friendlyNameInstance;
                                 }
                                 
-                                JToken fabricTypeValue = propertiesValue["fabricType"];
-                                if (fabricTypeValue != null && fabricTypeValue.Type != JTokenType.Null)
-                                {
-                                    string fabricTypeInstance = ((string)fabricTypeValue);
-                                    propertiesInstance.FabricType = fabricTypeInstance;
-                                }
-                                
                                 JToken internalIdentifierValue = propertiesValue["internalIdentifier"];
                                 if (internalIdentifierValue != null && internalIdentifierValue.Type != JTokenType.Null)
                                 {
                                     string internalIdentifierInstance = ((string)internalIdentifierValue);
                                     propertiesInstance.InternalIdentifier = internalIdentifierInstance;
+                                }
+                                
+                                JToken fabricTypeValue = propertiesValue["fabricType"];
+                                if (fabricTypeValue != null && fabricTypeValue.Type != JTokenType.Null)
+                                {
+                                    string fabricTypeInstance = ((string)fabricTypeValue);
+                                    propertiesInstance.FabricType = fabricTypeInstance;
                                 }
                                 
                                 JToken encryptionDetailsValue = propertiesValue["encryptionDetails"];
@@ -1477,18 +1477,18 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             propertiesInstance.FriendlyName = friendlyNameInstance;
                                         }
                                         
-                                        JToken fabricTypeValue = propertiesValue["fabricType"];
-                                        if (fabricTypeValue != null && fabricTypeValue.Type != JTokenType.Null)
-                                        {
-                                            string fabricTypeInstance = ((string)fabricTypeValue);
-                                            propertiesInstance.FabricType = fabricTypeInstance;
-                                        }
-                                        
                                         JToken internalIdentifierValue = propertiesValue["internalIdentifier"];
                                         if (internalIdentifierValue != null && internalIdentifierValue.Type != JTokenType.Null)
                                         {
                                             string internalIdentifierInstance = ((string)internalIdentifierValue);
                                             propertiesInstance.InternalIdentifier = internalIdentifierInstance;
+                                        }
+                                        
+                                        JToken fabricTypeValue = propertiesValue["fabricType"];
+                                        if (fabricTypeValue != null && fabricTypeValue.Type != JTokenType.Null)
+                                        {
+                                            string fabricTypeInstance = ((string)fabricTypeValue);
+                                            propertiesInstance.FabricType = fabricTypeInstance;
                                         }
                                         
                                         JToken encryptionDetailsValue = propertiesValue["encryptionDetails"];

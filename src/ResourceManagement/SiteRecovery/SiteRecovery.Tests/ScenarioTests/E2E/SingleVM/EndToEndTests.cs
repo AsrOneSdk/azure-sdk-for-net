@@ -35,7 +35,7 @@ namespace SiteRecovery.Tests
                 context.Start();
                 var client = GetSiteRecoveryClient(CustomHttpHandler);
 
-                bool pairClouds = true;
+                bool pairClouds = false;
                 bool enableDR = true;
                 bool pfo = true;
                 bool commit = true;
@@ -60,10 +60,10 @@ namespace SiteRecovery.Tests
                     }
                 }
 
-                string priCld = string.Empty;
+                string priCld = "cloud_b6d8b350-2ee5-40c0-b777-2158a87c2aee";// string.Empty;
                 string recCldGuid = string.Empty;
                 string recCld = string.Empty;
-                string policyName = "Hydra" + (new Random()).Next();
+                string policyName = "Hydra2001396971546";// "Hydra" + (new Random()).Next();
                 string replicationProtectedItemName = "PE" + (new Random()).Next();
                 string enableDRVmName = string.Empty;
                 List<ApplicablePolicy> applicablePolicies = new List<ApplicablePolicy>();
@@ -241,7 +241,8 @@ namespace SiteRecovery.Tests
                 /////////////////////////////////////
                 if (pfo)
                 {
-                    var plannedfailover = client.ReplicationProtectedItem.PlannedFailover(selectedFabric.Name, priCld, replicationProtectedItemName, plannedFailoverInput, RequestHeaders);
+                    //var plannedfailover = client.ReplicationProtectedItem.PlannedFailover(selectedFabric.Name, priCld, replicationProtectedItemName, plannedFailoverInput, RequestHeaders);
+                    var unplannedFailoverReverse = client.ReplicationProtectedItem.UnplannedFailover(selectedFabric.Name, priCld, replicationProtectedItemName, ufoInput, RequestHeaders);
                 }
 
                 if (commit)
@@ -353,15 +354,15 @@ namespace SiteRecovery.Tests
                 context.Start();
                 var client = GetSiteRecoveryClient(CustomHttpHandler);
 
-                bool createPolicy = true;
+                bool createPolicy = false;
                 bool pairClouds = true;
                 bool enableDR = true;
                 bool pfo = true;
-                bool commit = true;
-                bool tfo = true;
-                bool pfoReverse = true;
-                bool commitReverse = true;
-                bool reprotect = true;
+                bool commit = false;
+                bool tfo = false;
+                bool pfoReverse = false;
+                bool commitReverse = false;
+                bool reprotect = false;
                 bool disableDR = true;
                 bool unpair = true;
                 bool removePolicy = true;
@@ -370,7 +371,7 @@ namespace SiteRecovery.Tests
                 string fabricName = string.Empty;
                 string recCldName = "Microsoft Azure";
                 string priCldName = string.Empty;
-                string policyName = "Hydra200" + (new Random()).Next();
+                string policyName = "ProtectionProfile;7854804d-8288-41cb-8acc-76136696c477";// "Hydra200" + (new Random()).Next();
                 string enableDRName = string.Empty;
                 string protectedItemName = "PE" + (new Random()).Next();
 
@@ -701,25 +702,25 @@ namespace SiteRecovery.Tests
                 var client = GetSiteRecoveryClient(CustomHttpHandler);
 
                 bool createPolicy = false;
-                bool pairClouds = false;
+                bool pairClouds = true;
                 bool enableDR = true;
                 bool pfo = true;
-                bool commit = true;
-                bool tfo = true;
-                bool pfoReverse = true;
-                bool commitReverse = true;
-                bool reprotect = true;
+                bool commit = false;
+                bool tfo = false;
+                bool pfoReverse = false;
+                bool commitReverse = false;
+                bool reprotect = false;
                 bool disableDR = true;
                 bool unpair = true;
-                bool removePolicy = true;
+                bool removePolicy = false;
 
                 // Process Variables
                 string fabricName = string.Empty;
                 string recCldName = "Microsoft Azure";
-                string priCldName = string.Empty;
-                string policyName = "ProtectionProfile;607d71a8-5ad0-4594-9c4c-5eff94a1da7d";// "Hydra200" + (new Random()).Next();
-                string enableDRName = "761667c6-4faf-4f1c-959a-8196ee2f1f5e";
-                string protectedItemName = "PE1728552989";// "PE" + (new Random()).Next();
+                string priCldName = "cloud_b6d8b350-2ee5-40c0-b777-2158a87c2aee";// string.Empty;
+                string policyName = "ProtectionProfile;7854804d-8288-41cb-8acc-76136696c477";// "Hydra200" + (new Random()).Next();
+                string enableDRName = string.Empty;
+                string protectedItemName = "PE" + (new Random()).Next();
 
                 // Data Variables
                 Fabric selectedFabric = null;
@@ -823,7 +824,7 @@ namespace SiteRecovery.Tests
                 {
                     if (string.IsNullOrEmpty(enableDRName))
                     {
-                        protectableItem = client.ProtectableItem.List(selectedFabric.Name, primaryCloud.Name, "Unprotected", RequestHeaders).ProtectableItems[1];
+                        protectableItem = client.ProtectableItem.List(selectedFabric.Name, primaryCloud.Name, "Unprotected", RequestHeaders).ProtectableItems[0];
                         enableDRName = protectableItem.Name;
                     }
                     else
