@@ -60,13 +60,13 @@ namespace SiteRecovery.Tests
                     }
                 }
 
-                string priCld = "cloud_b6d8b350-2ee5-40c0-b777-2158a87c2aee";// string.Empty;
+                string priCld = string.Empty;
                 string recCldGuid = string.Empty;
                 string recCld = string.Empty;
-                string policyName = "Hydra2001396971546";// "Hydra" + (new Random()).Next();
+                string policyName = "Hydra" + (new Random()).Next();
+                string mappingName = "Mapping" + (new Random()).Next();
                 string replicationProtectedItemName = "PE" + (new Random()).Next();
                 string enableDRVmName = string.Empty;
-                List<ApplicablePolicy> applicablePolicies = new List<ApplicablePolicy>();
                 Policy currentPolicy = null;
 
                 var policies = client.Policies.List(RequestHeaders);
@@ -126,37 +126,31 @@ namespace SiteRecovery.Tests
 
                     currentPolicy = client.Policies.Get(policyName, RequestHeaders).Policy;
 
-                    ApplicablePolicy policy1 = new ApplicablePolicy()
+                    if (client.ProtectionContainerMapping.List(selectedFabric.Name, priCld, RequestHeaders).ProtectionContainerMappings.Count == 0)
                     {
-                        PolicyId = currentPolicy.Id
-                    };
-                    applicablePolicies.Add(policy1);
+                        CreateProtectionContainerMappingInputProperties pairingProps = new CreateProtectionContainerMappingInputProperties()
+                        {
+                            PolicyId = currentPolicy.Id,
+                            TargetProtectionContainerName = recCld,
+                            ProviderSpecificInput = new ReplicationProviderContainerMappingInput()
+                        };
 
-                    ConfigureProtectionInputProperties properties = new ConfigureProtectionInputProperties()
-                    {
-                        TargetProtectionContainerName = recCld,
-                        FabricType = "",
-                        ApplicablePolicies = applicablePolicies,
-                        ProviderConfigurationSettings = null
-                    };
+                        CreateProtectionContainerMappingInput pairingInput = new CreateProtectionContainerMappingInput()
+                        {
+                            Properties = pairingProps
+                        };
 
-                    ConfigureProtectionInput inputForPairing = new ConfigureProtectionInput()
-                    {
-                        Properties = properties
-                    };
-
-                    var cloudPairingResp = client.ProtectionContainer.ConfigureProtection(selectedFabric.Name, priCld, inputForPairing, RequestHeaders);
+                        var pairingResponse = client.ProtectionContainerMapping.ConfigureProtection(
+                            selectedFabric.Name, 
+                            priCld, 
+                            mappingName, 
+                            pairingInput, 
+                            RequestHeaders);
+                    }
                 }
                 else
                 {
                     currentPolicy = client.Policies.Get(policyName, RequestHeaders).Policy;
-                    ApplicablePolicy policy1 = new ApplicablePolicy()
-                    {
-                        PolicyId = currentPolicy.Id
-                    };
-
-
-                    applicablePolicies.Add(policy1);
                 }
 
                 if (enableDR)
@@ -192,7 +186,12 @@ namespace SiteRecovery.Tests
 
                     var enableDRStartTime = DateTime.Now;
 
-                    var enableDRresp = client.ReplicationProtectedItem.EnableProtection(selectedFabric.Name, priCld, replicationProtectedItemName, enableInput, RequestHeaders);
+                    var enableDRresp = client.ReplicationProtectedItem.EnableProtection(
+                        selectedFabric.Name, 
+                        priCld, 
+                        replicationProtectedItemName, 
+                        enableInput, 
+                        RequestHeaders);
 
                     MonitoringHelper.MonitorJobs(MonitoringHelper.SecondaryIrJobName, enableDRStartTime, client, RequestHeaders);
                 }
@@ -242,7 +241,12 @@ namespace SiteRecovery.Tests
                 if (pfo)
                 {
                     //var plannedfailover = client.ReplicationProtectedItem.PlannedFailover(selectedFabric.Name, priCld, replicationProtectedItemName, plannedFailoverInput, RequestHeaders);
-                    var unplannedFailoverReverse = client.ReplicationProtectedItem.UnplannedFailover(selectedFabric.Name, priCld, replicationProtectedItemName, ufoInput, RequestHeaders);
+                    var unplannedFailoverReverse = client.ReplicationProtectedItem.UnplannedFailover(
+                        selectedFabric.Name, 
+                        priCld, 
+                        replicationProtectedItemName, 
+                        ufoInput, 
+                        RequestHeaders);
                 }
 
                 if (commit)
@@ -257,7 +261,8 @@ namespace SiteRecovery.Tests
 
                 if (pfoReverse)
                 {
-                    var unplannedFailoverReverse = client.ReplicationProtectedItem.UnplannedFailover(selectedFabric.Name, priCld, replicationProtectedItemName, ufoInput, RequestHeaders);
+                    var unplannedFailoverReverse = client.ReplicationProtectedItem.UnplannedFailover(
+                        selectedFabric.Name, priCld, replicationProtectedItemName, ufoInput, RequestHeaders);
 
                     //var plannedFailoverReverse = client.ReplicationProtectedItem.PlannedFailover(selectedFabric.Name, priCld, replicationProtectedItemName, plannedFailoverInput, RequestHeaders);
                 }
@@ -321,22 +326,12 @@ namespace SiteRecovery.Tests
 
                 if (unpair)
                 {
-                    var recoveryCld = client.ProtectionContainer.Get(selectedFabric.Name, recCldGuid, RequestHeaders);
-
-                    UnconfigureProtectionInputProperties unpairProp = new UnconfigureProtectionInputProperties()
-                    {
-                        TargetProtectionContainerName = recoveryCld.ProtectionContainer.Id,
-                        FabricType = "",
-                        ApplicablePolicies = applicablePolicies,
-                        ProviderConfigurationSettings = null
-                    };
-
-                    UnconfigureProtectionInput unpairInput = new UnconfigureProtectionInput()
-                    {
-                        Properties = unpairProp
-                    };
-
-                    var unpaiClouds = client.ProtectionContainer.UnconfigureProtection(selectedFabric.Name, priCld, unpairInput, RequestHeaders);
+                    var unpaiClouds = client.ProtectionContainerMapping.UnconfigureProtection(
+                        selectedFabric.Name, 
+                        priCld,
+                        mappingName, 
+                        new RemoveProtectionContainerMappingInput(), 
+                        RequestHeaders);
                 }
 
                 if (removePolicy)
@@ -372,6 +367,7 @@ namespace SiteRecovery.Tests
                 string recCldName = "Microsoft Azure";
                 string priCldName = string.Empty;
                 string policyName = "ProtectionProfile;7854804d-8288-41cb-8acc-76136696c477";// "Hydra200" + (new Random()).Next();
+                string mappingName = "Mapping" + (new Random()).Next();
                 string enableDRName = string.Empty;
                 string protectedItemName = "PE" + (new Random()).Next();
 
@@ -458,31 +454,29 @@ namespace SiteRecovery.Tests
                     selectedPolicy = client.Policies.Get(policyName, RequestHeaders).Policy;
                 }
 
-                List<ApplicablePolicy> applicablePolicies = new List<ApplicablePolicy>();
-
-                ApplicablePolicy appPolicy = new ApplicablePolicy()
-                {
-                    PolicyId =  selectedPolicy.Id
-                };
-
-                applicablePolicies.Add(appPolicy);
-
                 if (pairClouds)
                 {
-                    ConfigureProtectionInputProperties configureProps = new ConfigureProtectionInputProperties()
+                    if (client.ProtectionContainerMapping.List(selectedFabric.Name, primaryCloud.Name, RequestHeaders).ProtectionContainerMappings.Count == 0)
                     {
-                        ApplicablePolicies = applicablePolicies,
-                        FabricType = "VMM",
-                        TargetProtectionContainerName = recCldName,
-                        ProviderConfigurationSettings = new ProviderConfigureProtectionInput()
-                    };
+                        CreateProtectionContainerMappingInputProperties pairingProps = new CreateProtectionContainerMappingInputProperties()
+                        {
+                            PolicyId = selectedPolicy.Id,
+                            TargetProtectionContainerName = recCldName,
+                            ProviderSpecificInput = new ReplicationProviderContainerMappingInput()
+                        };
 
-                    ConfigureProtectionInput configureProtectionInput = new ConfigureProtectionInput()
-                    {
-                        Properties = configureProps
-                    };
+                        CreateProtectionContainerMappingInput pairingInput = new CreateProtectionContainerMappingInput()
+                        {
+                            Properties = pairingProps
+                        };
 
-                    var pairingResponse = client.ProtectionContainer.ConfigureProtection(selectedFabric.Name, primaryCloud.Name, configureProtectionInput, RequestHeaders);
+                        var pairingResponse = client.ProtectionContainerMapping.ConfigureProtection(
+                            selectedFabric.Name, 
+                            primaryCloud.Name, 
+                            mappingName, 
+                            pairingInput, 
+                            RequestHeaders);
+                    }
                 }
 
                 if (enableDR)
@@ -669,20 +663,15 @@ namespace SiteRecovery.Tests
 
                     if (unpair)
                     {
-                        UnconfigureProtectionInputProperties unpairProp = new UnconfigureProtectionInputProperties()
+                        if (unpair)
                         {
-                            TargetProtectionContainerName = "Microsoft Azure",
-                            FabricType = "",
-                            ApplicablePolicies = applicablePolicies,
-                            ProviderConfigurationSettings = null
-                        };
-
-                        UnconfigureProtectionInput unpairInput = new UnconfigureProtectionInput()
-                        {
-                            Properties = unpairProp
-                        };
-
-                        var unpaiClouds = client.ProtectionContainer.UnconfigureProtection(selectedFabric.Name, primaryCloud.Name, unpairInput, RequestHeaders);
+                            var unpairClouds = client.ProtectionContainerMapping.UnconfigureProtection(
+                                selectedFabric.Name,
+                                primaryCloud.Name,
+                                mappingName,
+                                new RemoveProtectionContainerMappingInput(),
+                                RequestHeaders);
+                        }
                     }
                 }
 
@@ -719,6 +708,7 @@ namespace SiteRecovery.Tests
                 string recCldName = "Microsoft Azure";
                 string priCldName = "cloud_b6d8b350-2ee5-40c0-b777-2158a87c2aee";// string.Empty;
                 string policyName = "ProtectionProfile;7854804d-8288-41cb-8acc-76136696c477";// "Hydra200" + (new Random()).Next();
+                string mappingName = "Mapping" + (new Random()).Next(); 
                 string enableDRName = string.Empty;
                 string protectedItemName = "PE" + (new Random()).Next();
 
@@ -790,33 +780,28 @@ namespace SiteRecovery.Tests
                     selectedPolicy = client.Policies.Get(policyName, RequestHeaders).Policy;
                 }
 
-                List<ApplicablePolicy> applicablePolicies = new List<ApplicablePolicy>();
-
-                ApplicablePolicy appPolicy = new ApplicablePolicy()
-                {
-                    PolicyId = selectedPolicy.Id
-                };
-
-                applicablePolicies.Add(appPolicy);
-
                 if (pairClouds)
                 {
                     if (client.ProtectionContainerMapping.List(selectedFabric.Name, primaryCloud.Name, RequestHeaders).ProtectionContainerMappings.Count == 0)
                     {
-                        ConfigureProtectionInputProperties configureProps = new ConfigureProtectionInputProperties()
+                        CreateProtectionContainerMappingInputProperties pairingProps = new CreateProtectionContainerMappingInputProperties()
                         {
-                            ApplicablePolicies = applicablePolicies,
-                            FabricType = "HyperV",
+                            PolicyId = selectedPolicy.Id,
                             TargetProtectionContainerName = recCldName,
-                            ProviderConfigurationSettings = new ProviderConfigureProtectionInput()
+                            ProviderSpecificInput = new ReplicationProviderContainerMappingInput()
                         };
 
-                        ConfigureProtectionInput configureProtectionInput = new ConfigureProtectionInput()
+                        CreateProtectionContainerMappingInput pairingInput = new CreateProtectionContainerMappingInput()
                         {
-                            Properties = configureProps
+                            Properties = pairingProps
                         };
 
-                        var pairingResponse = client.ProtectionContainer.ConfigureProtection(selectedFabric.Name, primaryCloud.Name, configureProtectionInput, RequestHeaders);
+                        var pairingResponse = client.ProtectionContainerMapping.ConfigureProtection(
+                            selectedFabric.Name, 
+                            primaryCloud.Name, 
+                            mappingName, 
+                            pairingInput, 
+                            RequestHeaders);
                     }
                 }
 
@@ -1007,20 +992,12 @@ namespace SiteRecovery.Tests
 
                     if (unpair)
                     {
-                        UnconfigureProtectionInputProperties unpairProp = new UnconfigureProtectionInputProperties()
-                        {
-                            TargetProtectionContainerName = "Microsoft Azure",
-                            FabricType = "",
-                            ApplicablePolicies = applicablePolicies,
-                            ProviderConfigurationSettings = null
-                        };
-
-                        UnconfigureProtectionInput unpairInput = new UnconfigureProtectionInput()
-                        {
-                            Properties = unpairProp
-                        };
-
-                        var unpaiClouds = client.ProtectionContainer.UnconfigureProtection(selectedFabric.Name, primaryCloud.Name, unpairInput, RequestHeaders);
+                        var unpairClouds = client.ProtectionContainerMapping.UnconfigureProtection(
+                            selectedFabric.Name, 
+                            primaryCloud.Name, 
+                            mappingName, 
+                            new RemoveProtectionContainerMappingInput(), 
+                            RequestHeaders);
                     }
                 }
 
