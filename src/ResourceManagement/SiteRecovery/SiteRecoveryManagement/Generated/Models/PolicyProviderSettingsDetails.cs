@@ -29,15 +29,15 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class PolicyProviderSettingsDetails
     {
-        private string _type;
+        private string _instanceType;
         
         /// <summary>
-        /// Optional.
+        /// Optional. Type of derived class
         /// </summary>
-        public string Type
+        public string InstanceType
         {
-            get { return this._type; }
-            set { this._type = value; }
+            get { return this._instanceType; }
+            set { this._instanceType = value; }
         }
         
         /// <summary>

@@ -30,7 +30,7 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// <summary>
     /// Hyper V Replica Provider specific entity details.
     /// </summary>
-    public partial class VirtualMachineDetails : ReplicationItemTypeSettings
+    public partial class HyperVVirtualMachineDetails : ProtectableItemTypeSettings
     {
         private IList<DiskDetails> _diskDetailsList;
         
@@ -77,9 +77,9 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         }
         
         /// <summary>
-        /// Initializes a new instance of the VirtualMachineDetails class.
+        /// Initializes a new instance of the HyperVVirtualMachineDetails class.
         /// </summary>
-        public VirtualMachineDetails()
+        public HyperVVirtualMachineDetails()
         {
             this.DiskDetailsList = new LazyList<DiskDetails>();
         }

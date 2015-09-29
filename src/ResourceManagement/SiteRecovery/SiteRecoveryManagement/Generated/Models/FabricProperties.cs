@@ -30,15 +30,15 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class FabricProperties
     {
-        private FabricSpecificSettings _configurationSettings;
+        private FabricSpecificSettings _customDetails;
         
         /// <summary>
         /// Optional. Type of the fabric.
         /// </summary>
-        public FabricSpecificSettings ConfigurationSettings
+        public FabricSpecificSettings CustomDetails
         {
-            get { return this._configurationSettings; }
-            set { this._configurationSettings = value; }
+            get { return this._customDetails; }
+            set { this._customDetails = value; }
         }
         
         private KekDetails _encryptionDetails;

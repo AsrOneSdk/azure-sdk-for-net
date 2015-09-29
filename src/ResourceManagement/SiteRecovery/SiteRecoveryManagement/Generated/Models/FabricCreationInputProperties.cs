@@ -30,15 +30,15 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class FabricCreationInputProperties
     {
-        private FabricSpecificCreationSettings _configurationSettings;
+        private FabricSpecificCreationSettings _customInput;
         
         /// <summary>
         /// Optional. Fabric specific creation input
         /// </summary>
-        public FabricSpecificCreationSettings ConfigurationSettings
+        public FabricSpecificCreationSettings CustomInput
         {
-            get { return this._configurationSettings; }
-            set { this._configurationSettings = value; }
+            get { return this._customInput; }
+            set { this._customInput = value; }
         }
         
         private string _fabricType;

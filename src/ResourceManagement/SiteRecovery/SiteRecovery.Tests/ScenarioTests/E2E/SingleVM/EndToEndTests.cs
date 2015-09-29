@@ -77,7 +77,7 @@ namespace SiteRecovery.Tests
                     
                     foreach (var container in containers.ProtectionContainers)
                     {
-                        if (container.Properties.ProtectionConfigurationSettings.Count == 0)
+                        if (client.ProtectionContainerMapping.List(selectedFabric.Name, container.Name, RequestHeaders).ProtectionContainerMappings.Count == 0)
                         {
                             if (string.IsNullOrEmpty(priCld))
                             {
@@ -113,7 +113,7 @@ namespace SiteRecovery.Tests
 
                     CreatePolicyInputProperties policyCreationProp = new CreatePolicyInputProperties()
                     {
-                        ReplicationProvider = "HyperVReplica",
+                        RecoveryProvider = "HyperVReplica",
                         ReplicationProviderSettings = hvrProfileInput
                     };
 
@@ -408,7 +408,7 @@ namespace SiteRecovery.Tests
 
                     foreach (var cloud in clouds.ProtectionContainers)
                     {
-                        if (cloud.Properties.ProtectionConfigurationSettings.Count == 0)
+                        if (client.ProtectionContainerMapping.List(selectedFabric.Name, cloud.Name, RequestHeaders).ProtectionContainerMappings.Count == 0)
                         {
                             priCldName = cloud.Name;
                             primaryCloud = cloud;
@@ -442,7 +442,7 @@ namespace SiteRecovery.Tests
 
                     CreatePolicyInputProperties createInputProp = new CreatePolicyInputProperties()
                     {
-                        ReplicationProvider = "HyperVReplicaAzure",
+                        RecoveryProvider = "HyperVReplicaAzure",
                         ReplicationProviderSettings = hvrAPolicy
                     };
 
@@ -499,9 +499,9 @@ namespace SiteRecovery.Tests
 
                     AzureEnableProtectionInput hvrAEnableDRInput = new AzureEnableProtectionInput()
                     {
-                        HvHostVmId = (protectableItem.Properties.ConfigurationSettings as VirtualMachineDetails).SourceItemId,
+                        HvHostVmId = (protectableItem.Properties.CustomDetails as HyperVVirtualMachineDetails).SourceItemId,
                         OSType = "Windows",
-                        VHDId = (protectableItem.Properties.ConfigurationSettings as VirtualMachineDetails).DiskDetailsList[0].VHDId,
+                        VHDId = (protectableItem.Properties.CustomDetails as HyperVVirtualMachineDetails).DiskDetailsList[0].VHDId,
                         VmName = protectableItem.Properties.FriendlyName,
                         StorageAccountName = "bvtmapped2storacc",
                         StorageAccountSubscriptionId = "19b823e2-d1f3-4805-93d7-401c5d8230d5"
@@ -568,9 +568,9 @@ namespace SiteRecovery.Tests
                     ////////////////////////////// Reprotect //////////////////////////////////////
                     HyperVReplicaAzureReprotectInput hvrARRInput = new HyperVReplicaAzureReprotectInput()
                     {
-                        HvHostVmId = (protectableItem.Properties.ConfigurationSettings as VirtualMachineDetails).SourceItemId,
+                        HvHostVmId = (protectableItem.Properties.CustomDetails as HyperVVirtualMachineDetails).SourceItemId,
                         OSType = "Windows",
-                        VHDId = (protectableItem.Properties.ConfigurationSettings as VirtualMachineDetails).DiskDetailsList[0].VHDId,
+                        VHDId = (protectableItem.Properties.CustomDetails as HyperVVirtualMachineDetails).DiskDetailsList[0].VHDId,
                         VmName = protectableItem.Properties.FriendlyName,
                         StorageAccountName = "bvtmapped2storacc",
                         StorageAccountSubscriptionId = "19b823e2-d1f3-4805-93d7-401c5d8230d5"
@@ -774,7 +774,7 @@ namespace SiteRecovery.Tests
 
                     CreatePolicyInputProperties createInputProp = new CreatePolicyInputProperties()
                     {
-                        ReplicationProvider = "HyperVReplicaAzure",
+                        RecoveryProvider = "HyperVReplicaAzure",
                         ReplicationProviderSettings = hvrAPolicy
                     };
 
@@ -801,7 +801,7 @@ namespace SiteRecovery.Tests
 
                 if (pairClouds)
                 {
-                    if (primaryCloud.Properties.ProtectionConfigurationSettings.Count == 0)
+                    if (client.ProtectionContainerMapping.List(selectedFabric.Name, primaryCloud.Name, RequestHeaders).ProtectionContainerMappings.Count == 0)
                     {
                         ConfigureProtectionInputProperties configureProps = new ConfigureProtectionInputProperties()
                         {
@@ -834,9 +834,9 @@ namespace SiteRecovery.Tests
 
                     AzureEnableProtectionInput hvrAEnableDRInput = new AzureEnableProtectionInput()
                     {
-                        HvHostVmId = (protectableItem.Properties.ConfigurationSettings as VirtualMachineDetails).SourceItemId,
+                        HvHostVmId = (protectableItem.Properties.CustomDetails as HyperVVirtualMachineDetails).SourceItemId,
                         OSType = "Windows",
-                        VHDId = (protectableItem.Properties.ConfigurationSettings as VirtualMachineDetails).DiskDetailsList[0].VHDId,
+                        VHDId = (protectableItem.Properties.CustomDetails as HyperVVirtualMachineDetails).DiskDetailsList[0].VHDId,
                         VmName = protectableItem.Properties.FriendlyName,
                         StorageAccountName = "bvtmapped2storacc",
                         StorageAccountSubscriptionId = "19b823e2-d1f3-4805-93d7-401c5d8230d5"
@@ -906,9 +906,9 @@ namespace SiteRecovery.Tests
                     ////////////////////////////// Reprotect //////////////////////////////////////
                     HyperVReplicaAzureReprotectInput hvrARRInput = new HyperVReplicaAzureReprotectInput()
                     {
-                        HvHostVmId = (protectableItem.Properties.ConfigurationSettings as VirtualMachineDetails).SourceItemId,
+                        HvHostVmId = (protectableItem.Properties.CustomDetails as HyperVVirtualMachineDetails).SourceItemId,
                         OSType = "Windows",
-                        VHDId = (protectableItem.Properties.ConfigurationSettings as VirtualMachineDetails).DiskDetailsList[0].VHDId,
+                        VHDId = (protectableItem.Properties.CustomDetails as HyperVVirtualMachineDetails).DiskDetailsList[0].VHDId,
                         VmName = protectableItem.Properties.FriendlyName,
                         StorageAccountName = "bvtmapped2storacc",
                         StorageAccountSubscriptionId = "19b823e2-d1f3-4805-93d7-401c5d8230d5"

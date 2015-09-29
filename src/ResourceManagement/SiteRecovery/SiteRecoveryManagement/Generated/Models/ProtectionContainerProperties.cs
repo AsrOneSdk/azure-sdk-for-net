@@ -20,9 +20,7 @@
 // code is regenerated.
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using Hyak.Common;
 using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
@@ -76,15 +74,15 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._friendlyName = value; }
         }
         
-        private IList<PairingDetails> _protectionConfigurationSettings;
+        private int _protectedItemCount;
         
         /// <summary>
-        /// Optional. Pairing details.
+        /// Optional. Number of protected items.
         /// </summary>
-        public IList<PairingDetails> ProtectionConfigurationSettings
+        public int ProtectedItemCount
         {
-            get { return this._protectionConfigurationSettings; }
-            set { this._protectionConfigurationSettings = value; }
+            get { return this._protectedItemCount; }
+            set { this._protectedItemCount = value; }
         }
         
         /// <summary>
@@ -93,7 +91,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         /// </summary>
         public ProtectionContainerProperties()
         {
-            this.ProtectionConfigurationSettings = new LazyList<PairingDetails>();
         }
     }
 }

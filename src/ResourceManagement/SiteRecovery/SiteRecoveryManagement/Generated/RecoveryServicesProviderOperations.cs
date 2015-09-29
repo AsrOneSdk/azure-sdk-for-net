@@ -682,18 +682,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.ConnectionStatus = connectionStatusInstance;
                                 }
                                 
-                                JToken purgeValue = propertiesValue["purge"];
-                                if (purgeValue != null && purgeValue.Type != JTokenType.Null)
+                                JToken allowedScenariosArray = propertiesValue["allowedScenarios"];
+                                if (allowedScenariosArray != null && allowedScenariosArray.Type != JTokenType.Null)
                                 {
-                                    string purgeInstance = ((string)purgeValue);
-                                    propertiesInstance.Purge = purgeInstance;
-                                }
-                                
-                                JToken refreshValue = propertiesValue["refresh"];
-                                if (refreshValue != null && refreshValue.Type != JTokenType.Null)
-                                {
-                                    string refreshInstance = ((string)refreshValue);
-                                    propertiesInstance.Refresh = refreshInstance;
+                                    foreach (JToken allowedScenariosValue in ((JArray)allowedScenariosArray))
+                                    {
+                                        propertiesInstance.AllowedScenarios.Add(((string)allowedScenariosValue));
+                                    }
                                 }
                                 
                                 JToken protectedItemCountValue = propertiesValue["protectedItemCount"];
@@ -701,12 +696,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 {
                                     int protectedItemCountInstance = ((int)protectedItemCountValue);
                                     propertiesInstance.ProtectedItemCount = protectedItemCountInstance;
-                                }
-                                
-                                JToken configurationSettingsValue = propertiesValue["configurationSettings"];
-                                if (configurationSettingsValue != null && configurationSettingsValue.Type != JTokenType.Null)
-                                {
-                                    string typeName = ((string)configurationSettingsValue["__type"]);
                                 }
                             }
                             
@@ -929,11 +918,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     {
                         result.Status = OperationStatus.InProgress;
                     }
-                    if (statusCode == HttpStatusCode.NoContent)
+                    if (statusCode == HttpStatusCode.OK)
                     {
                         result.Status = OperationStatus.Succeeded;
                     }
-                    if (statusCode == HttpStatusCode.OK)
+                    if (statusCode == HttpStatusCode.NoContent)
                     {
                         result.Status = OperationStatus.Succeeded;
                     }
@@ -1349,18 +1338,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             propertiesInstance.ConnectionStatus = connectionStatusInstance;
                                         }
                                         
-                                        JToken purgeValue = propertiesValue["purge"];
-                                        if (purgeValue != null && purgeValue.Type != JTokenType.Null)
+                                        JToken allowedScenariosArray = propertiesValue["allowedScenarios"];
+                                        if (allowedScenariosArray != null && allowedScenariosArray.Type != JTokenType.Null)
                                         {
-                                            string purgeInstance = ((string)purgeValue);
-                                            propertiesInstance.Purge = purgeInstance;
-                                        }
-                                        
-                                        JToken refreshValue = propertiesValue["refresh"];
-                                        if (refreshValue != null && refreshValue.Type != JTokenType.Null)
-                                        {
-                                            string refreshInstance = ((string)refreshValue);
-                                            propertiesInstance.Refresh = refreshInstance;
+                                            foreach (JToken allowedScenariosValue in ((JArray)allowedScenariosArray))
+                                            {
+                                                propertiesInstance.AllowedScenarios.Add(((string)allowedScenariosValue));
+                                            }
                                         }
                                         
                                         JToken protectedItemCountValue = propertiesValue["protectedItemCount"];
@@ -1368,12 +1352,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             int protectedItemCountInstance = ((int)protectedItemCountValue);
                                             propertiesInstance.ProtectedItemCount = protectedItemCountInstance;
-                                        }
-                                        
-                                        JToken configurationSettingsValue = propertiesValue["configurationSettings"];
-                                        if (configurationSettingsValue != null && configurationSettingsValue.Type != JTokenType.Null)
-                                        {
-                                            string typeName = ((string)configurationSettingsValue["__type"]);
                                         }
                                     }
                                     
@@ -1653,18 +1631,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             propertiesInstance.ConnectionStatus = connectionStatusInstance;
                                         }
                                         
-                                        JToken purgeValue = propertiesValue["purge"];
-                                        if (purgeValue != null && purgeValue.Type != JTokenType.Null)
+                                        JToken allowedScenariosArray = propertiesValue["allowedScenarios"];
+                                        if (allowedScenariosArray != null && allowedScenariosArray.Type != JTokenType.Null)
                                         {
-                                            string purgeInstance = ((string)purgeValue);
-                                            propertiesInstance.Purge = purgeInstance;
-                                        }
-                                        
-                                        JToken refreshValue = propertiesValue["refresh"];
-                                        if (refreshValue != null && refreshValue.Type != JTokenType.Null)
-                                        {
-                                            string refreshInstance = ((string)refreshValue);
-                                            propertiesInstance.Refresh = refreshInstance;
+                                            foreach (JToken allowedScenariosValue in ((JArray)allowedScenariosArray))
+                                            {
+                                                propertiesInstance.AllowedScenarios.Add(((string)allowedScenariosValue));
+                                            }
                                         }
                                         
                                         JToken protectedItemCountValue = propertiesValue["protectedItemCount"];
@@ -1672,12 +1645,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             int protectedItemCountInstance = ((int)protectedItemCountValue);
                                             propertiesInstance.ProtectedItemCount = protectedItemCountInstance;
-                                        }
-                                        
-                                        JToken configurationSettingsValue = propertiesValue["configurationSettings"];
-                                        if (configurationSettingsValue != null && configurationSettingsValue.Type != JTokenType.Null)
-                                        {
-                                            string typeName = ((string)configurationSettingsValue["__type"]);
                                         }
                                     }
                                     

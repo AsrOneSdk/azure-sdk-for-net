@@ -41,26 +41,26 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._friendlyName = value; }
         }
         
-        private string _replicationProvider;
-        
-        /// <summary>
-        /// Required. Name of replication provider
-        /// </summary>
-        public string ReplicationProvider
-        {
-            get { return this._replicationProvider; }
-            set { this._replicationProvider = value; }
-        }
-        
-        private PolicyProviderSettingsDetails _replicationProviderSettings;
+        private PolicyProviderSettingsDetails _providerSpecificDetails;
         
         /// <summary>
         /// Required. the replication provider settings
         /// </summary>
-        public PolicyProviderSettingsDetails ReplicationProviderSettings
+        public PolicyProviderSettingsDetails ProviderSpecificDetails
         {
-            get { return this._replicationProviderSettings; }
-            set { this._replicationProviderSettings = value; }
+            get { return this._providerSpecificDetails; }
+            set { this._providerSpecificDetails = value; }
+        }
+        
+        private string _recoveryProvider;
+        
+        /// <summary>
+        /// Required. Name of replication provider
+        /// </summary>
+        public string RecoveryProvider
+        {
+            get { return this._recoveryProvider; }
+            set { this._recoveryProvider = value; }
         }
         
         /// <summary>
@@ -74,24 +74,24 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         /// Initializes a new instance of the PolicyProperties class with
         /// required arguments.
         /// </summary>
-        public PolicyProperties(string friendlyName, string replicationProvider, PolicyProviderSettingsDetails replicationProviderSettings)
+        public PolicyProperties(string friendlyName, string recoveryProvider, PolicyProviderSettingsDetails providerSpecificDetails)
             : this()
         {
             if (friendlyName == null)
             {
                 throw new ArgumentNullException("friendlyName");
             }
-            if (replicationProvider == null)
+            if (recoveryProvider == null)
             {
-                throw new ArgumentNullException("replicationProvider");
+                throw new ArgumentNullException("recoveryProvider");
             }
-            if (replicationProviderSettings == null)
+            if (providerSpecificDetails == null)
             {
-                throw new ArgumentNullException("replicationProviderSettings");
+                throw new ArgumentNullException("providerSpecificDetails");
             }
             this.FriendlyName = friendlyName;
-            this.ReplicationProvider = replicationProvider;
-            this.ReplicationProviderSettings = replicationProviderSettings;
+            this.RecoveryProvider = recoveryProvider;
+            this.ProviderSpecificDetails = providerSpecificDetails;
         }
     }
 }

@@ -32,15 +32,15 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class ProtectableItemProperties
     {
-        private ReplicationItemTypeSettings _configurationSettings;
+        private ProtectableItemTypeSettings _customDetails;
         
         /// <summary>
         /// Optional. Gets or sets the Replication provider custom settings.
         /// </summary>
-        public ReplicationItemTypeSettings ConfigurationSettings
+        public ProtectableItemTypeSettings CustomDetails
         {
-            get { return this._configurationSettings; }
-            set { this._configurationSettings = value; }
+            get { return this._customDetails; }
+            set { this._customDetails = value; }
         }
         
         private string _friendlyName;

@@ -178,10 +178,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
                         propertiesValue["fabricType"] = input.Properties.FabricType;
                     }
                     
-                    if (input.Properties.ConfigurationSettings != null)
+                    if (input.Properties.CustomInput != null)
                     {
-                        JObject configurationSettingsValue = new JObject();
-                        propertiesValue["configurationSettings"] = configurationSettingsValue;
+                        JObject customInputValue = new JObject();
+                        propertiesValue["customInput"] = customInputValue;
                     }
                 }
                 
@@ -765,10 +765,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     }
                                 }
                                 
-                                JToken configurationSettingsValue = propertiesValue["configurationSettings"];
-                                if (configurationSettingsValue != null && configurationSettingsValue.Type != JTokenType.Null)
+                                JToken customDetailsValue = propertiesValue["customDetails"];
+                                if (customDetailsValue != null && customDetailsValue.Type != JTokenType.Null)
                                 {
-                                    string typeName = ((string)configurationSettingsValue["__type"]);
+                                    string typeName = ((string)customDetailsValue["__type"]);
                                 }
                             }
                             
@@ -1026,10 +1026,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     }
                                 }
                                 
-                                JToken configurationSettingsValue = propertiesValue["configurationSettings"];
-                                if (configurationSettingsValue != null && configurationSettingsValue.Type != JTokenType.Null)
+                                JToken customDetailsValue = propertiesValue["customDetails"];
+                                if (customDetailsValue != null && customDetailsValue.Type != JTokenType.Null)
                                 {
-                                    string typeName = ((string)configurationSettingsValue["__type"]);
+                                    string typeName = ((string)customDetailsValue["__type"]);
                                 }
                             }
                             
@@ -1547,10 +1547,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken configurationSettingsValue = propertiesValue["configurationSettings"];
-                                        if (configurationSettingsValue != null && configurationSettingsValue.Type != JTokenType.Null)
+                                        JToken customDetailsValue = propertiesValue["customDetails"];
+                                        if (customDetailsValue != null && customDetailsValue.Type != JTokenType.Null)
                                         {
-                                            string typeName = ((string)configurationSettingsValue["__type"]);
+                                            string typeName = ((string)customDetailsValue["__type"]);
                                         }
                                     }
                                     

@@ -55,7 +55,7 @@ namespace SiteRecovery.Tests
 
                 foreach (var container in containers.ProtectionContainers)
                 {
-                    if (container.Properties.ProtectionConfigurationSettings.Count == 0)
+                    if (client.ProtectionContainerMapping.List(selectedFabric.Name, container.Name, RequestHeaders).ProtectionContainerMappings.Count == 0)
                     {
                         if (string.IsNullOrEmpty(priCld))
                         {
@@ -84,7 +84,7 @@ namespace SiteRecovery.Tests
 
                 CreatePolicyInputProperties policyCreationProp = new CreatePolicyInputProperties()
                 {
-                    ReplicationProvider = "HyperVReplica",
+                    RecoveryProvider = "HyperVReplica",
                     ReplicationProviderSettings = hvrProfileInput
                 };
 
@@ -100,8 +100,8 @@ namespace SiteRecovery.Tests
                 CreateProtectionContainerMappingInputProperties pairingProps =
                     new CreateProtectionContainerMappingInputProperties()
                 {
-                    ApplicablePolicy = currentPolicy.Id,
-                    ProviderConfigurationSettings = new ReplicationProviderContainerMappingInput(),
+                    PolicyId = currentPolicy.Id,
+                    ProviderSpecificInput = new ReplicationProviderContainerMappingInput(),
                     TargetProtectionContainerName = recCld
                 };
 
@@ -162,7 +162,7 @@ namespace SiteRecovery.Tests
 
                 CreatePolicyInputProperties createInputProp = new CreatePolicyInputProperties()
                 {
-                    ReplicationProvider = "HyperVReplicaAzure",
+                    RecoveryProvider = "HyperVReplicaAzure",
                     ReplicationProviderSettings = hvrAPolicy
                 };
 

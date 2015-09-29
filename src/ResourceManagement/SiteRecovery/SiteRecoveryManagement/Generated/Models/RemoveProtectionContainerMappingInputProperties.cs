@@ -31,15 +31,15 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class RemoveProtectionContainerMappingInputProperties
     {
-        private ReplicationProviderContainerUnmappingInput _providerConfigurationSettings;
+        private ReplicationProviderContainerUnmappingInput _providerSpecificInput;
         
         /// <summary>
         /// Optional. Gets or sets Provider specific input for unpairing.
         /// </summary>
-        public ReplicationProviderContainerUnmappingInput ProviderConfigurationSettings
+        public ReplicationProviderContainerUnmappingInput ProviderSpecificInput
         {
-            get { return this._providerConfigurationSettings; }
-            set { this._providerConfigurationSettings = value; }
+            get { return this._providerSpecificInput; }
+            set { this._providerSpecificInput = value; }
         }
         
         /// <summary>

@@ -30,15 +30,15 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class CreatePolicyInputProperties
     {
-        private string _replicationProvider;
+        private string _recoveryProvider;
         
         /// <summary>
-        /// Optional. the replication provider.
+        /// Optional. Replication provider.
         /// </summary>
-        public string ReplicationProvider
+        public string RecoveryProvider
         {
-            get { return this._replicationProvider; }
-            set { this._replicationProvider = value; }
+            get { return this._recoveryProvider; }
+            set { this._recoveryProvider = value; }
         }
         
         private PolicyProviderSpecificInput _replicationProviderSettings;

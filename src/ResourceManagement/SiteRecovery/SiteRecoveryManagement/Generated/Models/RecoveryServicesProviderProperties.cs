@@ -20,8 +20,9 @@
 // code is regenerated.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Azure.Management.SiteRecovery.Models;
+using Hyak.Common;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
@@ -30,15 +31,15 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class RecoveryServicesProviderProperties
     {
-        private RecoveryServicesProviderSpecificSettings _configurationSettings;
+        private IList<string> _allowedScenarios;
         
         /// <summary>
-        /// Optional. Fabric specific creation input
+        /// Optional. Gets or sets the scenarions allowed on this provider.
         /// </summary>
-        public RecoveryServicesProviderSpecificSettings ConfigurationSettings
+        public IList<string> AllowedScenarios
         {
-            get { return this._configurationSettings; }
-            set { this._configurationSettings = value; }
+            get { return this._allowedScenarios; }
+            set { this._allowedScenarios = value; }
         }
         
         private string _connectionStatus;
@@ -141,28 +142,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._providerVersionState = value; }
         }
         
-        private string _purge;
-        
-        /// <summary>
-        /// Optional. Indicates whether the DRA supports purge operation.
-        /// </summary>
-        public string Purge
-        {
-            get { return this._purge; }
-            set { this._purge = value; }
-        }
-        
-        private string _refresh;
-        
-        /// <summary>
-        /// Optional. Indicates whether the DRA supports refresh operation.
-        /// </summary>
-        public string Refresh
-        {
-            get { return this._refresh; }
-            set { this._refresh = value; }
-        }
-        
         private string _serverVersion;
         
         /// <summary>
@@ -180,6 +159,7 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         /// </summary>
         public RecoveryServicesProviderProperties()
         {
+            this.AllowedScenarios = new LazyList<string>();
         }
     }
 }

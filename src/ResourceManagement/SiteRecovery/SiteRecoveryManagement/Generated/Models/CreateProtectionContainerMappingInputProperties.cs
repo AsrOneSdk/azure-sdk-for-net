@@ -31,26 +31,26 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class CreateProtectionContainerMappingInputProperties
     {
-        private string _applicablePolicy;
+        private string _policyId;
         
         /// <summary>
-        /// Optional. Gets or sets applicable policy.
+        /// Optional. Gets or sets policy id.
         /// </summary>
-        public string ApplicablePolicy
+        public string PolicyId
         {
-            get { return this._applicablePolicy; }
-            set { this._applicablePolicy = value; }
+            get { return this._policyId; }
+            set { this._policyId = value; }
         }
         
-        private ReplicationProviderContainerMappingInput _providerConfigurationSettings;
+        private ReplicationProviderContainerMappingInput _providerSpecificInput;
         
         /// <summary>
         /// Optional. Gets or sets Provider specific input for pairing.
         /// </summary>
-        public ReplicationProviderContainerMappingInput ProviderConfigurationSettings
+        public ReplicationProviderContainerMappingInput ProviderSpecificInput
         {
-            get { return this._providerConfigurationSettings; }
-            set { this._providerConfigurationSettings = value; }
+            get { return this._providerSpecificInput; }
+            set { this._providerSpecificInput = value; }
         }
         
         private string _targetProtectionContainerName;

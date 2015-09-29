@@ -27,12 +27,12 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// <summary>
     /// Provider specific entity details.
     /// </summary>
-    public partial class ReplicationItemTypeSettings
+    public partial class ProtectableItemTypeSettings
     {
         /// <summary>
-        /// Initializes a new instance of the ReplicationItemTypeSettings class.
+        /// Initializes a new instance of the ProtectableItemTypeSettings class.
         /// </summary>
-        public ReplicationItemTypeSettings()
+        public ProtectableItemTypeSettings()
         {
         }
     }

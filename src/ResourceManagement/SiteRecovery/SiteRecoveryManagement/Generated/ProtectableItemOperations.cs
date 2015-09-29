@@ -256,33 +256,33 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     }
                                 }
                                 
-                                JToken configurationSettingsValue = propertiesValue["configurationSettings"];
-                                if (configurationSettingsValue != null && configurationSettingsValue.Type != JTokenType.Null)
+                                JToken customDetailsValue = propertiesValue["customDetails"];
+                                if (customDetailsValue != null && customDetailsValue.Type != JTokenType.Null)
                                 {
-                                    string typeName = ((string)configurationSettingsValue["__type"]);
+                                    string typeName = ((string)customDetailsValue["__type"]);
                                     if (typeName == "VirtualMachineDetails")
                                     {
-                                        VirtualMachineDetails virtualMachineDetailsInstance = new VirtualMachineDetails();
+                                        HyperVVirtualMachineDetails hyperVVirtualMachineDetailsInstance = new HyperVVirtualMachineDetails();
                                         
-                                        JToken generationValue = configurationSettingsValue["generation"];
+                                        JToken generationValue = customDetailsValue["generation"];
                                         if (generationValue != null && generationValue.Type != JTokenType.Null)
                                         {
                                             string generationInstance = ((string)generationValue);
-                                            virtualMachineDetailsInstance.Generation = generationInstance;
+                                            hyperVVirtualMachineDetailsInstance.Generation = generationInstance;
                                         }
                                         
-                                        JToken sourceItemIdValue = configurationSettingsValue["sourceItemId"];
+                                        JToken sourceItemIdValue = customDetailsValue["sourceItemId"];
                                         if (sourceItemIdValue != null && sourceItemIdValue.Type != JTokenType.Null)
                                         {
                                             string sourceItemIdInstance = ((string)sourceItemIdValue);
-                                            virtualMachineDetailsInstance.SourceItemId = sourceItemIdInstance;
+                                            hyperVVirtualMachineDetailsInstance.SourceItemId = sourceItemIdInstance;
                                         }
                                         
-                                        JToken osDetailsValue = configurationSettingsValue["osDetails"];
+                                        JToken osDetailsValue = customDetailsValue["osDetails"];
                                         if (osDetailsValue != null && osDetailsValue.Type != JTokenType.Null)
                                         {
                                             OSDetails osDetailsInstance = new OSDetails();
-                                            virtualMachineDetailsInstance.OSDetails = osDetailsInstance;
+                                            hyperVVirtualMachineDetailsInstance.OSDetails = osDetailsInstance;
                                             
                                             JToken osTypeValue = osDetailsValue["osType"];
                                             if (osTypeValue != null && osTypeValue.Type != JTokenType.Null)
@@ -327,13 +327,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken diskDetailsArray = configurationSettingsValue["diskDetails"];
+                                        JToken diskDetailsArray = customDetailsValue["diskDetails"];
                                         if (diskDetailsArray != null && diskDetailsArray.Type != JTokenType.Null)
                                         {
                                             foreach (JToken diskDetailsValue in ((JArray)diskDetailsArray))
                                             {
                                                 DiskDetails diskDetailsInstance = new DiskDetails();
-                                                virtualMachineDetailsInstance.DiskDetailsList.Add(diskDetailsInstance);
+                                                hyperVVirtualMachineDetailsInstance.DiskDetailsList.Add(diskDetailsInstance);
                                                 
                                                 JToken maxSizeMBValue = diskDetailsValue["maxSizeMB"];
                                                 if (maxSizeMBValue != null && maxSizeMBValue.Type != JTokenType.Null)
@@ -364,12 +364,12 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 }
                                             }
                                         }
-                                        propertiesInstance.ConfigurationSettings = virtualMachineDetailsInstance;
+                                        propertiesInstance.CustomDetails = hyperVVirtualMachineDetailsInstance;
                                     }
                                     if (typeName == "ReplicationGroupDetails")
                                     {
                                         ReplicationGroupDetails replicationGroupDetailsInstance = new ReplicationGroupDetails();
-                                        propertiesInstance.ConfigurationSettings = replicationGroupDetailsInstance;
+                                        propertiesInstance.CustomDetails = replicationGroupDetailsInstance;
                                     }
                                 }
                             }
@@ -645,33 +645,33 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken configurationSettingsValue = propertiesValue["configurationSettings"];
-                                        if (configurationSettingsValue != null && configurationSettingsValue.Type != JTokenType.Null)
+                                        JToken customDetailsValue = propertiesValue["customDetails"];
+                                        if (customDetailsValue != null && customDetailsValue.Type != JTokenType.Null)
                                         {
-                                            string typeName = ((string)configurationSettingsValue["__type"]);
+                                            string typeName = ((string)customDetailsValue["__type"]);
                                             if (typeName == "VirtualMachineDetails")
                                             {
-                                                VirtualMachineDetails virtualMachineDetailsInstance = new VirtualMachineDetails();
+                                                HyperVVirtualMachineDetails hyperVVirtualMachineDetailsInstance = new HyperVVirtualMachineDetails();
                                                 
-                                                JToken generationValue = configurationSettingsValue["generation"];
+                                                JToken generationValue = customDetailsValue["generation"];
                                                 if (generationValue != null && generationValue.Type != JTokenType.Null)
                                                 {
                                                     string generationInstance = ((string)generationValue);
-                                                    virtualMachineDetailsInstance.Generation = generationInstance;
+                                                    hyperVVirtualMachineDetailsInstance.Generation = generationInstance;
                                                 }
                                                 
-                                                JToken sourceItemIdValue = configurationSettingsValue["sourceItemId"];
+                                                JToken sourceItemIdValue = customDetailsValue["sourceItemId"];
                                                 if (sourceItemIdValue != null && sourceItemIdValue.Type != JTokenType.Null)
                                                 {
                                                     string sourceItemIdInstance = ((string)sourceItemIdValue);
-                                                    virtualMachineDetailsInstance.SourceItemId = sourceItemIdInstance;
+                                                    hyperVVirtualMachineDetailsInstance.SourceItemId = sourceItemIdInstance;
                                                 }
                                                 
-                                                JToken osDetailsValue = configurationSettingsValue["osDetails"];
+                                                JToken osDetailsValue = customDetailsValue["osDetails"];
                                                 if (osDetailsValue != null && osDetailsValue.Type != JTokenType.Null)
                                                 {
                                                     OSDetails osDetailsInstance = new OSDetails();
-                                                    virtualMachineDetailsInstance.OSDetails = osDetailsInstance;
+                                                    hyperVVirtualMachineDetailsInstance.OSDetails = osDetailsInstance;
                                                     
                                                     JToken osTypeValue = osDetailsValue["osType"];
                                                     if (osTypeValue != null && osTypeValue.Type != JTokenType.Null)
@@ -716,13 +716,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     }
                                                 }
                                                 
-                                                JToken diskDetailsArray = configurationSettingsValue["diskDetails"];
+                                                JToken diskDetailsArray = customDetailsValue["diskDetails"];
                                                 if (diskDetailsArray != null && diskDetailsArray.Type != JTokenType.Null)
                                                 {
                                                     foreach (JToken diskDetailsValue in ((JArray)diskDetailsArray))
                                                     {
                                                         DiskDetails diskDetailsInstance = new DiskDetails();
-                                                        virtualMachineDetailsInstance.DiskDetailsList.Add(diskDetailsInstance);
+                                                        hyperVVirtualMachineDetailsInstance.DiskDetailsList.Add(diskDetailsInstance);
                                                         
                                                         JToken maxSizeMBValue = diskDetailsValue["maxSizeMB"];
                                                         if (maxSizeMBValue != null && maxSizeMBValue.Type != JTokenType.Null)
@@ -753,12 +753,12 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                         }
                                                     }
                                                 }
-                                                propertiesInstance.ConfigurationSettings = virtualMachineDetailsInstance;
+                                                propertiesInstance.CustomDetails = hyperVVirtualMachineDetailsInstance;
                                             }
                                             if (typeName == "ReplicationGroupDetails")
                                             {
                                                 ReplicationGroupDetails replicationGroupDetailsInstance = new ReplicationGroupDetails();
-                                                propertiesInstance.ConfigurationSettings = replicationGroupDetailsInstance;
+                                                propertiesInstance.CustomDetails = replicationGroupDetailsInstance;
                                             }
                                         }
                                     }

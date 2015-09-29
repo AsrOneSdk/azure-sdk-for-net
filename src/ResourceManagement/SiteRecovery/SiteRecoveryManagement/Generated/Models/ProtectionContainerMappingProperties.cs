@@ -32,17 +32,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class ProtectionContainerMappingProperties
     {
-        private string _configurationState;
-        
-        /// <summary>
-        /// Optional. Association Status
-        /// </summary>
-        public string ConfigurationState
-        {
-            get { return this._configurationState; }
-            set { this._configurationState = value; }
-        }
-        
         private string _health;
         
         /// <summary>
@@ -68,7 +57,7 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         private string _policyId;
         
         /// <summary>
-        /// Optional. Policy ARM Id.
+        /// Optional. Policy Id.
         /// </summary>
         public string PolicyId
         {
@@ -76,26 +65,26 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._policyId = value; }
         }
         
-        private MappingProviderConfigurationSettings _providerConfigurationSettings;
+        private MappingProviderConfigurationSettings _providerSpecificDetails;
+        
+        /// <summary>
+        /// Optional. Provider specific details.
+        /// </summary>
+        public MappingProviderConfigurationSettings ProviderSpecificDetails
+        {
+            get { return this._providerSpecificDetails; }
+            set { this._providerSpecificDetails = value; }
+        }
+        
+        private string _state;
         
         /// <summary>
         /// Optional. Association Status
         /// </summary>
-        public MappingProviderConfigurationSettings ProviderConfigurationSettings
+        public string State
         {
-            get { return this._providerConfigurationSettings; }
-            set { this._providerConfigurationSettings = value; }
-        }
-        
-        private string _role;
-        
-        /// <summary>
-        /// Optional. Pairing role.
-        /// </summary>
-        public string Role
-        {
-            get { return this._role; }
-            set { this._role = value; }
+            get { return this._state; }
+            set { this._state = value; }
         }
         
         private string _targetProtectionContainerFriendlyName;
