@@ -260,7 +260,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 if (customDetailsValue != null && customDetailsValue.Type != JTokenType.Null)
                                 {
                                     string typeName = ((string)customDetailsValue["__type"]);
-                                    if (typeName == "VirtualMachineDetails")
+                                    if (typeName == "HyperVVirtualMachineDetails")
                                     {
                                         HyperVVirtualMachineDetails hyperVVirtualMachineDetailsInstance = new HyperVVirtualMachineDetails();
                                         
@@ -649,7 +649,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         if (customDetailsValue != null && customDetailsValue.Type != JTokenType.Null)
                                         {
                                             string typeName = ((string)customDetailsValue["__type"]);
-                                            if (typeName == "VirtualMachineDetails")
+                                            if (typeName == "HyperVVirtualMachineDetails")
                                             {
                                                 HyperVVirtualMachineDetails hyperVVirtualMachineDetailsInstance = new HyperVVirtualMachineDetails();
                                                 
