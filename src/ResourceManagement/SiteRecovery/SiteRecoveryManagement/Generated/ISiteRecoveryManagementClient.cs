@@ -107,6 +107,23 @@ namespace Microsoft.Azure.Management.SiteRecovery
         }
         
         /// <summary>
+        /// Definition of NetworkMapping operations for the Site Recovery
+        /// extension.
+        /// </summary>
+        INetworkMappingOperations NetworkMapping
+        {
+            get; 
+        }
+        
+        /// <summary>
+        /// Definition of Network operations for the Site Recovery extension.
+        /// </summary>
+        INetworkOperations Network
+        {
+            get; 
+        }
+        
+        /// <summary>
         /// Definition of Policy operations for the Site Recovery extension.
         /// </summary>
         IPolicyOperations Policies

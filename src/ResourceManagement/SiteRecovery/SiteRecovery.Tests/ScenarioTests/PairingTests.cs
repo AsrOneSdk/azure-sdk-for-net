@@ -176,5 +176,51 @@ namespace SiteRecovery.Tests
                 //var selectedPolicy = (client.Policies.Create(policyName, policyInput, RequestHeaders) as CreatePolicyOperationResponse).Policy;
             }
         }
+
+        [Fact]
+        public void PairNetworks()
+        {
+            using (UndoContext context = UndoContext.Current)
+            {
+                context.Start();
+                var client = GetSiteRecoveryClient(CustomHttpHandler);
+
+                const string fabricName = "Vmm;f0632449-effd-4858-a210-4ea15756e4b7";
+                const string primaryNetworkName = "399137cc-f0de-4a3f-b961-fd0892d8ebc4";
+                const string networkMappingName = "Test";
+                CreateNetworkMappingInput input = new CreateNetworkMappingInput()
+                {
+                    RecoveryFabricName = "Vmm;f0632449-effd-4858-a210-4ea15756e4b7",
+                    RecoveryNetworkId = "/Subscriptions/19b823e2-d1f3-4805-93d7-401c5d8230d5/resourceGroups/Default-Storage-WestUS/providers/Microsoft.SiteRecovery/SiteRecoveryVault/testVault/replicationFabrics/Vmm;f0632449-effd-4858-a210-4ea15756e4b7/replicationNetworks/15e1a665-e184-4da0-8e9d-0de72a7d8fa9"
+                };
+
+                var response = client.NetworkMapping.Create(
+                    fabricName,
+                    primaryNetworkName,
+                    networkMappingName,
+                    input,
+                    RequestHeaders);
+            }
+        }
+
+        [Fact]
+        public void UnPairNetworks()
+        {
+            using (UndoContext context = UndoContext.Current)
+            {
+                context.Start();
+                var client = GetSiteRecoveryClient(CustomHttpHandler);
+
+                const string fabricName = "Vmm;f0632449-effd-4858-a210-4ea15756e4b7";
+                const string primaryNetworkName = "399137cc-f0de-4a3f-b961-fd0892d8ebc4";
+                const string networkMappingName = "VMNetworkPair;f0632449-effd-4858-a210-4ea15756e4b7_399137cc-f0de-4a3f-b961-fd0892d8ebc4_21a9403c-6ec1-44f2-b744-b4e50b792387";
+
+                var response = client.NetworkMapping.Delete(
+                    fabricName,
+                    primaryNetworkName,
+                    networkMappingName,
+                    RequestHeaders);
+            }
+        }
     }
 }

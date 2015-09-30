@@ -136,6 +136,27 @@ namespace Microsoft.Azure.Management.SiteRecovery
             get { return this._jobs; }
         }
         
+        private INetworkMappingOperations _networkMapping;
+        
+        /// <summary>
+        /// Definition of NetworkMapping operations for the Site Recovery
+        /// extension.
+        /// </summary>
+        public virtual INetworkMappingOperations NetworkMapping
+        {
+            get { return this._networkMapping; }
+        }
+        
+        private INetworkOperations _network;
+        
+        /// <summary>
+        /// Definition of Network operations for the Site Recovery extension.
+        /// </summary>
+        public virtual INetworkOperations Network
+        {
+            get { return this._network; }
+        }
+        
         private IPolicyOperations _policies;
         
         /// <summary>
@@ -209,6 +230,8 @@ namespace Microsoft.Azure.Management.SiteRecovery
         {
             this._fabrics = new FabricOperations(this);
             this._jobs = new JobOperations(this);
+            this._networkMapping = new NetworkMappingOperations(this);
+            this._network = new NetworkOperations(this);
             this._policies = new PolicyOperations(this);
             this._protectableItem = new ProtectableItemOperations(this);
             this._protectionContainerMapping = new ProtectionContainerMappingOperations(this);
@@ -349,6 +372,8 @@ namespace Microsoft.Azure.Management.SiteRecovery
         {
             this._fabrics = new FabricOperations(this);
             this._jobs = new JobOperations(this);
+            this._networkMapping = new NetworkMappingOperations(this);
+            this._network = new NetworkOperations(this);
             this._policies = new PolicyOperations(this);
             this._protectableItem = new ProtectableItemOperations(this);
             this._protectionContainerMapping = new ProtectionContainerMappingOperations(this);

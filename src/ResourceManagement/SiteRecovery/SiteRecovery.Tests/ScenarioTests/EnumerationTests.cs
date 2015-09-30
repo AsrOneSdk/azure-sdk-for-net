@@ -115,15 +115,53 @@ namespace SiteRecovery.Tests
         }
 
         [Fact]
-        public void EnumeratePolicies()
+        public void EnumerateNetworksUnderFabricTest()
         {
             using (UndoContext context = UndoContext.Current)
             {
                 context.Start();
                 var client = GetSiteRecoveryClient(CustomHttpHandler);
 
-                var response = client.Policies.List(RequestHeaders);
+                const string fabricName = "Vmm;f0632449-effd-4858-a210-4ea15756e4b7";
+                var response = client.Network.List(fabricName, RequestHeaders);
+            }
+        }
 
+        [Fact]
+        public void EnumerateAllNetworksInSubscriptionTest()
+        {
+            using (UndoContext context = UndoContext.Current)
+            {
+                context.Start();
+                var client = GetSiteRecoveryClient(CustomHttpHandler);
+
+                var response = client.Network.GetAll(RequestHeaders);
+            }
+        }
+
+        [Fact]
+        public void EnumerateNetworkMappingsUnderNetworkTest()
+        {
+            using (UndoContext context = UndoContext.Current)
+            {
+                context.Start();
+                var client = GetSiteRecoveryClient(CustomHttpHandler);
+
+                const string fabricName = "Vmm;f0632449-effd-4858-a210-4ea15756e4b7";
+                const string networkName = "399137cc-f0de-4a3f-b961-fd0892d8ebc4";
+                var response = client.NetworkMapping.List(fabricName, networkName, RequestHeaders);
+            }
+        }
+
+        [Fact]
+        public void EnumerateAllNetworkMappingsInSubscriptionTest()
+        {
+            using (UndoContext context = UndoContext.Current)
+            {
+                context.Start();
+                var client = GetSiteRecoveryClient(CustomHttpHandler);
+
+                var response = client.NetworkMapping.GetAll(RequestHeaders);
             }
         }
     }

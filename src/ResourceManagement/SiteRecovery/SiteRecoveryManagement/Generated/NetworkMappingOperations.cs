@@ -38,17 +38,17 @@ using Newtonsoft.Json.Linq;
 namespace Microsoft.Azure.Management.SiteRecovery
 {
     /// <summary>
-    /// Definition of fabric operations for the Site Recovery extension.
+    /// Definition of NetworkMapping operations for the Site Recovery extension.
     /// </summary>
-    internal partial class FabricOperations : IServiceOperations<SiteRecoveryManagementClient>, IFabricOperations
+    internal partial class NetworkMappingOperations : IServiceOperations<SiteRecoveryManagementClient>, INetworkMappingOperations
     {
         /// <summary>
-        /// Initializes a new instance of the FabricOperations class.
+        /// Initializes a new instance of the NetworkMappingOperations class.
         /// </summary>
         /// <param name='client'>
         /// Reference to the service client.
         /// </param>
-        internal FabricOperations(SiteRecoveryManagementClient client)
+        internal NetworkMappingOperations(SiteRecoveryManagementClient client)
         {
             this._client = client;
         }
@@ -65,13 +65,19 @@ namespace Microsoft.Azure.Management.SiteRecovery
         }
         
         /// <summary>
-        /// Creates a Fabric
+        /// Creates Network Mapping.
         /// </summary>
         /// <param name='fabricName'>
         /// Required. Fabric Name.
         /// </param>
+        /// <param name='primaryNetworkName'>
+        /// Required. Primary Network Name.
+        /// </param>
+        /// <param name='networkMappingName'>
+        /// Required. Network Mapping Name.
+        /// </param>
         /// <param name='input'>
-        /// Required. Input to create fabric
+        /// Required. Network Mapping input.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -82,12 +88,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public async Task<LongRunningOperationResponse> BeginCreatingAsync(string fabricName, FabricCreationInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        public async Task<LongRunningOperationResponse> BeginCreatingAsync(string fabricName, string primaryNetworkName, string networkMappingName, CreateNetworkMappingInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
         {
             // Validate
             if (fabricName == null)
             {
                 throw new ArgumentNullException("fabricName");
+            }
+            if (primaryNetworkName == null)
+            {
+                throw new ArgumentNullException("primaryNetworkName");
+            }
+            if (networkMappingName == null)
+            {
+                throw new ArgumentNullException("networkMappingName");
             }
             if (input == null)
             {
@@ -102,6 +116,8 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 invocationId = TracingAdapter.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("fabricName", fabricName);
+                tracingParameters.Add("primaryNetworkName", primaryNetworkName);
+                tracingParameters.Add("networkMappingName", networkMappingName);
                 tracingParameters.Add("input", input);
                 tracingParameters.Add("customRequestHeaders", customRequestHeaders);
                 TracingAdapter.Enter(invocationId, this, "BeginCreatingAsync", tracingParameters);
@@ -119,11 +135,15 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/providers/";
             url = url + Uri.EscapeDataString(this.Client.ResourceNamespace);
             url = url + "/";
-            url = url + Uri.EscapeDataString(this.Client.ResourceType);
+            url = url + null;
             url = url + "/";
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationFabrics/";
             url = url + Uri.EscapeDataString(fabricName);
+            url = url + "/replicationNetworks/";
+            url = url + Uri.EscapeDataString(primaryNetworkName);
+            url = url + "/replicationNetworkMappings/";
+            url = url + Uri.EscapeDataString(networkMappingName);
             List<string> queryParameters = new List<string>();
             queryParameters.Add("api-version=2015-11-10");
             if (queryParameters.Count > 0)
@@ -165,24 +185,17 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 string requestContent = null;
                 JToken requestDoc = null;
                 
-                JObject fabricCreationInputValue = new JObject();
-                requestDoc = fabricCreationInputValue;
+                JObject createNetworkMappingInputValue = new JObject();
+                requestDoc = createNetworkMappingInputValue;
                 
-                if (input.Properties != null)
+                if (input.RecoveryFabricName != null)
                 {
-                    JObject propertiesValue = new JObject();
-                    fabricCreationInputValue["properties"] = propertiesValue;
-                    
-                    if (input.Properties.FabricType != null)
-                    {
-                        propertiesValue["fabricType"] = input.Properties.FabricType;
-                    }
-                    
-                    if (input.Properties.CustomInput != null)
-                    {
-                        JObject customInputValue = new JObject();
-                        propertiesValue["customInput"] = customInputValue;
-                    }
+                    createNetworkMappingInputValue["recoveryFabricName"] = input.RecoveryFabricName;
+                }
+                
+                if (input.RecoveryNetworkId != null)
+                {
+                    createNetworkMappingInputValue["recoveryNetworkId"] = input.RecoveryNetworkId;
                 }
                 
                 requestContent = requestDoc.ToString(Newtonsoft.Json.Formatting.Indented);
@@ -261,10 +274,16 @@ namespace Microsoft.Azure.Management.SiteRecovery
         }
         
         /// <summary>
-        /// Deletes a Fabric
+        /// Deletes Network Mapping.
         /// </summary>
         /// <param name='fabricName'>
         /// Required. Fabric Name.
+        /// </param>
+        /// <param name='primaryNetworkName'>
+        /// Required. Primary Network Name.
+        /// </param>
+        /// <param name='networkMappingName'>
+        /// Required. Network Mapping Name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -275,12 +294,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public async Task<LongRunningOperationResponse> BeginDeletingAsync(string fabricName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        public async Task<LongRunningOperationResponse> BeginDeletingAsync(string fabricName, string primaryNetworkName, string networkMappingName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
         {
             // Validate
             if (fabricName == null)
             {
                 throw new ArgumentNullException("fabricName");
+            }
+            if (primaryNetworkName == null)
+            {
+                throw new ArgumentNullException("primaryNetworkName");
+            }
+            if (networkMappingName == null)
+            {
+                throw new ArgumentNullException("networkMappingName");
             }
             
             // Tracing
@@ -291,6 +318,8 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 invocationId = TracingAdapter.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("fabricName", fabricName);
+                tracingParameters.Add("primaryNetworkName", primaryNetworkName);
+                tracingParameters.Add("networkMappingName", networkMappingName);
                 tracingParameters.Add("customRequestHeaders", customRequestHeaders);
                 TracingAdapter.Enter(invocationId, this, "BeginDeletingAsync", tracingParameters);
             }
@@ -307,11 +336,15 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/providers/";
             url = url + Uri.EscapeDataString(this.Client.ResourceNamespace);
             url = url + "/";
-            url = url + Uri.EscapeDataString(this.Client.ResourceType);
+            url = url + null;
             url = url + "/";
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationFabrics/";
             url = url + Uri.EscapeDataString(fabricName);
+            url = url + "/replicationNetworks/";
+            url = url + Uri.EscapeDataString(primaryNetworkName);
+            url = url + "/replicationNetworkMappings/";
+            url = url + Uri.EscapeDataString(networkMappingName);
             List<string> queryParameters = new List<string>();
             queryParameters.Add("api-version=2015-11-10");
             if (queryParameters.Count > 0)
@@ -421,13 +454,19 @@ namespace Microsoft.Azure.Management.SiteRecovery
         }
         
         /// <summary>
-        /// Creates a fabric
+        /// Creates Network Mapping.
         /// </summary>
         /// <param name='fabricName'>
         /// Required. Fabric Name.
         /// </param>
+        /// <param name='primaryNetworkName'>
+        /// Required. Primary Network Name.
+        /// </param>
+        /// <param name='networkMappingName'>
+        /// Required. Network Mapping Name.
+        /// </param>
         /// <param name='input'>
-        /// Required. Input to create fabric
+        /// Required. Network Mapping input.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -438,7 +477,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public async Task<LongRunningOperationResponse> CreateAsync(string fabricName, FabricCreationInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        public async Task<LongRunningOperationResponse> CreateAsync(string fabricName, string primaryNetworkName, string networkMappingName, CreateNetworkMappingInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
         {
             SiteRecoveryManagementClient client = this.Client;
             bool shouldTrace = TracingAdapter.IsEnabled;
@@ -448,19 +487,21 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 invocationId = TracingAdapter.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("fabricName", fabricName);
+                tracingParameters.Add("primaryNetworkName", primaryNetworkName);
+                tracingParameters.Add("networkMappingName", networkMappingName);
                 tracingParameters.Add("input", input);
                 tracingParameters.Add("customRequestHeaders", customRequestHeaders);
                 TracingAdapter.Enter(invocationId, this, "CreateAsync", tracingParameters);
             }
             
             cancellationToken.ThrowIfCancellationRequested();
-            LongRunningOperationResponse response = await client.Fabrics.BeginCreatingAsync(fabricName, input, customRequestHeaders, cancellationToken).ConfigureAwait(false);
+            LongRunningOperationResponse response = await client.NetworkMapping.BeginCreatingAsync(fabricName, primaryNetworkName, networkMappingName, input, customRequestHeaders, cancellationToken).ConfigureAwait(false);
             if (response.Status == OperationStatus.Succeeded)
             {
                 return response;
             }
             cancellationToken.ThrowIfCancellationRequested();
-            CreateFabricOperationResponse result = await client.Fabrics.GetCreateStatusAsync(response.Location, cancellationToken).ConfigureAwait(false);
+            CreateNetworkMappingOperationResponse result = await client.NetworkMapping.GetCreateStatusAsync(response.Location, cancellationToken).ConfigureAwait(false);
             int delayInSeconds = 30;
             if (client.LongRunningOperationInitialTimeout >= 0)
             {
@@ -471,7 +512,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 cancellationToken.ThrowIfCancellationRequested();
                 await TaskEx.Delay(delayInSeconds * 1000, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
-                result = await client.Fabrics.GetCreateStatusAsync(response.Location, cancellationToken).ConfigureAwait(false);
+                result = await client.NetworkMapping.GetCreateStatusAsync(response.Location, cancellationToken).ConfigureAwait(false);
                 delayInSeconds = 30;
                 if (client.LongRunningOperationRetryTimeout >= 0)
                 {
@@ -488,10 +529,16 @@ namespace Microsoft.Azure.Management.SiteRecovery
         }
         
         /// <summary>
-        /// Deletes a fabric
+        /// Deletes Network Mapping.
         /// </summary>
         /// <param name='fabricName'>
         /// Required. Fabric Name.
+        /// </param>
+        /// <param name='primaryNetworkName'>
+        /// Required. Primary Network Name.
+        /// </param>
+        /// <param name='networkMappingName'>
+        /// Required. Network Mapping Name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -502,7 +549,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public async Task<LongRunningOperationResponse> DeleteAsync(string fabricName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        public async Task<LongRunningOperationResponse> DeleteAsync(string fabricName, string primaryNetworkName, string networkMappingName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
         {
             SiteRecoveryManagementClient client = this.Client;
             bool shouldTrace = TracingAdapter.IsEnabled;
@@ -512,18 +559,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 invocationId = TracingAdapter.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("fabricName", fabricName);
+                tracingParameters.Add("primaryNetworkName", primaryNetworkName);
+                tracingParameters.Add("networkMappingName", networkMappingName);
                 tracingParameters.Add("customRequestHeaders", customRequestHeaders);
                 TracingAdapter.Enter(invocationId, this, "DeleteAsync", tracingParameters);
             }
             
             cancellationToken.ThrowIfCancellationRequested();
-            LongRunningOperationResponse response = await client.Fabrics.BeginDeletingAsync(fabricName, customRequestHeaders, cancellationToken).ConfigureAwait(false);
+            LongRunningOperationResponse response = await client.NetworkMapping.BeginDeletingAsync(fabricName, primaryNetworkName, networkMappingName, customRequestHeaders, cancellationToken).ConfigureAwait(false);
             if (response.Status == OperationStatus.Succeeded)
             {
                 return response;
             }
             cancellationToken.ThrowIfCancellationRequested();
-            LongRunningOperationResponse result = await client.Fabrics.GetDeleteStatusAsync(response.Location, cancellationToken).ConfigureAwait(false);
+            LongRunningOperationResponse result = await client.NetworkMapping.GetDeleteStatusAsync(response.Location, cancellationToken).ConfigureAwait(false);
             int delayInSeconds = 30;
             if (client.LongRunningOperationInitialTimeout >= 0)
             {
@@ -534,7 +583,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 cancellationToken.ThrowIfCancellationRequested();
                 await TaskEx.Delay(delayInSeconds * 1000, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
-                result = await client.Fabrics.GetDeleteStatusAsync(response.Location, cancellationToken).ConfigureAwait(false);
+                result = await client.NetworkMapping.GetDeleteStatusAsync(response.Location, cancellationToken).ConfigureAwait(false);
                 delayInSeconds = 30;
                 if (client.LongRunningOperationRetryTimeout >= 0)
                 {
@@ -551,10 +600,16 @@ namespace Microsoft.Azure.Management.SiteRecovery
         }
         
         /// <summary>
-        /// Get the server object by Id.
+        /// Gets a network mapping.
         /// </summary>
         /// <param name='fabricName'>
-        /// Required. Fabric Name.
+        /// Required. Fabric unique name.
+        /// </param>
+        /// <param name='primaryNetworkName'>
+        /// Required. Network name.
+        /// </param>
+        /// <param name='networkMappingName'>
+        /// Required. Network mapping name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -563,14 +618,22 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// Cancellation token.
         /// </param>
         /// <returns>
-        /// The response model for the fabric object
+        /// The response model for the Network Mapping object.
         /// </returns>
-        public async Task<FabricResponse> GetAsync(string fabricName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        public async Task<NetworkMappingResponse> GetAsync(string fabricName, string primaryNetworkName, string networkMappingName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
         {
             // Validate
             if (fabricName == null)
             {
                 throw new ArgumentNullException("fabricName");
+            }
+            if (primaryNetworkName == null)
+            {
+                throw new ArgumentNullException("primaryNetworkName");
+            }
+            if (networkMappingName == null)
+            {
+                throw new ArgumentNullException("networkMappingName");
             }
             
             // Tracing
@@ -581,6 +644,8 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 invocationId = TracingAdapter.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("fabricName", fabricName);
+                tracingParameters.Add("primaryNetworkName", primaryNetworkName);
+                tracingParameters.Add("networkMappingName", networkMappingName);
                 tracingParameters.Add("customRequestHeaders", customRequestHeaders);
                 TracingAdapter.Enter(invocationId, this, "GetAsync", tracingParameters);
             }
@@ -597,11 +662,15 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/providers/";
             url = url + Uri.EscapeDataString(this.Client.ResourceNamespace);
             url = url + "/";
-            url = url + Uri.EscapeDataString(this.Client.ResourceType);
+            url = url + null;
             url = url + "/";
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationFabrics/";
             url = url + Uri.EscapeDataString(fabricName);
+            url = url + "/replicationNetworks/";
+            url = url + Uri.EscapeDataString(primaryNetworkName);
+            url = url + "/replicationNetworkMappings/";
+            url = url + Uri.EscapeDataString(networkMappingName);
             List<string> queryParameters = new List<string>();
             queryParameters.Add("api-version=2015-11-10");
             if (queryParameters.Count > 0)
@@ -664,13 +733,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     }
                     
                     // Create Result
-                    FabricResponse result = null;
+                    NetworkMappingResponse result = null;
                     // Deserialize Response
                     if (statusCode == HttpStatusCode.OK)
                     {
                         cancellationToken.ThrowIfCancellationRequested();
                         string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        result = new FabricResponse();
+                        result = new NetworkMappingResponse();
                         JToken responseDoc = null;
                         if (string.IsNullOrEmpty(responseContent) == false)
                         {
@@ -679,96 +748,27 @@ namespace Microsoft.Azure.Management.SiteRecovery
                         
                         if (responseDoc != null && responseDoc.Type != JTokenType.Null)
                         {
-                            Fabric fabricInstance = new Fabric();
-                            result.Fabric = fabricInstance;
+                            NetworkMapping networkMappingInstance = new NetworkMapping();
+                            result.NetworkMapping = networkMappingInstance;
                             
                             JToken propertiesValue = responseDoc["properties"];
                             if (propertiesValue != null && propertiesValue.Type != JTokenType.Null)
                             {
-                                FabricProperties propertiesInstance = new FabricProperties();
-                                fabricInstance.Properties = propertiesInstance;
+                                NetworkMappingProperties propertiesInstance = new NetworkMappingProperties();
+                                networkMappingInstance.Properties = propertiesInstance;
                                 
-                                JToken friendlyNameValue = propertiesValue["friendlyName"];
-                                if (friendlyNameValue != null && friendlyNameValue.Type != JTokenType.Null)
+                                JToken stateValue = propertiesValue["state"];
+                                if (stateValue != null && stateValue.Type != JTokenType.Null)
                                 {
-                                    string friendlyNameInstance = ((string)friendlyNameValue);
-                                    propertiesInstance.FriendlyName = friendlyNameInstance;
+                                    string stateInstance = ((string)stateValue);
+                                    propertiesInstance.PairingStatus = stateInstance;
                                 }
                                 
-                                JToken internalIdentifierValue = propertiesValue["internalIdentifier"];
-                                if (internalIdentifierValue != null && internalIdentifierValue.Type != JTokenType.Null)
+                                JToken recoveryNetworkIdValue = propertiesValue["recoveryNetworkId"];
+                                if (recoveryNetworkIdValue != null && recoveryNetworkIdValue.Type != JTokenType.Null)
                                 {
-                                    string internalIdentifierInstance = ((string)internalIdentifierValue);
-                                    propertiesInstance.InternalIdentifier = internalIdentifierInstance;
-                                }
-                                
-                                JToken fabricTypeValue = propertiesValue["fabricType"];
-                                if (fabricTypeValue != null && fabricTypeValue.Type != JTokenType.Null)
-                                {
-                                    string fabricTypeInstance = ((string)fabricTypeValue);
-                                    propertiesInstance.FabricType = fabricTypeInstance;
-                                }
-                                
-                                JToken encryptionDetailsValue = propertiesValue["encryptionDetails"];
-                                if (encryptionDetailsValue != null && encryptionDetailsValue.Type != JTokenType.Null)
-                                {
-                                    KekDetails encryptionDetailsInstance = new KekDetails();
-                                    propertiesInstance.EncryptionDetails = encryptionDetailsInstance;
-                                    
-                                    JToken kekStateValue = encryptionDetailsValue["kekState"];
-                                    if (kekStateValue != null && kekStateValue.Type != JTokenType.Null)
-                                    {
-                                        string kekStateInstance = ((string)kekStateValue);
-                                        encryptionDetailsInstance.KekState = kekStateInstance;
-                                    }
-                                    
-                                    JToken kekCertThumbprintValue = encryptionDetailsValue["kekCertThumbprint"];
-                                    if (kekCertThumbprintValue != null && kekCertThumbprintValue.Type != JTokenType.Null)
-                                    {
-                                        string kekCertThumbprintInstance = ((string)kekCertThumbprintValue);
-                                        encryptionDetailsInstance.KekCertThumbprint = kekCertThumbprintInstance;
-                                    }
-                                    
-                                    JToken kekCertExpiryDateValue = encryptionDetailsValue["kekCertExpiryDate"];
-                                    if (kekCertExpiryDateValue != null && kekCertExpiryDateValue.Type != JTokenType.Null)
-                                    {
-                                        string kekCertExpiryDateInstance = ((string)kekCertExpiryDateValue);
-                                        encryptionDetailsInstance.KekCertExpiryDate = kekCertExpiryDateInstance;
-                                    }
-                                }
-                                
-                                JToken rolloverEncryptionDetailsValue = propertiesValue["rolloverEncryptionDetails"];
-                                if (rolloverEncryptionDetailsValue != null && rolloverEncryptionDetailsValue.Type != JTokenType.Null)
-                                {
-                                    KekDetails rolloverEncryptionDetailsInstance = new KekDetails();
-                                    propertiesInstance.RolloverEncryptionDetails = rolloverEncryptionDetailsInstance;
-                                    
-                                    JToken kekStateValue2 = rolloverEncryptionDetailsValue["kekState"];
-                                    if (kekStateValue2 != null && kekStateValue2.Type != JTokenType.Null)
-                                    {
-                                        string kekStateInstance2 = ((string)kekStateValue2);
-                                        rolloverEncryptionDetailsInstance.KekState = kekStateInstance2;
-                                    }
-                                    
-                                    JToken kekCertThumbprintValue2 = rolloverEncryptionDetailsValue["kekCertThumbprint"];
-                                    if (kekCertThumbprintValue2 != null && kekCertThumbprintValue2.Type != JTokenType.Null)
-                                    {
-                                        string kekCertThumbprintInstance2 = ((string)kekCertThumbprintValue2);
-                                        rolloverEncryptionDetailsInstance.KekCertThumbprint = kekCertThumbprintInstance2;
-                                    }
-                                    
-                                    JToken kekCertExpiryDateValue2 = rolloverEncryptionDetailsValue["kekCertExpiryDate"];
-                                    if (kekCertExpiryDateValue2 != null && kekCertExpiryDateValue2.Type != JTokenType.Null)
-                                    {
-                                        string kekCertExpiryDateInstance2 = ((string)kekCertExpiryDateValue2);
-                                        rolloverEncryptionDetailsInstance.KekCertExpiryDate = kekCertExpiryDateInstance2;
-                                    }
-                                }
-                                
-                                JToken customDetailsValue = propertiesValue["customDetails"];
-                                if (customDetailsValue != null && customDetailsValue.Type != JTokenType.Null)
-                                {
-                                    string typeName = ((string)customDetailsValue["__type"]);
+                                    string recoveryNetworkIdInstance = ((string)recoveryNetworkIdValue);
+                                    propertiesInstance.RecoveryNetworkId = recoveryNetworkIdInstance;
                                 }
                             }
                             
@@ -776,28 +776,28 @@ namespace Microsoft.Azure.Management.SiteRecovery
                             if (idValue != null && idValue.Type != JTokenType.Null)
                             {
                                 string idInstance = ((string)idValue);
-                                fabricInstance.Id = idInstance;
+                                networkMappingInstance.Id = idInstance;
                             }
                             
                             JToken nameValue = responseDoc["name"];
                             if (nameValue != null && nameValue.Type != JTokenType.Null)
                             {
                                 string nameInstance = ((string)nameValue);
-                                fabricInstance.Name = nameInstance;
+                                networkMappingInstance.Name = nameInstance;
                             }
                             
                             JToken typeValue = responseDoc["type"];
                             if (typeValue != null && typeValue.Type != JTokenType.Null)
                             {
                                 string typeInstance = ((string)typeValue);
-                                fabricInstance.Type = typeInstance;
+                                networkMappingInstance.Type = typeInstance;
                             }
                             
                             JToken locationValue = responseDoc["location"];
                             if (locationValue != null && locationValue.Type != JTokenType.Null)
                             {
                                 string locationInstance = ((string)locationValue);
-                                fabricInstance.Location = locationInstance;
+                                networkMappingInstance.Location = locationInstance;
                             }
                             
                             JToken tagsSequenceElement = ((JToken)responseDoc["tags"]);
@@ -807,8 +807,236 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 {
                                     string tagsKey = ((string)property.Name);
                                     string tagsValue = ((string)property.Value);
-                                    fabricInstance.Tags.Add(tagsKey, tagsValue);
+                                    networkMappingInstance.Tags.Add(tagsKey, tagsValue);
                                 }
+                            }
+                        }
+                        
+                    }
+                    result.StatusCode = statusCode;
+                    if (httpResponse.Headers.Contains("x-ms-request-id"))
+                    {
+                        result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    
+                    if (shouldTrace)
+                    {
+                        TracingAdapter.Exit(invocationId, result);
+                    }
+                    return result;
+                }
+                finally
+                {
+                    if (httpResponse != null)
+                    {
+                        httpResponse.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (httpRequest != null)
+                {
+                    httpRequest.Dispose();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Get list of Network Mappings.
+        /// </summary>
+        /// <param name='customRequestHeaders'>
+        /// Optional. Request header parameters.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
+        /// The response model for the list of Network Mappings.
+        /// </returns>
+        public async Task<NetworkMappingsListResponse> GetAllAsync(CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        {
+            // Validate
+            
+            // Tracing
+            bool shouldTrace = TracingAdapter.IsEnabled;
+            string invocationId = null;
+            if (shouldTrace)
+            {
+                invocationId = TracingAdapter.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("customRequestHeaders", customRequestHeaders);
+                TracingAdapter.Enter(invocationId, this, "GetAllAsync", tracingParameters);
+            }
+            
+            // Construct URL
+            string url = "";
+            url = url + "/Subscriptions/";
+            if (this.Client.Credentials.SubscriptionId != null)
+            {
+                url = url + Uri.EscapeDataString(this.Client.Credentials.SubscriptionId);
+            }
+            url = url + "/resourceGroups/";
+            url = url + Uri.EscapeDataString(this.Client.ResourceGroupName);
+            url = url + "/providers/";
+            url = url + Uri.EscapeDataString(this.Client.ResourceNamespace);
+            url = url + "/";
+            url = url + null;
+            url = url + "/";
+            url = url + Uri.EscapeDataString(this.Client.ResourceName);
+            url = url + "/replicationNetworkMappings";
+            List<string> queryParameters = new List<string>();
+            queryParameters.Add("api-version=2015-11-10");
+            if (queryParameters.Count > 0)
+            {
+                url = url + "?" + string.Join("&", queryParameters);
+            }
+            string baseUrl = this.Client.BaseUri.AbsoluteUri;
+            // Trim '/' character from the end of baseUrl and beginning of url.
+            if (baseUrl[baseUrl.Length - 1] == '/')
+            {
+                baseUrl = baseUrl.Substring(0, baseUrl.Length - 1);
+            }
+            if (url[0] == '/')
+            {
+                url = url.Substring(1);
+            }
+            url = baseUrl + "/" + url;
+            url = url.Replace(" ", "%20");
+            
+            // Create HTTP transport objects
+            HttpRequestMessage httpRequest = null;
+            try
+            {
+                httpRequest = new HttpRequestMessage();
+                httpRequest.Method = HttpMethod.Get;
+                httpRequest.RequestUri = new Uri(url);
+                
+                // Set Headers
+                httpRequest.Headers.Add("x-ms-client-request-id", customRequestHeaders.ClientRequestId);
+                httpRequest.Headers.Add("x-ms-version", "2015-01-01");
+                
+                // Set Credentials
+                cancellationToken.ThrowIfCancellationRequested();
+                await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+                
+                // Send Request
+                HttpResponseMessage httpResponse = null;
+                try
+                {
+                    if (shouldTrace)
+                    {
+                        TracingAdapter.SendRequest(invocationId, httpRequest);
+                    }
+                    cancellationToken.ThrowIfCancellationRequested();
+                    httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+                    if (shouldTrace)
+                    {
+                        TracingAdapter.ReceiveResponse(invocationId, httpResponse);
+                    }
+                    HttpStatusCode statusCode = httpResponse.StatusCode;
+                    if (statusCode != HttpStatusCode.OK)
+                    {
+                        cancellationToken.ThrowIfCancellationRequested();
+                        CloudException ex = CloudException.Create(httpRequest, null, httpResponse, await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false));
+                        if (shouldTrace)
+                        {
+                            TracingAdapter.Error(invocationId, ex);
+                        }
+                        throw ex;
+                    }
+                    
+                    // Create Result
+                    NetworkMappingsListResponse result = null;
+                    // Deserialize Response
+                    if (statusCode == HttpStatusCode.OK)
+                    {
+                        cancellationToken.ThrowIfCancellationRequested();
+                        string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        result = new NetworkMappingsListResponse();
+                        JToken responseDoc = null;
+                        if (string.IsNullOrEmpty(responseContent) == false)
+                        {
+                            responseDoc = JToken.Parse(responseContent);
+                        }
+                        
+                        if (responseDoc != null && responseDoc.Type != JTokenType.Null)
+                        {
+                            JToken valueArray = responseDoc["value"];
+                            if (valueArray != null && valueArray.Type != JTokenType.Null)
+                            {
+                                foreach (JToken valueValue in ((JArray)valueArray))
+                                {
+                                    NetworkMapping networkMappingInstance = new NetworkMapping();
+                                    result.NetworkMappingsList.Add(networkMappingInstance);
+                                    
+                                    JToken propertiesValue = valueValue["properties"];
+                                    if (propertiesValue != null && propertiesValue.Type != JTokenType.Null)
+                                    {
+                                        NetworkMappingProperties propertiesInstance = new NetworkMappingProperties();
+                                        networkMappingInstance.Properties = propertiesInstance;
+                                        
+                                        JToken stateValue = propertiesValue["state"];
+                                        if (stateValue != null && stateValue.Type != JTokenType.Null)
+                                        {
+                                            string stateInstance = ((string)stateValue);
+                                            propertiesInstance.PairingStatus = stateInstance;
+                                        }
+                                        
+                                        JToken recoveryNetworkIdValue = propertiesValue["recoveryNetworkId"];
+                                        if (recoveryNetworkIdValue != null && recoveryNetworkIdValue.Type != JTokenType.Null)
+                                        {
+                                            string recoveryNetworkIdInstance = ((string)recoveryNetworkIdValue);
+                                            propertiesInstance.RecoveryNetworkId = recoveryNetworkIdInstance;
+                                        }
+                                    }
+                                    
+                                    JToken idValue = valueValue["id"];
+                                    if (idValue != null && idValue.Type != JTokenType.Null)
+                                    {
+                                        string idInstance = ((string)idValue);
+                                        networkMappingInstance.Id = idInstance;
+                                    }
+                                    
+                                    JToken nameValue = valueValue["name"];
+                                    if (nameValue != null && nameValue.Type != JTokenType.Null)
+                                    {
+                                        string nameInstance = ((string)nameValue);
+                                        networkMappingInstance.Name = nameInstance;
+                                    }
+                                    
+                                    JToken typeValue = valueValue["type"];
+                                    if (typeValue != null && typeValue.Type != JTokenType.Null)
+                                    {
+                                        string typeInstance = ((string)typeValue);
+                                        networkMappingInstance.Type = typeInstance;
+                                    }
+                                    
+                                    JToken locationValue = valueValue["location"];
+                                    if (locationValue != null && locationValue.Type != JTokenType.Null)
+                                    {
+                                        string locationInstance = ((string)locationValue);
+                                        networkMappingInstance.Location = locationInstance;
+                                    }
+                                    
+                                    JToken tagsSequenceElement = ((JToken)valueValue["tags"]);
+                                    if (tagsSequenceElement != null && tagsSequenceElement.Type != JTokenType.Null)
+                                    {
+                                        foreach (JProperty property in tagsSequenceElement)
+                                        {
+                                            string tagsKey = ((string)property.Name);
+                                            string tagsValue = ((string)property.Value);
+                                            networkMappingInstance.Tags.Add(tagsKey, tagsValue);
+                                        }
+                                    }
+                                }
+                            }
+                            
+                            JToken nextLinkValue = responseDoc["nextLink"];
+                            if (nextLinkValue != null && nextLinkValue.Type != JTokenType.Null)
+                            {
+                                string nextLinkInstance = ((string)nextLinkValue);
+                                result.NextLink = nextLinkInstance;
                             }
                         }
                         
@@ -857,7 +1085,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public async Task<CreateFabricOperationResponse> GetCreateStatusAsync(string operationStatusLink, CancellationToken cancellationToken)
+        public async Task<CreateNetworkMappingOperationResponse> GetCreateStatusAsync(string operationStatusLink, CancellationToken cancellationToken)
         {
             // Validate
             if (operationStatusLink == null)
@@ -925,13 +1153,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     }
                     
                     // Create Result
-                    CreateFabricOperationResponse result = null;
+                    CreateNetworkMappingOperationResponse result = null;
                     // Deserialize Response
                     if (statusCode == HttpStatusCode.OK || statusCode == HttpStatusCode.Accepted || statusCode == HttpStatusCode.NoContent)
                     {
                         cancellationToken.ThrowIfCancellationRequested();
                         string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        result = new CreateFabricOperationResponse();
+                        result = new CreateNetworkMappingOperationResponse();
                         JToken responseDoc = null;
                         if (string.IsNullOrEmpty(responseContent) == false)
                         {
@@ -940,96 +1168,27 @@ namespace Microsoft.Azure.Management.SiteRecovery
                         
                         if (responseDoc != null && responseDoc.Type != JTokenType.Null)
                         {
-                            Fabric fabricInstance = new Fabric();
-                            result.Fabric = fabricInstance;
+                            NetworkMapping networkMappingInstance = new NetworkMapping();
+                            result.NetworkMapping = networkMappingInstance;
                             
                             JToken propertiesValue = responseDoc["properties"];
                             if (propertiesValue != null && propertiesValue.Type != JTokenType.Null)
                             {
-                                FabricProperties propertiesInstance = new FabricProperties();
-                                fabricInstance.Properties = propertiesInstance;
+                                NetworkMappingProperties propertiesInstance = new NetworkMappingProperties();
+                                networkMappingInstance.Properties = propertiesInstance;
                                 
-                                JToken friendlyNameValue = propertiesValue["friendlyName"];
-                                if (friendlyNameValue != null && friendlyNameValue.Type != JTokenType.Null)
+                                JToken stateValue = propertiesValue["state"];
+                                if (stateValue != null && stateValue.Type != JTokenType.Null)
                                 {
-                                    string friendlyNameInstance = ((string)friendlyNameValue);
-                                    propertiesInstance.FriendlyName = friendlyNameInstance;
+                                    string stateInstance = ((string)stateValue);
+                                    propertiesInstance.PairingStatus = stateInstance;
                                 }
                                 
-                                JToken internalIdentifierValue = propertiesValue["internalIdentifier"];
-                                if (internalIdentifierValue != null && internalIdentifierValue.Type != JTokenType.Null)
+                                JToken recoveryNetworkIdValue = propertiesValue["recoveryNetworkId"];
+                                if (recoveryNetworkIdValue != null && recoveryNetworkIdValue.Type != JTokenType.Null)
                                 {
-                                    string internalIdentifierInstance = ((string)internalIdentifierValue);
-                                    propertiesInstance.InternalIdentifier = internalIdentifierInstance;
-                                }
-                                
-                                JToken fabricTypeValue = propertiesValue["fabricType"];
-                                if (fabricTypeValue != null && fabricTypeValue.Type != JTokenType.Null)
-                                {
-                                    string fabricTypeInstance = ((string)fabricTypeValue);
-                                    propertiesInstance.FabricType = fabricTypeInstance;
-                                }
-                                
-                                JToken encryptionDetailsValue = propertiesValue["encryptionDetails"];
-                                if (encryptionDetailsValue != null && encryptionDetailsValue.Type != JTokenType.Null)
-                                {
-                                    KekDetails encryptionDetailsInstance = new KekDetails();
-                                    propertiesInstance.EncryptionDetails = encryptionDetailsInstance;
-                                    
-                                    JToken kekStateValue = encryptionDetailsValue["kekState"];
-                                    if (kekStateValue != null && kekStateValue.Type != JTokenType.Null)
-                                    {
-                                        string kekStateInstance = ((string)kekStateValue);
-                                        encryptionDetailsInstance.KekState = kekStateInstance;
-                                    }
-                                    
-                                    JToken kekCertThumbprintValue = encryptionDetailsValue["kekCertThumbprint"];
-                                    if (kekCertThumbprintValue != null && kekCertThumbprintValue.Type != JTokenType.Null)
-                                    {
-                                        string kekCertThumbprintInstance = ((string)kekCertThumbprintValue);
-                                        encryptionDetailsInstance.KekCertThumbprint = kekCertThumbprintInstance;
-                                    }
-                                    
-                                    JToken kekCertExpiryDateValue = encryptionDetailsValue["kekCertExpiryDate"];
-                                    if (kekCertExpiryDateValue != null && kekCertExpiryDateValue.Type != JTokenType.Null)
-                                    {
-                                        string kekCertExpiryDateInstance = ((string)kekCertExpiryDateValue);
-                                        encryptionDetailsInstance.KekCertExpiryDate = kekCertExpiryDateInstance;
-                                    }
-                                }
-                                
-                                JToken rolloverEncryptionDetailsValue = propertiesValue["rolloverEncryptionDetails"];
-                                if (rolloverEncryptionDetailsValue != null && rolloverEncryptionDetailsValue.Type != JTokenType.Null)
-                                {
-                                    KekDetails rolloverEncryptionDetailsInstance = new KekDetails();
-                                    propertiesInstance.RolloverEncryptionDetails = rolloverEncryptionDetailsInstance;
-                                    
-                                    JToken kekStateValue2 = rolloverEncryptionDetailsValue["kekState"];
-                                    if (kekStateValue2 != null && kekStateValue2.Type != JTokenType.Null)
-                                    {
-                                        string kekStateInstance2 = ((string)kekStateValue2);
-                                        rolloverEncryptionDetailsInstance.KekState = kekStateInstance2;
-                                    }
-                                    
-                                    JToken kekCertThumbprintValue2 = rolloverEncryptionDetailsValue["kekCertThumbprint"];
-                                    if (kekCertThumbprintValue2 != null && kekCertThumbprintValue2.Type != JTokenType.Null)
-                                    {
-                                        string kekCertThumbprintInstance2 = ((string)kekCertThumbprintValue2);
-                                        rolloverEncryptionDetailsInstance.KekCertThumbprint = kekCertThumbprintInstance2;
-                                    }
-                                    
-                                    JToken kekCertExpiryDateValue2 = rolloverEncryptionDetailsValue["kekCertExpiryDate"];
-                                    if (kekCertExpiryDateValue2 != null && kekCertExpiryDateValue2.Type != JTokenType.Null)
-                                    {
-                                        string kekCertExpiryDateInstance2 = ((string)kekCertExpiryDateValue2);
-                                        rolloverEncryptionDetailsInstance.KekCertExpiryDate = kekCertExpiryDateInstance2;
-                                    }
-                                }
-                                
-                                JToken customDetailsValue = propertiesValue["customDetails"];
-                                if (customDetailsValue != null && customDetailsValue.Type != JTokenType.Null)
-                                {
-                                    string typeName = ((string)customDetailsValue["__type"]);
+                                    string recoveryNetworkIdInstance = ((string)recoveryNetworkIdValue);
+                                    propertiesInstance.RecoveryNetworkId = recoveryNetworkIdInstance;
                                 }
                             }
                             
@@ -1037,28 +1196,28 @@ namespace Microsoft.Azure.Management.SiteRecovery
                             if (idValue != null && idValue.Type != JTokenType.Null)
                             {
                                 string idInstance = ((string)idValue);
-                                fabricInstance.Id = idInstance;
+                                networkMappingInstance.Id = idInstance;
                             }
                             
                             JToken nameValue = responseDoc["name"];
                             if (nameValue != null && nameValue.Type != JTokenType.Null)
                             {
                                 string nameInstance = ((string)nameValue);
-                                fabricInstance.Name = nameInstance;
+                                networkMappingInstance.Name = nameInstance;
                             }
                             
                             JToken typeValue = responseDoc["type"];
                             if (typeValue != null && typeValue.Type != JTokenType.Null)
                             {
                                 string typeInstance = ((string)typeValue);
-                                fabricInstance.Type = typeInstance;
+                                networkMappingInstance.Type = typeInstance;
                             }
                             
                             JToken locationValue = responseDoc["location"];
                             if (locationValue != null && locationValue.Type != JTokenType.Null)
                             {
                                 string locationInstance = ((string)locationValue);
-                                fabricInstance.Location = locationInstance;
+                                networkMappingInstance.Location = locationInstance;
                             }
                             
                             JToken tagsSequenceElement = ((JToken)responseDoc["tags"]);
@@ -1068,7 +1227,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 {
                                     string tagsKey = ((string)property.Name);
                                     string tagsValue = ((string)property.Value);
-                                    fabricInstance.Tags.Add(tagsKey, tagsValue);
+                                    networkMappingInstance.Tags.Add(tagsKey, tagsValue);
                                 }
                             }
                             
@@ -1162,7 +1321,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// has succeeded, failed, or is still in progress.
         /// </summary>
         /// <param name='operationStatusLink'>
-        /// Required. Location value returned by the Begin operation.
+        /// Required. Location value returned by the Delete operation.
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -1300,13 +1459,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     {
                         result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
                     }
+                    if (statusCode == HttpStatusCode.NoContent)
+                    {
+                        result.Status = OperationStatus.Failed;
+                    }
                     if (statusCode == HttpStatusCode.Accepted)
                     {
                         result.Status = OperationStatus.InProgress;
-                    }
-                    if (statusCode == HttpStatusCode.NoContent)
-                    {
-                        result.Status = OperationStatus.Succeeded;
                     }
                     if (statusCode == HttpStatusCode.OK)
                     {
@@ -1337,8 +1496,14 @@ namespace Microsoft.Azure.Management.SiteRecovery
         }
         
         /// <summary>
-        /// Get the list of all servers under the vault.
+        /// Get list of Network Mappings.
         /// </summary>
+        /// <param name='fabricName'>
+        /// Required. Fabric unique name.
+        /// </param>
+        /// <param name='primaryNetworkName'>
+        /// Required. Network name.
+        /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
         /// </param>
@@ -1346,11 +1511,19 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// Cancellation token.
         /// </param>
         /// <returns>
-        /// The response model for the list servers operation.
+        /// The response model for the list of Network Mappings.
         /// </returns>
-        public async Task<FabricListResponse> ListAsync(CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        public async Task<NetworkMappingsListResponse> ListAsync(string fabricName, string primaryNetworkName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
         {
             // Validate
+            if (fabricName == null)
+            {
+                throw new ArgumentNullException("fabricName");
+            }
+            if (primaryNetworkName == null)
+            {
+                throw new ArgumentNullException("primaryNetworkName");
+            }
             
             // Tracing
             bool shouldTrace = TracingAdapter.IsEnabled;
@@ -1359,6 +1532,8 @@ namespace Microsoft.Azure.Management.SiteRecovery
             {
                 invocationId = TracingAdapter.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("fabricName", fabricName);
+                tracingParameters.Add("primaryNetworkName", primaryNetworkName);
                 tracingParameters.Add("customRequestHeaders", customRequestHeaders);
                 TracingAdapter.Enter(invocationId, this, "ListAsync", tracingParameters);
             }
@@ -1375,10 +1550,14 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/providers/";
             url = url + Uri.EscapeDataString(this.Client.ResourceNamespace);
             url = url + "/";
-            url = url + Uri.EscapeDataString(this.Client.ResourceType);
+            url = url + null;
             url = url + "/";
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
-            url = url + "/replicationFabrics";
+            url = url + "/replicationFabrics/";
+            url = url + Uri.EscapeDataString(fabricName);
+            url = url + "/replicationNetworks/";
+            url = url + Uri.EscapeDataString(primaryNetworkName);
+            url = url + "/replicationNetworkMappings";
             List<string> queryParameters = new List<string>();
             queryParameters.Add("api-version=2015-11-10");
             if (queryParameters.Count > 0)
@@ -1441,13 +1620,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     }
                     
                     // Create Result
-                    FabricListResponse result = null;
+                    NetworkMappingsListResponse result = null;
                     // Deserialize Response
                     if (statusCode == HttpStatusCode.OK)
                     {
                         cancellationToken.ThrowIfCancellationRequested();
                         string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        result = new FabricListResponse();
+                        result = new NetworkMappingsListResponse();
                         JToken responseDoc = null;
                         if (string.IsNullOrEmpty(responseContent) == false)
                         {
@@ -1461,96 +1640,27 @@ namespace Microsoft.Azure.Management.SiteRecovery
                             {
                                 foreach (JToken valueValue in ((JArray)valueArray))
                                 {
-                                    Fabric fabricInstance = new Fabric();
-                                    result.Fabrics.Add(fabricInstance);
+                                    NetworkMapping networkMappingInstance = new NetworkMapping();
+                                    result.NetworkMappingsList.Add(networkMappingInstance);
                                     
                                     JToken propertiesValue = valueValue["properties"];
                                     if (propertiesValue != null && propertiesValue.Type != JTokenType.Null)
                                     {
-                                        FabricProperties propertiesInstance = new FabricProperties();
-                                        fabricInstance.Properties = propertiesInstance;
+                                        NetworkMappingProperties propertiesInstance = new NetworkMappingProperties();
+                                        networkMappingInstance.Properties = propertiesInstance;
                                         
-                                        JToken friendlyNameValue = propertiesValue["friendlyName"];
-                                        if (friendlyNameValue != null && friendlyNameValue.Type != JTokenType.Null)
+                                        JToken stateValue = propertiesValue["state"];
+                                        if (stateValue != null && stateValue.Type != JTokenType.Null)
                                         {
-                                            string friendlyNameInstance = ((string)friendlyNameValue);
-                                            propertiesInstance.FriendlyName = friendlyNameInstance;
+                                            string stateInstance = ((string)stateValue);
+                                            propertiesInstance.PairingStatus = stateInstance;
                                         }
                                         
-                                        JToken internalIdentifierValue = propertiesValue["internalIdentifier"];
-                                        if (internalIdentifierValue != null && internalIdentifierValue.Type != JTokenType.Null)
+                                        JToken recoveryNetworkIdValue = propertiesValue["recoveryNetworkId"];
+                                        if (recoveryNetworkIdValue != null && recoveryNetworkIdValue.Type != JTokenType.Null)
                                         {
-                                            string internalIdentifierInstance = ((string)internalIdentifierValue);
-                                            propertiesInstance.InternalIdentifier = internalIdentifierInstance;
-                                        }
-                                        
-                                        JToken fabricTypeValue = propertiesValue["fabricType"];
-                                        if (fabricTypeValue != null && fabricTypeValue.Type != JTokenType.Null)
-                                        {
-                                            string fabricTypeInstance = ((string)fabricTypeValue);
-                                            propertiesInstance.FabricType = fabricTypeInstance;
-                                        }
-                                        
-                                        JToken encryptionDetailsValue = propertiesValue["encryptionDetails"];
-                                        if (encryptionDetailsValue != null && encryptionDetailsValue.Type != JTokenType.Null)
-                                        {
-                                            KekDetails encryptionDetailsInstance = new KekDetails();
-                                            propertiesInstance.EncryptionDetails = encryptionDetailsInstance;
-                                            
-                                            JToken kekStateValue = encryptionDetailsValue["kekState"];
-                                            if (kekStateValue != null && kekStateValue.Type != JTokenType.Null)
-                                            {
-                                                string kekStateInstance = ((string)kekStateValue);
-                                                encryptionDetailsInstance.KekState = kekStateInstance;
-                                            }
-                                            
-                                            JToken kekCertThumbprintValue = encryptionDetailsValue["kekCertThumbprint"];
-                                            if (kekCertThumbprintValue != null && kekCertThumbprintValue.Type != JTokenType.Null)
-                                            {
-                                                string kekCertThumbprintInstance = ((string)kekCertThumbprintValue);
-                                                encryptionDetailsInstance.KekCertThumbprint = kekCertThumbprintInstance;
-                                            }
-                                            
-                                            JToken kekCertExpiryDateValue = encryptionDetailsValue["kekCertExpiryDate"];
-                                            if (kekCertExpiryDateValue != null && kekCertExpiryDateValue.Type != JTokenType.Null)
-                                            {
-                                                string kekCertExpiryDateInstance = ((string)kekCertExpiryDateValue);
-                                                encryptionDetailsInstance.KekCertExpiryDate = kekCertExpiryDateInstance;
-                                            }
-                                        }
-                                        
-                                        JToken rolloverEncryptionDetailsValue = propertiesValue["rolloverEncryptionDetails"];
-                                        if (rolloverEncryptionDetailsValue != null && rolloverEncryptionDetailsValue.Type != JTokenType.Null)
-                                        {
-                                            KekDetails rolloverEncryptionDetailsInstance = new KekDetails();
-                                            propertiesInstance.RolloverEncryptionDetails = rolloverEncryptionDetailsInstance;
-                                            
-                                            JToken kekStateValue2 = rolloverEncryptionDetailsValue["kekState"];
-                                            if (kekStateValue2 != null && kekStateValue2.Type != JTokenType.Null)
-                                            {
-                                                string kekStateInstance2 = ((string)kekStateValue2);
-                                                rolloverEncryptionDetailsInstance.KekState = kekStateInstance2;
-                                            }
-                                            
-                                            JToken kekCertThumbprintValue2 = rolloverEncryptionDetailsValue["kekCertThumbprint"];
-                                            if (kekCertThumbprintValue2 != null && kekCertThumbprintValue2.Type != JTokenType.Null)
-                                            {
-                                                string kekCertThumbprintInstance2 = ((string)kekCertThumbprintValue2);
-                                                rolloverEncryptionDetailsInstance.KekCertThumbprint = kekCertThumbprintInstance2;
-                                            }
-                                            
-                                            JToken kekCertExpiryDateValue2 = rolloverEncryptionDetailsValue["kekCertExpiryDate"];
-                                            if (kekCertExpiryDateValue2 != null && kekCertExpiryDateValue2.Type != JTokenType.Null)
-                                            {
-                                                string kekCertExpiryDateInstance2 = ((string)kekCertExpiryDateValue2);
-                                                rolloverEncryptionDetailsInstance.KekCertExpiryDate = kekCertExpiryDateInstance2;
-                                            }
-                                        }
-                                        
-                                        JToken customDetailsValue = propertiesValue["customDetails"];
-                                        if (customDetailsValue != null && customDetailsValue.Type != JTokenType.Null)
-                                        {
-                                            string typeName = ((string)customDetailsValue["__type"]);
+                                            string recoveryNetworkIdInstance = ((string)recoveryNetworkIdValue);
+                                            propertiesInstance.RecoveryNetworkId = recoveryNetworkIdInstance;
                                         }
                                     }
                                     
@@ -1558,28 +1668,28 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     if (idValue != null && idValue.Type != JTokenType.Null)
                                     {
                                         string idInstance = ((string)idValue);
-                                        fabricInstance.Id = idInstance;
+                                        networkMappingInstance.Id = idInstance;
                                     }
                                     
                                     JToken nameValue = valueValue["name"];
                                     if (nameValue != null && nameValue.Type != JTokenType.Null)
                                     {
                                         string nameInstance = ((string)nameValue);
-                                        fabricInstance.Name = nameInstance;
+                                        networkMappingInstance.Name = nameInstance;
                                     }
                                     
                                     JToken typeValue = valueValue["type"];
                                     if (typeValue != null && typeValue.Type != JTokenType.Null)
                                     {
                                         string typeInstance = ((string)typeValue);
-                                        fabricInstance.Type = typeInstance;
+                                        networkMappingInstance.Type = typeInstance;
                                     }
                                     
                                     JToken locationValue = valueValue["location"];
                                     if (locationValue != null && locationValue.Type != JTokenType.Null)
                                     {
                                         string locationInstance = ((string)locationValue);
-                                        fabricInstance.Location = locationInstance;
+                                        networkMappingInstance.Location = locationInstance;
                                     }
                                     
                                     JToken tagsSequenceElement = ((JToken)valueValue["tags"]);
@@ -1589,7 +1699,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             string tagsKey = ((string)property.Name);
                                             string tagsValue = ((string)property.Value);
-                                            fabricInstance.Tags.Add(tagsKey, tagsValue);
+                                            networkMappingInstance.Tags.Add(tagsKey, tagsValue);
                                         }
                                     }
                                 }
