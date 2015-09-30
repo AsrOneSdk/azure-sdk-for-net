@@ -30,15 +30,15 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class FabricProperties
     {
-        private FabricSpecificSettings _configurationSettings;
+        private FabricSpecificSettings _customDetails;
         
         /// <summary>
         /// Optional. Type of the fabric.
         /// </summary>
-        public FabricSpecificSettings ConfigurationSettings
+        public FabricSpecificSettings CustomDetails
         {
-            get { return this._configurationSettings; }
-            set { this._configurationSettings = value; }
+            get { return this._customDetails; }
+            set { this._customDetails = value; }
         }
         
         private KekDetails _encryptionDetails;
@@ -72,6 +72,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         {
             get { return this._friendlyName; }
             set { this._friendlyName = value; }
+        }
+        
+        private string _internalIdentifier;
+        
+        /// <summary>
+        /// Optional. Internal Identifier.
+        /// </summary>
+        public string InternalIdentifier
+        {
+            get { return this._internalIdentifier; }
+            set { this._internalIdentifier = value; }
         }
         
         private KekDetails _rolloverEncryptionDetails;

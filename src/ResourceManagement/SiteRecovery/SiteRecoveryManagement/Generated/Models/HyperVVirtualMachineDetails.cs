@@ -30,49 +30,58 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// <summary>
     /// Hyper V Replica Provider specific entity details.
     /// </summary>
-    public partial class HyperVReplicaProviderSpecificSettings : ReplicationProviderSpecificSettings
+    public partial class HyperVVirtualMachineDetails : ProtectableItemTypeSettings
     {
-        private string _lastReplicatedTime;
+        private IList<DiskDetails> _diskDetailsList;
         
         /// <summary>
-        /// Optional. Gets or sets the Last replication time.
+        /// Optional. Gets or sets the DiskDetails.
         /// </summary>
-        public string LastReplicatedTime
+        public IList<DiskDetails> DiskDetailsList
         {
-            get { return this._lastReplicatedTime; }
-            set { this._lastReplicatedTime = value; }
+            get { return this._diskDetailsList; }
+            set { this._diskDetailsList = value; }
         }
         
-        private IList<HyperVReplicaProviderNetworkDetails> _networkDetails;
+        private string _generation;
         
         /// <summary>
-        /// Optional. Gets or sets the network details.
+        /// Optional. Gets or sets the Generation.
         /// </summary>
-        public IList<HyperVReplicaProviderNetworkDetails> NetworkDetails
+        public string Generation
         {
-            get { return this._networkDetails; }
-            set { this._networkDetails = value; }
+            get { return this._generation; }
+            set { this._generation = value; }
         }
         
-        private IList<DiskDetails> _vMDiskDetails;
+        private OSDetails _oSDetails;
         
         /// <summary>
-        /// Optional. Gets or sets VM disk details.
+        /// Optional. Gets or sets the OSDetails.
         /// </summary>
-        public IList<DiskDetails> VMDiskDetails
+        public OSDetails OSDetails
         {
-            get { return this._vMDiskDetails; }
-            set { this._vMDiskDetails = value; }
+            get { return this._oSDetails; }
+            set { this._oSDetails = value; }
+        }
+        
+        private string _sourceItemId;
+        
+        /// <summary>
+        /// Optional. Gets or sets the source id of the object.
+        /// </summary>
+        public string SourceItemId
+        {
+            get { return this._sourceItemId; }
+            set { this._sourceItemId = value; }
         }
         
         /// <summary>
-        /// Initializes a new instance of the
-        /// HyperVReplicaProviderSpecificSettings class.
+        /// Initializes a new instance of the HyperVVirtualMachineDetails class.
         /// </summary>
-        public HyperVReplicaProviderSpecificSettings()
+        public HyperVVirtualMachineDetails()
         {
-            this.NetworkDetails = new LazyList<HyperVReplicaProviderNetworkDetails>();
-            this.VMDiskDetails = new LazyList<DiskDetails>();
+            this.DiskDetailsList = new LazyList<DiskDetails>();
         }
     }
 }

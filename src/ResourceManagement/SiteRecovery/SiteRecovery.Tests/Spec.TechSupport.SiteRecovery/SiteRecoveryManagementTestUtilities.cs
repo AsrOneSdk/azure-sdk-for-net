@@ -44,6 +44,7 @@ namespace Microsoft.Azure.Test
 
             return new RecoveryServicesManagementClient(
                 "Microsoft.SiteRecovery",
+                "SiteRecoveryVault",
                 (SubscriptionCloudCredentials)environment.Credentials,
                 environment.BaseUri).WithHandler(HttpMockServer.CreateInstance());
         }
@@ -61,8 +62,10 @@ namespace Microsoft.Azure.Test
                     IgnoreCertificateErrorHandler;
             }
 
-            TestEnvironment environment = new CSMTestEnvironmentFactory().GetTestEnvironment();
-            environment.BaseUri = new Uri("https://localhost:8443/RdfeProxy.svc");
+            //TestEnvironment environment = new CSMTestEnvironmentFactory().GetTestEnvironment();
+            TestEnvironment environment = new RDFETestEnvironmentFactory().GetTestEnvironment();
+            environment.BaseUri = new Uri("https://localhost:8443/Rdfeproxy.svc");
+            //environment.BaseUri = new Uri("https://sea-bvtd2-srs1-t56tl.cloudapp.net");
 
             SiteRecoveryTestsBase.MyCloudService = (HttpMockServer.Mode == HttpRecorderMode.Playback) ?
                 "testsitegroup" :
@@ -106,6 +109,7 @@ namespace Microsoft.Azure.Test
                 SiteRecoveryTestsBase.MyVaultName,
                 SiteRecoveryTestsBase.MyResourceGroupName,
                 "Microsoft.SiteRecovery",
+                "SiteRecoveryVault",
                 (SubscriptionCloudCredentials)environment.Credentials,
                 environment.BaseUri).WithHandler(HttpMockServer.CreateInstance());
         }

@@ -33,7 +33,7 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         private string _dataSyncOption;
         
         /// <summary>
-        /// Optional.
+        /// Optional. Gets or sets Data sync option.
         /// </summary>
         public string DataSyncOption
         {
@@ -44,7 +44,7 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         private string _providerIdForAlternateRecovery;
         
         /// <summary>
-        /// Optional.
+        /// Optional. Gets or sets Provider ID for alternate location.
         /// </summary>
         public string ProviderIdForAlternateRecovery
         {
@@ -55,7 +55,7 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         private string _recoveryVmCreationOption;
         
         /// <summary>
-        /// Optional.
+        /// Optional. Gets or sets ALR options to create alternate recovery.
         /// </summary>
         public string RecoveryVmCreationOption
         {

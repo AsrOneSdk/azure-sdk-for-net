@@ -25,52 +25,52 @@ using System.Linq;
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// disk details.
+    /// Onprem disk details data.
     /// </summary>
     public partial class DiskDetails
     {
-        private string _maxSizeMB;
+        private ulong _maxSizeMB;
         
         /// <summary>
-        /// Optional.
+        /// Optional. Gets or sets the hard disk max size in MB.
         /// </summary>
-        public string MaxSizeMB
+        public ulong MaxSizeMB
         {
             get { return this._maxSizeMB; }
             set { this._maxSizeMB = value; }
         }
         
-        private string _vhdId;
+        private string _vHDId;
         
         /// <summary>
-        /// Optional.
+        /// Optional. Gets or sets the VHD Id.
         /// </summary>
-        public string VhdId
+        public string VHDId
         {
-            get { return this._vhdId; }
-            set { this._vhdId = value; }
+            get { return this._vHDId; }
+            set { this._vHDId = value; }
         }
         
-        private string _vhdName;
+        private string _vHDName;
         
         /// <summary>
-        /// Optional.
+        /// Optional. Gets or sets the VHD name.
         /// </summary>
-        public string VhdName
+        public string VHDName
         {
-            get { return this._vhdName; }
-            set { this._vhdName = value; }
+            get { return this._vHDName; }
+            set { this._vHDName = value; }
         }
         
-        private string _vhdType;
+        private string _vHDStatus;
         
         /// <summary>
-        /// Optional.
+        /// Optional. Gets or sets the type of the volume.
         /// </summary>
-        public string VhdType
+        public string VHDStatus
         {
-            get { return this._vhdType; }
-            set { this._vhdType = value; }
+            get { return this._vHDStatus; }
+            set { this._vHDStatus = value; }
         }
         
         /// <summary>

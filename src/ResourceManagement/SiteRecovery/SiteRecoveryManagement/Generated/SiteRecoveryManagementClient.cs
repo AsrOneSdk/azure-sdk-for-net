@@ -108,6 +108,14 @@ namespace Microsoft.Azure.Management.SiteRecovery
             set { this._resourceNamespace = value; }
         }
         
+        private string _resourceType;
+        
+        public string ResourceType
+        {
+            get { return this._resourceType; }
+            set { this._resourceType = value; }
+        }
+        
         private IFabricOperations _fabrics;
         
         /// <summary>
@@ -147,6 +155,17 @@ namespace Microsoft.Azure.Management.SiteRecovery
         public virtual IProtectableItemOperations ProtectableItem
         {
             get { return this._protectableItem; }
+        }
+        
+        private IProtectionContainerMappingOperations _protectionContainerMapping;
+        
+        /// <summary>
+        /// Definition of Protection Container mapping operations for the Site
+        /// Recovery extension.
+        /// </summary>
+        public virtual IProtectionContainerMappingOperations ProtectionContainerMapping
+        {
+            get { return this._protectionContainerMapping; }
         }
         
         private IProtectionContainerOperations _protectionContainer;
@@ -192,6 +211,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             this._jobs = new JobOperations(this);
             this._policies = new PolicyOperations(this);
             this._protectableItem = new ProtectableItemOperations(this);
+            this._protectionContainerMapping = new ProtectionContainerMappingOperations(this);
             this._protectionContainer = new ProtectionContainerOperations(this);
             this._recoveryServicesProvider = new RecoveryServicesProviderOperations(this);
             this._replicationProtectedItem = new ReplicationProtectedItemOperations(this);
@@ -214,6 +234,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <param name='resourceNamespace'>
         /// Required.
         /// </param>
+        /// <param name='resourceType'>
+        /// Required.
+        /// </param>
         /// <param name='credentials'>
         /// Required. Gets subscription credentials which uniquely identify
         /// Microsoft Azure subscription. The subscription ID forms part of
@@ -223,7 +246,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// Optional. Gets the URI used as the base for all cloud service
         /// requests.
         /// </param>
-        public SiteRecoveryManagementClient(string resourceName, string resourceGroupName, string resourceNamespace, SubscriptionCloudCredentials credentials, Uri baseUri)
+        public SiteRecoveryManagementClient(string resourceName, string resourceGroupName, string resourceNamespace, string resourceType, SubscriptionCloudCredentials credentials, Uri baseUri)
             : this()
         {
             if (resourceName == null)
@@ -238,6 +261,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
             {
                 throw new ArgumentNullException("resourceNamespace");
             }
+            if (resourceType == null)
+            {
+                throw new ArgumentNullException("resourceType");
+            }
             if (credentials == null)
             {
                 throw new ArgumentNullException("credentials");
@@ -249,6 +276,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             this._resourceName = resourceName;
             this._resourceGroupName = resourceGroupName;
             this._resourceNamespace = resourceNamespace;
+            this._resourceType = resourceType;
             this._credentials = credentials;
             this._baseUri = baseUri;
             
@@ -268,12 +296,15 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <param name='resourceNamespace'>
         /// Required.
         /// </param>
+        /// <param name='resourceType'>
+        /// Required.
+        /// </param>
         /// <param name='credentials'>
         /// Required. Gets subscription credentials which uniquely identify
         /// Microsoft Azure subscription. The subscription ID forms part of
         /// the URI for every service call.
         /// </param>
-        public SiteRecoveryManagementClient(string resourceName, string resourceGroupName, string resourceNamespace, SubscriptionCloudCredentials credentials)
+        public SiteRecoveryManagementClient(string resourceName, string resourceGroupName, string resourceNamespace, string resourceType, SubscriptionCloudCredentials credentials)
             : this()
         {
             if (resourceName == null)
@@ -288,6 +319,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
             {
                 throw new ArgumentNullException("resourceNamespace");
             }
+            if (resourceType == null)
+            {
+                throw new ArgumentNullException("resourceType");
+            }
             if (credentials == null)
             {
                 throw new ArgumentNullException("credentials");
@@ -295,6 +330,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             this._resourceName = resourceName;
             this._resourceGroupName = resourceGroupName;
             this._resourceNamespace = resourceNamespace;
+            this._resourceType = resourceType;
             this._credentials = credentials;
             this._baseUri = new Uri("https://management.core.windows.net");
             
@@ -315,6 +351,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             this._jobs = new JobOperations(this);
             this._policies = new PolicyOperations(this);
             this._protectableItem = new ProtectableItemOperations(this);
+            this._protectionContainerMapping = new ProtectionContainerMappingOperations(this);
             this._protectionContainer = new ProtectionContainerOperations(this);
             this._recoveryServicesProvider = new RecoveryServicesProviderOperations(this);
             this._replicationProtectedItem = new ReplicationProtectedItemOperations(this);
@@ -337,6 +374,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <param name='resourceNamespace'>
         /// Required.
         /// </param>
+        /// <param name='resourceType'>
+        /// Required.
+        /// </param>
         /// <param name='credentials'>
         /// Required. Gets subscription credentials which uniquely identify
         /// Microsoft Azure subscription. The subscription ID forms part of
@@ -349,7 +389,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <param name='httpClient'>
         /// The Http client
         /// </param>
-        public SiteRecoveryManagementClient(string resourceName, string resourceGroupName, string resourceNamespace, SubscriptionCloudCredentials credentials, Uri baseUri, HttpClient httpClient)
+        public SiteRecoveryManagementClient(string resourceName, string resourceGroupName, string resourceNamespace, string resourceType, SubscriptionCloudCredentials credentials, Uri baseUri, HttpClient httpClient)
             : this(httpClient)
         {
             if (resourceName == null)
@@ -364,6 +404,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
             {
                 throw new ArgumentNullException("resourceNamespace");
             }
+            if (resourceType == null)
+            {
+                throw new ArgumentNullException("resourceType");
+            }
             if (credentials == null)
             {
                 throw new ArgumentNullException("credentials");
@@ -375,6 +419,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             this._resourceName = resourceName;
             this._resourceGroupName = resourceGroupName;
             this._resourceNamespace = resourceNamespace;
+            this._resourceType = resourceType;
             this._credentials = credentials;
             this._baseUri = baseUri;
             
@@ -394,6 +439,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <param name='resourceNamespace'>
         /// Required.
         /// </param>
+        /// <param name='resourceType'>
+        /// Required.
+        /// </param>
         /// <param name='credentials'>
         /// Required. Gets subscription credentials which uniquely identify
         /// Microsoft Azure subscription. The subscription ID forms part of
@@ -402,7 +450,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <param name='httpClient'>
         /// The Http client
         /// </param>
-        public SiteRecoveryManagementClient(string resourceName, string resourceGroupName, string resourceNamespace, SubscriptionCloudCredentials credentials, HttpClient httpClient)
+        public SiteRecoveryManagementClient(string resourceName, string resourceGroupName, string resourceNamespace, string resourceType, SubscriptionCloudCredentials credentials, HttpClient httpClient)
             : this(httpClient)
         {
             if (resourceName == null)
@@ -417,6 +465,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
             {
                 throw new ArgumentNullException("resourceNamespace");
             }
+            if (resourceType == null)
+            {
+                throw new ArgumentNullException("resourceType");
+            }
             if (credentials == null)
             {
                 throw new ArgumentNullException("credentials");
@@ -424,6 +476,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             this._resourceName = resourceName;
             this._resourceGroupName = resourceGroupName;
             this._resourceNamespace = resourceNamespace;
+            this._resourceType = resourceType;
             this._credentials = credentials;
             this._baseUri = new Uri("https://management.core.windows.net");
             
@@ -448,6 +501,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 clonedClient._resourceName = this._resourceName;
                 clonedClient._resourceGroupName = this._resourceGroupName;
                 clonedClient._resourceNamespace = this._resourceNamespace;
+                clonedClient._resourceType = this._resourceType;
                 clonedClient._credentials = this._credentials;
                 clonedClient._baseUri = this._baseUri;
                 clonedClient._apiVersion = this._apiVersion;

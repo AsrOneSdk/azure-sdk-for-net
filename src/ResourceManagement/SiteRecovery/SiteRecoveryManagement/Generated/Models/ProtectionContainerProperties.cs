@@ -20,9 +20,7 @@
 // code is regenerated.
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using Hyak.Common;
 using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
@@ -54,6 +52,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._fabricFriendlyName = value; }
         }
         
+        private string _fabricType;
+        
+        /// <summary>
+        /// Optional. Gets or sets the fabric type.
+        /// </summary>
+        public string FabricType
+        {
+            get { return this._fabricType; }
+            set { this._fabricType = value; }
+        }
+        
         private string _friendlyName;
         
         /// <summary>
@@ -65,15 +74,26 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._friendlyName = value; }
         }
         
-        private IList<PairingDetails> _protectionConfigurationSettings;
+        private string _pairingStatus;
         
         /// <summary>
-        /// Optional. Pairing details.
+        /// Optional. Gets or sets the pairing status of this cloud.
         /// </summary>
-        public IList<PairingDetails> ProtectionConfigurationSettings
+        public string PairingStatus
         {
-            get { return this._protectionConfigurationSettings; }
-            set { this._protectionConfigurationSettings = value; }
+            get { return this._pairingStatus; }
+            set { this._pairingStatus = value; }
+        }
+        
+        private int _protectedItemCount;
+        
+        /// <summary>
+        /// Optional. Number of protected items.
+        /// </summary>
+        public int ProtectedItemCount
+        {
+            get { return this._protectedItemCount; }
+            set { this._protectedItemCount = value; }
         }
         
         /// <summary>
@@ -82,7 +102,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         /// </summary>
         public ProtectionContainerProperties()
         {
-            this.ProtectionConfigurationSettings = new LazyList<PairingDetails>();
         }
     }
 }

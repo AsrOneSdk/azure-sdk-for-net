@@ -20,44 +20,48 @@
 // code is regenerated.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using Hyak.Common;
+using Microsoft.Azure;
 using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// The definition of a Fabric creation object properties.
+    /// The definition of a Protection Container mapping collection object.
     /// </summary>
-    public partial class FabricCreationInputProperties
+    public partial class ProtectionContainerMappingListResponse : AzureOperationResponse
     {
-        private FabricSpecificCreationSettings _customInput;
+        private string _nextLink;
         
         /// <summary>
-        /// Optional. Fabric specific creation input
+        /// Optional. Gets or sets link to fetch rest of the data.
         /// </summary>
-        public FabricSpecificCreationSettings CustomInput
+        public string NextLink
         {
-            get { return this._customInput; }
-            set { this._customInput = value; }
+            get { return this._nextLink; }
+            set { this._nextLink = value; }
         }
         
-        private string _fabricType;
+        private IList<ProtectionContainerMapping> _protectionContainerMappings;
         
         /// <summary>
-        /// Optional. Type of fabric.
+        /// Optional. Gets or sets list of container mappings.
         /// </summary>
-        public string FabricType
+        public IList<ProtectionContainerMapping> ProtectionContainerMappings
         {
-            get { return this._fabricType; }
-            set { this._fabricType = value; }
+            get { return this._protectionContainerMappings; }
+            set { this._protectionContainerMappings = value; }
         }
         
         /// <summary>
-        /// Initializes a new instance of the FabricCreationInputProperties
-        /// class.
+        /// Initializes a new instance of the
+        /// ProtectionContainerMappingListResponse class.
         /// </summary>
-        public FabricCreationInputProperties()
+        public ProtectionContainerMappingListResponse()
         {
+            this.ProtectionContainerMappings = new LazyList<ProtectionContainerMapping>();
         }
     }
 }

@@ -34,98 +34,83 @@ namespace SiteRecovery.Tests
                 context.Start();
                 var client = GetSiteRecoveryClient(CustomHttpHandler);
 
-                string fabricId = "6adf9420-b02f-4377-8ab7-ff384e6d792f";
-                string containerId = "4f94127d-2eb3-449d-a708-250752e93cb4";
-                //string peId = "4d63fad7-eb47-4f47-8f2b-c789ec853a58";
-                //string peId = "052ca37a-cdca-441f-82ba-55d22de2409e";
+                string priCld = string.Empty;
+                string recCldGuid = string.Empty;
+                string recCld = string.Empty;
+                string policyName = "Hydra" + (new Random()).Next();
+                Fabric selectedFabric = null;
+                Policy currentPolicy = null;
 
-                var container = client.ProtectionContainer.Get(fabricId, containerId, RequestHeaders);
+                var fabrics = client.Fabrics.List(RequestHeaders);
 
-                string pairedPolicy = container.ProtectionContainer.Properties.ProtectionConfigurationSettings[0].PolicyId;
-
-                var policies = client.Policies.List(RequestHeaders);
-
-                Policy selectedPolicy = new Policy();
-
-                foreach (var policy in policies.Policies)
+                foreach (var fabric in fabrics.Fabrics)
                 {
-                    if (policy.Id == pairedPolicy)
+                    if (fabric.Properties.FabricType.Contains("VMM"))
                     {
-                        selectedPolicy = policy;
-                        break;
+                        selectedFabric = fabric;
                     }
                 }
 
-                HyperVReplicaPolicyDetails policyDet = (HyperVReplicaPolicyDetails)selectedPolicy.Properties.ReplicationProviderSettings;
+                var containers = client.ProtectionContainer.List(selectedFabric.Name, RequestHeaders);
+
+                foreach (var container in containers.ProtectionContainers)
+                {
+                    if (client.ProtectionContainerMapping.List(selectedFabric.Name, container.Name, RequestHeaders).ProtectionContainerMappings.Count == 0)
+                    {
+                        if (string.IsNullOrEmpty(priCld))
+                        {
+                            priCld = container.Name;
+                        }
+                        else if (string.IsNullOrEmpty(recCld))
+                        {
+                            recCld = container.Id;
+                            recCldGuid = container.Name;
+                        }
+                    }
+                }
 
                 HyperVReplicaPolicyInput hvrProfileInput = new HyperVReplicaPolicyInput()
                 {
-                    ApplicationConsistentSnapshotFrequencyInHours = policyDet.ApplicationConsistentSnapshotFrequencyInHours,
-                    AllowedAuthenticationType = policyDet.AllowedAuthenticationType,
+                    ApplicationConsistentSnapshotFrequencyInHours = 0,
+                    AllowedAuthenticationType = 1,
                     Compression = "Enable",
                     InitialReplicationMethod = "OverNetwork",
                     OnlineReplicationStartTime = null,
-                    RecoveryPoints = policyDet.RecoveryPoints,
+                    RecoveryPoints = 0,
                     ReplicaDeletion = "Required",
-                    ReplicationFrequencyInSeconds = policyDet.ReplicationFrequencyInSeconds,
-                    ReplicationPort = policyDet.ReplicationPort
+                    ReplicationFrequencyInSeconds = 30,
+                    ReplicationPort = 8083
                 };
 
                 CreatePolicyInputProperties policyCreationProp = new CreatePolicyInputProperties()
                 {
-                    ReplicationProvider = selectedPolicy.Properties.ReplicationProvider,
-                    ReplicationProviderSettings = hvrProfileInput
+                    RecoveryProvider = "HyperVReplica",
+                    ProviderSpecificInput = hvrProfileInput
                 };
 
-                CreatePolicyInput policyCreation = new CreatePolicyInput()
+                CreatePolicyInput policyCreationInput = new CreatePolicyInput()
                 {
                     Properties = policyCreationProp
                 };
 
-                string policyName = "Hydra11" + Guid.NewGuid().ToString();
+                var policyCreateResp = client.Policies.Create(policyName, policyCreationInput, RequestHeaders);
 
-                var resp = client.Policies.Create(policyName, policyCreation, RequestHeaders);
+                currentPolicy = client.Policies.Get(policyName, RequestHeaders).Policy;
 
-                policies = client.Policies.List(RequestHeaders);
-                Policy newPolicy = new Policy();
-
-                foreach (var policy in policies.Policies)
+                CreateProtectionContainerMappingInputProperties pairingProps =
+                    new CreateProtectionContainerMappingInputProperties()
                 {
-                    if (policyName == policy.Properties.FriendlyName)
-                    {
-                        newPolicy = policy;
-                        break;
-                    }
-                }
-
-                string priCld = "85a747d6-03f2-4002-9510-96e10648d484";
-                string recCld = "4f9dbf63-3f0c-4dd3-bd0e-9d27e414de8d";
-
-                var reccloud = client.ProtectionContainer.Get(fabricId, recCld, RequestHeaders);
-
-                List<ApplicablePolicy> applicablePolicies = new List<ApplicablePolicy>();
-
-                ApplicablePolicy policy1 = new ApplicablePolicy()
-                {
-                    PolicyId = newPolicy.Id
+                    PolicyId = currentPolicy.Id,
+                    ProviderSpecificInput = new ReplicationProviderContainerMappingInput(),
+                    TargetProtectionContainerId = recCld
                 };
 
-                applicablePolicies.Add(policy1);
-
-                ConfigureProtectionInputProperties properties = new ConfigureProtectionInputProperties()
+                CreateProtectionContainerMappingInput pairingInput = new CreateProtectionContainerMappingInput()
                 {
-                    TargetProtectionContainerName = reccloud.ProtectionContainer.Id,
-                    FabricType = "",
-                    ApplicablePolicies = applicablePolicies,
-                    ProviderConfigurationSettings = null
+                    Properties = pairingProps
                 };
 
-                ConfigureProtectionInput inputForPairing = new ConfigureProtectionInput()
-                {
-                    Properties = properties
-                };
-
-                var pairingResp = client.ProtectionContainer.ConfigureProtection(fabricId, priCld, inputForPairing, RequestHeaders);
+                var pairingResp = client.ProtectionContainerMapping.ConfigureProtection(selectedFabric.Name, priCld, "Mapping01", pairingInput, RequestHeaders);
             }
         }
 
@@ -136,52 +121,59 @@ namespace SiteRecovery.Tests
             {
                 context.Start();
                 var client = GetSiteRecoveryClient(CustomHttpHandler);
+                Fabric selectedFabric = null;
 
-                string fabricId = "6adf9420-b02f-4377-8ab7-ff384e6d792f";
-                string policyName = "Hydra11";
-                //string peId = "4d63fad7-eb47-4f47-8f2b-c789ec853a58";
-                //string peId = "052ca37a-cdca-441f-82ba-55d22de2409e";
+                string fabricName = "Vmm;6adf9420-b02f-4377-8ab7-ff384e6d792f";
+                string mappingName = "Mapping01";
+                string cloudName = "4f94127d-2eb3-449d-a708-250752e93cb4";
 
-                var policies = client.Policies.List(RequestHeaders);
-                Policy selectedPolicy = new Policy();
+                selectedFabric = client.Fabrics.Get(fabricName, RequestHeaders).Fabric;
 
-                foreach (var policy in policies.Policies)
+                var mapping = client.ProtectionContainerMapping.Get(fabricName, cloudName, mappingName, RequestHeaders);
+                var unpairResp = client.ProtectionContainerMapping.UnconfigureProtection(fabricName, cloudName, mappingName, new RemoveProtectionContainerMappingInput(), RequestHeaders);
+            }
+        }
+
+        [Fact]
+        public void CreateProfile()
+        {
+            using (UndoContext context = UndoContext.Current)
+            {
+                context.Start();
+                var client = GetSiteRecoveryClient(CustomHttpHandler);
+                string policyName = "ARMProfile111";
+                HyperVReplicaAzurePolicyInput hvrAPolicy = new HyperVReplicaAzurePolicyInput()
                 {
-                    if (policyName == policy.Properties.FriendlyName)
-                    {
-                        selectedPolicy = policy;
-                        break;
-                    }
-                }
-
-                string priCld = "85a747d6-03f2-4002-9510-96e10648d484";
-                string recCld = "4f9dbf63-3f0c-4dd3-bd0e-9d27e414de8d";
-
-                var reccloud = client.ProtectionContainer.Get(fabricId, recCld, RequestHeaders);
-
-                List<ApplicablePolicy> applicablePolicies = new List<ApplicablePolicy>();
-
-                ApplicablePolicy policy1 = new ApplicablePolicy()
-                {
-                    PolicyId = selectedPolicy.Id
+                    ApplicationConsistentSnapshotFrequencyInHours = 0,
+                    Encryption = "Disable",
+                    OnlineIrStartTime = null,
+                    RecoveryPointHistoryDuration = 0,
+                    ReplicationInterval = 30,
+                    StorageAccounts = new List<CustomerStorageAccount>()
                 };
 
-                applicablePolicies.Add(policy1);
-
-                UnconfigureProtectionInputProperties properties = new UnconfigureProtectionInputProperties()
+                CustomerStorageAccount strgAcc = new CustomerStorageAccount()
                 {
-                    TargetProtectionContainerName = reccloud.ProtectionContainer.Id,
-                    FabricType = "",
-                    ApplicablePolicies = applicablePolicies,
-                    ProviderConfigurationSettings = null
+                    StorageAccountName = "ramjsingstorage",
+                    SubscriptionId = "33050569-6b4a-43e9-a1b1-2477b1e21136"
                 };
 
-                UnconfigureProtectionInput inputForPairing = new UnconfigureProtectionInput()
+                hvrAPolicy.StorageAccounts.Add(strgAcc);
+
+                CreatePolicyInputProperties createInputProp = new CreatePolicyInputProperties()
                 {
-                    Properties = properties
+                    RecoveryProvider = "HyperVReplicaAzure",
+                    ProviderSpecificInput = hvrAPolicy
                 };
 
-                var respUnpairing = client.ProtectionContainer.UnconfigureProtection(fabricId, priCld, inputForPairing, RequestHeaders);
+                CreatePolicyInput policyInput = new CreatePolicyInput()
+                {
+                    Properties = createInputProp
+                };
+
+                var policy = client.Policies.Create(policyName, policyInput, RequestHeaders);
+
+                //var selectedPolicy = (client.Policies.Create(policyName, policyInput, RequestHeaders) as CreatePolicyOperationResponse).Policy;
             }
         }
 

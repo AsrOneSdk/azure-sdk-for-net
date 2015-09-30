@@ -119,7 +119,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/providers/";
             url = url + Uri.EscapeDataString(this.Client.ResourceNamespace);
             url = url + "/";
-            url = url + "SiteRecoveryVault";
+            url = url + Uri.EscapeDataString(this.Client.ResourceType);
             url = url + "/";
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationFabrics/";
@@ -178,10 +178,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
                         propertiesValue["fabricType"] = input.Properties.FabricType;
                     }
                     
-                    if (input.Properties.ConfigurationSettings != null)
+                    if (input.Properties.CustomInput != null)
                     {
-                        JObject configurationSettingsValue = new JObject();
-                        propertiesValue["configurationSettings"] = configurationSettingsValue;
+                        JObject customInputValue = new JObject();
+                        propertiesValue["customInput"] = customInputValue;
                     }
                 }
                 
@@ -307,7 +307,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/providers/";
             url = url + Uri.EscapeDataString(this.Client.ResourceNamespace);
             url = url + "/";
-            url = url + "SiteRecoveryVault";
+            url = url + Uri.EscapeDataString(this.Client.ResourceType);
             url = url + "/";
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationFabrics/";
@@ -597,7 +597,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/providers/";
             url = url + Uri.EscapeDataString(this.Client.ResourceNamespace);
             url = url + "/";
-            url = url + "SiteRecoveryVault";
+            url = url + Uri.EscapeDataString(this.Client.ResourceType);
             url = url + "/";
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationFabrics/";
@@ -695,6 +695,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.FriendlyName = friendlyNameInstance;
                                 }
                                 
+                                JToken internalIdentifierValue = propertiesValue["internalIdentifier"];
+                                if (internalIdentifierValue != null && internalIdentifierValue.Type != JTokenType.Null)
+                                {
+                                    string internalIdentifierInstance = ((string)internalIdentifierValue);
+                                    propertiesInstance.InternalIdentifier = internalIdentifierInstance;
+                                }
+                                
                                 JToken fabricTypeValue = propertiesValue["fabricType"];
                                 if (fabricTypeValue != null && fabricTypeValue.Type != JTokenType.Null)
                                 {
@@ -758,10 +765,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     }
                                 }
                                 
-                                JToken configurationSettingsValue = propertiesValue["configurationSettings"];
-                                if (configurationSettingsValue != null && configurationSettingsValue.Type != JTokenType.Null)
+                                JToken customDetailsValue = propertiesValue["customDetails"];
+                                if (customDetailsValue != null && customDetailsValue.Type != JTokenType.Null)
                                 {
-                                    string typeName = ((string)configurationSettingsValue["__type"]);
+                                    string typeName = ((string)customDetailsValue["__type"]);
                                 }
                             }
                             
@@ -949,6 +956,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.FriendlyName = friendlyNameInstance;
                                 }
                                 
+                                JToken internalIdentifierValue = propertiesValue["internalIdentifier"];
+                                if (internalIdentifierValue != null && internalIdentifierValue.Type != JTokenType.Null)
+                                {
+                                    string internalIdentifierInstance = ((string)internalIdentifierValue);
+                                    propertiesInstance.InternalIdentifier = internalIdentifierInstance;
+                                }
+                                
                                 JToken fabricTypeValue = propertiesValue["fabricType"];
                                 if (fabricTypeValue != null && fabricTypeValue.Type != JTokenType.Null)
                                 {
@@ -1012,10 +1026,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     }
                                 }
                                 
-                                JToken configurationSettingsValue = propertiesValue["configurationSettings"];
-                                if (configurationSettingsValue != null && configurationSettingsValue.Type != JTokenType.Null)
+                                JToken customDetailsValue = propertiesValue["customDetails"];
+                                if (customDetailsValue != null && customDetailsValue.Type != JTokenType.Null)
                                 {
-                                    string typeName = ((string)configurationSettingsValue["__type"]);
+                                    string typeName = ((string)customDetailsValue["__type"]);
                                 }
                             }
                             
@@ -1286,15 +1300,15 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     {
                         result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
                     }
-                    if (statusCode == HttpStatusCode.NoContent)
-                    {
-                        result.Status = OperationStatus.Failed;
-                    }
                     if (statusCode == HttpStatusCode.Accepted)
                     {
                         result.Status = OperationStatus.InProgress;
                     }
                     if (statusCode == HttpStatusCode.OK)
+                    {
+                        result.Status = OperationStatus.Succeeded;
+                    }
+                    if (statusCode == HttpStatusCode.NoContent)
                     {
                         result.Status = OperationStatus.Succeeded;
                     }
@@ -1361,7 +1375,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/providers/";
             url = url + Uri.EscapeDataString(this.Client.ResourceNamespace);
             url = url + "/";
-            url = url + "SiteRecoveryVault";
+            url = url + Uri.EscapeDataString(this.Client.ResourceType);
             url = url + "/";
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationFabrics";
@@ -1463,6 +1477,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             propertiesInstance.FriendlyName = friendlyNameInstance;
                                         }
                                         
+                                        JToken internalIdentifierValue = propertiesValue["internalIdentifier"];
+                                        if (internalIdentifierValue != null && internalIdentifierValue.Type != JTokenType.Null)
+                                        {
+                                            string internalIdentifierInstance = ((string)internalIdentifierValue);
+                                            propertiesInstance.InternalIdentifier = internalIdentifierInstance;
+                                        }
+                                        
                                         JToken fabricTypeValue = propertiesValue["fabricType"];
                                         if (fabricTypeValue != null && fabricTypeValue.Type != JTokenType.Null)
                                         {
@@ -1526,10 +1547,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken configurationSettingsValue = propertiesValue["configurationSettings"];
-                                        if (configurationSettingsValue != null && configurationSettingsValue.Type != JTokenType.Null)
+                                        JToken customDetailsValue = propertiesValue["customDetails"];
+                                        if (customDetailsValue != null && customDetailsValue.Type != JTokenType.Null)
                                         {
-                                            string typeName = ((string)configurationSettingsValue["__type"]);
+                                            string typeName = ((string)customDetailsValue["__type"]);
                                         }
                                     }
                                     

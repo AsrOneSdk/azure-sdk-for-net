@@ -21,43 +21,46 @@
 
 using System;
 using System.Linq;
+using Microsoft.Azure;
 using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// The definition of a Fabric creation object properties.
+    /// The definition of a Protection Container mapping object.
     /// </summary>
-    public partial class FabricCreationInputProperties
+    public partial class ProtectionContainerMapping : ResourceBaseExtended
     {
-        private FabricSpecificCreationSettings _customInput;
+        private ProtectionContainerMappingProperties _properties;
         
         /// <summary>
-        /// Optional. Fabric specific creation input
+        /// Optional. Gets or sets the custom data.
         /// </summary>
-        public FabricSpecificCreationSettings CustomInput
+        public ProtectionContainerMappingProperties Properties
         {
-            get { return this._customInput; }
-            set { this._customInput = value; }
-        }
-        
-        private string _fabricType;
-        
-        /// <summary>
-        /// Optional. Type of fabric.
-        /// </summary>
-        public string FabricType
-        {
-            get { return this._fabricType; }
-            set { this._fabricType = value; }
+            get { return this._properties; }
+            set { this._properties = value; }
         }
         
         /// <summary>
-        /// Initializes a new instance of the FabricCreationInputProperties
-        /// class.
+        /// Initializes a new instance of the ProtectionContainerMapping class.
         /// </summary>
-        public FabricCreationInputProperties()
+        public ProtectionContainerMapping()
         {
+        }
+        
+        /// <summary>
+        /// Initializes a new instance of the ProtectionContainerMapping class
+        /// with required arguments.
+        /// </summary>
+        public ProtectionContainerMapping(string location)
+            : this()
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException("location");
+            }
+            this.Location = location;
         }
     }
 }

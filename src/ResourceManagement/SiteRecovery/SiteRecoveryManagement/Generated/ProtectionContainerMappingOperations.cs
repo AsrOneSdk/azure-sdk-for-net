@@ -30,7 +30,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Hyak.Common;
-using Hyak.Common.Internals;
 using Microsoft.Azure;
 using Microsoft.Azure.Management.SiteRecovery;
 using Microsoft.Azure.Management.SiteRecovery.Models;
@@ -39,19 +38,19 @@ using Newtonsoft.Json.Linq;
 namespace Microsoft.Azure.Management.SiteRecovery
 {
     /// <summary>
-    /// Definition of Protection Container operations for the Site Recovery
-    /// extension.
+    /// Definition of Protection Container mapping operations for the Site
+    /// Recovery extension.
     /// </summary>
-    internal partial class ProtectionContainerOperations : IServiceOperations<SiteRecoveryManagementClient>, IProtectionContainerOperations
+    internal partial class ProtectionContainerMappingOperations : IServiceOperations<SiteRecoveryManagementClient>, IProtectionContainerMappingOperations
     {
         /// <summary>
-        /// Initializes a new instance of the ProtectionContainerOperations
-        /// class.
+        /// Initializes a new instance of the
+        /// ProtectionContainerMappingOperations class.
         /// </summary>
         /// <param name='client'>
         /// Reference to the service client.
         /// </param>
-        internal ProtectionContainerOperations(SiteRecoveryManagementClient client)
+        internal ProtectionContainerMappingOperations(SiteRecoveryManagementClient client)
         {
             this._client = client;
         }
@@ -76,8 +75,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <param name='protectionContainerName'>
         /// Required. Protection container name.
         /// </param>
+        /// <param name='mappingName'>
+        /// Required. Container mapping name.
+        /// </param>
         /// <param name='input'>
-        /// Required. Configure protection input.
+        /// Required. Create mapping input.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -88,7 +90,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public async Task<LongRunningOperationResponse> BeginConfigureProtectionAsync(string fabricName, string protectionContainerName, ConfigureProtectionInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        public async Task<LongRunningOperationResponse> BeginConfigureProtectionAsync(string fabricName, string protectionContainerName, string mappingName, CreateProtectionContainerMappingInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
         {
             // Validate
             if (fabricName == null)
@@ -98,6 +100,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
             if (protectionContainerName == null)
             {
                 throw new ArgumentNullException("protectionContainerName");
+            }
+            if (mappingName == null)
+            {
+                throw new ArgumentNullException("mappingName");
             }
             if (input == null)
             {
@@ -113,6 +119,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("fabricName", fabricName);
                 tracingParameters.Add("protectionContainerName", protectionContainerName);
+                tracingParameters.Add("mappingName", mappingName);
                 tracingParameters.Add("input", input);
                 tracingParameters.Add("customRequestHeaders", customRequestHeaders);
                 TracingAdapter.Enter(invocationId, this, "BeginConfigureProtectionAsync", tracingParameters);
@@ -137,7 +144,8 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(fabricName);
             url = url + "/replicationProtectionContainers/";
             url = url + Uri.EscapeDataString(protectionContainerName);
-            url = url + "/configureProtection";
+            url = url + "/replicationProtectionContainerMappings/";
+            url = url + Uri.EscapeDataString(mappingName);
             List<string> queryParameters = new List<string>();
             queryParameters.Add("api-version=2015-11-10");
             if (queryParameters.Count > 0)
@@ -162,7 +170,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             try
             {
                 httpRequest = new HttpRequestMessage();
-                httpRequest.Method = HttpMethod.Post;
+                httpRequest.Method = HttpMethod.Put;
                 httpRequest.RequestUri = new Uri(url);
                 
                 // Set Headers
@@ -178,47 +186,28 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 string requestContent = null;
                 JToken requestDoc = null;
                 
-                JObject configureProtectionInputValue = new JObject();
-                requestDoc = configureProtectionInputValue;
+                JObject createProtectionContainerMappingInputValue = new JObject();
+                requestDoc = createProtectionContainerMappingInputValue;
                 
                 if (input.Properties != null)
                 {
                     JObject propertiesValue = new JObject();
-                    configureProtectionInputValue["properties"] = propertiesValue;
+                    createProtectionContainerMappingInputValue["properties"] = propertiesValue;
                     
-                    if (input.Properties.TargetProtectionContainerName != null)
+                    if (input.Properties.TargetProtectionContainerId != null)
                     {
-                        propertiesValue["targetProtectionContainerId"] = input.Properties.TargetProtectionContainerName;
+                        propertiesValue["targetProtectionContainerId"] = input.Properties.TargetProtectionContainerId;
                     }
                     
-                    if (input.Properties.FabricType != null)
+                    if (input.Properties.PolicyId != null)
                     {
-                        propertiesValue["fabricType"] = input.Properties.FabricType;
+                        propertiesValue["policyId"] = input.Properties.PolicyId;
                     }
                     
-                    if (input.Properties.ApplicablePolicies != null)
+                    if (input.Properties.ProviderSpecificInput != null)
                     {
-                        if (input.Properties.ApplicablePolicies is ILazyCollection == false || ((ILazyCollection)input.Properties.ApplicablePolicies).IsInitialized)
-                        {
-                            JArray applicablePoliciesArray = new JArray();
-                            foreach (ApplicablePolicy applicablePoliciesItem in input.Properties.ApplicablePolicies)
-                            {
-                                JObject applicablePolicyValue = new JObject();
-                                applicablePoliciesArray.Add(applicablePolicyValue);
-                                
-                                if (applicablePoliciesItem.PolicyId != null)
-                                {
-                                    applicablePolicyValue["policyId"] = applicablePoliciesItem.PolicyId;
-                                }
-                            }
-                            propertiesValue["applicablePolicies"] = applicablePoliciesArray;
-                        }
-                    }
-                    
-                    if (input.Properties.ProviderConfigurationSettings != null)
-                    {
-                        JObject providerConfigurationSettingsValue = new JObject();
-                        propertiesValue["providerConfigurationSettings"] = providerConfigurationSettingsValue;
+                        JObject providerSpecificInputValue = new JObject();
+                        propertiesValue["providerSpecificInput"] = providerSpecificInputValue;
                     }
                 }
                 
@@ -306,8 +295,8 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <param name='protectionContainerName'>
         /// Required. Protection container name.
         /// </param>
-        /// <param name='input'>
-        /// Required. Purge protection input.
+        /// <param name='mappingName'>
+        /// Required. Protection container mapping name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -318,7 +307,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public async Task<LongRunningOperationResponse> BeginPurgeProtectionAsync(string fabricName, string protectionContainerName, PurgeProtectionInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        public async Task<LongRunningOperationResponse> BeginPurgeProtectionAsync(string fabricName, string protectionContainerName, string mappingName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
         {
             // Validate
             if (fabricName == null)
@@ -329,9 +318,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
             {
                 throw new ArgumentNullException("protectionContainerName");
             }
-            if (input == null)
+            if (mappingName == null)
             {
-                throw new ArgumentNullException("input");
+                throw new ArgumentNullException("mappingName");
             }
             
             // Tracing
@@ -343,7 +332,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("fabricName", fabricName);
                 tracingParameters.Add("protectionContainerName", protectionContainerName);
-                tracingParameters.Add("input", input);
+                tracingParameters.Add("mappingName", mappingName);
                 tracingParameters.Add("customRequestHeaders", customRequestHeaders);
                 TracingAdapter.Enter(invocationId, this, "BeginPurgeProtectionAsync", tracingParameters);
             }
@@ -367,7 +356,8 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(fabricName);
             url = url + "/replicationProtectionContainers/";
             url = url + Uri.EscapeDataString(protectionContainerName);
-            url = url + "/purgeProtectionConfiguration";
+            url = url + "/replicationProtectionContainerMappings/";
+            url = url + Uri.EscapeDataString(mappingName);
             List<string> queryParameters = new List<string>();
             queryParameters.Add("api-version=2015-11-10");
             if (queryParameters.Count > 0)
@@ -392,7 +382,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             try
             {
                 httpRequest = new HttpRequestMessage();
-                httpRequest.Method = HttpMethod.Post;
+                httpRequest.Method = HttpMethod.Delete;
                 httpRequest.RequestUri = new Uri(url);
                 
                 // Set Headers
@@ -403,58 +393,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 // Set Credentials
                 cancellationToken.ThrowIfCancellationRequested();
                 await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
-                
-                // Serialize Request
-                string requestContent = null;
-                JToken requestDoc = null;
-                
-                JObject purgeProtectionInputValue = new JObject();
-                requestDoc = purgeProtectionInputValue;
-                
-                if (input.Properties != null)
-                {
-                    JObject propertiesValue = new JObject();
-                    purgeProtectionInputValue["properties"] = propertiesValue;
-                    
-                    if (input.Properties.TargetProtectionContainerName != null)
-                    {
-                        propertiesValue["targetProtectionContainerId"] = input.Properties.TargetProtectionContainerName;
-                    }
-                    
-                    if (input.Properties.FabricType != null)
-                    {
-                        propertiesValue["fabricType"] = input.Properties.FabricType;
-                    }
-                    
-                    if (input.Properties.ApplicablePolicies != null)
-                    {
-                        if (input.Properties.ApplicablePolicies is ILazyCollection == false || ((ILazyCollection)input.Properties.ApplicablePolicies).IsInitialized)
-                        {
-                            JArray applicablePoliciesArray = new JArray();
-                            foreach (ApplicablePolicy applicablePoliciesItem in input.Properties.ApplicablePolicies)
-                            {
-                                JObject applicablePolicyValue = new JObject();
-                                applicablePoliciesArray.Add(applicablePolicyValue);
-                                
-                                if (applicablePoliciesItem.PolicyId != null)
-                                {
-                                    applicablePolicyValue["policyId"] = applicablePoliciesItem.PolicyId;
-                                }
-                            }
-                            propertiesValue["applicablePolicies"] = applicablePoliciesArray;
-                        }
-                    }
-                    
-                    if (input.Properties.ProviderConfigurationSettings != null)
-                    {
-                        JObject providerConfigurationSettingsValue = new JObject();
-                        propertiesValue["providerConfigurationSettings"] = providerConfigurationSettingsValue;
-                    }
-                }
-                
-                requestContent = requestDoc.ToString(Newtonsoft.Json.Formatting.Indented);
-                httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
-                httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
                 
                 // Send Request
                 HttpResponseMessage httpResponse = null;
@@ -474,7 +412,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     if (statusCode != HttpStatusCode.OK && statusCode != HttpStatusCode.Accepted)
                     {
                         cancellationToken.ThrowIfCancellationRequested();
-                        CloudException ex = CloudException.Create(httpRequest, requestContent, httpResponse, await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false));
+                        CloudException ex = CloudException.Create(httpRequest, null, httpResponse, await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false));
                         if (shouldTrace)
                         {
                             TracingAdapter.Error(invocationId, ex);
@@ -536,6 +474,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <param name='protectionContainerName'>
         /// Required. Protection container name.
         /// </param>
+        /// <param name='mappingName'>
+        /// Required. Container mapping name.
+        /// </param>
         /// <param name='input'>
         /// Required. Unconfigure protection input.
         /// </param>
@@ -548,7 +489,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public async Task<LongRunningOperationResponse> BeginUnconfigureProtectionAsync(string fabricName, string protectionContainerName, UnconfigureProtectionInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        public async Task<LongRunningOperationResponse> BeginUnconfigureProtectionAsync(string fabricName, string protectionContainerName, string mappingName, RemoveProtectionContainerMappingInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
         {
             // Validate
             if (fabricName == null)
@@ -558,6 +499,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
             if (protectionContainerName == null)
             {
                 throw new ArgumentNullException("protectionContainerName");
+            }
+            if (mappingName == null)
+            {
+                throw new ArgumentNullException("mappingName");
             }
             if (input == null)
             {
@@ -573,6 +518,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("fabricName", fabricName);
                 tracingParameters.Add("protectionContainerName", protectionContainerName);
+                tracingParameters.Add("mappingName", mappingName);
                 tracingParameters.Add("input", input);
                 tracingParameters.Add("customRequestHeaders", customRequestHeaders);
                 TracingAdapter.Enter(invocationId, this, "BeginUnconfigureProtectionAsync", tracingParameters);
@@ -597,6 +543,8 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(fabricName);
             url = url + "/replicationProtectionContainers/";
             url = url + Uri.EscapeDataString(protectionContainerName);
+            url = url + "/replicationProtectionContainerMappings/";
+            url = url + Uri.EscapeDataString(mappingName);
             url = url + "/unconfigureProtection";
             List<string> queryParameters = new List<string>();
             queryParameters.Add("api-version=2015-11-10");
@@ -638,47 +586,18 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 string requestContent = null;
                 JToken requestDoc = null;
                 
-                JObject unconfigureProtectionInputValue = new JObject();
-                requestDoc = unconfigureProtectionInputValue;
+                JObject removeProtectionContainerMappingInputValue = new JObject();
+                requestDoc = removeProtectionContainerMappingInputValue;
                 
                 if (input.Properties != null)
                 {
                     JObject propertiesValue = new JObject();
-                    unconfigureProtectionInputValue["properties"] = propertiesValue;
+                    removeProtectionContainerMappingInputValue["properties"] = propertiesValue;
                     
-                    if (input.Properties.TargetProtectionContainerName != null)
+                    if (input.Properties.ProviderSpecificInput != null)
                     {
-                        propertiesValue["targetProtectionContainerId"] = input.Properties.TargetProtectionContainerName;
-                    }
-                    
-                    if (input.Properties.FabricType != null)
-                    {
-                        propertiesValue["fabricType"] = input.Properties.FabricType;
-                    }
-                    
-                    if (input.Properties.ApplicablePolicies != null)
-                    {
-                        if (input.Properties.ApplicablePolicies is ILazyCollection == false || ((ILazyCollection)input.Properties.ApplicablePolicies).IsInitialized)
-                        {
-                            JArray applicablePoliciesArray = new JArray();
-                            foreach (ApplicablePolicy applicablePoliciesItem in input.Properties.ApplicablePolicies)
-                            {
-                                JObject applicablePolicyValue = new JObject();
-                                applicablePoliciesArray.Add(applicablePolicyValue);
-                                
-                                if (applicablePoliciesItem.PolicyId != null)
-                                {
-                                    applicablePolicyValue["policyId"] = applicablePoliciesItem.PolicyId;
-                                }
-                            }
-                            propertiesValue["applicablePolicies"] = applicablePoliciesArray;
-                        }
-                    }
-                    
-                    if (input.Properties.ProviderConfigurationSettings != null)
-                    {
-                        JObject providerConfigurationSettingsValue = new JObject();
-                        propertiesValue["providerConfigurationSettings"] = providerConfigurationSettingsValue;
+                        JObject providerSpecificInputValue = new JObject();
+                        propertiesValue["providerSpecificInput"] = providerSpecificInputValue;
                     }
                 }
                 
@@ -766,8 +685,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <param name='protectionContainerName'>
         /// Required. Protection container name.
         /// </param>
+        /// <param name='mappingName'>
+        /// Required. Container mapping name.
+        /// </param>
         /// <param name='input'>
-        /// Required. Configure protection input.
+        /// Required. Create mapping input.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -778,7 +700,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public async Task<LongRunningOperationResponse> ConfigureProtectionAsync(string fabricName, string protectionContainerName, ConfigureProtectionInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        public async Task<LongRunningOperationResponse> ConfigureProtectionAsync(string fabricName, string protectionContainerName, string mappingName, CreateProtectionContainerMappingInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
         {
             SiteRecoveryManagementClient client = this.Client;
             bool shouldTrace = TracingAdapter.IsEnabled;
@@ -789,19 +711,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("fabricName", fabricName);
                 tracingParameters.Add("protectionContainerName", protectionContainerName);
+                tracingParameters.Add("mappingName", mappingName);
                 tracingParameters.Add("input", input);
                 tracingParameters.Add("customRequestHeaders", customRequestHeaders);
                 TracingAdapter.Enter(invocationId, this, "ConfigureProtectionAsync", tracingParameters);
             }
             
             cancellationToken.ThrowIfCancellationRequested();
-            LongRunningOperationResponse response = await client.ProtectionContainer.BeginConfigureProtectionAsync(fabricName, protectionContainerName, input, customRequestHeaders, cancellationToken).ConfigureAwait(false);
+            LongRunningOperationResponse response = await client.ProtectionContainerMapping.BeginConfigureProtectionAsync(fabricName, protectionContainerName, mappingName, input, customRequestHeaders, cancellationToken).ConfigureAwait(false);
             if (response.Status == OperationStatus.Succeeded)
             {
                 return response;
             }
             cancellationToken.ThrowIfCancellationRequested();
-            ChangeProtectionStateResponse result = await client.ProtectionContainer.GetConfigureProtectionStatusAsync(response.Location, cancellationToken).ConfigureAwait(false);
+            MappingOperationResponse result = await client.ProtectionContainerMapping.GetConfigureProtectionStatusAsync(response.Location, cancellationToken).ConfigureAwait(false);
             int delayInSeconds = 30;
             if (client.LongRunningOperationInitialTimeout >= 0)
             {
@@ -812,7 +735,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 cancellationToken.ThrowIfCancellationRequested();
                 await TaskEx.Delay(delayInSeconds * 1000, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
-                result = await client.ProtectionContainer.GetConfigureProtectionStatusAsync(response.Location, cancellationToken).ConfigureAwait(false);
+                result = await client.ProtectionContainerMapping.GetConfigureProtectionStatusAsync(response.Location, cancellationToken).ConfigureAwait(false);
                 delayInSeconds = 30;
                 if (client.LongRunningOperationRetryTimeout >= 0)
                 {
@@ -829,13 +752,16 @@ namespace Microsoft.Azure.Management.SiteRecovery
         }
         
         /// <summary>
-        /// Get the protected container by Id.
+        /// Get the protected container mapping by name.
         /// </summary>
         /// <param name='fabricName'>
         /// Required. Fabric Name.
         /// </param>
         /// <param name='protectionContainerName'>
         /// Required. Protection Container Name.
+        /// </param>
+        /// <param name='mappingName'>
+        /// Required. Container mapping name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -844,9 +770,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// Cancellation token.
         /// </param>
         /// <returns>
-        /// The response model for the Protection Container object.
+        /// The response model for the Protection Container mapping object.
         /// </returns>
-        public async Task<ProtectionContainerResponse> GetAsync(string fabricName, string protectionContainerName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        public async Task<ProtectionContainerMappingResponse> GetAsync(string fabricName, string protectionContainerName, string mappingName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
         {
             // Validate
             if (fabricName == null)
@@ -856,6 +782,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
             if (protectionContainerName == null)
             {
                 throw new ArgumentNullException("protectionContainerName");
+            }
+            if (mappingName == null)
+            {
+                throw new ArgumentNullException("mappingName");
             }
             
             // Tracing
@@ -867,6 +797,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("fabricName", fabricName);
                 tracingParameters.Add("protectionContainerName", protectionContainerName);
+                tracingParameters.Add("mappingName", mappingName);
                 tracingParameters.Add("customRequestHeaders", customRequestHeaders);
                 TracingAdapter.Enter(invocationId, this, "GetAsync", tracingParameters);
             }
@@ -890,6 +821,8 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(fabricName);
             url = url + "/replicationProtectionContainers/";
             url = url + Uri.EscapeDataString(protectionContainerName);
+            url = url + "/replicationProtectionContainerMappings/";
+            url = url + Uri.EscapeDataString(mappingName);
             List<string> queryParameters = new List<string>();
             queryParameters.Add("api-version=2015-11-10");
             if (queryParameters.Count > 0)
@@ -952,13 +885,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     }
                     
                     // Create Result
-                    ProtectionContainerResponse result = null;
+                    ProtectionContainerMappingResponse result = null;
                     // Deserialize Response
                     if (statusCode == HttpStatusCode.OK)
                     {
                         cancellationToken.ThrowIfCancellationRequested();
                         string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        result = new ProtectionContainerResponse();
+                        result = new ProtectionContainerMappingResponse();
                         JToken responseDoc = null;
                         if (string.IsNullOrEmpty(responseContent) == false)
                         {
@@ -967,54 +900,120 @@ namespace Microsoft.Azure.Management.SiteRecovery
                         
                         if (responseDoc != null && responseDoc.Type != JTokenType.Null)
                         {
-                            ProtectionContainer protectionContainerInstance = new ProtectionContainer();
-                            result.ProtectionContainer = protectionContainerInstance;
+                            ProtectionContainerMapping protectionContainerMappingInstance = new ProtectionContainerMapping();
+                            result.ProtectionContainerMapping = protectionContainerMappingInstance;
                             
                             JToken propertiesValue = responseDoc["properties"];
                             if (propertiesValue != null && propertiesValue.Type != JTokenType.Null)
                             {
-                                ProtectionContainerProperties propertiesInstance = new ProtectionContainerProperties();
-                                protectionContainerInstance.Properties = propertiesInstance;
+                                ProtectionContainerMappingProperties propertiesInstance = new ProtectionContainerMappingProperties();
+                                protectionContainerMappingInstance.Properties = propertiesInstance;
                                 
-                                JToken fabricFriendlyNameValue = propertiesValue["fabricFriendlyName"];
-                                if (fabricFriendlyNameValue != null && fabricFriendlyNameValue.Type != JTokenType.Null)
+                                JToken targetProtectionContainerIdValue = propertiesValue["targetProtectionContainerId"];
+                                if (targetProtectionContainerIdValue != null && targetProtectionContainerIdValue.Type != JTokenType.Null)
                                 {
-                                    string fabricFriendlyNameInstance = ((string)fabricFriendlyNameValue);
-                                    propertiesInstance.FabricFriendlyName = fabricFriendlyNameInstance;
+                                    string targetProtectionContainerIdInstance = ((string)targetProtectionContainerIdValue);
+                                    propertiesInstance.TargetProtectionContainerId = targetProtectionContainerIdInstance;
                                 }
                                 
-                                JToken friendlyNameValue = propertiesValue["friendlyName"];
-                                if (friendlyNameValue != null && friendlyNameValue.Type != JTokenType.Null)
+                                JToken targetProtectionContainerFriendlyNameValue = propertiesValue["targetProtectionContainerFriendlyName"];
+                                if (targetProtectionContainerFriendlyNameValue != null && targetProtectionContainerFriendlyNameValue.Type != JTokenType.Null)
                                 {
-                                    string friendlyNameInstance = ((string)friendlyNameValue);
-                                    propertiesInstance.FriendlyName = friendlyNameInstance;
+                                    string targetProtectionContainerFriendlyNameInstance = ((string)targetProtectionContainerFriendlyNameValue);
+                                    propertiesInstance.TargetProtectionContainerFriendlyName = targetProtectionContainerFriendlyNameInstance;
                                 }
                                 
-                                JToken fabricTypeValue = propertiesValue["fabricType"];
-                                if (fabricTypeValue != null && fabricTypeValue.Type != JTokenType.Null)
+                                JToken healthValue = propertiesValue["health"];
+                                if (healthValue != null && healthValue.Type != JTokenType.Null)
                                 {
-                                    string fabricTypeInstance = ((string)fabricTypeValue);
-                                    propertiesInstance.FabricType = fabricTypeInstance;
+                                    string healthInstance = ((string)healthValue);
+                                    propertiesInstance.Health = healthInstance;
                                 }
                                 
-                                JToken protectedItemCountValue = propertiesValue["protectedItemCount"];
-                                if (protectedItemCountValue != null && protectedItemCountValue.Type != JTokenType.Null)
+                                JToken healthErrorDetailsArray = propertiesValue["healthErrorDetails"];
+                                if (healthErrorDetailsArray != null && healthErrorDetailsArray.Type != JTokenType.Null)
                                 {
-                                    int protectedItemCountInstance = ((int)protectedItemCountValue);
-                                    propertiesInstance.ProtectedItemCount = protectedItemCountInstance;
+                                    foreach (JToken healthErrorDetailsValue in ((JArray)healthErrorDetailsArray))
+                                    {
+                                        HealthError healthErrorInstance = new HealthError();
+                                        propertiesInstance.HealthErrorDetails.Add(healthErrorInstance);
+                                        
+                                        JToken errorLevelValue = healthErrorDetailsValue["errorLevel"];
+                                        if (errorLevelValue != null && errorLevelValue.Type != JTokenType.Null)
+                                        {
+                                            string errorLevelInstance = ((string)errorLevelValue);
+                                            healthErrorInstance.ErrorLevel = errorLevelInstance;
+                                        }
+                                        
+                                        JToken errorCodeValue = healthErrorDetailsValue["errorCode"];
+                                        if (errorCodeValue != null && errorCodeValue.Type != JTokenType.Null)
+                                        {
+                                            string errorCodeInstance = ((string)errorCodeValue);
+                                            healthErrorInstance.ErrorCode = errorCodeInstance;
+                                        }
+                                        
+                                        JToken errorMessageValue = healthErrorDetailsValue["errorMessage"];
+                                        if (errorMessageValue != null && errorMessageValue.Type != JTokenType.Null)
+                                        {
+                                            string errorMessageInstance = ((string)errorMessageValue);
+                                            healthErrorInstance.ErrorMessage = errorMessageInstance;
+                                        }
+                                        
+                                        JToken possibleCausesValue = healthErrorDetailsValue["possibleCauses"];
+                                        if (possibleCausesValue != null && possibleCausesValue.Type != JTokenType.Null)
+                                        {
+                                            string possibleCausesInstance = ((string)possibleCausesValue);
+                                            healthErrorInstance.PossibleCauses = possibleCausesInstance;
+                                        }
+                                        
+                                        JToken recommendedActionValue = healthErrorDetailsValue["recommendedAction"];
+                                        if (recommendedActionValue != null && recommendedActionValue.Type != JTokenType.Null)
+                                        {
+                                            string recommendedActionInstance = ((string)recommendedActionValue);
+                                            healthErrorInstance.RecommendedAction = recommendedActionInstance;
+                                        }
+                                        
+                                        JToken creationTimeUtcValue = healthErrorDetailsValue["creationTimeUtc"];
+                                        if (creationTimeUtcValue != null && creationTimeUtcValue.Type != JTokenType.Null)
+                                        {
+                                            string creationTimeUtcInstance = ((string)creationTimeUtcValue);
+                                            healthErrorInstance.CreationTimeUtc = creationTimeUtcInstance;
+                                        }
+                                        
+                                        JToken recoveryProviderErrorMessageValue = healthErrorDetailsValue["recoveryProviderErrorMessage"];
+                                        if (recoveryProviderErrorMessageValue != null && recoveryProviderErrorMessageValue.Type != JTokenType.Null)
+                                        {
+                                            string recoveryProviderErrorMessageInstance = ((string)recoveryProviderErrorMessageValue);
+                                            healthErrorInstance.RecoveryProviderErrorMessage = recoveryProviderErrorMessageInstance;
+                                        }
+                                        
+                                        JToken entityIdValue = healthErrorDetailsValue["entityId"];
+                                        if (entityIdValue != null && entityIdValue.Type != JTokenType.Null)
+                                        {
+                                            string entityIdInstance = ((string)entityIdValue);
+                                            healthErrorInstance.EntityId = entityIdInstance;
+                                        }
+                                    }
                                 }
                                 
-                                JToken pairingStatusValue = propertiesValue["pairingStatus"];
-                                if (pairingStatusValue != null && pairingStatusValue.Type != JTokenType.Null)
+                                JToken policyIdValue = propertiesValue["policyId"];
+                                if (policyIdValue != null && policyIdValue.Type != JTokenType.Null)
                                 {
-                                    string pairingStatusInstance = ((string)pairingStatusValue);
-                                    propertiesInstance.PairingStatus = pairingStatusInstance;
+                                    string policyIdInstance = ((string)policyIdValue);
+                                    propertiesInstance.PolicyId = policyIdInstance;
                                 }
                                 
-                                JToken fabricConfigurationSettingsValue = propertiesValue["fabricConfigurationSettings"];
-                                if (fabricConfigurationSettingsValue != null && fabricConfigurationSettingsValue.Type != JTokenType.Null)
+                                JToken stateValue = propertiesValue["state"];
+                                if (stateValue != null && stateValue.Type != JTokenType.Null)
                                 {
-                                    string typeName = ((string)fabricConfigurationSettingsValue["__type"]);
+                                    string stateInstance = ((string)stateValue);
+                                    propertiesInstance.State = stateInstance;
+                                }
+                                
+                                JToken providerSpecificDetailsValue = propertiesValue["providerSpecificDetails"];
+                                if (providerSpecificDetailsValue != null && providerSpecificDetailsValue.Type != JTokenType.Null)
+                                {
+                                    string typeName = ((string)providerSpecificDetailsValue["__type"]);
                                 }
                             }
                             
@@ -1022,28 +1021,28 @@ namespace Microsoft.Azure.Management.SiteRecovery
                             if (idValue != null && idValue.Type != JTokenType.Null)
                             {
                                 string idInstance = ((string)idValue);
-                                protectionContainerInstance.Id = idInstance;
+                                protectionContainerMappingInstance.Id = idInstance;
                             }
                             
                             JToken nameValue = responseDoc["name"];
                             if (nameValue != null && nameValue.Type != JTokenType.Null)
                             {
                                 string nameInstance = ((string)nameValue);
-                                protectionContainerInstance.Name = nameInstance;
+                                protectionContainerMappingInstance.Name = nameInstance;
                             }
                             
                             JToken typeValue = responseDoc["type"];
                             if (typeValue != null && typeValue.Type != JTokenType.Null)
                             {
                                 string typeInstance = ((string)typeValue);
-                                protectionContainerInstance.Type = typeInstance;
+                                protectionContainerMappingInstance.Type = typeInstance;
                             }
                             
                             JToken locationValue = responseDoc["location"];
                             if (locationValue != null && locationValue.Type != JTokenType.Null)
                             {
                                 string locationInstance = ((string)locationValue);
-                                protectionContainerInstance.Location = locationInstance;
+                                protectionContainerMappingInstance.Location = locationInstance;
                             }
                             
                             JToken tagsSequenceElement = ((JToken)responseDoc["tags"]);
@@ -1053,7 +1052,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 {
                                     string tagsKey = ((string)property.Name);
                                     string tagsValue = ((string)property.Value);
-                                    protectionContainerInstance.Tags.Add(tagsKey, tagsValue);
+                                    protectionContainerMappingInstance.Tags.Add(tagsKey, tagsValue);
                                 }
                             }
                         }
@@ -1101,10 +1100,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// Cancellation token.
         /// </param>
         /// <returns>
-        /// Service response for operation which change status of protection
-        /// for protection container.
+        /// Service response for operation which change status of mapping for
+        /// protection container.
         /// </returns>
-        public async Task<ChangeProtectionStateResponse> GetConfigureProtectionStatusAsync(string operationStatusLink, CancellationToken cancellationToken)
+        public async Task<MappingOperationResponse> GetConfigureProtectionStatusAsync(string operationStatusLink, CancellationToken cancellationToken)
         {
             // Validate
             if (operationStatusLink == null)
@@ -1172,13 +1171,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     }
                     
                     // Create Result
-                    ChangeProtectionStateResponse result = null;
+                    MappingOperationResponse result = null;
                     // Deserialize Response
                     if (statusCode == HttpStatusCode.OK || statusCode == HttpStatusCode.Accepted || statusCode == HttpStatusCode.NoContent)
                     {
                         cancellationToken.ThrowIfCancellationRequested();
                         string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        result = new ChangeProtectionStateResponse();
+                        result = new MappingOperationResponse();
                         JToken responseDoc = null;
                         if (string.IsNullOrEmpty(responseContent) == false)
                         {
@@ -1187,54 +1186,120 @@ namespace Microsoft.Azure.Management.SiteRecovery
                         
                         if (responseDoc != null && responseDoc.Type != JTokenType.Null)
                         {
-                            ProtectionContainer protectionContainerInstance = new ProtectionContainer();
-                            result.ProtectionContainer = protectionContainerInstance;
+                            ProtectionContainerMapping protectionContainerMappingInstance = new ProtectionContainerMapping();
+                            result.ProtectionContainerMapping = protectionContainerMappingInstance;
                             
                             JToken propertiesValue = responseDoc["properties"];
                             if (propertiesValue != null && propertiesValue.Type != JTokenType.Null)
                             {
-                                ProtectionContainerProperties propertiesInstance = new ProtectionContainerProperties();
-                                protectionContainerInstance.Properties = propertiesInstance;
+                                ProtectionContainerMappingProperties propertiesInstance = new ProtectionContainerMappingProperties();
+                                protectionContainerMappingInstance.Properties = propertiesInstance;
                                 
-                                JToken fabricFriendlyNameValue = propertiesValue["fabricFriendlyName"];
-                                if (fabricFriendlyNameValue != null && fabricFriendlyNameValue.Type != JTokenType.Null)
+                                JToken targetProtectionContainerIdValue = propertiesValue["targetProtectionContainerId"];
+                                if (targetProtectionContainerIdValue != null && targetProtectionContainerIdValue.Type != JTokenType.Null)
                                 {
-                                    string fabricFriendlyNameInstance = ((string)fabricFriendlyNameValue);
-                                    propertiesInstance.FabricFriendlyName = fabricFriendlyNameInstance;
+                                    string targetProtectionContainerIdInstance = ((string)targetProtectionContainerIdValue);
+                                    propertiesInstance.TargetProtectionContainerId = targetProtectionContainerIdInstance;
                                 }
                                 
-                                JToken friendlyNameValue = propertiesValue["friendlyName"];
-                                if (friendlyNameValue != null && friendlyNameValue.Type != JTokenType.Null)
+                                JToken targetProtectionContainerFriendlyNameValue = propertiesValue["targetProtectionContainerFriendlyName"];
+                                if (targetProtectionContainerFriendlyNameValue != null && targetProtectionContainerFriendlyNameValue.Type != JTokenType.Null)
                                 {
-                                    string friendlyNameInstance = ((string)friendlyNameValue);
-                                    propertiesInstance.FriendlyName = friendlyNameInstance;
+                                    string targetProtectionContainerFriendlyNameInstance = ((string)targetProtectionContainerFriendlyNameValue);
+                                    propertiesInstance.TargetProtectionContainerFriendlyName = targetProtectionContainerFriendlyNameInstance;
                                 }
                                 
-                                JToken fabricTypeValue = propertiesValue["fabricType"];
-                                if (fabricTypeValue != null && fabricTypeValue.Type != JTokenType.Null)
+                                JToken healthValue = propertiesValue["health"];
+                                if (healthValue != null && healthValue.Type != JTokenType.Null)
                                 {
-                                    string fabricTypeInstance = ((string)fabricTypeValue);
-                                    propertiesInstance.FabricType = fabricTypeInstance;
+                                    string healthInstance = ((string)healthValue);
+                                    propertiesInstance.Health = healthInstance;
                                 }
                                 
-                                JToken protectedItemCountValue = propertiesValue["protectedItemCount"];
-                                if (protectedItemCountValue != null && protectedItemCountValue.Type != JTokenType.Null)
+                                JToken healthErrorDetailsArray = propertiesValue["healthErrorDetails"];
+                                if (healthErrorDetailsArray != null && healthErrorDetailsArray.Type != JTokenType.Null)
                                 {
-                                    int protectedItemCountInstance = ((int)protectedItemCountValue);
-                                    propertiesInstance.ProtectedItemCount = protectedItemCountInstance;
+                                    foreach (JToken healthErrorDetailsValue in ((JArray)healthErrorDetailsArray))
+                                    {
+                                        HealthError healthErrorInstance = new HealthError();
+                                        propertiesInstance.HealthErrorDetails.Add(healthErrorInstance);
+                                        
+                                        JToken errorLevelValue = healthErrorDetailsValue["errorLevel"];
+                                        if (errorLevelValue != null && errorLevelValue.Type != JTokenType.Null)
+                                        {
+                                            string errorLevelInstance = ((string)errorLevelValue);
+                                            healthErrorInstance.ErrorLevel = errorLevelInstance;
+                                        }
+                                        
+                                        JToken errorCodeValue = healthErrorDetailsValue["errorCode"];
+                                        if (errorCodeValue != null && errorCodeValue.Type != JTokenType.Null)
+                                        {
+                                            string errorCodeInstance = ((string)errorCodeValue);
+                                            healthErrorInstance.ErrorCode = errorCodeInstance;
+                                        }
+                                        
+                                        JToken errorMessageValue = healthErrorDetailsValue["errorMessage"];
+                                        if (errorMessageValue != null && errorMessageValue.Type != JTokenType.Null)
+                                        {
+                                            string errorMessageInstance = ((string)errorMessageValue);
+                                            healthErrorInstance.ErrorMessage = errorMessageInstance;
+                                        }
+                                        
+                                        JToken possibleCausesValue = healthErrorDetailsValue["possibleCauses"];
+                                        if (possibleCausesValue != null && possibleCausesValue.Type != JTokenType.Null)
+                                        {
+                                            string possibleCausesInstance = ((string)possibleCausesValue);
+                                            healthErrorInstance.PossibleCauses = possibleCausesInstance;
+                                        }
+                                        
+                                        JToken recommendedActionValue = healthErrorDetailsValue["recommendedAction"];
+                                        if (recommendedActionValue != null && recommendedActionValue.Type != JTokenType.Null)
+                                        {
+                                            string recommendedActionInstance = ((string)recommendedActionValue);
+                                            healthErrorInstance.RecommendedAction = recommendedActionInstance;
+                                        }
+                                        
+                                        JToken creationTimeUtcValue = healthErrorDetailsValue["creationTimeUtc"];
+                                        if (creationTimeUtcValue != null && creationTimeUtcValue.Type != JTokenType.Null)
+                                        {
+                                            string creationTimeUtcInstance = ((string)creationTimeUtcValue);
+                                            healthErrorInstance.CreationTimeUtc = creationTimeUtcInstance;
+                                        }
+                                        
+                                        JToken recoveryProviderErrorMessageValue = healthErrorDetailsValue["recoveryProviderErrorMessage"];
+                                        if (recoveryProviderErrorMessageValue != null && recoveryProviderErrorMessageValue.Type != JTokenType.Null)
+                                        {
+                                            string recoveryProviderErrorMessageInstance = ((string)recoveryProviderErrorMessageValue);
+                                            healthErrorInstance.RecoveryProviderErrorMessage = recoveryProviderErrorMessageInstance;
+                                        }
+                                        
+                                        JToken entityIdValue = healthErrorDetailsValue["entityId"];
+                                        if (entityIdValue != null && entityIdValue.Type != JTokenType.Null)
+                                        {
+                                            string entityIdInstance = ((string)entityIdValue);
+                                            healthErrorInstance.EntityId = entityIdInstance;
+                                        }
+                                    }
                                 }
                                 
-                                JToken pairingStatusValue = propertiesValue["pairingStatus"];
-                                if (pairingStatusValue != null && pairingStatusValue.Type != JTokenType.Null)
+                                JToken policyIdValue = propertiesValue["policyId"];
+                                if (policyIdValue != null && policyIdValue.Type != JTokenType.Null)
                                 {
-                                    string pairingStatusInstance = ((string)pairingStatusValue);
-                                    propertiesInstance.PairingStatus = pairingStatusInstance;
+                                    string policyIdInstance = ((string)policyIdValue);
+                                    propertiesInstance.PolicyId = policyIdInstance;
                                 }
                                 
-                                JToken fabricConfigurationSettingsValue = propertiesValue["fabricConfigurationSettings"];
-                                if (fabricConfigurationSettingsValue != null && fabricConfigurationSettingsValue.Type != JTokenType.Null)
+                                JToken stateValue = propertiesValue["state"];
+                                if (stateValue != null && stateValue.Type != JTokenType.Null)
                                 {
-                                    string typeName = ((string)fabricConfigurationSettingsValue["__type"]);
+                                    string stateInstance = ((string)stateValue);
+                                    propertiesInstance.State = stateInstance;
+                                }
+                                
+                                JToken providerSpecificDetailsValue = propertiesValue["providerSpecificDetails"];
+                                if (providerSpecificDetailsValue != null && providerSpecificDetailsValue.Type != JTokenType.Null)
+                                {
+                                    string typeName = ((string)providerSpecificDetailsValue["__type"]);
                                 }
                             }
                             
@@ -1242,28 +1307,28 @@ namespace Microsoft.Azure.Management.SiteRecovery
                             if (idValue != null && idValue.Type != JTokenType.Null)
                             {
                                 string idInstance = ((string)idValue);
-                                protectionContainerInstance.Id = idInstance;
+                                protectionContainerMappingInstance.Id = idInstance;
                             }
                             
                             JToken nameValue = responseDoc["name"];
                             if (nameValue != null && nameValue.Type != JTokenType.Null)
                             {
                                 string nameInstance = ((string)nameValue);
-                                protectionContainerInstance.Name = nameInstance;
+                                protectionContainerMappingInstance.Name = nameInstance;
                             }
                             
                             JToken typeValue = responseDoc["type"];
                             if (typeValue != null && typeValue.Type != JTokenType.Null)
                             {
                                 string typeInstance = ((string)typeValue);
-                                protectionContainerInstance.Type = typeInstance;
+                                protectionContainerMappingInstance.Type = typeInstance;
                             }
                             
                             JToken locationValue = responseDoc["location"];
                             if (locationValue != null && locationValue.Type != JTokenType.Null)
                             {
                                 string locationInstance = ((string)locationValue);
-                                protectionContainerInstance.Location = locationInstance;
+                                protectionContainerMappingInstance.Location = locationInstance;
                             }
                             
                             JToken tagsSequenceElement = ((JToken)responseDoc["tags"]);
@@ -1273,7 +1338,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 {
                                     string tagsKey = ((string)property.Name);
                                     string tagsValue = ((string)property.Value);
-                                    protectionContainerInstance.Tags.Add(tagsKey, tagsValue);
+                                    protectionContainerMappingInstance.Tags.Add(tagsKey, tagsValue);
                                 }
                             }
                             
@@ -1373,10 +1438,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// Cancellation token.
         /// </param>
         /// <returns>
-        /// Service response for operation which change status of protection
-        /// for protection container.
+        /// A standard service response for long running operations.
         /// </returns>
-        public async Task<ChangeProtectionStateResponse> GetPurgeProtectionStatusAsync(string operationStatusLink, CancellationToken cancellationToken)
+        public async Task<LongRunningOperationResponse> GetPurgeProtectionStatusAsync(string operationStatusLink, CancellationToken cancellationToken)
         {
             // Validate
             if (operationStatusLink == null)
@@ -1444,141 +1508,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     }
                     
                     // Create Result
-                    ChangeProtectionStateResponse result = null;
+                    LongRunningOperationResponse result = null;
                     // Deserialize Response
-                    if (statusCode == HttpStatusCode.OK || statusCode == HttpStatusCode.Accepted || statusCode == HttpStatusCode.NoContent)
-                    {
-                        cancellationToken.ThrowIfCancellationRequested();
-                        string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        result = new ChangeProtectionStateResponse();
-                        JToken responseDoc = null;
-                        if (string.IsNullOrEmpty(responseContent) == false)
-                        {
-                            responseDoc = JToken.Parse(responseContent);
-                        }
-                        
-                        if (responseDoc != null && responseDoc.Type != JTokenType.Null)
-                        {
-                            ProtectionContainer protectionContainerInstance = new ProtectionContainer();
-                            result.ProtectionContainer = protectionContainerInstance;
-                            
-                            JToken propertiesValue = responseDoc["properties"];
-                            if (propertiesValue != null && propertiesValue.Type != JTokenType.Null)
-                            {
-                                ProtectionContainerProperties propertiesInstance = new ProtectionContainerProperties();
-                                protectionContainerInstance.Properties = propertiesInstance;
-                                
-                                JToken fabricFriendlyNameValue = propertiesValue["fabricFriendlyName"];
-                                if (fabricFriendlyNameValue != null && fabricFriendlyNameValue.Type != JTokenType.Null)
-                                {
-                                    string fabricFriendlyNameInstance = ((string)fabricFriendlyNameValue);
-                                    propertiesInstance.FabricFriendlyName = fabricFriendlyNameInstance;
-                                }
-                                
-                                JToken friendlyNameValue = propertiesValue["friendlyName"];
-                                if (friendlyNameValue != null && friendlyNameValue.Type != JTokenType.Null)
-                                {
-                                    string friendlyNameInstance = ((string)friendlyNameValue);
-                                    propertiesInstance.FriendlyName = friendlyNameInstance;
-                                }
-                                
-                                JToken fabricTypeValue = propertiesValue["fabricType"];
-                                if (fabricTypeValue != null && fabricTypeValue.Type != JTokenType.Null)
-                                {
-                                    string fabricTypeInstance = ((string)fabricTypeValue);
-                                    propertiesInstance.FabricType = fabricTypeInstance;
-                                }
-                                
-                                JToken protectedItemCountValue = propertiesValue["protectedItemCount"];
-                                if (protectedItemCountValue != null && protectedItemCountValue.Type != JTokenType.Null)
-                                {
-                                    int protectedItemCountInstance = ((int)protectedItemCountValue);
-                                    propertiesInstance.ProtectedItemCount = protectedItemCountInstance;
-                                }
-                                
-                                JToken pairingStatusValue = propertiesValue["pairingStatus"];
-                                if (pairingStatusValue != null && pairingStatusValue.Type != JTokenType.Null)
-                                {
-                                    string pairingStatusInstance = ((string)pairingStatusValue);
-                                    propertiesInstance.PairingStatus = pairingStatusInstance;
-                                }
-                                
-                                JToken fabricConfigurationSettingsValue = propertiesValue["fabricConfigurationSettings"];
-                                if (fabricConfigurationSettingsValue != null && fabricConfigurationSettingsValue.Type != JTokenType.Null)
-                                {
-                                    string typeName = ((string)fabricConfigurationSettingsValue["__type"]);
-                                }
-                            }
-                            
-                            JToken idValue = responseDoc["id"];
-                            if (idValue != null && idValue.Type != JTokenType.Null)
-                            {
-                                string idInstance = ((string)idValue);
-                                protectionContainerInstance.Id = idInstance;
-                            }
-                            
-                            JToken nameValue = responseDoc["name"];
-                            if (nameValue != null && nameValue.Type != JTokenType.Null)
-                            {
-                                string nameInstance = ((string)nameValue);
-                                protectionContainerInstance.Name = nameInstance;
-                            }
-                            
-                            JToken typeValue = responseDoc["type"];
-                            if (typeValue != null && typeValue.Type != JTokenType.Null)
-                            {
-                                string typeInstance = ((string)typeValue);
-                                protectionContainerInstance.Type = typeInstance;
-                            }
-                            
-                            JToken locationValue = responseDoc["location"];
-                            if (locationValue != null && locationValue.Type != JTokenType.Null)
-                            {
-                                string locationInstance = ((string)locationValue);
-                                protectionContainerInstance.Location = locationInstance;
-                            }
-                            
-                            JToken tagsSequenceElement = ((JToken)responseDoc["tags"]);
-                            if (tagsSequenceElement != null && tagsSequenceElement.Type != JTokenType.Null)
-                            {
-                                foreach (JProperty property in tagsSequenceElement)
-                                {
-                                    string tagsKey = ((string)property.Name);
-                                    string tagsValue = ((string)property.Value);
-                                    protectionContainerInstance.Tags.Add(tagsKey, tagsValue);
-                                }
-                            }
-                            
-                            JToken locationValue2 = responseDoc["Location"];
-                            if (locationValue2 != null && locationValue2.Type != JTokenType.Null)
-                            {
-                                string locationInstance2 = ((string)locationValue2);
-                                result.Location = locationInstance2;
-                            }
-                            
-                            JToken retryAfterValue = responseDoc["RetryAfter"];
-                            if (retryAfterValue != null && retryAfterValue.Type != JTokenType.Null)
-                            {
-                                int retryAfterInstance = ((int)retryAfterValue);
-                                result.RetryAfter = retryAfterInstance;
-                            }
-                            
-                            JToken asyncOperationValue = responseDoc["AsyncOperation"];
-                            if (asyncOperationValue != null && asyncOperationValue.Type != JTokenType.Null)
-                            {
-                                string asyncOperationInstance = ((string)asyncOperationValue);
-                                result.AsyncOperation = asyncOperationInstance;
-                            }
-                            
-                            JToken statusValue = responseDoc["Status"];
-                            if (statusValue != null && statusValue.Type != JTokenType.Null)
-                            {
-                                OperationStatus statusInstance = ((OperationStatus)Enum.Parse(typeof(OperationStatus), ((string)statusValue), true));
-                                result.Status = statusInstance;
-                            }
-                        }
-                        
-                    }
+                    result = new LongRunningOperationResponse();
                     result.StatusCode = statusCode;
                     if (httpResponse.Headers.Contains("Azure-AsyncOperation"))
                     {
@@ -1596,7 +1528,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     {
                         result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
                     }
-                    if (statusCode == HttpStatusCode.NoContent)
+                    if (statusCode == HttpStatusCode.OK)
                     {
                         result.Status = OperationStatus.Failed;
                     }
@@ -1604,7 +1536,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     {
                         result.Status = OperationStatus.InProgress;
                     }
-                    if (statusCode == HttpStatusCode.OK)
+                    if (statusCode == HttpStatusCode.NoContent)
                     {
                         result.Status = OperationStatus.Succeeded;
                     }
@@ -1645,10 +1577,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// Cancellation token.
         /// </param>
         /// <returns>
-        /// Service response for operation which change status of protection
-        /// for protection container.
+        /// Service response for operation which change status of mapping for
+        /// protection container.
         /// </returns>
-        public async Task<ChangeProtectionStateResponse> GetUnconfigureProtectionStatusAsync(string operationStatusLink, CancellationToken cancellationToken)
+        public async Task<MappingOperationResponse> GetUnconfigureProtectionStatusAsync(string operationStatusLink, CancellationToken cancellationToken)
         {
             // Validate
             if (operationStatusLink == null)
@@ -1716,13 +1648,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     }
                     
                     // Create Result
-                    ChangeProtectionStateResponse result = null;
+                    MappingOperationResponse result = null;
                     // Deserialize Response
                     if (statusCode == HttpStatusCode.OK || statusCode == HttpStatusCode.Accepted || statusCode == HttpStatusCode.NoContent)
                     {
                         cancellationToken.ThrowIfCancellationRequested();
                         string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        result = new ChangeProtectionStateResponse();
+                        result = new MappingOperationResponse();
                         JToken responseDoc = null;
                         if (string.IsNullOrEmpty(responseContent) == false)
                         {
@@ -1731,54 +1663,120 @@ namespace Microsoft.Azure.Management.SiteRecovery
                         
                         if (responseDoc != null && responseDoc.Type != JTokenType.Null)
                         {
-                            ProtectionContainer protectionContainerInstance = new ProtectionContainer();
-                            result.ProtectionContainer = protectionContainerInstance;
+                            ProtectionContainerMapping protectionContainerMappingInstance = new ProtectionContainerMapping();
+                            result.ProtectionContainerMapping = protectionContainerMappingInstance;
                             
                             JToken propertiesValue = responseDoc["properties"];
                             if (propertiesValue != null && propertiesValue.Type != JTokenType.Null)
                             {
-                                ProtectionContainerProperties propertiesInstance = new ProtectionContainerProperties();
-                                protectionContainerInstance.Properties = propertiesInstance;
+                                ProtectionContainerMappingProperties propertiesInstance = new ProtectionContainerMappingProperties();
+                                protectionContainerMappingInstance.Properties = propertiesInstance;
                                 
-                                JToken fabricFriendlyNameValue = propertiesValue["fabricFriendlyName"];
-                                if (fabricFriendlyNameValue != null && fabricFriendlyNameValue.Type != JTokenType.Null)
+                                JToken targetProtectionContainerIdValue = propertiesValue["targetProtectionContainerId"];
+                                if (targetProtectionContainerIdValue != null && targetProtectionContainerIdValue.Type != JTokenType.Null)
                                 {
-                                    string fabricFriendlyNameInstance = ((string)fabricFriendlyNameValue);
-                                    propertiesInstance.FabricFriendlyName = fabricFriendlyNameInstance;
+                                    string targetProtectionContainerIdInstance = ((string)targetProtectionContainerIdValue);
+                                    propertiesInstance.TargetProtectionContainerId = targetProtectionContainerIdInstance;
                                 }
                                 
-                                JToken friendlyNameValue = propertiesValue["friendlyName"];
-                                if (friendlyNameValue != null && friendlyNameValue.Type != JTokenType.Null)
+                                JToken targetProtectionContainerFriendlyNameValue = propertiesValue["targetProtectionContainerFriendlyName"];
+                                if (targetProtectionContainerFriendlyNameValue != null && targetProtectionContainerFriendlyNameValue.Type != JTokenType.Null)
                                 {
-                                    string friendlyNameInstance = ((string)friendlyNameValue);
-                                    propertiesInstance.FriendlyName = friendlyNameInstance;
+                                    string targetProtectionContainerFriendlyNameInstance = ((string)targetProtectionContainerFriendlyNameValue);
+                                    propertiesInstance.TargetProtectionContainerFriendlyName = targetProtectionContainerFriendlyNameInstance;
                                 }
                                 
-                                JToken fabricTypeValue = propertiesValue["fabricType"];
-                                if (fabricTypeValue != null && fabricTypeValue.Type != JTokenType.Null)
+                                JToken healthValue = propertiesValue["health"];
+                                if (healthValue != null && healthValue.Type != JTokenType.Null)
                                 {
-                                    string fabricTypeInstance = ((string)fabricTypeValue);
-                                    propertiesInstance.FabricType = fabricTypeInstance;
+                                    string healthInstance = ((string)healthValue);
+                                    propertiesInstance.Health = healthInstance;
                                 }
                                 
-                                JToken protectedItemCountValue = propertiesValue["protectedItemCount"];
-                                if (protectedItemCountValue != null && protectedItemCountValue.Type != JTokenType.Null)
+                                JToken healthErrorDetailsArray = propertiesValue["healthErrorDetails"];
+                                if (healthErrorDetailsArray != null && healthErrorDetailsArray.Type != JTokenType.Null)
                                 {
-                                    int protectedItemCountInstance = ((int)protectedItemCountValue);
-                                    propertiesInstance.ProtectedItemCount = protectedItemCountInstance;
+                                    foreach (JToken healthErrorDetailsValue in ((JArray)healthErrorDetailsArray))
+                                    {
+                                        HealthError healthErrorInstance = new HealthError();
+                                        propertiesInstance.HealthErrorDetails.Add(healthErrorInstance);
+                                        
+                                        JToken errorLevelValue = healthErrorDetailsValue["errorLevel"];
+                                        if (errorLevelValue != null && errorLevelValue.Type != JTokenType.Null)
+                                        {
+                                            string errorLevelInstance = ((string)errorLevelValue);
+                                            healthErrorInstance.ErrorLevel = errorLevelInstance;
+                                        }
+                                        
+                                        JToken errorCodeValue = healthErrorDetailsValue["errorCode"];
+                                        if (errorCodeValue != null && errorCodeValue.Type != JTokenType.Null)
+                                        {
+                                            string errorCodeInstance = ((string)errorCodeValue);
+                                            healthErrorInstance.ErrorCode = errorCodeInstance;
+                                        }
+                                        
+                                        JToken errorMessageValue = healthErrorDetailsValue["errorMessage"];
+                                        if (errorMessageValue != null && errorMessageValue.Type != JTokenType.Null)
+                                        {
+                                            string errorMessageInstance = ((string)errorMessageValue);
+                                            healthErrorInstance.ErrorMessage = errorMessageInstance;
+                                        }
+                                        
+                                        JToken possibleCausesValue = healthErrorDetailsValue["possibleCauses"];
+                                        if (possibleCausesValue != null && possibleCausesValue.Type != JTokenType.Null)
+                                        {
+                                            string possibleCausesInstance = ((string)possibleCausesValue);
+                                            healthErrorInstance.PossibleCauses = possibleCausesInstance;
+                                        }
+                                        
+                                        JToken recommendedActionValue = healthErrorDetailsValue["recommendedAction"];
+                                        if (recommendedActionValue != null && recommendedActionValue.Type != JTokenType.Null)
+                                        {
+                                            string recommendedActionInstance = ((string)recommendedActionValue);
+                                            healthErrorInstance.RecommendedAction = recommendedActionInstance;
+                                        }
+                                        
+                                        JToken creationTimeUtcValue = healthErrorDetailsValue["creationTimeUtc"];
+                                        if (creationTimeUtcValue != null && creationTimeUtcValue.Type != JTokenType.Null)
+                                        {
+                                            string creationTimeUtcInstance = ((string)creationTimeUtcValue);
+                                            healthErrorInstance.CreationTimeUtc = creationTimeUtcInstance;
+                                        }
+                                        
+                                        JToken recoveryProviderErrorMessageValue = healthErrorDetailsValue["recoveryProviderErrorMessage"];
+                                        if (recoveryProviderErrorMessageValue != null && recoveryProviderErrorMessageValue.Type != JTokenType.Null)
+                                        {
+                                            string recoveryProviderErrorMessageInstance = ((string)recoveryProviderErrorMessageValue);
+                                            healthErrorInstance.RecoveryProviderErrorMessage = recoveryProviderErrorMessageInstance;
+                                        }
+                                        
+                                        JToken entityIdValue = healthErrorDetailsValue["entityId"];
+                                        if (entityIdValue != null && entityIdValue.Type != JTokenType.Null)
+                                        {
+                                            string entityIdInstance = ((string)entityIdValue);
+                                            healthErrorInstance.EntityId = entityIdInstance;
+                                        }
+                                    }
                                 }
                                 
-                                JToken pairingStatusValue = propertiesValue["pairingStatus"];
-                                if (pairingStatusValue != null && pairingStatusValue.Type != JTokenType.Null)
+                                JToken policyIdValue = propertiesValue["policyId"];
+                                if (policyIdValue != null && policyIdValue.Type != JTokenType.Null)
                                 {
-                                    string pairingStatusInstance = ((string)pairingStatusValue);
-                                    propertiesInstance.PairingStatus = pairingStatusInstance;
+                                    string policyIdInstance = ((string)policyIdValue);
+                                    propertiesInstance.PolicyId = policyIdInstance;
                                 }
                                 
-                                JToken fabricConfigurationSettingsValue = propertiesValue["fabricConfigurationSettings"];
-                                if (fabricConfigurationSettingsValue != null && fabricConfigurationSettingsValue.Type != JTokenType.Null)
+                                JToken stateValue = propertiesValue["state"];
+                                if (stateValue != null && stateValue.Type != JTokenType.Null)
                                 {
-                                    string typeName = ((string)fabricConfigurationSettingsValue["__type"]);
+                                    string stateInstance = ((string)stateValue);
+                                    propertiesInstance.State = stateInstance;
+                                }
+                                
+                                JToken providerSpecificDetailsValue = propertiesValue["providerSpecificDetails"];
+                                if (providerSpecificDetailsValue != null && providerSpecificDetailsValue.Type != JTokenType.Null)
+                                {
+                                    string typeName = ((string)providerSpecificDetailsValue["__type"]);
                                 }
                             }
                             
@@ -1786,28 +1784,28 @@ namespace Microsoft.Azure.Management.SiteRecovery
                             if (idValue != null && idValue.Type != JTokenType.Null)
                             {
                                 string idInstance = ((string)idValue);
-                                protectionContainerInstance.Id = idInstance;
+                                protectionContainerMappingInstance.Id = idInstance;
                             }
                             
                             JToken nameValue = responseDoc["name"];
                             if (nameValue != null && nameValue.Type != JTokenType.Null)
                             {
                                 string nameInstance = ((string)nameValue);
-                                protectionContainerInstance.Name = nameInstance;
+                                protectionContainerMappingInstance.Name = nameInstance;
                             }
                             
                             JToken typeValue = responseDoc["type"];
                             if (typeValue != null && typeValue.Type != JTokenType.Null)
                             {
                                 string typeInstance = ((string)typeValue);
-                                protectionContainerInstance.Type = typeInstance;
+                                protectionContainerMappingInstance.Type = typeInstance;
                             }
                             
                             JToken locationValue = responseDoc["location"];
                             if (locationValue != null && locationValue.Type != JTokenType.Null)
                             {
                                 string locationInstance = ((string)locationValue);
-                                protectionContainerInstance.Location = locationInstance;
+                                protectionContainerMappingInstance.Location = locationInstance;
                             }
                             
                             JToken tagsSequenceElement = ((JToken)responseDoc["tags"]);
@@ -1817,7 +1815,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 {
                                     string tagsKey = ((string)property.Name);
                                     string tagsValue = ((string)property.Value);
-                                    protectionContainerInstance.Tags.Add(tagsKey, tagsValue);
+                                    protectionContainerMappingInstance.Tags.Add(tagsKey, tagsValue);
                                 }
                             }
                             
@@ -1868,7 +1866,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     {
                         result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
                     }
-                    if (statusCode == HttpStatusCode.NoContent)
+                    if (statusCode == HttpStatusCode.OK)
                     {
                         result.Status = OperationStatus.Failed;
                     }
@@ -1876,7 +1874,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     {
                         result.Status = OperationStatus.InProgress;
                     }
-                    if (statusCode == HttpStatusCode.OK)
+                    if (statusCode == HttpStatusCode.NoContent)
                     {
                         result.Status = OperationStatus.Succeeded;
                     }
@@ -1905,10 +1903,14 @@ namespace Microsoft.Azure.Management.SiteRecovery
         }
         
         /// <summary>
-        /// Get the list of all ProtectionContainers for the given server.
+        /// Get the list of all protection container mapping for the given
+        /// container under a fabric.
         /// </summary>
         /// <param name='fabricName'>
         /// Required. Fabric Unique name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Required. Protection Container Name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -1917,14 +1919,18 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// Cancellation token.
         /// </param>
         /// <returns>
-        /// The response model for the list ProtectionContainers operation.
+        /// The definition of a Protection Container mapping collection object.
         /// </returns>
-        public async Task<ProtectionContainerListResponse> ListAsync(string fabricName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        public async Task<ProtectionContainerMappingListResponse> ListAsync(string fabricName, string protectionContainerName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
         {
             // Validate
             if (fabricName == null)
             {
                 throw new ArgumentNullException("fabricName");
+            }
+            if (protectionContainerName == null)
+            {
+                throw new ArgumentNullException("protectionContainerName");
             }
             
             // Tracing
@@ -1935,6 +1941,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 invocationId = TracingAdapter.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("fabricName", fabricName);
+                tracingParameters.Add("protectionContainerName", protectionContainerName);
                 tracingParameters.Add("customRequestHeaders", customRequestHeaders);
                 TracingAdapter.Enter(invocationId, this, "ListAsync", tracingParameters);
             }
@@ -1956,7 +1963,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationFabrics/";
             url = url + Uri.EscapeDataString(fabricName);
-            url = url + "/replicationProtectionContainers";
+            url = url + "/replicationProtectionContainers/";
+            url = url + Uri.EscapeDataString(protectionContainerName);
+            url = url + "/replicationProtectionContainerMappings";
             List<string> queryParameters = new List<string>();
             queryParameters.Add("api-version=2015-11-10");
             if (queryParameters.Count > 0)
@@ -2019,13 +2028,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     }
                     
                     // Create Result
-                    ProtectionContainerListResponse result = null;
+                    ProtectionContainerMappingListResponse result = null;
                     // Deserialize Response
                     if (statusCode == HttpStatusCode.OK)
                     {
                         cancellationToken.ThrowIfCancellationRequested();
                         string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        result = new ProtectionContainerListResponse();
+                        result = new ProtectionContainerMappingListResponse();
                         JToken responseDoc = null;
                         if (string.IsNullOrEmpty(responseContent) == false)
                         {
@@ -2039,54 +2048,120 @@ namespace Microsoft.Azure.Management.SiteRecovery
                             {
                                 foreach (JToken valueValue in ((JArray)valueArray))
                                 {
-                                    ProtectionContainer protectionContainerInstance = new ProtectionContainer();
-                                    result.ProtectionContainers.Add(protectionContainerInstance);
+                                    ProtectionContainerMapping protectionContainerMappingInstance = new ProtectionContainerMapping();
+                                    result.ProtectionContainerMappings.Add(protectionContainerMappingInstance);
                                     
                                     JToken propertiesValue = valueValue["properties"];
                                     if (propertiesValue != null && propertiesValue.Type != JTokenType.Null)
                                     {
-                                        ProtectionContainerProperties propertiesInstance = new ProtectionContainerProperties();
-                                        protectionContainerInstance.Properties = propertiesInstance;
+                                        ProtectionContainerMappingProperties propertiesInstance = new ProtectionContainerMappingProperties();
+                                        protectionContainerMappingInstance.Properties = propertiesInstance;
                                         
-                                        JToken fabricFriendlyNameValue = propertiesValue["fabricFriendlyName"];
-                                        if (fabricFriendlyNameValue != null && fabricFriendlyNameValue.Type != JTokenType.Null)
+                                        JToken targetProtectionContainerIdValue = propertiesValue["targetProtectionContainerId"];
+                                        if (targetProtectionContainerIdValue != null && targetProtectionContainerIdValue.Type != JTokenType.Null)
                                         {
-                                            string fabricFriendlyNameInstance = ((string)fabricFriendlyNameValue);
-                                            propertiesInstance.FabricFriendlyName = fabricFriendlyNameInstance;
+                                            string targetProtectionContainerIdInstance = ((string)targetProtectionContainerIdValue);
+                                            propertiesInstance.TargetProtectionContainerId = targetProtectionContainerIdInstance;
                                         }
                                         
-                                        JToken friendlyNameValue = propertiesValue["friendlyName"];
-                                        if (friendlyNameValue != null && friendlyNameValue.Type != JTokenType.Null)
+                                        JToken targetProtectionContainerFriendlyNameValue = propertiesValue["targetProtectionContainerFriendlyName"];
+                                        if (targetProtectionContainerFriendlyNameValue != null && targetProtectionContainerFriendlyNameValue.Type != JTokenType.Null)
                                         {
-                                            string friendlyNameInstance = ((string)friendlyNameValue);
-                                            propertiesInstance.FriendlyName = friendlyNameInstance;
+                                            string targetProtectionContainerFriendlyNameInstance = ((string)targetProtectionContainerFriendlyNameValue);
+                                            propertiesInstance.TargetProtectionContainerFriendlyName = targetProtectionContainerFriendlyNameInstance;
                                         }
                                         
-                                        JToken fabricTypeValue = propertiesValue["fabricType"];
-                                        if (fabricTypeValue != null && fabricTypeValue.Type != JTokenType.Null)
+                                        JToken healthValue = propertiesValue["health"];
+                                        if (healthValue != null && healthValue.Type != JTokenType.Null)
                                         {
-                                            string fabricTypeInstance = ((string)fabricTypeValue);
-                                            propertiesInstance.FabricType = fabricTypeInstance;
+                                            string healthInstance = ((string)healthValue);
+                                            propertiesInstance.Health = healthInstance;
                                         }
                                         
-                                        JToken protectedItemCountValue = propertiesValue["protectedItemCount"];
-                                        if (protectedItemCountValue != null && protectedItemCountValue.Type != JTokenType.Null)
+                                        JToken healthErrorDetailsArray = propertiesValue["healthErrorDetails"];
+                                        if (healthErrorDetailsArray != null && healthErrorDetailsArray.Type != JTokenType.Null)
                                         {
-                                            int protectedItemCountInstance = ((int)protectedItemCountValue);
-                                            propertiesInstance.ProtectedItemCount = protectedItemCountInstance;
+                                            foreach (JToken healthErrorDetailsValue in ((JArray)healthErrorDetailsArray))
+                                            {
+                                                HealthError healthErrorInstance = new HealthError();
+                                                propertiesInstance.HealthErrorDetails.Add(healthErrorInstance);
+                                                
+                                                JToken errorLevelValue = healthErrorDetailsValue["errorLevel"];
+                                                if (errorLevelValue != null && errorLevelValue.Type != JTokenType.Null)
+                                                {
+                                                    string errorLevelInstance = ((string)errorLevelValue);
+                                                    healthErrorInstance.ErrorLevel = errorLevelInstance;
+                                                }
+                                                
+                                                JToken errorCodeValue = healthErrorDetailsValue["errorCode"];
+                                                if (errorCodeValue != null && errorCodeValue.Type != JTokenType.Null)
+                                                {
+                                                    string errorCodeInstance = ((string)errorCodeValue);
+                                                    healthErrorInstance.ErrorCode = errorCodeInstance;
+                                                }
+                                                
+                                                JToken errorMessageValue = healthErrorDetailsValue["errorMessage"];
+                                                if (errorMessageValue != null && errorMessageValue.Type != JTokenType.Null)
+                                                {
+                                                    string errorMessageInstance = ((string)errorMessageValue);
+                                                    healthErrorInstance.ErrorMessage = errorMessageInstance;
+                                                }
+                                                
+                                                JToken possibleCausesValue = healthErrorDetailsValue["possibleCauses"];
+                                                if (possibleCausesValue != null && possibleCausesValue.Type != JTokenType.Null)
+                                                {
+                                                    string possibleCausesInstance = ((string)possibleCausesValue);
+                                                    healthErrorInstance.PossibleCauses = possibleCausesInstance;
+                                                }
+                                                
+                                                JToken recommendedActionValue = healthErrorDetailsValue["recommendedAction"];
+                                                if (recommendedActionValue != null && recommendedActionValue.Type != JTokenType.Null)
+                                                {
+                                                    string recommendedActionInstance = ((string)recommendedActionValue);
+                                                    healthErrorInstance.RecommendedAction = recommendedActionInstance;
+                                                }
+                                                
+                                                JToken creationTimeUtcValue = healthErrorDetailsValue["creationTimeUtc"];
+                                                if (creationTimeUtcValue != null && creationTimeUtcValue.Type != JTokenType.Null)
+                                                {
+                                                    string creationTimeUtcInstance = ((string)creationTimeUtcValue);
+                                                    healthErrorInstance.CreationTimeUtc = creationTimeUtcInstance;
+                                                }
+                                                
+                                                JToken recoveryProviderErrorMessageValue = healthErrorDetailsValue["recoveryProviderErrorMessage"];
+                                                if (recoveryProviderErrorMessageValue != null && recoveryProviderErrorMessageValue.Type != JTokenType.Null)
+                                                {
+                                                    string recoveryProviderErrorMessageInstance = ((string)recoveryProviderErrorMessageValue);
+                                                    healthErrorInstance.RecoveryProviderErrorMessage = recoveryProviderErrorMessageInstance;
+                                                }
+                                                
+                                                JToken entityIdValue = healthErrorDetailsValue["entityId"];
+                                                if (entityIdValue != null && entityIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string entityIdInstance = ((string)entityIdValue);
+                                                    healthErrorInstance.EntityId = entityIdInstance;
+                                                }
+                                            }
                                         }
                                         
-                                        JToken pairingStatusValue = propertiesValue["pairingStatus"];
-                                        if (pairingStatusValue != null && pairingStatusValue.Type != JTokenType.Null)
+                                        JToken policyIdValue = propertiesValue["policyId"];
+                                        if (policyIdValue != null && policyIdValue.Type != JTokenType.Null)
                                         {
-                                            string pairingStatusInstance = ((string)pairingStatusValue);
-                                            propertiesInstance.PairingStatus = pairingStatusInstance;
+                                            string policyIdInstance = ((string)policyIdValue);
+                                            propertiesInstance.PolicyId = policyIdInstance;
                                         }
                                         
-                                        JToken fabricConfigurationSettingsValue = propertiesValue["fabricConfigurationSettings"];
-                                        if (fabricConfigurationSettingsValue != null && fabricConfigurationSettingsValue.Type != JTokenType.Null)
+                                        JToken stateValue = propertiesValue["state"];
+                                        if (stateValue != null && stateValue.Type != JTokenType.Null)
                                         {
-                                            string typeName = ((string)fabricConfigurationSettingsValue["__type"]);
+                                            string stateInstance = ((string)stateValue);
+                                            propertiesInstance.State = stateInstance;
+                                        }
+                                        
+                                        JToken providerSpecificDetailsValue = propertiesValue["providerSpecificDetails"];
+                                        if (providerSpecificDetailsValue != null && providerSpecificDetailsValue.Type != JTokenType.Null)
+                                        {
+                                            string typeName = ((string)providerSpecificDetailsValue["__type"]);
                                         }
                                     }
                                     
@@ -2094,28 +2169,28 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     if (idValue != null && idValue.Type != JTokenType.Null)
                                     {
                                         string idInstance = ((string)idValue);
-                                        protectionContainerInstance.Id = idInstance;
+                                        protectionContainerMappingInstance.Id = idInstance;
                                     }
                                     
                                     JToken nameValue = valueValue["name"];
                                     if (nameValue != null && nameValue.Type != JTokenType.Null)
                                     {
                                         string nameInstance = ((string)nameValue);
-                                        protectionContainerInstance.Name = nameInstance;
+                                        protectionContainerMappingInstance.Name = nameInstance;
                                     }
                                     
                                     JToken typeValue = valueValue["type"];
                                     if (typeValue != null && typeValue.Type != JTokenType.Null)
                                     {
                                         string typeInstance = ((string)typeValue);
-                                        protectionContainerInstance.Type = typeInstance;
+                                        protectionContainerMappingInstance.Type = typeInstance;
                                     }
                                     
                                     JToken locationValue = valueValue["location"];
                                     if (locationValue != null && locationValue.Type != JTokenType.Null)
                                     {
                                         string locationInstance = ((string)locationValue);
-                                        protectionContainerInstance.Location = locationInstance;
+                                        protectionContainerMappingInstance.Location = locationInstance;
                                     }
                                     
                                     JToken tagsSequenceElement = ((JToken)valueValue["tags"]);
@@ -2125,7 +2200,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             string tagsKey = ((string)property.Name);
                                             string tagsValue = ((string)property.Value);
-                                            protectionContainerInstance.Tags.Add(tagsKey, tagsValue);
+                                            protectionContainerMappingInstance.Tags.Add(tagsKey, tagsValue);
                                         }
                                     }
                                 }
@@ -2178,8 +2253,8 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <param name='protectionContainerName'>
         /// Required. Protection container name.
         /// </param>
-        /// <param name='input'>
-        /// Required. Purge protection input.
+        /// <param name='mappingName'>
+        /// Required. Protection container mapping name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -2190,7 +2265,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public async Task<LongRunningOperationResponse> PurgeProtectionAsync(string fabricName, string protectionContainerName, PurgeProtectionInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        public async Task<LongRunningOperationResponse> PurgeProtectionAsync(string fabricName, string protectionContainerName, string mappingName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
         {
             SiteRecoveryManagementClient client = this.Client;
             bool shouldTrace = TracingAdapter.IsEnabled;
@@ -2201,19 +2276,19 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("fabricName", fabricName);
                 tracingParameters.Add("protectionContainerName", protectionContainerName);
-                tracingParameters.Add("input", input);
+                tracingParameters.Add("mappingName", mappingName);
                 tracingParameters.Add("customRequestHeaders", customRequestHeaders);
                 TracingAdapter.Enter(invocationId, this, "PurgeProtectionAsync", tracingParameters);
             }
             
             cancellationToken.ThrowIfCancellationRequested();
-            LongRunningOperationResponse response = await client.ProtectionContainer.BeginPurgeProtectionAsync(fabricName, protectionContainerName, input, customRequestHeaders, cancellationToken).ConfigureAwait(false);
+            LongRunningOperationResponse response = await client.ProtectionContainerMapping.BeginPurgeProtectionAsync(fabricName, protectionContainerName, mappingName, customRequestHeaders, cancellationToken).ConfigureAwait(false);
             if (response.Status == OperationStatus.Succeeded)
             {
                 return response;
             }
             cancellationToken.ThrowIfCancellationRequested();
-            ChangeProtectionStateResponse result = await client.ProtectionContainer.GetPurgeProtectionStatusAsync(response.Location, cancellationToken).ConfigureAwait(false);
+            LongRunningOperationResponse result = await client.ProtectionContainerMapping.GetPurgeProtectionStatusAsync(response.Location, cancellationToken).ConfigureAwait(false);
             int delayInSeconds = 30;
             if (client.LongRunningOperationInitialTimeout >= 0)
             {
@@ -2224,7 +2299,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 cancellationToken.ThrowIfCancellationRequested();
                 await TaskEx.Delay(delayInSeconds * 1000, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
-                result = await client.ProtectionContainer.GetPurgeProtectionStatusAsync(response.Location, cancellationToken).ConfigureAwait(false);
+                result = await client.ProtectionContainerMapping.GetPurgeProtectionStatusAsync(response.Location, cancellationToken).ConfigureAwait(false);
                 delayInSeconds = 30;
                 if (client.LongRunningOperationRetryTimeout >= 0)
                 {
@@ -2249,6 +2324,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <param name='protectionContainerName'>
         /// Required. Protection container name.
         /// </param>
+        /// <param name='mappingName'>
+        /// Required. Container mapping name.
+        /// </param>
         /// <param name='input'>
         /// Required. Unconfigure protection input.
         /// </param>
@@ -2261,7 +2339,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public async Task<LongRunningOperationResponse> UnconfigureProtectionAsync(string fabricName, string protectionContainerName, UnconfigureProtectionInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        public async Task<LongRunningOperationResponse> UnconfigureProtectionAsync(string fabricName, string protectionContainerName, string mappingName, RemoveProtectionContainerMappingInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
         {
             SiteRecoveryManagementClient client = this.Client;
             bool shouldTrace = TracingAdapter.IsEnabled;
@@ -2272,19 +2350,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("fabricName", fabricName);
                 tracingParameters.Add("protectionContainerName", protectionContainerName);
+                tracingParameters.Add("mappingName", mappingName);
                 tracingParameters.Add("input", input);
                 tracingParameters.Add("customRequestHeaders", customRequestHeaders);
                 TracingAdapter.Enter(invocationId, this, "UnconfigureProtectionAsync", tracingParameters);
             }
             
             cancellationToken.ThrowIfCancellationRequested();
-            LongRunningOperationResponse response = await client.ProtectionContainer.BeginUnconfigureProtectionAsync(fabricName, protectionContainerName, input, customRequestHeaders, cancellationToken).ConfigureAwait(false);
+            LongRunningOperationResponse response = await client.ProtectionContainerMapping.BeginUnconfigureProtectionAsync(fabricName, protectionContainerName, mappingName, input, customRequestHeaders, cancellationToken).ConfigureAwait(false);
             if (response.Status == OperationStatus.Succeeded)
             {
                 return response;
             }
             cancellationToken.ThrowIfCancellationRequested();
-            ChangeProtectionStateResponse result = await client.ProtectionContainer.GetUnconfigureProtectionStatusAsync(response.Location, cancellationToken).ConfigureAwait(false);
+            MappingOperationResponse result = await client.ProtectionContainerMapping.GetUnconfigureProtectionStatusAsync(response.Location, cancellationToken).ConfigureAwait(false);
             int delayInSeconds = 30;
             if (client.LongRunningOperationInitialTimeout >= 0)
             {
@@ -2295,7 +2374,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 cancellationToken.ThrowIfCancellationRequested();
                 await TaskEx.Delay(delayInSeconds * 1000, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
-                result = await client.ProtectionContainer.GetUnconfigureProtectionStatusAsync(response.Location, cancellationToken).ConfigureAwait(false);
+                result = await client.ProtectionContainerMapping.GetUnconfigureProtectionStatusAsync(response.Location, cancellationToken).ConfigureAwait(false);
                 delayInSeconds = 30;
                 if (client.LongRunningOperationRetryTimeout >= 0)
                 {

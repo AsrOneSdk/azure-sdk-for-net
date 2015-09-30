@@ -32,15 +32,15 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class ProtectableItemProperties
     {
-        private ReplicationItemTypeSettings _configurationSettings;
+        private ProtectableItemTypeSettings _customDetails;
         
         /// <summary>
         /// Optional. Gets or sets the Replication provider custom settings.
         /// </summary>
-        public ReplicationItemTypeSettings ConfigurationSettings
+        public ProtectableItemTypeSettings CustomDetails
         {
-            get { return this._configurationSettings; }
-            set { this._configurationSettings = value; }
+            get { return this._customDetails; }
+            set { this._customDetails = value; }
         }
         
         private string _friendlyName;
@@ -85,6 +85,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         {
             get { return this._protectionStatus; }
             set { this._protectionStatus = value; }
+        }
+        
+        private string _replicationProtectedItemId;
+        
+        /// <summary>
+        /// Optional. Gets or sets the ARM resource Id of protected items.
+        /// </summary>
+        public string ReplicationProtectedItemId
+        {
+            get { return this._replicationProtectedItemId; }
+            set { this._replicationProtectedItemId = value; }
         }
         
         /// <summary>

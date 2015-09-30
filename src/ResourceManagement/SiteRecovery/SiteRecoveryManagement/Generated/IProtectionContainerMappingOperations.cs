@@ -28,15 +28,25 @@ using Microsoft.Azure.Management.SiteRecovery.Models;
 namespace Microsoft.Azure.Management.SiteRecovery
 {
     /// <summary>
-    /// Definition for Job Operations.
+    /// Definition of Protection Container mapping operations for the Site
+    /// Recovery extension.
     /// </summary>
-    public partial interface IJobOperations
+    public partial interface IProtectionContainerMappingOperations
     {
         /// <summary>
-        /// Cancel the job .
+        /// Configures protection for given protection container
         /// </summary>
-        /// <param name='jobName'>
-        /// Job Name.
+        /// <param name='fabricName'>
+        /// Fabric name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Protection container name.
+        /// </param>
+        /// <param name='mappingName'>
+        /// Container mapping name.
+        /// </param>
+        /// <param name='input'>
+        /// Create mapping input.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Request header parameters.
@@ -47,13 +57,19 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        Task<LongRunningOperationResponse> BeginCancellingAsync(string jobName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        Task<LongRunningOperationResponse> BeginConfigureProtectionAsync(string fabricName, string protectionContainerName, string mappingName, CreateProtectionContainerMappingInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
         
         /// <summary>
-        /// Restart the job .
+        /// Purges protection for given protection container
         /// </summary>
-        /// <param name='jobName'>
-        /// Job Name.
+        /// <param name='fabricName'>
+        /// Fabric name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Protection container name.
+        /// </param>
+        /// <param name='mappingName'>
+        /// Protection container mapping name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Request header parameters.
@@ -64,16 +80,22 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        Task<LongRunningOperationResponse> BeginRestartingAsync(string jobName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        Task<LongRunningOperationResponse> BeginPurgeProtectionAsync(string fabricName, string protectionContainerName, string mappingName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
         
         /// <summary>
-        /// Resume the job .
+        /// Unconfigures protection for given protection container
         /// </summary>
-        /// <param name='jobId'>
-        /// Job ID.
+        /// <param name='fabricName'>
+        /// Fabric name.
         /// </param>
-        /// <param name='resumeJobParameters'>
-        /// Resume job parameters.
+        /// <param name='protectionContainerName'>
+        /// Protection container name.
+        /// </param>
+        /// <param name='mappingName'>
+        /// Container mapping name.
+        /// </param>
+        /// <param name='input'>
+        /// Unconfigure protection input.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Request header parameters.
@@ -84,13 +106,22 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        Task<LongRunningOperationResponse> BeginResumingAsync(string jobId, ResumeJobParams resumeJobParameters, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        Task<LongRunningOperationResponse> BeginUnconfigureProtectionAsync(string fabricName, string protectionContainerName, string mappingName, RemoveProtectionContainerMappingInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
         
         /// <summary>
-        /// Cancel the job .
+        /// Configures protection for given protection container
         /// </summary>
-        /// <param name='jobName'>
-        /// Job Name.
+        /// <param name='fabricName'>
+        /// Fabric name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Protection container name.
+        /// </param>
+        /// <param name='mappingName'>
+        /// Container mapping name.
+        /// </param>
+        /// <param name='input'>
+        /// Create mapping input.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Request header parameters.
@@ -101,13 +132,19 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        Task<LongRunningOperationResponse> CancelAsync(string jobName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        Task<LongRunningOperationResponse> ConfigureProtectionAsync(string fabricName, string protectionContainerName, string mappingName, CreateProtectionContainerMappingInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
         
         /// <summary>
-        /// Get the job details.
+        /// Get the protected container mapping by name.
         /// </summary>
-        /// <param name='jobId'>
-        /// Job ID.
+        /// <param name='fabricName'>
+        /// Fabric Name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Protection Container Name.
+        /// </param>
+        /// <param name='mappingName'>
+        /// Container mapping name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Request header parameters.
@@ -116,9 +153,27 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// Cancellation token.
         /// </param>
         /// <returns>
-        /// The response model for the Job details object.
+        /// The response model for the Protection Container mapping object.
         /// </returns>
-        Task<JobResponse> GetAsync(string jobId, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        Task<ProtectionContainerMappingResponse> GetAsync(string fabricName, string protectionContainerName, string mappingName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        
+        /// <summary>
+        /// The Get Operation Status operation returns the status of the
+        /// specified operation. After calling an asynchronous operation, you
+        /// can call Get Operation Status to determine whether the operation
+        /// has succeeded, failed, or is still in progress.
+        /// </summary>
+        /// <param name='operationStatusLink'>
+        /// Location value returned by the Begin operation.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
+        /// Service response for operation which change status of mapping for
+        /// protection container.
+        /// </returns>
+        Task<MappingOperationResponse> GetConfigureProtectionStatusAsync(string operationStatusLink, CancellationToken cancellationToken);
         
         /// <summary>
         /// The Get Operation Status operation returns the status of the
@@ -135,7 +190,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        Task<LongRunningOperationResponse> GetCancelStatusAsync(string operationStatusLink, CancellationToken cancellationToken);
+        Task<LongRunningOperationResponse> GetPurgeProtectionStatusAsync(string operationStatusLink, CancellationToken cancellationToken);
         
         /// <summary>
         /// The Get Operation Status operation returns the status of the
@@ -150,32 +205,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// Cancellation token.
         /// </param>
         /// <returns>
-        /// A standard service response for long running operations.
+        /// Service response for operation which change status of mapping for
+        /// protection container.
         /// </returns>
-        Task<RestartJobOperationResponse> GetRestartStatusAsync(string operationStatusLink, CancellationToken cancellationToken);
+        Task<MappingOperationResponse> GetUnconfigureProtectionStatusAsync(string operationStatusLink, CancellationToken cancellationToken);
         
         /// <summary>
-        /// The Get Operation Status operation returns the status of the
-        /// specified operation. After calling an asynchronous operation, you
-        /// can call Get Operation Status to determine whether the operation
-        /// has succeeded, failed, or is still in progress.
+        /// Get the list of all protection container mapping for the given
+        /// container under a fabric.
         /// </summary>
-        /// <param name='operationStatusLink'>
-        /// Location value returned by the Begin operation.
+        /// <param name='fabricName'>
+        /// Fabric Unique name.
         /// </param>
-        /// <param name='cancellationToken'>
-        /// Cancellation token.
-        /// </param>
-        /// <returns>
-        /// A standard service response for long running operations.
-        /// </returns>
-        Task<ResumeJobOperationResponse> GetResumeStatusAsync(string operationStatusLink, CancellationToken cancellationToken);
-        
-        /// <summary>
-        /// Get the list of all jobs.
-        /// </summary>
-        /// <param name='parameters'>
-        /// Job query parameter.
+        /// <param name='protectionContainerName'>
+        /// Protection Container Name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Request header parameters.
@@ -184,35 +227,21 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// Cancellation token.
         /// </param>
         /// <returns>
-        /// The response model for the list Jobs operation.
+        /// The definition of a Protection Container mapping collection object.
         /// </returns>
-        Task<JobListResponse> ListAsync(JobQueryParameter parameters, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        Task<ProtectionContainerMappingListResponse> ListAsync(string fabricName, string protectionContainerName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
         
         /// <summary>
-        /// Restart the job .
+        /// Purges protection for given protection container
         /// </summary>
-        /// <param name='jobName'>
-        /// Job Name.
+        /// <param name='fabricName'>
+        /// Fabric name.
         /// </param>
-        /// <param name='customRequestHeaders'>
-        /// Request header parameters.
+        /// <param name='protectionContainerName'>
+        /// Protection container name.
         /// </param>
-        /// <param name='cancellationToken'>
-        /// Cancellation token.
-        /// </param>
-        /// <returns>
-        /// A standard service response for long running operations.
-        /// </returns>
-        Task<LongRunningOperationResponse> RestartAsync(string jobName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
-        
-        /// <summary>
-        /// Resume the job .
-        /// </summary>
-        /// <param name='jobId'>
-        /// Job ID.
-        /// </param>
-        /// <param name='resumeJobParameters'>
-        /// Resume job parameters.
+        /// <param name='mappingName'>
+        /// Protection container mapping name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Request header parameters.
@@ -223,6 +252,32 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        Task<LongRunningOperationResponse> ResumeAsync(string jobId, ResumeJobParams resumeJobParameters, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        Task<LongRunningOperationResponse> PurgeProtectionAsync(string fabricName, string protectionContainerName, string mappingName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        
+        /// <summary>
+        /// Unconfigures protection for given protection container
+        /// </summary>
+        /// <param name='fabricName'>
+        /// Fabric name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Protection container name.
+        /// </param>
+        /// <param name='mappingName'>
+        /// Container mapping name.
+        /// </param>
+        /// <param name='input'>
+        /// Unconfigure protection input.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Request header parameters.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
+        /// A standard service response for long running operations.
+        /// </returns>
+        Task<LongRunningOperationResponse> UnconfigureProtectionAsync(string fabricName, string protectionContainerName, string mappingName, RemoveProtectionContainerMappingInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
     }
 }

@@ -129,7 +129,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/providers/";
             url = url + Uri.EscapeDataString(this.Client.ResourceNamespace);
             url = url + "/";
-            url = url + "SiteRecoveryVault";
+            url = url + Uri.EscapeDataString(this.Client.ResourceType);
             url = url + "/";
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationFabrics/";
@@ -317,7 +317,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/providers/";
             url = url + Uri.EscapeDataString(this.Client.ResourceNamespace);
             url = url + "/";
-            url = url + "SiteRecoveryVault";
+            url = url + Uri.EscapeDataString(this.Client.ResourceType);
             url = url + "/";
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationFabrics/";
@@ -524,7 +524,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/providers/";
             url = url + Uri.EscapeDataString(this.Client.ResourceNamespace);
             url = url + "/";
-            url = url + "SiteRecoveryVault";
+            url = url + Uri.EscapeDataString(this.Client.ResourceType);
             url = url + "/";
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationFabrics/";
@@ -618,6 +618,16 @@ namespace Microsoft.Azure.Management.SiteRecovery
                             if (derived.VHDId != null)
                             {
                                 providerConfigurationSettingsValue["vHDId"] = derived.VHDId;
+                            }
+                            
+                            if (derived.StorageAccountName != null)
+                            {
+                                providerConfigurationSettingsValue["storageAccountName"] = derived.StorageAccountName;
+                            }
+                            
+                            if (derived.StorageAccountSubscriptionId != null)
+                            {
+                                providerConfigurationSettingsValue["storageAccountSubscriptionId"] = derived.StorageAccountSubscriptionId;
                             }
                         }
                     }
@@ -769,7 +779,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/providers/";
             url = url + Uri.EscapeDataString(this.Client.ResourceNamespace);
             url = url + "/";
-            url = url + "SiteRecoveryVault";
+            url = url + Uri.EscapeDataString(this.Client.ResourceType);
             url = url + "/";
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationFabrics/";
@@ -861,11 +871,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                             providerConfigurationSettingsValue["__type"] = "HyperVReplicaAzureFailbackProviderInput";
                             HyperVReplicaAzureFailbackProviderInput derived2 = ((HyperVReplicaAzureFailbackProviderInput)input.Properties.ProviderConfigurationSettings);
                             
-                            providerConfigurationSettingsValue["dataSyncOption"] = providerConfigurationSettingsValue;
+                            if (derived2.DataSyncOption != null)
+                            {
+                                providerConfigurationSettingsValue["dataSyncOption"] = derived2.DataSyncOption;
+                            }
                             
-                            providerConfigurationSettingsValue["recoveryVmCreationOption"] = providerConfigurationSettingsValue;
+                            if (derived2.RecoveryVmCreationOption != null)
+                            {
+                                providerConfigurationSettingsValue["recoveryVmCreationOption"] = derived2.RecoveryVmCreationOption;
+                            }
                             
-                            providerConfigurationSettingsValue["providerIdForAlternateRecovery"] = providerConfigurationSettingsValue;
+                            if (derived2.ProviderIdForAlternateRecovery != null)
+                            {
+                                providerConfigurationSettingsValue["providerIdForAlternateRecovery"] = derived2.ProviderIdForAlternateRecovery;
+                            }
                         }
                     }
                 }
@@ -1016,7 +1035,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/providers/";
             url = url + Uri.EscapeDataString(this.Client.ResourceNamespace);
             url = url + "/";
-            url = url + "SiteRecoveryVault";
+            url = url + Uri.EscapeDataString(this.Client.ResourceType);
             url = url + "/";
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationFabrics/";
@@ -1267,7 +1286,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/providers/";
             url = url + Uri.EscapeDataString(this.Client.ResourceNamespace);
             url = url + "/";
-            url = url + "SiteRecoveryVault";
+            url = url + Uri.EscapeDataString(this.Client.ResourceType);
             url = url + "/";
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationFabrics/";
@@ -1369,11 +1388,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                             providerConfigurationSettingsValue["__type"] = "HyperVReplicaAzureFailbackProviderInput";
                             HyperVReplicaAzureFailbackProviderInput derived2 = ((HyperVReplicaAzureFailbackProviderInput)input.Properties.ProviderConfigurationSettings);
                             
-                            providerConfigurationSettingsValue["dataSyncOption"] = providerConfigurationSettingsValue;
+                            if (derived2.DataSyncOption != null)
+                            {
+                                providerConfigurationSettingsValue["dataSyncOption"] = derived2.DataSyncOption;
+                            }
                             
-                            providerConfigurationSettingsValue["recoveryVmCreationOption"] = providerConfigurationSettingsValue;
+                            if (derived2.RecoveryVmCreationOption != null)
+                            {
+                                providerConfigurationSettingsValue["recoveryVmCreationOption"] = derived2.RecoveryVmCreationOption;
+                            }
                             
-                            providerConfigurationSettingsValue["providerIdForAlternateRecovery"] = providerConfigurationSettingsValue;
+                            if (derived2.ProviderIdForAlternateRecovery != null)
+                            {
+                                providerConfigurationSettingsValue["providerIdForAlternateRecovery"] = derived2.ProviderIdForAlternateRecovery;
+                            }
                         }
                     }
                 }
@@ -1524,7 +1552,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/providers/";
             url = url + Uri.EscapeDataString(this.Client.ResourceNamespace);
             url = url + "/";
-            url = url + "SiteRecoveryVault";
+            url = url + Uri.EscapeDataString(this.Client.ResourceType);
             url = url + "/";
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationFabrics/";
@@ -1621,11 +1649,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                             providerConfigurationSettingsValue["__type"] = "HyperVReplicaAzureFailbackProviderInput";
                             HyperVReplicaAzureFailbackProviderInput derived2 = ((HyperVReplicaAzureFailbackProviderInput)input.Properties.ProviderConfigurationSettings);
                             
-                            providerConfigurationSettingsValue["dataSyncOption"] = providerConfigurationSettingsValue;
+                            if (derived2.DataSyncOption != null)
+                            {
+                                providerConfigurationSettingsValue["dataSyncOption"] = derived2.DataSyncOption;
+                            }
                             
-                            providerConfigurationSettingsValue["recoveryVmCreationOption"] = providerConfigurationSettingsValue;
+                            if (derived2.RecoveryVmCreationOption != null)
+                            {
+                                providerConfigurationSettingsValue["recoveryVmCreationOption"] = derived2.RecoveryVmCreationOption;
+                            }
                             
-                            providerConfigurationSettingsValue["providerIdForAlternateRecovery"] = providerConfigurationSettingsValue;
+                            if (derived2.ProviderIdForAlternateRecovery != null)
+                            {
+                                providerConfigurationSettingsValue["providerIdForAlternateRecovery"] = derived2.ProviderIdForAlternateRecovery;
+                            }
                         }
                     }
                 }
@@ -1989,7 +2026,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/providers/";
             url = url + Uri.EscapeDataString(this.Client.ResourceNamespace);
             url = url + "/";
-            url = url + "SiteRecoveryVault";
+            url = url + Uri.EscapeDataString(this.Client.ResourceType);
             url = url + "/";
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationFabrics/";
@@ -2285,35 +2322,35 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             foreach (JToken vMDiskDetailsValue in ((JArray)vMDiskDetailsArray))
                                             {
-                                                OnPremVmDiskDetails onPremVmDiskDetailsInstance = new OnPremVmDiskDetails();
-                                                hyperVReplicaProviderSpecificSettingsInstance.VMDiskDetails.Add(onPremVmDiskDetailsInstance);
+                                                DiskDetails diskDetailsInstance = new DiskDetails();
+                                                hyperVReplicaProviderSpecificSettingsInstance.VMDiskDetails.Add(diskDetailsInstance);
                                                 
                                                 JToken maxSizeMBValue = vMDiskDetailsValue["maxSizeMB"];
                                                 if (maxSizeMBValue != null && maxSizeMBValue.Type != JTokenType.Null)
                                                 {
                                                     ulong maxSizeMBInstance = ((ulong)maxSizeMBValue);
-                                                    onPremVmDiskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
+                                                    diskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
                                                 }
                                                 
                                                 JToken vHDStatusValue = vMDiskDetailsValue["vHDStatus"];
                                                 if (vHDStatusValue != null && vHDStatusValue.Type != JTokenType.Null)
                                                 {
                                                     string vHDStatusInstance = ((string)vHDStatusValue);
-                                                    onPremVmDiskDetailsInstance.VHDStatus = vHDStatusInstance;
+                                                    diskDetailsInstance.VHDStatus = vHDStatusInstance;
                                                 }
                                                 
                                                 JToken vHDIdValue = vMDiskDetailsValue["vHDId"];
                                                 if (vHDIdValue != null && vHDIdValue.Type != JTokenType.Null)
                                                 {
-                                                    Guid vHDIdInstance = Guid.Parse(((string)vHDIdValue));
-                                                    onPremVmDiskDetailsInstance.VHDId = vHDIdInstance;
+                                                    string vHDIdInstance = ((string)vHDIdValue);
+                                                    diskDetailsInstance.VHDId = vHDIdInstance;
                                                 }
                                                 
                                                 JToken vHDNameValue = vMDiskDetailsValue["vHDName"];
                                                 if (vHDNameValue != null && vHDNameValue.Type != JTokenType.Null)
                                                 {
                                                     string vHDNameInstance = ((string)vHDNameValue);
-                                                    onPremVmDiskDetailsInstance.VHDName = vHDNameInstance;
+                                                    diskDetailsInstance.VHDName = vHDNameInstance;
                                                 }
                                             }
                                         }
@@ -2826,35 +2863,35 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             foreach (JToken vMDiskDetailsValue in ((JArray)vMDiskDetailsArray))
                                             {
-                                                OnPremVmDiskDetails onPremVmDiskDetailsInstance = new OnPremVmDiskDetails();
-                                                hyperVReplicaProviderSpecificSettingsInstance.VMDiskDetails.Add(onPremVmDiskDetailsInstance);
+                                                DiskDetails diskDetailsInstance = new DiskDetails();
+                                                hyperVReplicaProviderSpecificSettingsInstance.VMDiskDetails.Add(diskDetailsInstance);
                                                 
                                                 JToken maxSizeMBValue = vMDiskDetailsValue["maxSizeMB"];
                                                 if (maxSizeMBValue != null && maxSizeMBValue.Type != JTokenType.Null)
                                                 {
                                                     ulong maxSizeMBInstance = ((ulong)maxSizeMBValue);
-                                                    onPremVmDiskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
+                                                    diskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
                                                 }
                                                 
                                                 JToken vHDStatusValue = vMDiskDetailsValue["vHDStatus"];
                                                 if (vHDStatusValue != null && vHDStatusValue.Type != JTokenType.Null)
                                                 {
                                                     string vHDStatusInstance = ((string)vHDStatusValue);
-                                                    onPremVmDiskDetailsInstance.VHDStatus = vHDStatusInstance;
+                                                    diskDetailsInstance.VHDStatus = vHDStatusInstance;
                                                 }
                                                 
                                                 JToken vHDIdValue = vMDiskDetailsValue["vHDId"];
                                                 if (vHDIdValue != null && vHDIdValue.Type != JTokenType.Null)
                                                 {
-                                                    Guid vHDIdInstance = Guid.Parse(((string)vHDIdValue));
-                                                    onPremVmDiskDetailsInstance.VHDId = vHDIdInstance;
+                                                    string vHDIdInstance = ((string)vHDIdValue);
+                                                    diskDetailsInstance.VHDId = vHDIdInstance;
                                                 }
                                                 
                                                 JToken vHDNameValue = vMDiskDetailsValue["vHDName"];
                                                 if (vHDNameValue != null && vHDNameValue.Type != JTokenType.Null)
                                                 {
                                                     string vHDNameInstance = ((string)vHDNameValue);
-                                                    onPremVmDiskDetailsInstance.VHDName = vHDNameInstance;
+                                                    diskDetailsInstance.VHDName = vHDNameInstance;
                                                 }
                                             }
                                         }
@@ -3256,15 +3293,15 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     {
                         result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
                     }
-                    if (statusCode == HttpStatusCode.NoContent)
-                    {
-                        result.Status = OperationStatus.Failed;
-                    }
                     if (statusCode == HttpStatusCode.Accepted)
                     {
                         result.Status = OperationStatus.InProgress;
                     }
                     if (statusCode == HttpStatusCode.OK)
+                    {
+                        result.Status = OperationStatus.Succeeded;
+                    }
+                    if (statusCode == HttpStatusCode.NoContent)
                     {
                         result.Status = OperationStatus.Succeeded;
                     }
@@ -3600,35 +3637,35 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             foreach (JToken vMDiskDetailsValue in ((JArray)vMDiskDetailsArray))
                                             {
-                                                OnPremVmDiskDetails onPremVmDiskDetailsInstance = new OnPremVmDiskDetails();
-                                                hyperVReplicaProviderSpecificSettingsInstance.VMDiskDetails.Add(onPremVmDiskDetailsInstance);
+                                                DiskDetails diskDetailsInstance = new DiskDetails();
+                                                hyperVReplicaProviderSpecificSettingsInstance.VMDiskDetails.Add(diskDetailsInstance);
                                                 
                                                 JToken maxSizeMBValue = vMDiskDetailsValue["maxSizeMB"];
                                                 if (maxSizeMBValue != null && maxSizeMBValue.Type != JTokenType.Null)
                                                 {
                                                     ulong maxSizeMBInstance = ((ulong)maxSizeMBValue);
-                                                    onPremVmDiskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
+                                                    diskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
                                                 }
                                                 
                                                 JToken vHDStatusValue = vMDiskDetailsValue["vHDStatus"];
                                                 if (vHDStatusValue != null && vHDStatusValue.Type != JTokenType.Null)
                                                 {
                                                     string vHDStatusInstance = ((string)vHDStatusValue);
-                                                    onPremVmDiskDetailsInstance.VHDStatus = vHDStatusInstance;
+                                                    diskDetailsInstance.VHDStatus = vHDStatusInstance;
                                                 }
                                                 
                                                 JToken vHDIdValue = vMDiskDetailsValue["vHDId"];
                                                 if (vHDIdValue != null && vHDIdValue.Type != JTokenType.Null)
                                                 {
-                                                    Guid vHDIdInstance = Guid.Parse(((string)vHDIdValue));
-                                                    onPremVmDiskDetailsInstance.VHDId = vHDIdInstance;
+                                                    string vHDIdInstance = ((string)vHDIdValue);
+                                                    diskDetailsInstance.VHDId = vHDIdInstance;
                                                 }
                                                 
                                                 JToken vHDNameValue = vMDiskDetailsValue["vHDName"];
                                                 if (vHDNameValue != null && vHDNameValue.Type != JTokenType.Null)
                                                 {
                                                     string vHDNameInstance = ((string)vHDNameValue);
-                                                    onPremVmDiskDetailsInstance.VHDName = vHDNameInstance;
+                                                    diskDetailsInstance.VHDName = vHDNameInstance;
                                                 }
                                             }
                                         }
@@ -4193,35 +4230,35 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             foreach (JToken vMDiskDetailsValue in ((JArray)vMDiskDetailsArray))
                                             {
-                                                OnPremVmDiskDetails onPremVmDiskDetailsInstance = new OnPremVmDiskDetails();
-                                                hyperVReplicaProviderSpecificSettingsInstance.VMDiskDetails.Add(onPremVmDiskDetailsInstance);
+                                                DiskDetails diskDetailsInstance = new DiskDetails();
+                                                hyperVReplicaProviderSpecificSettingsInstance.VMDiskDetails.Add(diskDetailsInstance);
                                                 
                                                 JToken maxSizeMBValue = vMDiskDetailsValue["maxSizeMB"];
                                                 if (maxSizeMBValue != null && maxSizeMBValue.Type != JTokenType.Null)
                                                 {
                                                     ulong maxSizeMBInstance = ((ulong)maxSizeMBValue);
-                                                    onPremVmDiskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
+                                                    diskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
                                                 }
                                                 
                                                 JToken vHDStatusValue = vMDiskDetailsValue["vHDStatus"];
                                                 if (vHDStatusValue != null && vHDStatusValue.Type != JTokenType.Null)
                                                 {
                                                     string vHDStatusInstance = ((string)vHDStatusValue);
-                                                    onPremVmDiskDetailsInstance.VHDStatus = vHDStatusInstance;
+                                                    diskDetailsInstance.VHDStatus = vHDStatusInstance;
                                                 }
                                                 
                                                 JToken vHDIdValue = vMDiskDetailsValue["vHDId"];
                                                 if (vHDIdValue != null && vHDIdValue.Type != JTokenType.Null)
                                                 {
-                                                    Guid vHDIdInstance = Guid.Parse(((string)vHDIdValue));
-                                                    onPremVmDiskDetailsInstance.VHDId = vHDIdInstance;
+                                                    string vHDIdInstance = ((string)vHDIdValue);
+                                                    diskDetailsInstance.VHDId = vHDIdInstance;
                                                 }
                                                 
                                                 JToken vHDNameValue = vMDiskDetailsValue["vHDName"];
                                                 if (vHDNameValue != null && vHDNameValue.Type != JTokenType.Null)
                                                 {
                                                     string vHDNameInstance = ((string)vHDNameValue);
-                                                    onPremVmDiskDetailsInstance.VHDName = vHDNameInstance;
+                                                    diskDetailsInstance.VHDName = vHDNameInstance;
                                                 }
                                             }
                                         }
@@ -4786,35 +4823,35 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             foreach (JToken vMDiskDetailsValue in ((JArray)vMDiskDetailsArray))
                                             {
-                                                OnPremVmDiskDetails onPremVmDiskDetailsInstance = new OnPremVmDiskDetails();
-                                                hyperVReplicaProviderSpecificSettingsInstance.VMDiskDetails.Add(onPremVmDiskDetailsInstance);
+                                                DiskDetails diskDetailsInstance = new DiskDetails();
+                                                hyperVReplicaProviderSpecificSettingsInstance.VMDiskDetails.Add(diskDetailsInstance);
                                                 
                                                 JToken maxSizeMBValue = vMDiskDetailsValue["maxSizeMB"];
                                                 if (maxSizeMBValue != null && maxSizeMBValue.Type != JTokenType.Null)
                                                 {
                                                     ulong maxSizeMBInstance = ((ulong)maxSizeMBValue);
-                                                    onPremVmDiskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
+                                                    diskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
                                                 }
                                                 
                                                 JToken vHDStatusValue = vMDiskDetailsValue["vHDStatus"];
                                                 if (vHDStatusValue != null && vHDStatusValue.Type != JTokenType.Null)
                                                 {
                                                     string vHDStatusInstance = ((string)vHDStatusValue);
-                                                    onPremVmDiskDetailsInstance.VHDStatus = vHDStatusInstance;
+                                                    diskDetailsInstance.VHDStatus = vHDStatusInstance;
                                                 }
                                                 
                                                 JToken vHDIdValue = vMDiskDetailsValue["vHDId"];
                                                 if (vHDIdValue != null && vHDIdValue.Type != JTokenType.Null)
                                                 {
-                                                    Guid vHDIdInstance = Guid.Parse(((string)vHDIdValue));
-                                                    onPremVmDiskDetailsInstance.VHDId = vHDIdInstance;
+                                                    string vHDIdInstance = ((string)vHDIdValue);
+                                                    diskDetailsInstance.VHDId = vHDIdInstance;
                                                 }
                                                 
                                                 JToken vHDNameValue = vMDiskDetailsValue["vHDName"];
                                                 if (vHDNameValue != null && vHDNameValue.Type != JTokenType.Null)
                                                 {
                                                     string vHDNameInstance = ((string)vHDNameValue);
-                                                    onPremVmDiskDetailsInstance.VHDName = vHDNameInstance;
+                                                    diskDetailsInstance.VHDName = vHDNameInstance;
                                                 }
                                             }
                                         }
@@ -5379,35 +5416,35 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             foreach (JToken vMDiskDetailsValue in ((JArray)vMDiskDetailsArray))
                                             {
-                                                OnPremVmDiskDetails onPremVmDiskDetailsInstance = new OnPremVmDiskDetails();
-                                                hyperVReplicaProviderSpecificSettingsInstance.VMDiskDetails.Add(onPremVmDiskDetailsInstance);
+                                                DiskDetails diskDetailsInstance = new DiskDetails();
+                                                hyperVReplicaProviderSpecificSettingsInstance.VMDiskDetails.Add(diskDetailsInstance);
                                                 
                                                 JToken maxSizeMBValue = vMDiskDetailsValue["maxSizeMB"];
                                                 if (maxSizeMBValue != null && maxSizeMBValue.Type != JTokenType.Null)
                                                 {
                                                     ulong maxSizeMBInstance = ((ulong)maxSizeMBValue);
-                                                    onPremVmDiskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
+                                                    diskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
                                                 }
                                                 
                                                 JToken vHDStatusValue = vMDiskDetailsValue["vHDStatus"];
                                                 if (vHDStatusValue != null && vHDStatusValue.Type != JTokenType.Null)
                                                 {
                                                     string vHDStatusInstance = ((string)vHDStatusValue);
-                                                    onPremVmDiskDetailsInstance.VHDStatus = vHDStatusInstance;
+                                                    diskDetailsInstance.VHDStatus = vHDStatusInstance;
                                                 }
                                                 
                                                 JToken vHDIdValue = vMDiskDetailsValue["vHDId"];
                                                 if (vHDIdValue != null && vHDIdValue.Type != JTokenType.Null)
                                                 {
-                                                    Guid vHDIdInstance = Guid.Parse(((string)vHDIdValue));
-                                                    onPremVmDiskDetailsInstance.VHDId = vHDIdInstance;
+                                                    string vHDIdInstance = ((string)vHDIdValue);
+                                                    diskDetailsInstance.VHDId = vHDIdInstance;
                                                 }
                                                 
                                                 JToken vHDNameValue = vMDiskDetailsValue["vHDName"];
                                                 if (vHDNameValue != null && vHDNameValue.Type != JTokenType.Null)
                                                 {
                                                     string vHDNameInstance = ((string)vHDNameValue);
-                                                    onPremVmDiskDetailsInstance.VHDName = vHDNameInstance;
+                                                    diskDetailsInstance.VHDName = vHDNameInstance;
                                                 }
                                             }
                                         }
@@ -5972,35 +6009,35 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             foreach (JToken vMDiskDetailsValue in ((JArray)vMDiskDetailsArray))
                                             {
-                                                OnPremVmDiskDetails onPremVmDiskDetailsInstance = new OnPremVmDiskDetails();
-                                                hyperVReplicaProviderSpecificSettingsInstance.VMDiskDetails.Add(onPremVmDiskDetailsInstance);
+                                                DiskDetails diskDetailsInstance = new DiskDetails();
+                                                hyperVReplicaProviderSpecificSettingsInstance.VMDiskDetails.Add(diskDetailsInstance);
                                                 
                                                 JToken maxSizeMBValue = vMDiskDetailsValue["maxSizeMB"];
                                                 if (maxSizeMBValue != null && maxSizeMBValue.Type != JTokenType.Null)
                                                 {
                                                     ulong maxSizeMBInstance = ((ulong)maxSizeMBValue);
-                                                    onPremVmDiskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
+                                                    diskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
                                                 }
                                                 
                                                 JToken vHDStatusValue = vMDiskDetailsValue["vHDStatus"];
                                                 if (vHDStatusValue != null && vHDStatusValue.Type != JTokenType.Null)
                                                 {
                                                     string vHDStatusInstance = ((string)vHDStatusValue);
-                                                    onPremVmDiskDetailsInstance.VHDStatus = vHDStatusInstance;
+                                                    diskDetailsInstance.VHDStatus = vHDStatusInstance;
                                                 }
                                                 
                                                 JToken vHDIdValue = vMDiskDetailsValue["vHDId"];
                                                 if (vHDIdValue != null && vHDIdValue.Type != JTokenType.Null)
                                                 {
-                                                    Guid vHDIdInstance = Guid.Parse(((string)vHDIdValue));
-                                                    onPremVmDiskDetailsInstance.VHDId = vHDIdInstance;
+                                                    string vHDIdInstance = ((string)vHDIdValue);
+                                                    diskDetailsInstance.VHDId = vHDIdInstance;
                                                 }
                                                 
                                                 JToken vHDNameValue = vMDiskDetailsValue["vHDName"];
                                                 if (vHDNameValue != null && vHDNameValue.Type != JTokenType.Null)
                                                 {
                                                     string vHDNameInstance = ((string)vHDNameValue);
-                                                    onPremVmDiskDetailsInstance.VHDName = vHDNameInstance;
+                                                    diskDetailsInstance.VHDName = vHDNameInstance;
                                                 }
                                             }
                                         }
@@ -6312,7 +6349,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/providers/";
             url = url + Uri.EscapeDataString(this.Client.ResourceNamespace);
             url = url + "/";
-            url = url + "SiteRecoveryVault";
+            url = url + Uri.EscapeDataString(this.Client.ResourceType);
             url = url + "/";
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationFabrics/";
@@ -6612,35 +6649,35 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 {
                                                     foreach (JToken vMDiskDetailsValue in ((JArray)vMDiskDetailsArray))
                                                     {
-                                                        OnPremVmDiskDetails onPremVmDiskDetailsInstance = new OnPremVmDiskDetails();
-                                                        hyperVReplicaProviderSpecificSettingsInstance.VMDiskDetails.Add(onPremVmDiskDetailsInstance);
+                                                        DiskDetails diskDetailsInstance = new DiskDetails();
+                                                        hyperVReplicaProviderSpecificSettingsInstance.VMDiskDetails.Add(diskDetailsInstance);
                                                         
                                                         JToken maxSizeMBValue = vMDiskDetailsValue["maxSizeMB"];
                                                         if (maxSizeMBValue != null && maxSizeMBValue.Type != JTokenType.Null)
                                                         {
                                                             ulong maxSizeMBInstance = ((ulong)maxSizeMBValue);
-                                                            onPremVmDiskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
+                                                            diskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
                                                         }
                                                         
                                                         JToken vHDStatusValue = vMDiskDetailsValue["vHDStatus"];
                                                         if (vHDStatusValue != null && vHDStatusValue.Type != JTokenType.Null)
                                                         {
                                                             string vHDStatusInstance = ((string)vHDStatusValue);
-                                                            onPremVmDiskDetailsInstance.VHDStatus = vHDStatusInstance;
+                                                            diskDetailsInstance.VHDStatus = vHDStatusInstance;
                                                         }
                                                         
                                                         JToken vHDIdValue = vMDiskDetailsValue["vHDId"];
                                                         if (vHDIdValue != null && vHDIdValue.Type != JTokenType.Null)
                                                         {
-                                                            Guid vHDIdInstance = Guid.Parse(((string)vHDIdValue));
-                                                            onPremVmDiskDetailsInstance.VHDId = vHDIdInstance;
+                                                            string vHDIdInstance = ((string)vHDIdValue);
+                                                            diskDetailsInstance.VHDId = vHDIdInstance;
                                                         }
                                                         
                                                         JToken vHDNameValue = vMDiskDetailsValue["vHDName"];
                                                         if (vHDNameValue != null && vHDNameValue.Type != JTokenType.Null)
                                                         {
                                                             string vHDNameInstance = ((string)vHDNameValue);
-                                                            onPremVmDiskDetailsInstance.VHDName = vHDNameInstance;
+                                                            diskDetailsInstance.VHDName = vHDNameInstance;
                                                         }
                                                     }
                                                 }

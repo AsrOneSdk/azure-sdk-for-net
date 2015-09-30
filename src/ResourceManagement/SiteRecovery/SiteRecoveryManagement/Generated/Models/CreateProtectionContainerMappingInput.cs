@@ -26,37 +26,26 @@ using Microsoft.Azure.Management.SiteRecovery.Models;
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// The definition of a Fabric creation object properties.
+    /// The definition of a Protection Container mapping creation object.
     /// </summary>
-    public partial class FabricCreationInputProperties
+    public partial class CreateProtectionContainerMappingInput
     {
-        private FabricSpecificCreationSettings _customInput;
+        private CreateProtectionContainerMappingInputProperties _properties;
         
         /// <summary>
-        /// Optional. Fabric specific creation input
+        /// Optional. Gets or sets Configure protection input properties.
         /// </summary>
-        public FabricSpecificCreationSettings CustomInput
+        public CreateProtectionContainerMappingInputProperties Properties
         {
-            get { return this._customInput; }
-            set { this._customInput = value; }
-        }
-        
-        private string _fabricType;
-        
-        /// <summary>
-        /// Optional. Type of fabric.
-        /// </summary>
-        public string FabricType
-        {
-            get { return this._fabricType; }
-            set { this._fabricType = value; }
+            get { return this._properties; }
+            set { this._properties = value; }
         }
         
         /// <summary>
-        /// Initializes a new instance of the FabricCreationInputProperties
-        /// class.
+        /// Initializes a new instance of the
+        /// CreateProtectionContainerMappingInput class.
         /// </summary>
-        public FabricCreationInputProperties()
+        public CreateProtectionContainerMappingInput()
         {
         }
     }

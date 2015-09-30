@@ -85,6 +85,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
             get; set; 
         }
         
+        string ResourceType
+        {
+            get; set; 
+        }
+        
         /// <summary>
         /// Definition of fabric operations for the Site Recovery extension.
         /// </summary>
@@ -114,6 +119,15 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// extension.
         /// </summary>
         IProtectableItemOperations ProtectableItem
+        {
+            get; 
+        }
+        
+        /// <summary>
+        /// Definition of Protection Container mapping operations for the Site
+        /// Recovery extension.
+        /// </summary>
+        IProtectionContainerMappingOperations ProtectionContainerMapping
         {
             get; 
         }

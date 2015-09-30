@@ -74,15 +74,15 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._onlineReplicationStartTime = value; }
         }
         
-        private int _recoveryPointHistoryDuration;
+        private int _recoveryPointHistoryDurationInHours;
         
         /// <summary>
         /// Optional.
         /// </summary>
-        public int RecoveryPointHistoryDuration
+        public int RecoveryPointHistoryDurationInHours
         {
-            get { return this._recoveryPointHistoryDuration; }
-            set { this._recoveryPointHistoryDuration = value; }
+            get { return this._recoveryPointHistoryDurationInHours; }
+            set { this._recoveryPointHistoryDurationInHours = value; }
         }
         
         private int _replicationInterval;

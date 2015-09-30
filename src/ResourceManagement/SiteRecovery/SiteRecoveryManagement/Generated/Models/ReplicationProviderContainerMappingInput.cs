@@ -21,42 +21,19 @@
 
 using System;
 using System.Linq;
-using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// The definition of a Fabric creation object properties.
+    /// Provider specific input.
     /// </summary>
-    public partial class FabricCreationInputProperties
+    public partial class ReplicationProviderContainerMappingInput
     {
-        private FabricSpecificCreationSettings _customInput;
-        
         /// <summary>
-        /// Optional. Fabric specific creation input
+        /// Initializes a new instance of the
+        /// ReplicationProviderContainerMappingInput class.
         /// </summary>
-        public FabricSpecificCreationSettings CustomInput
-        {
-            get { return this._customInput; }
-            set { this._customInput = value; }
-        }
-        
-        private string _fabricType;
-        
-        /// <summary>
-        /// Optional. Type of fabric.
-        /// </summary>
-        public string FabricType
-        {
-            get { return this._fabricType; }
-            set { this._fabricType = value; }
-        }
-        
-        /// <summary>
-        /// Initializes a new instance of the FabricCreationInputProperties
-        /// class.
-        /// </summary>
-        public FabricCreationInputProperties()
+        public ReplicationProviderContainerMappingInput()
         {
         }
     }

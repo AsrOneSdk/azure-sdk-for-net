@@ -26,37 +26,27 @@ using Microsoft.Azure.Management.SiteRecovery.Models;
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// The definition of a Fabric creation object properties.
+    /// The definition of a Protection Container mapping removal object
+    /// properties.
     /// </summary>
-    public partial class FabricCreationInputProperties
+    public partial class RemoveProtectionContainerMappingInputProperties
     {
-        private FabricSpecificCreationSettings _customInput;
+        private ReplicationProviderContainerUnmappingInput _providerSpecificInput;
         
         /// <summary>
-        /// Optional. Fabric specific creation input
+        /// Optional. Gets or sets Provider specific input for unpairing.
         /// </summary>
-        public FabricSpecificCreationSettings CustomInput
+        public ReplicationProviderContainerUnmappingInput ProviderSpecificInput
         {
-            get { return this._customInput; }
-            set { this._customInput = value; }
-        }
-        
-        private string _fabricType;
-        
-        /// <summary>
-        /// Optional. Type of fabric.
-        /// </summary>
-        public string FabricType
-        {
-            get { return this._fabricType; }
-            set { this._fabricType = value; }
+            get { return this._providerSpecificInput; }
+            set { this._providerSpecificInput = value; }
         }
         
         /// <summary>
-        /// Initializes a new instance of the FabricCreationInputProperties
-        /// class.
+        /// Initializes a new instance of the
+        /// RemoveProtectionContainerMappingInputProperties class.
         /// </summary>
-        public FabricCreationInputProperties()
+        public RemoveProtectionContainerMappingInputProperties()
         {
         }
     }

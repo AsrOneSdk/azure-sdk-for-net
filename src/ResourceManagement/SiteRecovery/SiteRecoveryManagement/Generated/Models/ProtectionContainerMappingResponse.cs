@@ -21,18 +21,32 @@
 
 using System;
 using System.Linq;
+using Microsoft.Azure;
+using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// Provider specific entity details.
+    /// The response model for the Protection Container mapping object.
     /// </summary>
-    public partial class ReplicationItemTypeSettings
+    public partial class ProtectionContainerMappingResponse : AzureOperationResponse
     {
+        private ProtectionContainerMapping _protectionContainerMapping;
+        
         /// <summary>
-        /// Initializes a new instance of the ReplicationItemTypeSettings class.
+        /// Optional. Protection Container mapping object.
         /// </summary>
-        public ReplicationItemTypeSettings()
+        public ProtectionContainerMapping ProtectionContainerMapping
+        {
+            get { return this._protectionContainerMapping; }
+            set { this._protectionContainerMapping = value; }
+        }
+        
+        /// <summary>
+        /// Initializes a new instance of the
+        /// ProtectionContainerMappingResponse class.
+        /// </summary>
+        public ProtectionContainerMappingResponse()
         {
         }
     }

@@ -20,57 +20,56 @@
 // code is regenerated.
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using Hyak.Common;
 using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// Hyper V Replica Provider specific entity details.
+    /// The definition of a Protection Container mapping creation object
+    /// properties.
     /// </summary>
-    public partial class VirtualMachineDetails : ReplicationItemTypeSettings
+    public partial class CreateProtectionContainerMappingInputProperties
     {
-        private IList<OnPremVmDiskDetails> _diskDetailsList;
+        private string _policyId;
         
         /// <summary>
-        /// Optional. Gets or sets the DiskDetails.
+        /// Optional. Gets or sets policy id.
         /// </summary>
-        public IList<OnPremVmDiskDetails> DiskDetailsList
+        public string PolicyId
         {
-            get { return this._diskDetailsList; }
-            set { this._diskDetailsList = value; }
+            get { return this._policyId; }
+            set { this._policyId = value; }
         }
         
-        private string _generation;
+        private ReplicationProviderContainerMappingInput _providerSpecificInput;
         
         /// <summary>
-        /// Optional. Gets or sets the Generation.
+        /// Optional. Gets or sets Provider specific input for pairing.
         /// </summary>
-        public string Generation
+        public ReplicationProviderContainerMappingInput ProviderSpecificInput
         {
-            get { return this._generation; }
-            set { this._generation = value; }
+            get { return this._providerSpecificInput; }
+            set { this._providerSpecificInput = value; }
         }
         
-        private OSDetails _oSDetails;
+        private string _targetProtectionContainerId;
         
         /// <summary>
-        /// Optional. Gets or sets the OSDetails.
+        /// Optional. Gets or sets the target unique protection container name.
         /// </summary>
-        public OSDetails OSDetails
+        public string TargetProtectionContainerId
         {
-            get { return this._oSDetails; }
-            set { this._oSDetails = value; }
+            get { return this._targetProtectionContainerId; }
+            set { this._targetProtectionContainerId = value; }
         }
         
         /// <summary>
-        /// Initializes a new instance of the VirtualMachineDetails class.
+        /// Initializes a new instance of the
+        /// CreateProtectionContainerMappingInputProperties class.
         /// </summary>
-        public VirtualMachineDetails()
+        public CreateProtectionContainerMappingInputProperties()
         {
-            this.DiskDetailsList = new LazyList<OnPremVmDiskDetails>();
         }
     }
 }

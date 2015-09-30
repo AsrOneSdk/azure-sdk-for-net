@@ -28,7 +28,7 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// <summary>
     /// Replication Item Type specific settings.
     /// </summary>
-    public partial class ReplicationGroupDetails : ReplicationItemTypeSettings
+    public partial class ReplicationGroupDetails : ProtectableItemTypeSettings
     {
         /// <summary>
         /// Initializes a new instance of the ReplicationGroupDetails class.
