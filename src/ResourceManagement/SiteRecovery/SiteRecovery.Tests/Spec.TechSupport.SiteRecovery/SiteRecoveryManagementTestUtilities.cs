@@ -62,7 +62,7 @@ namespace Microsoft.Azure.Test
             }
 
             TestEnvironment environment = new CSMTestEnvironmentFactory().GetTestEnvironment();
-            environment.BaseUri = new Uri("https://ramjsing-2:8443/Rdfeproxy.svc");
+            environment.BaseUri = new Uri("https://localhost:8443/RdfeProxy.svc");
 
             SiteRecoveryTestsBase.MyCloudService = (HttpMockServer.Mode == HttpRecorderMode.Playback) ?
                 "testsitegroup" :

@@ -51,7 +51,7 @@ namespace SiteRecovery.Tests
                 context.Start();
                 var client = GetSiteRecoveryClient(CustomHttpHandler);
 
-                var protectionContainerList = client.ProtectionContainer.List("",RequestHeaders);
+                var protectionContainerList = client.ProtectionContainer.List("", RequestHeaders);
                 var response = client.ProtectionContainer.Get("",
                     protectionContainerList.ProtectionContainers[0].Name,
                     RequestHeaders);
@@ -71,10 +71,43 @@ namespace SiteRecovery.Tests
                 context.Start();
                 var client = GetSiteRecoveryClient(CustomHttpHandler);
 
-                string fabricId = "6adf9420-b02f-4377-8ab7-ff384e6d792f";
-                string containerId = "4f94127d-2eb3-449d-a708-250752e93cb4";
+                string fabricId = "f0632449-effd-4858-a210-4ea15756e4b7";
+                string containerId = "d38048d4-b460-4791-8ece-108395ee8478";
 
                 var response = client.ReplicationProtectedItem.List(fabricId, containerId, RequestHeaders);
+            }
+        }
+
+        [Fact]
+        public void GetNetworkTest()
+        {
+            using (UndoContext context = UndoContext.Current)
+            {
+                context.Start();
+                var client = GetSiteRecoveryClient(CustomHttpHandler);
+
+                const string fabricName = "Vmm;f0632449-effd-4858-a210-4ea15756e4b7";
+                const string networkName = "15e1a665-e184-4da0-8e9d-0de72a7d8fa9";
+                var response = client.Network.Get(fabricName, networkName, RequestHeaders);
+            }
+        }
+
+        [Fact]
+        public void GetNetworkMappingTest()
+        {
+            using (UndoContext context = UndoContext.Current)
+            {
+                context.Start();
+                var client = GetSiteRecoveryClient(CustomHttpHandler);
+
+                const string fabricName = "Vmm;f0632449-effd-4858-a210-4ea15756e4b7";
+                const string networkName = "399137cc-f0de-4a3f-b961-fd0892d8ebc4";
+                const string networkMappingName = "VMNetworkPair;f0632449-effd-4858-a210-4ea15756e4b7_399137cc-f0de-4a3f-b961-fd0892d8ebc4_21a9403c-6ec1-44f2-b744-b4e50b792387";
+                var response = client.NetworkMapping.Get(
+                    fabricName,
+                    networkName,
+                    networkMappingName,
+                    RequestHeaders);
             }
         }
     }
