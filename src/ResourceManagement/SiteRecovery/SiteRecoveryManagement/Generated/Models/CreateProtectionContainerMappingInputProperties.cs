@@ -53,15 +53,15 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._providerSpecificInput = value; }
         }
         
-        private string _targetProtectionContainerName;
+        private string _targetProtectionContainerId;
         
         /// <summary>
         /// Optional. Gets or sets the target unique protection container name.
         /// </summary>
-        public string TargetProtectionContainerName
+        public string TargetProtectionContainerId
         {
-            get { return this._targetProtectionContainerName; }
-            set { this._targetProtectionContainerName = value; }
+            get { return this._targetProtectionContainerId; }
+            set { this._targetProtectionContainerId = value; }
         }
         
         /// <summary>

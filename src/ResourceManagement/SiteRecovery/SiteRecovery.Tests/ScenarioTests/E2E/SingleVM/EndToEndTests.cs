@@ -36,9 +36,9 @@ namespace SiteRecovery.Tests
                 var client = GetSiteRecoveryClient(CustomHttpHandler);
 
                 bool pairClouds = false;
-                bool enableDR = true;
-                bool pfo = true;
-                bool commit = true;
+                bool enableDR = false;
+                bool pfo = false;
+                bool commit = false;
                 bool tfo = true;
                 bool pfoReverse = true;
                 bool commitReverse = true;
@@ -60,7 +60,7 @@ namespace SiteRecovery.Tests
                     }
                 }
 
-                string priCld = string.Empty;
+                string priCld = "ff7aaab7-542a-42ec-9fdc-044e3b3c996d";
                 string recCldGuid = string.Empty;
                 string recCld = string.Empty;
                 string policyName = "Hydra" + (new Random()).Next();
@@ -77,13 +77,13 @@ namespace SiteRecovery.Tests
                     
                     foreach (var container in containers.ProtectionContainers)
                     {
-                        if (client.ProtectionContainerMapping.List(selectedFabric.Name, container.Name, RequestHeaders).ProtectionContainerMappings.Count == 0)
+                        if (container.Properties.PairingStatus.Equals("NotPaired", StringComparison.InvariantCultureIgnoreCase))
                         {
                             if (string.IsNullOrEmpty(priCld))
                             {
                                 priCld = container.Name;
                             }
-                            else if (string.IsNullOrEmpty(recCld))
+                            else if (string.IsNullOrEmpty(recCld) && priCld != container.Name)
                             {
                                 recCld = container.Id;
                                 recCldGuid = container.Name;
@@ -114,7 +114,7 @@ namespace SiteRecovery.Tests
                     CreatePolicyInputProperties policyCreationProp = new CreatePolicyInputProperties()
                     {
                         RecoveryProvider = "HyperVReplica",
-                        ReplicationProviderSettings = hvrProfileInput
+                        ProviderSpecificInput = hvrProfileInput
                     };
 
                     CreatePolicyInput policyCreationInput = new CreatePolicyInput()
@@ -125,28 +125,25 @@ namespace SiteRecovery.Tests
                     var policyCreateResp = client.Policies.Create(policyName, policyCreationInput, RequestHeaders);
 
                     currentPolicy = client.Policies.Get(policyName, RequestHeaders).Policy;
-
-                    if (client.ProtectionContainerMapping.List(selectedFabric.Name, priCld, RequestHeaders).ProtectionContainerMappings.Count == 0)
+                    CreateProtectionContainerMappingInputProperties pairingProps = new CreateProtectionContainerMappingInputProperties()
                     {
-                        CreateProtectionContainerMappingInputProperties pairingProps = new CreateProtectionContainerMappingInputProperties()
-                        {
-                            PolicyId = currentPolicy.Id,
-                            TargetProtectionContainerName = recCld,
-                            ProviderSpecificInput = new ReplicationProviderContainerMappingInput()
-                        };
+                        PolicyId = currentPolicy.Id,
+                        TargetProtectionContainerId = recCld,
+                        ProviderSpecificInput = new ReplicationProviderContainerMappingInput()
+                    };
 
-                        CreateProtectionContainerMappingInput pairingInput = new CreateProtectionContainerMappingInput()
-                        {
-                            Properties = pairingProps
-                        };
+                    CreateProtectionContainerMappingInput pairingInput = new CreateProtectionContainerMappingInput()
+                    {
+                        Properties = pairingProps
+                    };
 
-                        var pairingResponse = client.ProtectionContainerMapping.ConfigureProtection(
-                            selectedFabric.Name, 
-                            priCld, 
-                            mappingName, 
-                            pairingInput, 
-                            RequestHeaders);
-                    }
+                    var pairingResponse = client.ProtectionContainerMapping.ConfigureProtection(
+                        selectedFabric.Name, 
+                        priCld, 
+                        mappingName, 
+                        pairingInput, 
+                        RequestHeaders);
+                    
                 }
                 else
                 {
@@ -404,7 +401,7 @@ namespace SiteRecovery.Tests
 
                     foreach (var cloud in clouds.ProtectionContainers)
                     {
-                        if (client.ProtectionContainerMapping.List(selectedFabric.Name, cloud.Name, RequestHeaders).ProtectionContainerMappings.Count == 0)
+                        if (cloud.Properties.PairingStatus.Equals("NotPaired", StringComparison.InvariantCultureIgnoreCase))
                         {
                             priCldName = cloud.Name;
                             primaryCloud = cloud;
@@ -439,7 +436,7 @@ namespace SiteRecovery.Tests
                     CreatePolicyInputProperties createInputProp = new CreatePolicyInputProperties()
                     {
                         RecoveryProvider = "HyperVReplicaAzure",
-                        ReplicationProviderSettings = hvrAPolicy
+                        ProviderSpecificInput = hvrAPolicy
                     };
 
                     CreatePolicyInput policyInput = new CreatePolicyInput()
@@ -456,27 +453,25 @@ namespace SiteRecovery.Tests
 
                 if (pairClouds)
                 {
-                    if (client.ProtectionContainerMapping.List(selectedFabric.Name, primaryCloud.Name, RequestHeaders).ProtectionContainerMappings.Count == 0)
+                    CreateProtectionContainerMappingInputProperties pairingProps = new CreateProtectionContainerMappingInputProperties()
                     {
-                        CreateProtectionContainerMappingInputProperties pairingProps = new CreateProtectionContainerMappingInputProperties()
-                        {
-                            PolicyId = selectedPolicy.Id,
-                            TargetProtectionContainerName = recCldName,
-                            ProviderSpecificInput = new ReplicationProviderContainerMappingInput()
-                        };
+                        PolicyId = selectedPolicy.Id,
+                        TargetProtectionContainerId = recCldName,
+                        ProviderSpecificInput = new ReplicationProviderContainerMappingInput()
+                    };
 
-                        CreateProtectionContainerMappingInput pairingInput = new CreateProtectionContainerMappingInput()
-                        {
-                            Properties = pairingProps
-                        };
+                    CreateProtectionContainerMappingInput pairingInput = new CreateProtectionContainerMappingInput()
+                    {
+                        Properties = pairingProps
+                    };
 
-                        var pairingResponse = client.ProtectionContainerMapping.ConfigureProtection(
-                            selectedFabric.Name, 
-                            primaryCloud.Name, 
-                            mappingName, 
-                            pairingInput, 
-                            RequestHeaders);
-                    }
+                    var pairingResponse = client.ProtectionContainerMapping.ConfigureProtection(
+                        selectedFabric.Name, 
+                        primaryCloud.Name, 
+                        mappingName, 
+                        pairingInput, 
+                        RequestHeaders);
+                    
                 }
 
                 if (enableDR)
@@ -765,7 +760,7 @@ namespace SiteRecovery.Tests
                     CreatePolicyInputProperties createInputProp = new CreatePolicyInputProperties()
                     {
                         RecoveryProvider = "HyperVReplicaAzure",
-                        ReplicationProviderSettings = hvrAPolicy
+                        ProviderSpecificInput = hvrAPolicy
                     };
 
                     CreatePolicyInput policyInput = new CreatePolicyInput()
@@ -782,27 +777,24 @@ namespace SiteRecovery.Tests
 
                 if (pairClouds)
                 {
-                    if (client.ProtectionContainerMapping.List(selectedFabric.Name, primaryCloud.Name, RequestHeaders).ProtectionContainerMappings.Count == 0)
+                    CreateProtectionContainerMappingInputProperties pairingProps = new CreateProtectionContainerMappingInputProperties()
                     {
-                        CreateProtectionContainerMappingInputProperties pairingProps = new CreateProtectionContainerMappingInputProperties()
-                        {
-                            PolicyId = selectedPolicy.Id,
-                            TargetProtectionContainerName = recCldName,
-                            ProviderSpecificInput = new ReplicationProviderContainerMappingInput()
-                        };
+                        PolicyId = selectedPolicy.Id,
+                        TargetProtectionContainerId = recCldName,
+                        ProviderSpecificInput = new ReplicationProviderContainerMappingInput()
+                    };
 
-                        CreateProtectionContainerMappingInput pairingInput = new CreateProtectionContainerMappingInput()
-                        {
-                            Properties = pairingProps
-                        };
+                    CreateProtectionContainerMappingInput pairingInput = new CreateProtectionContainerMappingInput()
+                    {
+                        Properties = pairingProps
+                    };
 
-                        var pairingResponse = client.ProtectionContainerMapping.ConfigureProtection(
-                            selectedFabric.Name, 
-                            primaryCloud.Name, 
-                            mappingName, 
-                            pairingInput, 
-                            RequestHeaders);
-                    }
+                    var pairingResponse = client.ProtectionContainerMapping.ConfigureProtection(
+                        selectedFabric.Name, 
+                        primaryCloud.Name, 
+                        mappingName, 
+                        pairingInput, 
+                        RequestHeaders);
                 }
 
                 if (enableDR)

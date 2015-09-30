@@ -179,69 +179,69 @@ namespace Microsoft.Azure.Management.SiteRecovery
                         propertiesValue["recoveryProvider"] = input.Properties.RecoveryProvider;
                     }
                     
-                    if (input.Properties.ReplicationProviderSettings != null)
+                    if (input.Properties.ProviderSpecificInput != null)
                     {
-                        JObject replicationProviderSettingsValue = new JObject();
-                        propertiesValue["replicationProviderSettings"] = replicationProviderSettingsValue;
-                        if (input.Properties.ReplicationProviderSettings is HyperVReplicaPolicyInput)
+                        JObject providerSpecificInputValue = new JObject();
+                        propertiesValue["providerSpecificInput"] = providerSpecificInputValue;
+                        if (input.Properties.ProviderSpecificInput is HyperVReplicaPolicyInput)
                         {
-                            replicationProviderSettingsValue["__type"] = "HyperVReplicaPolicyInput";
-                            HyperVReplicaPolicyInput derived = ((HyperVReplicaPolicyInput)input.Properties.ReplicationProviderSettings);
+                            providerSpecificInputValue["__type"] = "HyperVReplicaPolicyInput";
+                            HyperVReplicaPolicyInput derived = ((HyperVReplicaPolicyInput)input.Properties.ProviderSpecificInput);
                             
-                            replicationProviderSettingsValue["replicationFrequencyInSeconds"] = derived.ReplicationFrequencyInSeconds;
+                            providerSpecificInputValue["replicationFrequencyInSeconds"] = derived.ReplicationFrequencyInSeconds;
                             
-                            replicationProviderSettingsValue["recoveryPoints"] = derived.RecoveryPoints;
+                            providerSpecificInputValue["recoveryPoints"] = derived.RecoveryPoints;
                             
-                            replicationProviderSettingsValue["applicationConsistentSnapshotFrequencyInHours"] = derived.ApplicationConsistentSnapshotFrequencyInHours;
+                            providerSpecificInputValue["applicationConsistentSnapshotFrequencyInHours"] = derived.ApplicationConsistentSnapshotFrequencyInHours;
                             
                             if (derived.Compression != null)
                             {
-                                replicationProviderSettingsValue["compression"] = derived.Compression;
+                                providerSpecificInputValue["compression"] = derived.Compression;
                             }
                             
                             if (derived.InitialReplicationMethod != null)
                             {
-                                replicationProviderSettingsValue["initialReplicationMethod"] = derived.InitialReplicationMethod;
+                                providerSpecificInputValue["initialReplicationMethod"] = derived.InitialReplicationMethod;
                             }
                             
                             if (derived.OnlineReplicationStartTime != null)
                             {
-                                replicationProviderSettingsValue["onlineReplicationStartTime"] = derived.OnlineReplicationStartTime.Value.ToString();
+                                providerSpecificInputValue["onlineReplicationStartTime"] = derived.OnlineReplicationStartTime.Value.ToString();
                             }
                             
                             if (derived.OfflineReplicationImportPath != null)
                             {
-                                replicationProviderSettingsValue["offlineReplicationImportPath"] = derived.OfflineReplicationImportPath;
+                                providerSpecificInputValue["offlineReplicationImportPath"] = derived.OfflineReplicationImportPath;
                             }
                             
                             if (derived.OfflineReplicationExportPath != null)
                             {
-                                replicationProviderSettingsValue["offlineReplicationExportPath"] = derived.OfflineReplicationExportPath;
+                                providerSpecificInputValue["offlineReplicationExportPath"] = derived.OfflineReplicationExportPath;
                             }
                             
-                            replicationProviderSettingsValue["replicationPort"] = derived.ReplicationPort;
+                            providerSpecificInputValue["replicationPort"] = derived.ReplicationPort;
                             
-                            replicationProviderSettingsValue["allowedAuthenticationType"] = derived.AllowedAuthenticationType;
+                            providerSpecificInputValue["allowedAuthenticationType"] = derived.AllowedAuthenticationType;
                             
                             if (derived.ReplicaDeletion != null)
                             {
-                                replicationProviderSettingsValue["replicaDeletion"] = derived.ReplicaDeletion;
+                                providerSpecificInputValue["replicaDeletion"] = derived.ReplicaDeletion;
                             }
                         }
-                        if (input.Properties.ReplicationProviderSettings is HyperVReplicaAzurePolicyInput)
+                        if (input.Properties.ProviderSpecificInput is HyperVReplicaAzurePolicyInput)
                         {
-                            replicationProviderSettingsValue["__type"] = "HyperVReplicaAzurePolicyInput";
-                            HyperVReplicaAzurePolicyInput derived2 = ((HyperVReplicaAzurePolicyInput)input.Properties.ReplicationProviderSettings);
+                            providerSpecificInputValue["__type"] = "HyperVReplicaAzurePolicyInput";
+                            HyperVReplicaAzurePolicyInput derived2 = ((HyperVReplicaAzurePolicyInput)input.Properties.ProviderSpecificInput);
                             
-                            replicationProviderSettingsValue["recoveryPointHistoryDuration"] = derived2.RecoveryPointHistoryDuration;
+                            providerSpecificInputValue["recoveryPointHistoryDuration"] = derived2.RecoveryPointHistoryDuration;
                             
-                            replicationProviderSettingsValue["applicationConsistentSnapshotFrequencyInHours"] = derived2.ApplicationConsistentSnapshotFrequencyInHours;
+                            providerSpecificInputValue["applicationConsistentSnapshotFrequencyInHours"] = derived2.ApplicationConsistentSnapshotFrequencyInHours;
                             
-                            replicationProviderSettingsValue["replicationInterval"] = derived2.ReplicationInterval;
+                            providerSpecificInputValue["replicationInterval"] = derived2.ReplicationInterval;
                             
                             if (derived2.OnlineIrStartTime != null)
                             {
-                                replicationProviderSettingsValue["onlineReplicationStartTime"] = derived2.OnlineIrStartTime.Value.ToString();
+                                providerSpecificInputValue["onlineReplicationStartTime"] = derived2.OnlineIrStartTime.Value.ToString();
                             }
                             
                             if (derived2.StorageAccounts != null)
@@ -264,38 +264,38 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             customerStorageAccountValue["subscriptionId"] = storageAccountsItem.SubscriptionId;
                                         }
                                     }
-                                    replicationProviderSettingsValue["storageAccounts"] = storageAccountsArray;
+                                    providerSpecificInputValue["storageAccounts"] = storageAccountsArray;
                                 }
                             }
                             
                             if (derived2.Encryption != null)
                             {
-                                replicationProviderSettingsValue["encryption"] = derived2.Encryption;
+                                providerSpecificInputValue["encryption"] = derived2.Encryption;
                             }
                         }
-                        if (input.Properties.ReplicationProviderSettings is SanPolicyInput)
+                        if (input.Properties.ProviderSpecificInput is SanPolicyInput)
                         {
-                            replicationProviderSettingsValue["__type"] = "SanPolicyInput";
-                            SanPolicyInput derived3 = ((SanPolicyInput)input.Properties.ReplicationProviderSettings);
+                            providerSpecificInputValue["__type"] = "SanPolicyInput";
+                            SanPolicyInput derived3 = ((SanPolicyInput)input.Properties.ProviderSpecificInput);
                             
                             if (derived3.CloudId != null)
                             {
-                                replicationProviderSettingsValue["cloudId"] = derived3.CloudId;
+                                providerSpecificInputValue["cloudId"] = derived3.CloudId;
                             }
                             
                             if (derived3.RemoteCloudId != null)
                             {
-                                replicationProviderSettingsValue["remoteCloudId"] = derived3.RemoteCloudId;
+                                providerSpecificInputValue["remoteCloudId"] = derived3.RemoteCloudId;
                             }
                             
                             if (derived3.ArrayUniqueId != null)
                             {
-                                replicationProviderSettingsValue["arrayUniqueId"] = derived3.ArrayUniqueId;
+                                providerSpecificInputValue["arrayUniqueId"] = derived3.ArrayUniqueId;
                             }
                             
                             if (derived3.RemoteArrayUniqueId != null)
                             {
-                                replicationProviderSettingsValue["remoteArrayUniqueId"] = derived3.RemoteArrayUniqueId;
+                                providerSpecificInputValue["remoteArrayUniqueId"] = derived3.RemoteArrayUniqueId;
                             }
                         }
                     }
@@ -1918,11 +1918,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     {
                         result.Status = OperationStatus.InProgress;
                     }
-                    if (statusCode == HttpStatusCode.OK)
+                    if (statusCode == HttpStatusCode.NoContent)
                     {
                         result.Status = OperationStatus.Succeeded;
                     }
-                    if (statusCode == HttpStatusCode.NoContent)
+                    if (statusCode == HttpStatusCode.OK)
                     {
                         result.Status = OperationStatus.Succeeded;
                     }

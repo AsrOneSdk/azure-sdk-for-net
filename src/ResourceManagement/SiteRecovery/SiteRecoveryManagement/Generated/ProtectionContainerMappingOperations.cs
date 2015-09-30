@@ -194,9 +194,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     JObject propertiesValue = new JObject();
                     createProtectionContainerMappingInputValue["properties"] = propertiesValue;
                     
-                    if (input.Properties.TargetProtectionContainerName != null)
+                    if (input.Properties.TargetProtectionContainerId != null)
                     {
-                        propertiesValue["targetProtectionContainerId"] = input.Properties.TargetProtectionContainerName;
+                        propertiesValue["targetProtectionContainerId"] = input.Properties.TargetProtectionContainerId;
                     }
                     
                     if (input.Properties.PolicyId != null)

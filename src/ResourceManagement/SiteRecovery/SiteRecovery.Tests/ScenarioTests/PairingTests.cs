@@ -85,7 +85,7 @@ namespace SiteRecovery.Tests
                 CreatePolicyInputProperties policyCreationProp = new CreatePolicyInputProperties()
                 {
                     RecoveryProvider = "HyperVReplica",
-                    ReplicationProviderSettings = hvrProfileInput
+                    ProviderSpecificInput = hvrProfileInput
                 };
 
                 CreatePolicyInput policyCreationInput = new CreatePolicyInput()
@@ -102,7 +102,7 @@ namespace SiteRecovery.Tests
                 {
                     PolicyId = currentPolicy.Id,
                     ProviderSpecificInput = new ReplicationProviderContainerMappingInput(),
-                    TargetProtectionContainerName = recCld
+                    TargetProtectionContainerId = recCld
                 };
 
                 CreateProtectionContainerMappingInput pairingInput = new CreateProtectionContainerMappingInput()
@@ -163,7 +163,7 @@ namespace SiteRecovery.Tests
                 CreatePolicyInputProperties createInputProp = new CreatePolicyInputProperties()
                 {
                     RecoveryProvider = "HyperVReplicaAzure",
-                    ReplicationProviderSettings = hvrAPolicy
+                    ProviderSpecificInput = hvrAPolicy
                 };
 
                 CreatePolicyInput policyInput = new CreatePolicyInput()

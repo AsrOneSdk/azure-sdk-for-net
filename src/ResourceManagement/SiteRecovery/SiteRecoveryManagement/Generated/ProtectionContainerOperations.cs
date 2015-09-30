@@ -1004,6 +1004,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.ProtectedItemCount = protectedItemCountInstance;
                                 }
                                 
+                                JToken pairingStatusValue = propertiesValue["pairingStatus"];
+                                if (pairingStatusValue != null && pairingStatusValue.Type != JTokenType.Null)
+                                {
+                                    string pairingStatusInstance = ((string)pairingStatusValue);
+                                    propertiesInstance.PairingStatus = pairingStatusInstance;
+                                }
+                                
                                 JToken fabricConfigurationSettingsValue = propertiesValue["fabricConfigurationSettings"];
                                 if (fabricConfigurationSettingsValue != null && fabricConfigurationSettingsValue.Type != JTokenType.Null)
                                 {
@@ -1215,6 +1222,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 {
                                     int protectedItemCountInstance = ((int)protectedItemCountValue);
                                     propertiesInstance.ProtectedItemCount = protectedItemCountInstance;
+                                }
+                                
+                                JToken pairingStatusValue = propertiesValue["pairingStatus"];
+                                if (pairingStatusValue != null && pairingStatusValue.Type != JTokenType.Null)
+                                {
+                                    string pairingStatusInstance = ((string)pairingStatusValue);
+                                    propertiesInstance.PairingStatus = pairingStatusInstance;
                                 }
                                 
                                 JToken fabricConfigurationSettingsValue = propertiesValue["fabricConfigurationSettings"];
@@ -1482,6 +1496,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.ProtectedItemCount = protectedItemCountInstance;
                                 }
                                 
+                                JToken pairingStatusValue = propertiesValue["pairingStatus"];
+                                if (pairingStatusValue != null && pairingStatusValue.Type != JTokenType.Null)
+                                {
+                                    string pairingStatusInstance = ((string)pairingStatusValue);
+                                    propertiesInstance.PairingStatus = pairingStatusInstance;
+                                }
+                                
                                 JToken fabricConfigurationSettingsValue = propertiesValue["fabricConfigurationSettings"];
                                 if (fabricConfigurationSettingsValue != null && fabricConfigurationSettingsValue.Type != JTokenType.Null)
                                 {
@@ -1745,6 +1766,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 {
                                     int protectedItemCountInstance = ((int)protectedItemCountValue);
                                     propertiesInstance.ProtectedItemCount = protectedItemCountInstance;
+                                }
+                                
+                                JToken pairingStatusValue = propertiesValue["pairingStatus"];
+                                if (pairingStatusValue != null && pairingStatusValue.Type != JTokenType.Null)
+                                {
+                                    string pairingStatusInstance = ((string)pairingStatusValue);
+                                    propertiesInstance.PairingStatus = pairingStatusInstance;
                                 }
                                 
                                 JToken fabricConfigurationSettingsValue = propertiesValue["fabricConfigurationSettings"];
@@ -2046,6 +2074,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             int protectedItemCountInstance = ((int)protectedItemCountValue);
                                             propertiesInstance.ProtectedItemCount = protectedItemCountInstance;
+                                        }
+                                        
+                                        JToken pairingStatusValue = propertiesValue["pairingStatus"];
+                                        if (pairingStatusValue != null && pairingStatusValue.Type != JTokenType.Null)
+                                        {
+                                            string pairingStatusInstance = ((string)pairingStatusValue);
+                                            propertiesInstance.PairingStatus = pairingStatusInstance;
                                         }
                                         
                                         JToken fabricConfigurationSettingsValue = propertiesValue["fabricConfigurationSettings"];

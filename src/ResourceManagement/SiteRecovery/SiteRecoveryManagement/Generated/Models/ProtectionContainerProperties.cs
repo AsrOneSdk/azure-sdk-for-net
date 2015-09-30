@@ -74,6 +74,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._friendlyName = value; }
         }
         
+        private string _pairingStatus;
+        
+        /// <summary>
+        /// Optional. Gets or sets the pairing status of this cloud.
+        /// </summary>
+        public string PairingStatus
+        {
+            get { return this._pairingStatus; }
+            set { this._pairingStatus = value; }
+        }
+        
         private int _protectedItemCount;
         
         /// <summary>
