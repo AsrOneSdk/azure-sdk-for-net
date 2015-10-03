@@ -29,6 +29,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class ReplicationProviderSpecificSettings
     {
+        private string _type;
+        
+        /// <summary>
+        /// Optional. Gets or sets the Instance type name.
+        /// </summary>
+        public string Type
+        {
+            get { return this._type; }
+            set { this._type = value; }
+        }
+        
         /// <summary>
         /// Initializes a new instance of the
         /// ReplicationProviderSpecificSettings class.

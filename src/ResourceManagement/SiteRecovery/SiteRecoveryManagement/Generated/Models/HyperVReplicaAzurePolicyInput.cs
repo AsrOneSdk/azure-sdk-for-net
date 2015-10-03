@@ -87,12 +87,12 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._replicationInterval = value; }
         }
         
-        private IList<CustomerStorageAccount> _storageAccounts;
+        private IList<string> _storageAccounts;
         
         /// <summary>
         /// Optional.
         /// </summary>
-        public IList<CustomerStorageAccount> StorageAccounts
+        public IList<string> StorageAccounts
         {
             get { return this._storageAccounts; }
             set { this._storageAccounts = value; }
@@ -104,7 +104,7 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         /// </summary>
         public HyperVReplicaAzurePolicyInput()
         {
-            this.StorageAccounts = new LazyList<CustomerStorageAccount>();
+            this.StorageAccounts = new LazyList<string>();
         }
     }
 }

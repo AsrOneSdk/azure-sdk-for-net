@@ -52,26 +52,15 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._oSType = value; }
         }
         
-        private string _storageAccountName;
+        private string _storageAccountId;
         
         /// <summary>
-        /// Optional. Gets or sets the storage account name.
+        /// Optional. Gets or sets the storage account Id.
         /// </summary>
-        public string StorageAccountName
+        public string StorageAccountId
         {
-            get { return this._storageAccountName; }
-            set { this._storageAccountName = value; }
-        }
-        
-        private string _storageAccountSubscriptionId;
-        
-        /// <summary>
-        /// Optional. Gets or sets the Storage account subscription id.
-        /// </summary>
-        public string StorageAccountSubscriptionId
-        {
-            get { return this._storageAccountSubscriptionId; }
-            set { this._storageAccountSubscriptionId = value; }
+            get { return this._storageAccountId; }
+            set { this._storageAccountId = value; }
         }
         
         private string _vHDId;

@@ -26,38 +26,40 @@ using Microsoft.Azure.Management.SiteRecovery.Models;
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// The definition of a PlannedFailoverInput properties object.
+    /// The definition of a Fabric deletion object.
     /// </summary>
-    public partial class PlannedFailoverInputProperties
+    public partial class FabricDeletionInput
     {
-        private string _failoverDirection;
+        private FabricDeletionInputProperties _properties;
         
         /// <summary>
-        /// Optional. Gets or sets Failover direction
+        /// Required. Properties of the fabric deletion input.
         /// </summary>
-        public string FailoverDirection
+        public FabricDeletionInputProperties Properties
         {
-            get { return this._failoverDirection; }
-            set { this._failoverDirection = value; }
-        }
-        
-        private ProviderSpecificFailoverInput _providerSpecificInput;
-        
-        /// <summary>
-        /// Optional. Gets or sets Provider specific settings.
-        /// </summary>
-        public ProviderSpecificFailoverInput ProviderSpecificInput
-        {
-            get { return this._providerSpecificInput; }
-            set { this._providerSpecificInput = value; }
+            get { return this._properties; }
+            set { this._properties = value; }
         }
         
         /// <summary>
-        /// Initializes a new instance of the PlannedFailoverInputProperties
-        /// class.
+        /// Initializes a new instance of the FabricDeletionInput class.
         /// </summary>
-        public PlannedFailoverInputProperties()
+        public FabricDeletionInput()
         {
+        }
+        
+        /// <summary>
+        /// Initializes a new instance of the FabricDeletionInput class with
+        /// required arguments.
+        /// </summary>
+        public FabricDeletionInput(FabricDeletionInputProperties properties)
+            : this()
+        {
+            if (properties == null)
+            {
+                throw new ArgumentNullException("properties");
+            }
+            this.Properties = properties;
         }
     }
 }

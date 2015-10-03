@@ -43,17 +43,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <param name='providerName'>
         /// Required. Provider Name.
         /// </param>
+        /// <param name='input'>
+        /// Required. Deletion input.
+        /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
         /// </param>
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public static LongRunningOperationResponse BeginDeleting(this IRecoveryServicesProviderOperations operations, string fabricName, string providerName, CustomRequestHeaders customRequestHeaders)
+        public static LongRunningOperationResponse BeginDeleting(this IRecoveryServicesProviderOperations operations, string fabricName, string providerName, RecoveryServicesProviderDeletionInput input, CustomRequestHeaders customRequestHeaders)
         {
             return Task.Factory.StartNew((object s) => 
             {
-                return ((IRecoveryServicesProviderOperations)s).BeginDeletingAsync(fabricName, providerName, customRequestHeaders);
+                return ((IRecoveryServicesProviderOperations)s).BeginDeletingAsync(fabricName, providerName, input, customRequestHeaders);
             }
             , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
         }
@@ -71,15 +74,70 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <param name='providerName'>
         /// Required. Provider Name.
         /// </param>
+        /// <param name='input'>
+        /// Required. Deletion input.
+        /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
         /// </param>
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public static Task<LongRunningOperationResponse> BeginDeletingAsync(this IRecoveryServicesProviderOperations operations, string fabricName, string providerName, CustomRequestHeaders customRequestHeaders)
+        public static Task<LongRunningOperationResponse> BeginDeletingAsync(this IRecoveryServicesProviderOperations operations, string fabricName, string providerName, RecoveryServicesProviderDeletionInput input, CustomRequestHeaders customRequestHeaders)
         {
-            return operations.BeginDeletingAsync(fabricName, providerName, customRequestHeaders, CancellationToken.None);
+            return operations.BeginDeletingAsync(fabricName, providerName, input, customRequestHeaders, CancellationToken.None);
+        }
+        
+        /// <summary>
+        /// Purges a provider
+        /// </summary>
+        /// <param name='operations'>
+        /// Reference to the
+        /// Microsoft.Azure.Management.SiteRecovery.IRecoveryServicesProviderOperations.
+        /// </param>
+        /// <param name='fabricName'>
+        /// Required. Name of provider's fabric
+        /// </param>
+        /// <param name='providerName'>
+        /// Required. Provider Name.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Optional. Request header parameters.
+        /// </param>
+        /// <returns>
+        /// A standard service response for long running operations.
+        /// </returns>
+        public static LongRunningOperationResponse BeginPurging(this IRecoveryServicesProviderOperations operations, string fabricName, string providerName, CustomRequestHeaders customRequestHeaders)
+        {
+            return Task.Factory.StartNew((object s) => 
+            {
+                return ((IRecoveryServicesProviderOperations)s).BeginPurgingAsync(fabricName, providerName, customRequestHeaders);
+            }
+            , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+        }
+        
+        /// <summary>
+        /// Purges a provider
+        /// </summary>
+        /// <param name='operations'>
+        /// Reference to the
+        /// Microsoft.Azure.Management.SiteRecovery.IRecoveryServicesProviderOperations.
+        /// </param>
+        /// <param name='fabricName'>
+        /// Required. Name of provider's fabric
+        /// </param>
+        /// <param name='providerName'>
+        /// Required. Provider Name.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Optional. Request header parameters.
+        /// </param>
+        /// <returns>
+        /// A standard service response for long running operations.
+        /// </returns>
+        public static Task<LongRunningOperationResponse> BeginPurgingAsync(this IRecoveryServicesProviderOperations operations, string fabricName, string providerName, CustomRequestHeaders customRequestHeaders)
+        {
+            return operations.BeginPurgingAsync(fabricName, providerName, customRequestHeaders, CancellationToken.None);
         }
         
         /// <summary>
@@ -147,17 +205,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <param name='providerName'>
         /// Required. Provider Name.
         /// </param>
+        /// <param name='input'>
+        /// Required. Deletion input.
+        /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
         /// </param>
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public static LongRunningOperationResponse Delete(this IRecoveryServicesProviderOperations operations, string fabricName, string providerName, CustomRequestHeaders customRequestHeaders)
+        public static LongRunningOperationResponse Delete(this IRecoveryServicesProviderOperations operations, string fabricName, string providerName, RecoveryServicesProviderDeletionInput input, CustomRequestHeaders customRequestHeaders)
         {
             return Task.Factory.StartNew((object s) => 
             {
-                return ((IRecoveryServicesProviderOperations)s).DeleteAsync(fabricName, providerName, customRequestHeaders);
+                return ((IRecoveryServicesProviderOperations)s).DeleteAsync(fabricName, providerName, input, customRequestHeaders);
             }
             , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
         }
@@ -175,15 +236,18 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <param name='providerName'>
         /// Required. Provider Name.
         /// </param>
+        /// <param name='input'>
+        /// Required. Deletion input.
+        /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
         /// </param>
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public static Task<LongRunningOperationResponse> DeleteAsync(this IRecoveryServicesProviderOperations operations, string fabricName, string providerName, CustomRequestHeaders customRequestHeaders)
+        public static Task<LongRunningOperationResponse> DeleteAsync(this IRecoveryServicesProviderOperations operations, string fabricName, string providerName, RecoveryServicesProviderDeletionInput input, CustomRequestHeaders customRequestHeaders)
         {
-            return operations.DeleteAsync(fabricName, providerName, customRequestHeaders, CancellationToken.None);
+            return operations.DeleteAsync(fabricName, providerName, input, customRequestHeaders, CancellationToken.None);
         }
         
         /// <summary>
@@ -282,6 +346,52 @@ namespace Microsoft.Azure.Management.SiteRecovery
         public static Task<LongRunningOperationResponse> GetDeleteStatusAsync(this IRecoveryServicesProviderOperations operations, string operationStatusLink)
         {
             return operations.GetDeleteStatusAsync(operationStatusLink, CancellationToken.None);
+        }
+        
+        /// <summary>
+        /// The Get Operation Status operation returns the status of the
+        /// specified operation. After calling an asynchronous operation, you
+        /// can call Get Operation Status to determine whether the operation
+        /// has succeeded, failed, or is still in progress.
+        /// </summary>
+        /// <param name='operations'>
+        /// Reference to the
+        /// Microsoft.Azure.Management.SiteRecovery.IRecoveryServicesProviderOperations.
+        /// </param>
+        /// <param name='operationStatusLink'>
+        /// Required. Location value returned by the Begin operation.
+        /// </param>
+        /// <returns>
+        /// A standard service response for long running operations.
+        /// </returns>
+        public static LongRunningOperationResponse GetPurgeStatus(this IRecoveryServicesProviderOperations operations, string operationStatusLink)
+        {
+            return Task.Factory.StartNew((object s) => 
+            {
+                return ((IRecoveryServicesProviderOperations)s).GetPurgeStatusAsync(operationStatusLink);
+            }
+            , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+        }
+        
+        /// <summary>
+        /// The Get Operation Status operation returns the status of the
+        /// specified operation. After calling an asynchronous operation, you
+        /// can call Get Operation Status to determine whether the operation
+        /// has succeeded, failed, or is still in progress.
+        /// </summary>
+        /// <param name='operations'>
+        /// Reference to the
+        /// Microsoft.Azure.Management.SiteRecovery.IRecoveryServicesProviderOperations.
+        /// </param>
+        /// <param name='operationStatusLink'>
+        /// Required. Location value returned by the Begin operation.
+        /// </param>
+        /// <returns>
+        /// A standard service response for long running operations.
+        /// </returns>
+        public static Task<LongRunningOperationResponse> GetPurgeStatusAsync(this IRecoveryServicesProviderOperations operations, string operationStatusLink)
+        {
+            return operations.GetPurgeStatusAsync(operationStatusLink, CancellationToken.None);
         }
         
         /// <summary>
@@ -414,6 +524,58 @@ namespace Microsoft.Azure.Management.SiteRecovery
         public static Task<RecoveryServicesProviderListResponse> ListAllAsync(this IRecoveryServicesProviderOperations operations, CustomRequestHeaders customRequestHeaders)
         {
             return operations.ListAllAsync(customRequestHeaders, CancellationToken.None);
+        }
+        
+        /// <summary>
+        /// Purges a provider
+        /// </summary>
+        /// <param name='operations'>
+        /// Reference to the
+        /// Microsoft.Azure.Management.SiteRecovery.IRecoveryServicesProviderOperations.
+        /// </param>
+        /// <param name='fabricName'>
+        /// Required. Name of provider's fabric
+        /// </param>
+        /// <param name='providerName'>
+        /// Required. Provider Name.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Optional. Request header parameters.
+        /// </param>
+        /// <returns>
+        /// A standard service response for long running operations.
+        /// </returns>
+        public static LongRunningOperationResponse Purge(this IRecoveryServicesProviderOperations operations, string fabricName, string providerName, CustomRequestHeaders customRequestHeaders)
+        {
+            return Task.Factory.StartNew((object s) => 
+            {
+                return ((IRecoveryServicesProviderOperations)s).PurgeAsync(fabricName, providerName, customRequestHeaders);
+            }
+            , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+        }
+        
+        /// <summary>
+        /// Purges a provider
+        /// </summary>
+        /// <param name='operations'>
+        /// Reference to the
+        /// Microsoft.Azure.Management.SiteRecovery.IRecoveryServicesProviderOperations.
+        /// </param>
+        /// <param name='fabricName'>
+        /// Required. Name of provider's fabric
+        /// </param>
+        /// <param name='providerName'>
+        /// Required. Provider Name.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Optional. Request header parameters.
+        /// </param>
+        /// <returns>
+        /// A standard service response for long running operations.
+        /// </returns>
+        public static Task<LongRunningOperationResponse> PurgeAsync(this IRecoveryServicesProviderOperations operations, string fabricName, string providerName, CustomRequestHeaders customRequestHeaders)
+        {
+            return operations.PurgeAsync(fabricName, providerName, customRequestHeaders, CancellationToken.None);
         }
         
         /// <summary>

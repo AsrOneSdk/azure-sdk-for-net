@@ -21,41 +21,19 @@
 
 using System;
 using System.Linq;
-using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// Policy creation properties.
+    /// The definition of a Fabric deletion object.
     /// </summary>
-    public partial class CreatePolicyInputProperties
+    public partial class FabricDeletionInputProperties
     {
-        private PolicyProviderSpecificInput _providerSpecificInput;
-        
         /// <summary>
-        /// Optional. the replication provider settings.
+        /// Initializes a new instance of the FabricDeletionInputProperties
+        /// class.
         /// </summary>
-        public PolicyProviderSpecificInput ProviderSpecificInput
-        {
-            get { return this._providerSpecificInput; }
-            set { this._providerSpecificInput = value; }
-        }
-        
-        private string _replicationProvider;
-        
-        /// <summary>
-        /// Optional. Replication provider.
-        /// </summary>
-        public string ReplicationProvider
-        {
-            get { return this._replicationProvider; }
-            set { this._replicationProvider = value; }
-        }
-        
-        /// <summary>
-        /// Initializes a new instance of the CreatePolicyInputProperties class.
-        /// </summary>
-        public CreatePolicyInputProperties()
+        public FabricDeletionInputProperties()
         {
         }
     }

@@ -43,24 +43,24 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._activeLocation = value; }
         }
         
-        private IList<AllowedOperations> _allowedOperations;
+        private IList<string> _allowedOperations;
         
         /// <summary>
         /// Optional. Gets or sets the allowed operations on the Replication
         /// protected item.
         /// </summary>
-        public IList<AllowedOperations> AllowedOperations
+        public IList<string> AllowedOperations
         {
             get { return this._allowedOperations; }
             set { this._allowedOperations = value; }
         }
         
-        private string _currentScenario;
+        private CurrentScenarioDetails _currentScenario;
         
         /// <summary>
         /// Optional. Gets or sets the current scenario.
         /// </summary>
-        public string CurrentScenario
+        public CurrentScenarioDetails CurrentScenario
         {
             get { return this._currentScenario; }
             set { this._currentScenario = value; }
@@ -88,23 +88,23 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._friendlyName = value; }
         }
         
-        private string _lastSuccessfulFailoverTime;
+        private System.DateTime? _lastSuccessfulFailoverTime;
         
         /// <summary>
         /// Optional. Gets or sets the Last successful failover time.
         /// </summary>
-        public string LastSuccessfulFailoverTime
+        public System.DateTime? LastSuccessfulFailoverTime
         {
             get { return this._lastSuccessfulFailoverTime; }
             set { this._lastSuccessfulFailoverTime = value; }
         }
         
-        private string _lastSuccessfulTestFailoverTime;
+        private System.DateTime? _lastSuccessfulTestFailoverTime;
         
         /// <summary>
         /// Optional. Gets or sets the Last successful test failover time.
         /// </summary>
-        public string LastSuccessfulTestFailoverTime
+        public System.DateTime? LastSuccessfulTestFailoverTime
         {
             get { return this._lastSuccessfulTestFailoverTime; }
             set { this._lastSuccessfulTestFailoverTime = value; }
@@ -130,6 +130,29 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         {
             get { return this._policyID; }
             set { this._policyID = value; }
+        }
+        
+        private string _primaryFabricFriendlyName;
+        
+        /// <summary>
+        /// Optional. Gets or sets the friendly name of the primary fabric.
+        /// </summary>
+        public string PrimaryFabricFriendlyName
+        {
+            get { return this._primaryFabricFriendlyName; }
+            set { this._primaryFabricFriendlyName = value; }
+        }
+        
+        private string _primaryProtectionContainerFriendlyName;
+        
+        /// <summary>
+        /// Optional. Gets or sets the name of primary protection container
+        /// friendly name.
+        /// </summary>
+        public string PrimaryProtectionContainerFriendlyName
+        {
+            get { return this._primaryProtectionContainerFriendlyName; }
+            set { this._primaryProtectionContainerFriendlyName = value; }
         }
         
         private string _protectedItemSourceId;
@@ -163,6 +186,28 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         {
             get { return this._protectionStatus; }
             set { this._protectionStatus = value; }
+        }
+        
+        private string _recoveryFabricFriendlyName;
+        
+        /// <summary>
+        /// Optional. Gets or sets the friendly name of recovery fabric.
+        /// </summary>
+        public string RecoveryFabricFriendlyName
+        {
+            get { return this._recoveryFabricFriendlyName; }
+            set { this._recoveryFabricFriendlyName = value; }
+        }
+        
+        private string _recoveryProtectionContainerFriendlyName;
+        
+        /// <summary>
+        /// Optional. Gets or sets the name of recovery container friendly name.
+        /// </summary>
+        public string RecoveryProtectionContainerFriendlyName
+        {
+            get { return this._recoveryProtectionContainerFriendlyName; }
+            set { this._recoveryProtectionContainerFriendlyName = value; }
         }
         
         private string _recoveryServicesProviderName;
@@ -227,7 +272,7 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         /// </summary>
         public ReplicationProtectedItemProperties()
         {
-            this.AllowedOperations = new LazyList<AllowedOperations>();
+            this.AllowedOperations = new LazyList<string>();
             this.ReplicationHealthErrors = new LazyList<HealthError>();
         }
     }

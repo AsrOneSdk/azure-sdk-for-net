@@ -35,10 +35,10 @@ namespace SiteRecovery.Tests
                 context.Start();
                 var client = GetSiteRecoveryClient(CustomHttpHandler);
 
-                bool pairClouds = false;
-                bool enableDR = false;
-                bool pfo = false;
-                bool commit = false;
+                bool pairClouds = true;
+                bool enableDR = true;
+                bool pfo = true;
+                bool commit = true;
                 bool tfo = true;
                 bool pfoReverse = true;
                 bool commitReverse = true;
@@ -60,7 +60,7 @@ namespace SiteRecovery.Tests
                     }
                 }
 
-                string priCld = "ff7aaab7-542a-42ec-9fdc-044e3b3c996d";
+                string priCld = string.Empty;
                 string recCldGuid = string.Empty;
                 string recCld = string.Empty;
                 string policyName = "Hydra" + (new Random()).Next();
@@ -113,7 +113,7 @@ namespace SiteRecovery.Tests
 
                     CreatePolicyInputProperties policyCreationProp = new CreatePolicyInputProperties()
                     {
-                        RecoveryProvider = "HyperVReplica",
+                        ReplicationProvider = "HyperVReplica",
                         ProviderSpecificInput = hvrProfileInput
                     };
 
@@ -196,7 +196,7 @@ namespace SiteRecovery.Tests
                 ///////////////////////////// PFO ////////////////////////////////
                 PlannedFailoverInputProperties plannedFailoverProp = new PlannedFailoverInputProperties()
                 {
-                    ProviderConfigurationSettings = new ProviderSpecificFailoverInput()
+                    ProviderSpecificInput = new ProviderSpecificFailoverInput()
                 };
 
                 PlannedFailoverInput plannedFailoverInput = new PlannedFailoverInput()
@@ -216,7 +216,7 @@ namespace SiteRecovery.Tests
                 ////////////////////////////////// UFO /////////////////////////////
                 UnplannedFailoverInputProperties ufoProp = new UnplannedFailoverInputProperties()
                 {
-                    ProviderConfigurationSettings = new ProviderSpecificFailoverInput(),
+                    ProviderSpecificInput = new ProviderSpecificFailoverInput(),
                     SourceSiteOperations = "NotRequired"
                 };
 
@@ -227,7 +227,7 @@ namespace SiteRecovery.Tests
                 /////////////////////////////////// TFO //////////////////////////////
                 TestFailoverInputProperties tfoProp = new TestFailoverInputProperties()
                 {
-                    ProviderConfigurationSettings = new ProviderSpecificFailoverInput()
+                    ProviderSpecificInput = new ProviderSpecificFailoverInput()
                 };
 
                 TestFailoverInput tfoInput = new TestFailoverInput()
@@ -238,6 +238,12 @@ namespace SiteRecovery.Tests
                 if (pfo)
                 {
                     //var plannedfailover = client.ReplicationProtectedItem.PlannedFailover(selectedFabric.Name, priCld, replicationProtectedItemName, plannedFailoverInput, RequestHeaders);
+                    var protectedItem = client.ReplicationProtectedItem.Get(
+                        selectedFabric.Name,
+                        priCld,
+                        replicationProtectedItemName,
+                        RequestHeaders);
+
                     var unplannedFailoverReverse = client.ReplicationProtectedItem.UnplannedFailover(
                         selectedFabric.Name, 
                         priCld, 
@@ -423,20 +429,12 @@ namespace SiteRecovery.Tests
                         OnlineIrStartTime =  null,
                         RecoveryPointHistoryDuration = 0,
                         ReplicationInterval = 30,
-                        StorageAccounts = new List<CustomerStorageAccount>()
+                        StorageAccounts = new List<string>() { "/subscriptions/19b823e2-d1f3-4805-93d7-401c5d8230d5/resourceGroups/Default-Storage-WestUS/providers/Microsoft.ClassicStorage/storageAccounts/bvtmapped2storacc" }
                     };
-
-                    CustomerStorageAccount strgAcc = new CustomerStorageAccount()
-                    {
-                        StorageAccountName = "bvtmapped2storacc",
-                        SubscriptionId = "19b823e2-d1f3-4805-93d7-401c5d8230d5"
-                    };
-
-                    hvrAPolicy.StorageAccounts.Add(strgAcc);
 
                     CreatePolicyInputProperties createInputProp = new CreatePolicyInputProperties()
                     {
-                        RecoveryProvider = "HyperVReplicaAzure",
+                        ReplicationProvider = "HyperVReplicaAzure",
                         ProviderSpecificInput = hvrAPolicy
                     };
 
@@ -493,8 +491,7 @@ namespace SiteRecovery.Tests
                         OSType = "Windows",
                         VHDId = (protectableItem.Properties.CustomDetails as HyperVVirtualMachineDetails).DiskDetailsList[0].VHDId,
                         VmName = protectableItem.Properties.FriendlyName,
-                        StorageAccountName = "bvtmapped2storacc",
-                        StorageAccountSubscriptionId = "19b823e2-d1f3-4805-93d7-401c5d8230d5"
+                        StorageAccountId = "/subscriptions/19b823e2-d1f3-4805-93d7-401c5d8230d5/resourceGroups/Default-Storage-WestUS/providers/Microsoft.ClassicStorage/storageAccounts/bvtmapped2storacc",
                     };
 
                     EnableProtectionInputProperties enableDRProp = new EnableProtectionInputProperties()
@@ -532,7 +529,7 @@ namespace SiteRecovery.Tests
                     PlannedFailoverInputProperties plannedFailoverProp = new PlannedFailoverInputProperties()
                     {
                         FailoverDirection = "",
-                        ProviderConfigurationSettings = hvrAFOInput
+                        ProviderSpecificInput = hvrAFOInput
                     };
 
                     PlannedFailoverInput plannedFailoverInput = new PlannedFailoverInput()
@@ -548,7 +545,7 @@ namespace SiteRecovery.Tests
                     PlannedFailoverInputProperties plannedFailbackProp = new PlannedFailoverInputProperties()
                     {
                         FailoverDirection = "",
-                        ProviderConfigurationSettings = hvrAFBInput
+                        ProviderSpecificInput = hvrAFBInput
                     };
 
                     PlannedFailoverInput plannedFailbackInput = new PlannedFailoverInput()
@@ -562,8 +559,7 @@ namespace SiteRecovery.Tests
                         OSType = "Windows",
                         VHDId = (protectableItem.Properties.CustomDetails as HyperVVirtualMachineDetails).DiskDetailsList[0].VHDId,
                         VmName = protectableItem.Properties.FriendlyName,
-                        StorageAccountName = "bvtmapped2storacc",
-                        StorageAccountSubscriptionId = "19b823e2-d1f3-4805-93d7-401c5d8230d5"
+                        StorageAccountId = "/subscriptions/19b823e2-d1f3-4805-93d7-401c5d8230d5/resourceGroups/Default-Storage-WestUS/providers/Microsoft.ClassicStorage/storageAccounts/bvtmapped2storacc",
                     };
 
                     ReverseReplicationInputProperties rrProp = new ReverseReplicationInputProperties()
@@ -580,7 +576,7 @@ namespace SiteRecovery.Tests
                     ////////////////////////////////// UFO /////////////////////////////////////////
                     UnplannedFailoverInputProperties ufoProp = new UnplannedFailoverInputProperties()
                     {
-                        ProviderConfigurationSettings = hvrAFOInput,
+                        ProviderSpecificInput = hvrAFOInput,
                         SourceSiteOperations = "NotRequired"
                     };
 
@@ -592,7 +588,7 @@ namespace SiteRecovery.Tests
                     /////////////////////////////////// TFO /////////////////////////////////////////////
                     TestFailoverInputProperties tfoProp = new TestFailoverInputProperties()
                     {
-                        ProviderConfigurationSettings = hvrAFOInput
+                        ProviderSpecificInput = hvrAFOInput
                     };
 
                     TestFailoverInput tfoInput = new TestFailoverInput()
@@ -747,20 +743,12 @@ namespace SiteRecovery.Tests
                         OnlineIrStartTime = null,
                         RecoveryPointHistoryDuration = 0,
                         ReplicationInterval = 30,
-                        StorageAccounts = new List<CustomerStorageAccount>()
+                        StorageAccounts = new List<string>() { "/subscriptions/19b823e2-d1f3-4805-93d7-401c5d8230d5/resourceGroups/Default-Storage-WestUS/providers/Microsoft.ClassicStorage/storageAccounts/bvtmapped2storacc" }
                     };
-
-                    CustomerStorageAccount strgAcc = new CustomerStorageAccount()
-                    {
-                        StorageAccountName = "bvtmapped2storacc",
-                        SubscriptionId = "19b823e2-d1f3-4805-93d7-401c5d8230d5"
-                    };
-
-                    hvrAPolicy.StorageAccounts.Add(strgAcc);
 
                     CreatePolicyInputProperties createInputProp = new CreatePolicyInputProperties()
                     {
-                        RecoveryProvider = "HyperVReplicaAzure",
+                        ReplicationProvider = "HyperVReplicaAzure",
                         ProviderSpecificInput = hvrAPolicy
                     };
 
@@ -816,8 +804,7 @@ namespace SiteRecovery.Tests
                         OSType = "Windows",
                         VHDId = (protectableItem.Properties.CustomDetails as HyperVVirtualMachineDetails).DiskDetailsList[0].VHDId,
                         VmName = protectableItem.Properties.FriendlyName,
-                        StorageAccountName = "bvtmapped2storacc",
-                        StorageAccountSubscriptionId = "19b823e2-d1f3-4805-93d7-401c5d8230d5"
+                        StorageAccountId = "/subscriptions/19b823e2-d1f3-4805-93d7-401c5d8230d5/resourceGroups/Default-Storage-WestUS/providers/Microsoft.ClassicStorage/storageAccounts/bvtmapped2storacc",
                     };
 
                     EnableProtectionInputProperties enableDRProp = new EnableProtectionInputProperties()
@@ -858,7 +845,7 @@ namespace SiteRecovery.Tests
                     PlannedFailoverInputProperties plannedFailoverProp = new PlannedFailoverInputProperties()
                     {
                         FailoverDirection = "",
-                        ProviderConfigurationSettings = hvrAFOInput
+                        ProviderSpecificInput = hvrAFOInput
                     };
 
                     PlannedFailoverInput plannedFailoverInput = new PlannedFailoverInput()
@@ -874,7 +861,7 @@ namespace SiteRecovery.Tests
                     PlannedFailoverInputProperties plannedFailbackProp = new PlannedFailoverInputProperties()
                     {
                         FailoverDirection = "",
-                        ProviderConfigurationSettings = hvrAFBInput
+                        ProviderSpecificInput = hvrAFBInput
                     };
 
                     PlannedFailoverInput plannedFailbackInput = new PlannedFailoverInput()
@@ -888,8 +875,7 @@ namespace SiteRecovery.Tests
                         OSType = "Windows",
                         VHDId = (protectableItem.Properties.CustomDetails as HyperVVirtualMachineDetails).DiskDetailsList[0].VHDId,
                         VmName = protectableItem.Properties.FriendlyName,
-                        StorageAccountName = "bvtmapped2storacc",
-                        StorageAccountSubscriptionId = "19b823e2-d1f3-4805-93d7-401c5d8230d5"
+                        StorageAccountId = "/subscriptions/19b823e2-d1f3-4805-93d7-401c5d8230d5/resourceGroups/Default-Storage-WestUS/providers/Microsoft.ClassicStorage/storageAccounts/bvtmapped2storacc",
                     };
 
                     ReverseReplicationInputProperties rrProp = new ReverseReplicationInputProperties()
@@ -906,7 +892,7 @@ namespace SiteRecovery.Tests
                     ////////////////////////////////// UFO /////////////////////////////////////////
                     UnplannedFailoverInputProperties ufoProp = new UnplannedFailoverInputProperties()
                     {
-                        ProviderConfigurationSettings = hvrAFOInput,
+                        ProviderSpecificInput = hvrAFOInput,
                         SourceSiteOperations = "NotRequired"
                     };
 
@@ -918,7 +904,7 @@ namespace SiteRecovery.Tests
                     /////////////////////////////////// TFO /////////////////////////////////////////////
                     TestFailoverInputProperties tfoProp = new TestFailoverInputProperties()
                     {
-                        ProviderConfigurationSettings = hvrAFOInput
+                        ProviderSpecificInput = hvrAFOInput
                     };
 
                     TestFailoverInput tfoInput = new TestFailoverInput()

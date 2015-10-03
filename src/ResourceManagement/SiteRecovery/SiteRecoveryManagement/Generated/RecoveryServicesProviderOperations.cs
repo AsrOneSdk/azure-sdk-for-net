@@ -72,6 +72,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <param name='providerName'>
         /// Required. Provider Name.
         /// </param>
+        /// <param name='input'>
+        /// Required. Deletion input.
+        /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
         /// </param>
@@ -81,7 +84,186 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public async Task<LongRunningOperationResponse> BeginDeletingAsync(string fabricName, string providerName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        public async Task<LongRunningOperationResponse> BeginDeletingAsync(string fabricName, string providerName, RecoveryServicesProviderDeletionInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        {
+            // Validate
+            if (fabricName == null)
+            {
+                throw new ArgumentNullException("fabricName");
+            }
+            if (providerName == null)
+            {
+                throw new ArgumentNullException("providerName");
+            }
+            if (input == null)
+            {
+                throw new ArgumentNullException("input");
+            }
+            if (input.Properties == null)
+            {
+                throw new ArgumentNullException("input.Properties");
+            }
+            
+            // Tracing
+            bool shouldTrace = TracingAdapter.IsEnabled;
+            string invocationId = null;
+            if (shouldTrace)
+            {
+                invocationId = TracingAdapter.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("fabricName", fabricName);
+                tracingParameters.Add("providerName", providerName);
+                tracingParameters.Add("input", input);
+                tracingParameters.Add("customRequestHeaders", customRequestHeaders);
+                TracingAdapter.Enter(invocationId, this, "BeginDeletingAsync", tracingParameters);
+            }
+            
+            // Construct URL
+            string url = "";
+            url = url + "/Subscriptions/";
+            if (this.Client.Credentials.SubscriptionId != null)
+            {
+                url = url + Uri.EscapeDataString(this.Client.Credentials.SubscriptionId);
+            }
+            url = url + "/resourceGroups/";
+            url = url + Uri.EscapeDataString(this.Client.ResourceGroupName);
+            url = url + "/providers/";
+            url = url + Uri.EscapeDataString(this.Client.ResourceNamespace);
+            url = url + "/";
+            url = url + Uri.EscapeDataString(this.Client.ResourceType);
+            url = url + "/";
+            url = url + Uri.EscapeDataString(this.Client.ResourceName);
+            url = url + "/replicationFabrics/";
+            url = url + Uri.EscapeDataString(fabricName);
+            url = url + "/replicationRecoveryServicesProviders/";
+            url = url + Uri.EscapeDataString(providerName);
+            List<string> queryParameters = new List<string>();
+            queryParameters.Add("api-version=2015-11-10");
+            if (queryParameters.Count > 0)
+            {
+                url = url + "?" + string.Join("&", queryParameters);
+            }
+            string baseUrl = this.Client.BaseUri.AbsoluteUri;
+            // Trim '/' character from the end of baseUrl and beginning of url.
+            if (baseUrl[baseUrl.Length - 1] == '/')
+            {
+                baseUrl = baseUrl.Substring(0, baseUrl.Length - 1);
+            }
+            if (url[0] == '/')
+            {
+                url = url.Substring(1);
+            }
+            url = baseUrl + "/" + url;
+            url = url.Replace(" ", "%20");
+            
+            // Create HTTP transport objects
+            HttpRequestMessage httpRequest = null;
+            try
+            {
+                httpRequest = new HttpRequestMessage();
+                httpRequest.Method = HttpMethod.Post;
+                httpRequest.RequestUri = new Uri(url);
+                
+                // Set Headers
+                httpRequest.Headers.Add("Accept", "application/Json");
+                httpRequest.Headers.Add("Agent-Authentication", customRequestHeaders.AgentAuthenticationHeader);
+                httpRequest.Headers.Add("x-ms-client-request-id", customRequestHeaders.ClientRequestId);
+                httpRequest.Headers.Add("x-ms-version", "2015-01-01");
+                
+                // Set Credentials
+                cancellationToken.ThrowIfCancellationRequested();
+                await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+                
+                // Send Request
+                HttpResponseMessage httpResponse = null;
+                try
+                {
+                    if (shouldTrace)
+                    {
+                        TracingAdapter.SendRequest(invocationId, httpRequest);
+                    }
+                    cancellationToken.ThrowIfCancellationRequested();
+                    httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+                    if (shouldTrace)
+                    {
+                        TracingAdapter.ReceiveResponse(invocationId, httpResponse);
+                    }
+                    HttpStatusCode statusCode = httpResponse.StatusCode;
+                    if (statusCode != HttpStatusCode.OK && statusCode != HttpStatusCode.Accepted)
+                    {
+                        cancellationToken.ThrowIfCancellationRequested();
+                        CloudException ex = CloudException.Create(httpRequest, null, httpResponse, await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false));
+                        if (shouldTrace)
+                        {
+                            TracingAdapter.Error(invocationId, ex);
+                        }
+                        throw ex;
+                    }
+                    
+                    // Create Result
+                    LongRunningOperationResponse result = null;
+                    // Deserialize Response
+                    result = new LongRunningOperationResponse();
+                    result.StatusCode = statusCode;
+                    if (httpResponse.Headers.Contains("Azure-AsyncOperation"))
+                    {
+                        result.AsyncOperation = httpResponse.Headers.GetValues("Azure-AsyncOperation").FirstOrDefault();
+                    }
+                    if (httpResponse.Headers.Contains("Location"))
+                    {
+                        result.Location = httpResponse.Headers.GetValues("Location").FirstOrDefault();
+                    }
+                    if (httpResponse.Headers.Contains("Retry-After"))
+                    {
+                        result.RetryAfter = int.Parse(httpResponse.Headers.GetValues("Retry-After").FirstOrDefault(), CultureInfo.InvariantCulture);
+                    }
+                    if (httpResponse.Headers.Contains("x-ms-request-id"))
+                    {
+                        result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    
+                    if (shouldTrace)
+                    {
+                        TracingAdapter.Exit(invocationId, result);
+                    }
+                    return result;
+                }
+                finally
+                {
+                    if (httpResponse != null)
+                    {
+                        httpResponse.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (httpRequest != null)
+                {
+                    httpRequest.Dispose();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Purges a provider
+        /// </summary>
+        /// <param name='fabricName'>
+        /// Required. Name of provider's fabric
+        /// </param>
+        /// <param name='providerName'>
+        /// Required. Provider Name.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Optional. Request header parameters.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
+        /// A standard service response for long running operations.
+        /// </returns>
+        public async Task<LongRunningOperationResponse> BeginPurgingAsync(string fabricName, string providerName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
         {
             // Validate
             if (fabricName == null)
@@ -103,7 +285,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 tracingParameters.Add("fabricName", fabricName);
                 tracingParameters.Add("providerName", providerName);
                 tracingParameters.Add("customRequestHeaders", customRequestHeaders);
-                TracingAdapter.Enter(invocationId, this, "BeginDeletingAsync", tracingParameters);
+                TracingAdapter.Enter(invocationId, this, "BeginPurgingAsync", tracingParameters);
             }
             
             // Construct URL
@@ -413,6 +595,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <param name='providerName'>
         /// Required. Provider Name.
         /// </param>
+        /// <param name='input'>
+        /// Required. Deletion input.
+        /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
         /// </param>
@@ -422,7 +607,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public async Task<LongRunningOperationResponse> DeleteAsync(string fabricName, string providerName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        public async Task<LongRunningOperationResponse> DeleteAsync(string fabricName, string providerName, RecoveryServicesProviderDeletionInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
         {
             SiteRecoveryManagementClient client = this.Client;
             bool shouldTrace = TracingAdapter.IsEnabled;
@@ -433,12 +618,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("fabricName", fabricName);
                 tracingParameters.Add("providerName", providerName);
+                tracingParameters.Add("input", input);
                 tracingParameters.Add("customRequestHeaders", customRequestHeaders);
                 TracingAdapter.Enter(invocationId, this, "DeleteAsync", tracingParameters);
             }
             
             cancellationToken.ThrowIfCancellationRequested();
-            LongRunningOperationResponse response = await client.RecoveryServicesProvider.BeginDeletingAsync(fabricName, providerName, customRequestHeaders, cancellationToken).ConfigureAwait(false);
+            LongRunningOperationResponse response = await client.RecoveryServicesProvider.BeginDeletingAsync(fabricName, providerName, input, customRequestHeaders, cancellationToken).ConfigureAwait(false);
             if (response.Status == OperationStatus.Succeeded)
             {
                 return response;
@@ -923,6 +1109,187 @@ namespace Microsoft.Azure.Management.SiteRecovery
                         result.Status = OperationStatus.Succeeded;
                     }
                     if (statusCode == HttpStatusCode.OK)
+                    {
+                        result.Status = OperationStatus.Succeeded;
+                    }
+                    
+                    if (shouldTrace)
+                    {
+                        TracingAdapter.Exit(invocationId, result);
+                    }
+                    return result;
+                }
+                finally
+                {
+                    if (httpResponse != null)
+                    {
+                        httpResponse.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (httpRequest != null)
+                {
+                    httpRequest.Dispose();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// The Get Operation Status operation returns the status of the
+        /// specified operation. After calling an asynchronous operation, you
+        /// can call Get Operation Status to determine whether the operation
+        /// has succeeded, failed, or is still in progress.
+        /// </summary>
+        /// <param name='operationStatusLink'>
+        /// Required. Location value returned by the Begin operation.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
+        /// A standard service response for long running operations.
+        /// </returns>
+        public async Task<LongRunningOperationResponse> GetPurgeStatusAsync(string operationStatusLink, CancellationToken cancellationToken)
+        {
+            // Validate
+            if (operationStatusLink == null)
+            {
+                throw new ArgumentNullException("operationStatusLink");
+            }
+            
+            // Tracing
+            bool shouldTrace = TracingAdapter.IsEnabled;
+            string invocationId = null;
+            if (shouldTrace)
+            {
+                invocationId = TracingAdapter.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("operationStatusLink", operationStatusLink);
+                TracingAdapter.Enter(invocationId, this, "GetPurgeStatusAsync", tracingParameters);
+            }
+            
+            // Construct URL
+            string url = "";
+            url = url + operationStatusLink;
+            url = url.Replace(" ", "%20");
+            
+            // Create HTTP transport objects
+            HttpRequestMessage httpRequest = null;
+            try
+            {
+                httpRequest = new HttpRequestMessage();
+                httpRequest.Method = HttpMethod.Get;
+                httpRequest.RequestUri = new Uri(url);
+                
+                // Set Headers
+                httpRequest.Headers.Add("Accept", "application/Json");
+                httpRequest.Headers.Add("x-ms-client-request-id", Guid.NewGuid().ToString());
+                httpRequest.Headers.Add("x-ms-version", "2015-01-01");
+                
+                // Set Credentials
+                cancellationToken.ThrowIfCancellationRequested();
+                await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+                
+                // Send Request
+                HttpResponseMessage httpResponse = null;
+                try
+                {
+                    if (shouldTrace)
+                    {
+                        TracingAdapter.SendRequest(invocationId, httpRequest);
+                    }
+                    cancellationToken.ThrowIfCancellationRequested();
+                    httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+                    if (shouldTrace)
+                    {
+                        TracingAdapter.ReceiveResponse(invocationId, httpResponse);
+                    }
+                    HttpStatusCode statusCode = httpResponse.StatusCode;
+                    if (statusCode != HttpStatusCode.OK && statusCode != HttpStatusCode.Accepted && statusCode != HttpStatusCode.NoContent)
+                    {
+                        cancellationToken.ThrowIfCancellationRequested();
+                        CloudException ex = CloudException.Create(httpRequest, null, httpResponse, await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false));
+                        if (shouldTrace)
+                        {
+                            TracingAdapter.Error(invocationId, ex);
+                        }
+                        throw ex;
+                    }
+                    
+                    // Create Result
+                    LongRunningOperationResponse result = null;
+                    // Deserialize Response
+                    if (statusCode == HttpStatusCode.OK || statusCode == HttpStatusCode.Accepted || statusCode == HttpStatusCode.NoContent)
+                    {
+                        cancellationToken.ThrowIfCancellationRequested();
+                        string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        result = new LongRunningOperationResponse();
+                        JToken responseDoc = null;
+                        if (string.IsNullOrEmpty(responseContent) == false)
+                        {
+                            responseDoc = JToken.Parse(responseContent);
+                        }
+                        
+                        if (responseDoc != null && responseDoc.Type != JTokenType.Null)
+                        {
+                            JToken locationValue = responseDoc["Location"];
+                            if (locationValue != null && locationValue.Type != JTokenType.Null)
+                            {
+                                string locationInstance = ((string)locationValue);
+                                result.Location = locationInstance;
+                            }
+                            
+                            JToken retryAfterValue = responseDoc["RetryAfter"];
+                            if (retryAfterValue != null && retryAfterValue.Type != JTokenType.Null)
+                            {
+                                int retryAfterInstance = ((int)retryAfterValue);
+                                result.RetryAfter = retryAfterInstance;
+                            }
+                            
+                            JToken asyncOperationValue = responseDoc["AsyncOperation"];
+                            if (asyncOperationValue != null && asyncOperationValue.Type != JTokenType.Null)
+                            {
+                                string asyncOperationInstance = ((string)asyncOperationValue);
+                                result.AsyncOperation = asyncOperationInstance;
+                            }
+                            
+                            JToken statusValue = responseDoc["Status"];
+                            if (statusValue != null && statusValue.Type != JTokenType.Null)
+                            {
+                                OperationStatus statusInstance = ((OperationStatus)Enum.Parse(typeof(OperationStatus), ((string)statusValue), true));
+                                result.Status = statusInstance;
+                            }
+                        }
+                        
+                    }
+                    result.StatusCode = statusCode;
+                    if (httpResponse.Headers.Contains("Azure-AsyncOperation"))
+                    {
+                        result.AsyncOperation = httpResponse.Headers.GetValues("Azure-AsyncOperation").FirstOrDefault();
+                    }
+                    if (httpResponse.Headers.Contains("Location"))
+                    {
+                        result.Location = httpResponse.Headers.GetValues("Location").FirstOrDefault();
+                    }
+                    if (httpResponse.Headers.Contains("Retry-After"))
+                    {
+                        result.RetryAfter = int.Parse(httpResponse.Headers.GetValues("Retry-After").FirstOrDefault(), CultureInfo.InvariantCulture);
+                    }
+                    if (httpResponse.Headers.Contains("x-ms-request-id"))
+                    {
+                        result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    if (statusCode == HttpStatusCode.OK)
+                    {
+                        result.Status = OperationStatus.Failed;
+                    }
+                    if (statusCode == HttpStatusCode.Accepted)
+                    {
+                        result.Status = OperationStatus.InProgress;
+                    }
+                    if (statusCode == HttpStatusCode.NoContent)
                     {
                         result.Status = OperationStatus.Succeeded;
                     }
@@ -1725,6 +2092,73 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     httpRequest.Dispose();
                 }
             }
+        }
+        
+        /// <summary>
+        /// Purges a provider
+        /// </summary>
+        /// <param name='fabricName'>
+        /// Required. Name of provider's fabric
+        /// </param>
+        /// <param name='providerName'>
+        /// Required. Provider Name.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Optional. Request header parameters.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
+        /// A standard service response for long running operations.
+        /// </returns>
+        public async Task<LongRunningOperationResponse> PurgeAsync(string fabricName, string providerName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        {
+            SiteRecoveryManagementClient client = this.Client;
+            bool shouldTrace = TracingAdapter.IsEnabled;
+            string invocationId = null;
+            if (shouldTrace)
+            {
+                invocationId = TracingAdapter.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("fabricName", fabricName);
+                tracingParameters.Add("providerName", providerName);
+                tracingParameters.Add("customRequestHeaders", customRequestHeaders);
+                TracingAdapter.Enter(invocationId, this, "PurgeAsync", tracingParameters);
+            }
+            
+            cancellationToken.ThrowIfCancellationRequested();
+            LongRunningOperationResponse response = await client.RecoveryServicesProvider.BeginPurgingAsync(fabricName, providerName, customRequestHeaders, cancellationToken).ConfigureAwait(false);
+            if (response.Status == OperationStatus.Succeeded)
+            {
+                return response;
+            }
+            cancellationToken.ThrowIfCancellationRequested();
+            LongRunningOperationResponse result = await client.RecoveryServicesProvider.GetPurgeStatusAsync(response.Location, cancellationToken).ConfigureAwait(false);
+            int delayInSeconds = 30;
+            if (client.LongRunningOperationInitialTimeout >= 0)
+            {
+                delayInSeconds = client.LongRunningOperationInitialTimeout;
+            }
+            while ((result.Status != OperationStatus.InProgress) == false)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                await TaskEx.Delay(delayInSeconds * 1000, cancellationToken).ConfigureAwait(false);
+                cancellationToken.ThrowIfCancellationRequested();
+                result = await client.RecoveryServicesProvider.GetPurgeStatusAsync(response.Location, cancellationToken).ConfigureAwait(false);
+                delayInSeconds = 30;
+                if (client.LongRunningOperationRetryTimeout >= 0)
+                {
+                    delayInSeconds = client.LongRunningOperationRetryTimeout;
+                }
+            }
+            
+            if (shouldTrace)
+            {
+                TracingAdapter.Exit(invocationId, result);
+            }
+            
+            return result;
         }
         
         /// <summary>

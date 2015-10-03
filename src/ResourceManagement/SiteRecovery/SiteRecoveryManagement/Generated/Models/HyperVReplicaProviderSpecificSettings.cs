@@ -32,6 +32,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class HyperVReplicaProviderSpecificSettings : ReplicationProviderSpecificSettings
     {
+        private InitialReplicationDetails _initialReplicationDetails;
+        
+        /// <summary>
+        /// Optional. Gets or sets initial replication details.
+        /// </summary>
+        public InitialReplicationDetails InitialReplicationDetails
+        {
+            get { return this._initialReplicationDetails; }
+            set { this._initialReplicationDetails = value; }
+        }
+        
         private string _lastReplicatedTime;
         
         /// <summary>
@@ -41,17 +52,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         {
             get { return this._lastReplicatedTime; }
             set { this._lastReplicatedTime = value; }
-        }
-        
-        private IList<HyperVReplicaProviderNetworkDetails> _networkDetails;
-        
-        /// <summary>
-        /// Optional. Gets or sets the network details.
-        /// </summary>
-        public IList<HyperVReplicaProviderNetworkDetails> NetworkDetails
-        {
-            get { return this._networkDetails; }
-            set { this._networkDetails = value; }
         }
         
         private IList<DiskDetails> _vMDiskDetails;
@@ -65,14 +65,25 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._vMDiskDetails = value; }
         }
         
+        private IList<VMNicDetails> _vmNics;
+        
+        /// <summary>
+        /// Optional. Gets or sets the network details.
+        /// </summary>
+        public IList<VMNicDetails> VmNics
+        {
+            get { return this._vmNics; }
+            set { this._vmNics = value; }
+        }
+        
         /// <summary>
         /// Initializes a new instance of the
         /// HyperVReplicaProviderSpecificSettings class.
         /// </summary>
         public HyperVReplicaProviderSpecificSettings()
         {
-            this.NetworkDetails = new LazyList<HyperVReplicaProviderNetworkDetails>();
             this.VMDiskDetails = new LazyList<DiskDetails>();
+            this.VmNics = new LazyList<VMNicDetails>();
         }
     }
 }

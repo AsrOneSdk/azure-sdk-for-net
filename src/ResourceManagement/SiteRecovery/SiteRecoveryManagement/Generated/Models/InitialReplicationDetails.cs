@@ -21,42 +21,40 @@
 
 using System;
 using System.Linq;
-using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// The definition of a PlannedFailoverInput properties object.
+    /// Hyper V Replica Provider network details.
     /// </summary>
-    public partial class PlannedFailoverInputProperties
+    public partial class InitialReplicationDetails
     {
-        private string _failoverDirection;
+        private string _initialReplicationProgressPercentage;
         
         /// <summary>
-        /// Optional. Gets or sets Failover direction
+        /// Optional. Gets or sets the initial replication progress percentage.
         /// </summary>
-        public string FailoverDirection
+        public string InitialReplicationProgressPercentage
         {
-            get { return this._failoverDirection; }
-            set { this._failoverDirection = value; }
+            get { return this._initialReplicationProgressPercentage; }
+            set { this._initialReplicationProgressPercentage = value; }
         }
         
-        private ProviderSpecificFailoverInput _providerSpecificInput;
+        private string _initialReplicationType;
         
         /// <summary>
-        /// Optional. Gets or sets Provider specific settings.
+        /// Optional. Gets or sets initial replication type.
         /// </summary>
-        public ProviderSpecificFailoverInput ProviderSpecificInput
+        public string InitialReplicationType
         {
-            get { return this._providerSpecificInput; }
-            set { this._providerSpecificInput = value; }
+            get { return this._initialReplicationType; }
+            set { this._initialReplicationType = value; }
         }
         
         /// <summary>
-        /// Initializes a new instance of the PlannedFailoverInputProperties
-        /// class.
+        /// Initializes a new instance of the InitialReplicationDetails class.
         /// </summary>
-        public PlannedFailoverInputProperties()
+        public InitialReplicationDetails()
         {
         }
     }

@@ -174,9 +174,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     JObject propertiesValue = new JObject();
                     createPolicyInputValue["properties"] = propertiesValue;
                     
-                    if (input.Properties.RecoveryProvider != null)
+                    if (input.Properties.ReplicationProvider != null)
                     {
-                        propertiesValue["recoveryProvider"] = input.Properties.RecoveryProvider;
+                        propertiesValue["replicationProvider"] = input.Properties.ReplicationProvider;
                     }
                     
                     if (input.Properties.ProviderSpecificInput != null)
@@ -249,20 +249,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 if (derived2.StorageAccounts is ILazyCollection == false || ((ILazyCollection)derived2.StorageAccounts).IsInitialized)
                                 {
                                     JArray storageAccountsArray = new JArray();
-                                    foreach (CustomerStorageAccount storageAccountsItem in derived2.StorageAccounts)
+                                    foreach (string storageAccountsItem in derived2.StorageAccounts)
                                     {
-                                        JObject customerStorageAccountValue = new JObject();
-                                        storageAccountsArray.Add(customerStorageAccountValue);
-                                        
-                                        if (storageAccountsItem.StorageAccountName != null)
-                                        {
-                                            customerStorageAccountValue["storageAccountName"] = storageAccountsItem.StorageAccountName;
-                                        }
-                                        
-                                        if (storageAccountsItem.SubscriptionId != null)
-                                        {
-                                            customerStorageAccountValue["subscriptionId"] = storageAccountsItem.SubscriptionId;
-                                        }
+                                        storageAccountsArray.Add(storageAccountsItem);
                                     }
                                     providerSpecificInputValue["storageAccounts"] = storageAccountsArray;
                                 }
@@ -720,20 +709,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
                             if (derived2.StorageAccounts is ILazyCollection == false || ((ILazyCollection)derived2.StorageAccounts).IsInitialized)
                             {
                                 JArray storageAccountsArray = new JArray();
-                                foreach (CustomerStorageAccount storageAccountsItem in derived2.StorageAccounts)
+                                foreach (string storageAccountsItem in derived2.StorageAccounts)
                                 {
-                                    JObject customerStorageAccountValue = new JObject();
-                                    storageAccountsArray.Add(customerStorageAccountValue);
-                                    
-                                    if (storageAccountsItem.StorageAccountName != null)
-                                    {
-                                        customerStorageAccountValue["storageAccountName"] = storageAccountsItem.StorageAccountName;
-                                    }
-                                    
-                                    if (storageAccountsItem.SubscriptionId != null)
-                                    {
-                                        customerStorageAccountValue["subscriptionId"] = storageAccountsItem.SubscriptionId;
-                                    }
+                                    storageAccountsArray.Add(storageAccountsItem);
                                 }
                                 replicationProviderSettingsValue["storageAccounts"] = storageAccountsArray;
                             }
@@ -1121,11 +1099,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.FriendlyName = friendlyNameInstance;
                                 }
                                 
-                                JToken recoveryProviderValue = propertiesValue["recoveryProvider"];
-                                if (recoveryProviderValue != null && recoveryProviderValue.Type != JTokenType.Null)
+                                JToken replicationProviderValue = propertiesValue["replicationProvider"];
+                                if (replicationProviderValue != null && replicationProviderValue.Type != JTokenType.Null)
                                 {
-                                    string recoveryProviderInstance = ((string)recoveryProviderValue);
-                                    propertiesInstance.RecoveryProvider = recoveryProviderInstance;
+                                    string replicationProviderInstance = ((string)replicationProviderValue);
+                                    propertiesInstance.ReplicationProvider = replicationProviderInstance;
                                 }
                                 
                                 JToken providerSpecificDetailsValue = propertiesValue["providerSpecificDetails"];
@@ -1476,11 +1454,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.FriendlyName = friendlyNameInstance;
                                 }
                                 
-                                JToken recoveryProviderValue = propertiesValue["recoveryProvider"];
-                                if (recoveryProviderValue != null && recoveryProviderValue.Type != JTokenType.Null)
+                                JToken replicationProviderValue = propertiesValue["replicationProvider"];
+                                if (replicationProviderValue != null && replicationProviderValue.Type != JTokenType.Null)
                                 {
-                                    string recoveryProviderInstance = ((string)recoveryProviderValue);
-                                    propertiesInstance.RecoveryProvider = recoveryProviderInstance;
+                                    string replicationProviderInstance = ((string)replicationProviderValue);
+                                    propertiesInstance.ReplicationProvider = replicationProviderInstance;
                                 }
                                 
                                 JToken providerSpecificDetailsValue = propertiesValue["providerSpecificDetails"];
@@ -2064,11 +2042,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.FriendlyName = friendlyNameInstance;
                                 }
                                 
-                                JToken recoveryProviderValue = propertiesValue["recoveryProvider"];
-                                if (recoveryProviderValue != null && recoveryProviderValue.Type != JTokenType.Null)
+                                JToken replicationProviderValue = propertiesValue["replicationProvider"];
+                                if (replicationProviderValue != null && replicationProviderValue.Type != JTokenType.Null)
                                 {
-                                    string recoveryProviderInstance = ((string)recoveryProviderValue);
-                                    propertiesInstance.RecoveryProvider = recoveryProviderInstance;
+                                    string replicationProviderInstance = ((string)replicationProviderValue);
+                                    propertiesInstance.ReplicationProvider = replicationProviderInstance;
                                 }
                                 
                                 JToken providerSpecificDetailsValue = propertiesValue["providerSpecificDetails"];
@@ -2498,11 +2476,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             propertiesInstance.FriendlyName = friendlyNameInstance;
                                         }
                                         
-                                        JToken recoveryProviderValue = propertiesValue["recoveryProvider"];
-                                        if (recoveryProviderValue != null && recoveryProviderValue.Type != JTokenType.Null)
+                                        JToken replicationProviderValue = propertiesValue["replicationProvider"];
+                                        if (replicationProviderValue != null && replicationProviderValue.Type != JTokenType.Null)
                                         {
-                                            string recoveryProviderInstance = ((string)recoveryProviderValue);
-                                            propertiesInstance.RecoveryProvider = recoveryProviderInstance;
+                                            string replicationProviderInstance = ((string)replicationProviderValue);
+                                            propertiesInstance.ReplicationProvider = replicationProviderInstance;
                                         }
                                         
                                         JToken providerSpecificDetailsValue = propertiesValue["providerSpecificDetails"];

@@ -84,7 +84,7 @@ namespace SiteRecovery.Tests
 
                 CreatePolicyInputProperties policyCreationProp = new CreatePolicyInputProperties()
                 {
-                    RecoveryProvider = "HyperVReplica",
+                    ReplicationProvider = "HyperVReplica",
                     ProviderSpecificInput = hvrProfileInput
                 };
 
@@ -149,20 +149,12 @@ namespace SiteRecovery.Tests
                     OnlineIrStartTime = null,
                     RecoveryPointHistoryDuration = 0,
                     ReplicationInterval = 30,
-                    StorageAccounts = new List<CustomerStorageAccount>()
+                    StorageAccounts = new List<string>() { "/subscriptions/19b823e2-d1f3-4805-93d7-401c5d8230d5/resourceGroups/Default-Storage-WestUS/providers/Microsoft.ClassicStorage/storageAccounts/bvtmapped2storacc" }
                 };
-
-                CustomerStorageAccount strgAcc = new CustomerStorageAccount()
-                {
-                    StorageAccountName = "ramjsingstorage",
-                    SubscriptionId = "33050569-6b4a-43e9-a1b1-2477b1e21136"
-                };
-
-                hvrAPolicy.StorageAccounts.Add(strgAcc);
 
                 CreatePolicyInputProperties createInputProp = new CreatePolicyInputProperties()
                 {
-                    RecoveryProvider = "HyperVReplicaAzure",
+                    ReplicationProvider = "HyperVReplicaAzure",
                     ProviderSpecificInput = hvrAPolicy
                 };
 

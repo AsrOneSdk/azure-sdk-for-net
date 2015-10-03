@@ -64,15 +64,15 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._networkType = value; }
         }
         
-        private ProviderSpecificFailoverInput _providerConfigurationSettings;
+        private ProviderSpecificFailoverInput _providerSpecificInput;
         
         /// <summary>
         /// Optional. Gets or sets Provider specific settings.
         /// </summary>
-        public ProviderSpecificFailoverInput ProviderConfigurationSettings
+        public ProviderSpecificFailoverInput ProviderSpecificInput
         {
-            get { return this._providerConfigurationSettings; }
-            set { this._providerConfigurationSettings = value; }
+            get { return this._providerSpecificInput; }
+            set { this._providerSpecificInput = value; }
         }
         
         /// <summary>

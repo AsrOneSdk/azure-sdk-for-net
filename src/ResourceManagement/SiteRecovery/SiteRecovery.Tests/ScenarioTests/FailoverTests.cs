@@ -103,7 +103,7 @@ namespace SiteRecovery.Tests
                 TestFailoverInputProperties tfoProp = new TestFailoverInputProperties()
                 {
                     FailoverDirection = "RecoveryToPrimary",
-                    ProviderConfigurationSettings = new ProviderSpecificFailoverInput()
+                    ProviderSpecificInput = new ProviderSpecificFailoverInput()
                 };
 
                 TestFailoverInput tfoInput = new TestFailoverInput()
@@ -152,7 +152,7 @@ namespace SiteRecovery.Tests
                 {
                     FailoverDirection = "RecoveryToPrimary",
                     SourceSiteOperations = "NotRequired",
-                    ProviderConfigurationSettings = new ProviderSpecificFailoverInput()
+                    ProviderSpecificInput = new ProviderSpecificFailoverInput()
                 };
 
                 UnplannedFailoverInput ufoInput = new UnplannedFailoverInput()

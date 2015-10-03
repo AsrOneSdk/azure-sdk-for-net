@@ -32,15 +32,26 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class HyperVReplicaAzureProviderSpecificSettings : ReplicationProviderSpecificSettings
     {
-        private AzureVmDiskDetails _azureVMDiskDetails;
+        private IList<AzureVmDiskDetails> _azureVMDiskDetails;
         
         /// <summary>
         /// Optional. Gets or sets Azure VM Disk details.
         /// </summary>
-        public AzureVmDiskDetails AzureVMDiskDetails
+        public IList<AzureVmDiskDetails> AzureVMDiskDetails
         {
             get { return this._azureVMDiskDetails; }
             set { this._azureVMDiskDetails = value; }
+        }
+        
+        private InitialReplicationDetails _initialReplicationDetails;
+        
+        /// <summary>
+        /// Optional. Gets or sets initial replication details.
+        /// </summary>
+        public InitialReplicationDetails InitialReplicationDetails
+        {
+            get { return this._initialReplicationDetails; }
+            set { this._initialReplicationDetails = value; }
         }
         
         private string _lastReplicatedTime;
@@ -54,15 +65,15 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._lastReplicatedTime = value; }
         }
         
-        private IList<HyperVReplicaAzureProviderNetworkDetails> _networkDetails;
+        private string _recoveryAzureStorageAccount;
         
         /// <summary>
-        /// Optional. Gets or sets the network details.
+        /// Optional. Gets or sets the recovery Azure storage account.
         /// </summary>
-        public IList<HyperVReplicaAzureProviderNetworkDetails> NetworkDetails
+        public string RecoveryAzureStorageAccount
         {
-            get { return this._networkDetails; }
-            set { this._networkDetails = value; }
+            get { return this._recoveryAzureStorageAccount; }
+            set { this._recoveryAzureStorageAccount = value; }
         }
         
         private string _recoveryAzureVMName;
@@ -98,13 +109,25 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._selectedRecoveryAzureNetworkId = value; }
         }
         
+        private IList<VMNicDetails> _vMNics;
+        
+        /// <summary>
+        /// Optional. Gets or sets the network details.
+        /// </summary>
+        public IList<VMNicDetails> VMNics
+        {
+            get { return this._vMNics; }
+            set { this._vMNics = value; }
+        }
+        
         /// <summary>
         /// Initializes a new instance of the
         /// HyperVReplicaAzureProviderSpecificSettings class.
         /// </summary>
         public HyperVReplicaAzureProviderSpecificSettings()
         {
-            this.NetworkDetails = new LazyList<HyperVReplicaAzureProviderNetworkDetails>();
+            this.AzureVMDiskDetails = new LazyList<AzureVmDiskDetails>();
+            this.VMNics = new LazyList<VMNicDetails>();
         }
     }
 }

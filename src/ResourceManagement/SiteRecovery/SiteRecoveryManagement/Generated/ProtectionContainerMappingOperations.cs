@@ -545,7 +545,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(protectionContainerName);
             url = url + "/replicationProtectionContainerMappings/";
             url = url + Uri.EscapeDataString(mappingName);
-            url = url + "/unconfigureProtection";
+            url = url + "/remove";
             List<string> queryParameters = new List<string>();
             queryParameters.Add("api-version=2015-11-10");
             if (queryParameters.Count > 0)

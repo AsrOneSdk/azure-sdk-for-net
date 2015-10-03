@@ -26,38 +26,43 @@ using Microsoft.Azure.Management.SiteRecovery.Models;
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// The definition of a PlannedFailoverInput properties object.
+    /// The definition of a recovery services provider deletion object.
     /// </summary>
-    public partial class PlannedFailoverInputProperties
+    public partial class RecoveryServicesProviderDeletionInput
     {
-        private string _failoverDirection;
+        private RecoveryServicesProviderDeletionInputProperties _properties;
         
         /// <summary>
-        /// Optional. Gets or sets Failover direction
+        /// Required. Properties of the recovery services provider deletion
+        /// input.
         /// </summary>
-        public string FailoverDirection
+        public RecoveryServicesProviderDeletionInputProperties Properties
         {
-            get { return this._failoverDirection; }
-            set { this._failoverDirection = value; }
-        }
-        
-        private ProviderSpecificFailoverInput _providerSpecificInput;
-        
-        /// <summary>
-        /// Optional. Gets or sets Provider specific settings.
-        /// </summary>
-        public ProviderSpecificFailoverInput ProviderSpecificInput
-        {
-            get { return this._providerSpecificInput; }
-            set { this._providerSpecificInput = value; }
+            get { return this._properties; }
+            set { this._properties = value; }
         }
         
         /// <summary>
-        /// Initializes a new instance of the PlannedFailoverInputProperties
-        /// class.
+        /// Initializes a new instance of the
+        /// RecoveryServicesProviderDeletionInput class.
         /// </summary>
-        public PlannedFailoverInputProperties()
+        public RecoveryServicesProviderDeletionInput()
         {
+        }
+        
+        /// <summary>
+        /// Initializes a new instance of the
+        /// RecoveryServicesProviderDeletionInput class with required
+        /// arguments.
+        /// </summary>
+        public RecoveryServicesProviderDeletionInput(RecoveryServicesProviderDeletionInputProperties properties)
+            : this()
+        {
+            if (properties == null)
+            {
+                throw new ArgumentNullException("properties");
+            }
+            this.Properties = properties;
         }
     }
 }

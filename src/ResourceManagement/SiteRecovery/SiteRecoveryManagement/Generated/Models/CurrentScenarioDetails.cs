@@ -21,42 +21,51 @@
 
 using System;
 using System.Linq;
-using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// The definition of a PlannedFailoverInput properties object.
+    /// Current scenario details.
     /// </summary>
-    public partial class PlannedFailoverInputProperties
+    public partial class CurrentScenarioDetails
     {
-        private string _failoverDirection;
+        private string _jobId;
         
         /// <summary>
-        /// Optional. Gets or sets Failover direction
+        /// Optional. Gets or sets ARM Id of the job being executed.
         /// </summary>
-        public string FailoverDirection
+        public string JobId
         {
-            get { return this._failoverDirection; }
-            set { this._failoverDirection = value; }
+            get { return this._jobId; }
+            set { this._jobId = value; }
         }
         
-        private ProviderSpecificFailoverInput _providerSpecificInput;
+        private string _scenarioName;
         
         /// <summary>
-        /// Optional. Gets or sets Provider specific settings.
+        /// Optional. Gets or sets Scenario name.
         /// </summary>
-        public ProviderSpecificFailoverInput ProviderSpecificInput
+        public string ScenarioName
         {
-            get { return this._providerSpecificInput; }
-            set { this._providerSpecificInput = value; }
+            get { return this._scenarioName; }
+            set { this._scenarioName = value; }
+        }
+        
+        private System.DateTime? _startTime;
+        
+        /// <summary>
+        /// Optional. Gets or sets Start time of the workflow.
+        /// </summary>
+        public System.DateTime? StartTime
+        {
+            get { return this._startTime; }
+            set { this._startTime = value; }
         }
         
         /// <summary>
-        /// Initializes a new instance of the PlannedFailoverInputProperties
-        /// class.
+        /// Initializes a new instance of the CurrentScenarioDetails class.
         /// </summary>
-        public PlannedFailoverInputProperties()
+        public CurrentScenarioDetails()
         {
         }
     }
