@@ -366,6 +366,98 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         }
                                         propertiesInstance.CustomDetails = hyperVVirtualMachineDetailsInstance;
                                     }
+                                    if (typeName == "VMwareVirtualMachineDetails")
+                                    {
+                                        VMwareVirtualMachineDetails vMwareVirtualMachineDetailsInstance = new VMwareVirtualMachineDetails();
+                                        
+                                        JToken agentGeneratedIdValue = customDetailsValue["agentGeneratedId"];
+                                        if (agentGeneratedIdValue != null && agentGeneratedIdValue.Type != JTokenType.Null)
+                                        {
+                                            string agentGeneratedIdInstance = ((string)agentGeneratedIdValue);
+                                            vMwareVirtualMachineDetailsInstance.AgentGeneratedId = agentGeneratedIdInstance;
+                                        }
+                                        
+                                        JToken agentInstalledValue = customDetailsValue["agentInstalled"];
+                                        if (agentInstalledValue != null && agentInstalledValue.Type != JTokenType.Null)
+                                        {
+                                            string agentInstalledInstance = ((string)agentInstalledValue);
+                                            vMwareVirtualMachineDetailsInstance.AgentInstalled = agentInstalledInstance;
+                                        }
+                                        
+                                        JToken osTypeValue2 = customDetailsValue["osType"];
+                                        if (osTypeValue2 != null && osTypeValue2.Type != JTokenType.Null)
+                                        {
+                                            string osTypeInstance2 = ((string)osTypeValue2);
+                                            vMwareVirtualMachineDetailsInstance.OsType = osTypeInstance2;
+                                        }
+                                        
+                                        JToken agentVersionValue = customDetailsValue["agentVersion"];
+                                        if (agentVersionValue != null && agentVersionValue.Type != JTokenType.Null)
+                                        {
+                                            string agentVersionInstance = ((string)agentVersionValue);
+                                            vMwareVirtualMachineDetailsInstance.AgentVersion = agentVersionInstance;
+                                        }
+                                        
+                                        JToken latestUpdateVersionValue = customDetailsValue["latestUpdateVersion"];
+                                        if (latestUpdateVersionValue != null && latestUpdateVersionValue.Type != JTokenType.Null)
+                                        {
+                                            string latestUpdateVersionInstance = ((string)latestUpdateVersionValue);
+                                            vMwareVirtualMachineDetailsInstance.LatestUpdateVersion = latestUpdateVersionInstance;
+                                        }
+                                        
+                                        JToken ipAddressValue = customDetailsValue["ipAddress"];
+                                        if (ipAddressValue != null && ipAddressValue.Type != JTokenType.Null)
+                                        {
+                                            string ipAddressInstance = ((string)ipAddressValue);
+                                            vMwareVirtualMachineDetailsInstance.IpAddress = ipAddressInstance;
+                                        }
+                                        
+                                        JToken poweredOnValue = customDetailsValue["poweredOn"];
+                                        if (poweredOnValue != null && poweredOnValue.Type != JTokenType.Null)
+                                        {
+                                            string poweredOnInstance = ((string)poweredOnValue);
+                                            vMwareVirtualMachineDetailsInstance.PoweredOn = poweredOnInstance;
+                                        }
+                                        
+                                        JToken vCenterInfrastructureIdValue = customDetailsValue["vCenterInfrastructureId"];
+                                        if (vCenterInfrastructureIdValue != null && vCenterInfrastructureIdValue.Type != JTokenType.Null)
+                                        {
+                                            string vCenterInfrastructureIdInstance = ((string)vCenterInfrastructureIdValue);
+                                            vMwareVirtualMachineDetailsInstance.VCenterInfrastructureId = vCenterInfrastructureIdInstance;
+                                        }
+                                        
+                                        JToken diskDetailsArray2 = customDetailsValue["diskDetails"];
+                                        if (diskDetailsArray2 != null && diskDetailsArray2.Type != JTokenType.Null)
+                                        {
+                                            foreach (JToken diskDetailsValue2 in ((JArray)diskDetailsArray2))
+                                            {
+                                                DiskDiscoveryDetails diskDiscoveryDetailsInstance = new DiskDiscoveryDetails();
+                                                vMwareVirtualMachineDetailsInstance.DiskDetails.Add(diskDiscoveryDetailsInstance);
+                                                
+                                                JToken diskIdValue = diskDetailsValue2["diskId"];
+                                                if (diskIdValue != null && diskIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string diskIdInstance = ((string)diskIdValue);
+                                                    diskDiscoveryDetailsInstance.DiskId = diskIdInstance;
+                                                }
+                                                
+                                                JToken diskNameValue = diskDetailsValue2["diskName"];
+                                                if (diskNameValue != null && diskNameValue.Type != JTokenType.Null)
+                                                {
+                                                    string diskNameInstance = ((string)diskNameValue);
+                                                    diskDiscoveryDetailsInstance.DiskName = diskNameInstance;
+                                                }
+                                                
+                                                JToken capacityValue = diskDetailsValue2["capacity"];
+                                                if (capacityValue != null && capacityValue.Type != JTokenType.Null)
+                                                {
+                                                    string capacityInstance = ((string)capacityValue);
+                                                    diskDiscoveryDetailsInstance.Capacity = capacityInstance;
+                                                }
+                                            }
+                                        }
+                                        propertiesInstance.CustomDetails = vMwareVirtualMachineDetailsInstance;
+                                    }
                                     if (typeName == "ReplicationGroupDetails")
                                     {
                                         ReplicationGroupDetails replicationGroupDetailsInstance = new ReplicationGroupDetails();
@@ -754,6 +846,98 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     }
                                                 }
                                                 propertiesInstance.CustomDetails = hyperVVirtualMachineDetailsInstance;
+                                            }
+                                            if (typeName == "VMwareVirtualMachineDetails")
+                                            {
+                                                VMwareVirtualMachineDetails vMwareVirtualMachineDetailsInstance = new VMwareVirtualMachineDetails();
+                                                
+                                                JToken agentGeneratedIdValue = customDetailsValue["agentGeneratedId"];
+                                                if (agentGeneratedIdValue != null && agentGeneratedIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string agentGeneratedIdInstance = ((string)agentGeneratedIdValue);
+                                                    vMwareVirtualMachineDetailsInstance.AgentGeneratedId = agentGeneratedIdInstance;
+                                                }
+                                                
+                                                JToken agentInstalledValue = customDetailsValue["agentInstalled"];
+                                                if (agentInstalledValue != null && agentInstalledValue.Type != JTokenType.Null)
+                                                {
+                                                    string agentInstalledInstance = ((string)agentInstalledValue);
+                                                    vMwareVirtualMachineDetailsInstance.AgentInstalled = agentInstalledInstance;
+                                                }
+                                                
+                                                JToken osTypeValue2 = customDetailsValue["osType"];
+                                                if (osTypeValue2 != null && osTypeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string osTypeInstance2 = ((string)osTypeValue2);
+                                                    vMwareVirtualMachineDetailsInstance.OsType = osTypeInstance2;
+                                                }
+                                                
+                                                JToken agentVersionValue = customDetailsValue["agentVersion"];
+                                                if (agentVersionValue != null && agentVersionValue.Type != JTokenType.Null)
+                                                {
+                                                    string agentVersionInstance = ((string)agentVersionValue);
+                                                    vMwareVirtualMachineDetailsInstance.AgentVersion = agentVersionInstance;
+                                                }
+                                                
+                                                JToken latestUpdateVersionValue = customDetailsValue["latestUpdateVersion"];
+                                                if (latestUpdateVersionValue != null && latestUpdateVersionValue.Type != JTokenType.Null)
+                                                {
+                                                    string latestUpdateVersionInstance = ((string)latestUpdateVersionValue);
+                                                    vMwareVirtualMachineDetailsInstance.LatestUpdateVersion = latestUpdateVersionInstance;
+                                                }
+                                                
+                                                JToken ipAddressValue = customDetailsValue["ipAddress"];
+                                                if (ipAddressValue != null && ipAddressValue.Type != JTokenType.Null)
+                                                {
+                                                    string ipAddressInstance = ((string)ipAddressValue);
+                                                    vMwareVirtualMachineDetailsInstance.IpAddress = ipAddressInstance;
+                                                }
+                                                
+                                                JToken poweredOnValue = customDetailsValue["poweredOn"];
+                                                if (poweredOnValue != null && poweredOnValue.Type != JTokenType.Null)
+                                                {
+                                                    string poweredOnInstance = ((string)poweredOnValue);
+                                                    vMwareVirtualMachineDetailsInstance.PoweredOn = poweredOnInstance;
+                                                }
+                                                
+                                                JToken vCenterInfrastructureIdValue = customDetailsValue["vCenterInfrastructureId"];
+                                                if (vCenterInfrastructureIdValue != null && vCenterInfrastructureIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string vCenterInfrastructureIdInstance = ((string)vCenterInfrastructureIdValue);
+                                                    vMwareVirtualMachineDetailsInstance.VCenterInfrastructureId = vCenterInfrastructureIdInstance;
+                                                }
+                                                
+                                                JToken diskDetailsArray2 = customDetailsValue["diskDetails"];
+                                                if (diskDetailsArray2 != null && diskDetailsArray2.Type != JTokenType.Null)
+                                                {
+                                                    foreach (JToken diskDetailsValue2 in ((JArray)diskDetailsArray2))
+                                                    {
+                                                        DiskDiscoveryDetails diskDiscoveryDetailsInstance = new DiskDiscoveryDetails();
+                                                        vMwareVirtualMachineDetailsInstance.DiskDetails.Add(diskDiscoveryDetailsInstance);
+                                                        
+                                                        JToken diskIdValue = diskDetailsValue2["diskId"];
+                                                        if (diskIdValue != null && diskIdValue.Type != JTokenType.Null)
+                                                        {
+                                                            string diskIdInstance = ((string)diskIdValue);
+                                                            diskDiscoveryDetailsInstance.DiskId = diskIdInstance;
+                                                        }
+                                                        
+                                                        JToken diskNameValue = diskDetailsValue2["diskName"];
+                                                        if (diskNameValue != null && diskNameValue.Type != JTokenType.Null)
+                                                        {
+                                                            string diskNameInstance = ((string)diskNameValue);
+                                                            diskDiscoveryDetailsInstance.DiskName = diskNameInstance;
+                                                        }
+                                                        
+                                                        JToken capacityValue = diskDetailsValue2["capacity"];
+                                                        if (capacityValue != null && capacityValue.Type != JTokenType.Null)
+                                                        {
+                                                            string capacityInstance = ((string)capacityValue);
+                                                            diskDiscoveryDetailsInstance.Capacity = capacityInstance;
+                                                        }
+                                                    }
+                                                }
+                                                propertiesInstance.CustomDetails = vMwareVirtualMachineDetailsInstance;
                                             }
                                             if (typeName == "ReplicationGroupDetails")
                                             {

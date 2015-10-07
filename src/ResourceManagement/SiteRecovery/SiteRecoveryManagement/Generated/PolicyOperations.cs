@@ -287,6 +287,24 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 providerSpecificInputValue["remoteArrayUniqueId"] = derived3.RemoteArrayUniqueId;
                             }
                         }
+                        if (input.Properties.ProviderSpecificInput is VMwareAzureV2PolicyInput)
+                        {
+                            providerSpecificInputValue["__type"] = "VMwareAzureV2PolicyInput";
+                            VMwareAzureV2PolicyInput derived4 = ((VMwareAzureV2PolicyInput)input.Properties.ProviderSpecificInput);
+                            
+                            providerSpecificInputValue["recoveryPointThresholdInMinutes"] = derived4.RecoveryPointThresholdInMinutes;
+                            
+                            providerSpecificInputValue["recoveryPointHistory"] = derived4.RecoveryPointHistory;
+                            
+                            providerSpecificInputValue["crashConsistentFrequencyInMinutes"] = derived4.CrashConsistentFrequencyInMinutes;
+                            
+                            providerSpecificInputValue["appConsistentFrequencyInMinutes"] = derived4.AppConsistentFrequencyInMinutes;
+                            
+                            if (derived4.EnableMultiVmSync != null)
+                            {
+                                providerSpecificInputValue["enableMultiVmSync"] = derived4.EnableMultiVmSync;
+                            }
+                        }
                     }
                 }
                 
@@ -745,6 +763,24 @@ namespace Microsoft.Azure.Management.SiteRecovery
                         if (derived3.RemoteArrayUniqueId != null)
                         {
                             replicationProviderSettingsValue["remoteArrayUniqueId"] = derived3.RemoteArrayUniqueId;
+                        }
+                    }
+                    if (input.Properties.ReplicationProviderSettings is VMwareAzureV2PolicyInput)
+                    {
+                        replicationProviderSettingsValue["__type"] = "VMwareAzureV2PolicyInput";
+                        VMwareAzureV2PolicyInput derived4 = ((VMwareAzureV2PolicyInput)input.Properties.ReplicationProviderSettings);
+                        
+                        replicationProviderSettingsValue["recoveryPointThresholdInMinutes"] = derived4.RecoveryPointThresholdInMinutes;
+                        
+                        replicationProviderSettingsValue["recoveryPointHistory"] = derived4.RecoveryPointHistory;
+                        
+                        replicationProviderSettingsValue["crashConsistentFrequencyInMinutes"] = derived4.CrashConsistentFrequencyInMinutes;
+                        
+                        replicationProviderSettingsValue["appConsistentFrequencyInMinutes"] = derived4.AppConsistentFrequencyInMinutes;
+                        
+                        if (derived4.EnableMultiVmSync != null)
+                        {
+                            replicationProviderSettingsValue["enableMultiVmSync"] = derived4.EnableMultiVmSync;
                         }
                     }
                 }
@@ -1267,6 +1303,53 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         }
                                         propertiesInstance.ProviderSpecificDetails = hyperVReplicaAzurePolicyDetailsInstance;
                                     }
+                                    if (typeName == "VMwareAzureV2PolicyDetails")
+                                    {
+                                        VMwareAzureV2PolicyDetails vMwareAzureV2PolicyDetailsInstance = new VMwareAzureV2PolicyDetails();
+                                        
+                                        JToken recoveryPointThresholdInMinutesValue = providerSpecificDetailsValue["recoveryPointThresholdInMinutes"];
+                                        if (recoveryPointThresholdInMinutesValue != null && recoveryPointThresholdInMinutesValue.Type != JTokenType.Null)
+                                        {
+                                            int recoveryPointThresholdInMinutesInstance = ((int)recoveryPointThresholdInMinutesValue);
+                                            vMwareAzureV2PolicyDetailsInstance.RecoveryPointThresholdInMinutes = recoveryPointThresholdInMinutesInstance;
+                                        }
+                                        
+                                        JToken recoveryPointHistoryValue = providerSpecificDetailsValue["recoveryPointHistory"];
+                                        if (recoveryPointHistoryValue != null && recoveryPointHistoryValue.Type != JTokenType.Null)
+                                        {
+                                            int recoveryPointHistoryInstance = ((int)recoveryPointHistoryValue);
+                                            vMwareAzureV2PolicyDetailsInstance.RecoveryPointHistory = recoveryPointHistoryInstance;
+                                        }
+                                        
+                                        JToken crashConsistentFrequencyInMinutesValue = providerSpecificDetailsValue["crashConsistentFrequencyInMinutes"];
+                                        if (crashConsistentFrequencyInMinutesValue != null && crashConsistentFrequencyInMinutesValue.Type != JTokenType.Null)
+                                        {
+                                            int crashConsistentFrequencyInMinutesInstance = ((int)crashConsistentFrequencyInMinutesValue);
+                                            vMwareAzureV2PolicyDetailsInstance.CrashConsistentFrequencyInMinutes = crashConsistentFrequencyInMinutesInstance;
+                                        }
+                                        
+                                        JToken appConsistentFrequencyInMinutesValue = providerSpecificDetailsValue["appConsistentFrequencyInMinutes"];
+                                        if (appConsistentFrequencyInMinutesValue != null && appConsistentFrequencyInMinutesValue.Type != JTokenType.Null)
+                                        {
+                                            int appConsistentFrequencyInMinutesInstance = ((int)appConsistentFrequencyInMinutesValue);
+                                            vMwareAzureV2PolicyDetailsInstance.AppConsistentFrequencyInMinutes = appConsistentFrequencyInMinutesInstance;
+                                        }
+                                        
+                                        JToken enableMultiVmSyncValue = providerSpecificDetailsValue["enableMultiVmSync"];
+                                        if (enableMultiVmSyncValue != null && enableMultiVmSyncValue.Type != JTokenType.Null)
+                                        {
+                                            string enableMultiVmSyncInstance = ((string)enableMultiVmSyncValue);
+                                            vMwareAzureV2PolicyDetailsInstance.EnableMultiVmSync = enableMultiVmSyncInstance;
+                                        }
+                                        
+                                        JToken typeValue3 = providerSpecificDetailsValue["__type"];
+                                        if (typeValue3 != null && typeValue3.Type != JTokenType.Null)
+                                        {
+                                            string typeInstance3 = ((string)typeValue3);
+                                            vMwareAzureV2PolicyDetailsInstance.InstanceType = typeInstance3;
+                                        }
+                                        propertiesInstance.ProviderSpecificDetails = vMwareAzureV2PolicyDetailsInstance;
+                                    }
                                 }
                             }
                             
@@ -1284,11 +1367,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 policyInstance.Name = nameInstance;
                             }
                             
-                            JToken typeValue3 = responseDoc["type"];
-                            if (typeValue3 != null && typeValue3.Type != JTokenType.Null)
+                            JToken typeValue4 = responseDoc["type"];
+                            if (typeValue4 != null && typeValue4.Type != JTokenType.Null)
                             {
-                                string typeInstance3 = ((string)typeValue3);
-                                policyInstance.Type = typeInstance3;
+                                string typeInstance4 = ((string)typeValue4);
+                                policyInstance.Type = typeInstance4;
                             }
                             
                             JToken locationValue = responseDoc["location"];
@@ -1622,6 +1705,53 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         }
                                         propertiesInstance.ProviderSpecificDetails = hyperVReplicaAzurePolicyDetailsInstance;
                                     }
+                                    if (typeName == "VMwareAzureV2PolicyDetails")
+                                    {
+                                        VMwareAzureV2PolicyDetails vMwareAzureV2PolicyDetailsInstance = new VMwareAzureV2PolicyDetails();
+                                        
+                                        JToken recoveryPointThresholdInMinutesValue = providerSpecificDetailsValue["recoveryPointThresholdInMinutes"];
+                                        if (recoveryPointThresholdInMinutesValue != null && recoveryPointThresholdInMinutesValue.Type != JTokenType.Null)
+                                        {
+                                            int recoveryPointThresholdInMinutesInstance = ((int)recoveryPointThresholdInMinutesValue);
+                                            vMwareAzureV2PolicyDetailsInstance.RecoveryPointThresholdInMinutes = recoveryPointThresholdInMinutesInstance;
+                                        }
+                                        
+                                        JToken recoveryPointHistoryValue = providerSpecificDetailsValue["recoveryPointHistory"];
+                                        if (recoveryPointHistoryValue != null && recoveryPointHistoryValue.Type != JTokenType.Null)
+                                        {
+                                            int recoveryPointHistoryInstance = ((int)recoveryPointHistoryValue);
+                                            vMwareAzureV2PolicyDetailsInstance.RecoveryPointHistory = recoveryPointHistoryInstance;
+                                        }
+                                        
+                                        JToken crashConsistentFrequencyInMinutesValue = providerSpecificDetailsValue["crashConsistentFrequencyInMinutes"];
+                                        if (crashConsistentFrequencyInMinutesValue != null && crashConsistentFrequencyInMinutesValue.Type != JTokenType.Null)
+                                        {
+                                            int crashConsistentFrequencyInMinutesInstance = ((int)crashConsistentFrequencyInMinutesValue);
+                                            vMwareAzureV2PolicyDetailsInstance.CrashConsistentFrequencyInMinutes = crashConsistentFrequencyInMinutesInstance;
+                                        }
+                                        
+                                        JToken appConsistentFrequencyInMinutesValue = providerSpecificDetailsValue["appConsistentFrequencyInMinutes"];
+                                        if (appConsistentFrequencyInMinutesValue != null && appConsistentFrequencyInMinutesValue.Type != JTokenType.Null)
+                                        {
+                                            int appConsistentFrequencyInMinutesInstance = ((int)appConsistentFrequencyInMinutesValue);
+                                            vMwareAzureV2PolicyDetailsInstance.AppConsistentFrequencyInMinutes = appConsistentFrequencyInMinutesInstance;
+                                        }
+                                        
+                                        JToken enableMultiVmSyncValue = providerSpecificDetailsValue["enableMultiVmSync"];
+                                        if (enableMultiVmSyncValue != null && enableMultiVmSyncValue.Type != JTokenType.Null)
+                                        {
+                                            string enableMultiVmSyncInstance = ((string)enableMultiVmSyncValue);
+                                            vMwareAzureV2PolicyDetailsInstance.EnableMultiVmSync = enableMultiVmSyncInstance;
+                                        }
+                                        
+                                        JToken typeValue3 = providerSpecificDetailsValue["__type"];
+                                        if (typeValue3 != null && typeValue3.Type != JTokenType.Null)
+                                        {
+                                            string typeInstance3 = ((string)typeValue3);
+                                            vMwareAzureV2PolicyDetailsInstance.InstanceType = typeInstance3;
+                                        }
+                                        propertiesInstance.ProviderSpecificDetails = vMwareAzureV2PolicyDetailsInstance;
+                                    }
                                 }
                             }
                             
@@ -1639,11 +1769,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 policyInstance.Name = nameInstance;
                             }
                             
-                            JToken typeValue3 = responseDoc["type"];
-                            if (typeValue3 != null && typeValue3.Type != JTokenType.Null)
+                            JToken typeValue4 = responseDoc["type"];
+                            if (typeValue4 != null && typeValue4.Type != JTokenType.Null)
                             {
-                                string typeInstance3 = ((string)typeValue3);
-                                policyInstance.Type = typeInstance3;
+                                string typeInstance4 = ((string)typeValue4);
+                                policyInstance.Type = typeInstance4;
                             }
                             
                             JToken locationValue = responseDoc["location"];
@@ -1896,11 +2026,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     {
                         result.Status = OperationStatus.InProgress;
                     }
-                    if (statusCode == HttpStatusCode.NoContent)
+                    if (statusCode == HttpStatusCode.OK)
                     {
                         result.Status = OperationStatus.Succeeded;
                     }
-                    if (statusCode == HttpStatusCode.OK)
+                    if (statusCode == HttpStatusCode.NoContent)
                     {
                         result.Status = OperationStatus.Succeeded;
                     }
@@ -2210,6 +2340,53 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         }
                                         propertiesInstance.ProviderSpecificDetails = hyperVReplicaAzurePolicyDetailsInstance;
                                     }
+                                    if (typeName == "VMwareAzureV2PolicyDetails")
+                                    {
+                                        VMwareAzureV2PolicyDetails vMwareAzureV2PolicyDetailsInstance = new VMwareAzureV2PolicyDetails();
+                                        
+                                        JToken recoveryPointThresholdInMinutesValue = providerSpecificDetailsValue["recoveryPointThresholdInMinutes"];
+                                        if (recoveryPointThresholdInMinutesValue != null && recoveryPointThresholdInMinutesValue.Type != JTokenType.Null)
+                                        {
+                                            int recoveryPointThresholdInMinutesInstance = ((int)recoveryPointThresholdInMinutesValue);
+                                            vMwareAzureV2PolicyDetailsInstance.RecoveryPointThresholdInMinutes = recoveryPointThresholdInMinutesInstance;
+                                        }
+                                        
+                                        JToken recoveryPointHistoryValue = providerSpecificDetailsValue["recoveryPointHistory"];
+                                        if (recoveryPointHistoryValue != null && recoveryPointHistoryValue.Type != JTokenType.Null)
+                                        {
+                                            int recoveryPointHistoryInstance = ((int)recoveryPointHistoryValue);
+                                            vMwareAzureV2PolicyDetailsInstance.RecoveryPointHistory = recoveryPointHistoryInstance;
+                                        }
+                                        
+                                        JToken crashConsistentFrequencyInMinutesValue = providerSpecificDetailsValue["crashConsistentFrequencyInMinutes"];
+                                        if (crashConsistentFrequencyInMinutesValue != null && crashConsistentFrequencyInMinutesValue.Type != JTokenType.Null)
+                                        {
+                                            int crashConsistentFrequencyInMinutesInstance = ((int)crashConsistentFrequencyInMinutesValue);
+                                            vMwareAzureV2PolicyDetailsInstance.CrashConsistentFrequencyInMinutes = crashConsistentFrequencyInMinutesInstance;
+                                        }
+                                        
+                                        JToken appConsistentFrequencyInMinutesValue = providerSpecificDetailsValue["appConsistentFrequencyInMinutes"];
+                                        if (appConsistentFrequencyInMinutesValue != null && appConsistentFrequencyInMinutesValue.Type != JTokenType.Null)
+                                        {
+                                            int appConsistentFrequencyInMinutesInstance = ((int)appConsistentFrequencyInMinutesValue);
+                                            vMwareAzureV2PolicyDetailsInstance.AppConsistentFrequencyInMinutes = appConsistentFrequencyInMinutesInstance;
+                                        }
+                                        
+                                        JToken enableMultiVmSyncValue = providerSpecificDetailsValue["enableMultiVmSync"];
+                                        if (enableMultiVmSyncValue != null && enableMultiVmSyncValue.Type != JTokenType.Null)
+                                        {
+                                            string enableMultiVmSyncInstance = ((string)enableMultiVmSyncValue);
+                                            vMwareAzureV2PolicyDetailsInstance.EnableMultiVmSync = enableMultiVmSyncInstance;
+                                        }
+                                        
+                                        JToken typeValue3 = providerSpecificDetailsValue["__type"];
+                                        if (typeValue3 != null && typeValue3.Type != JTokenType.Null)
+                                        {
+                                            string typeInstance3 = ((string)typeValue3);
+                                            vMwareAzureV2PolicyDetailsInstance.InstanceType = typeInstance3;
+                                        }
+                                        propertiesInstance.ProviderSpecificDetails = vMwareAzureV2PolicyDetailsInstance;
+                                    }
                                 }
                             }
                             
@@ -2227,11 +2404,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 policyInstance.Name = nameInstance;
                             }
                             
-                            JToken typeValue3 = responseDoc["type"];
-                            if (typeValue3 != null && typeValue3.Type != JTokenType.Null)
+                            JToken typeValue4 = responseDoc["type"];
+                            if (typeValue4 != null && typeValue4.Type != JTokenType.Null)
                             {
-                                string typeInstance3 = ((string)typeValue3);
-                                policyInstance.Type = typeInstance3;
+                                string typeInstance4 = ((string)typeValue4);
+                                policyInstance.Type = typeInstance4;
                             }
                             
                             JToken locationValue = responseDoc["location"];
@@ -2644,6 +2821,53 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 }
                                                 propertiesInstance.ProviderSpecificDetails = hyperVReplicaAzurePolicyDetailsInstance;
                                             }
+                                            if (typeName == "VMwareAzureV2PolicyDetails")
+                                            {
+                                                VMwareAzureV2PolicyDetails vMwareAzureV2PolicyDetailsInstance = new VMwareAzureV2PolicyDetails();
+                                                
+                                                JToken recoveryPointThresholdInMinutesValue = providerSpecificDetailsValue["recoveryPointThresholdInMinutes"];
+                                                if (recoveryPointThresholdInMinutesValue != null && recoveryPointThresholdInMinutesValue.Type != JTokenType.Null)
+                                                {
+                                                    int recoveryPointThresholdInMinutesInstance = ((int)recoveryPointThresholdInMinutesValue);
+                                                    vMwareAzureV2PolicyDetailsInstance.RecoveryPointThresholdInMinutes = recoveryPointThresholdInMinutesInstance;
+                                                }
+                                                
+                                                JToken recoveryPointHistoryValue = providerSpecificDetailsValue["recoveryPointHistory"];
+                                                if (recoveryPointHistoryValue != null && recoveryPointHistoryValue.Type != JTokenType.Null)
+                                                {
+                                                    int recoveryPointHistoryInstance = ((int)recoveryPointHistoryValue);
+                                                    vMwareAzureV2PolicyDetailsInstance.RecoveryPointHistory = recoveryPointHistoryInstance;
+                                                }
+                                                
+                                                JToken crashConsistentFrequencyInMinutesValue = providerSpecificDetailsValue["crashConsistentFrequencyInMinutes"];
+                                                if (crashConsistentFrequencyInMinutesValue != null && crashConsistentFrequencyInMinutesValue.Type != JTokenType.Null)
+                                                {
+                                                    int crashConsistentFrequencyInMinutesInstance = ((int)crashConsistentFrequencyInMinutesValue);
+                                                    vMwareAzureV2PolicyDetailsInstance.CrashConsistentFrequencyInMinutes = crashConsistentFrequencyInMinutesInstance;
+                                                }
+                                                
+                                                JToken appConsistentFrequencyInMinutesValue = providerSpecificDetailsValue["appConsistentFrequencyInMinutes"];
+                                                if (appConsistentFrequencyInMinutesValue != null && appConsistentFrequencyInMinutesValue.Type != JTokenType.Null)
+                                                {
+                                                    int appConsistentFrequencyInMinutesInstance = ((int)appConsistentFrequencyInMinutesValue);
+                                                    vMwareAzureV2PolicyDetailsInstance.AppConsistentFrequencyInMinutes = appConsistentFrequencyInMinutesInstance;
+                                                }
+                                                
+                                                JToken enableMultiVmSyncValue = providerSpecificDetailsValue["enableMultiVmSync"];
+                                                if (enableMultiVmSyncValue != null && enableMultiVmSyncValue.Type != JTokenType.Null)
+                                                {
+                                                    string enableMultiVmSyncInstance = ((string)enableMultiVmSyncValue);
+                                                    vMwareAzureV2PolicyDetailsInstance.EnableMultiVmSync = enableMultiVmSyncInstance;
+                                                }
+                                                
+                                                JToken typeValue3 = providerSpecificDetailsValue["__type"];
+                                                if (typeValue3 != null && typeValue3.Type != JTokenType.Null)
+                                                {
+                                                    string typeInstance3 = ((string)typeValue3);
+                                                    vMwareAzureV2PolicyDetailsInstance.InstanceType = typeInstance3;
+                                                }
+                                                propertiesInstance.ProviderSpecificDetails = vMwareAzureV2PolicyDetailsInstance;
+                                            }
                                         }
                                     }
                                     
@@ -2661,11 +2885,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         policyInstance.Name = nameInstance;
                                     }
                                     
-                                    JToken typeValue3 = valueValue["type"];
-                                    if (typeValue3 != null && typeValue3.Type != JTokenType.Null)
+                                    JToken typeValue4 = valueValue["type"];
+                                    if (typeValue4 != null && typeValue4.Type != JTokenType.Null)
                                     {
-                                        string typeInstance3 = ((string)typeValue3);
-                                        policyInstance.Type = typeInstance3;
+                                        string typeInstance4 = ((string)typeValue4);
+                                        policyInstance.Type = typeInstance4;
                                     }
                                     
                                     JToken locationValue = valueValue["location"];

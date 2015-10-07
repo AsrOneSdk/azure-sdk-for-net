@@ -28,20 +28,23 @@ using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery
 {
-    public static partial class FabricOperationsExtensions
+    public static partial class VCenterOperationsExtensions
     {
         /// <summary>
-        /// Creates a Fabric
+        /// Creates a vCenter
         /// </summary>
         /// <param name='operations'>
         /// Reference to the
-        /// Microsoft.Azure.Management.SiteRecovery.IFabricOperations.
+        /// Microsoft.Azure.Management.SiteRecovery.IVCenterOperations.
         /// </param>
         /// <param name='fabricName'>
         /// Required. Fabric Name.
+        /// </param>
+        /// <param name='vCenterName'>
+        /// Required. vCenter Name.
         /// </param>
         /// <param name='input'>
-        /// Required. Input to create fabric
+        /// Required. Input to create vCenter.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -49,27 +52,30 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public static LongRunningOperationResponse BeginCreating(this IFabricOperations operations, string fabricName, FabricCreationInput input, CustomRequestHeaders customRequestHeaders)
+        public static LongRunningOperationResponse BeginCreating(this IVCenterOperations operations, string fabricName, string vCenterName, CreateVCenterInput input, CustomRequestHeaders customRequestHeaders)
         {
             return Task.Factory.StartNew((object s) => 
             {
-                return ((IFabricOperations)s).BeginCreatingAsync(fabricName, input, customRequestHeaders);
+                return ((IVCenterOperations)s).BeginCreatingAsync(fabricName, vCenterName, input, customRequestHeaders);
             }
             , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
         }
         
         /// <summary>
-        /// Creates a Fabric
+        /// Creates a vCenter
         /// </summary>
         /// <param name='operations'>
         /// Reference to the
-        /// Microsoft.Azure.Management.SiteRecovery.IFabricOperations.
+        /// Microsoft.Azure.Management.SiteRecovery.IVCenterOperations.
         /// </param>
         /// <param name='fabricName'>
         /// Required. Fabric Name.
+        /// </param>
+        /// <param name='vCenterName'>
+        /// Required. vCenter Name.
         /// </param>
         /// <param name='input'>
-        /// Required. Input to create fabric
+        /// Required. Input to create vCenter.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -77,23 +83,23 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public static Task<LongRunningOperationResponse> BeginCreatingAsync(this IFabricOperations operations, string fabricName, FabricCreationInput input, CustomRequestHeaders customRequestHeaders)
+        public static Task<LongRunningOperationResponse> BeginCreatingAsync(this IVCenterOperations operations, string fabricName, string vCenterName, CreateVCenterInput input, CustomRequestHeaders customRequestHeaders)
         {
-            return operations.BeginCreatingAsync(fabricName, input, customRequestHeaders, CancellationToken.None);
+            return operations.BeginCreatingAsync(fabricName, vCenterName, input, customRequestHeaders, CancellationToken.None);
         }
         
         /// <summary>
-        /// Deletes a Fabric
+        /// Deletes a vCenter
         /// </summary>
         /// <param name='operations'>
         /// Reference to the
-        /// Microsoft.Azure.Management.SiteRecovery.IFabricOperations.
+        /// Microsoft.Azure.Management.SiteRecovery.IVCenterOperations.
         /// </param>
         /// <param name='fabricName'>
         /// Required. Fabric Name.
         /// </param>
-        /// <param name='fabricDeletionInput'>
-        /// Required. Fabric deletion input.
+        /// <param name='vCenterName'>
+        /// Required. vCenter Name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -101,27 +107,27 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public static LongRunningOperationResponse BeginDeleting(this IFabricOperations operations, string fabricName, FabricDeletionInput fabricDeletionInput, CustomRequestHeaders customRequestHeaders)
+        public static LongRunningOperationResponse BeginDeleting(this IVCenterOperations operations, string fabricName, string vCenterName, CustomRequestHeaders customRequestHeaders)
         {
             return Task.Factory.StartNew((object s) => 
             {
-                return ((IFabricOperations)s).BeginDeletingAsync(fabricName, fabricDeletionInput, customRequestHeaders);
+                return ((IVCenterOperations)s).BeginDeletingAsync(fabricName, vCenterName, customRequestHeaders);
             }
             , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
         }
         
         /// <summary>
-        /// Deletes a Fabric
+        /// Deletes a vCenter
         /// </summary>
         /// <param name='operations'>
         /// Reference to the
-        /// Microsoft.Azure.Management.SiteRecovery.IFabricOperations.
+        /// Microsoft.Azure.Management.SiteRecovery.IVCenterOperations.
         /// </param>
         /// <param name='fabricName'>
         /// Required. Fabric Name.
         /// </param>
-        /// <param name='fabricDeletionInput'>
-        /// Required. Fabric deletion input.
+        /// <param name='vCenterName'>
+        /// Required. vCenter Name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -129,69 +135,26 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public static Task<LongRunningOperationResponse> BeginDeletingAsync(this IFabricOperations operations, string fabricName, FabricDeletionInput fabricDeletionInput, CustomRequestHeaders customRequestHeaders)
+        public static Task<LongRunningOperationResponse> BeginDeletingAsync(this IVCenterOperations operations, string fabricName, string vCenterName, CustomRequestHeaders customRequestHeaders)
         {
-            return operations.BeginDeletingAsync(fabricName, fabricDeletionInput, customRequestHeaders, CancellationToken.None);
+            return operations.BeginDeletingAsync(fabricName, vCenterName, customRequestHeaders, CancellationToken.None);
         }
         
         /// <summary>
-        /// Purges a Fabric
+        /// Update vCenter.
         /// </summary>
         /// <param name='operations'>
         /// Reference to the
-        /// Microsoft.Azure.Management.SiteRecovery.IFabricOperations.
+        /// Microsoft.Azure.Management.SiteRecovery.IVCenterOperations.
         /// </param>
         /// <param name='fabricName'>
         /// Required. Fabric Name.
         /// </param>
-        /// <param name='customRequestHeaders'>
-        /// Optional. Request header parameters.
-        /// </param>
-        /// <returns>
-        /// A standard service response for long running operations.
-        /// </returns>
-        public static LongRunningOperationResponse BeginPurging(this IFabricOperations operations, string fabricName, CustomRequestHeaders customRequestHeaders)
-        {
-            return Task.Factory.StartNew((object s) => 
-            {
-                return ((IFabricOperations)s).BeginPurgingAsync(fabricName, customRequestHeaders);
-            }
-            , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-        }
-        
-        /// <summary>
-        /// Purges a Fabric
-        /// </summary>
-        /// <param name='operations'>
-        /// Reference to the
-        /// Microsoft.Azure.Management.SiteRecovery.IFabricOperations.
-        /// </param>
-        /// <param name='fabricName'>
-        /// Required. Fabric Name.
-        /// </param>
-        /// <param name='customRequestHeaders'>
-        /// Optional. Request header parameters.
-        /// </param>
-        /// <returns>
-        /// A standard service response for long running operations.
-        /// </returns>
-        public static Task<LongRunningOperationResponse> BeginPurgingAsync(this IFabricOperations operations, string fabricName, CustomRequestHeaders customRequestHeaders)
-        {
-            return operations.BeginPurgingAsync(fabricName, customRequestHeaders, CancellationToken.None);
-        }
-        
-        /// <summary>
-        /// Performs reassociate gateway operation on a fabric.
-        /// </summary>
-        /// <param name='operations'>
-        /// Reference to the
-        /// Microsoft.Azure.Management.SiteRecovery.IFabricOperations.
-        /// </param>
-        /// <param name='fabricName'>
-        /// Required. Fabric Name.
+        /// <param name='vCenterName'>
+        /// Required. vCenter Name.
         /// </param>
         /// <param name='input'>
-        /// Required. Input to reassociate a gateway.
+        /// Required. Input to update vCenter.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -199,27 +162,30 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public static LongRunningOperationResponse BeginReassociateGateway(this IFabricOperations operations, string fabricName, FailoverProcessServerRequest input, CustomRequestHeaders customRequestHeaders)
+        public static LongRunningOperationResponse BeginUpdating(this IVCenterOperations operations, string fabricName, string vCenterName, UpdateVCenterInput input, CustomRequestHeaders customRequestHeaders)
         {
             return Task.Factory.StartNew((object s) => 
             {
-                return ((IFabricOperations)s).BeginReassociateGatewayAsync(fabricName, input, customRequestHeaders);
+                return ((IVCenterOperations)s).BeginUpdatingAsync(fabricName, vCenterName, input, customRequestHeaders);
             }
             , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
         }
         
         /// <summary>
-        /// Performs reassociate gateway operation on a fabric.
+        /// Update vCenter.
         /// </summary>
         /// <param name='operations'>
         /// Reference to the
-        /// Microsoft.Azure.Management.SiteRecovery.IFabricOperations.
+        /// Microsoft.Azure.Management.SiteRecovery.IVCenterOperations.
         /// </param>
         /// <param name='fabricName'>
         /// Required. Fabric Name.
+        /// </param>
+        /// <param name='vCenterName'>
+        /// Required. vCenter Name.
         /// </param>
         /// <param name='input'>
-        /// Required. Input to reassociate a gateway.
+        /// Required. Input to update vCenter.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -227,23 +193,26 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public static Task<LongRunningOperationResponse> BeginReassociateGatewayAsync(this IFabricOperations operations, string fabricName, FailoverProcessServerRequest input, CustomRequestHeaders customRequestHeaders)
+        public static Task<LongRunningOperationResponse> BeginUpdatingAsync(this IVCenterOperations operations, string fabricName, string vCenterName, UpdateVCenterInput input, CustomRequestHeaders customRequestHeaders)
         {
-            return operations.BeginReassociateGatewayAsync(fabricName, input, customRequestHeaders, CancellationToken.None);
+            return operations.BeginUpdatingAsync(fabricName, vCenterName, input, customRequestHeaders, CancellationToken.None);
         }
         
         /// <summary>
-        /// Creates a fabric
+        /// Creates a vCenter
         /// </summary>
         /// <param name='operations'>
         /// Reference to the
-        /// Microsoft.Azure.Management.SiteRecovery.IFabricOperations.
+        /// Microsoft.Azure.Management.SiteRecovery.IVCenterOperations.
         /// </param>
         /// <param name='fabricName'>
         /// Required. Fabric Name.
+        /// </param>
+        /// <param name='vCenterName'>
+        /// Required. vCenter Name.
         /// </param>
         /// <param name='input'>
-        /// Required. Input to create fabric
+        /// Required. Input to create vCenter.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -251,27 +220,30 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public static LongRunningOperationResponse Create(this IFabricOperations operations, string fabricName, FabricCreationInput input, CustomRequestHeaders customRequestHeaders)
+        public static LongRunningOperationResponse Create(this IVCenterOperations operations, string fabricName, string vCenterName, CreateVCenterInput input, CustomRequestHeaders customRequestHeaders)
         {
             return Task.Factory.StartNew((object s) => 
             {
-                return ((IFabricOperations)s).CreateAsync(fabricName, input, customRequestHeaders);
+                return ((IVCenterOperations)s).CreateAsync(fabricName, vCenterName, input, customRequestHeaders);
             }
             , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
         }
         
         /// <summary>
-        /// Creates a fabric
+        /// Creates a vCenter
         /// </summary>
         /// <param name='operations'>
         /// Reference to the
-        /// Microsoft.Azure.Management.SiteRecovery.IFabricOperations.
+        /// Microsoft.Azure.Management.SiteRecovery.IVCenterOperations.
         /// </param>
         /// <param name='fabricName'>
         /// Required. Fabric Name.
+        /// </param>
+        /// <param name='vCenterName'>
+        /// Required. vCenter Name.
         /// </param>
         /// <param name='input'>
-        /// Required. Input to create fabric
+        /// Required. Input to create vCenter.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -279,23 +251,23 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public static Task<LongRunningOperationResponse> CreateAsync(this IFabricOperations operations, string fabricName, FabricCreationInput input, CustomRequestHeaders customRequestHeaders)
+        public static Task<LongRunningOperationResponse> CreateAsync(this IVCenterOperations operations, string fabricName, string vCenterName, CreateVCenterInput input, CustomRequestHeaders customRequestHeaders)
         {
-            return operations.CreateAsync(fabricName, input, customRequestHeaders, CancellationToken.None);
+            return operations.CreateAsync(fabricName, vCenterName, input, customRequestHeaders, CancellationToken.None);
         }
         
         /// <summary>
-        /// Deletes a fabric
+        /// Deletes a vCenter
         /// </summary>
         /// <param name='operations'>
         /// Reference to the
-        /// Microsoft.Azure.Management.SiteRecovery.IFabricOperations.
+        /// Microsoft.Azure.Management.SiteRecovery.IVCenterOperations.
         /// </param>
         /// <param name='fabricName'>
         /// Required. Fabric Name.
         /// </param>
-        /// <param name='fabricDeletionInput'>
-        /// Required. Fabric deletion input.
+        /// <param name='vCenterName'>
+        /// Required. vCenter Name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -303,27 +275,27 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public static LongRunningOperationResponse Delete(this IFabricOperations operations, string fabricName, FabricDeletionInput fabricDeletionInput, CustomRequestHeaders customRequestHeaders)
+        public static LongRunningOperationResponse Delete(this IVCenterOperations operations, string fabricName, string vCenterName, CustomRequestHeaders customRequestHeaders)
         {
             return Task.Factory.StartNew((object s) => 
             {
-                return ((IFabricOperations)s).DeleteAsync(fabricName, fabricDeletionInput, customRequestHeaders);
+                return ((IVCenterOperations)s).DeleteAsync(fabricName, vCenterName, customRequestHeaders);
             }
             , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
         }
         
         /// <summary>
-        /// Deletes a fabric
+        /// Deletes a vCenter
         /// </summary>
         /// <param name='operations'>
         /// Reference to the
-        /// Microsoft.Azure.Management.SiteRecovery.IFabricOperations.
+        /// Microsoft.Azure.Management.SiteRecovery.IVCenterOperations.
         /// </param>
         /// <param name='fabricName'>
         /// Required. Fabric Name.
         /// </param>
-        /// <param name='fabricDeletionInput'>
-        /// Required. Fabric deletion input.
+        /// <param name='vCenterName'>
+        /// Required. vCenter Name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -331,55 +303,61 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public static Task<LongRunningOperationResponse> DeleteAsync(this IFabricOperations operations, string fabricName, FabricDeletionInput fabricDeletionInput, CustomRequestHeaders customRequestHeaders)
+        public static Task<LongRunningOperationResponse> DeleteAsync(this IVCenterOperations operations, string fabricName, string vCenterName, CustomRequestHeaders customRequestHeaders)
         {
-            return operations.DeleteAsync(fabricName, fabricDeletionInput, customRequestHeaders, CancellationToken.None);
+            return operations.DeleteAsync(fabricName, vCenterName, customRequestHeaders, CancellationToken.None);
         }
         
         /// <summary>
-        /// Get the server object by Id.
+        /// Get the vCenter object by Id.
         /// </summary>
         /// <param name='operations'>
         /// Reference to the
-        /// Microsoft.Azure.Management.SiteRecovery.IFabricOperations.
+        /// Microsoft.Azure.Management.SiteRecovery.IVCenterOperations.
         /// </param>
         /// <param name='fabricName'>
         /// Required. Fabric Name.
+        /// </param>
+        /// <param name='vCenterName'>
+        /// Required. vCenter Name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
         /// </param>
         /// <returns>
-        /// The response model for the fabric object
+        /// The response model for the vCenter object
         /// </returns>
-        public static FabricResponse Get(this IFabricOperations operations, string fabricName, CustomRequestHeaders customRequestHeaders)
+        public static VCenterResponse Get(this IVCenterOperations operations, string fabricName, string vCenterName, CustomRequestHeaders customRequestHeaders)
         {
             return Task.Factory.StartNew((object s) => 
             {
-                return ((IFabricOperations)s).GetAsync(fabricName, customRequestHeaders);
+                return ((IVCenterOperations)s).GetAsync(fabricName, vCenterName, customRequestHeaders);
             }
             , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
         }
         
         /// <summary>
-        /// Get the server object by Id.
+        /// Get the vCenter object by Id.
         /// </summary>
         /// <param name='operations'>
         /// Reference to the
-        /// Microsoft.Azure.Management.SiteRecovery.IFabricOperations.
+        /// Microsoft.Azure.Management.SiteRecovery.IVCenterOperations.
         /// </param>
         /// <param name='fabricName'>
         /// Required. Fabric Name.
+        /// </param>
+        /// <param name='vCenterName'>
+        /// Required. vCenter Name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
         /// </param>
         /// <returns>
-        /// The response model for the fabric object
+        /// The response model for the vCenter object
         /// </returns>
-        public static Task<FabricResponse> GetAsync(this IFabricOperations operations, string fabricName, CustomRequestHeaders customRequestHeaders)
+        public static Task<VCenterResponse> GetAsync(this IVCenterOperations operations, string fabricName, string vCenterName, CustomRequestHeaders customRequestHeaders)
         {
-            return operations.GetAsync(fabricName, customRequestHeaders, CancellationToken.None);
+            return operations.GetAsync(fabricName, vCenterName, customRequestHeaders, CancellationToken.None);
         }
         
         /// <summary>
@@ -390,7 +368,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// </summary>
         /// <param name='operations'>
         /// Reference to the
-        /// Microsoft.Azure.Management.SiteRecovery.IFabricOperations.
+        /// Microsoft.Azure.Management.SiteRecovery.IVCenterOperations.
         /// </param>
         /// <param name='operationStatusLink'>
         /// Required. Location value returned by the Begin operation.
@@ -398,11 +376,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public static CreateFabricOperationResponse GetCreateStatus(this IFabricOperations operations, string operationStatusLink)
+        public static CreateVCenterOperationResponse GetCreateStatus(this IVCenterOperations operations, string operationStatusLink)
         {
             return Task.Factory.StartNew((object s) => 
             {
-                return ((IFabricOperations)s).GetCreateStatusAsync(operationStatusLink);
+                return ((IVCenterOperations)s).GetCreateStatusAsync(operationStatusLink);
             }
             , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
         }
@@ -415,7 +393,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// </summary>
         /// <param name='operations'>
         /// Reference to the
-        /// Microsoft.Azure.Management.SiteRecovery.IFabricOperations.
+        /// Microsoft.Azure.Management.SiteRecovery.IVCenterOperations.
         /// </param>
         /// <param name='operationStatusLink'>
         /// Required. Location value returned by the Begin operation.
@@ -423,7 +401,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public static Task<CreateFabricOperationResponse> GetCreateStatusAsync(this IFabricOperations operations, string operationStatusLink)
+        public static Task<CreateVCenterOperationResponse> GetCreateStatusAsync(this IVCenterOperations operations, string operationStatusLink)
         {
             return operations.GetCreateStatusAsync(operationStatusLink, CancellationToken.None);
         }
@@ -436,7 +414,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// </summary>
         /// <param name='operations'>
         /// Reference to the
-        /// Microsoft.Azure.Management.SiteRecovery.IFabricOperations.
+        /// Microsoft.Azure.Management.SiteRecovery.IVCenterOperations.
         /// </param>
         /// <param name='operationStatusLink'>
         /// Required. Location value returned by the Begin operation.
@@ -444,11 +422,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public static LongRunningOperationResponse GetDeleteStatus(this IFabricOperations operations, string operationStatusLink)
+        public static LongRunningOperationResponse GetDeleteStatus(this IVCenterOperations operations, string operationStatusLink)
         {
             return Task.Factory.StartNew((object s) => 
             {
-                return ((IFabricOperations)s).GetDeleteStatusAsync(operationStatusLink);
+                return ((IVCenterOperations)s).GetDeleteStatusAsync(operationStatusLink);
             }
             , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
         }
@@ -461,7 +439,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// </summary>
         /// <param name='operations'>
         /// Reference to the
-        /// Microsoft.Azure.Management.SiteRecovery.IFabricOperations.
+        /// Microsoft.Azure.Management.SiteRecovery.IVCenterOperations.
         /// </param>
         /// <param name='operationStatusLink'>
         /// Required. Location value returned by the Begin operation.
@@ -469,7 +447,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public static Task<LongRunningOperationResponse> GetDeleteStatusAsync(this IFabricOperations operations, string operationStatusLink)
+        public static Task<LongRunningOperationResponse> GetDeleteStatusAsync(this IVCenterOperations operations, string operationStatusLink)
         {
             return operations.GetDeleteStatusAsync(operationStatusLink, CancellationToken.None);
         }
@@ -482,7 +460,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// </summary>
         /// <param name='operations'>
         /// Reference to the
-        /// Microsoft.Azure.Management.SiteRecovery.IFabricOperations.
+        /// Microsoft.Azure.Management.SiteRecovery.IVCenterOperations.
         /// </param>
         /// <param name='operationStatusLink'>
         /// Required. Location value returned by the Begin operation.
@@ -490,11 +468,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public static LongRunningOperationResponse GetPurgeStatus(this IFabricOperations operations, string operationStatusLink)
+        public static UpdateVCenterOperationResponse GetUpdateStatus(this IVCenterOperations operations, string operationStatusLink)
         {
             return Task.Factory.StartNew((object s) => 
             {
-                return ((IFabricOperations)s).GetPurgeStatusAsync(operationStatusLink);
+                return ((IVCenterOperations)s).GetUpdateStatusAsync(operationStatusLink);
             }
             , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
         }
@@ -507,7 +485,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// </summary>
         /// <param name='operations'>
         /// Reference to the
-        /// Microsoft.Azure.Management.SiteRecovery.IFabricOperations.
+        /// Microsoft.Azure.Management.SiteRecovery.IVCenterOperations.
         /// </param>
         /// <param name='operationStatusLink'>
         /// Required. Location value returned by the Begin operation.
@@ -515,103 +493,17 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public static Task<LongRunningOperationResponse> GetPurgeStatusAsync(this IFabricOperations operations, string operationStatusLink)
+        public static Task<UpdateVCenterOperationResponse> GetUpdateStatusAsync(this IVCenterOperations operations, string operationStatusLink)
         {
-            return operations.GetPurgeStatusAsync(operationStatusLink, CancellationToken.None);
+            return operations.GetUpdateStatusAsync(operationStatusLink, CancellationToken.None);
         }
         
         /// <summary>
-        /// The Get Operation Status operation returns the status of the
-        /// specified operation. After calling an asynchronous operation, you
-        /// can call Get Operation Status to determine whether the operation
-        /// has succeeded, failed, or is still in progress.
+        /// Get the list of all vCenters under a fabric.
         /// </summary>
         /// <param name='operations'>
         /// Reference to the
-        /// Microsoft.Azure.Management.SiteRecovery.IFabricOperations.
-        /// </param>
-        /// <param name='operationStatusLink'>
-        /// Required. Location value returned by the Begin operation.
-        /// </param>
-        /// <returns>
-        /// A standard service response for long running operations.
-        /// </returns>
-        public static ReassociateGatewayOperationResponse GetReassociateGatewayStatus(this IFabricOperations operations, string operationStatusLink)
-        {
-            return Task.Factory.StartNew((object s) => 
-            {
-                return ((IFabricOperations)s).GetReassociateGatewayStatusAsync(operationStatusLink);
-            }
-            , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-        }
-        
-        /// <summary>
-        /// The Get Operation Status operation returns the status of the
-        /// specified operation. After calling an asynchronous operation, you
-        /// can call Get Operation Status to determine whether the operation
-        /// has succeeded, failed, or is still in progress.
-        /// </summary>
-        /// <param name='operations'>
-        /// Reference to the
-        /// Microsoft.Azure.Management.SiteRecovery.IFabricOperations.
-        /// </param>
-        /// <param name='operationStatusLink'>
-        /// Required. Location value returned by the Begin operation.
-        /// </param>
-        /// <returns>
-        /// A standard service response for long running operations.
-        /// </returns>
-        public static Task<ReassociateGatewayOperationResponse> GetReassociateGatewayStatusAsync(this IFabricOperations operations, string operationStatusLink)
-        {
-            return operations.GetReassociateGatewayStatusAsync(operationStatusLink, CancellationToken.None);
-        }
-        
-        /// <summary>
-        /// Get the list of all servers under the vault.
-        /// </summary>
-        /// <param name='operations'>
-        /// Reference to the
-        /// Microsoft.Azure.Management.SiteRecovery.IFabricOperations.
-        /// </param>
-        /// <param name='customRequestHeaders'>
-        /// Optional. Request header parameters.
-        /// </param>
-        /// <returns>
-        /// The response model for the list servers operation.
-        /// </returns>
-        public static FabricListResponse List(this IFabricOperations operations, CustomRequestHeaders customRequestHeaders)
-        {
-            return Task.Factory.StartNew((object s) => 
-            {
-                return ((IFabricOperations)s).ListAsync(customRequestHeaders);
-            }
-            , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-        }
-        
-        /// <summary>
-        /// Get the list of all servers under the vault.
-        /// </summary>
-        /// <param name='operations'>
-        /// Reference to the
-        /// Microsoft.Azure.Management.SiteRecovery.IFabricOperations.
-        /// </param>
-        /// <param name='customRequestHeaders'>
-        /// Optional. Request header parameters.
-        /// </param>
-        /// <returns>
-        /// The response model for the list servers operation.
-        /// </returns>
-        public static Task<FabricListResponse> ListAsync(this IFabricOperations operations, CustomRequestHeaders customRequestHeaders)
-        {
-            return operations.ListAsync(customRequestHeaders, CancellationToken.None);
-        }
-        
-        /// <summary>
-        /// Purges a fabric
-        /// </summary>
-        /// <param name='operations'>
-        /// Reference to the
-        /// Microsoft.Azure.Management.SiteRecovery.IFabricOperations.
+        /// Microsoft.Azure.Management.SiteRecovery.IVCenterOperations.
         /// </param>
         /// <param name='fabricName'>
         /// Required. Fabric Name.
@@ -620,23 +512,23 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// Optional. Request header parameters.
         /// </param>
         /// <returns>
-        /// A standard service response for long running operations.
+        /// The response model for the list vCenters operation.
         /// </returns>
-        public static LongRunningOperationResponse Purge(this IFabricOperations operations, string fabricName, CustomRequestHeaders customRequestHeaders)
+        public static VCenterListResponse List(this IVCenterOperations operations, string fabricName, CustomRequestHeaders customRequestHeaders)
         {
             return Task.Factory.StartNew((object s) => 
             {
-                return ((IFabricOperations)s).PurgeAsync(fabricName, customRequestHeaders);
+                return ((IVCenterOperations)s).ListAsync(fabricName, customRequestHeaders);
             }
             , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
         }
         
         /// <summary>
-        /// Purges a fabric
+        /// Get the list of all vCenters under a fabric.
         /// </summary>
         /// <param name='operations'>
         /// Reference to the
-        /// Microsoft.Azure.Management.SiteRecovery.IFabricOperations.
+        /// Microsoft.Azure.Management.SiteRecovery.IVCenterOperations.
         /// </param>
         /// <param name='fabricName'>
         /// Required. Fabric Name.
@@ -645,25 +537,68 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// Optional. Request header parameters.
         /// </param>
         /// <returns>
-        /// A standard service response for long running operations.
+        /// The response model for the list vCenters operation.
         /// </returns>
-        public static Task<LongRunningOperationResponse> PurgeAsync(this IFabricOperations operations, string fabricName, CustomRequestHeaders customRequestHeaders)
+        public static Task<VCenterListResponse> ListAsync(this IVCenterOperations operations, string fabricName, CustomRequestHeaders customRequestHeaders)
         {
-            return operations.PurgeAsync(fabricName, customRequestHeaders, CancellationToken.None);
+            return operations.ListAsync(fabricName, customRequestHeaders, CancellationToken.None);
         }
         
         /// <summary>
-        /// Performs reassociate gateway operation on a fabric.
+        /// Get the list of all vCenters under the vault.
         /// </summary>
         /// <param name='operations'>
         /// Reference to the
-        /// Microsoft.Azure.Management.SiteRecovery.IFabricOperations.
+        /// Microsoft.Azure.Management.SiteRecovery.IVCenterOperations.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Optional. Request header parameters.
+        /// </param>
+        /// <returns>
+        /// The response model for the list vCenters operation.
+        /// </returns>
+        public static VCenterListResponse ListAll(this IVCenterOperations operations, CustomRequestHeaders customRequestHeaders)
+        {
+            return Task.Factory.StartNew((object s) => 
+            {
+                return ((IVCenterOperations)s).ListAllAsync(customRequestHeaders);
+            }
+            , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+        }
+        
+        /// <summary>
+        /// Get the list of all vCenters under the vault.
+        /// </summary>
+        /// <param name='operations'>
+        /// Reference to the
+        /// Microsoft.Azure.Management.SiteRecovery.IVCenterOperations.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Optional. Request header parameters.
+        /// </param>
+        /// <returns>
+        /// The response model for the list vCenters operation.
+        /// </returns>
+        public static Task<VCenterListResponse> ListAllAsync(this IVCenterOperations operations, CustomRequestHeaders customRequestHeaders)
+        {
+            return operations.ListAllAsync(customRequestHeaders, CancellationToken.None);
+        }
+        
+        /// <summary>
+        /// Update vCenter.
+        /// </summary>
+        /// <param name='operations'>
+        /// Reference to the
+        /// Microsoft.Azure.Management.SiteRecovery.IVCenterOperations.
         /// </param>
         /// <param name='fabricName'>
         /// Required. Fabric Name.
+        /// </param>
+        /// <param name='vCenterName'>
+        /// Required. vCenter Name.
         /// </param>
         /// <param name='input'>
-        /// Required. Input to reassociate a gateway.
+        /// Required. Input to update vCenter.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -671,27 +606,30 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public static LongRunningOperationResponse ReassociateGateway(this IFabricOperations operations, string fabricName, FailoverProcessServerRequest input, CustomRequestHeaders customRequestHeaders)
+        public static LongRunningOperationResponse Update(this IVCenterOperations operations, string fabricName, string vCenterName, UpdateVCenterInput input, CustomRequestHeaders customRequestHeaders)
         {
             return Task.Factory.StartNew((object s) => 
             {
-                return ((IFabricOperations)s).ReassociateGatewayAsync(fabricName, input, customRequestHeaders);
+                return ((IVCenterOperations)s).UpdateAsync(fabricName, vCenterName, input, customRequestHeaders);
             }
             , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
         }
         
         /// <summary>
-        /// Performs reassociate gateway operation on a fabric.
+        /// Update vCenter.
         /// </summary>
         /// <param name='operations'>
         /// Reference to the
-        /// Microsoft.Azure.Management.SiteRecovery.IFabricOperations.
+        /// Microsoft.Azure.Management.SiteRecovery.IVCenterOperations.
         /// </param>
         /// <param name='fabricName'>
         /// Required. Fabric Name.
         /// </param>
+        /// <param name='vCenterName'>
+        /// Required. vCenter Name.
+        /// </param>
         /// <param name='input'>
-        /// Required. Input to reassociate a gateway.
+        /// Required. Input to update vCenter.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -699,9 +637,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public static Task<LongRunningOperationResponse> ReassociateGatewayAsync(this IFabricOperations operations, string fabricName, FailoverProcessServerRequest input, CustomRequestHeaders customRequestHeaders)
+        public static Task<LongRunningOperationResponse> UpdateAsync(this IVCenterOperations operations, string fabricName, string vCenterName, UpdateVCenterInput input, CustomRequestHeaders customRequestHeaders)
         {
-            return operations.ReassociateGatewayAsync(fabricName, input, customRequestHeaders, CancellationToken.None);
+            return operations.UpdateAsync(fabricName, vCenterName, input, customRequestHeaders, CancellationToken.None);
         }
     }
 }

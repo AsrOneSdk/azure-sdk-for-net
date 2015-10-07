@@ -174,5 +174,14 @@ namespace Microsoft.Azure.Management.SiteRecovery
         {
             get; 
         }
+        
+        /// <summary>
+        /// Definition of vCenter entity operations for the Site Recovery
+        /// extension.
+        /// </summary>
+        IVCenterOperations VCenters
+        {
+            get; 
+        }
     }
 }

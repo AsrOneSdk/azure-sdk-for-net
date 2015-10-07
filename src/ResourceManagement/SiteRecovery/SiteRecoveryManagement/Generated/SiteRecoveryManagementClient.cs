@@ -221,6 +221,17 @@ namespace Microsoft.Azure.Management.SiteRecovery
             get { return this._replicationProtectedItem; }
         }
         
+        private IVCenterOperations _vCenters;
+        
+        /// <summary>
+        /// Definition of vCenter entity operations for the Site Recovery
+        /// extension.
+        /// </summary>
+        public virtual IVCenterOperations VCenters
+        {
+            get { return this._vCenters; }
+        }
+        
         /// <summary>
         /// Initializes a new instance of the SiteRecoveryManagementClient
         /// class.
@@ -238,6 +249,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             this._protectionContainer = new ProtectionContainerOperations(this);
             this._recoveryServicesProvider = new RecoveryServicesProviderOperations(this);
             this._replicationProtectedItem = new ReplicationProtectedItemOperations(this);
+            this._vCenters = new VCenterOperations(this);
             this._apiVersion = "2015-01-01";
             this._longRunningOperationInitialTimeout = -1;
             this._longRunningOperationRetryTimeout = -1;
@@ -380,6 +392,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             this._protectionContainer = new ProtectionContainerOperations(this);
             this._recoveryServicesProvider = new RecoveryServicesProviderOperations(this);
             this._replicationProtectedItem = new ReplicationProtectedItemOperations(this);
+            this._vCenters = new VCenterOperations(this);
             this._apiVersion = "2015-01-01";
             this._longRunningOperationInitialTimeout = -1;
             this._longRunningOperationRetryTimeout = -1;

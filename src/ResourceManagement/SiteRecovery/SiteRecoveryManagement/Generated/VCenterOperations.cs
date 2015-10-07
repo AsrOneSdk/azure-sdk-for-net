@@ -25,6 +25,8 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Hyak.Common;
@@ -36,18 +38,17 @@ using Newtonsoft.Json.Linq;
 namespace Microsoft.Azure.Management.SiteRecovery
 {
     /// <summary>
-    /// Definition of provider operations for the Site Recovery extension.
+    /// Definition of vCenter entity operations for the Site Recovery extension.
     /// </summary>
-    internal partial class RecoveryServicesProviderOperations : IServiceOperations<SiteRecoveryManagementClient>, IRecoveryServicesProviderOperations
+    internal partial class VCenterOperations : IServiceOperations<SiteRecoveryManagementClient>, IVCenterOperations
     {
         /// <summary>
-        /// Initializes a new instance of the
-        /// RecoveryServicesProviderOperations class.
+        /// Initializes a new instance of the VCenterOperations class.
         /// </summary>
         /// <param name='client'>
         /// Reference to the service client.
         /// </param>
-        internal RecoveryServicesProviderOperations(SiteRecoveryManagementClient client)
+        internal VCenterOperations(SiteRecoveryManagementClient client)
         {
             this._client = client;
         }
@@ -64,16 +65,16 @@ namespace Microsoft.Azure.Management.SiteRecovery
         }
         
         /// <summary>
-        /// Deletes a provider
+        /// Creates a vCenter
         /// </summary>
         /// <param name='fabricName'>
-        /// Required. Name of provider's fabric
+        /// Required. Fabric Name.
         /// </param>
-        /// <param name='providerName'>
-        /// Required. Provider Name.
+        /// <param name='vCenterName'>
+        /// Required. vCenter Name.
         /// </param>
         /// <param name='input'>
-        /// Required. Deletion input.
+        /// Required. Input to create vCenter.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -84,24 +85,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public async Task<LongRunningOperationResponse> BeginDeletingAsync(string fabricName, string providerName, RecoveryServicesProviderDeletionInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        public async Task<LongRunningOperationResponse> BeginCreatingAsync(string fabricName, string vCenterName, CreateVCenterInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
         {
             // Validate
             if (fabricName == null)
             {
                 throw new ArgumentNullException("fabricName");
             }
-            if (providerName == null)
+            if (vCenterName == null)
             {
-                throw new ArgumentNullException("providerName");
+                throw new ArgumentNullException("vCenterName");
             }
             if (input == null)
             {
                 throw new ArgumentNullException("input");
-            }
-            if (input.Properties == null)
-            {
-                throw new ArgumentNullException("input.Properties");
             }
             
             // Tracing
@@ -112,10 +109,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 invocationId = TracingAdapter.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("fabricName", fabricName);
-                tracingParameters.Add("providerName", providerName);
+                tracingParameters.Add("vCenterName", vCenterName);
                 tracingParameters.Add("input", input);
                 tracingParameters.Add("customRequestHeaders", customRequestHeaders);
-                TracingAdapter.Enter(invocationId, this, "BeginDeletingAsync", tracingParameters);
+                TracingAdapter.Enter(invocationId, this, "BeginCreatingAsync", tracingParameters);
             }
             
             // Construct URL
@@ -130,13 +127,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/providers/";
             url = url + Uri.EscapeDataString(this.Client.ResourceNamespace);
             url = url + "/";
-            url = url + Uri.EscapeDataString(this.Client.ResourceType);
+            url = url + null;
             url = url + "/";
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationFabrics/";
             url = url + Uri.EscapeDataString(fabricName);
-            url = url + "/replicationRecoveryServicesProviders/";
-            url = url + Uri.EscapeDataString(providerName);
+            url = url + "/vCenters/";
+            url = url + Uri.EscapeDataString(vCenterName);
             List<string> queryParameters = new List<string>();
             queryParameters.Add("api-version=2015-11-10");
             if (queryParameters.Count > 0)
@@ -161,7 +158,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             try
             {
                 httpRequest = new HttpRequestMessage();
-                httpRequest.Method = HttpMethod.Post;
+                httpRequest.Method = HttpMethod.Put;
                 httpRequest.RequestUri = new Uri(url);
                 
                 // Set Headers
@@ -173,6 +170,48 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 // Set Credentials
                 cancellationToken.ThrowIfCancellationRequested();
                 await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+                
+                // Serialize Request
+                string requestContent = null;
+                JToken requestDoc = null;
+                
+                JObject createVCenterInputValue = new JObject();
+                requestDoc = createVCenterInputValue;
+                
+                if (input.Properties != null)
+                {
+                    JObject propertiesValue = new JObject();
+                    createVCenterInputValue["properties"] = propertiesValue;
+                    
+                    if (input.Properties.FriendlyName != null)
+                    {
+                        propertiesValue["friendlyName"] = input.Properties.FriendlyName;
+                    }
+                    
+                    if (input.Properties.IpAddress != null)
+                    {
+                        propertiesValue["ipAddress"] = input.Properties.IpAddress;
+                    }
+                    
+                    if (input.Properties.ProcessServerId != null)
+                    {
+                        propertiesValue["processServerId"] = input.Properties.ProcessServerId;
+                    }
+                    
+                    if (input.Properties.Port != null)
+                    {
+                        propertiesValue["port"] = input.Properties.Port;
+                    }
+                    
+                    if (input.Properties.RunAsAccountId != null)
+                    {
+                        propertiesValue["runAsAccountId"] = input.Properties.RunAsAccountId;
+                    }
+                }
+                
+                requestContent = requestDoc.ToString(Newtonsoft.Json.Formatting.Indented);
+                httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
+                httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/Json");
                 
                 // Send Request
                 HttpResponseMessage httpResponse = null;
@@ -192,7 +231,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     if (statusCode != HttpStatusCode.OK && statusCode != HttpStatusCode.Accepted)
                     {
                         cancellationToken.ThrowIfCancellationRequested();
-                        CloudException ex = CloudException.Create(httpRequest, null, httpResponse, await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false));
+                        CloudException ex = CloudException.Create(httpRequest, requestContent, httpResponse, await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false));
                         if (shouldTrace)
                         {
                             TracingAdapter.Error(invocationId, ex);
@@ -246,13 +285,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
         }
         
         /// <summary>
-        /// Purges a provider
+        /// Deletes a vCenter
         /// </summary>
         /// <param name='fabricName'>
-        /// Required. Name of provider's fabric
+        /// Required. Fabric Name.
         /// </param>
-        /// <param name='providerName'>
-        /// Required. Provider Name.
+        /// <param name='vCenterName'>
+        /// Required. vCenter Name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -263,16 +302,16 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public async Task<LongRunningOperationResponse> BeginPurgingAsync(string fabricName, string providerName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        public async Task<LongRunningOperationResponse> BeginDeletingAsync(string fabricName, string vCenterName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
         {
             // Validate
             if (fabricName == null)
             {
                 throw new ArgumentNullException("fabricName");
             }
-            if (providerName == null)
+            if (vCenterName == null)
             {
-                throw new ArgumentNullException("providerName");
+                throw new ArgumentNullException("vCenterName");
             }
             
             // Tracing
@@ -283,9 +322,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 invocationId = TracingAdapter.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("fabricName", fabricName);
-                tracingParameters.Add("providerName", providerName);
+                tracingParameters.Add("vCenterName", vCenterName);
                 tracingParameters.Add("customRequestHeaders", customRequestHeaders);
-                TracingAdapter.Enter(invocationId, this, "BeginPurgingAsync", tracingParameters);
+                TracingAdapter.Enter(invocationId, this, "BeginDeletingAsync", tracingParameters);
             }
             
             // Construct URL
@@ -300,13 +339,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/providers/";
             url = url + Uri.EscapeDataString(this.Client.ResourceNamespace);
             url = url + "/";
-            url = url + Uri.EscapeDataString(this.Client.ResourceType);
+            url = url + null;
             url = url + "/";
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationFabrics/";
             url = url + Uri.EscapeDataString(fabricName);
-            url = url + "/replicationRecoveryServicesProviders/";
-            url = url + Uri.EscapeDataString(providerName);
+            url = url + "/vCenters/";
+            url = url + Uri.EscapeDataString(vCenterName);
             List<string> queryParameters = new List<string>();
             queryParameters.Add("api-version=2015-11-10");
             if (queryParameters.Count > 0)
@@ -416,13 +455,16 @@ namespace Microsoft.Azure.Management.SiteRecovery
         }
         
         /// <summary>
-        /// Refreshes a provider
+        /// Update vCenter.
         /// </summary>
         /// <param name='fabricName'>
-        /// Required. Name of provider's fabric
+        /// Required. Fabric Name.
         /// </param>
-        /// <param name='providerName'>
-        /// Required. Name of provider
+        /// <param name='vCenterName'>
+        /// Required. vCenter Name.
+        /// </param>
+        /// <param name='input'>
+        /// Required. Input to update vCenter.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -433,16 +475,27 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public async Task<LongRunningOperationResponse> BeginRefreshingAsync(string fabricName, string providerName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        public async Task<LongRunningOperationResponse> BeginUpdatingAsync(string fabricName, string vCenterName, UpdateVCenterInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
         {
             // Validate
             if (fabricName == null)
             {
                 throw new ArgumentNullException("fabricName");
             }
-            if (providerName == null)
+            if (vCenterName == null)
             {
-                throw new ArgumentNullException("providerName");
+                throw new ArgumentNullException("vCenterName");
+            }
+            if (input == null)
+            {
+                throw new ArgumentNullException("input");
+            }
+            if (input.Properties != null)
+            {
+                if (input.Properties.VCenterId == null)
+                {
+                    throw new ArgumentNullException("input.Properties.VCenterId");
+                }
             }
             
             // Tracing
@@ -453,9 +506,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 invocationId = TracingAdapter.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("fabricName", fabricName);
-                tracingParameters.Add("providerName", providerName);
+                tracingParameters.Add("vCenterName", vCenterName);
+                tracingParameters.Add("input", input);
                 tracingParameters.Add("customRequestHeaders", customRequestHeaders);
-                TracingAdapter.Enter(invocationId, this, "BeginRefreshingAsync", tracingParameters);
+                TracingAdapter.Enter(invocationId, this, "BeginUpdatingAsync", tracingParameters);
             }
             
             // Construct URL
@@ -470,14 +524,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/providers/";
             url = url + Uri.EscapeDataString(this.Client.ResourceNamespace);
             url = url + "/";
-            url = url + Uri.EscapeDataString(this.Client.ResourceType);
+            url = url + null;
             url = url + "/";
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationFabrics/";
             url = url + Uri.EscapeDataString(fabricName);
-            url = url + "/replicationRecoveryServicesProviders/";
-            url = url + Uri.EscapeDataString(providerName);
-            url = url + "/RefreshProvider";
+            url = url + "/vCenters/";
+            url = url + Uri.EscapeDataString(vCenterName);
             List<string> queryParameters = new List<string>();
             queryParameters.Add("api-version=2015-11-10");
             if (queryParameters.Count > 0)
@@ -502,7 +555,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             try
             {
                 httpRequest = new HttpRequestMessage();
-                httpRequest.Method = HttpMethod.Post;
+                httpRequest.Method = new HttpMethod("PATCH");
                 httpRequest.RequestUri = new Uri(url);
                 
                 // Set Headers
@@ -514,6 +567,50 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 // Set Credentials
                 cancellationToken.ThrowIfCancellationRequested();
                 await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+                
+                // Serialize Request
+                string requestContent = null;
+                JToken requestDoc = null;
+                
+                JObject updateVCenterInputValue = new JObject();
+                requestDoc = updateVCenterInputValue;
+                
+                if (input.Properties != null)
+                {
+                    JObject propertiesValue = new JObject();
+                    updateVCenterInputValue["properties"] = propertiesValue;
+                    
+                    propertiesValue["vCenterId"] = input.Properties.VCenterId;
+                    
+                    if (input.Properties.FriendlyName != null)
+                    {
+                        propertiesValue["friendlyName"] = input.Properties.FriendlyName;
+                    }
+                    
+                    if (input.Properties.IpAddress != null)
+                    {
+                        propertiesValue["ipAddress"] = input.Properties.IpAddress;
+                    }
+                    
+                    if (input.Properties.ProcessServerId != null)
+                    {
+                        propertiesValue["processServerId"] = input.Properties.ProcessServerId;
+                    }
+                    
+                    if (input.Properties.Port != null)
+                    {
+                        propertiesValue["port"] = input.Properties.Port;
+                    }
+                    
+                    if (input.Properties.RunAsAccountId != null)
+                    {
+                        propertiesValue["runAsAccountId"] = input.Properties.RunAsAccountId;
+                    }
+                }
+                
+                requestContent = requestDoc.ToString(Newtonsoft.Json.Formatting.Indented);
+                httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
+                httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
                 
                 // Send Request
                 HttpResponseMessage httpResponse = null;
@@ -533,7 +630,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     if (statusCode != HttpStatusCode.OK && statusCode != HttpStatusCode.Accepted)
                     {
                         cancellationToken.ThrowIfCancellationRequested();
-                        CloudException ex = CloudException.Create(httpRequest, null, httpResponse, await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false));
+                        CloudException ex = CloudException.Create(httpRequest, requestContent, httpResponse, await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false));
                         if (shouldTrace)
                         {
                             TracingAdapter.Error(invocationId, ex);
@@ -587,16 +684,16 @@ namespace Microsoft.Azure.Management.SiteRecovery
         }
         
         /// <summary>
-        /// Deletes a provider
+        /// Creates a vCenter
         /// </summary>
         /// <param name='fabricName'>
-        /// Required. Name of provider's fabric
+        /// Required. Fabric Name.
         /// </param>
-        /// <param name='providerName'>
-        /// Required. Provider Name.
+        /// <param name='vCenterName'>
+        /// Required. vCenter Name.
         /// </param>
         /// <param name='input'>
-        /// Required. Deletion input.
+        /// Required. Input to create vCenter.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -607,7 +704,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public async Task<LongRunningOperationResponse> DeleteAsync(string fabricName, string providerName, RecoveryServicesProviderDeletionInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        public async Task<LongRunningOperationResponse> CreateAsync(string fabricName, string vCenterName, CreateVCenterInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
         {
             SiteRecoveryManagementClient client = this.Client;
             bool shouldTrace = TracingAdapter.IsEnabled;
@@ -617,20 +714,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 invocationId = TracingAdapter.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("fabricName", fabricName);
-                tracingParameters.Add("providerName", providerName);
+                tracingParameters.Add("vCenterName", vCenterName);
                 tracingParameters.Add("input", input);
                 tracingParameters.Add("customRequestHeaders", customRequestHeaders);
-                TracingAdapter.Enter(invocationId, this, "DeleteAsync", tracingParameters);
+                TracingAdapter.Enter(invocationId, this, "CreateAsync", tracingParameters);
             }
             
             cancellationToken.ThrowIfCancellationRequested();
-            LongRunningOperationResponse response = await client.RecoveryServicesProvider.BeginDeletingAsync(fabricName, providerName, input, customRequestHeaders, cancellationToken).ConfigureAwait(false);
+            LongRunningOperationResponse response = await client.VCenters.BeginCreatingAsync(fabricName, vCenterName, input, customRequestHeaders, cancellationToken).ConfigureAwait(false);
             if (response.Status == OperationStatus.Succeeded)
             {
                 return response;
             }
             cancellationToken.ThrowIfCancellationRequested();
-            LongRunningOperationResponse result = await client.RecoveryServicesProvider.GetDeleteStatusAsync(response.Location, cancellationToken).ConfigureAwait(false);
+            CreateVCenterOperationResponse result = await client.VCenters.GetCreateStatusAsync(response.Location, cancellationToken).ConfigureAwait(false);
             int delayInSeconds = 30;
             if (client.LongRunningOperationInitialTimeout >= 0)
             {
@@ -641,7 +738,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 cancellationToken.ThrowIfCancellationRequested();
                 await TaskEx.Delay(delayInSeconds * 1000, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
-                result = await client.RecoveryServicesProvider.GetDeleteStatusAsync(response.Location, cancellationToken).ConfigureAwait(false);
+                result = await client.VCenters.GetCreateStatusAsync(response.Location, cancellationToken).ConfigureAwait(false);
                 delayInSeconds = 30;
                 if (client.LongRunningOperationRetryTimeout >= 0)
                 {
@@ -658,13 +755,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
         }
         
         /// <summary>
-        /// Get the server object by Id.
+        /// Deletes a vCenter
         /// </summary>
         /// <param name='fabricName'>
         /// Required. Fabric Name.
         /// </param>
-        /// <param name='providerName'>
-        /// Required. Provider Name.
+        /// <param name='vCenterName'>
+        /// Required. vCenter Name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -673,18 +770,85 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// Cancellation token.
         /// </param>
         /// <returns>
-        /// The response model for the provider object
+        /// A standard service response for long running operations.
         /// </returns>
-        public async Task<RecoveryServicesProviderResponse> GetAsync(string fabricName, string providerName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        public async Task<LongRunningOperationResponse> DeleteAsync(string fabricName, string vCenterName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        {
+            SiteRecoveryManagementClient client = this.Client;
+            bool shouldTrace = TracingAdapter.IsEnabled;
+            string invocationId = null;
+            if (shouldTrace)
+            {
+                invocationId = TracingAdapter.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("fabricName", fabricName);
+                tracingParameters.Add("vCenterName", vCenterName);
+                tracingParameters.Add("customRequestHeaders", customRequestHeaders);
+                TracingAdapter.Enter(invocationId, this, "DeleteAsync", tracingParameters);
+            }
+            
+            cancellationToken.ThrowIfCancellationRequested();
+            LongRunningOperationResponse response = await client.VCenters.BeginDeletingAsync(fabricName, vCenterName, customRequestHeaders, cancellationToken).ConfigureAwait(false);
+            if (response.Status == OperationStatus.Succeeded)
+            {
+                return response;
+            }
+            cancellationToken.ThrowIfCancellationRequested();
+            LongRunningOperationResponse result = await client.VCenters.GetDeleteStatusAsync(response.Location, cancellationToken).ConfigureAwait(false);
+            int delayInSeconds = 30;
+            if (client.LongRunningOperationInitialTimeout >= 0)
+            {
+                delayInSeconds = client.LongRunningOperationInitialTimeout;
+            }
+            while ((result.Status != OperationStatus.InProgress) == false)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                await TaskEx.Delay(delayInSeconds * 1000, cancellationToken).ConfigureAwait(false);
+                cancellationToken.ThrowIfCancellationRequested();
+                result = await client.VCenters.GetDeleteStatusAsync(response.Location, cancellationToken).ConfigureAwait(false);
+                delayInSeconds = 30;
+                if (client.LongRunningOperationRetryTimeout >= 0)
+                {
+                    delayInSeconds = client.LongRunningOperationRetryTimeout;
+                }
+            }
+            
+            if (shouldTrace)
+            {
+                TracingAdapter.Exit(invocationId, result);
+            }
+            
+            return result;
+        }
+        
+        /// <summary>
+        /// Get the vCenter object by Id.
+        /// </summary>
+        /// <param name='fabricName'>
+        /// Required. Fabric Name.
+        /// </param>
+        /// <param name='vCenterName'>
+        /// Required. vCenter Name.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Optional. Request header parameters.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
+        /// The response model for the vCenter object
+        /// </returns>
+        public async Task<VCenterResponse> GetAsync(string fabricName, string vCenterName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
         {
             // Validate
             if (fabricName == null)
             {
                 throw new ArgumentNullException("fabricName");
             }
-            if (providerName == null)
+            if (vCenterName == null)
             {
-                throw new ArgumentNullException("providerName");
+                throw new ArgumentNullException("vCenterName");
             }
             
             // Tracing
@@ -695,7 +859,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 invocationId = TracingAdapter.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("fabricName", fabricName);
-                tracingParameters.Add("providerName", providerName);
+                tracingParameters.Add("vCenterName", vCenterName);
                 tracingParameters.Add("customRequestHeaders", customRequestHeaders);
                 TracingAdapter.Enter(invocationId, this, "GetAsync", tracingParameters);
             }
@@ -710,15 +874,15 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/resourceGroups/";
             url = url + Uri.EscapeDataString(this.Client.ResourceGroupName);
             url = url + "/providers/";
-            url = url + Uri.EscapeDataString(this.Client.ResourceNamespace);
+            url = url + null;
             url = url + "/";
-            url = url + Uri.EscapeDataString(this.Client.ResourceType);
+            url = url + null;
             url = url + "/";
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationFabrics/";
             url = url + Uri.EscapeDataString(fabricName);
-            url = url + "/replicationRecoveryServicesProviders/";
-            url = url + Uri.EscapeDataString(providerName);
+            url = url + "/vCenters/";
+            url = url + Uri.EscapeDataString(vCenterName);
             List<string> queryParameters = new List<string>();
             queryParameters.Add("api-version=2015-11-10");
             if (queryParameters.Count > 0)
@@ -781,13 +945,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     }
                     
                     // Create Result
-                    RecoveryServicesProviderResponse result = null;
+                    VCenterResponse result = null;
                     // Deserialize Response
                     if (statusCode == HttpStatusCode.OK)
                     {
                         cancellationToken.ThrowIfCancellationRequested();
                         string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        result = new RecoveryServicesProviderResponse();
+                        result = new VCenterResponse();
                         JToken responseDoc = null;
                         if (string.IsNullOrEmpty(responseContent) == false)
                         {
@@ -796,21 +960,14 @@ namespace Microsoft.Azure.Management.SiteRecovery
                         
                         if (responseDoc != null && responseDoc.Type != JTokenType.Null)
                         {
-                            RecoveryServicesProvider recoveryServicesProviderInstance = new RecoveryServicesProvider();
-                            result.RecoveryServicesProvider = recoveryServicesProviderInstance;
+                            VCenter vCenterInstance = new VCenter();
+                            result.VCenter = vCenterInstance;
                             
                             JToken propertiesValue = responseDoc["properties"];
                             if (propertiesValue != null && propertiesValue.Type != JTokenType.Null)
                             {
-                                RecoveryServicesProviderProperties propertiesInstance = new RecoveryServicesProviderProperties();
-                                recoveryServicesProviderInstance.Properties = propertiesInstance;
-                                
-                                JToken fabricTypeValue = propertiesValue["fabricType"];
-                                if (fabricTypeValue != null && fabricTypeValue.Type != JTokenType.Null)
-                                {
-                                    string fabricTypeInstance = ((string)fabricTypeValue);
-                                    propertiesInstance.FabricType = fabricTypeInstance;
-                                }
+                                VCenterProperties propertiesInstance = new VCenterProperties();
+                                vCenterInstance.Properties = propertiesInstance;
                                 
                                 JToken friendlyNameValue = propertiesValue["friendlyName"];
                                 if (friendlyNameValue != null && friendlyNameValue.Type != JTokenType.Null)
@@ -819,69 +976,53 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.FriendlyName = friendlyNameInstance;
                                 }
                                 
-                                JToken fabricFriendlyNameValue = propertiesValue["fabricFriendlyName"];
-                                if (fabricFriendlyNameValue != null && fabricFriendlyNameValue.Type != JTokenType.Null)
+                                JToken fabricIdValue = propertiesValue["fabricId"];
+                                if (fabricIdValue != null && fabricIdValue.Type != JTokenType.Null)
                                 {
-                                    string fabricFriendlyNameInstance = ((string)fabricFriendlyNameValue);
-                                    propertiesInstance.FabricFriendlyName = fabricFriendlyNameInstance;
+                                    string fabricIdInstance = ((string)fabricIdValue);
+                                    propertiesInstance.FabricId = fabricIdInstance;
                                 }
                                 
-                                JToken providerVersionValue = propertiesValue["providerVersion"];
-                                if (providerVersionValue != null && providerVersionValue.Type != JTokenType.Null)
+                                JToken lastHBReceivedValue = propertiesValue["lastHBReceived"];
+                                if (lastHBReceivedValue != null && lastHBReceivedValue.Type != JTokenType.Null)
                                 {
-                                    string providerVersionInstance = ((string)providerVersionValue);
-                                    propertiesInstance.ProviderVersion = providerVersionInstance;
+                                    DateTime lastHBReceivedInstance = ((DateTime)lastHBReceivedValue);
+                                    propertiesInstance.LastHBReceived = lastHBReceivedInstance;
                                 }
                                 
-                                JToken serverVersionValue = propertiesValue["serverVersion"];
-                                if (serverVersionValue != null && serverVersionValue.Type != JTokenType.Null)
+                                JToken discoveryStatusValue = propertiesValue["discoveryStatus"];
+                                if (discoveryStatusValue != null && discoveryStatusValue.Type != JTokenType.Null)
                                 {
-                                    string serverVersionInstance = ((string)serverVersionValue);
-                                    propertiesInstance.ServerVersion = serverVersionInstance;
+                                    string discoveryStatusInstance = ((string)discoveryStatusValue);
+                                    propertiesInstance.DiscoveryStatus = discoveryStatusInstance;
                                 }
                                 
-                                JToken providerVersionStateValue = propertiesValue["providerVersionState"];
-                                if (providerVersionStateValue != null && providerVersionStateValue.Type != JTokenType.Null)
+                                JToken processServerIdValue = propertiesValue["processServerId"];
+                                if (processServerIdValue != null && processServerIdValue.Type != JTokenType.Null)
                                 {
-                                    string providerVersionStateInstance = ((string)providerVersionStateValue);
-                                    propertiesInstance.ProviderVersionState = providerVersionStateInstance;
+                                    string processServerIdInstance = ((string)processServerIdValue);
+                                    propertiesInstance.ProcessServerId = processServerIdInstance;
                                 }
                                 
-                                JToken providerVersionExpiryDateValue = propertiesValue["providerVersionExpiryDate"];
-                                if (providerVersionExpiryDateValue != null && providerVersionExpiryDateValue.Type != JTokenType.Null)
+                                JToken ipAddressValue = propertiesValue["ipAddress"];
+                                if (ipAddressValue != null && ipAddressValue.Type != JTokenType.Null)
                                 {
-                                    DateTime providerVersionExpiryDateInstance = ((DateTime)providerVersionExpiryDateValue);
-                                    propertiesInstance.ProviderVersionExpiryDate = providerVersionExpiryDateInstance;
+                                    string ipAddressInstance = ((string)ipAddressValue);
+                                    propertiesInstance.IpAddress = ipAddressInstance;
                                 }
                                 
-                                JToken lastHeartBeatValue = propertiesValue["lastHeartBeat"];
-                                if (lastHeartBeatValue != null && lastHeartBeatValue.Type != JTokenType.Null)
+                                JToken infrastructureIdValue = propertiesValue["infrastructureId"];
+                                if (infrastructureIdValue != null && infrastructureIdValue.Type != JTokenType.Null)
                                 {
-                                    DateTime lastHeartBeatInstance = ((DateTime)lastHeartBeatValue);
-                                    propertiesInstance.LastHeartbeat = lastHeartBeatInstance;
+                                    string infrastructureIdInstance = ((string)infrastructureIdValue);
+                                    propertiesInstance.InfrastructureId = infrastructureIdInstance;
                                 }
                                 
-                                JToken connectionStatusValue = propertiesValue["connectionStatus"];
-                                if (connectionStatusValue != null && connectionStatusValue.Type != JTokenType.Null)
+                                JToken portValue = propertiesValue["port"];
+                                if (portValue != null && portValue.Type != JTokenType.Null)
                                 {
-                                    string connectionStatusInstance = ((string)connectionStatusValue);
-                                    propertiesInstance.ConnectionStatus = connectionStatusInstance;
-                                }
-                                
-                                JToken allowedScenariosArray = propertiesValue["allowedScenarios"];
-                                if (allowedScenariosArray != null && allowedScenariosArray.Type != JTokenType.Null)
-                                {
-                                    foreach (JToken allowedScenariosValue in ((JArray)allowedScenariosArray))
-                                    {
-                                        propertiesInstance.AllowedScenarios.Add(((string)allowedScenariosValue));
-                                    }
-                                }
-                                
-                                JToken protectedItemCountValue = propertiesValue["protectedItemCount"];
-                                if (protectedItemCountValue != null && protectedItemCountValue.Type != JTokenType.Null)
-                                {
-                                    int protectedItemCountInstance = ((int)protectedItemCountValue);
-                                    propertiesInstance.ProtectedItemCount = protectedItemCountInstance;
+                                    string portInstance = ((string)portValue);
+                                    propertiesInstance.Port = portInstance;
                                 }
                             }
                             
@@ -889,28 +1030,28 @@ namespace Microsoft.Azure.Management.SiteRecovery
                             if (idValue != null && idValue.Type != JTokenType.Null)
                             {
                                 string idInstance = ((string)idValue);
-                                recoveryServicesProviderInstance.Id = idInstance;
+                                vCenterInstance.Id = idInstance;
                             }
                             
                             JToken nameValue = responseDoc["name"];
                             if (nameValue != null && nameValue.Type != JTokenType.Null)
                             {
                                 string nameInstance = ((string)nameValue);
-                                recoveryServicesProviderInstance.Name = nameInstance;
+                                vCenterInstance.Name = nameInstance;
                             }
                             
                             JToken typeValue = responseDoc["type"];
                             if (typeValue != null && typeValue.Type != JTokenType.Null)
                             {
                                 string typeInstance = ((string)typeValue);
-                                recoveryServicesProviderInstance.Type = typeInstance;
+                                vCenterInstance.Type = typeInstance;
                             }
                             
                             JToken locationValue = responseDoc["location"];
                             if (locationValue != null && locationValue.Type != JTokenType.Null)
                             {
                                 string locationInstance = ((string)locationValue);
-                                recoveryServicesProviderInstance.Location = locationInstance;
+                                vCenterInstance.Location = locationInstance;
                             }
                             
                             JToken tagsSequenceElement = ((JToken)responseDoc["tags"]);
@@ -920,7 +1061,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 {
                                     string tagsKey = ((string)property.Name);
                                     string tagsValue = ((string)property.Value);
-                                    recoveryServicesProviderInstance.Tags.Add(tagsKey, tagsValue);
+                                    vCenterInstance.Tags.Add(tagsKey, tagsValue);
                                 }
                             }
                         }
@@ -930,6 +1071,292 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     if (httpResponse.Headers.Contains("x-ms-request-id"))
                     {
                         result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    
+                    if (shouldTrace)
+                    {
+                        TracingAdapter.Exit(invocationId, result);
+                    }
+                    return result;
+                }
+                finally
+                {
+                    if (httpResponse != null)
+                    {
+                        httpResponse.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (httpRequest != null)
+                {
+                    httpRequest.Dispose();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// The Get Operation Status operation returns the status of the
+        /// specified operation. After calling an asynchronous operation, you
+        /// can call Get Operation Status to determine whether the operation
+        /// has succeeded, failed, or is still in progress.
+        /// </summary>
+        /// <param name='operationStatusLink'>
+        /// Required. Location value returned by the Begin operation.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
+        /// A standard service response for long running operations.
+        /// </returns>
+        public async Task<CreateVCenterOperationResponse> GetCreateStatusAsync(string operationStatusLink, CancellationToken cancellationToken)
+        {
+            // Validate
+            if (operationStatusLink == null)
+            {
+                throw new ArgumentNullException("operationStatusLink");
+            }
+            
+            // Tracing
+            bool shouldTrace = TracingAdapter.IsEnabled;
+            string invocationId = null;
+            if (shouldTrace)
+            {
+                invocationId = TracingAdapter.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("operationStatusLink", operationStatusLink);
+                TracingAdapter.Enter(invocationId, this, "GetCreateStatusAsync", tracingParameters);
+            }
+            
+            // Construct URL
+            string url = "";
+            url = url + operationStatusLink;
+            url = url.Replace(" ", "%20");
+            
+            // Create HTTP transport objects
+            HttpRequestMessage httpRequest = null;
+            try
+            {
+                httpRequest = new HttpRequestMessage();
+                httpRequest.Method = HttpMethod.Get;
+                httpRequest.RequestUri = new Uri(url);
+                
+                // Set Headers
+                httpRequest.Headers.Add("Accept", "application/Json");
+                httpRequest.Headers.Add("x-ms-client-request-id", Guid.NewGuid().ToString());
+                httpRequest.Headers.Add("x-ms-version", "2015-01-01");
+                
+                // Set Credentials
+                cancellationToken.ThrowIfCancellationRequested();
+                await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+                
+                // Send Request
+                HttpResponseMessage httpResponse = null;
+                try
+                {
+                    if (shouldTrace)
+                    {
+                        TracingAdapter.SendRequest(invocationId, httpRequest);
+                    }
+                    cancellationToken.ThrowIfCancellationRequested();
+                    httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+                    if (shouldTrace)
+                    {
+                        TracingAdapter.ReceiveResponse(invocationId, httpResponse);
+                    }
+                    HttpStatusCode statusCode = httpResponse.StatusCode;
+                    if (statusCode != HttpStatusCode.OK && statusCode != HttpStatusCode.Accepted)
+                    {
+                        cancellationToken.ThrowIfCancellationRequested();
+                        CloudException ex = CloudException.Create(httpRequest, null, httpResponse, await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false));
+                        if (shouldTrace)
+                        {
+                            TracingAdapter.Error(invocationId, ex);
+                        }
+                        throw ex;
+                    }
+                    
+                    // Create Result
+                    CreateVCenterOperationResponse result = null;
+                    // Deserialize Response
+                    if (statusCode == HttpStatusCode.OK || statusCode == HttpStatusCode.Accepted)
+                    {
+                        cancellationToken.ThrowIfCancellationRequested();
+                        string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        result = new CreateVCenterOperationResponse();
+                        JToken responseDoc = null;
+                        if (string.IsNullOrEmpty(responseContent) == false)
+                        {
+                            responseDoc = JToken.Parse(responseContent);
+                        }
+                        
+                        if (responseDoc != null && responseDoc.Type != JTokenType.Null)
+                        {
+                            VCenter vCenterInstance = new VCenter();
+                            result.VCenter = vCenterInstance;
+                            
+                            JToken propertiesValue = responseDoc["properties"];
+                            if (propertiesValue != null && propertiesValue.Type != JTokenType.Null)
+                            {
+                                VCenterProperties propertiesInstance = new VCenterProperties();
+                                vCenterInstance.Properties = propertiesInstance;
+                                
+                                JToken friendlyNameValue = propertiesValue["friendlyName"];
+                                if (friendlyNameValue != null && friendlyNameValue.Type != JTokenType.Null)
+                                {
+                                    string friendlyNameInstance = ((string)friendlyNameValue);
+                                    propertiesInstance.FriendlyName = friendlyNameInstance;
+                                }
+                                
+                                JToken fabricIdValue = propertiesValue["fabricId"];
+                                if (fabricIdValue != null && fabricIdValue.Type != JTokenType.Null)
+                                {
+                                    string fabricIdInstance = ((string)fabricIdValue);
+                                    propertiesInstance.FabricId = fabricIdInstance;
+                                }
+                                
+                                JToken lastHBReceivedValue = propertiesValue["lastHBReceived"];
+                                if (lastHBReceivedValue != null && lastHBReceivedValue.Type != JTokenType.Null)
+                                {
+                                    DateTime lastHBReceivedInstance = ((DateTime)lastHBReceivedValue);
+                                    propertiesInstance.LastHBReceived = lastHBReceivedInstance;
+                                }
+                                
+                                JToken discoveryStatusValue = propertiesValue["discoveryStatus"];
+                                if (discoveryStatusValue != null && discoveryStatusValue.Type != JTokenType.Null)
+                                {
+                                    string discoveryStatusInstance = ((string)discoveryStatusValue);
+                                    propertiesInstance.DiscoveryStatus = discoveryStatusInstance;
+                                }
+                                
+                                JToken processServerIdValue = propertiesValue["processServerId"];
+                                if (processServerIdValue != null && processServerIdValue.Type != JTokenType.Null)
+                                {
+                                    string processServerIdInstance = ((string)processServerIdValue);
+                                    propertiesInstance.ProcessServerId = processServerIdInstance;
+                                }
+                                
+                                JToken ipAddressValue = propertiesValue["ipAddress"];
+                                if (ipAddressValue != null && ipAddressValue.Type != JTokenType.Null)
+                                {
+                                    string ipAddressInstance = ((string)ipAddressValue);
+                                    propertiesInstance.IpAddress = ipAddressInstance;
+                                }
+                                
+                                JToken infrastructureIdValue = propertiesValue["infrastructureId"];
+                                if (infrastructureIdValue != null && infrastructureIdValue.Type != JTokenType.Null)
+                                {
+                                    string infrastructureIdInstance = ((string)infrastructureIdValue);
+                                    propertiesInstance.InfrastructureId = infrastructureIdInstance;
+                                }
+                                
+                                JToken portValue = propertiesValue["port"];
+                                if (portValue != null && portValue.Type != JTokenType.Null)
+                                {
+                                    string portInstance = ((string)portValue);
+                                    propertiesInstance.Port = portInstance;
+                                }
+                            }
+                            
+                            JToken idValue = responseDoc["id"];
+                            if (idValue != null && idValue.Type != JTokenType.Null)
+                            {
+                                string idInstance = ((string)idValue);
+                                vCenterInstance.Id = idInstance;
+                            }
+                            
+                            JToken nameValue = responseDoc["name"];
+                            if (nameValue != null && nameValue.Type != JTokenType.Null)
+                            {
+                                string nameInstance = ((string)nameValue);
+                                vCenterInstance.Name = nameInstance;
+                            }
+                            
+                            JToken typeValue = responseDoc["type"];
+                            if (typeValue != null && typeValue.Type != JTokenType.Null)
+                            {
+                                string typeInstance = ((string)typeValue);
+                                vCenterInstance.Type = typeInstance;
+                            }
+                            
+                            JToken locationValue = responseDoc["location"];
+                            if (locationValue != null && locationValue.Type != JTokenType.Null)
+                            {
+                                string locationInstance = ((string)locationValue);
+                                vCenterInstance.Location = locationInstance;
+                            }
+                            
+                            JToken tagsSequenceElement = ((JToken)responseDoc["tags"]);
+                            if (tagsSequenceElement != null && tagsSequenceElement.Type != JTokenType.Null)
+                            {
+                                foreach (JProperty property in tagsSequenceElement)
+                                {
+                                    string tagsKey = ((string)property.Name);
+                                    string tagsValue = ((string)property.Value);
+                                    vCenterInstance.Tags.Add(tagsKey, tagsValue);
+                                }
+                            }
+                            
+                            JToken locationValue2 = responseDoc["Location"];
+                            if (locationValue2 != null && locationValue2.Type != JTokenType.Null)
+                            {
+                                string locationInstance2 = ((string)locationValue2);
+                                result.Location = locationInstance2;
+                            }
+                            
+                            JToken retryAfterValue = responseDoc["RetryAfter"];
+                            if (retryAfterValue != null && retryAfterValue.Type != JTokenType.Null)
+                            {
+                                int retryAfterInstance = ((int)retryAfterValue);
+                                result.RetryAfter = retryAfterInstance;
+                            }
+                            
+                            JToken asyncOperationValue = responseDoc["AsyncOperation"];
+                            if (asyncOperationValue != null && asyncOperationValue.Type != JTokenType.Null)
+                            {
+                                string asyncOperationInstance = ((string)asyncOperationValue);
+                                result.AsyncOperation = asyncOperationInstance;
+                            }
+                            
+                            JToken statusValue = responseDoc["Status"];
+                            if (statusValue != null && statusValue.Type != JTokenType.Null)
+                            {
+                                OperationStatus statusInstance = ((OperationStatus)Enum.Parse(typeof(OperationStatus), ((string)statusValue), true));
+                                result.Status = statusInstance;
+                            }
+                        }
+                        
+                    }
+                    result.StatusCode = statusCode;
+                    if (httpResponse.Headers.Contains("Azure-AsyncOperation"))
+                    {
+                        result.AsyncOperation = httpResponse.Headers.GetValues("Azure-AsyncOperation").FirstOrDefault();
+                    }
+                    if (httpResponse.Headers.Contains("Location"))
+                    {
+                        result.Location = httpResponse.Headers.GetValues("Location").FirstOrDefault();
+                    }
+                    if (httpResponse.Headers.Contains("Retry-After"))
+                    {
+                        result.RetryAfter = int.Parse(httpResponse.Headers.GetValues("Retry-After").FirstOrDefault(), CultureInfo.InvariantCulture);
+                    }
+                    if (httpResponse.Headers.Contains("x-ms-request-id"))
+                    {
+                        result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    if (statusCode == HttpStatusCode.NoContent)
+                    {
+                        result.Status = OperationStatus.Failed;
+                    }
+                    if (statusCode == HttpStatusCode.Accepted)
+                    {
+                        result.Status = OperationStatus.InProgress;
+                    }
+                    if (statusCode == HttpStatusCode.OK)
+                    {
+                        result.Status = OperationStatus.Succeeded;
                     }
                     
                     if (shouldTrace)
@@ -1026,7 +1453,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                         TracingAdapter.ReceiveResponse(invocationId, httpResponse);
                     }
                     HttpStatusCode statusCode = httpResponse.StatusCode;
-                    if (statusCode != HttpStatusCode.OK && statusCode != HttpStatusCode.Accepted && statusCode != HttpStatusCode.NoContent)
+                    if (statusCode != HttpStatusCode.Accepted && statusCode != HttpStatusCode.NoContent)
                     {
                         cancellationToken.ThrowIfCancellationRequested();
                         CloudException ex = CloudException.Create(httpRequest, null, httpResponse, await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false));
@@ -1040,188 +1467,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     // Create Result
                     LongRunningOperationResponse result = null;
                     // Deserialize Response
-                    if (statusCode == HttpStatusCode.OK || statusCode == HttpStatusCode.Accepted || statusCode == HttpStatusCode.NoContent)
-                    {
-                        cancellationToken.ThrowIfCancellationRequested();
-                        string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        result = new LongRunningOperationResponse();
-                        JToken responseDoc = null;
-                        if (string.IsNullOrEmpty(responseContent) == false)
-                        {
-                            responseDoc = JToken.Parse(responseContent);
-                        }
-                        
-                        if (responseDoc != null && responseDoc.Type != JTokenType.Null)
-                        {
-                            JToken locationValue = responseDoc["Location"];
-                            if (locationValue != null && locationValue.Type != JTokenType.Null)
-                            {
-                                string locationInstance = ((string)locationValue);
-                                result.Location = locationInstance;
-                            }
-                            
-                            JToken retryAfterValue = responseDoc["RetryAfter"];
-                            if (retryAfterValue != null && retryAfterValue.Type != JTokenType.Null)
-                            {
-                                int retryAfterInstance = ((int)retryAfterValue);
-                                result.RetryAfter = retryAfterInstance;
-                            }
-                            
-                            JToken asyncOperationValue = responseDoc["AsyncOperation"];
-                            if (asyncOperationValue != null && asyncOperationValue.Type != JTokenType.Null)
-                            {
-                                string asyncOperationInstance = ((string)asyncOperationValue);
-                                result.AsyncOperation = asyncOperationInstance;
-                            }
-                            
-                            JToken statusValue = responseDoc["Status"];
-                            if (statusValue != null && statusValue.Type != JTokenType.Null)
-                            {
-                                OperationStatus statusInstance = ((OperationStatus)Enum.Parse(typeof(OperationStatus), ((string)statusValue), true));
-                                result.Status = statusInstance;
-                            }
-                        }
-                        
-                    }
-                    result.StatusCode = statusCode;
-                    if (httpResponse.Headers.Contains("Azure-AsyncOperation"))
-                    {
-                        result.AsyncOperation = httpResponse.Headers.GetValues("Azure-AsyncOperation").FirstOrDefault();
-                    }
-                    if (httpResponse.Headers.Contains("Location"))
-                    {
-                        result.Location = httpResponse.Headers.GetValues("Location").FirstOrDefault();
-                    }
-                    if (httpResponse.Headers.Contains("Retry-After"))
-                    {
-                        result.RetryAfter = int.Parse(httpResponse.Headers.GetValues("Retry-After").FirstOrDefault(), CultureInfo.InvariantCulture);
-                    }
-                    if (httpResponse.Headers.Contains("x-ms-request-id"))
-                    {
-                        result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-                    }
-                    if (statusCode == HttpStatusCode.Accepted)
-                    {
-                        result.Status = OperationStatus.InProgress;
-                    }
-                    if (statusCode == HttpStatusCode.OK)
-                    {
-                        result.Status = OperationStatus.Succeeded;
-                    }
-                    if (statusCode == HttpStatusCode.NoContent)
-                    {
-                        result.Status = OperationStatus.Succeeded;
-                    }
-                    
-                    if (shouldTrace)
-                    {
-                        TracingAdapter.Exit(invocationId, result);
-                    }
-                    return result;
-                }
-                finally
-                {
-                    if (httpResponse != null)
-                    {
-                        httpResponse.Dispose();
-                    }
-                }
-            }
-            finally
-            {
-                if (httpRequest != null)
-                {
-                    httpRequest.Dispose();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// The Get Operation Status operation returns the status of the
-        /// specified operation. After calling an asynchronous operation, you
-        /// can call Get Operation Status to determine whether the operation
-        /// has succeeded, failed, or is still in progress.
-        /// </summary>
-        /// <param name='operationStatusLink'>
-        /// Required. Location value returned by the Begin operation.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// Cancellation token.
-        /// </param>
-        /// <returns>
-        /// A standard service response for long running operations.
-        /// </returns>
-        public async Task<LongRunningOperationResponse> GetPurgeStatusAsync(string operationStatusLink, CancellationToken cancellationToken)
-        {
-            // Validate
-            if (operationStatusLink == null)
-            {
-                throw new ArgumentNullException("operationStatusLink");
-            }
-            
-            // Tracing
-            bool shouldTrace = TracingAdapter.IsEnabled;
-            string invocationId = null;
-            if (shouldTrace)
-            {
-                invocationId = TracingAdapter.NextInvocationId.ToString();
-                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("operationStatusLink", operationStatusLink);
-                TracingAdapter.Enter(invocationId, this, "GetPurgeStatusAsync", tracingParameters);
-            }
-            
-            // Construct URL
-            string url = "";
-            url = url + operationStatusLink;
-            url = url.Replace(" ", "%20");
-            
-            // Create HTTP transport objects
-            HttpRequestMessage httpRequest = null;
-            try
-            {
-                httpRequest = new HttpRequestMessage();
-                httpRequest.Method = HttpMethod.Get;
-                httpRequest.RequestUri = new Uri(url);
-                
-                // Set Headers
-                httpRequest.Headers.Add("Accept", "application/Json");
-                httpRequest.Headers.Add("x-ms-client-request-id", Guid.NewGuid().ToString());
-                httpRequest.Headers.Add("x-ms-version", "2015-01-01");
-                
-                // Set Credentials
-                cancellationToken.ThrowIfCancellationRequested();
-                await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
-                
-                // Send Request
-                HttpResponseMessage httpResponse = null;
-                try
-                {
-                    if (shouldTrace)
-                    {
-                        TracingAdapter.SendRequest(invocationId, httpRequest);
-                    }
-                    cancellationToken.ThrowIfCancellationRequested();
-                    httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
-                    if (shouldTrace)
-                    {
-                        TracingAdapter.ReceiveResponse(invocationId, httpResponse);
-                    }
-                    HttpStatusCode statusCode = httpResponse.StatusCode;
-                    if (statusCode != HttpStatusCode.OK && statusCode != HttpStatusCode.Accepted && statusCode != HttpStatusCode.NoContent)
-                    {
-                        cancellationToken.ThrowIfCancellationRequested();
-                        CloudException ex = CloudException.Create(httpRequest, null, httpResponse, await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false));
-                        if (shouldTrace)
-                        {
-                            TracingAdapter.Error(invocationId, ex);
-                        }
-                        throw ex;
-                    }
-                    
-                    // Create Result
-                    LongRunningOperationResponse result = null;
-                    // Deserialize Response
-                    if (statusCode == HttpStatusCode.OK || statusCode == HttpStatusCode.Accepted || statusCode == HttpStatusCode.NoContent)
+                    if (statusCode == HttpStatusCode.Accepted || statusCode == HttpStatusCode.NoContent)
                     {
                         cancellationToken.ThrowIfCancellationRequested();
                         string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -1332,7 +1578,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public async Task<LongRunningOperationResponse> GetRefreshStatusAsync(string operationStatusLink, CancellationToken cancellationToken)
+        public async Task<UpdateVCenterOperationResponse> GetUpdateStatusAsync(string operationStatusLink, CancellationToken cancellationToken)
         {
             // Validate
             if (operationStatusLink == null)
@@ -1348,7 +1594,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 invocationId = TracingAdapter.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("operationStatusLink", operationStatusLink);
-                TracingAdapter.Enter(invocationId, this, "GetRefreshStatusAsync", tracingParameters);
+                TracingAdapter.Enter(invocationId, this, "GetUpdateStatusAsync", tracingParameters);
             }
             
             // Construct URL
@@ -1388,7 +1634,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                         TracingAdapter.ReceiveResponse(invocationId, httpResponse);
                     }
                     HttpStatusCode statusCode = httpResponse.StatusCode;
-                    if (statusCode != HttpStatusCode.OK && statusCode != HttpStatusCode.Accepted && statusCode != HttpStatusCode.NoContent)
+                    if (statusCode != HttpStatusCode.OK && statusCode != HttpStatusCode.Accepted)
                     {
                         cancellationToken.ThrowIfCancellationRequested();
                         CloudException ex = CloudException.Create(httpRequest, null, httpResponse, await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false));
@@ -1400,13 +1646,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     }
                     
                     // Create Result
-                    LongRunningOperationResponse result = null;
+                    UpdateVCenterOperationResponse result = null;
                     // Deserialize Response
-                    if (statusCode == HttpStatusCode.OK || statusCode == HttpStatusCode.Accepted || statusCode == HttpStatusCode.NoContent)
+                    if (statusCode == HttpStatusCode.OK || statusCode == HttpStatusCode.Accepted)
                     {
                         cancellationToken.ThrowIfCancellationRequested();
                         string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        result = new LongRunningOperationResponse();
+                        result = new UpdateVCenterOperationResponse();
                         JToken responseDoc = null;
                         if (string.IsNullOrEmpty(responseContent) == false)
                         {
@@ -1415,11 +1661,116 @@ namespace Microsoft.Azure.Management.SiteRecovery
                         
                         if (responseDoc != null && responseDoc.Type != JTokenType.Null)
                         {
-                            JToken locationValue = responseDoc["Location"];
+                            VCenter vCenterInstance = new VCenter();
+                            result.VCenter = vCenterInstance;
+                            
+                            JToken propertiesValue = responseDoc["properties"];
+                            if (propertiesValue != null && propertiesValue.Type != JTokenType.Null)
+                            {
+                                VCenterProperties propertiesInstance = new VCenterProperties();
+                                vCenterInstance.Properties = propertiesInstance;
+                                
+                                JToken friendlyNameValue = propertiesValue["friendlyName"];
+                                if (friendlyNameValue != null && friendlyNameValue.Type != JTokenType.Null)
+                                {
+                                    string friendlyNameInstance = ((string)friendlyNameValue);
+                                    propertiesInstance.FriendlyName = friendlyNameInstance;
+                                }
+                                
+                                JToken fabricIdValue = propertiesValue["fabricId"];
+                                if (fabricIdValue != null && fabricIdValue.Type != JTokenType.Null)
+                                {
+                                    string fabricIdInstance = ((string)fabricIdValue);
+                                    propertiesInstance.FabricId = fabricIdInstance;
+                                }
+                                
+                                JToken lastHBReceivedValue = propertiesValue["lastHBReceived"];
+                                if (lastHBReceivedValue != null && lastHBReceivedValue.Type != JTokenType.Null)
+                                {
+                                    DateTime lastHBReceivedInstance = ((DateTime)lastHBReceivedValue);
+                                    propertiesInstance.LastHBReceived = lastHBReceivedInstance;
+                                }
+                                
+                                JToken discoveryStatusValue = propertiesValue["discoveryStatus"];
+                                if (discoveryStatusValue != null && discoveryStatusValue.Type != JTokenType.Null)
+                                {
+                                    string discoveryStatusInstance = ((string)discoveryStatusValue);
+                                    propertiesInstance.DiscoveryStatus = discoveryStatusInstance;
+                                }
+                                
+                                JToken processServerIdValue = propertiesValue["processServerId"];
+                                if (processServerIdValue != null && processServerIdValue.Type != JTokenType.Null)
+                                {
+                                    string processServerIdInstance = ((string)processServerIdValue);
+                                    propertiesInstance.ProcessServerId = processServerIdInstance;
+                                }
+                                
+                                JToken ipAddressValue = propertiesValue["ipAddress"];
+                                if (ipAddressValue != null && ipAddressValue.Type != JTokenType.Null)
+                                {
+                                    string ipAddressInstance = ((string)ipAddressValue);
+                                    propertiesInstance.IpAddress = ipAddressInstance;
+                                }
+                                
+                                JToken infrastructureIdValue = propertiesValue["infrastructureId"];
+                                if (infrastructureIdValue != null && infrastructureIdValue.Type != JTokenType.Null)
+                                {
+                                    string infrastructureIdInstance = ((string)infrastructureIdValue);
+                                    propertiesInstance.InfrastructureId = infrastructureIdInstance;
+                                }
+                                
+                                JToken portValue = propertiesValue["port"];
+                                if (portValue != null && portValue.Type != JTokenType.Null)
+                                {
+                                    string portInstance = ((string)portValue);
+                                    propertiesInstance.Port = portInstance;
+                                }
+                            }
+                            
+                            JToken idValue = responseDoc["id"];
+                            if (idValue != null && idValue.Type != JTokenType.Null)
+                            {
+                                string idInstance = ((string)idValue);
+                                vCenterInstance.Id = idInstance;
+                            }
+                            
+                            JToken nameValue = responseDoc["name"];
+                            if (nameValue != null && nameValue.Type != JTokenType.Null)
+                            {
+                                string nameInstance = ((string)nameValue);
+                                vCenterInstance.Name = nameInstance;
+                            }
+                            
+                            JToken typeValue = responseDoc["type"];
+                            if (typeValue != null && typeValue.Type != JTokenType.Null)
+                            {
+                                string typeInstance = ((string)typeValue);
+                                vCenterInstance.Type = typeInstance;
+                            }
+                            
+                            JToken locationValue = responseDoc["location"];
                             if (locationValue != null && locationValue.Type != JTokenType.Null)
                             {
                                 string locationInstance = ((string)locationValue);
-                                result.Location = locationInstance;
+                                vCenterInstance.Location = locationInstance;
+                            }
+                            
+                            JToken tagsSequenceElement = ((JToken)responseDoc["tags"]);
+                            if (tagsSequenceElement != null && tagsSequenceElement.Type != JTokenType.Null)
+                            {
+                                foreach (JProperty property in tagsSequenceElement)
+                                {
+                                    string tagsKey = ((string)property.Name);
+                                    string tagsValue = ((string)property.Value);
+                                    vCenterInstance.Tags.Add(tagsKey, tagsValue);
+                                }
+                            }
+                            
+                            JToken locationValue2 = responseDoc["Location"];
+                            if (locationValue2 != null && locationValue2.Type != JTokenType.Null)
+                            {
+                                string locationInstance2 = ((string)locationValue2);
+                                result.Location = locationInstance2;
                             }
                             
                             JToken retryAfterValue = responseDoc["RetryAfter"];
@@ -1499,7 +1850,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         }
         
         /// <summary>
-        /// Get the list of all servers under the vault for given fabric.
+        /// Get the list of all vCenters under a fabric.
         /// </summary>
         /// <param name='fabricName'>
         /// Required. Fabric Name.
@@ -1511,9 +1862,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// Cancellation token.
         /// </param>
         /// <returns>
-        /// The response model for the list servers operation.
+        /// The response model for the list vCenters operation.
         /// </returns>
-        public async Task<RecoveryServicesProviderListResponse> ListAsync(string fabricName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        public async Task<VCenterListResponse> ListAsync(string fabricName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
         {
             // Validate
             if (fabricName == null)
@@ -1543,14 +1894,14 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/resourceGroups/";
             url = url + Uri.EscapeDataString(this.Client.ResourceGroupName);
             url = url + "/providers/";
-            url = url + Uri.EscapeDataString(this.Client.ResourceNamespace);
+            url = url + null;
             url = url + "/";
-            url = url + Uri.EscapeDataString(this.Client.ResourceType);
+            url = url + null;
             url = url + "/";
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationFabrics/";
             url = url + Uri.EscapeDataString(fabricName);
-            url = url + "/replicationRecoveryServicesProviders";
+            url = url + "/vCenters";
             List<string> queryParameters = new List<string>();
             queryParameters.Add("api-version=2015-11-10");
             if (queryParameters.Count > 0)
@@ -1613,13 +1964,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     }
                     
                     // Create Result
-                    RecoveryServicesProviderListResponse result = null;
+                    VCenterListResponse result = null;
                     // Deserialize Response
                     if (statusCode == HttpStatusCode.OK)
                     {
                         cancellationToken.ThrowIfCancellationRequested();
                         string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        result = new RecoveryServicesProviderListResponse();
+                        result = new VCenterListResponse();
                         JToken responseDoc = null;
                         if (string.IsNullOrEmpty(responseContent) == false)
                         {
@@ -1633,21 +1984,14 @@ namespace Microsoft.Azure.Management.SiteRecovery
                             {
                                 foreach (JToken valueValue in ((JArray)valueArray))
                                 {
-                                    RecoveryServicesProvider recoveryServicesProviderInstance = new RecoveryServicesProvider();
-                                    result.RecoveryServicesProviders.Add(recoveryServicesProviderInstance);
+                                    VCenter vCenterInstance = new VCenter();
+                                    result.VCenters.Add(vCenterInstance);
                                     
                                     JToken propertiesValue = valueValue["properties"];
                                     if (propertiesValue != null && propertiesValue.Type != JTokenType.Null)
                                     {
-                                        RecoveryServicesProviderProperties propertiesInstance = new RecoveryServicesProviderProperties();
-                                        recoveryServicesProviderInstance.Properties = propertiesInstance;
-                                        
-                                        JToken fabricTypeValue = propertiesValue["fabricType"];
-                                        if (fabricTypeValue != null && fabricTypeValue.Type != JTokenType.Null)
-                                        {
-                                            string fabricTypeInstance = ((string)fabricTypeValue);
-                                            propertiesInstance.FabricType = fabricTypeInstance;
-                                        }
+                                        VCenterProperties propertiesInstance = new VCenterProperties();
+                                        vCenterInstance.Properties = propertiesInstance;
                                         
                                         JToken friendlyNameValue = propertiesValue["friendlyName"];
                                         if (friendlyNameValue != null && friendlyNameValue.Type != JTokenType.Null)
@@ -1656,69 +2000,53 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             propertiesInstance.FriendlyName = friendlyNameInstance;
                                         }
                                         
-                                        JToken fabricFriendlyNameValue = propertiesValue["fabricFriendlyName"];
-                                        if (fabricFriendlyNameValue != null && fabricFriendlyNameValue.Type != JTokenType.Null)
+                                        JToken fabricIdValue = propertiesValue["fabricId"];
+                                        if (fabricIdValue != null && fabricIdValue.Type != JTokenType.Null)
                                         {
-                                            string fabricFriendlyNameInstance = ((string)fabricFriendlyNameValue);
-                                            propertiesInstance.FabricFriendlyName = fabricFriendlyNameInstance;
+                                            string fabricIdInstance = ((string)fabricIdValue);
+                                            propertiesInstance.FabricId = fabricIdInstance;
                                         }
                                         
-                                        JToken providerVersionValue = propertiesValue["providerVersion"];
-                                        if (providerVersionValue != null && providerVersionValue.Type != JTokenType.Null)
+                                        JToken lastHBReceivedValue = propertiesValue["lastHBReceived"];
+                                        if (lastHBReceivedValue != null && lastHBReceivedValue.Type != JTokenType.Null)
                                         {
-                                            string providerVersionInstance = ((string)providerVersionValue);
-                                            propertiesInstance.ProviderVersion = providerVersionInstance;
+                                            DateTime lastHBReceivedInstance = ((DateTime)lastHBReceivedValue);
+                                            propertiesInstance.LastHBReceived = lastHBReceivedInstance;
                                         }
                                         
-                                        JToken serverVersionValue = propertiesValue["serverVersion"];
-                                        if (serverVersionValue != null && serverVersionValue.Type != JTokenType.Null)
+                                        JToken discoveryStatusValue = propertiesValue["discoveryStatus"];
+                                        if (discoveryStatusValue != null && discoveryStatusValue.Type != JTokenType.Null)
                                         {
-                                            string serverVersionInstance = ((string)serverVersionValue);
-                                            propertiesInstance.ServerVersion = serverVersionInstance;
+                                            string discoveryStatusInstance = ((string)discoveryStatusValue);
+                                            propertiesInstance.DiscoveryStatus = discoveryStatusInstance;
                                         }
                                         
-                                        JToken providerVersionStateValue = propertiesValue["providerVersionState"];
-                                        if (providerVersionStateValue != null && providerVersionStateValue.Type != JTokenType.Null)
+                                        JToken processServerIdValue = propertiesValue["processServerId"];
+                                        if (processServerIdValue != null && processServerIdValue.Type != JTokenType.Null)
                                         {
-                                            string providerVersionStateInstance = ((string)providerVersionStateValue);
-                                            propertiesInstance.ProviderVersionState = providerVersionStateInstance;
+                                            string processServerIdInstance = ((string)processServerIdValue);
+                                            propertiesInstance.ProcessServerId = processServerIdInstance;
                                         }
                                         
-                                        JToken providerVersionExpiryDateValue = propertiesValue["providerVersionExpiryDate"];
-                                        if (providerVersionExpiryDateValue != null && providerVersionExpiryDateValue.Type != JTokenType.Null)
+                                        JToken ipAddressValue = propertiesValue["ipAddress"];
+                                        if (ipAddressValue != null && ipAddressValue.Type != JTokenType.Null)
                                         {
-                                            DateTime providerVersionExpiryDateInstance = ((DateTime)providerVersionExpiryDateValue);
-                                            propertiesInstance.ProviderVersionExpiryDate = providerVersionExpiryDateInstance;
+                                            string ipAddressInstance = ((string)ipAddressValue);
+                                            propertiesInstance.IpAddress = ipAddressInstance;
                                         }
                                         
-                                        JToken lastHeartBeatValue = propertiesValue["lastHeartBeat"];
-                                        if (lastHeartBeatValue != null && lastHeartBeatValue.Type != JTokenType.Null)
+                                        JToken infrastructureIdValue = propertiesValue["infrastructureId"];
+                                        if (infrastructureIdValue != null && infrastructureIdValue.Type != JTokenType.Null)
                                         {
-                                            DateTime lastHeartBeatInstance = ((DateTime)lastHeartBeatValue);
-                                            propertiesInstance.LastHeartbeat = lastHeartBeatInstance;
+                                            string infrastructureIdInstance = ((string)infrastructureIdValue);
+                                            propertiesInstance.InfrastructureId = infrastructureIdInstance;
                                         }
                                         
-                                        JToken connectionStatusValue = propertiesValue["connectionStatus"];
-                                        if (connectionStatusValue != null && connectionStatusValue.Type != JTokenType.Null)
+                                        JToken portValue = propertiesValue["port"];
+                                        if (portValue != null && portValue.Type != JTokenType.Null)
                                         {
-                                            string connectionStatusInstance = ((string)connectionStatusValue);
-                                            propertiesInstance.ConnectionStatus = connectionStatusInstance;
-                                        }
-                                        
-                                        JToken allowedScenariosArray = propertiesValue["allowedScenarios"];
-                                        if (allowedScenariosArray != null && allowedScenariosArray.Type != JTokenType.Null)
-                                        {
-                                            foreach (JToken allowedScenariosValue in ((JArray)allowedScenariosArray))
-                                            {
-                                                propertiesInstance.AllowedScenarios.Add(((string)allowedScenariosValue));
-                                            }
-                                        }
-                                        
-                                        JToken protectedItemCountValue = propertiesValue["protectedItemCount"];
-                                        if (protectedItemCountValue != null && protectedItemCountValue.Type != JTokenType.Null)
-                                        {
-                                            int protectedItemCountInstance = ((int)protectedItemCountValue);
-                                            propertiesInstance.ProtectedItemCount = protectedItemCountInstance;
+                                            string portInstance = ((string)portValue);
+                                            propertiesInstance.Port = portInstance;
                                         }
                                     }
                                     
@@ -1726,28 +2054,28 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     if (idValue != null && idValue.Type != JTokenType.Null)
                                     {
                                         string idInstance = ((string)idValue);
-                                        recoveryServicesProviderInstance.Id = idInstance;
+                                        vCenterInstance.Id = idInstance;
                                     }
                                     
                                     JToken nameValue = valueValue["name"];
                                     if (nameValue != null && nameValue.Type != JTokenType.Null)
                                     {
                                         string nameInstance = ((string)nameValue);
-                                        recoveryServicesProviderInstance.Name = nameInstance;
+                                        vCenterInstance.Name = nameInstance;
                                     }
                                     
                                     JToken typeValue = valueValue["type"];
                                     if (typeValue != null && typeValue.Type != JTokenType.Null)
                                     {
                                         string typeInstance = ((string)typeValue);
-                                        recoveryServicesProviderInstance.Type = typeInstance;
+                                        vCenterInstance.Type = typeInstance;
                                     }
                                     
                                     JToken locationValue = valueValue["location"];
                                     if (locationValue != null && locationValue.Type != JTokenType.Null)
                                     {
                                         string locationInstance = ((string)locationValue);
-                                        recoveryServicesProviderInstance.Location = locationInstance;
+                                        vCenterInstance.Location = locationInstance;
                                     }
                                     
                                     JToken tagsSequenceElement = ((JToken)valueValue["tags"]);
@@ -1757,7 +2085,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             string tagsKey = ((string)property.Name);
                                             string tagsValue = ((string)property.Value);
-                                            recoveryServicesProviderInstance.Tags.Add(tagsKey, tagsValue);
+                                            vCenterInstance.Tags.Add(tagsKey, tagsValue);
                                         }
                                     }
                                 }
@@ -1802,7 +2130,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         }
         
         /// <summary>
-        /// Get the list of all servers under the vault.
+        /// Get the list of all vCenters under the vault.
         /// </summary>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -1811,9 +2139,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// Cancellation token.
         /// </param>
         /// <returns>
-        /// The response model for the list servers operation.
+        /// The response model for the list vCenters operation.
         /// </returns>
-        public async Task<RecoveryServicesProviderListResponse> ListAllAsync(CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        public async Task<VCenterListResponse> ListAllAsync(CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
         {
             // Validate
             
@@ -1838,12 +2166,12 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/resourceGroups/";
             url = url + Uri.EscapeDataString(this.Client.ResourceGroupName);
             url = url + "/providers/";
-            url = url + Uri.EscapeDataString(this.Client.ResourceNamespace);
+            url = url + null;
             url = url + "/";
-            url = url + Uri.EscapeDataString(this.Client.ResourceType);
+            url = url + null;
             url = url + "/";
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
-            url = url + "/replicationRecoveryServicesProviders";
+            url = url + "/vCenters";
             List<string> queryParameters = new List<string>();
             queryParameters.Add("api-version=2015-11-10");
             if (queryParameters.Count > 0)
@@ -1906,13 +2234,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     }
                     
                     // Create Result
-                    RecoveryServicesProviderListResponse result = null;
+                    VCenterListResponse result = null;
                     // Deserialize Response
                     if (statusCode == HttpStatusCode.OK)
                     {
                         cancellationToken.ThrowIfCancellationRequested();
                         string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        result = new RecoveryServicesProviderListResponse();
+                        result = new VCenterListResponse();
                         JToken responseDoc = null;
                         if (string.IsNullOrEmpty(responseContent) == false)
                         {
@@ -1926,21 +2254,14 @@ namespace Microsoft.Azure.Management.SiteRecovery
                             {
                                 foreach (JToken valueValue in ((JArray)valueArray))
                                 {
-                                    RecoveryServicesProvider recoveryServicesProviderInstance = new RecoveryServicesProvider();
-                                    result.RecoveryServicesProviders.Add(recoveryServicesProviderInstance);
+                                    VCenter vCenterInstance = new VCenter();
+                                    result.VCenters.Add(vCenterInstance);
                                     
                                     JToken propertiesValue = valueValue["properties"];
                                     if (propertiesValue != null && propertiesValue.Type != JTokenType.Null)
                                     {
-                                        RecoveryServicesProviderProperties propertiesInstance = new RecoveryServicesProviderProperties();
-                                        recoveryServicesProviderInstance.Properties = propertiesInstance;
-                                        
-                                        JToken fabricTypeValue = propertiesValue["fabricType"];
-                                        if (fabricTypeValue != null && fabricTypeValue.Type != JTokenType.Null)
-                                        {
-                                            string fabricTypeInstance = ((string)fabricTypeValue);
-                                            propertiesInstance.FabricType = fabricTypeInstance;
-                                        }
+                                        VCenterProperties propertiesInstance = new VCenterProperties();
+                                        vCenterInstance.Properties = propertiesInstance;
                                         
                                         JToken friendlyNameValue = propertiesValue["friendlyName"];
                                         if (friendlyNameValue != null && friendlyNameValue.Type != JTokenType.Null)
@@ -1949,69 +2270,53 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             propertiesInstance.FriendlyName = friendlyNameInstance;
                                         }
                                         
-                                        JToken fabricFriendlyNameValue = propertiesValue["fabricFriendlyName"];
-                                        if (fabricFriendlyNameValue != null && fabricFriendlyNameValue.Type != JTokenType.Null)
+                                        JToken fabricIdValue = propertiesValue["fabricId"];
+                                        if (fabricIdValue != null && fabricIdValue.Type != JTokenType.Null)
                                         {
-                                            string fabricFriendlyNameInstance = ((string)fabricFriendlyNameValue);
-                                            propertiesInstance.FabricFriendlyName = fabricFriendlyNameInstance;
+                                            string fabricIdInstance = ((string)fabricIdValue);
+                                            propertiesInstance.FabricId = fabricIdInstance;
                                         }
                                         
-                                        JToken providerVersionValue = propertiesValue["providerVersion"];
-                                        if (providerVersionValue != null && providerVersionValue.Type != JTokenType.Null)
+                                        JToken lastHBReceivedValue = propertiesValue["lastHBReceived"];
+                                        if (lastHBReceivedValue != null && lastHBReceivedValue.Type != JTokenType.Null)
                                         {
-                                            string providerVersionInstance = ((string)providerVersionValue);
-                                            propertiesInstance.ProviderVersion = providerVersionInstance;
+                                            DateTime lastHBReceivedInstance = ((DateTime)lastHBReceivedValue);
+                                            propertiesInstance.LastHBReceived = lastHBReceivedInstance;
                                         }
                                         
-                                        JToken serverVersionValue = propertiesValue["serverVersion"];
-                                        if (serverVersionValue != null && serverVersionValue.Type != JTokenType.Null)
+                                        JToken discoveryStatusValue = propertiesValue["discoveryStatus"];
+                                        if (discoveryStatusValue != null && discoveryStatusValue.Type != JTokenType.Null)
                                         {
-                                            string serverVersionInstance = ((string)serverVersionValue);
-                                            propertiesInstance.ServerVersion = serverVersionInstance;
+                                            string discoveryStatusInstance = ((string)discoveryStatusValue);
+                                            propertiesInstance.DiscoveryStatus = discoveryStatusInstance;
                                         }
                                         
-                                        JToken providerVersionStateValue = propertiesValue["providerVersionState"];
-                                        if (providerVersionStateValue != null && providerVersionStateValue.Type != JTokenType.Null)
+                                        JToken processServerIdValue = propertiesValue["processServerId"];
+                                        if (processServerIdValue != null && processServerIdValue.Type != JTokenType.Null)
                                         {
-                                            string providerVersionStateInstance = ((string)providerVersionStateValue);
-                                            propertiesInstance.ProviderVersionState = providerVersionStateInstance;
+                                            string processServerIdInstance = ((string)processServerIdValue);
+                                            propertiesInstance.ProcessServerId = processServerIdInstance;
                                         }
                                         
-                                        JToken providerVersionExpiryDateValue = propertiesValue["providerVersionExpiryDate"];
-                                        if (providerVersionExpiryDateValue != null && providerVersionExpiryDateValue.Type != JTokenType.Null)
+                                        JToken ipAddressValue = propertiesValue["ipAddress"];
+                                        if (ipAddressValue != null && ipAddressValue.Type != JTokenType.Null)
                                         {
-                                            DateTime providerVersionExpiryDateInstance = ((DateTime)providerVersionExpiryDateValue);
-                                            propertiesInstance.ProviderVersionExpiryDate = providerVersionExpiryDateInstance;
+                                            string ipAddressInstance = ((string)ipAddressValue);
+                                            propertiesInstance.IpAddress = ipAddressInstance;
                                         }
                                         
-                                        JToken lastHeartBeatValue = propertiesValue["lastHeartBeat"];
-                                        if (lastHeartBeatValue != null && lastHeartBeatValue.Type != JTokenType.Null)
+                                        JToken infrastructureIdValue = propertiesValue["infrastructureId"];
+                                        if (infrastructureIdValue != null && infrastructureIdValue.Type != JTokenType.Null)
                                         {
-                                            DateTime lastHeartBeatInstance = ((DateTime)lastHeartBeatValue);
-                                            propertiesInstance.LastHeartbeat = lastHeartBeatInstance;
+                                            string infrastructureIdInstance = ((string)infrastructureIdValue);
+                                            propertiesInstance.InfrastructureId = infrastructureIdInstance;
                                         }
                                         
-                                        JToken connectionStatusValue = propertiesValue["connectionStatus"];
-                                        if (connectionStatusValue != null && connectionStatusValue.Type != JTokenType.Null)
+                                        JToken portValue = propertiesValue["port"];
+                                        if (portValue != null && portValue.Type != JTokenType.Null)
                                         {
-                                            string connectionStatusInstance = ((string)connectionStatusValue);
-                                            propertiesInstance.ConnectionStatus = connectionStatusInstance;
-                                        }
-                                        
-                                        JToken allowedScenariosArray = propertiesValue["allowedScenarios"];
-                                        if (allowedScenariosArray != null && allowedScenariosArray.Type != JTokenType.Null)
-                                        {
-                                            foreach (JToken allowedScenariosValue in ((JArray)allowedScenariosArray))
-                                            {
-                                                propertiesInstance.AllowedScenarios.Add(((string)allowedScenariosValue));
-                                            }
-                                        }
-                                        
-                                        JToken protectedItemCountValue = propertiesValue["protectedItemCount"];
-                                        if (protectedItemCountValue != null && protectedItemCountValue.Type != JTokenType.Null)
-                                        {
-                                            int protectedItemCountInstance = ((int)protectedItemCountValue);
-                                            propertiesInstance.ProtectedItemCount = protectedItemCountInstance;
+                                            string portInstance = ((string)portValue);
+                                            propertiesInstance.Port = portInstance;
                                         }
                                     }
                                     
@@ -2019,28 +2324,28 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     if (idValue != null && idValue.Type != JTokenType.Null)
                                     {
                                         string idInstance = ((string)idValue);
-                                        recoveryServicesProviderInstance.Id = idInstance;
+                                        vCenterInstance.Id = idInstance;
                                     }
                                     
                                     JToken nameValue = valueValue["name"];
                                     if (nameValue != null && nameValue.Type != JTokenType.Null)
                                     {
                                         string nameInstance = ((string)nameValue);
-                                        recoveryServicesProviderInstance.Name = nameInstance;
+                                        vCenterInstance.Name = nameInstance;
                                     }
                                     
                                     JToken typeValue = valueValue["type"];
                                     if (typeValue != null && typeValue.Type != JTokenType.Null)
                                     {
                                         string typeInstance = ((string)typeValue);
-                                        recoveryServicesProviderInstance.Type = typeInstance;
+                                        vCenterInstance.Type = typeInstance;
                                     }
                                     
                                     JToken locationValue = valueValue["location"];
                                     if (locationValue != null && locationValue.Type != JTokenType.Null)
                                     {
                                         string locationInstance = ((string)locationValue);
-                                        recoveryServicesProviderInstance.Location = locationInstance;
+                                        vCenterInstance.Location = locationInstance;
                                     }
                                     
                                     JToken tagsSequenceElement = ((JToken)valueValue["tags"]);
@@ -2050,7 +2355,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             string tagsKey = ((string)property.Name);
                                             string tagsValue = ((string)property.Value);
-                                            recoveryServicesProviderInstance.Tags.Add(tagsKey, tagsValue);
+                                            vCenterInstance.Tags.Add(tagsKey, tagsValue);
                                         }
                                     }
                                 }
@@ -2095,13 +2400,16 @@ namespace Microsoft.Azure.Management.SiteRecovery
         }
         
         /// <summary>
-        /// Purges a provider
+        /// Update vCenter.
         /// </summary>
         /// <param name='fabricName'>
-        /// Required. Name of provider's fabric
+        /// Required. Fabric Name.
         /// </param>
-        /// <param name='providerName'>
-        /// Required. Provider Name.
+        /// <param name='vCenterName'>
+        /// Required. vCenter Name.
+        /// </param>
+        /// <param name='input'>
+        /// Required. Input to update vCenter.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
@@ -2112,7 +2420,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// A standard service response for long running operations.
         /// </returns>
-        public async Task<LongRunningOperationResponse> PurgeAsync(string fabricName, string providerName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        public async Task<LongRunningOperationResponse> UpdateAsync(string fabricName, string vCenterName, UpdateVCenterInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
         {
             SiteRecoveryManagementClient client = this.Client;
             bool shouldTrace = TracingAdapter.IsEnabled;
@@ -2122,19 +2430,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 invocationId = TracingAdapter.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("fabricName", fabricName);
-                tracingParameters.Add("providerName", providerName);
+                tracingParameters.Add("vCenterName", vCenterName);
+                tracingParameters.Add("input", input);
                 tracingParameters.Add("customRequestHeaders", customRequestHeaders);
-                TracingAdapter.Enter(invocationId, this, "PurgeAsync", tracingParameters);
+                TracingAdapter.Enter(invocationId, this, "UpdateAsync", tracingParameters);
             }
             
             cancellationToken.ThrowIfCancellationRequested();
-            LongRunningOperationResponse response = await client.RecoveryServicesProvider.BeginPurgingAsync(fabricName, providerName, customRequestHeaders, cancellationToken).ConfigureAwait(false);
+            LongRunningOperationResponse response = await client.VCenters.BeginUpdatingAsync(fabricName, vCenterName, input, customRequestHeaders, cancellationToken).ConfigureAwait(false);
             if (response.Status == OperationStatus.Succeeded)
             {
                 return response;
             }
             cancellationToken.ThrowIfCancellationRequested();
-            LongRunningOperationResponse result = await client.RecoveryServicesProvider.GetPurgeStatusAsync(response.Location, cancellationToken).ConfigureAwait(false);
+            UpdateVCenterOperationResponse result = await client.VCenters.GetUpdateStatusAsync(response.Location, cancellationToken).ConfigureAwait(false);
             int delayInSeconds = 30;
             if (client.LongRunningOperationInitialTimeout >= 0)
             {
@@ -2145,74 +2454,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 cancellationToken.ThrowIfCancellationRequested();
                 await TaskEx.Delay(delayInSeconds * 1000, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
-                result = await client.RecoveryServicesProvider.GetPurgeStatusAsync(response.Location, cancellationToken).ConfigureAwait(false);
-                delayInSeconds = 30;
-                if (client.LongRunningOperationRetryTimeout >= 0)
-                {
-                    delayInSeconds = client.LongRunningOperationRetryTimeout;
-                }
-            }
-            
-            if (shouldTrace)
-            {
-                TracingAdapter.Exit(invocationId, result);
-            }
-            
-            return result;
-        }
-        
-        /// <summary>
-        /// Refreshes a provider
-        /// </summary>
-        /// <param name='fabricName'>
-        /// Required. Name of provider's fabric
-        /// </param>
-        /// <param name='providerName'>
-        /// Required. Name of provider
-        /// </param>
-        /// <param name='customRequestHeaders'>
-        /// Optional. Request header parameters.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// Cancellation token.
-        /// </param>
-        /// <returns>
-        /// A standard service response for long running operations.
-        /// </returns>
-        public async Task<LongRunningOperationResponse> RefreshAsync(string fabricName, string providerName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
-        {
-            SiteRecoveryManagementClient client = this.Client;
-            bool shouldTrace = TracingAdapter.IsEnabled;
-            string invocationId = null;
-            if (shouldTrace)
-            {
-                invocationId = TracingAdapter.NextInvocationId.ToString();
-                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("fabricName", fabricName);
-                tracingParameters.Add("providerName", providerName);
-                tracingParameters.Add("customRequestHeaders", customRequestHeaders);
-                TracingAdapter.Enter(invocationId, this, "RefreshAsync", tracingParameters);
-            }
-            
-            cancellationToken.ThrowIfCancellationRequested();
-            LongRunningOperationResponse response = await client.RecoveryServicesProvider.BeginRefreshingAsync(fabricName, providerName, customRequestHeaders, cancellationToken).ConfigureAwait(false);
-            if (response.Status == OperationStatus.Succeeded)
-            {
-                return response;
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            LongRunningOperationResponse result = await client.RecoveryServicesProvider.GetRefreshStatusAsync(response.Location, cancellationToken).ConfigureAwait(false);
-            int delayInSeconds = 30;
-            if (client.LongRunningOperationInitialTimeout >= 0)
-            {
-                delayInSeconds = client.LongRunningOperationInitialTimeout;
-            }
-            while ((result.Status != OperationStatus.InProgress) == false)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await TaskEx.Delay(delayInSeconds * 1000, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
-                result = await client.RecoveryServicesProvider.GetRefreshStatusAsync(response.Location, cancellationToken).ConfigureAwait(false);
+                result = await client.VCenters.GetUpdateStatusAsync(response.Location, cancellationToken).ConfigureAwait(false);
                 delayInSeconds = 30;
                 if (client.LongRunningOperationRetryTimeout >= 0)
                 {
