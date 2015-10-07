@@ -32,7 +32,8 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         private string _runAsAccountId;
         
         /// <summary>
-        /// Optional. The CS run as account Id.
+        /// Optional. Account Id which has priviliges to install the mobility
+        /// service update.
         /// </summary>
         public string RunAsAccountId
         {

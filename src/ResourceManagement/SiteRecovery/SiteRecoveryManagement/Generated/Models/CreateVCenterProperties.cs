@@ -77,7 +77,7 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         private string _runAsAccountId;
         
         /// <summary>
-        /// Optional. IP Address of the vCenter.
+        /// Optional. Account Id which has priviliges to discover vCenter.
         /// </summary>
         public string RunAsAccountId
         {
