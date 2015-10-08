@@ -29,6 +29,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class ProtectableItemTypeSettings
     {
+        private string _instanceType;
+        
+        /// <summary>
+        /// Optional. Gets or sets the type of object passed.
+        /// </summary>
+        public string InstanceType
+        {
+            get { return this._instanceType; }
+            set { this._instanceType = value; }
+        }
+        
         /// <summary>
         /// Initializes a new instance of the ProtectableItemTypeSettings class.
         /// </summary>

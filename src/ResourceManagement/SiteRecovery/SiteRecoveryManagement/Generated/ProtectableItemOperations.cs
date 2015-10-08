@@ -357,6 +357,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 }
                                             }
                                         }
+                                        
+                                        JToken typeValue = customDetailsValue["__type"];
+                                        if (typeValue != null && typeValue.Type != JTokenType.Null)
+                                        {
+                                            string typeInstance = ((string)typeValue);
+                                            hyperVVirtualMachineDetailsInstance.InstanceType = typeInstance;
+                                        }
                                         propertiesInstance.CustomDetails = hyperVVirtualMachineDetailsInstance;
                                     }
                                     if (typeName == "VMwareVirtualMachineDetails")
@@ -449,11 +456,25 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 }
                                             }
                                         }
+                                        
+                                        JToken typeValue2 = customDetailsValue["__type"];
+                                        if (typeValue2 != null && typeValue2.Type != JTokenType.Null)
+                                        {
+                                            string typeInstance2 = ((string)typeValue2);
+                                            vMwareVirtualMachineDetailsInstance.InstanceType = typeInstance2;
+                                        }
                                         propertiesInstance.CustomDetails = vMwareVirtualMachineDetailsInstance;
                                     }
                                     if (typeName == "ReplicationGroupDetails")
                                     {
                                         ReplicationGroupDetails replicationGroupDetailsInstance = new ReplicationGroupDetails();
+                                        
+                                        JToken typeValue3 = customDetailsValue["__type"];
+                                        if (typeValue3 != null && typeValue3.Type != JTokenType.Null)
+                                        {
+                                            string typeInstance3 = ((string)typeValue3);
+                                            replicationGroupDetailsInstance.InstanceType = typeInstance3;
+                                        }
                                         propertiesInstance.CustomDetails = replicationGroupDetailsInstance;
                                     }
                                 }
@@ -473,11 +494,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 protectableItemInstance.Name = nameInstance;
                             }
                             
-                            JToken typeValue = responseDoc["type"];
-                            if (typeValue != null && typeValue.Type != JTokenType.Null)
+                            JToken typeValue4 = responseDoc["type"];
+                            if (typeValue4 != null && typeValue4.Type != JTokenType.Null)
                             {
-                                string typeInstance = ((string)typeValue);
-                                protectableItemInstance.Type = typeInstance;
+                                string typeInstance4 = ((string)typeValue4);
+                                protectableItemInstance.Type = typeInstance4;
                             }
                             
                             JToken locationValue = responseDoc["location"];
@@ -831,6 +852,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                         }
                                                     }
                                                 }
+                                                
+                                                JToken typeValue = customDetailsValue["__type"];
+                                                if (typeValue != null && typeValue.Type != JTokenType.Null)
+                                                {
+                                                    string typeInstance = ((string)typeValue);
+                                                    hyperVVirtualMachineDetailsInstance.InstanceType = typeInstance;
+                                                }
                                                 propertiesInstance.CustomDetails = hyperVVirtualMachineDetailsInstance;
                                             }
                                             if (typeName == "VMwareVirtualMachineDetails")
@@ -923,11 +951,25 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                         }
                                                     }
                                                 }
+                                                
+                                                JToken typeValue2 = customDetailsValue["__type"];
+                                                if (typeValue2 != null && typeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string typeInstance2 = ((string)typeValue2);
+                                                    vMwareVirtualMachineDetailsInstance.InstanceType = typeInstance2;
+                                                }
                                                 propertiesInstance.CustomDetails = vMwareVirtualMachineDetailsInstance;
                                             }
                                             if (typeName == "ReplicationGroupDetails")
                                             {
                                                 ReplicationGroupDetails replicationGroupDetailsInstance = new ReplicationGroupDetails();
+                                                
+                                                JToken typeValue3 = customDetailsValue["__type"];
+                                                if (typeValue3 != null && typeValue3.Type != JTokenType.Null)
+                                                {
+                                                    string typeInstance3 = ((string)typeValue3);
+                                                    replicationGroupDetailsInstance.InstanceType = typeInstance3;
+                                                }
                                                 propertiesInstance.CustomDetails = replicationGroupDetailsInstance;
                                             }
                                         }
@@ -947,11 +989,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         protectableItemInstance.Name = nameInstance;
                                     }
                                     
-                                    JToken typeValue = valueValue["type"];
-                                    if (typeValue != null && typeValue.Type != JTokenType.Null)
+                                    JToken typeValue4 = valueValue["type"];
+                                    if (typeValue4 != null && typeValue4.Type != JTokenType.Null)
                                     {
-                                        string typeInstance = ((string)typeValue);
-                                        protectableItemInstance.Type = typeInstance;
+                                        string typeInstance4 = ((string)typeValue4);
+                                        protectableItemInstance.Type = typeInstance4;
                                     }
                                     
                                     JToken locationValue = valueValue["location"];
