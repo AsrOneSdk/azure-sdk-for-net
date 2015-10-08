@@ -66,17 +66,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._currentScenario = value; }
         }
         
-        private ReplicationProviderSpecificSettings _customSettings;
-        
-        /// <summary>
-        /// Optional. Gets or sets the Replication provider custom settings.
-        /// </summary>
-        public ReplicationProviderSpecificSettings CustomSettings
-        {
-            get { return this._customSettings; }
-            set { this._customSettings = value; }
-        }
-        
         private string _friendlyName;
         
         /// <summary>
@@ -155,15 +144,15 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._primaryProtectionContainerFriendlyName = value; }
         }
         
-        private string _protectedItemSourceId;
+        private string _protectedItemId;
         
         /// <summary>
-        /// Optional. Gets or sets the protected item source Id.
+        /// Optional. Gets or sets the protected item Id.
         /// </summary>
-        public string ProtectedItemSourceId
+        public string ProtectedItemId
         {
-            get { return this._protectedItemSourceId; }
-            set { this._protectedItemSourceId = value; }
+            get { return this._protectedItemId; }
+            set { this._protectedItemId = value; }
         }
         
         private string _protectedItemType;
@@ -177,15 +166,26 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._protectedItemType = value; }
         }
         
-        private string _protectionStatus;
+        private string _protectionState;
         
         /// <summary>
         /// Optional. Gets or sets the protection status.
         /// </summary>
-        public string ProtectionStatus
+        public string ProtectionState
         {
-            get { return this._protectionStatus; }
-            set { this._protectionStatus = value; }
+            get { return this._protectionState; }
+            set { this._protectionState = value; }
+        }
+        
+        private ReplicationProviderSpecificSettings _providerSpecificDetails;
+        
+        /// <summary>
+        /// Optional. Gets or sets the Replication provider custom settings.
+        /// </summary>
+        public ReplicationProviderSpecificSettings ProviderSpecificDetails
+        {
+            get { return this._providerSpecificDetails; }
+            set { this._providerSpecificDetails = value; }
         }
         
         private string _recoveryFabricFriendlyName;
@@ -253,17 +253,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         {
             get { return this._replicationProvider; }
             set { this._replicationProvider = value; }
-        }
-        
-        private string _testFailoverStateDescription;
-        
-        /// <summary>
-        /// Optional. Gets or sets the Test failover state description.
-        /// </summary>
-        public string TestFailoverStateDescription
-        {
-            get { return this._testFailoverStateDescription; }
-            set { this._testFailoverStateDescription = value; }
         }
         
         /// <summary>

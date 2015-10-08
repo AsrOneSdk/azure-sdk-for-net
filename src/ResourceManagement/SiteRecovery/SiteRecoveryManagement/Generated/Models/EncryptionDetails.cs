@@ -25,58 +25,49 @@ using System.Linq;
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// Onprem disk details data.
+    /// Encryption details for the fabric.
     /// </summary>
-    public partial class DiskDetails
+    public partial class EncryptionDetails
     {
-        private ulong _maxSizeMB;
+        private System.DateTime? _kekCertExpiryDate;
         
         /// <summary>
-        /// Optional. Gets or sets the hard disk max size in MB.
+        /// Optional. Gets or sets the key encryption key certificate expiry
+        /// date.
         /// </summary>
-        public ulong MaxSizeMB
+        public System.DateTime? KekCertExpiryDate
         {
-            get { return this._maxSizeMB; }
-            set { this._maxSizeMB = value; }
+            get { return this._kekCertExpiryDate; }
+            set { this._kekCertExpiryDate = value; }
         }
         
-        private string _vhdId;
+        private string _kekCertThumbprint;
         
         /// <summary>
-        /// Optional. Gets or sets the VHD Id.
+        /// Optional. Gets or sets the key encryption key certificate
+        /// thumbprint.
         /// </summary>
-        public string VhdId
+        public string KekCertThumbprint
         {
-            get { return this._vhdId; }
-            set { this._vhdId = value; }
+            get { return this._kekCertThumbprint; }
+            set { this._kekCertThumbprint = value; }
         }
         
-        private string _vhdName;
+        private string _kekState;
         
         /// <summary>
-        /// Optional. Gets or sets the VHD name.
+        /// Optional. Gets or sets the key encryption key state for the fabric.
         /// </summary>
-        public string VhdName
+        public string KekState
         {
-            get { return this._vhdName; }
-            set { this._vhdName = value; }
-        }
-        
-        private string _vhdType;
-        
-        /// <summary>
-        /// Optional. Gets or sets the type of the volume.
-        /// </summary>
-        public string VhdType
-        {
-            get { return this._vhdType; }
-            set { this._vhdType = value; }
+            get { return this._kekState; }
+            set { this._kekState = value; }
         }
         
         /// <summary>
-        /// Initializes a new instance of the DiskDetails class.
+        /// Initializes a new instance of the EncryptionDetails class.
         /// </summary>
-        public DiskDetails()
+        public EncryptionDetails()
         {
         }
     }

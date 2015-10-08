@@ -52,17 +52,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._providerSpecificDetails = value; }
         }
         
-        private string _replicationProvider;
-        
-        /// <summary>
-        /// Required. Name of replication provider
-        /// </summary>
-        public string ReplicationProvider
-        {
-            get { return this._replicationProvider; }
-            set { this._replicationProvider = value; }
-        }
-        
         /// <summary>
         /// Initializes a new instance of the PolicyProperties class.
         /// </summary>
@@ -74,23 +63,18 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         /// Initializes a new instance of the PolicyProperties class with
         /// required arguments.
         /// </summary>
-        public PolicyProperties(string friendlyName, string replicationProvider, PolicyProviderSettingsDetails providerSpecificDetails)
+        public PolicyProperties(string friendlyName, PolicyProviderSettingsDetails providerSpecificDetails)
             : this()
         {
             if (friendlyName == null)
             {
                 throw new ArgumentNullException("friendlyName");
             }
-            if (replicationProvider == null)
-            {
-                throw new ArgumentNullException("replicationProvider");
-            }
             if (providerSpecificDetails == null)
             {
                 throw new ArgumentNullException("providerSpecificDetails");
             }
             this.FriendlyName = friendlyName;
-            this.ReplicationProvider = replicationProvider;
             this.ProviderSpecificDetails = providerSpecificDetails;
         }
     }

@@ -21,42 +21,29 @@
 
 using System;
 using System.Linq;
-using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// The definition of a ReverseReplicationInput properties object.
+    /// Fabric specific details.
     /// </summary>
-    public partial class ReverseReplicationInputProperties
+    public partial class FabricSpecificDetails
     {
-        private string _failoverDirection;
+        private string _instanceType;
         
         /// <summary>
-        /// Optional. Gets or sets Failover direction.
+        /// Optional. Type of derived class
         /// </summary>
-        public string FailoverDirection
+        public string InstanceType
         {
-            get { return this._failoverDirection; }
-            set { this._failoverDirection = value; }
-        }
-        
-        private ReverseReplicationProviderSpecificInput _providerSpecificDetails;
-        
-        /// <summary>
-        /// Optional. Gets or sets Provider specific reverse replication input.
-        /// </summary>
-        public ReverseReplicationProviderSpecificInput ProviderSpecificDetails
-        {
-            get { return this._providerSpecificDetails; }
-            set { this._providerSpecificDetails = value; }
+            get { return this._instanceType; }
+            set { this._instanceType = value; }
         }
         
         /// <summary>
-        /// Initializes a new instance of the ReverseReplicationInputProperties
-        /// class.
+        /// Initializes a new instance of the FabricSpecificDetails class.
         /// </summary>
-        public ReverseReplicationInputProperties()
+        public FabricSpecificDetails()
         {
         }
     }

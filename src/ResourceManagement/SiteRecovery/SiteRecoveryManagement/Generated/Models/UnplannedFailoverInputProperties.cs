@@ -41,15 +41,15 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._failoverDirection = value; }
         }
         
-        private ProviderSpecificFailoverInput _providerSpecificInput;
+        private ProviderSpecificFailoverInput _providerSpecificDetails;
         
         /// <summary>
         /// Optional. Gets or sets Provider specific settings.
         /// </summary>
-        public ProviderSpecificFailoverInput ProviderSpecificInput
+        public ProviderSpecificFailoverInput ProviderSpecificDetails
         {
-            get { return this._providerSpecificInput; }
-            set { this._providerSpecificInput = value; }
+            get { return this._providerSpecificDetails; }
+            set { this._providerSpecificDetails = value; }
         }
         
         private string _sourceSiteOperations;

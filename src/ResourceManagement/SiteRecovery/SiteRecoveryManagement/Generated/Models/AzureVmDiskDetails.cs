@@ -29,17 +29,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class AzureVmDiskDetails
     {
-        private string _diskLocation;
-        
-        /// <summary>
-        /// Optional. Gets or sets blob uri of the Azure disk.
-        /// </summary>
-        public string DiskLocation
-        {
-            get { return this._diskLocation; }
-            set { this._diskLocation = value; }
-        }
-        
         private string _lunId;
         
         /// <summary>
@@ -62,15 +51,26 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._maxSizeMB = value; }
         }
         
-        private string _primaryDiskCorelationId;
+        private string _targetDiskLocation;
         
         /// <summary>
-        /// Optional. Gets or sets Primary disk’s id.
+        /// Optional. Gets or sets blob uri of the Azure disk.
         /// </summary>
-        public string PrimaryDiskCorelationId
+        public string TargetDiskLocation
         {
-            get { return this._primaryDiskCorelationId; }
-            set { this._primaryDiskCorelationId = value; }
+            get { return this._targetDiskLocation; }
+            set { this._targetDiskLocation = value; }
+        }
+        
+        private string _targetDiskName;
+        
+        /// <summary>
+        /// Optional. Gets or sets Azure disk name.
+        /// </summary>
+        public string TargetDiskName
+        {
+            get { return this._targetDiskName; }
+            set { this._targetDiskName = value; }
         }
         
         private string _vhdId;

@@ -54,17 +54,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._friendlyName = value; }
         }
         
-        private string _protectableItemType;
-        
-        /// <summary>
-        /// Optional. Gets or sets the Protectable Item Type.
-        /// </summary>
-        public string ProtectableItemType
-        {
-            get { return this._protectableItemType; }
-            set { this._protectableItemType = value; }
-        }
-        
         private IList<string> _protectionReadinessErrors;
         
         /// <summary>

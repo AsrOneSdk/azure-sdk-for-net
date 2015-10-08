@@ -179,10 +179,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
                         propertiesValue["fabricType"] = input.Properties.FabricType;
                     }
                     
-                    if (input.Properties.CustomInput != null)
+                    if (input.Properties.CustomDetails != null)
                     {
-                        JObject customInputValue = new JObject();
-                        propertiesValue["customInput"] = customInputValue;
+                        JObject customDetailsValue = new JObject();
+                        propertiesValue["customDetails"] = customDetailsValue;
                     }
                 }
                 
@@ -1099,17 +1099,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.InternalIdentifier = internalIdentifierInstance;
                                 }
                                 
-                                JToken fabricTypeValue = propertiesValue["fabricType"];
-                                if (fabricTypeValue != null && fabricTypeValue.Type != JTokenType.Null)
-                                {
-                                    string fabricTypeInstance = ((string)fabricTypeValue);
-                                    propertiesInstance.FabricType = fabricTypeInstance;
-                                }
-                                
                                 JToken encryptionDetailsValue = propertiesValue["encryptionDetails"];
                                 if (encryptionDetailsValue != null && encryptionDetailsValue.Type != JTokenType.Null)
                                 {
-                                    KekDetails encryptionDetailsInstance = new KekDetails();
+                                    EncryptionDetails encryptionDetailsInstance = new EncryptionDetails();
                                     propertiesInstance.EncryptionDetails = encryptionDetailsInstance;
                                     
                                     JToken kekStateValue = encryptionDetailsValue["kekState"];
@@ -1129,7 +1122,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     JToken kekCertExpiryDateValue = encryptionDetailsValue["kekCertExpiryDate"];
                                     if (kekCertExpiryDateValue != null && kekCertExpiryDateValue.Type != JTokenType.Null)
                                     {
-                                        string kekCertExpiryDateInstance = ((string)kekCertExpiryDateValue);
+                                        DateTime kekCertExpiryDateInstance = ((DateTime)kekCertExpiryDateValue);
                                         encryptionDetailsInstance.KekCertExpiryDate = kekCertExpiryDateInstance;
                                     }
                                 }
@@ -1137,7 +1130,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 JToken rolloverEncryptionDetailsValue = propertiesValue["rolloverEncryptionDetails"];
                                 if (rolloverEncryptionDetailsValue != null && rolloverEncryptionDetailsValue.Type != JTokenType.Null)
                                 {
-                                    KekDetails rolloverEncryptionDetailsInstance = new KekDetails();
+                                    EncryptionDetails rolloverEncryptionDetailsInstance = new EncryptionDetails();
                                     propertiesInstance.RolloverEncryptionDetails = rolloverEncryptionDetailsInstance;
                                     
                                     JToken kekStateValue2 = rolloverEncryptionDetailsValue["kekState"];
@@ -1157,7 +1150,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     JToken kekCertExpiryDateValue2 = rolloverEncryptionDetailsValue["kekCertExpiryDate"];
                                     if (kekCertExpiryDateValue2 != null && kekCertExpiryDateValue2.Type != JTokenType.Null)
                                     {
-                                        string kekCertExpiryDateInstance2 = ((string)kekCertExpiryDateValue2);
+                                        DateTime kekCertExpiryDateInstance2 = ((DateTime)kekCertExpiryDateValue2);
                                         rolloverEncryptionDetailsInstance.KekCertExpiryDate = kekCertExpiryDateInstance2;
                                     }
                                 }
@@ -1166,7 +1159,31 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 if (customDetailsValue != null && customDetailsValue.Type != JTokenType.Null)
                                 {
                                     string typeName = ((string)customDetailsValue["__type"]);
-                                    if (typeName == "VMwareFabricDetails")
+                                    if (typeName == "VMM")
+                                    {
+                                        VmmDetails vmmDetailsInstance = new VmmDetails();
+                                        
+                                        JToken typeValue = customDetailsValue["__type"];
+                                        if (typeValue != null && typeValue.Type != JTokenType.Null)
+                                        {
+                                            string typeInstance = ((string)typeValue);
+                                            vmmDetailsInstance.InstanceType = typeInstance;
+                                        }
+                                        propertiesInstance.CustomDetails = vmmDetailsInstance;
+                                    }
+                                    if (typeName == "HyperVSite")
+                                    {
+                                        HyperVSiteDetails hyperVSiteDetailsInstance = new HyperVSiteDetails();
+                                        
+                                        JToken typeValue2 = customDetailsValue["__type"];
+                                        if (typeValue2 != null && typeValue2.Type != JTokenType.Null)
+                                        {
+                                            string typeInstance2 = ((string)typeValue2);
+                                            hyperVSiteDetailsInstance.InstanceType = typeInstance2;
+                                        }
+                                        propertiesInstance.CustomDetails = hyperVSiteDetailsInstance;
+                                    }
+                                    if (typeName == "VMware")
                                     {
                                         VMwareFabricDetails vMwareFabricDetailsInstance = new VMwareFabricDetails();
                                         
@@ -1616,11 +1633,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareFabricDetailsInstance.CsServiceStatus = csServiceStatusInstance;
                                         }
                                         
-                                        JToken typeValue = customDetailsValue["__type"];
-                                        if (typeValue != null && typeValue.Type != JTokenType.Null)
+                                        JToken typeValue3 = customDetailsValue["__type"];
+                                        if (typeValue3 != null && typeValue3.Type != JTokenType.Null)
                                         {
-                                            string typeInstance = ((string)typeValue);
-                                            vMwareFabricDetailsInstance.InstanceType = typeInstance;
+                                            string typeInstance3 = ((string)typeValue3);
+                                            vMwareFabricDetailsInstance.InstanceType = typeInstance3;
                                         }
                                         propertiesInstance.CustomDetails = vMwareFabricDetailsInstance;
                                     }
@@ -1641,11 +1658,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 fabricInstance.Name = nameInstance2;
                             }
                             
-                            JToken typeValue2 = responseDoc["type"];
-                            if (typeValue2 != null && typeValue2.Type != JTokenType.Null)
+                            JToken typeValue4 = responseDoc["type"];
+                            if (typeValue4 != null && typeValue4.Type != JTokenType.Null)
                             {
-                                string typeInstance2 = ((string)typeValue2);
-                                fabricInstance.Type = typeInstance2;
+                                string typeInstance4 = ((string)typeValue4);
+                                fabricInstance.Type = typeInstance4;
                             }
                             
                             JToken locationValue = responseDoc["location"];
@@ -1818,17 +1835,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.InternalIdentifier = internalIdentifierInstance;
                                 }
                                 
-                                JToken fabricTypeValue = propertiesValue["fabricType"];
-                                if (fabricTypeValue != null && fabricTypeValue.Type != JTokenType.Null)
-                                {
-                                    string fabricTypeInstance = ((string)fabricTypeValue);
-                                    propertiesInstance.FabricType = fabricTypeInstance;
-                                }
-                                
                                 JToken encryptionDetailsValue = propertiesValue["encryptionDetails"];
                                 if (encryptionDetailsValue != null && encryptionDetailsValue.Type != JTokenType.Null)
                                 {
-                                    KekDetails encryptionDetailsInstance = new KekDetails();
+                                    EncryptionDetails encryptionDetailsInstance = new EncryptionDetails();
                                     propertiesInstance.EncryptionDetails = encryptionDetailsInstance;
                                     
                                     JToken kekStateValue = encryptionDetailsValue["kekState"];
@@ -1848,7 +1858,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     JToken kekCertExpiryDateValue = encryptionDetailsValue["kekCertExpiryDate"];
                                     if (kekCertExpiryDateValue != null && kekCertExpiryDateValue.Type != JTokenType.Null)
                                     {
-                                        string kekCertExpiryDateInstance = ((string)kekCertExpiryDateValue);
+                                        DateTime kekCertExpiryDateInstance = ((DateTime)kekCertExpiryDateValue);
                                         encryptionDetailsInstance.KekCertExpiryDate = kekCertExpiryDateInstance;
                                     }
                                 }
@@ -1856,7 +1866,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 JToken rolloverEncryptionDetailsValue = propertiesValue["rolloverEncryptionDetails"];
                                 if (rolloverEncryptionDetailsValue != null && rolloverEncryptionDetailsValue.Type != JTokenType.Null)
                                 {
-                                    KekDetails rolloverEncryptionDetailsInstance = new KekDetails();
+                                    EncryptionDetails rolloverEncryptionDetailsInstance = new EncryptionDetails();
                                     propertiesInstance.RolloverEncryptionDetails = rolloverEncryptionDetailsInstance;
                                     
                                     JToken kekStateValue2 = rolloverEncryptionDetailsValue["kekState"];
@@ -1876,7 +1886,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     JToken kekCertExpiryDateValue2 = rolloverEncryptionDetailsValue["kekCertExpiryDate"];
                                     if (kekCertExpiryDateValue2 != null && kekCertExpiryDateValue2.Type != JTokenType.Null)
                                     {
-                                        string kekCertExpiryDateInstance2 = ((string)kekCertExpiryDateValue2);
+                                        DateTime kekCertExpiryDateInstance2 = ((DateTime)kekCertExpiryDateValue2);
                                         rolloverEncryptionDetailsInstance.KekCertExpiryDate = kekCertExpiryDateInstance2;
                                     }
                                 }
@@ -1885,7 +1895,31 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 if (customDetailsValue != null && customDetailsValue.Type != JTokenType.Null)
                                 {
                                     string typeName = ((string)customDetailsValue["__type"]);
-                                    if (typeName == "VMwareFabricDetails")
+                                    if (typeName == "VMM")
+                                    {
+                                        VmmDetails vmmDetailsInstance = new VmmDetails();
+                                        
+                                        JToken typeValue = customDetailsValue["__type"];
+                                        if (typeValue != null && typeValue.Type != JTokenType.Null)
+                                        {
+                                            string typeInstance = ((string)typeValue);
+                                            vmmDetailsInstance.InstanceType = typeInstance;
+                                        }
+                                        propertiesInstance.CustomDetails = vmmDetailsInstance;
+                                    }
+                                    if (typeName == "HyperVSite")
+                                    {
+                                        HyperVSiteDetails hyperVSiteDetailsInstance = new HyperVSiteDetails();
+                                        
+                                        JToken typeValue2 = customDetailsValue["__type"];
+                                        if (typeValue2 != null && typeValue2.Type != JTokenType.Null)
+                                        {
+                                            string typeInstance2 = ((string)typeValue2);
+                                            hyperVSiteDetailsInstance.InstanceType = typeInstance2;
+                                        }
+                                        propertiesInstance.CustomDetails = hyperVSiteDetailsInstance;
+                                    }
+                                    if (typeName == "VMware")
                                     {
                                         VMwareFabricDetails vMwareFabricDetailsInstance = new VMwareFabricDetails();
                                         
@@ -2335,11 +2369,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareFabricDetailsInstance.CsServiceStatus = csServiceStatusInstance;
                                         }
                                         
-                                        JToken typeValue = customDetailsValue["__type"];
-                                        if (typeValue != null && typeValue.Type != JTokenType.Null)
+                                        JToken typeValue3 = customDetailsValue["__type"];
+                                        if (typeValue3 != null && typeValue3.Type != JTokenType.Null)
                                         {
-                                            string typeInstance = ((string)typeValue);
-                                            vMwareFabricDetailsInstance.InstanceType = typeInstance;
+                                            string typeInstance3 = ((string)typeValue3);
+                                            vMwareFabricDetailsInstance.InstanceType = typeInstance3;
                                         }
                                         propertiesInstance.CustomDetails = vMwareFabricDetailsInstance;
                                     }
@@ -2360,11 +2394,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 fabricInstance.Name = nameInstance2;
                             }
                             
-                            JToken typeValue2 = responseDoc["type"];
-                            if (typeValue2 != null && typeValue2.Type != JTokenType.Null)
+                            JToken typeValue4 = responseDoc["type"];
+                            if (typeValue4 != null && typeValue4.Type != JTokenType.Null)
                             {
-                                string typeInstance2 = ((string)typeValue2);
-                                fabricInstance.Type = typeInstance2;
+                                string typeInstance4 = ((string)typeValue4);
+                                fabricInstance.Type = typeInstance4;
                             }
                             
                             JToken locationValue = responseDoc["location"];
@@ -2951,17 +2985,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.InternalIdentifier = internalIdentifierInstance;
                                 }
                                 
-                                JToken fabricTypeValue = propertiesValue["fabricType"];
-                                if (fabricTypeValue != null && fabricTypeValue.Type != JTokenType.Null)
-                                {
-                                    string fabricTypeInstance = ((string)fabricTypeValue);
-                                    propertiesInstance.FabricType = fabricTypeInstance;
-                                }
-                                
                                 JToken encryptionDetailsValue = propertiesValue["encryptionDetails"];
                                 if (encryptionDetailsValue != null && encryptionDetailsValue.Type != JTokenType.Null)
                                 {
-                                    KekDetails encryptionDetailsInstance = new KekDetails();
+                                    EncryptionDetails encryptionDetailsInstance = new EncryptionDetails();
                                     propertiesInstance.EncryptionDetails = encryptionDetailsInstance;
                                     
                                     JToken kekStateValue = encryptionDetailsValue["kekState"];
@@ -2981,7 +3008,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     JToken kekCertExpiryDateValue = encryptionDetailsValue["kekCertExpiryDate"];
                                     if (kekCertExpiryDateValue != null && kekCertExpiryDateValue.Type != JTokenType.Null)
                                     {
-                                        string kekCertExpiryDateInstance = ((string)kekCertExpiryDateValue);
+                                        DateTime kekCertExpiryDateInstance = ((DateTime)kekCertExpiryDateValue);
                                         encryptionDetailsInstance.KekCertExpiryDate = kekCertExpiryDateInstance;
                                     }
                                 }
@@ -2989,7 +3016,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 JToken rolloverEncryptionDetailsValue = propertiesValue["rolloverEncryptionDetails"];
                                 if (rolloverEncryptionDetailsValue != null && rolloverEncryptionDetailsValue.Type != JTokenType.Null)
                                 {
-                                    KekDetails rolloverEncryptionDetailsInstance = new KekDetails();
+                                    EncryptionDetails rolloverEncryptionDetailsInstance = new EncryptionDetails();
                                     propertiesInstance.RolloverEncryptionDetails = rolloverEncryptionDetailsInstance;
                                     
                                     JToken kekStateValue2 = rolloverEncryptionDetailsValue["kekState"];
@@ -3009,7 +3036,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     JToken kekCertExpiryDateValue2 = rolloverEncryptionDetailsValue["kekCertExpiryDate"];
                                     if (kekCertExpiryDateValue2 != null && kekCertExpiryDateValue2.Type != JTokenType.Null)
                                     {
-                                        string kekCertExpiryDateInstance2 = ((string)kekCertExpiryDateValue2);
+                                        DateTime kekCertExpiryDateInstance2 = ((DateTime)kekCertExpiryDateValue2);
                                         rolloverEncryptionDetailsInstance.KekCertExpiryDate = kekCertExpiryDateInstance2;
                                     }
                                 }
@@ -3018,7 +3045,31 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 if (customDetailsValue != null && customDetailsValue.Type != JTokenType.Null)
                                 {
                                     string typeName = ((string)customDetailsValue["__type"]);
-                                    if (typeName == "VMwareFabricDetails")
+                                    if (typeName == "VMM")
+                                    {
+                                        VmmDetails vmmDetailsInstance = new VmmDetails();
+                                        
+                                        JToken typeValue = customDetailsValue["__type"];
+                                        if (typeValue != null && typeValue.Type != JTokenType.Null)
+                                        {
+                                            string typeInstance = ((string)typeValue);
+                                            vmmDetailsInstance.InstanceType = typeInstance;
+                                        }
+                                        propertiesInstance.CustomDetails = vmmDetailsInstance;
+                                    }
+                                    if (typeName == "HyperVSite")
+                                    {
+                                        HyperVSiteDetails hyperVSiteDetailsInstance = new HyperVSiteDetails();
+                                        
+                                        JToken typeValue2 = customDetailsValue["__type"];
+                                        if (typeValue2 != null && typeValue2.Type != JTokenType.Null)
+                                        {
+                                            string typeInstance2 = ((string)typeValue2);
+                                            hyperVSiteDetailsInstance.InstanceType = typeInstance2;
+                                        }
+                                        propertiesInstance.CustomDetails = hyperVSiteDetailsInstance;
+                                    }
+                                    if (typeName == "VMware")
                                     {
                                         VMwareFabricDetails vMwareFabricDetailsInstance = new VMwareFabricDetails();
                                         
@@ -3468,11 +3519,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareFabricDetailsInstance.CsServiceStatus = csServiceStatusInstance;
                                         }
                                         
-                                        JToken typeValue = customDetailsValue["__type"];
-                                        if (typeValue != null && typeValue.Type != JTokenType.Null)
+                                        JToken typeValue3 = customDetailsValue["__type"];
+                                        if (typeValue3 != null && typeValue3.Type != JTokenType.Null)
                                         {
-                                            string typeInstance = ((string)typeValue);
-                                            vMwareFabricDetailsInstance.InstanceType = typeInstance;
+                                            string typeInstance3 = ((string)typeValue3);
+                                            vMwareFabricDetailsInstance.InstanceType = typeInstance3;
                                         }
                                         propertiesInstance.CustomDetails = vMwareFabricDetailsInstance;
                                     }
@@ -3493,11 +3544,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 fabricInstance.Name = nameInstance2;
                             }
                             
-                            JToken typeValue2 = responseDoc["type"];
-                            if (typeValue2 != null && typeValue2.Type != JTokenType.Null)
+                            JToken typeValue4 = responseDoc["type"];
+                            if (typeValue4 != null && typeValue4.Type != JTokenType.Null)
                             {
-                                string typeInstance2 = ((string)typeValue2);
-                                fabricInstance.Type = typeInstance2;
+                                string typeInstance4 = ((string)typeValue4);
+                                fabricInstance.Type = typeInstance4;
                             }
                             
                             JToken locationValue = responseDoc["location"];
@@ -3721,17 +3772,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             propertiesInstance.InternalIdentifier = internalIdentifierInstance;
                                         }
                                         
-                                        JToken fabricTypeValue = propertiesValue["fabricType"];
-                                        if (fabricTypeValue != null && fabricTypeValue.Type != JTokenType.Null)
-                                        {
-                                            string fabricTypeInstance = ((string)fabricTypeValue);
-                                            propertiesInstance.FabricType = fabricTypeInstance;
-                                        }
-                                        
                                         JToken encryptionDetailsValue = propertiesValue["encryptionDetails"];
                                         if (encryptionDetailsValue != null && encryptionDetailsValue.Type != JTokenType.Null)
                                         {
-                                            KekDetails encryptionDetailsInstance = new KekDetails();
+                                            EncryptionDetails encryptionDetailsInstance = new EncryptionDetails();
                                             propertiesInstance.EncryptionDetails = encryptionDetailsInstance;
                                             
                                             JToken kekStateValue = encryptionDetailsValue["kekState"];
@@ -3751,7 +3795,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             JToken kekCertExpiryDateValue = encryptionDetailsValue["kekCertExpiryDate"];
                                             if (kekCertExpiryDateValue != null && kekCertExpiryDateValue.Type != JTokenType.Null)
                                             {
-                                                string kekCertExpiryDateInstance = ((string)kekCertExpiryDateValue);
+                                                DateTime kekCertExpiryDateInstance = ((DateTime)kekCertExpiryDateValue);
                                                 encryptionDetailsInstance.KekCertExpiryDate = kekCertExpiryDateInstance;
                                             }
                                         }
@@ -3759,7 +3803,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         JToken rolloverEncryptionDetailsValue = propertiesValue["rolloverEncryptionDetails"];
                                         if (rolloverEncryptionDetailsValue != null && rolloverEncryptionDetailsValue.Type != JTokenType.Null)
                                         {
-                                            KekDetails rolloverEncryptionDetailsInstance = new KekDetails();
+                                            EncryptionDetails rolloverEncryptionDetailsInstance = new EncryptionDetails();
                                             propertiesInstance.RolloverEncryptionDetails = rolloverEncryptionDetailsInstance;
                                             
                                             JToken kekStateValue2 = rolloverEncryptionDetailsValue["kekState"];
@@ -3779,7 +3823,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             JToken kekCertExpiryDateValue2 = rolloverEncryptionDetailsValue["kekCertExpiryDate"];
                                             if (kekCertExpiryDateValue2 != null && kekCertExpiryDateValue2.Type != JTokenType.Null)
                                             {
-                                                string kekCertExpiryDateInstance2 = ((string)kekCertExpiryDateValue2);
+                                                DateTime kekCertExpiryDateInstance2 = ((DateTime)kekCertExpiryDateValue2);
                                                 rolloverEncryptionDetailsInstance.KekCertExpiryDate = kekCertExpiryDateInstance2;
                                             }
                                         }
@@ -3788,7 +3832,31 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         if (customDetailsValue != null && customDetailsValue.Type != JTokenType.Null)
                                         {
                                             string typeName = ((string)customDetailsValue["__type"]);
-                                            if (typeName == "VMwareFabricDetails")
+                                            if (typeName == "VMM")
+                                            {
+                                                VmmDetails vmmDetailsInstance = new VmmDetails();
+                                                
+                                                JToken typeValue = customDetailsValue["__type"];
+                                                if (typeValue != null && typeValue.Type != JTokenType.Null)
+                                                {
+                                                    string typeInstance = ((string)typeValue);
+                                                    vmmDetailsInstance.InstanceType = typeInstance;
+                                                }
+                                                propertiesInstance.CustomDetails = vmmDetailsInstance;
+                                            }
+                                            if (typeName == "HyperVSite")
+                                            {
+                                                HyperVSiteDetails hyperVSiteDetailsInstance = new HyperVSiteDetails();
+                                                
+                                                JToken typeValue2 = customDetailsValue["__type"];
+                                                if (typeValue2 != null && typeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string typeInstance2 = ((string)typeValue2);
+                                                    hyperVSiteDetailsInstance.InstanceType = typeInstance2;
+                                                }
+                                                propertiesInstance.CustomDetails = hyperVSiteDetailsInstance;
+                                            }
+                                            if (typeName == "VMware")
                                             {
                                                 VMwareFabricDetails vMwareFabricDetailsInstance = new VMwareFabricDetails();
                                                 
@@ -4238,11 +4306,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareFabricDetailsInstance.CsServiceStatus = csServiceStatusInstance;
                                                 }
                                                 
-                                                JToken typeValue = customDetailsValue["__type"];
-                                                if (typeValue != null && typeValue.Type != JTokenType.Null)
+                                                JToken typeValue3 = customDetailsValue["__type"];
+                                                if (typeValue3 != null && typeValue3.Type != JTokenType.Null)
                                                 {
-                                                    string typeInstance = ((string)typeValue);
-                                                    vMwareFabricDetailsInstance.InstanceType = typeInstance;
+                                                    string typeInstance3 = ((string)typeValue3);
+                                                    vMwareFabricDetailsInstance.InstanceType = typeInstance3;
                                                 }
                                                 propertiesInstance.CustomDetails = vMwareFabricDetailsInstance;
                                             }
@@ -4263,11 +4331,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         fabricInstance.Name = nameInstance2;
                                     }
                                     
-                                    JToken typeValue2 = valueValue["type"];
-                                    if (typeValue2 != null && typeValue2.Type != JTokenType.Null)
+                                    JToken typeValue4 = valueValue["type"];
+                                    if (typeValue4 != null && typeValue4.Type != JTokenType.Null)
                                     {
-                                        string typeInstance2 = ((string)typeValue2);
-                                        fabricInstance.Type = typeInstance2;
+                                        string typeInstance4 = ((string)typeValue4);
+                                        fabricInstance.Type = typeInstance4;
                                     }
                                     
                                     JToken locationValue = valueValue["location"];

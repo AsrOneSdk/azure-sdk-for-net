@@ -26,69 +26,70 @@ using Microsoft.Azure.Management.SiteRecovery.Models;
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// The definition of a Fabric properties.
+    /// The Azure enable protection input.
     /// </summary>
-    public partial class FabricProperties
+    public partial class HyperVReplicaAzureEnableProtectionInput : EnableProtectionProviderSpecificInput
     {
-        private FabricSpecificDetails _customDetails;
+        private string _hvHostVmId;
         
         /// <summary>
-        /// Optional. Type of the fabric.
+        /// Optional.
         /// </summary>
-        public FabricSpecificDetails CustomDetails
+        public string HvHostVmId
         {
-            get { return this._customDetails; }
-            set { this._customDetails = value; }
+            get { return this._hvHostVmId; }
+            set { this._hvHostVmId = value; }
         }
         
-        private EncryptionDetails _encryptionDetails;
+        private string _oSType;
         
         /// <summary>
-        /// Optional. Encryption details for the fabric.
+        /// Optional.
         /// </summary>
-        public EncryptionDetails EncryptionDetails
+        public string OSType
         {
-            get { return this._encryptionDetails; }
-            set { this._encryptionDetails = value; }
+            get { return this._oSType; }
+            set { this._oSType = value; }
         }
         
-        private string _friendlyName;
+        private string _targetStorageAccountId;
         
         /// <summary>
-        /// Optional. Friendly name of the fabric.
+        /// Optional. Gets or sets the storage account Id.
         /// </summary>
-        public string FriendlyName
+        public string TargetStorageAccountId
         {
-            get { return this._friendlyName; }
-            set { this._friendlyName = value; }
+            get { return this._targetStorageAccountId; }
+            set { this._targetStorageAccountId = value; }
         }
         
-        private string _internalIdentifier;
+        private string _vhdId;
         
         /// <summary>
-        /// Optional. Internal Identifier.
+        /// Optional.
         /// </summary>
-        public string InternalIdentifier
+        public string VhdId
         {
-            get { return this._internalIdentifier; }
-            set { this._internalIdentifier = value; }
+            get { return this._vhdId; }
+            set { this._vhdId = value; }
         }
         
-        private EncryptionDetails _rolloverEncryptionDetails;
+        private string _vmName;
         
         /// <summary>
-        /// Optional. Rollover encryption details for the fabric.
+        /// Optional.
         /// </summary>
-        public EncryptionDetails RolloverEncryptionDetails
+        public string VmName
         {
-            get { return this._rolloverEncryptionDetails; }
-            set { this._rolloverEncryptionDetails = value; }
+            get { return this._vmName; }
+            set { this._vmName = value; }
         }
         
         /// <summary>
-        /// Initializes a new instance of the FabricProperties class.
+        /// Initializes a new instance of the
+        /// HyperVReplicaAzureEnableProtectionInput class.
         /// </summary>
-        public FabricProperties()
+        public HyperVReplicaAzureEnableProtectionInput()
         {
         }
     }

@@ -30,15 +30,15 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class HyperVReplicaAzurePolicyDetails : PolicyProviderSettingsDetails
     {
-        private CustomerStorageAccount _activeStorageAccount;
+        private string _activeStorageAccountId;
         
         /// <summary>
         /// Optional.
         /// </summary>
-        public CustomerStorageAccount ActiveStorageAccount
+        public string ActiveStorageAccountId
         {
-            get { return this._activeStorageAccount; }
-            set { this._activeStorageAccount = value; }
+            get { return this._activeStorageAccountId; }
+            set { this._activeStorageAccountId = value; }
         }
         
         private int _applicationConsistentSnapshotFrequencyInHours;

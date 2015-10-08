@@ -226,13 +226,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.FriendlyName = friendlyNameInstance;
                                 }
                                 
-                                JToken protectableItemTypeValue = propertiesValue["protectableItemType"];
-                                if (protectableItemTypeValue != null && protectableItemTypeValue.Type != JTokenType.Null)
-                                {
-                                    string protectableItemTypeInstance = ((string)protectableItemTypeValue);
-                                    propertiesInstance.ProtectableItemType = protectableItemTypeInstance;
-                                }
-                                
                                 JToken protectionStatusValue = propertiesValue["protectionStatus"];
                                 if (protectionStatusValue != null && protectionStatusValue.Type != JTokenType.Null)
                                 {
@@ -342,25 +335,25 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     diskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
                                                 }
                                                 
-                                                JToken vHDStatusValue = diskDetailsValue["vHDStatus"];
-                                                if (vHDStatusValue != null && vHDStatusValue.Type != JTokenType.Null)
+                                                JToken vhdTypeValue = diskDetailsValue["vhdType"];
+                                                if (vhdTypeValue != null && vhdTypeValue.Type != JTokenType.Null)
                                                 {
-                                                    string vHDStatusInstance = ((string)vHDStatusValue);
-                                                    diskDetailsInstance.VHDStatus = vHDStatusInstance;
+                                                    string vhdTypeInstance = ((string)vhdTypeValue);
+                                                    diskDetailsInstance.VhdType = vhdTypeInstance;
                                                 }
                                                 
-                                                JToken vHDIdValue = diskDetailsValue["vHDId"];
-                                                if (vHDIdValue != null && vHDIdValue.Type != JTokenType.Null)
+                                                JToken vhdIdValue = diskDetailsValue["vhdId"];
+                                                if (vhdIdValue != null && vhdIdValue.Type != JTokenType.Null)
                                                 {
-                                                    string vHDIdInstance = ((string)vHDIdValue);
-                                                    diskDetailsInstance.VHDId = vHDIdInstance;
+                                                    string vhdIdInstance = ((string)vhdIdValue);
+                                                    diskDetailsInstance.VhdId = vhdIdInstance;
                                                 }
                                                 
-                                                JToken vHDNameValue = diskDetailsValue["vHDName"];
-                                                if (vHDNameValue != null && vHDNameValue.Type != JTokenType.Null)
+                                                JToken vhdNameValue = diskDetailsValue["vhdName"];
+                                                if (vhdNameValue != null && vhdNameValue.Type != JTokenType.Null)
                                                 {
-                                                    string vHDNameInstance = ((string)vHDNameValue);
-                                                    diskDetailsInstance.VHDName = vHDNameInstance;
+                                                    string vhdNameInstance = ((string)vhdNameValue);
+                                                    diskDetailsInstance.VhdName = vhdNameInstance;
                                                 }
                                             }
                                         }
@@ -707,13 +700,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             propertiesInstance.FriendlyName = friendlyNameInstance;
                                         }
                                         
-                                        JToken protectableItemTypeValue = propertiesValue["protectableItemType"];
-                                        if (protectableItemTypeValue != null && protectableItemTypeValue.Type != JTokenType.Null)
-                                        {
-                                            string protectableItemTypeInstance = ((string)protectableItemTypeValue);
-                                            propertiesInstance.ProtectableItemType = protectableItemTypeInstance;
-                                        }
-                                        
                                         JToken protectionStatusValue = propertiesValue["protectionStatus"];
                                         if (protectionStatusValue != null && protectionStatusValue.Type != JTokenType.Null)
                                         {
@@ -823,25 +809,25 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                             diskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
                                                         }
                                                         
-                                                        JToken vHDStatusValue = diskDetailsValue["vHDStatus"];
-                                                        if (vHDStatusValue != null && vHDStatusValue.Type != JTokenType.Null)
+                                                        JToken vhdTypeValue = diskDetailsValue["vhdType"];
+                                                        if (vhdTypeValue != null && vhdTypeValue.Type != JTokenType.Null)
                                                         {
-                                                            string vHDStatusInstance = ((string)vHDStatusValue);
-                                                            diskDetailsInstance.VHDStatus = vHDStatusInstance;
+                                                            string vhdTypeInstance = ((string)vhdTypeValue);
+                                                            diskDetailsInstance.VhdType = vhdTypeInstance;
                                                         }
                                                         
-                                                        JToken vHDIdValue = diskDetailsValue["vHDId"];
-                                                        if (vHDIdValue != null && vHDIdValue.Type != JTokenType.Null)
+                                                        JToken vhdIdValue = diskDetailsValue["vhdId"];
+                                                        if (vhdIdValue != null && vhdIdValue.Type != JTokenType.Null)
                                                         {
-                                                            string vHDIdInstance = ((string)vHDIdValue);
-                                                            diskDetailsInstance.VHDId = vHDIdInstance;
+                                                            string vhdIdInstance = ((string)vhdIdValue);
+                                                            diskDetailsInstance.VhdId = vhdIdInstance;
                                                         }
                                                         
-                                                        JToken vHDNameValue = diskDetailsValue["vHDName"];
-                                                        if (vHDNameValue != null && vHDNameValue.Type != JTokenType.Null)
+                                                        JToken vhdNameValue = diskDetailsValue["vhdName"];
+                                                        if (vhdNameValue != null && vhdNameValue.Type != JTokenType.Null)
                                                         {
-                                                            string vHDNameInstance = ((string)vHDNameValue);
-                                                            diskDetailsInstance.VHDName = vHDNameInstance;
+                                                            string vhdNameInstance = ((string)vhdNameValue);
+                                                            diskDetailsInstance.VhdName = vhdNameInstance;
                                                         }
                                                     }
                                                 }

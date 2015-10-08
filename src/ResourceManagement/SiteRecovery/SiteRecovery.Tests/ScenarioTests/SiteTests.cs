@@ -38,7 +38,7 @@ namespace SiteRecovery.Tests
 
                 FabricCreationInput siteInput = new FabricCreationInput();
                 siteInput.Properties = new FabricCreationInputProperties();
-                siteInput.Properties.FabricType = "HyperVSite";
+                siteInput.Properties.FabricType = "";
 
                 var site = client.Fabrics.Create(siteName, siteInput, RequestHeaders);
                 var response = client.Fabrics.Get(siteName, RequestHeaders);

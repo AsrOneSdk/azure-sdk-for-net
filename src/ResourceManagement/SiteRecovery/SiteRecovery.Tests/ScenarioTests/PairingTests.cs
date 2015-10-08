@@ -45,7 +45,7 @@ namespace SiteRecovery.Tests
 
                 foreach (var fabric in fabrics.Fabrics)
                 {
-                    if (fabric.Properties.FabricType.Contains("VMM"))
+                    if (fabric.Properties.CustomDetails.InstanceType.Contains("VMM"))
                     {
                         selectedFabric = fabric;
                     }
@@ -84,7 +84,6 @@ namespace SiteRecovery.Tests
 
                 CreatePolicyInputProperties policyCreationProp = new CreatePolicyInputProperties()
                 {
-                    ReplicationProvider = "HyperVReplica",
                     ProviderSpecificInput = hvrProfileInput
                 };
 
@@ -154,7 +153,6 @@ namespace SiteRecovery.Tests
 
                 CreatePolicyInputProperties createInputProp = new CreatePolicyInputProperties()
                 {
-                    ReplicationProvider = "HyperVReplicaAzure",
                     ProviderSpecificInput = hvrAPolicy
                 };
 

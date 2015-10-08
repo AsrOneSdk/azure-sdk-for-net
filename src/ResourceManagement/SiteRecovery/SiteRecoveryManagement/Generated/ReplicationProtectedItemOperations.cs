@@ -595,10 +595,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     {
                         JObject providerConfigurationSettingsValue = new JObject();
                         propertiesValue["providerConfigurationSettings"] = providerConfigurationSettingsValue;
-                        if (input.Properties.ProviderConfigurationSettings is AzureEnableProtectionInput)
+                        if (input.Properties.ProviderConfigurationSettings is HyperVReplicaAzureEnableProtectionInput)
                         {
                             providerConfigurationSettingsValue["__type"] = "AzureEnableProtectionInput";
-                            AzureEnableProtectionInput derived = ((AzureEnableProtectionInput)input.Properties.ProviderConfigurationSettings);
+                            HyperVReplicaAzureEnableProtectionInput derived = ((HyperVReplicaAzureEnableProtectionInput)input.Properties.ProviderConfigurationSettings);
                             
                             if (derived.HvHostVmId != null)
                             {
@@ -615,14 +615,14 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 providerConfigurationSettingsValue["osType"] = derived.OSType;
                             }
                             
-                            if (derived.VHDId != null)
+                            if (derived.VhdId != null)
                             {
-                                providerConfigurationSettingsValue["vHDId"] = derived.VHDId;
+                                providerConfigurationSettingsValue["vhdId"] = derived.VhdId;
                             }
                             
-                            if (derived.StorageAccountId != null)
+                            if (derived.TargetStorageAccountId != null)
                             {
-                                providerConfigurationSettingsValue["storageAccountId"] = derived.StorageAccountId;
+                                providerConfigurationSettingsValue["targetStorageAccountId"] = derived.TargetStorageAccountId;
                             }
                         }
                         if (input.Properties.ProviderConfigurationSettings is VMwareAzureV2EnableProtectionInput)
@@ -918,63 +918,63 @@ namespace Microsoft.Azure.Management.SiteRecovery
                         propertiesValue["failoverDirection"] = input.Properties.FailoverDirection;
                     }
                     
-                    if (input.Properties.ProviderSpecificInput != null)
+                    if (input.Properties.ProviderSpecificDetails != null)
                     {
-                        JObject providerSpecificInputValue = new JObject();
-                        propertiesValue["providerSpecificInput"] = providerSpecificInputValue;
-                        if (input.Properties.ProviderSpecificInput is HyperVReplicaAzureFailoverProviderInput)
+                        JObject providerSpecificDetailsValue = new JObject();
+                        propertiesValue["providerSpecificDetails"] = providerSpecificDetailsValue;
+                        if (input.Properties.ProviderSpecificDetails is HyperVReplicaAzureFailoverProviderInput)
                         {
-                            providerSpecificInputValue["__type"] = "HyperVReplicaAzureFailoverProviderInput";
-                            HyperVReplicaAzureFailoverProviderInput derived = ((HyperVReplicaAzureFailoverProviderInput)input.Properties.ProviderSpecificInput);
+                            providerSpecificDetailsValue["__type"] = "HyperVReplicaAzureFailoverProviderInput";
+                            HyperVReplicaAzureFailoverProviderInput derived = ((HyperVReplicaAzureFailoverProviderInput)input.Properties.ProviderSpecificDetails);
                             
                             if (derived.VaultLocation != null)
                             {
-                                providerSpecificInputValue["vaultLocation"] = derived.VaultLocation;
+                                providerSpecificDetailsValue["vaultLocation"] = derived.VaultLocation;
                             }
                             
                             if (derived.PrimaryKekCertificatePfx != null)
                             {
-                                providerSpecificInputValue["primaryKekCertificatePfx"] = derived.PrimaryKekCertificatePfx;
+                                providerSpecificDetailsValue["primaryKekCertificatePfx"] = derived.PrimaryKekCertificatePfx;
                             }
                             
                             if (derived.SecondaryKekCertificatePfx != null)
                             {
-                                providerSpecificInputValue["secondaryKekCertificatePfx"] = derived.SecondaryKekCertificatePfx;
+                                providerSpecificDetailsValue["secondaryKekCertificatePfx"] = derived.SecondaryKekCertificatePfx;
                             }
                         }
-                        if (input.Properties.ProviderSpecificInput is HyperVReplicaAzureFailbackProviderInput)
+                        if (input.Properties.ProviderSpecificDetails is HyperVReplicaAzureFailbackProviderInput)
                         {
-                            providerSpecificInputValue["__type"] = "HyperVReplicaAzureFailbackProviderInput";
-                            HyperVReplicaAzureFailbackProviderInput derived2 = ((HyperVReplicaAzureFailbackProviderInput)input.Properties.ProviderSpecificInput);
+                            providerSpecificDetailsValue["__type"] = "HyperVReplicaAzureFailbackProviderInput";
+                            HyperVReplicaAzureFailbackProviderInput derived2 = ((HyperVReplicaAzureFailbackProviderInput)input.Properties.ProviderSpecificDetails);
                             
                             if (derived2.DataSyncOption != null)
                             {
-                                providerSpecificInputValue["dataSyncOption"] = derived2.DataSyncOption;
+                                providerSpecificDetailsValue["dataSyncOption"] = derived2.DataSyncOption;
                             }
                             
                             if (derived2.RecoveryVmCreationOption != null)
                             {
-                                providerSpecificInputValue["recoveryVmCreationOption"] = derived2.RecoveryVmCreationOption;
+                                providerSpecificDetailsValue["recoveryVmCreationOption"] = derived2.RecoveryVmCreationOption;
                             }
                             
                             if (derived2.ProviderIdForAlternateRecovery != null)
                             {
-                                providerSpecificInputValue["providerIdForAlternateRecovery"] = derived2.ProviderIdForAlternateRecovery;
+                                providerSpecificDetailsValue["providerIdForAlternateRecovery"] = derived2.ProviderIdForAlternateRecovery;
                             }
                         }
-                        if (input.Properties.ProviderSpecificInput is VMWareAzureV2FailoverProviderInput)
+                        if (input.Properties.ProviderSpecificDetails is VMWareAzureV2FailoverProviderInput)
                         {
-                            providerSpecificInputValue["__type"] = "VMWareAzureV2FailoverProviderInput";
-                            VMWareAzureV2FailoverProviderInput derived3 = ((VMWareAzureV2FailoverProviderInput)input.Properties.ProviderSpecificInput);
+                            providerSpecificDetailsValue["__type"] = "VMWareAzureV2FailoverProviderInput";
+                            VMWareAzureV2FailoverProviderInput derived3 = ((VMWareAzureV2FailoverProviderInput)input.Properties.ProviderSpecificDetails);
                             
                             if (derived3.VaultLocation != null)
                             {
-                                providerSpecificInputValue["vaultLocation"] = derived3.VaultLocation;
+                                providerSpecificDetailsValue["vaultLocation"] = derived3.VaultLocation;
                             }
                             
                             if (derived3.RecoveryPointId != null)
                             {
-                                providerSpecificInputValue["recoveryPointId"] = derived3.RecoveryPointId;
+                                providerSpecificDetailsValue["recoveryPointId"] = derived3.RecoveryPointId;
                             }
                         }
                     }
@@ -1189,94 +1189,94 @@ namespace Microsoft.Azure.Management.SiteRecovery
                         propertiesValue["failoverDirection"] = input.Properties.FailoverDirection;
                     }
                     
-                    if (input.Properties.ProviderConfigurationSettings != null)
+                    if (input.Properties.ProviderSpecificDetails != null)
                     {
-                        JObject providerConfigurationSettingsValue = new JObject();
-                        propertiesValue["providerConfigurationSettings"] = providerConfigurationSettingsValue;
-                        if (input.Properties.ProviderConfigurationSettings is HyperVReplicaAzureReprotectInput)
+                        JObject providerSpecificDetailsValue = new JObject();
+                        propertiesValue["providerSpecificDetails"] = providerSpecificDetailsValue;
+                        if (input.Properties.ProviderSpecificDetails is HyperVReplicaAzureReprotectInput)
                         {
-                            providerConfigurationSettingsValue["__type"] = "HyperVReplicaAzureReprotectInput";
-                            HyperVReplicaAzureReprotectInput derived = ((HyperVReplicaAzureReprotectInput)input.Properties.ProviderConfigurationSettings);
+                            providerSpecificDetailsValue["__type"] = "HyperVReplicaAzureReprotectInput";
+                            HyperVReplicaAzureReprotectInput derived = ((HyperVReplicaAzureReprotectInput)input.Properties.ProviderSpecificDetails);
                             
                             if (derived.HvHostVmId != null)
                             {
-                                providerConfigurationSettingsValue["hvHostVmId"] = derived.HvHostVmId;
+                                providerSpecificDetailsValue["hvHostVmId"] = derived.HvHostVmId;
                             }
                             
                             if (derived.VmName != null)
                             {
-                                providerConfigurationSettingsValue["vmName"] = derived.VmName;
+                                providerSpecificDetailsValue["vmName"] = derived.VmName;
                             }
                             
                             if (derived.OSType != null)
                             {
-                                providerConfigurationSettingsValue["osType"] = derived.OSType;
+                                providerSpecificDetailsValue["osType"] = derived.OSType;
                             }
                             
                             if (derived.VHDId != null)
                             {
-                                providerConfigurationSettingsValue["vHDId"] = derived.VHDId;
+                                providerSpecificDetailsValue["vHDId"] = derived.VHDId;
                             }
                             
                             if (derived.StorageAccountId != null)
                             {
-                                providerConfigurationSettingsValue["storageAccountId"] = derived.StorageAccountId;
+                                providerSpecificDetailsValue["storageAccountId"] = derived.StorageAccountId;
                             }
                         }
-                        if (input.Properties.ProviderConfigurationSettings is VMwareAzureV2ReprotectInput)
+                        if (input.Properties.ProviderSpecificDetails is VMwareAzureV2ReprotectInput)
                         {
-                            providerConfigurationSettingsValue["__type"] = "VMwareAzureV2ReprotectInput";
-                            VMwareAzureV2ReprotectInput derived2 = ((VMwareAzureV2ReprotectInput)input.Properties.ProviderConfigurationSettings);
+                            providerSpecificDetailsValue["__type"] = "VMwareAzureV2ReprotectInput";
+                            VMwareAzureV2ReprotectInput derived2 = ((VMwareAzureV2ReprotectInput)input.Properties.ProviderSpecificDetails);
                             
                             if (derived2.AgentGeneratedVmId != null)
                             {
-                                providerConfigurationSettingsValue["agentGeneratedVmId"] = derived2.AgentGeneratedVmId;
+                                providerSpecificDetailsValue["agentGeneratedVmId"] = derived2.AgentGeneratedVmId;
                             }
                             
                             if (derived2.PlanName != null)
                             {
-                                providerConfigurationSettingsValue["planName"] = derived2.PlanName;
+                                providerSpecificDetailsValue["planName"] = derived2.PlanName;
                             }
                             
                             if (derived2.ProcessServerId != null)
                             {
-                                providerConfigurationSettingsValue["processServerId"] = derived2.ProcessServerId;
+                                providerSpecificDetailsValue["processServerId"] = derived2.ProcessServerId;
                             }
                             
                             if (derived2.MasterTargetId != null)
                             {
-                                providerConfigurationSettingsValue["masterTargetId"] = derived2.MasterTargetId;
+                                providerSpecificDetailsValue["masterTargetId"] = derived2.MasterTargetId;
                             }
                             
                             if (derived2.RetentionDrive != null)
                             {
-                                providerConfigurationSettingsValue["retentionDrive"] = derived2.RetentionDrive;
+                                providerSpecificDetailsValue["retentionDrive"] = derived2.RetentionDrive;
                             }
                             
                             if (derived2.PSIpAddress != null)
                             {
-                                providerConfigurationSettingsValue["psIpAddress"] = derived2.PSIpAddress;
+                                providerSpecificDetailsValue["psIpAddress"] = derived2.PSIpAddress;
                             }
                             
                             if (derived2.UseNatIPFor != null)
                             {
-                                providerConfigurationSettingsValue["useNatIPFor"] = derived2.UseNatIPFor;
+                                providerSpecificDetailsValue["useNatIPFor"] = derived2.UseNatIPFor;
                             }
                             
                             if (derived2.DiskMap != null)
                             {
-                                providerConfigurationSettingsValue["diskMap"] = derived2.DiskMap.ToString();
+                                providerSpecificDetailsValue["diskMap"] = derived2.DiskMap.ToString();
                             }
                             
-                            providerConfigurationSettingsValue["recoveryPointThreshold"] = derived2.RecoveryPointThreshold;
+                            providerSpecificDetailsValue["recoveryPointThreshold"] = derived2.RecoveryPointThreshold;
                             
-                            providerConfigurationSettingsValue["recoveryPointHistory"] = derived2.RecoveryPointHistory;
+                            providerSpecificDetailsValue["recoveryPointHistory"] = derived2.RecoveryPointHistory;
                             
-                            providerConfigurationSettingsValue["appConsistentFrequency"] = derived2.AppConsistentFrequency;
+                            providerSpecificDetailsValue["appConsistentFrequency"] = derived2.AppConsistentFrequency;
                             
                             if (derived2.MultiVmSyncStatus != null)
                             {
-                                providerConfigurationSettingsValue["multiVmSyncStatus"] = derived2.MultiVmSyncStatus;
+                                providerSpecificDetailsValue["multiVmSyncStatus"] = derived2.MultiVmSyncStatus;
                             }
                         }
                     }
@@ -1501,63 +1501,63 @@ namespace Microsoft.Azure.Management.SiteRecovery
                         propertiesValue["networkId"] = input.Properties.NetworkId;
                     }
                     
-                    if (input.Properties.ProviderSpecificInput != null)
+                    if (input.Properties.ProviderSpecificDetails != null)
                     {
-                        JObject providerSpecificInputValue = new JObject();
-                        propertiesValue["providerSpecificInput"] = providerSpecificInputValue;
-                        if (input.Properties.ProviderSpecificInput is HyperVReplicaAzureFailoverProviderInput)
+                        JObject providerSpecificDetailsValue = new JObject();
+                        propertiesValue["providerSpecificDetails"] = providerSpecificDetailsValue;
+                        if (input.Properties.ProviderSpecificDetails is HyperVReplicaAzureFailoverProviderInput)
                         {
-                            providerSpecificInputValue["__type"] = "HyperVReplicaAzureFailoverProviderInput";
-                            HyperVReplicaAzureFailoverProviderInput derived = ((HyperVReplicaAzureFailoverProviderInput)input.Properties.ProviderSpecificInput);
+                            providerSpecificDetailsValue["__type"] = "HyperVReplicaAzureFailoverProviderInput";
+                            HyperVReplicaAzureFailoverProviderInput derived = ((HyperVReplicaAzureFailoverProviderInput)input.Properties.ProviderSpecificDetails);
                             
                             if (derived.VaultLocation != null)
                             {
-                                providerSpecificInputValue["vaultLocation"] = derived.VaultLocation;
+                                providerSpecificDetailsValue["vaultLocation"] = derived.VaultLocation;
                             }
                             
                             if (derived.PrimaryKekCertificatePfx != null)
                             {
-                                providerSpecificInputValue["primaryKekCertificatePfx"] = derived.PrimaryKekCertificatePfx;
+                                providerSpecificDetailsValue["primaryKekCertificatePfx"] = derived.PrimaryKekCertificatePfx;
                             }
                             
                             if (derived.SecondaryKekCertificatePfx != null)
                             {
-                                providerSpecificInputValue["secondaryKekCertificatePfx"] = derived.SecondaryKekCertificatePfx;
+                                providerSpecificDetailsValue["secondaryKekCertificatePfx"] = derived.SecondaryKekCertificatePfx;
                             }
                         }
-                        if (input.Properties.ProviderSpecificInput is HyperVReplicaAzureFailbackProviderInput)
+                        if (input.Properties.ProviderSpecificDetails is HyperVReplicaAzureFailbackProviderInput)
                         {
-                            providerSpecificInputValue["__type"] = "HyperVReplicaAzureFailbackProviderInput";
-                            HyperVReplicaAzureFailbackProviderInput derived2 = ((HyperVReplicaAzureFailbackProviderInput)input.Properties.ProviderSpecificInput);
+                            providerSpecificDetailsValue["__type"] = "HyperVReplicaAzureFailbackProviderInput";
+                            HyperVReplicaAzureFailbackProviderInput derived2 = ((HyperVReplicaAzureFailbackProviderInput)input.Properties.ProviderSpecificDetails);
                             
                             if (derived2.DataSyncOption != null)
                             {
-                                providerSpecificInputValue["dataSyncOption"] = derived2.DataSyncOption;
+                                providerSpecificDetailsValue["dataSyncOption"] = derived2.DataSyncOption;
                             }
                             
                             if (derived2.RecoveryVmCreationOption != null)
                             {
-                                providerSpecificInputValue["recoveryVmCreationOption"] = derived2.RecoveryVmCreationOption;
+                                providerSpecificDetailsValue["recoveryVmCreationOption"] = derived2.RecoveryVmCreationOption;
                             }
                             
                             if (derived2.ProviderIdForAlternateRecovery != null)
                             {
-                                providerSpecificInputValue["providerIdForAlternateRecovery"] = derived2.ProviderIdForAlternateRecovery;
+                                providerSpecificDetailsValue["providerIdForAlternateRecovery"] = derived2.ProviderIdForAlternateRecovery;
                             }
                         }
-                        if (input.Properties.ProviderSpecificInput is VMWareAzureV2FailoverProviderInput)
+                        if (input.Properties.ProviderSpecificDetails is VMWareAzureV2FailoverProviderInput)
                         {
-                            providerSpecificInputValue["__type"] = "VMWareAzureV2FailoverProviderInput";
-                            VMWareAzureV2FailoverProviderInput derived3 = ((VMWareAzureV2FailoverProviderInput)input.Properties.ProviderSpecificInput);
+                            providerSpecificDetailsValue["__type"] = "VMWareAzureV2FailoverProviderInput";
+                            VMWareAzureV2FailoverProviderInput derived3 = ((VMWareAzureV2FailoverProviderInput)input.Properties.ProviderSpecificDetails);
                             
                             if (derived3.VaultLocation != null)
                             {
-                                providerSpecificInputValue["vaultLocation"] = derived3.VaultLocation;
+                                providerSpecificDetailsValue["vaultLocation"] = derived3.VaultLocation;
                             }
                             
                             if (derived3.RecoveryPointId != null)
                             {
-                                providerSpecificInputValue["recoveryPointId"] = derived3.RecoveryPointId;
+                                providerSpecificDetailsValue["recoveryPointId"] = derived3.RecoveryPointId;
                             }
                         }
                     }
@@ -1777,63 +1777,63 @@ namespace Microsoft.Azure.Management.SiteRecovery
                         propertiesValue["sourceSiteOperations"] = input.Properties.SourceSiteOperations;
                     }
                     
-                    if (input.Properties.ProviderSpecificInput != null)
+                    if (input.Properties.ProviderSpecificDetails != null)
                     {
-                        JObject providerSpecificInputValue = new JObject();
-                        propertiesValue["providerSpecificInput"] = providerSpecificInputValue;
-                        if (input.Properties.ProviderSpecificInput is HyperVReplicaAzureFailoverProviderInput)
+                        JObject providerSpecificDetailsValue = new JObject();
+                        propertiesValue["ProviderSpecificDetails"] = providerSpecificDetailsValue;
+                        if (input.Properties.ProviderSpecificDetails is HyperVReplicaAzureFailoverProviderInput)
                         {
-                            providerSpecificInputValue["__type"] = "HyperVReplicaAzureFailoverProviderInput";
-                            HyperVReplicaAzureFailoverProviderInput derived = ((HyperVReplicaAzureFailoverProviderInput)input.Properties.ProviderSpecificInput);
+                            providerSpecificDetailsValue["__type"] = "HyperVReplicaAzureFailoverProviderInput";
+                            HyperVReplicaAzureFailoverProviderInput derived = ((HyperVReplicaAzureFailoverProviderInput)input.Properties.ProviderSpecificDetails);
                             
                             if (derived.VaultLocation != null)
                             {
-                                providerSpecificInputValue["vaultLocation"] = derived.VaultLocation;
+                                providerSpecificDetailsValue["vaultLocation"] = derived.VaultLocation;
                             }
                             
                             if (derived.PrimaryKekCertificatePfx != null)
                             {
-                                providerSpecificInputValue["primaryKekCertificatePfx"] = derived.PrimaryKekCertificatePfx;
+                                providerSpecificDetailsValue["primaryKekCertificatePfx"] = derived.PrimaryKekCertificatePfx;
                             }
                             
                             if (derived.SecondaryKekCertificatePfx != null)
                             {
-                                providerSpecificInputValue["secondaryKekCertificatePfx"] = derived.SecondaryKekCertificatePfx;
+                                providerSpecificDetailsValue["secondaryKekCertificatePfx"] = derived.SecondaryKekCertificatePfx;
                             }
                         }
-                        if (input.Properties.ProviderSpecificInput is HyperVReplicaAzureFailbackProviderInput)
+                        if (input.Properties.ProviderSpecificDetails is HyperVReplicaAzureFailbackProviderInput)
                         {
-                            providerSpecificInputValue["__type"] = "HyperVReplicaAzureFailbackProviderInput";
-                            HyperVReplicaAzureFailbackProviderInput derived2 = ((HyperVReplicaAzureFailbackProviderInput)input.Properties.ProviderSpecificInput);
+                            providerSpecificDetailsValue["__type"] = "HyperVReplicaAzureFailbackProviderInput";
+                            HyperVReplicaAzureFailbackProviderInput derived2 = ((HyperVReplicaAzureFailbackProviderInput)input.Properties.ProviderSpecificDetails);
                             
                             if (derived2.DataSyncOption != null)
                             {
-                                providerSpecificInputValue["dataSyncOption"] = derived2.DataSyncOption;
+                                providerSpecificDetailsValue["dataSyncOption"] = derived2.DataSyncOption;
                             }
                             
                             if (derived2.RecoveryVmCreationOption != null)
                             {
-                                providerSpecificInputValue["recoveryVmCreationOption"] = derived2.RecoveryVmCreationOption;
+                                providerSpecificDetailsValue["recoveryVmCreationOption"] = derived2.RecoveryVmCreationOption;
                             }
                             
                             if (derived2.ProviderIdForAlternateRecovery != null)
                             {
-                                providerSpecificInputValue["providerIdForAlternateRecovery"] = derived2.ProviderIdForAlternateRecovery;
+                                providerSpecificDetailsValue["providerIdForAlternateRecovery"] = derived2.ProviderIdForAlternateRecovery;
                             }
                         }
-                        if (input.Properties.ProviderSpecificInput is VMWareAzureV2FailoverProviderInput)
+                        if (input.Properties.ProviderSpecificDetails is VMWareAzureV2FailoverProviderInput)
                         {
-                            providerSpecificInputValue["__type"] = "VMWareAzureV2FailoverProviderInput";
-                            VMWareAzureV2FailoverProviderInput derived3 = ((VMWareAzureV2FailoverProviderInput)input.Properties.ProviderSpecificInput);
+                            providerSpecificDetailsValue["__type"] = "VMWareAzureV2FailoverProviderInput";
+                            VMWareAzureV2FailoverProviderInput derived3 = ((VMWareAzureV2FailoverProviderInput)input.Properties.ProviderSpecificDetails);
                             
                             if (derived3.VaultLocation != null)
                             {
-                                providerSpecificInputValue["vaultLocation"] = derived3.VaultLocation;
+                                providerSpecificDetailsValue["vaultLocation"] = derived3.VaultLocation;
                             }
                             
                             if (derived3.RecoveryPointId != null)
                             {
-                                providerSpecificInputValue["recoveryPointId"] = derived3.RecoveryPointId;
+                                providerSpecificDetailsValue["recoveryPointId"] = derived3.RecoveryPointId;
                             }
                         }
                     }
@@ -2517,11 +2517,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.ProtectedItemType = protectedItemTypeInstance;
                                 }
                                 
-                                JToken protectedItemSourceIdValue = propertiesValue["protectedItemSourceId"];
-                                if (protectedItemSourceIdValue != null && protectedItemSourceIdValue.Type != JTokenType.Null)
+                                JToken protectedItemIdValue = propertiesValue["protectedItemId"];
+                                if (protectedItemIdValue != null && protectedItemIdValue.Type != JTokenType.Null)
                                 {
-                                    string protectedItemSourceIdInstance = ((string)protectedItemSourceIdValue);
-                                    propertiesInstance.ProtectedItemSourceId = protectedItemSourceIdInstance;
+                                    string protectedItemIdInstance = ((string)protectedItemIdValue);
+                                    propertiesInstance.ProtectedItemId = protectedItemIdInstance;
                                 }
                                 
                                 JToken recoveryServicesProviderNameValue = propertiesValue["recoveryServicesProviderName"];
@@ -2559,11 +2559,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.RecoveryProtectionContainerFriendlyName = recoveryProtectionContainerFriendlyNameInstance;
                                 }
                                 
-                                JToken protectionStatusValue = propertiesValue["protectionStatus"];
-                                if (protectionStatusValue != null && protectionStatusValue.Type != JTokenType.Null)
+                                JToken protectionStateValue = propertiesValue["protectionState"];
+                                if (protectionStateValue != null && protectionStateValue.Type != JTokenType.Null)
                                 {
-                                    string protectionStatusInstance = ((string)protectionStatusValue);
-                                    propertiesInstance.ProtectionStatus = protectionStatusInstance;
+                                    string protectionStateInstance = ((string)protectionStateValue);
+                                    propertiesInstance.ProtectionState = protectionStateInstance;
                                 }
                                 
                                 JToken activeLocationValue = propertiesValue["activeLocation"];
@@ -2571,13 +2571,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 {
                                     string activeLocationInstance = ((string)activeLocationValue);
                                     propertiesInstance.ActiveLocation = activeLocationInstance;
-                                }
-                                
-                                JToken testFailoverStateDescriptionValue = propertiesValue["testFailoverStateDescription"];
-                                if (testFailoverStateDescriptionValue != null && testFailoverStateDescriptionValue.Type != JTokenType.Null)
-                                {
-                                    string testFailoverStateDescriptionInstance = ((string)testFailoverStateDescriptionValue);
-                                    propertiesInstance.TestFailoverStateDescription = testFailoverStateDescriptionInstance;
                                 }
                                 
                                 JToken allowedOperationsArray = propertiesValue["allowedOperations"];
@@ -2725,28 +2718,28 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     }
                                 }
                                 
-                                JToken customSettingValue = propertiesValue["customSetting"];
-                                if (customSettingValue != null && customSettingValue.Type != JTokenType.Null)
+                                JToken providerSpecificDetailsValue = propertiesValue["providerSpecificDetails"];
+                                if (providerSpecificDetailsValue != null && providerSpecificDetailsValue.Type != JTokenType.Null)
                                 {
-                                    string typeName = ((string)customSettingValue["__type"]);
-                                    if (typeName == "HyperVReplicaProviderSpecificSettings")
+                                    string typeName = ((string)providerSpecificDetailsValue["__type"]);
+                                    if (typeName == "HyperVReplicaReplicationDetails")
                                     {
-                                        HyperVReplicaProviderSpecificSettings hyperVReplicaProviderSpecificSettingsInstance = new HyperVReplicaProviderSpecificSettings();
+                                        HyperVReplicaReplicationDetails hyperVReplicaReplicationDetailsInstance = new HyperVReplicaReplicationDetails();
                                         
-                                        JToken lastReplicatedTimeValue = customSettingValue["lastReplicatedTime"];
+                                        JToken lastReplicatedTimeValue = providerSpecificDetailsValue["lastReplicatedTime"];
                                         if (lastReplicatedTimeValue != null && lastReplicatedTimeValue.Type != JTokenType.Null)
                                         {
                                             string lastReplicatedTimeInstance = ((string)lastReplicatedTimeValue);
-                                            hyperVReplicaProviderSpecificSettingsInstance.LastReplicatedTime = lastReplicatedTimeInstance;
+                                            hyperVReplicaReplicationDetailsInstance.LastReplicatedTime = lastReplicatedTimeInstance;
                                         }
                                         
-                                        JToken vmNicsArray = customSettingValue["vmNics"];
+                                        JToken vmNicsArray = providerSpecificDetailsValue["vmNics"];
                                         if (vmNicsArray != null && vmNicsArray.Type != JTokenType.Null)
                                         {
                                             foreach (JToken vmNicsValue in ((JArray)vmNicsArray))
                                             {
                                                 VMNicDetails vMNicDetailsInstance = new VMNicDetails();
-                                                hyperVReplicaProviderSpecificSettingsInstance.VmNics.Add(vMNicDetailsInstance);
+                                                hyperVReplicaReplicationDetailsInstance.VmNics.Add(vMNicDetailsInstance);
                                                 
                                                 JToken nicIdValue = vmNicsValue["nicId"];
                                                 if (nicIdValue != null && nicIdValue.Type != JTokenType.Null)
@@ -2792,11 +2785,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken initialReplicationDetailsValue = customSettingValue["initialReplicationDetails"];
+                                        JToken initialReplicationDetailsValue = providerSpecificDetailsValue["initialReplicationDetails"];
                                         if (initialReplicationDetailsValue != null && initialReplicationDetailsValue.Type != JTokenType.Null)
                                         {
                                             InitialReplicationDetails initialReplicationDetailsInstance = new InitialReplicationDetails();
-                                            hyperVReplicaProviderSpecificSettingsInstance.InitialReplicationDetails = initialReplicationDetailsInstance;
+                                            hyperVReplicaReplicationDetailsInstance.InitialReplicationDetails = initialReplicationDetailsInstance;
                                             
                                             JToken initialReplicationTypeValue = initialReplicationDetailsValue["initialReplicationType"];
                                             if (initialReplicationTypeValue != null && initialReplicationTypeValue.Type != JTokenType.Null)
@@ -2813,13 +2806,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken vMDiskDetailsArray = customSettingValue["vMDiskDetails"];
+                                        JToken vMDiskDetailsArray = providerSpecificDetailsValue["vMDiskDetails"];
                                         if (vMDiskDetailsArray != null && vMDiskDetailsArray.Type != JTokenType.Null)
                                         {
                                             foreach (JToken vMDiskDetailsValue in ((JArray)vMDiskDetailsArray))
                                             {
                                                 DiskDetails diskDetailsInstance = new DiskDetails();
-                                                hyperVReplicaProviderSpecificSettingsInstance.VMDiskDetails.Add(diskDetailsInstance);
+                                                hyperVReplicaReplicationDetailsInstance.VMDiskDetails.Add(diskDetailsInstance);
                                                 
                                                 JToken maxSizeMBValue = vMDiskDetailsValue["maxSizeMB"];
                                                 if (maxSizeMBValue != null && maxSizeMBValue.Type != JTokenType.Null)
@@ -2828,154 +2821,154 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     diskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
                                                 }
                                                 
-                                                JToken vHDStatusValue = vMDiskDetailsValue["vHDStatus"];
-                                                if (vHDStatusValue != null && vHDStatusValue.Type != JTokenType.Null)
+                                                JToken vhdTypeValue = vMDiskDetailsValue["vhdType"];
+                                                if (vhdTypeValue != null && vhdTypeValue.Type != JTokenType.Null)
                                                 {
-                                                    string vHDStatusInstance = ((string)vHDStatusValue);
-                                                    diskDetailsInstance.VHDStatus = vHDStatusInstance;
+                                                    string vhdTypeInstance = ((string)vhdTypeValue);
+                                                    diskDetailsInstance.VhdType = vhdTypeInstance;
                                                 }
                                                 
-                                                JToken vHDIdValue = vMDiskDetailsValue["vHDId"];
-                                                if (vHDIdValue != null && vHDIdValue.Type != JTokenType.Null)
+                                                JToken vhdIdValue = vMDiskDetailsValue["vhdId"];
+                                                if (vhdIdValue != null && vhdIdValue.Type != JTokenType.Null)
                                                 {
-                                                    string vHDIdInstance = ((string)vHDIdValue);
-                                                    diskDetailsInstance.VHDId = vHDIdInstance;
+                                                    string vhdIdInstance = ((string)vhdIdValue);
+                                                    diskDetailsInstance.VhdId = vhdIdInstance;
                                                 }
                                                 
-                                                JToken vHDNameValue = vMDiskDetailsValue["vHDName"];
-                                                if (vHDNameValue != null && vHDNameValue.Type != JTokenType.Null)
+                                                JToken vhdNameValue = vMDiskDetailsValue["vhdName"];
+                                                if (vhdNameValue != null && vhdNameValue.Type != JTokenType.Null)
                                                 {
-                                                    string vHDNameInstance = ((string)vHDNameValue);
-                                                    diskDetailsInstance.VHDName = vHDNameInstance;
+                                                    string vhdNameInstance = ((string)vhdNameValue);
+                                                    diskDetailsInstance.VhdName = vhdNameInstance;
                                                 }
                                             }
                                         }
                                         
-                                        JToken typeValue = customSettingValue["__type"];
+                                        JToken typeValue = providerSpecificDetailsValue["__type"];
                                         if (typeValue != null && typeValue.Type != JTokenType.Null)
                                         {
                                             string typeInstance = ((string)typeValue);
-                                            hyperVReplicaProviderSpecificSettingsInstance.Type = typeInstance;
+                                            hyperVReplicaReplicationDetailsInstance.Type = typeInstance;
                                         }
-                                        propertiesInstance.CustomSettings = hyperVReplicaProviderSpecificSettingsInstance;
+                                        propertiesInstance.ProviderSpecificDetails = hyperVReplicaReplicationDetailsInstance;
                                     }
                                     if (typeName == "VMwareAzureV2ProviderSpecificSettings")
                                     {
                                         VMwareAzureV2ProviderSpecificSettings vMwareAzureV2ProviderSpecificSettingsInstance = new VMwareAzureV2ProviderSpecificSettings();
                                         
-                                        JToken protectionStageValue = customSettingValue["protectionStage"];
+                                        JToken protectionStageValue = providerSpecificDetailsValue["protectionStage"];
                                         if (protectionStageValue != null && protectionStageValue.Type != JTokenType.Null)
                                         {
                                             string protectionStageInstance = ((string)protectionStageValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.ProtectionStage = protectionStageInstance;
                                         }
                                         
-                                        JToken healthErrorCodeValue = customSettingValue["healthErrorCode"];
+                                        JToken healthErrorCodeValue = providerSpecificDetailsValue["healthErrorCode"];
                                         if (healthErrorCodeValue != null && healthErrorCodeValue.Type != JTokenType.Null)
                                         {
                                             string healthErrorCodeInstance = ((string)healthErrorCodeValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.HealthErrorCode = healthErrorCodeInstance;
                                         }
                                         
-                                        JToken resyncRequiredValue = customSettingValue["resyncRequired"];
+                                        JToken resyncRequiredValue = providerSpecificDetailsValue["resyncRequired"];
                                         if (resyncRequiredValue != null && resyncRequiredValue.Type != JTokenType.Null)
                                         {
                                             bool resyncRequiredInstance = ((bool)resyncRequiredValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.ResyncRequired = resyncRequiredInstance;
                                         }
                                         
-                                        JToken resyncProgressPercentageValue = customSettingValue["resyncProgressPercentage"];
+                                        JToken resyncProgressPercentageValue = providerSpecificDetailsValue["resyncProgressPercentage"];
                                         if (resyncProgressPercentageValue != null && resyncProgressPercentageValue.Type != JTokenType.Null)
                                         {
                                             int resyncProgressPercentageInstance = ((int)resyncProgressPercentageValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.ResyncProgressPercentage = resyncProgressPercentageInstance;
                                         }
                                         
-                                        JToken rpoInSecondsValue = customSettingValue["rpoInSeconds"];
+                                        JToken rpoInSecondsValue = providerSpecificDetailsValue["rpoInSeconds"];
                                         if (rpoInSecondsValue != null && rpoInSecondsValue.Type != JTokenType.Null)
                                         {
                                             long rpoInSecondsInstance = ((long)rpoInSecondsValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.RpoInSeconds = rpoInSecondsInstance;
                                         }
                                         
-                                        JToken compressedDataRateInMBValue = customSettingValue["compressedDataRateInMB"];
+                                        JToken compressedDataRateInMBValue = providerSpecificDetailsValue["compressedDataRateInMB"];
                                         if (compressedDataRateInMBValue != null && compressedDataRateInMBValue.Type != JTokenType.Null)
                                         {
                                             double compressedDataRateInMBInstance = ((double)compressedDataRateInMBValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.CompressedDataRateInMB = compressedDataRateInMBInstance;
                                         }
                                         
-                                        JToken uncompressedDataRateInMBValue = customSettingValue["uncompressedDataRateInMB"];
+                                        JToken uncompressedDataRateInMBValue = providerSpecificDetailsValue["uncompressedDataRateInMB"];
                                         if (uncompressedDataRateInMBValue != null && uncompressedDataRateInMBValue.Type != JTokenType.Null)
                                         {
                                             double uncompressedDataRateInMBInstance = ((double)uncompressedDataRateInMBValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.UncompressedDataRateInMB = uncompressedDataRateInMBInstance;
                                         }
                                         
-                                        JToken ipAddressValue = customSettingValue["ipAddress"];
+                                        JToken ipAddressValue = providerSpecificDetailsValue["ipAddress"];
                                         if (ipAddressValue != null && ipAddressValue.Type != JTokenType.Null)
                                         {
                                             string ipAddressInstance = ((string)ipAddressValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.IpAddress = ipAddressInstance;
                                         }
                                         
-                                        JToken agentVersionValue = customSettingValue["agentVersion"];
+                                        JToken agentVersionValue = providerSpecificDetailsValue["agentVersion"];
                                         if (agentVersionValue != null && agentVersionValue.Type != JTokenType.Null)
                                         {
                                             string agentVersionInstance = ((string)agentVersionValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.AgentVersion = agentVersionInstance;
                                         }
                                         
-                                        JToken latestUpdateVersionValue = customSettingValue["latestUpdateVersion"];
+                                        JToken latestUpdateVersionValue = providerSpecificDetailsValue["latestUpdateVersion"];
                                         if (latestUpdateVersionValue != null && latestUpdateVersionValue.Type != JTokenType.Null)
                                         {
                                             string latestUpdateVersionInstance = ((string)latestUpdateVersionValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.LatestUpdateVersion = latestUpdateVersionInstance;
                                         }
                                         
-                                        JToken isAgentUpdateRequiredValue = customSettingValue["isAgentUpdateRequired"];
+                                        JToken isAgentUpdateRequiredValue = providerSpecificDetailsValue["isAgentUpdateRequired"];
                                         if (isAgentUpdateRequiredValue != null && isAgentUpdateRequiredValue.Type != JTokenType.Null)
                                         {
                                             bool isAgentUpdateRequiredInstance = ((bool)isAgentUpdateRequiredValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.IsAgentUpdateRequired = isAgentUpdateRequiredInstance;
                                         }
                                         
-                                        JToken isRebootAfterUpdateRequiredValue = customSettingValue["isRebootAfterUpdateRequired"];
+                                        JToken isRebootAfterUpdateRequiredValue = providerSpecificDetailsValue["isRebootAfterUpdateRequired"];
                                         if (isRebootAfterUpdateRequiredValue != null && isRebootAfterUpdateRequiredValue.Type != JTokenType.Null)
                                         {
                                             bool isRebootAfterUpdateRequiredInstance = ((bool)isRebootAfterUpdateRequiredValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.IsRebootAfterUpdateRequired = isRebootAfterUpdateRequiredInstance;
                                         }
                                         
-                                        JToken lastHeartbeatValue = customSettingValue["lastHeartbeat"];
+                                        JToken lastHeartbeatValue = providerSpecificDetailsValue["lastHeartbeat"];
                                         if (lastHeartbeatValue != null && lastHeartbeatValue.Type != JTokenType.Null)
                                         {
                                             DateTime lastHeartbeatInstance = ((DateTime)lastHeartbeatValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.LastHeartbeat = lastHeartbeatInstance;
                                         }
                                         
-                                        JToken processServerIdValue = customSettingValue["processServerId"];
+                                        JToken processServerIdValue = providerSpecificDetailsValue["processServerId"];
                                         if (processServerIdValue != null && processServerIdValue.Type != JTokenType.Null)
                                         {
                                             string processServerIdInstance = ((string)processServerIdValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.ProcessServerId = processServerIdInstance;
                                         }
                                         
-                                        JToken multiVmGroupIdValue = customSettingValue["multiVmGroupId"];
+                                        JToken multiVmGroupIdValue = providerSpecificDetailsValue["multiVmGroupId"];
                                         if (multiVmGroupIdValue != null && multiVmGroupIdValue.Type != JTokenType.Null)
                                         {
                                             string multiVmGroupIdInstance = ((string)multiVmGroupIdValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.MultiVmGroupId = multiVmGroupIdInstance;
                                         }
                                         
-                                        JToken multiVmGroupNameValue = customSettingValue["multiVmGroupName"];
+                                        JToken multiVmGroupNameValue = providerSpecificDetailsValue["multiVmGroupName"];
                                         if (multiVmGroupNameValue != null && multiVmGroupNameValue.Type != JTokenType.Null)
                                         {
                                             string multiVmGroupNameInstance = ((string)multiVmGroupNameValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.MultiVmGroupName = multiVmGroupNameInstance;
                                         }
                                         
-                                        JToken protectedVolumesArray = customSettingValue["protectedVolumes"];
+                                        JToken protectedVolumesArray = providerSpecificDetailsValue["protectedVolumes"];
                                         if (protectedVolumesArray != null && protectedVolumesArray.Type != JTokenType.Null)
                                         {
                                             foreach (JToken protectedVolumesValue in ((JArray)protectedVolumesArray))
@@ -3076,94 +3069,94 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken volumeResizedValue2 = customSettingValue["volumeResized"];
+                                        JToken volumeResizedValue2 = providerSpecificDetailsValue["volumeResized"];
                                         if (volumeResizedValue2 != null && volumeResizedValue2.Type != JTokenType.Null)
                                         {
                                             bool volumeResizedInstance2 = ((bool)volumeResizedValue2);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.VolumeResized = volumeResizedInstance2;
                                         }
                                         
-                                        JToken masterTargetIdValue = customSettingValue["masterTargetId"];
+                                        JToken masterTargetIdValue = providerSpecificDetailsValue["masterTargetId"];
                                         if (masterTargetIdValue != null && masterTargetIdValue.Type != JTokenType.Null)
                                         {
                                             string masterTargetIdInstance = ((string)masterTargetIdValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.MasterTargetId = masterTargetIdInstance;
                                         }
                                         
-                                        JToken sourceVmCPUCountValue = customSettingValue["sourceVmCPUCount"];
+                                        JToken sourceVmCPUCountValue = providerSpecificDetailsValue["sourceVmCPUCount"];
                                         if (sourceVmCPUCountValue != null && sourceVmCPUCountValue.Type != JTokenType.Null)
                                         {
                                             int sourceVmCPUCountInstance = ((int)sourceVmCPUCountValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.SourceVmCPUCount = sourceVmCPUCountInstance;
                                         }
                                         
-                                        JToken sourceVmRAMSizeInMBValue = customSettingValue["sourceVmRAMSizeInMB"];
+                                        JToken sourceVmRAMSizeInMBValue = providerSpecificDetailsValue["sourceVmRAMSizeInMB"];
                                         if (sourceVmRAMSizeInMBValue != null && sourceVmRAMSizeInMBValue.Type != JTokenType.Null)
                                         {
                                             int sourceVmRAMSizeInMBInstance = ((int)sourceVmRAMSizeInMBValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.SourceVmRAMSizeInMB = sourceVmRAMSizeInMBInstance;
                                         }
                                         
-                                        JToken osTypeValue = customSettingValue["osType"];
+                                        JToken osTypeValue = providerSpecificDetailsValue["osType"];
                                         if (osTypeValue != null && osTypeValue.Type != JTokenType.Null)
                                         {
                                             string osTypeInstance = ((string)osTypeValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.OSType = osTypeInstance;
                                         }
                                         
-                                        JToken vhdNameValue = customSettingValue["vhdName"];
-                                        if (vhdNameValue != null && vhdNameValue.Type != JTokenType.Null)
+                                        JToken vhdNameValue2 = providerSpecificDetailsValue["vhdName"];
+                                        if (vhdNameValue2 != null && vhdNameValue2.Type != JTokenType.Null)
                                         {
-                                            string vhdNameInstance = ((string)vhdNameValue);
-                                            vMwareAzureV2ProviderSpecificSettingsInstance.VHDName = vhdNameInstance;
+                                            string vhdNameInstance2 = ((string)vhdNameValue2);
+                                            vMwareAzureV2ProviderSpecificSettingsInstance.VHDName = vhdNameInstance2;
                                         }
                                         
-                                        JToken osDiskIdValue = customSettingValue["osDiskId"];
+                                        JToken osDiskIdValue = providerSpecificDetailsValue["osDiskId"];
                                         if (osDiskIdValue != null && osDiskIdValue.Type != JTokenType.Null)
                                         {
                                             string osDiskIdInstance = ((string)osDiskIdValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.OSDiskId = osDiskIdInstance;
                                         }
                                         
-                                        JToken typeValue2 = customSettingValue["__type"];
+                                        JToken typeValue2 = providerSpecificDetailsValue["__type"];
                                         if (typeValue2 != null && typeValue2.Type != JTokenType.Null)
                                         {
                                             string typeInstance2 = ((string)typeValue2);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.Type = typeInstance2;
                                         }
-                                        propertiesInstance.CustomSettings = vMwareAzureV2ProviderSpecificSettingsInstance;
+                                        propertiesInstance.ProviderSpecificDetails = vMwareAzureV2ProviderSpecificSettingsInstance;
                                     }
-                                    if (typeName == "HyperVReplicaAzureProviderSpecificSettings")
+                                    if (typeName == "HyperVReplicaAzureReplicationDetails")
                                     {
-                                        HyperVReplicaAzureProviderSpecificSettings hyperVReplicaAzureProviderSpecificSettingsInstance = new HyperVReplicaAzureProviderSpecificSettings();
+                                        HyperVReplicaAzureReplicationDetails hyperVReplicaAzureReplicationDetailsInstance = new HyperVReplicaAzureReplicationDetails();
                                         
-                                        JToken azureVMDiskDetailsArray = customSettingValue["azureVMDiskDetails"];
+                                        JToken azureVMDiskDetailsArray = providerSpecificDetailsValue["azureVMDiskDetails"];
                                         if (azureVMDiskDetailsArray != null && azureVMDiskDetailsArray.Type != JTokenType.Null)
                                         {
                                             foreach (JToken azureVMDiskDetailsValue in ((JArray)azureVMDiskDetailsArray))
                                             {
                                                 AzureVmDiskDetails azureVmDiskDetailsInstance = new AzureVmDiskDetails();
-                                                hyperVReplicaAzureProviderSpecificSettingsInstance.AzureVMDiskDetails.Add(azureVmDiskDetailsInstance);
+                                                hyperVReplicaAzureReplicationDetailsInstance.AzureVMDiskDetails.Add(azureVmDiskDetailsInstance);
                                                 
-                                                JToken vhdTypeValue = azureVMDiskDetailsValue["vhdType"];
-                                                if (vhdTypeValue != null && vhdTypeValue.Type != JTokenType.Null)
+                                                JToken vhdTypeValue2 = azureVMDiskDetailsValue["vhdType"];
+                                                if (vhdTypeValue2 != null && vhdTypeValue2.Type != JTokenType.Null)
                                                 {
-                                                    string vhdTypeInstance = ((string)vhdTypeValue);
-                                                    azureVmDiskDetailsInstance.VhdType = vhdTypeInstance;
+                                                    string vhdTypeInstance2 = ((string)vhdTypeValue2);
+                                                    azureVmDiskDetailsInstance.VhdType = vhdTypeInstance2;
                                                 }
                                                 
-                                                JToken vhdIdValue = azureVMDiskDetailsValue["vhdId"];
-                                                if (vhdIdValue != null && vhdIdValue.Type != JTokenType.Null)
+                                                JToken vhdIdValue2 = azureVMDiskDetailsValue["vhdId"];
+                                                if (vhdIdValue2 != null && vhdIdValue2.Type != JTokenType.Null)
                                                 {
-                                                    string vhdIdInstance = ((string)vhdIdValue);
-                                                    azureVmDiskDetailsInstance.VhdId = vhdIdInstance;
+                                                    string vhdIdInstance2 = ((string)vhdIdValue2);
+                                                    azureVmDiskDetailsInstance.VhdId = vhdIdInstance2;
                                                 }
                                                 
-                                                JToken vhdNameValue2 = azureVMDiskDetailsValue["vhdName"];
-                                                if (vhdNameValue2 != null && vhdNameValue2.Type != JTokenType.Null)
+                                                JToken vhdNameValue3 = azureVMDiskDetailsValue["vhdName"];
+                                                if (vhdNameValue3 != null && vhdNameValue3.Type != JTokenType.Null)
                                                 {
-                                                    string vhdNameInstance2 = ((string)vhdNameValue2);
-                                                    azureVmDiskDetailsInstance.VhdName = vhdNameInstance2;
+                                                    string vhdNameInstance3 = ((string)vhdNameValue3);
+                                                    azureVmDiskDetailsInstance.VhdName = vhdNameInstance3;
                                                 }
                                                 
                                                 JToken maxSizeMBValue2 = azureVMDiskDetailsValue["maxSizeMB"];
@@ -3173,11 +3166,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     azureVmDiskDetailsInstance.MaxSizeMB = maxSizeMBInstance2;
                                                 }
                                                 
-                                                JToken diskLocationValue = azureVMDiskDetailsValue["diskLocation"];
-                                                if (diskLocationValue != null && diskLocationValue.Type != JTokenType.Null)
+                                                JToken targetDiskLocationValue = azureVMDiskDetailsValue["targetDiskLocation"];
+                                                if (targetDiskLocationValue != null && targetDiskLocationValue.Type != JTokenType.Null)
                                                 {
-                                                    string diskLocationInstance = ((string)diskLocationValue);
-                                                    azureVmDiskDetailsInstance.DiskLocation = diskLocationInstance;
+                                                    string targetDiskLocationInstance = ((string)targetDiskLocationValue);
+                                                    azureVmDiskDetailsInstance.TargetDiskLocation = targetDiskLocationInstance;
                                                 }
                                                 
                                                 JToken lunIdValue = azureVMDiskDetailsValue["lunId"];
@@ -3187,55 +3180,55 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     azureVmDiskDetailsInstance.LunId = lunIdInstance;
                                                 }
                                                 
-                                                JToken primaryDiskCorelationIdValue = azureVMDiskDetailsValue["primaryDiskCorelationId"];
-                                                if (primaryDiskCorelationIdValue != null && primaryDiskCorelationIdValue.Type != JTokenType.Null)
+                                                JToken targetDiskNameValue = azureVMDiskDetailsValue["targetDiskName"];
+                                                if (targetDiskNameValue != null && targetDiskNameValue.Type != JTokenType.Null)
                                                 {
-                                                    string primaryDiskCorelationIdInstance = ((string)primaryDiskCorelationIdValue);
-                                                    azureVmDiskDetailsInstance.PrimaryDiskCorelationId = primaryDiskCorelationIdInstance;
+                                                    string targetDiskNameInstance = ((string)targetDiskNameValue);
+                                                    azureVmDiskDetailsInstance.TargetDiskName = targetDiskNameInstance;
                                                 }
                                             }
                                         }
                                         
-                                        JToken recoveryAzureVMNameValue = customSettingValue["recoveryAzureVMName"];
+                                        JToken recoveryAzureVMNameValue = providerSpecificDetailsValue["recoveryAzureVMName"];
                                         if (recoveryAzureVMNameValue != null && recoveryAzureVMNameValue.Type != JTokenType.Null)
                                         {
                                             string recoveryAzureVMNameInstance = ((string)recoveryAzureVMNameValue);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.RecoveryAzureVMName = recoveryAzureVMNameInstance;
+                                            hyperVReplicaAzureReplicationDetailsInstance.RecoveryAzureVMName = recoveryAzureVMNameInstance;
                                         }
                                         
-                                        JToken recoveryAzureVMSizeValue = customSettingValue["recoveryAzureVMSize"];
+                                        JToken recoveryAzureVMSizeValue = providerSpecificDetailsValue["recoveryAzureVMSize"];
                                         if (recoveryAzureVMSizeValue != null && recoveryAzureVMSizeValue.Type != JTokenType.Null)
                                         {
                                             string recoveryAzureVMSizeInstance = ((string)recoveryAzureVMSizeValue);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.RecoveryAzureVMSize = recoveryAzureVMSizeInstance;
+                                            hyperVReplicaAzureReplicationDetailsInstance.RecoveryAzureVMSize = recoveryAzureVMSizeInstance;
                                         }
                                         
-                                        JToken recoveryAzureStorageAccountValue = customSettingValue["recoveryAzureStorageAccount"];
+                                        JToken recoveryAzureStorageAccountValue = providerSpecificDetailsValue["recoveryAzureStorageAccount"];
                                         if (recoveryAzureStorageAccountValue != null && recoveryAzureStorageAccountValue.Type != JTokenType.Null)
                                         {
                                             string recoveryAzureStorageAccountInstance = ((string)recoveryAzureStorageAccountValue);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.RecoveryAzureStorageAccount = recoveryAzureStorageAccountInstance;
+                                            hyperVReplicaAzureReplicationDetailsInstance.RecoveryAzureStorageAccount = recoveryAzureStorageAccountInstance;
                                         }
                                         
-                                        JToken selectedRecoveryAzureNetworkIdValue = customSettingValue["selectedRecoveryAzureNetworkId"];
+                                        JToken selectedRecoveryAzureNetworkIdValue = providerSpecificDetailsValue["selectedRecoveryAzureNetworkId"];
                                         if (selectedRecoveryAzureNetworkIdValue != null && selectedRecoveryAzureNetworkIdValue.Type != JTokenType.Null)
                                         {
                                             string selectedRecoveryAzureNetworkIdInstance = ((string)selectedRecoveryAzureNetworkIdValue);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.SelectedRecoveryAzureNetworkId = selectedRecoveryAzureNetworkIdInstance;
+                                            hyperVReplicaAzureReplicationDetailsInstance.SelectedRecoveryAzureNetworkId = selectedRecoveryAzureNetworkIdInstance;
                                         }
                                         
-                                        JToken lastReplicatedTimeValue2 = customSettingValue["lastReplicatedTime"];
+                                        JToken lastReplicatedTimeValue2 = providerSpecificDetailsValue["lastReplicatedTime"];
                                         if (lastReplicatedTimeValue2 != null && lastReplicatedTimeValue2.Type != JTokenType.Null)
                                         {
                                             string lastReplicatedTimeInstance2 = ((string)lastReplicatedTimeValue2);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.LastReplicatedTime = lastReplicatedTimeInstance2;
+                                            hyperVReplicaAzureReplicationDetailsInstance.LastReplicatedTime = lastReplicatedTimeInstance2;
                                         }
                                         
-                                        JToken initialReplicationDetailsValue2 = customSettingValue["initialReplicationDetails"];
+                                        JToken initialReplicationDetailsValue2 = providerSpecificDetailsValue["initialReplicationDetails"];
                                         if (initialReplicationDetailsValue2 != null && initialReplicationDetailsValue2.Type != JTokenType.Null)
                                         {
                                             InitialReplicationDetails initialReplicationDetailsInstance2 = new InitialReplicationDetails();
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.InitialReplicationDetails = initialReplicationDetailsInstance2;
+                                            hyperVReplicaAzureReplicationDetailsInstance.InitialReplicationDetails = initialReplicationDetailsInstance2;
                                             
                                             JToken initialReplicationTypeValue2 = initialReplicationDetailsValue2["initialReplicationType"];
                                             if (initialReplicationTypeValue2 != null && initialReplicationTypeValue2.Type != JTokenType.Null)
@@ -3252,13 +3245,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken vmNicsArray2 = customSettingValue["vmNics"];
+                                        JToken vmNicsArray2 = providerSpecificDetailsValue["vmNics"];
                                         if (vmNicsArray2 != null && vmNicsArray2.Type != JTokenType.Null)
                                         {
                                             foreach (JToken vmNicsValue2 in ((JArray)vmNicsArray2))
                                             {
                                                 VMNicDetails vMNicDetailsInstance2 = new VMNicDetails();
-                                                hyperVReplicaAzureProviderSpecificSettingsInstance.VMNics.Add(vMNicDetailsInstance2);
+                                                hyperVReplicaAzureReplicationDetailsInstance.VMNics.Add(vMNicDetailsInstance2);
                                                 
                                                 JToken nicIdValue2 = vmNicsValue2["nicId"];
                                                 if (nicIdValue2 != null && nicIdValue2.Type != JTokenType.Null)
@@ -3304,13 +3297,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken typeValue3 = customSettingValue["__type"];
+                                        JToken typeValue3 = providerSpecificDetailsValue["__type"];
                                         if (typeValue3 != null && typeValue3.Type != JTokenType.Null)
                                         {
                                             string typeInstance3 = ((string)typeValue3);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.Type = typeInstance3;
+                                            hyperVReplicaAzureReplicationDetailsInstance.Type = typeInstance3;
                                         }
-                                        propertiesInstance.CustomSettings = hyperVReplicaAzureProviderSpecificSettingsInstance;
+                                        propertiesInstance.ProviderSpecificDetails = hyperVReplicaAzureReplicationDetailsInstance;
                                     }
                                 }
                             }
@@ -3506,11 +3499,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.ProtectedItemType = protectedItemTypeInstance;
                                 }
                                 
-                                JToken protectedItemSourceIdValue = propertiesValue["protectedItemSourceId"];
-                                if (protectedItemSourceIdValue != null && protectedItemSourceIdValue.Type != JTokenType.Null)
+                                JToken protectedItemIdValue = propertiesValue["protectedItemId"];
+                                if (protectedItemIdValue != null && protectedItemIdValue.Type != JTokenType.Null)
                                 {
-                                    string protectedItemSourceIdInstance = ((string)protectedItemSourceIdValue);
-                                    propertiesInstance.ProtectedItemSourceId = protectedItemSourceIdInstance;
+                                    string protectedItemIdInstance = ((string)protectedItemIdValue);
+                                    propertiesInstance.ProtectedItemId = protectedItemIdInstance;
                                 }
                                 
                                 JToken recoveryServicesProviderNameValue = propertiesValue["recoveryServicesProviderName"];
@@ -3548,11 +3541,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.RecoveryProtectionContainerFriendlyName = recoveryProtectionContainerFriendlyNameInstance;
                                 }
                                 
-                                JToken protectionStatusValue = propertiesValue["protectionStatus"];
-                                if (protectionStatusValue != null && protectionStatusValue.Type != JTokenType.Null)
+                                JToken protectionStateValue = propertiesValue["protectionState"];
+                                if (protectionStateValue != null && protectionStateValue.Type != JTokenType.Null)
                                 {
-                                    string protectionStatusInstance = ((string)protectionStatusValue);
-                                    propertiesInstance.ProtectionStatus = protectionStatusInstance;
+                                    string protectionStateInstance = ((string)protectionStateValue);
+                                    propertiesInstance.ProtectionState = protectionStateInstance;
                                 }
                                 
                                 JToken activeLocationValue = propertiesValue["activeLocation"];
@@ -3560,13 +3553,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 {
                                     string activeLocationInstance = ((string)activeLocationValue);
                                     propertiesInstance.ActiveLocation = activeLocationInstance;
-                                }
-                                
-                                JToken testFailoverStateDescriptionValue = propertiesValue["testFailoverStateDescription"];
-                                if (testFailoverStateDescriptionValue != null && testFailoverStateDescriptionValue.Type != JTokenType.Null)
-                                {
-                                    string testFailoverStateDescriptionInstance = ((string)testFailoverStateDescriptionValue);
-                                    propertiesInstance.TestFailoverStateDescription = testFailoverStateDescriptionInstance;
                                 }
                                 
                                 JToken allowedOperationsArray = propertiesValue["allowedOperations"];
@@ -3714,28 +3700,28 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     }
                                 }
                                 
-                                JToken customSettingValue = propertiesValue["customSetting"];
-                                if (customSettingValue != null && customSettingValue.Type != JTokenType.Null)
+                                JToken providerSpecificDetailsValue = propertiesValue["providerSpecificDetails"];
+                                if (providerSpecificDetailsValue != null && providerSpecificDetailsValue.Type != JTokenType.Null)
                                 {
-                                    string typeName = ((string)customSettingValue["__type"]);
-                                    if (typeName == "HyperVReplicaProviderSpecificSettings")
+                                    string typeName = ((string)providerSpecificDetailsValue["__type"]);
+                                    if (typeName == "HyperVReplicaReplicationDetails")
                                     {
-                                        HyperVReplicaProviderSpecificSettings hyperVReplicaProviderSpecificSettingsInstance = new HyperVReplicaProviderSpecificSettings();
+                                        HyperVReplicaReplicationDetails hyperVReplicaReplicationDetailsInstance = new HyperVReplicaReplicationDetails();
                                         
-                                        JToken lastReplicatedTimeValue = customSettingValue["lastReplicatedTime"];
+                                        JToken lastReplicatedTimeValue = providerSpecificDetailsValue["lastReplicatedTime"];
                                         if (lastReplicatedTimeValue != null && lastReplicatedTimeValue.Type != JTokenType.Null)
                                         {
                                             string lastReplicatedTimeInstance = ((string)lastReplicatedTimeValue);
-                                            hyperVReplicaProviderSpecificSettingsInstance.LastReplicatedTime = lastReplicatedTimeInstance;
+                                            hyperVReplicaReplicationDetailsInstance.LastReplicatedTime = lastReplicatedTimeInstance;
                                         }
                                         
-                                        JToken vmNicsArray = customSettingValue["vmNics"];
+                                        JToken vmNicsArray = providerSpecificDetailsValue["vmNics"];
                                         if (vmNicsArray != null && vmNicsArray.Type != JTokenType.Null)
                                         {
                                             foreach (JToken vmNicsValue in ((JArray)vmNicsArray))
                                             {
                                                 VMNicDetails vMNicDetailsInstance = new VMNicDetails();
-                                                hyperVReplicaProviderSpecificSettingsInstance.VmNics.Add(vMNicDetailsInstance);
+                                                hyperVReplicaReplicationDetailsInstance.VmNics.Add(vMNicDetailsInstance);
                                                 
                                                 JToken nicIdValue = vmNicsValue["nicId"];
                                                 if (nicIdValue != null && nicIdValue.Type != JTokenType.Null)
@@ -3781,11 +3767,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken initialReplicationDetailsValue = customSettingValue["initialReplicationDetails"];
+                                        JToken initialReplicationDetailsValue = providerSpecificDetailsValue["initialReplicationDetails"];
                                         if (initialReplicationDetailsValue != null && initialReplicationDetailsValue.Type != JTokenType.Null)
                                         {
                                             InitialReplicationDetails initialReplicationDetailsInstance = new InitialReplicationDetails();
-                                            hyperVReplicaProviderSpecificSettingsInstance.InitialReplicationDetails = initialReplicationDetailsInstance;
+                                            hyperVReplicaReplicationDetailsInstance.InitialReplicationDetails = initialReplicationDetailsInstance;
                                             
                                             JToken initialReplicationTypeValue = initialReplicationDetailsValue["initialReplicationType"];
                                             if (initialReplicationTypeValue != null && initialReplicationTypeValue.Type != JTokenType.Null)
@@ -3802,13 +3788,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken vMDiskDetailsArray = customSettingValue["vMDiskDetails"];
+                                        JToken vMDiskDetailsArray = providerSpecificDetailsValue["vMDiskDetails"];
                                         if (vMDiskDetailsArray != null && vMDiskDetailsArray.Type != JTokenType.Null)
                                         {
                                             foreach (JToken vMDiskDetailsValue in ((JArray)vMDiskDetailsArray))
                                             {
                                                 DiskDetails diskDetailsInstance = new DiskDetails();
-                                                hyperVReplicaProviderSpecificSettingsInstance.VMDiskDetails.Add(diskDetailsInstance);
+                                                hyperVReplicaReplicationDetailsInstance.VMDiskDetails.Add(diskDetailsInstance);
                                                 
                                                 JToken maxSizeMBValue = vMDiskDetailsValue["maxSizeMB"];
                                                 if (maxSizeMBValue != null && maxSizeMBValue.Type != JTokenType.Null)
@@ -3817,154 +3803,154 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     diskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
                                                 }
                                                 
-                                                JToken vHDStatusValue = vMDiskDetailsValue["vHDStatus"];
-                                                if (vHDStatusValue != null && vHDStatusValue.Type != JTokenType.Null)
+                                                JToken vhdTypeValue = vMDiskDetailsValue["vhdType"];
+                                                if (vhdTypeValue != null && vhdTypeValue.Type != JTokenType.Null)
                                                 {
-                                                    string vHDStatusInstance = ((string)vHDStatusValue);
-                                                    diskDetailsInstance.VHDStatus = vHDStatusInstance;
+                                                    string vhdTypeInstance = ((string)vhdTypeValue);
+                                                    diskDetailsInstance.VhdType = vhdTypeInstance;
                                                 }
                                                 
-                                                JToken vHDIdValue = vMDiskDetailsValue["vHDId"];
-                                                if (vHDIdValue != null && vHDIdValue.Type != JTokenType.Null)
+                                                JToken vhdIdValue = vMDiskDetailsValue["vhdId"];
+                                                if (vhdIdValue != null && vhdIdValue.Type != JTokenType.Null)
                                                 {
-                                                    string vHDIdInstance = ((string)vHDIdValue);
-                                                    diskDetailsInstance.VHDId = vHDIdInstance;
+                                                    string vhdIdInstance = ((string)vhdIdValue);
+                                                    diskDetailsInstance.VhdId = vhdIdInstance;
                                                 }
                                                 
-                                                JToken vHDNameValue = vMDiskDetailsValue["vHDName"];
-                                                if (vHDNameValue != null && vHDNameValue.Type != JTokenType.Null)
+                                                JToken vhdNameValue = vMDiskDetailsValue["vhdName"];
+                                                if (vhdNameValue != null && vhdNameValue.Type != JTokenType.Null)
                                                 {
-                                                    string vHDNameInstance = ((string)vHDNameValue);
-                                                    diskDetailsInstance.VHDName = vHDNameInstance;
+                                                    string vhdNameInstance = ((string)vhdNameValue);
+                                                    diskDetailsInstance.VhdName = vhdNameInstance;
                                                 }
                                             }
                                         }
                                         
-                                        JToken typeValue = customSettingValue["__type"];
+                                        JToken typeValue = providerSpecificDetailsValue["__type"];
                                         if (typeValue != null && typeValue.Type != JTokenType.Null)
                                         {
                                             string typeInstance = ((string)typeValue);
-                                            hyperVReplicaProviderSpecificSettingsInstance.Type = typeInstance;
+                                            hyperVReplicaReplicationDetailsInstance.Type = typeInstance;
                                         }
-                                        propertiesInstance.CustomSettings = hyperVReplicaProviderSpecificSettingsInstance;
+                                        propertiesInstance.ProviderSpecificDetails = hyperVReplicaReplicationDetailsInstance;
                                     }
                                     if (typeName == "VMwareAzureV2ProviderSpecificSettings")
                                     {
                                         VMwareAzureV2ProviderSpecificSettings vMwareAzureV2ProviderSpecificSettingsInstance = new VMwareAzureV2ProviderSpecificSettings();
                                         
-                                        JToken protectionStageValue = customSettingValue["protectionStage"];
+                                        JToken protectionStageValue = providerSpecificDetailsValue["protectionStage"];
                                         if (protectionStageValue != null && protectionStageValue.Type != JTokenType.Null)
                                         {
                                             string protectionStageInstance = ((string)protectionStageValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.ProtectionStage = protectionStageInstance;
                                         }
                                         
-                                        JToken healthErrorCodeValue = customSettingValue["healthErrorCode"];
+                                        JToken healthErrorCodeValue = providerSpecificDetailsValue["healthErrorCode"];
                                         if (healthErrorCodeValue != null && healthErrorCodeValue.Type != JTokenType.Null)
                                         {
                                             string healthErrorCodeInstance = ((string)healthErrorCodeValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.HealthErrorCode = healthErrorCodeInstance;
                                         }
                                         
-                                        JToken resyncRequiredValue = customSettingValue["resyncRequired"];
+                                        JToken resyncRequiredValue = providerSpecificDetailsValue["resyncRequired"];
                                         if (resyncRequiredValue != null && resyncRequiredValue.Type != JTokenType.Null)
                                         {
                                             bool resyncRequiredInstance = ((bool)resyncRequiredValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.ResyncRequired = resyncRequiredInstance;
                                         }
                                         
-                                        JToken resyncProgressPercentageValue = customSettingValue["resyncProgressPercentage"];
+                                        JToken resyncProgressPercentageValue = providerSpecificDetailsValue["resyncProgressPercentage"];
                                         if (resyncProgressPercentageValue != null && resyncProgressPercentageValue.Type != JTokenType.Null)
                                         {
                                             int resyncProgressPercentageInstance = ((int)resyncProgressPercentageValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.ResyncProgressPercentage = resyncProgressPercentageInstance;
                                         }
                                         
-                                        JToken rpoInSecondsValue = customSettingValue["rpoInSeconds"];
+                                        JToken rpoInSecondsValue = providerSpecificDetailsValue["rpoInSeconds"];
                                         if (rpoInSecondsValue != null && rpoInSecondsValue.Type != JTokenType.Null)
                                         {
                                             long rpoInSecondsInstance = ((long)rpoInSecondsValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.RpoInSeconds = rpoInSecondsInstance;
                                         }
                                         
-                                        JToken compressedDataRateInMBValue = customSettingValue["compressedDataRateInMB"];
+                                        JToken compressedDataRateInMBValue = providerSpecificDetailsValue["compressedDataRateInMB"];
                                         if (compressedDataRateInMBValue != null && compressedDataRateInMBValue.Type != JTokenType.Null)
                                         {
                                             double compressedDataRateInMBInstance = ((double)compressedDataRateInMBValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.CompressedDataRateInMB = compressedDataRateInMBInstance;
                                         }
                                         
-                                        JToken uncompressedDataRateInMBValue = customSettingValue["uncompressedDataRateInMB"];
+                                        JToken uncompressedDataRateInMBValue = providerSpecificDetailsValue["uncompressedDataRateInMB"];
                                         if (uncompressedDataRateInMBValue != null && uncompressedDataRateInMBValue.Type != JTokenType.Null)
                                         {
                                             double uncompressedDataRateInMBInstance = ((double)uncompressedDataRateInMBValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.UncompressedDataRateInMB = uncompressedDataRateInMBInstance;
                                         }
                                         
-                                        JToken ipAddressValue = customSettingValue["ipAddress"];
+                                        JToken ipAddressValue = providerSpecificDetailsValue["ipAddress"];
                                         if (ipAddressValue != null && ipAddressValue.Type != JTokenType.Null)
                                         {
                                             string ipAddressInstance = ((string)ipAddressValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.IpAddress = ipAddressInstance;
                                         }
                                         
-                                        JToken agentVersionValue = customSettingValue["agentVersion"];
+                                        JToken agentVersionValue = providerSpecificDetailsValue["agentVersion"];
                                         if (agentVersionValue != null && agentVersionValue.Type != JTokenType.Null)
                                         {
                                             string agentVersionInstance = ((string)agentVersionValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.AgentVersion = agentVersionInstance;
                                         }
                                         
-                                        JToken latestUpdateVersionValue = customSettingValue["latestUpdateVersion"];
+                                        JToken latestUpdateVersionValue = providerSpecificDetailsValue["latestUpdateVersion"];
                                         if (latestUpdateVersionValue != null && latestUpdateVersionValue.Type != JTokenType.Null)
                                         {
                                             string latestUpdateVersionInstance = ((string)latestUpdateVersionValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.LatestUpdateVersion = latestUpdateVersionInstance;
                                         }
                                         
-                                        JToken isAgentUpdateRequiredValue = customSettingValue["isAgentUpdateRequired"];
+                                        JToken isAgentUpdateRequiredValue = providerSpecificDetailsValue["isAgentUpdateRequired"];
                                         if (isAgentUpdateRequiredValue != null && isAgentUpdateRequiredValue.Type != JTokenType.Null)
                                         {
                                             bool isAgentUpdateRequiredInstance = ((bool)isAgentUpdateRequiredValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.IsAgentUpdateRequired = isAgentUpdateRequiredInstance;
                                         }
                                         
-                                        JToken isRebootAfterUpdateRequiredValue = customSettingValue["isRebootAfterUpdateRequired"];
+                                        JToken isRebootAfterUpdateRequiredValue = providerSpecificDetailsValue["isRebootAfterUpdateRequired"];
                                         if (isRebootAfterUpdateRequiredValue != null && isRebootAfterUpdateRequiredValue.Type != JTokenType.Null)
                                         {
                                             bool isRebootAfterUpdateRequiredInstance = ((bool)isRebootAfterUpdateRequiredValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.IsRebootAfterUpdateRequired = isRebootAfterUpdateRequiredInstance;
                                         }
                                         
-                                        JToken lastHeartbeatValue = customSettingValue["lastHeartbeat"];
+                                        JToken lastHeartbeatValue = providerSpecificDetailsValue["lastHeartbeat"];
                                         if (lastHeartbeatValue != null && lastHeartbeatValue.Type != JTokenType.Null)
                                         {
                                             DateTime lastHeartbeatInstance = ((DateTime)lastHeartbeatValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.LastHeartbeat = lastHeartbeatInstance;
                                         }
                                         
-                                        JToken processServerIdValue = customSettingValue["processServerId"];
+                                        JToken processServerIdValue = providerSpecificDetailsValue["processServerId"];
                                         if (processServerIdValue != null && processServerIdValue.Type != JTokenType.Null)
                                         {
                                             string processServerIdInstance = ((string)processServerIdValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.ProcessServerId = processServerIdInstance;
                                         }
                                         
-                                        JToken multiVmGroupIdValue = customSettingValue["multiVmGroupId"];
+                                        JToken multiVmGroupIdValue = providerSpecificDetailsValue["multiVmGroupId"];
                                         if (multiVmGroupIdValue != null && multiVmGroupIdValue.Type != JTokenType.Null)
                                         {
                                             string multiVmGroupIdInstance = ((string)multiVmGroupIdValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.MultiVmGroupId = multiVmGroupIdInstance;
                                         }
                                         
-                                        JToken multiVmGroupNameValue = customSettingValue["multiVmGroupName"];
+                                        JToken multiVmGroupNameValue = providerSpecificDetailsValue["multiVmGroupName"];
                                         if (multiVmGroupNameValue != null && multiVmGroupNameValue.Type != JTokenType.Null)
                                         {
                                             string multiVmGroupNameInstance = ((string)multiVmGroupNameValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.MultiVmGroupName = multiVmGroupNameInstance;
                                         }
                                         
-                                        JToken protectedVolumesArray = customSettingValue["protectedVolumes"];
+                                        JToken protectedVolumesArray = providerSpecificDetailsValue["protectedVolumes"];
                                         if (protectedVolumesArray != null && protectedVolumesArray.Type != JTokenType.Null)
                                         {
                                             foreach (JToken protectedVolumesValue in ((JArray)protectedVolumesArray))
@@ -4065,94 +4051,94 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken volumeResizedValue2 = customSettingValue["volumeResized"];
+                                        JToken volumeResizedValue2 = providerSpecificDetailsValue["volumeResized"];
                                         if (volumeResizedValue2 != null && volumeResizedValue2.Type != JTokenType.Null)
                                         {
                                             bool volumeResizedInstance2 = ((bool)volumeResizedValue2);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.VolumeResized = volumeResizedInstance2;
                                         }
                                         
-                                        JToken masterTargetIdValue = customSettingValue["masterTargetId"];
+                                        JToken masterTargetIdValue = providerSpecificDetailsValue["masterTargetId"];
                                         if (masterTargetIdValue != null && masterTargetIdValue.Type != JTokenType.Null)
                                         {
                                             string masterTargetIdInstance = ((string)masterTargetIdValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.MasterTargetId = masterTargetIdInstance;
                                         }
                                         
-                                        JToken sourceVmCPUCountValue = customSettingValue["sourceVmCPUCount"];
+                                        JToken sourceVmCPUCountValue = providerSpecificDetailsValue["sourceVmCPUCount"];
                                         if (sourceVmCPUCountValue != null && sourceVmCPUCountValue.Type != JTokenType.Null)
                                         {
                                             int sourceVmCPUCountInstance = ((int)sourceVmCPUCountValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.SourceVmCPUCount = sourceVmCPUCountInstance;
                                         }
                                         
-                                        JToken sourceVmRAMSizeInMBValue = customSettingValue["sourceVmRAMSizeInMB"];
+                                        JToken sourceVmRAMSizeInMBValue = providerSpecificDetailsValue["sourceVmRAMSizeInMB"];
                                         if (sourceVmRAMSizeInMBValue != null && sourceVmRAMSizeInMBValue.Type != JTokenType.Null)
                                         {
                                             int sourceVmRAMSizeInMBInstance = ((int)sourceVmRAMSizeInMBValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.SourceVmRAMSizeInMB = sourceVmRAMSizeInMBInstance;
                                         }
                                         
-                                        JToken osTypeValue = customSettingValue["osType"];
+                                        JToken osTypeValue = providerSpecificDetailsValue["osType"];
                                         if (osTypeValue != null && osTypeValue.Type != JTokenType.Null)
                                         {
                                             string osTypeInstance = ((string)osTypeValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.OSType = osTypeInstance;
                                         }
                                         
-                                        JToken vhdNameValue = customSettingValue["vhdName"];
-                                        if (vhdNameValue != null && vhdNameValue.Type != JTokenType.Null)
+                                        JToken vhdNameValue2 = providerSpecificDetailsValue["vhdName"];
+                                        if (vhdNameValue2 != null && vhdNameValue2.Type != JTokenType.Null)
                                         {
-                                            string vhdNameInstance = ((string)vhdNameValue);
-                                            vMwareAzureV2ProviderSpecificSettingsInstance.VHDName = vhdNameInstance;
+                                            string vhdNameInstance2 = ((string)vhdNameValue2);
+                                            vMwareAzureV2ProviderSpecificSettingsInstance.VHDName = vhdNameInstance2;
                                         }
                                         
-                                        JToken osDiskIdValue = customSettingValue["osDiskId"];
+                                        JToken osDiskIdValue = providerSpecificDetailsValue["osDiskId"];
                                         if (osDiskIdValue != null && osDiskIdValue.Type != JTokenType.Null)
                                         {
                                             string osDiskIdInstance = ((string)osDiskIdValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.OSDiskId = osDiskIdInstance;
                                         }
                                         
-                                        JToken typeValue2 = customSettingValue["__type"];
+                                        JToken typeValue2 = providerSpecificDetailsValue["__type"];
                                         if (typeValue2 != null && typeValue2.Type != JTokenType.Null)
                                         {
                                             string typeInstance2 = ((string)typeValue2);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.Type = typeInstance2;
                                         }
-                                        propertiesInstance.CustomSettings = vMwareAzureV2ProviderSpecificSettingsInstance;
+                                        propertiesInstance.ProviderSpecificDetails = vMwareAzureV2ProviderSpecificSettingsInstance;
                                     }
-                                    if (typeName == "HyperVReplicaAzureProviderSpecificSettings")
+                                    if (typeName == "HyperVReplicaAzureReplicationDetails")
                                     {
-                                        HyperVReplicaAzureProviderSpecificSettings hyperVReplicaAzureProviderSpecificSettingsInstance = new HyperVReplicaAzureProviderSpecificSettings();
+                                        HyperVReplicaAzureReplicationDetails hyperVReplicaAzureReplicationDetailsInstance = new HyperVReplicaAzureReplicationDetails();
                                         
-                                        JToken azureVMDiskDetailsArray = customSettingValue["azureVMDiskDetails"];
+                                        JToken azureVMDiskDetailsArray = providerSpecificDetailsValue["azureVMDiskDetails"];
                                         if (azureVMDiskDetailsArray != null && azureVMDiskDetailsArray.Type != JTokenType.Null)
                                         {
                                             foreach (JToken azureVMDiskDetailsValue in ((JArray)azureVMDiskDetailsArray))
                                             {
                                                 AzureVmDiskDetails azureVmDiskDetailsInstance = new AzureVmDiskDetails();
-                                                hyperVReplicaAzureProviderSpecificSettingsInstance.AzureVMDiskDetails.Add(azureVmDiskDetailsInstance);
+                                                hyperVReplicaAzureReplicationDetailsInstance.AzureVMDiskDetails.Add(azureVmDiskDetailsInstance);
                                                 
-                                                JToken vhdTypeValue = azureVMDiskDetailsValue["vhdType"];
-                                                if (vhdTypeValue != null && vhdTypeValue.Type != JTokenType.Null)
+                                                JToken vhdTypeValue2 = azureVMDiskDetailsValue["vhdType"];
+                                                if (vhdTypeValue2 != null && vhdTypeValue2.Type != JTokenType.Null)
                                                 {
-                                                    string vhdTypeInstance = ((string)vhdTypeValue);
-                                                    azureVmDiskDetailsInstance.VhdType = vhdTypeInstance;
+                                                    string vhdTypeInstance2 = ((string)vhdTypeValue2);
+                                                    azureVmDiskDetailsInstance.VhdType = vhdTypeInstance2;
                                                 }
                                                 
-                                                JToken vhdIdValue = azureVMDiskDetailsValue["vhdId"];
-                                                if (vhdIdValue != null && vhdIdValue.Type != JTokenType.Null)
+                                                JToken vhdIdValue2 = azureVMDiskDetailsValue["vhdId"];
+                                                if (vhdIdValue2 != null && vhdIdValue2.Type != JTokenType.Null)
                                                 {
-                                                    string vhdIdInstance = ((string)vhdIdValue);
-                                                    azureVmDiskDetailsInstance.VhdId = vhdIdInstance;
+                                                    string vhdIdInstance2 = ((string)vhdIdValue2);
+                                                    azureVmDiskDetailsInstance.VhdId = vhdIdInstance2;
                                                 }
                                                 
-                                                JToken vhdNameValue2 = azureVMDiskDetailsValue["vhdName"];
-                                                if (vhdNameValue2 != null && vhdNameValue2.Type != JTokenType.Null)
+                                                JToken vhdNameValue3 = azureVMDiskDetailsValue["vhdName"];
+                                                if (vhdNameValue3 != null && vhdNameValue3.Type != JTokenType.Null)
                                                 {
-                                                    string vhdNameInstance2 = ((string)vhdNameValue2);
-                                                    azureVmDiskDetailsInstance.VhdName = vhdNameInstance2;
+                                                    string vhdNameInstance3 = ((string)vhdNameValue3);
+                                                    azureVmDiskDetailsInstance.VhdName = vhdNameInstance3;
                                                 }
                                                 
                                                 JToken maxSizeMBValue2 = azureVMDiskDetailsValue["maxSizeMB"];
@@ -4162,11 +4148,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     azureVmDiskDetailsInstance.MaxSizeMB = maxSizeMBInstance2;
                                                 }
                                                 
-                                                JToken diskLocationValue = azureVMDiskDetailsValue["diskLocation"];
-                                                if (diskLocationValue != null && diskLocationValue.Type != JTokenType.Null)
+                                                JToken targetDiskLocationValue = azureVMDiskDetailsValue["targetDiskLocation"];
+                                                if (targetDiskLocationValue != null && targetDiskLocationValue.Type != JTokenType.Null)
                                                 {
-                                                    string diskLocationInstance = ((string)diskLocationValue);
-                                                    azureVmDiskDetailsInstance.DiskLocation = diskLocationInstance;
+                                                    string targetDiskLocationInstance = ((string)targetDiskLocationValue);
+                                                    azureVmDiskDetailsInstance.TargetDiskLocation = targetDiskLocationInstance;
                                                 }
                                                 
                                                 JToken lunIdValue = azureVMDiskDetailsValue["lunId"];
@@ -4176,55 +4162,55 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     azureVmDiskDetailsInstance.LunId = lunIdInstance;
                                                 }
                                                 
-                                                JToken primaryDiskCorelationIdValue = azureVMDiskDetailsValue["primaryDiskCorelationId"];
-                                                if (primaryDiskCorelationIdValue != null && primaryDiskCorelationIdValue.Type != JTokenType.Null)
+                                                JToken targetDiskNameValue = azureVMDiskDetailsValue["targetDiskName"];
+                                                if (targetDiskNameValue != null && targetDiskNameValue.Type != JTokenType.Null)
                                                 {
-                                                    string primaryDiskCorelationIdInstance = ((string)primaryDiskCorelationIdValue);
-                                                    azureVmDiskDetailsInstance.PrimaryDiskCorelationId = primaryDiskCorelationIdInstance;
+                                                    string targetDiskNameInstance = ((string)targetDiskNameValue);
+                                                    azureVmDiskDetailsInstance.TargetDiskName = targetDiskNameInstance;
                                                 }
                                             }
                                         }
                                         
-                                        JToken recoveryAzureVMNameValue = customSettingValue["recoveryAzureVMName"];
+                                        JToken recoveryAzureVMNameValue = providerSpecificDetailsValue["recoveryAzureVMName"];
                                         if (recoveryAzureVMNameValue != null && recoveryAzureVMNameValue.Type != JTokenType.Null)
                                         {
                                             string recoveryAzureVMNameInstance = ((string)recoveryAzureVMNameValue);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.RecoveryAzureVMName = recoveryAzureVMNameInstance;
+                                            hyperVReplicaAzureReplicationDetailsInstance.RecoveryAzureVMName = recoveryAzureVMNameInstance;
                                         }
                                         
-                                        JToken recoveryAzureVMSizeValue = customSettingValue["recoveryAzureVMSize"];
+                                        JToken recoveryAzureVMSizeValue = providerSpecificDetailsValue["recoveryAzureVMSize"];
                                         if (recoveryAzureVMSizeValue != null && recoveryAzureVMSizeValue.Type != JTokenType.Null)
                                         {
                                             string recoveryAzureVMSizeInstance = ((string)recoveryAzureVMSizeValue);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.RecoveryAzureVMSize = recoveryAzureVMSizeInstance;
+                                            hyperVReplicaAzureReplicationDetailsInstance.RecoveryAzureVMSize = recoveryAzureVMSizeInstance;
                                         }
                                         
-                                        JToken recoveryAzureStorageAccountValue = customSettingValue["recoveryAzureStorageAccount"];
+                                        JToken recoveryAzureStorageAccountValue = providerSpecificDetailsValue["recoveryAzureStorageAccount"];
                                         if (recoveryAzureStorageAccountValue != null && recoveryAzureStorageAccountValue.Type != JTokenType.Null)
                                         {
                                             string recoveryAzureStorageAccountInstance = ((string)recoveryAzureStorageAccountValue);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.RecoveryAzureStorageAccount = recoveryAzureStorageAccountInstance;
+                                            hyperVReplicaAzureReplicationDetailsInstance.RecoveryAzureStorageAccount = recoveryAzureStorageAccountInstance;
                                         }
                                         
-                                        JToken selectedRecoveryAzureNetworkIdValue = customSettingValue["selectedRecoveryAzureNetworkId"];
+                                        JToken selectedRecoveryAzureNetworkIdValue = providerSpecificDetailsValue["selectedRecoveryAzureNetworkId"];
                                         if (selectedRecoveryAzureNetworkIdValue != null && selectedRecoveryAzureNetworkIdValue.Type != JTokenType.Null)
                                         {
                                             string selectedRecoveryAzureNetworkIdInstance = ((string)selectedRecoveryAzureNetworkIdValue);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.SelectedRecoveryAzureNetworkId = selectedRecoveryAzureNetworkIdInstance;
+                                            hyperVReplicaAzureReplicationDetailsInstance.SelectedRecoveryAzureNetworkId = selectedRecoveryAzureNetworkIdInstance;
                                         }
                                         
-                                        JToken lastReplicatedTimeValue2 = customSettingValue["lastReplicatedTime"];
+                                        JToken lastReplicatedTimeValue2 = providerSpecificDetailsValue["lastReplicatedTime"];
                                         if (lastReplicatedTimeValue2 != null && lastReplicatedTimeValue2.Type != JTokenType.Null)
                                         {
                                             string lastReplicatedTimeInstance2 = ((string)lastReplicatedTimeValue2);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.LastReplicatedTime = lastReplicatedTimeInstance2;
+                                            hyperVReplicaAzureReplicationDetailsInstance.LastReplicatedTime = lastReplicatedTimeInstance2;
                                         }
                                         
-                                        JToken initialReplicationDetailsValue2 = customSettingValue["initialReplicationDetails"];
+                                        JToken initialReplicationDetailsValue2 = providerSpecificDetailsValue["initialReplicationDetails"];
                                         if (initialReplicationDetailsValue2 != null && initialReplicationDetailsValue2.Type != JTokenType.Null)
                                         {
                                             InitialReplicationDetails initialReplicationDetailsInstance2 = new InitialReplicationDetails();
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.InitialReplicationDetails = initialReplicationDetailsInstance2;
+                                            hyperVReplicaAzureReplicationDetailsInstance.InitialReplicationDetails = initialReplicationDetailsInstance2;
                                             
                                             JToken initialReplicationTypeValue2 = initialReplicationDetailsValue2["initialReplicationType"];
                                             if (initialReplicationTypeValue2 != null && initialReplicationTypeValue2.Type != JTokenType.Null)
@@ -4241,13 +4227,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken vmNicsArray2 = customSettingValue["vmNics"];
+                                        JToken vmNicsArray2 = providerSpecificDetailsValue["vmNics"];
                                         if (vmNicsArray2 != null && vmNicsArray2.Type != JTokenType.Null)
                                         {
                                             foreach (JToken vmNicsValue2 in ((JArray)vmNicsArray2))
                                             {
                                                 VMNicDetails vMNicDetailsInstance2 = new VMNicDetails();
-                                                hyperVReplicaAzureProviderSpecificSettingsInstance.VMNics.Add(vMNicDetailsInstance2);
+                                                hyperVReplicaAzureReplicationDetailsInstance.VMNics.Add(vMNicDetailsInstance2);
                                                 
                                                 JToken nicIdValue2 = vmNicsValue2["nicId"];
                                                 if (nicIdValue2 != null && nicIdValue2.Type != JTokenType.Null)
@@ -4293,13 +4279,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken typeValue3 = customSettingValue["__type"];
+                                        JToken typeValue3 = providerSpecificDetailsValue["__type"];
                                         if (typeValue3 != null && typeValue3.Type != JTokenType.Null)
                                         {
                                             string typeInstance3 = ((string)typeValue3);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.Type = typeInstance3;
+                                            hyperVReplicaAzureReplicationDetailsInstance.Type = typeInstance3;
                                         }
-                                        propertiesInstance.CustomSettings = hyperVReplicaAzureProviderSpecificSettingsInstance;
+                                        propertiesInstance.ProviderSpecificDetails = hyperVReplicaAzureReplicationDetailsInstance;
                                     }
                                 }
                             }
@@ -4575,11 +4561,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     {
                         result.Status = OperationStatus.InProgress;
                     }
-                    if (statusCode == HttpStatusCode.OK)
+                    if (statusCode == HttpStatusCode.NoContent)
                     {
                         result.Status = OperationStatus.Succeeded;
                     }
-                    if (statusCode == HttpStatusCode.NoContent)
+                    if (statusCode == HttpStatusCode.OK)
                     {
                         result.Status = OperationStatus.Succeeded;
                     }
@@ -4728,11 +4714,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.ProtectedItemType = protectedItemTypeInstance;
                                 }
                                 
-                                JToken protectedItemSourceIdValue = propertiesValue["protectedItemSourceId"];
-                                if (protectedItemSourceIdValue != null && protectedItemSourceIdValue.Type != JTokenType.Null)
+                                JToken protectedItemIdValue = propertiesValue["protectedItemId"];
+                                if (protectedItemIdValue != null && protectedItemIdValue.Type != JTokenType.Null)
                                 {
-                                    string protectedItemSourceIdInstance = ((string)protectedItemSourceIdValue);
-                                    propertiesInstance.ProtectedItemSourceId = protectedItemSourceIdInstance;
+                                    string protectedItemIdInstance = ((string)protectedItemIdValue);
+                                    propertiesInstance.ProtectedItemId = protectedItemIdInstance;
                                 }
                                 
                                 JToken recoveryServicesProviderNameValue = propertiesValue["recoveryServicesProviderName"];
@@ -4770,11 +4756,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.RecoveryProtectionContainerFriendlyName = recoveryProtectionContainerFriendlyNameInstance;
                                 }
                                 
-                                JToken protectionStatusValue = propertiesValue["protectionStatus"];
-                                if (protectionStatusValue != null && protectionStatusValue.Type != JTokenType.Null)
+                                JToken protectionStateValue = propertiesValue["protectionState"];
+                                if (protectionStateValue != null && protectionStateValue.Type != JTokenType.Null)
                                 {
-                                    string protectionStatusInstance = ((string)protectionStatusValue);
-                                    propertiesInstance.ProtectionStatus = protectionStatusInstance;
+                                    string protectionStateInstance = ((string)protectionStateValue);
+                                    propertiesInstance.ProtectionState = protectionStateInstance;
                                 }
                                 
                                 JToken activeLocationValue = propertiesValue["activeLocation"];
@@ -4782,13 +4768,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 {
                                     string activeLocationInstance = ((string)activeLocationValue);
                                     propertiesInstance.ActiveLocation = activeLocationInstance;
-                                }
-                                
-                                JToken testFailoverStateDescriptionValue = propertiesValue["testFailoverStateDescription"];
-                                if (testFailoverStateDescriptionValue != null && testFailoverStateDescriptionValue.Type != JTokenType.Null)
-                                {
-                                    string testFailoverStateDescriptionInstance = ((string)testFailoverStateDescriptionValue);
-                                    propertiesInstance.TestFailoverStateDescription = testFailoverStateDescriptionInstance;
                                 }
                                 
                                 JToken allowedOperationsArray = propertiesValue["allowedOperations"];
@@ -4936,28 +4915,28 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     }
                                 }
                                 
-                                JToken customSettingValue = propertiesValue["customSetting"];
-                                if (customSettingValue != null && customSettingValue.Type != JTokenType.Null)
+                                JToken providerSpecificDetailsValue = propertiesValue["providerSpecificDetails"];
+                                if (providerSpecificDetailsValue != null && providerSpecificDetailsValue.Type != JTokenType.Null)
                                 {
-                                    string typeName = ((string)customSettingValue["__type"]);
-                                    if (typeName == "HyperVReplicaProviderSpecificSettings")
+                                    string typeName = ((string)providerSpecificDetailsValue["__type"]);
+                                    if (typeName == "HyperVReplicaReplicationDetails")
                                     {
-                                        HyperVReplicaProviderSpecificSettings hyperVReplicaProviderSpecificSettingsInstance = new HyperVReplicaProviderSpecificSettings();
+                                        HyperVReplicaReplicationDetails hyperVReplicaReplicationDetailsInstance = new HyperVReplicaReplicationDetails();
                                         
-                                        JToken lastReplicatedTimeValue = customSettingValue["lastReplicatedTime"];
+                                        JToken lastReplicatedTimeValue = providerSpecificDetailsValue["lastReplicatedTime"];
                                         if (lastReplicatedTimeValue != null && lastReplicatedTimeValue.Type != JTokenType.Null)
                                         {
                                             string lastReplicatedTimeInstance = ((string)lastReplicatedTimeValue);
-                                            hyperVReplicaProviderSpecificSettingsInstance.LastReplicatedTime = lastReplicatedTimeInstance;
+                                            hyperVReplicaReplicationDetailsInstance.LastReplicatedTime = lastReplicatedTimeInstance;
                                         }
                                         
-                                        JToken vmNicsArray = customSettingValue["vmNics"];
+                                        JToken vmNicsArray = providerSpecificDetailsValue["vmNics"];
                                         if (vmNicsArray != null && vmNicsArray.Type != JTokenType.Null)
                                         {
                                             foreach (JToken vmNicsValue in ((JArray)vmNicsArray))
                                             {
                                                 VMNicDetails vMNicDetailsInstance = new VMNicDetails();
-                                                hyperVReplicaProviderSpecificSettingsInstance.VmNics.Add(vMNicDetailsInstance);
+                                                hyperVReplicaReplicationDetailsInstance.VmNics.Add(vMNicDetailsInstance);
                                                 
                                                 JToken nicIdValue = vmNicsValue["nicId"];
                                                 if (nicIdValue != null && nicIdValue.Type != JTokenType.Null)
@@ -5003,11 +4982,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken initialReplicationDetailsValue = customSettingValue["initialReplicationDetails"];
+                                        JToken initialReplicationDetailsValue = providerSpecificDetailsValue["initialReplicationDetails"];
                                         if (initialReplicationDetailsValue != null && initialReplicationDetailsValue.Type != JTokenType.Null)
                                         {
                                             InitialReplicationDetails initialReplicationDetailsInstance = new InitialReplicationDetails();
-                                            hyperVReplicaProviderSpecificSettingsInstance.InitialReplicationDetails = initialReplicationDetailsInstance;
+                                            hyperVReplicaReplicationDetailsInstance.InitialReplicationDetails = initialReplicationDetailsInstance;
                                             
                                             JToken initialReplicationTypeValue = initialReplicationDetailsValue["initialReplicationType"];
                                             if (initialReplicationTypeValue != null && initialReplicationTypeValue.Type != JTokenType.Null)
@@ -5024,13 +5003,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken vMDiskDetailsArray = customSettingValue["vMDiskDetails"];
+                                        JToken vMDiskDetailsArray = providerSpecificDetailsValue["vMDiskDetails"];
                                         if (vMDiskDetailsArray != null && vMDiskDetailsArray.Type != JTokenType.Null)
                                         {
                                             foreach (JToken vMDiskDetailsValue in ((JArray)vMDiskDetailsArray))
                                             {
                                                 DiskDetails diskDetailsInstance = new DiskDetails();
-                                                hyperVReplicaProviderSpecificSettingsInstance.VMDiskDetails.Add(diskDetailsInstance);
+                                                hyperVReplicaReplicationDetailsInstance.VMDiskDetails.Add(diskDetailsInstance);
                                                 
                                                 JToken maxSizeMBValue = vMDiskDetailsValue["maxSizeMB"];
                                                 if (maxSizeMBValue != null && maxSizeMBValue.Type != JTokenType.Null)
@@ -5039,154 +5018,154 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     diskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
                                                 }
                                                 
-                                                JToken vHDStatusValue = vMDiskDetailsValue["vHDStatus"];
-                                                if (vHDStatusValue != null && vHDStatusValue.Type != JTokenType.Null)
+                                                JToken vhdTypeValue = vMDiskDetailsValue["vhdType"];
+                                                if (vhdTypeValue != null && vhdTypeValue.Type != JTokenType.Null)
                                                 {
-                                                    string vHDStatusInstance = ((string)vHDStatusValue);
-                                                    diskDetailsInstance.VHDStatus = vHDStatusInstance;
+                                                    string vhdTypeInstance = ((string)vhdTypeValue);
+                                                    diskDetailsInstance.VhdType = vhdTypeInstance;
                                                 }
                                                 
-                                                JToken vHDIdValue = vMDiskDetailsValue["vHDId"];
-                                                if (vHDIdValue != null && vHDIdValue.Type != JTokenType.Null)
+                                                JToken vhdIdValue = vMDiskDetailsValue["vhdId"];
+                                                if (vhdIdValue != null && vhdIdValue.Type != JTokenType.Null)
                                                 {
-                                                    string vHDIdInstance = ((string)vHDIdValue);
-                                                    diskDetailsInstance.VHDId = vHDIdInstance;
+                                                    string vhdIdInstance = ((string)vhdIdValue);
+                                                    diskDetailsInstance.VhdId = vhdIdInstance;
                                                 }
                                                 
-                                                JToken vHDNameValue = vMDiskDetailsValue["vHDName"];
-                                                if (vHDNameValue != null && vHDNameValue.Type != JTokenType.Null)
+                                                JToken vhdNameValue = vMDiskDetailsValue["vhdName"];
+                                                if (vhdNameValue != null && vhdNameValue.Type != JTokenType.Null)
                                                 {
-                                                    string vHDNameInstance = ((string)vHDNameValue);
-                                                    diskDetailsInstance.VHDName = vHDNameInstance;
+                                                    string vhdNameInstance = ((string)vhdNameValue);
+                                                    diskDetailsInstance.VhdName = vhdNameInstance;
                                                 }
                                             }
                                         }
                                         
-                                        JToken typeValue = customSettingValue["__type"];
+                                        JToken typeValue = providerSpecificDetailsValue["__type"];
                                         if (typeValue != null && typeValue.Type != JTokenType.Null)
                                         {
                                             string typeInstance = ((string)typeValue);
-                                            hyperVReplicaProviderSpecificSettingsInstance.Type = typeInstance;
+                                            hyperVReplicaReplicationDetailsInstance.Type = typeInstance;
                                         }
-                                        propertiesInstance.CustomSettings = hyperVReplicaProviderSpecificSettingsInstance;
+                                        propertiesInstance.ProviderSpecificDetails = hyperVReplicaReplicationDetailsInstance;
                                     }
                                     if (typeName == "VMwareAzureV2ProviderSpecificSettings")
                                     {
                                         VMwareAzureV2ProviderSpecificSettings vMwareAzureV2ProviderSpecificSettingsInstance = new VMwareAzureV2ProviderSpecificSettings();
                                         
-                                        JToken protectionStageValue = customSettingValue["protectionStage"];
+                                        JToken protectionStageValue = providerSpecificDetailsValue["protectionStage"];
                                         if (protectionStageValue != null && protectionStageValue.Type != JTokenType.Null)
                                         {
                                             string protectionStageInstance = ((string)protectionStageValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.ProtectionStage = protectionStageInstance;
                                         }
                                         
-                                        JToken healthErrorCodeValue = customSettingValue["healthErrorCode"];
+                                        JToken healthErrorCodeValue = providerSpecificDetailsValue["healthErrorCode"];
                                         if (healthErrorCodeValue != null && healthErrorCodeValue.Type != JTokenType.Null)
                                         {
                                             string healthErrorCodeInstance = ((string)healthErrorCodeValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.HealthErrorCode = healthErrorCodeInstance;
                                         }
                                         
-                                        JToken resyncRequiredValue = customSettingValue["resyncRequired"];
+                                        JToken resyncRequiredValue = providerSpecificDetailsValue["resyncRequired"];
                                         if (resyncRequiredValue != null && resyncRequiredValue.Type != JTokenType.Null)
                                         {
                                             bool resyncRequiredInstance = ((bool)resyncRequiredValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.ResyncRequired = resyncRequiredInstance;
                                         }
                                         
-                                        JToken resyncProgressPercentageValue = customSettingValue["resyncProgressPercentage"];
+                                        JToken resyncProgressPercentageValue = providerSpecificDetailsValue["resyncProgressPercentage"];
                                         if (resyncProgressPercentageValue != null && resyncProgressPercentageValue.Type != JTokenType.Null)
                                         {
                                             int resyncProgressPercentageInstance = ((int)resyncProgressPercentageValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.ResyncProgressPercentage = resyncProgressPercentageInstance;
                                         }
                                         
-                                        JToken rpoInSecondsValue = customSettingValue["rpoInSeconds"];
+                                        JToken rpoInSecondsValue = providerSpecificDetailsValue["rpoInSeconds"];
                                         if (rpoInSecondsValue != null && rpoInSecondsValue.Type != JTokenType.Null)
                                         {
                                             long rpoInSecondsInstance = ((long)rpoInSecondsValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.RpoInSeconds = rpoInSecondsInstance;
                                         }
                                         
-                                        JToken compressedDataRateInMBValue = customSettingValue["compressedDataRateInMB"];
+                                        JToken compressedDataRateInMBValue = providerSpecificDetailsValue["compressedDataRateInMB"];
                                         if (compressedDataRateInMBValue != null && compressedDataRateInMBValue.Type != JTokenType.Null)
                                         {
                                             double compressedDataRateInMBInstance = ((double)compressedDataRateInMBValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.CompressedDataRateInMB = compressedDataRateInMBInstance;
                                         }
                                         
-                                        JToken uncompressedDataRateInMBValue = customSettingValue["uncompressedDataRateInMB"];
+                                        JToken uncompressedDataRateInMBValue = providerSpecificDetailsValue["uncompressedDataRateInMB"];
                                         if (uncompressedDataRateInMBValue != null && uncompressedDataRateInMBValue.Type != JTokenType.Null)
                                         {
                                             double uncompressedDataRateInMBInstance = ((double)uncompressedDataRateInMBValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.UncompressedDataRateInMB = uncompressedDataRateInMBInstance;
                                         }
                                         
-                                        JToken ipAddressValue = customSettingValue["ipAddress"];
+                                        JToken ipAddressValue = providerSpecificDetailsValue["ipAddress"];
                                         if (ipAddressValue != null && ipAddressValue.Type != JTokenType.Null)
                                         {
                                             string ipAddressInstance = ((string)ipAddressValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.IpAddress = ipAddressInstance;
                                         }
                                         
-                                        JToken agentVersionValue = customSettingValue["agentVersion"];
+                                        JToken agentVersionValue = providerSpecificDetailsValue["agentVersion"];
                                         if (agentVersionValue != null && agentVersionValue.Type != JTokenType.Null)
                                         {
                                             string agentVersionInstance = ((string)agentVersionValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.AgentVersion = agentVersionInstance;
                                         }
                                         
-                                        JToken latestUpdateVersionValue = customSettingValue["latestUpdateVersion"];
+                                        JToken latestUpdateVersionValue = providerSpecificDetailsValue["latestUpdateVersion"];
                                         if (latestUpdateVersionValue != null && latestUpdateVersionValue.Type != JTokenType.Null)
                                         {
                                             string latestUpdateVersionInstance = ((string)latestUpdateVersionValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.LatestUpdateVersion = latestUpdateVersionInstance;
                                         }
                                         
-                                        JToken isAgentUpdateRequiredValue = customSettingValue["isAgentUpdateRequired"];
+                                        JToken isAgentUpdateRequiredValue = providerSpecificDetailsValue["isAgentUpdateRequired"];
                                         if (isAgentUpdateRequiredValue != null && isAgentUpdateRequiredValue.Type != JTokenType.Null)
                                         {
                                             bool isAgentUpdateRequiredInstance = ((bool)isAgentUpdateRequiredValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.IsAgentUpdateRequired = isAgentUpdateRequiredInstance;
                                         }
                                         
-                                        JToken isRebootAfterUpdateRequiredValue = customSettingValue["isRebootAfterUpdateRequired"];
+                                        JToken isRebootAfterUpdateRequiredValue = providerSpecificDetailsValue["isRebootAfterUpdateRequired"];
                                         if (isRebootAfterUpdateRequiredValue != null && isRebootAfterUpdateRequiredValue.Type != JTokenType.Null)
                                         {
                                             bool isRebootAfterUpdateRequiredInstance = ((bool)isRebootAfterUpdateRequiredValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.IsRebootAfterUpdateRequired = isRebootAfterUpdateRequiredInstance;
                                         }
                                         
-                                        JToken lastHeartbeatValue = customSettingValue["lastHeartbeat"];
+                                        JToken lastHeartbeatValue = providerSpecificDetailsValue["lastHeartbeat"];
                                         if (lastHeartbeatValue != null && lastHeartbeatValue.Type != JTokenType.Null)
                                         {
                                             DateTime lastHeartbeatInstance = ((DateTime)lastHeartbeatValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.LastHeartbeat = lastHeartbeatInstance;
                                         }
                                         
-                                        JToken processServerIdValue = customSettingValue["processServerId"];
+                                        JToken processServerIdValue = providerSpecificDetailsValue["processServerId"];
                                         if (processServerIdValue != null && processServerIdValue.Type != JTokenType.Null)
                                         {
                                             string processServerIdInstance = ((string)processServerIdValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.ProcessServerId = processServerIdInstance;
                                         }
                                         
-                                        JToken multiVmGroupIdValue = customSettingValue["multiVmGroupId"];
+                                        JToken multiVmGroupIdValue = providerSpecificDetailsValue["multiVmGroupId"];
                                         if (multiVmGroupIdValue != null && multiVmGroupIdValue.Type != JTokenType.Null)
                                         {
                                             string multiVmGroupIdInstance = ((string)multiVmGroupIdValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.MultiVmGroupId = multiVmGroupIdInstance;
                                         }
                                         
-                                        JToken multiVmGroupNameValue = customSettingValue["multiVmGroupName"];
+                                        JToken multiVmGroupNameValue = providerSpecificDetailsValue["multiVmGroupName"];
                                         if (multiVmGroupNameValue != null && multiVmGroupNameValue.Type != JTokenType.Null)
                                         {
                                             string multiVmGroupNameInstance = ((string)multiVmGroupNameValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.MultiVmGroupName = multiVmGroupNameInstance;
                                         }
                                         
-                                        JToken protectedVolumesArray = customSettingValue["protectedVolumes"];
+                                        JToken protectedVolumesArray = providerSpecificDetailsValue["protectedVolumes"];
                                         if (protectedVolumesArray != null && protectedVolumesArray.Type != JTokenType.Null)
                                         {
                                             foreach (JToken protectedVolumesValue in ((JArray)protectedVolumesArray))
@@ -5287,94 +5266,94 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken volumeResizedValue2 = customSettingValue["volumeResized"];
+                                        JToken volumeResizedValue2 = providerSpecificDetailsValue["volumeResized"];
                                         if (volumeResizedValue2 != null && volumeResizedValue2.Type != JTokenType.Null)
                                         {
                                             bool volumeResizedInstance2 = ((bool)volumeResizedValue2);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.VolumeResized = volumeResizedInstance2;
                                         }
                                         
-                                        JToken masterTargetIdValue = customSettingValue["masterTargetId"];
+                                        JToken masterTargetIdValue = providerSpecificDetailsValue["masterTargetId"];
                                         if (masterTargetIdValue != null && masterTargetIdValue.Type != JTokenType.Null)
                                         {
                                             string masterTargetIdInstance = ((string)masterTargetIdValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.MasterTargetId = masterTargetIdInstance;
                                         }
                                         
-                                        JToken sourceVmCPUCountValue = customSettingValue["sourceVmCPUCount"];
+                                        JToken sourceVmCPUCountValue = providerSpecificDetailsValue["sourceVmCPUCount"];
                                         if (sourceVmCPUCountValue != null && sourceVmCPUCountValue.Type != JTokenType.Null)
                                         {
                                             int sourceVmCPUCountInstance = ((int)sourceVmCPUCountValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.SourceVmCPUCount = sourceVmCPUCountInstance;
                                         }
                                         
-                                        JToken sourceVmRAMSizeInMBValue = customSettingValue["sourceVmRAMSizeInMB"];
+                                        JToken sourceVmRAMSizeInMBValue = providerSpecificDetailsValue["sourceVmRAMSizeInMB"];
                                         if (sourceVmRAMSizeInMBValue != null && sourceVmRAMSizeInMBValue.Type != JTokenType.Null)
                                         {
                                             int sourceVmRAMSizeInMBInstance = ((int)sourceVmRAMSizeInMBValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.SourceVmRAMSizeInMB = sourceVmRAMSizeInMBInstance;
                                         }
                                         
-                                        JToken osTypeValue = customSettingValue["osType"];
+                                        JToken osTypeValue = providerSpecificDetailsValue["osType"];
                                         if (osTypeValue != null && osTypeValue.Type != JTokenType.Null)
                                         {
                                             string osTypeInstance = ((string)osTypeValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.OSType = osTypeInstance;
                                         }
                                         
-                                        JToken vhdNameValue = customSettingValue["vhdName"];
-                                        if (vhdNameValue != null && vhdNameValue.Type != JTokenType.Null)
+                                        JToken vhdNameValue2 = providerSpecificDetailsValue["vhdName"];
+                                        if (vhdNameValue2 != null && vhdNameValue2.Type != JTokenType.Null)
                                         {
-                                            string vhdNameInstance = ((string)vhdNameValue);
-                                            vMwareAzureV2ProviderSpecificSettingsInstance.VHDName = vhdNameInstance;
+                                            string vhdNameInstance2 = ((string)vhdNameValue2);
+                                            vMwareAzureV2ProviderSpecificSettingsInstance.VHDName = vhdNameInstance2;
                                         }
                                         
-                                        JToken osDiskIdValue = customSettingValue["osDiskId"];
+                                        JToken osDiskIdValue = providerSpecificDetailsValue["osDiskId"];
                                         if (osDiskIdValue != null && osDiskIdValue.Type != JTokenType.Null)
                                         {
                                             string osDiskIdInstance = ((string)osDiskIdValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.OSDiskId = osDiskIdInstance;
                                         }
                                         
-                                        JToken typeValue2 = customSettingValue["__type"];
+                                        JToken typeValue2 = providerSpecificDetailsValue["__type"];
                                         if (typeValue2 != null && typeValue2.Type != JTokenType.Null)
                                         {
                                             string typeInstance2 = ((string)typeValue2);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.Type = typeInstance2;
                                         }
-                                        propertiesInstance.CustomSettings = vMwareAzureV2ProviderSpecificSettingsInstance;
+                                        propertiesInstance.ProviderSpecificDetails = vMwareAzureV2ProviderSpecificSettingsInstance;
                                     }
-                                    if (typeName == "HyperVReplicaAzureProviderSpecificSettings")
+                                    if (typeName == "HyperVReplicaAzureReplicationDetails")
                                     {
-                                        HyperVReplicaAzureProviderSpecificSettings hyperVReplicaAzureProviderSpecificSettingsInstance = new HyperVReplicaAzureProviderSpecificSettings();
+                                        HyperVReplicaAzureReplicationDetails hyperVReplicaAzureReplicationDetailsInstance = new HyperVReplicaAzureReplicationDetails();
                                         
-                                        JToken azureVMDiskDetailsArray = customSettingValue["azureVMDiskDetails"];
+                                        JToken azureVMDiskDetailsArray = providerSpecificDetailsValue["azureVMDiskDetails"];
                                         if (azureVMDiskDetailsArray != null && azureVMDiskDetailsArray.Type != JTokenType.Null)
                                         {
                                             foreach (JToken azureVMDiskDetailsValue in ((JArray)azureVMDiskDetailsArray))
                                             {
                                                 AzureVmDiskDetails azureVmDiskDetailsInstance = new AzureVmDiskDetails();
-                                                hyperVReplicaAzureProviderSpecificSettingsInstance.AzureVMDiskDetails.Add(azureVmDiskDetailsInstance);
+                                                hyperVReplicaAzureReplicationDetailsInstance.AzureVMDiskDetails.Add(azureVmDiskDetailsInstance);
                                                 
-                                                JToken vhdTypeValue = azureVMDiskDetailsValue["vhdType"];
-                                                if (vhdTypeValue != null && vhdTypeValue.Type != JTokenType.Null)
+                                                JToken vhdTypeValue2 = azureVMDiskDetailsValue["vhdType"];
+                                                if (vhdTypeValue2 != null && vhdTypeValue2.Type != JTokenType.Null)
                                                 {
-                                                    string vhdTypeInstance = ((string)vhdTypeValue);
-                                                    azureVmDiskDetailsInstance.VhdType = vhdTypeInstance;
+                                                    string vhdTypeInstance2 = ((string)vhdTypeValue2);
+                                                    azureVmDiskDetailsInstance.VhdType = vhdTypeInstance2;
                                                 }
                                                 
-                                                JToken vhdIdValue = azureVMDiskDetailsValue["vhdId"];
-                                                if (vhdIdValue != null && vhdIdValue.Type != JTokenType.Null)
+                                                JToken vhdIdValue2 = azureVMDiskDetailsValue["vhdId"];
+                                                if (vhdIdValue2 != null && vhdIdValue2.Type != JTokenType.Null)
                                                 {
-                                                    string vhdIdInstance = ((string)vhdIdValue);
-                                                    azureVmDiskDetailsInstance.VhdId = vhdIdInstance;
+                                                    string vhdIdInstance2 = ((string)vhdIdValue2);
+                                                    azureVmDiskDetailsInstance.VhdId = vhdIdInstance2;
                                                 }
                                                 
-                                                JToken vhdNameValue2 = azureVMDiskDetailsValue["vhdName"];
-                                                if (vhdNameValue2 != null && vhdNameValue2.Type != JTokenType.Null)
+                                                JToken vhdNameValue3 = azureVMDiskDetailsValue["vhdName"];
+                                                if (vhdNameValue3 != null && vhdNameValue3.Type != JTokenType.Null)
                                                 {
-                                                    string vhdNameInstance2 = ((string)vhdNameValue2);
-                                                    azureVmDiskDetailsInstance.VhdName = vhdNameInstance2;
+                                                    string vhdNameInstance3 = ((string)vhdNameValue3);
+                                                    azureVmDiskDetailsInstance.VhdName = vhdNameInstance3;
                                                 }
                                                 
                                                 JToken maxSizeMBValue2 = azureVMDiskDetailsValue["maxSizeMB"];
@@ -5384,11 +5363,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     azureVmDiskDetailsInstance.MaxSizeMB = maxSizeMBInstance2;
                                                 }
                                                 
-                                                JToken diskLocationValue = azureVMDiskDetailsValue["diskLocation"];
-                                                if (diskLocationValue != null && diskLocationValue.Type != JTokenType.Null)
+                                                JToken targetDiskLocationValue = azureVMDiskDetailsValue["targetDiskLocation"];
+                                                if (targetDiskLocationValue != null && targetDiskLocationValue.Type != JTokenType.Null)
                                                 {
-                                                    string diskLocationInstance = ((string)diskLocationValue);
-                                                    azureVmDiskDetailsInstance.DiskLocation = diskLocationInstance;
+                                                    string targetDiskLocationInstance = ((string)targetDiskLocationValue);
+                                                    azureVmDiskDetailsInstance.TargetDiskLocation = targetDiskLocationInstance;
                                                 }
                                                 
                                                 JToken lunIdValue = azureVMDiskDetailsValue["lunId"];
@@ -5398,55 +5377,55 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     azureVmDiskDetailsInstance.LunId = lunIdInstance;
                                                 }
                                                 
-                                                JToken primaryDiskCorelationIdValue = azureVMDiskDetailsValue["primaryDiskCorelationId"];
-                                                if (primaryDiskCorelationIdValue != null && primaryDiskCorelationIdValue.Type != JTokenType.Null)
+                                                JToken targetDiskNameValue = azureVMDiskDetailsValue["targetDiskName"];
+                                                if (targetDiskNameValue != null && targetDiskNameValue.Type != JTokenType.Null)
                                                 {
-                                                    string primaryDiskCorelationIdInstance = ((string)primaryDiskCorelationIdValue);
-                                                    azureVmDiskDetailsInstance.PrimaryDiskCorelationId = primaryDiskCorelationIdInstance;
+                                                    string targetDiskNameInstance = ((string)targetDiskNameValue);
+                                                    azureVmDiskDetailsInstance.TargetDiskName = targetDiskNameInstance;
                                                 }
                                             }
                                         }
                                         
-                                        JToken recoveryAzureVMNameValue = customSettingValue["recoveryAzureVMName"];
+                                        JToken recoveryAzureVMNameValue = providerSpecificDetailsValue["recoveryAzureVMName"];
                                         if (recoveryAzureVMNameValue != null && recoveryAzureVMNameValue.Type != JTokenType.Null)
                                         {
                                             string recoveryAzureVMNameInstance = ((string)recoveryAzureVMNameValue);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.RecoveryAzureVMName = recoveryAzureVMNameInstance;
+                                            hyperVReplicaAzureReplicationDetailsInstance.RecoveryAzureVMName = recoveryAzureVMNameInstance;
                                         }
                                         
-                                        JToken recoveryAzureVMSizeValue = customSettingValue["recoveryAzureVMSize"];
+                                        JToken recoveryAzureVMSizeValue = providerSpecificDetailsValue["recoveryAzureVMSize"];
                                         if (recoveryAzureVMSizeValue != null && recoveryAzureVMSizeValue.Type != JTokenType.Null)
                                         {
                                             string recoveryAzureVMSizeInstance = ((string)recoveryAzureVMSizeValue);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.RecoveryAzureVMSize = recoveryAzureVMSizeInstance;
+                                            hyperVReplicaAzureReplicationDetailsInstance.RecoveryAzureVMSize = recoveryAzureVMSizeInstance;
                                         }
                                         
-                                        JToken recoveryAzureStorageAccountValue = customSettingValue["recoveryAzureStorageAccount"];
+                                        JToken recoveryAzureStorageAccountValue = providerSpecificDetailsValue["recoveryAzureStorageAccount"];
                                         if (recoveryAzureStorageAccountValue != null && recoveryAzureStorageAccountValue.Type != JTokenType.Null)
                                         {
                                             string recoveryAzureStorageAccountInstance = ((string)recoveryAzureStorageAccountValue);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.RecoveryAzureStorageAccount = recoveryAzureStorageAccountInstance;
+                                            hyperVReplicaAzureReplicationDetailsInstance.RecoveryAzureStorageAccount = recoveryAzureStorageAccountInstance;
                                         }
                                         
-                                        JToken selectedRecoveryAzureNetworkIdValue = customSettingValue["selectedRecoveryAzureNetworkId"];
+                                        JToken selectedRecoveryAzureNetworkIdValue = providerSpecificDetailsValue["selectedRecoveryAzureNetworkId"];
                                         if (selectedRecoveryAzureNetworkIdValue != null && selectedRecoveryAzureNetworkIdValue.Type != JTokenType.Null)
                                         {
                                             string selectedRecoveryAzureNetworkIdInstance = ((string)selectedRecoveryAzureNetworkIdValue);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.SelectedRecoveryAzureNetworkId = selectedRecoveryAzureNetworkIdInstance;
+                                            hyperVReplicaAzureReplicationDetailsInstance.SelectedRecoveryAzureNetworkId = selectedRecoveryAzureNetworkIdInstance;
                                         }
                                         
-                                        JToken lastReplicatedTimeValue2 = customSettingValue["lastReplicatedTime"];
+                                        JToken lastReplicatedTimeValue2 = providerSpecificDetailsValue["lastReplicatedTime"];
                                         if (lastReplicatedTimeValue2 != null && lastReplicatedTimeValue2.Type != JTokenType.Null)
                                         {
                                             string lastReplicatedTimeInstance2 = ((string)lastReplicatedTimeValue2);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.LastReplicatedTime = lastReplicatedTimeInstance2;
+                                            hyperVReplicaAzureReplicationDetailsInstance.LastReplicatedTime = lastReplicatedTimeInstance2;
                                         }
                                         
-                                        JToken initialReplicationDetailsValue2 = customSettingValue["initialReplicationDetails"];
+                                        JToken initialReplicationDetailsValue2 = providerSpecificDetailsValue["initialReplicationDetails"];
                                         if (initialReplicationDetailsValue2 != null && initialReplicationDetailsValue2.Type != JTokenType.Null)
                                         {
                                             InitialReplicationDetails initialReplicationDetailsInstance2 = new InitialReplicationDetails();
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.InitialReplicationDetails = initialReplicationDetailsInstance2;
+                                            hyperVReplicaAzureReplicationDetailsInstance.InitialReplicationDetails = initialReplicationDetailsInstance2;
                                             
                                             JToken initialReplicationTypeValue2 = initialReplicationDetailsValue2["initialReplicationType"];
                                             if (initialReplicationTypeValue2 != null && initialReplicationTypeValue2.Type != JTokenType.Null)
@@ -5463,13 +5442,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken vmNicsArray2 = customSettingValue["vmNics"];
+                                        JToken vmNicsArray2 = providerSpecificDetailsValue["vmNics"];
                                         if (vmNicsArray2 != null && vmNicsArray2.Type != JTokenType.Null)
                                         {
                                             foreach (JToken vmNicsValue2 in ((JArray)vmNicsArray2))
                                             {
                                                 VMNicDetails vMNicDetailsInstance2 = new VMNicDetails();
-                                                hyperVReplicaAzureProviderSpecificSettingsInstance.VMNics.Add(vMNicDetailsInstance2);
+                                                hyperVReplicaAzureReplicationDetailsInstance.VMNics.Add(vMNicDetailsInstance2);
                                                 
                                                 JToken nicIdValue2 = vmNicsValue2["nicId"];
                                                 if (nicIdValue2 != null && nicIdValue2.Type != JTokenType.Null)
@@ -5515,13 +5494,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken typeValue3 = customSettingValue["__type"];
+                                        JToken typeValue3 = providerSpecificDetailsValue["__type"];
                                         if (typeValue3 != null && typeValue3.Type != JTokenType.Null)
                                         {
                                             string typeInstance3 = ((string)typeValue3);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.Type = typeInstance3;
+                                            hyperVReplicaAzureReplicationDetailsInstance.Type = typeInstance3;
                                         }
-                                        propertiesInstance.CustomSettings = hyperVReplicaAzureProviderSpecificSettingsInstance;
+                                        propertiesInstance.ProviderSpecificDetails = hyperVReplicaAzureReplicationDetailsInstance;
                                     }
                                 }
                             }
@@ -5769,11 +5748,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.ProtectedItemType = protectedItemTypeInstance;
                                 }
                                 
-                                JToken protectedItemSourceIdValue = propertiesValue["protectedItemSourceId"];
-                                if (protectedItemSourceIdValue != null && protectedItemSourceIdValue.Type != JTokenType.Null)
+                                JToken protectedItemIdValue = propertiesValue["protectedItemId"];
+                                if (protectedItemIdValue != null && protectedItemIdValue.Type != JTokenType.Null)
                                 {
-                                    string protectedItemSourceIdInstance = ((string)protectedItemSourceIdValue);
-                                    propertiesInstance.ProtectedItemSourceId = protectedItemSourceIdInstance;
+                                    string protectedItemIdInstance = ((string)protectedItemIdValue);
+                                    propertiesInstance.ProtectedItemId = protectedItemIdInstance;
                                 }
                                 
                                 JToken recoveryServicesProviderNameValue = propertiesValue["recoveryServicesProviderName"];
@@ -5811,11 +5790,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.RecoveryProtectionContainerFriendlyName = recoveryProtectionContainerFriendlyNameInstance;
                                 }
                                 
-                                JToken protectionStatusValue = propertiesValue["protectionStatus"];
-                                if (protectionStatusValue != null && protectionStatusValue.Type != JTokenType.Null)
+                                JToken protectionStateValue = propertiesValue["protectionState"];
+                                if (protectionStateValue != null && protectionStateValue.Type != JTokenType.Null)
                                 {
-                                    string protectionStatusInstance = ((string)protectionStatusValue);
-                                    propertiesInstance.ProtectionStatus = protectionStatusInstance;
+                                    string protectionStateInstance = ((string)protectionStateValue);
+                                    propertiesInstance.ProtectionState = protectionStateInstance;
                                 }
                                 
                                 JToken activeLocationValue = propertiesValue["activeLocation"];
@@ -5823,13 +5802,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 {
                                     string activeLocationInstance = ((string)activeLocationValue);
                                     propertiesInstance.ActiveLocation = activeLocationInstance;
-                                }
-                                
-                                JToken testFailoverStateDescriptionValue = propertiesValue["testFailoverStateDescription"];
-                                if (testFailoverStateDescriptionValue != null && testFailoverStateDescriptionValue.Type != JTokenType.Null)
-                                {
-                                    string testFailoverStateDescriptionInstance = ((string)testFailoverStateDescriptionValue);
-                                    propertiesInstance.TestFailoverStateDescription = testFailoverStateDescriptionInstance;
                                 }
                                 
                                 JToken allowedOperationsArray = propertiesValue["allowedOperations"];
@@ -5977,28 +5949,28 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     }
                                 }
                                 
-                                JToken customSettingValue = propertiesValue["customSetting"];
-                                if (customSettingValue != null && customSettingValue.Type != JTokenType.Null)
+                                JToken providerSpecificDetailsValue = propertiesValue["providerSpecificDetails"];
+                                if (providerSpecificDetailsValue != null && providerSpecificDetailsValue.Type != JTokenType.Null)
                                 {
-                                    string typeName = ((string)customSettingValue["__type"]);
-                                    if (typeName == "HyperVReplicaProviderSpecificSettings")
+                                    string typeName = ((string)providerSpecificDetailsValue["__type"]);
+                                    if (typeName == "HyperVReplicaReplicationDetails")
                                     {
-                                        HyperVReplicaProviderSpecificSettings hyperVReplicaProviderSpecificSettingsInstance = new HyperVReplicaProviderSpecificSettings();
+                                        HyperVReplicaReplicationDetails hyperVReplicaReplicationDetailsInstance = new HyperVReplicaReplicationDetails();
                                         
-                                        JToken lastReplicatedTimeValue = customSettingValue["lastReplicatedTime"];
+                                        JToken lastReplicatedTimeValue = providerSpecificDetailsValue["lastReplicatedTime"];
                                         if (lastReplicatedTimeValue != null && lastReplicatedTimeValue.Type != JTokenType.Null)
                                         {
                                             string lastReplicatedTimeInstance = ((string)lastReplicatedTimeValue);
-                                            hyperVReplicaProviderSpecificSettingsInstance.LastReplicatedTime = lastReplicatedTimeInstance;
+                                            hyperVReplicaReplicationDetailsInstance.LastReplicatedTime = lastReplicatedTimeInstance;
                                         }
                                         
-                                        JToken vmNicsArray = customSettingValue["vmNics"];
+                                        JToken vmNicsArray = providerSpecificDetailsValue["vmNics"];
                                         if (vmNicsArray != null && vmNicsArray.Type != JTokenType.Null)
                                         {
                                             foreach (JToken vmNicsValue in ((JArray)vmNicsArray))
                                             {
                                                 VMNicDetails vMNicDetailsInstance = new VMNicDetails();
-                                                hyperVReplicaProviderSpecificSettingsInstance.VmNics.Add(vMNicDetailsInstance);
+                                                hyperVReplicaReplicationDetailsInstance.VmNics.Add(vMNicDetailsInstance);
                                                 
                                                 JToken nicIdValue = vmNicsValue["nicId"];
                                                 if (nicIdValue != null && nicIdValue.Type != JTokenType.Null)
@@ -6044,11 +6016,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken initialReplicationDetailsValue = customSettingValue["initialReplicationDetails"];
+                                        JToken initialReplicationDetailsValue = providerSpecificDetailsValue["initialReplicationDetails"];
                                         if (initialReplicationDetailsValue != null && initialReplicationDetailsValue.Type != JTokenType.Null)
                                         {
                                             InitialReplicationDetails initialReplicationDetailsInstance = new InitialReplicationDetails();
-                                            hyperVReplicaProviderSpecificSettingsInstance.InitialReplicationDetails = initialReplicationDetailsInstance;
+                                            hyperVReplicaReplicationDetailsInstance.InitialReplicationDetails = initialReplicationDetailsInstance;
                                             
                                             JToken initialReplicationTypeValue = initialReplicationDetailsValue["initialReplicationType"];
                                             if (initialReplicationTypeValue != null && initialReplicationTypeValue.Type != JTokenType.Null)
@@ -6065,13 +6037,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken vMDiskDetailsArray = customSettingValue["vMDiskDetails"];
+                                        JToken vMDiskDetailsArray = providerSpecificDetailsValue["vMDiskDetails"];
                                         if (vMDiskDetailsArray != null && vMDiskDetailsArray.Type != JTokenType.Null)
                                         {
                                             foreach (JToken vMDiskDetailsValue in ((JArray)vMDiskDetailsArray))
                                             {
                                                 DiskDetails diskDetailsInstance = new DiskDetails();
-                                                hyperVReplicaProviderSpecificSettingsInstance.VMDiskDetails.Add(diskDetailsInstance);
+                                                hyperVReplicaReplicationDetailsInstance.VMDiskDetails.Add(diskDetailsInstance);
                                                 
                                                 JToken maxSizeMBValue = vMDiskDetailsValue["maxSizeMB"];
                                                 if (maxSizeMBValue != null && maxSizeMBValue.Type != JTokenType.Null)
@@ -6080,154 +6052,154 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     diskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
                                                 }
                                                 
-                                                JToken vHDStatusValue = vMDiskDetailsValue["vHDStatus"];
-                                                if (vHDStatusValue != null && vHDStatusValue.Type != JTokenType.Null)
+                                                JToken vhdTypeValue = vMDiskDetailsValue["vhdType"];
+                                                if (vhdTypeValue != null && vhdTypeValue.Type != JTokenType.Null)
                                                 {
-                                                    string vHDStatusInstance = ((string)vHDStatusValue);
-                                                    diskDetailsInstance.VHDStatus = vHDStatusInstance;
+                                                    string vhdTypeInstance = ((string)vhdTypeValue);
+                                                    diskDetailsInstance.VhdType = vhdTypeInstance;
                                                 }
                                                 
-                                                JToken vHDIdValue = vMDiskDetailsValue["vHDId"];
-                                                if (vHDIdValue != null && vHDIdValue.Type != JTokenType.Null)
+                                                JToken vhdIdValue = vMDiskDetailsValue["vhdId"];
+                                                if (vhdIdValue != null && vhdIdValue.Type != JTokenType.Null)
                                                 {
-                                                    string vHDIdInstance = ((string)vHDIdValue);
-                                                    diskDetailsInstance.VHDId = vHDIdInstance;
+                                                    string vhdIdInstance = ((string)vhdIdValue);
+                                                    diskDetailsInstance.VhdId = vhdIdInstance;
                                                 }
                                                 
-                                                JToken vHDNameValue = vMDiskDetailsValue["vHDName"];
-                                                if (vHDNameValue != null && vHDNameValue.Type != JTokenType.Null)
+                                                JToken vhdNameValue = vMDiskDetailsValue["vhdName"];
+                                                if (vhdNameValue != null && vhdNameValue.Type != JTokenType.Null)
                                                 {
-                                                    string vHDNameInstance = ((string)vHDNameValue);
-                                                    diskDetailsInstance.VHDName = vHDNameInstance;
+                                                    string vhdNameInstance = ((string)vhdNameValue);
+                                                    diskDetailsInstance.VhdName = vhdNameInstance;
                                                 }
                                             }
                                         }
                                         
-                                        JToken typeValue = customSettingValue["__type"];
+                                        JToken typeValue = providerSpecificDetailsValue["__type"];
                                         if (typeValue != null && typeValue.Type != JTokenType.Null)
                                         {
                                             string typeInstance = ((string)typeValue);
-                                            hyperVReplicaProviderSpecificSettingsInstance.Type = typeInstance;
+                                            hyperVReplicaReplicationDetailsInstance.Type = typeInstance;
                                         }
-                                        propertiesInstance.CustomSettings = hyperVReplicaProviderSpecificSettingsInstance;
+                                        propertiesInstance.ProviderSpecificDetails = hyperVReplicaReplicationDetailsInstance;
                                     }
                                     if (typeName == "VMwareAzureV2ProviderSpecificSettings")
                                     {
                                         VMwareAzureV2ProviderSpecificSettings vMwareAzureV2ProviderSpecificSettingsInstance = new VMwareAzureV2ProviderSpecificSettings();
                                         
-                                        JToken protectionStageValue = customSettingValue["protectionStage"];
+                                        JToken protectionStageValue = providerSpecificDetailsValue["protectionStage"];
                                         if (protectionStageValue != null && protectionStageValue.Type != JTokenType.Null)
                                         {
                                             string protectionStageInstance = ((string)protectionStageValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.ProtectionStage = protectionStageInstance;
                                         }
                                         
-                                        JToken healthErrorCodeValue = customSettingValue["healthErrorCode"];
+                                        JToken healthErrorCodeValue = providerSpecificDetailsValue["healthErrorCode"];
                                         if (healthErrorCodeValue != null && healthErrorCodeValue.Type != JTokenType.Null)
                                         {
                                             string healthErrorCodeInstance = ((string)healthErrorCodeValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.HealthErrorCode = healthErrorCodeInstance;
                                         }
                                         
-                                        JToken resyncRequiredValue = customSettingValue["resyncRequired"];
+                                        JToken resyncRequiredValue = providerSpecificDetailsValue["resyncRequired"];
                                         if (resyncRequiredValue != null && resyncRequiredValue.Type != JTokenType.Null)
                                         {
                                             bool resyncRequiredInstance = ((bool)resyncRequiredValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.ResyncRequired = resyncRequiredInstance;
                                         }
                                         
-                                        JToken resyncProgressPercentageValue = customSettingValue["resyncProgressPercentage"];
+                                        JToken resyncProgressPercentageValue = providerSpecificDetailsValue["resyncProgressPercentage"];
                                         if (resyncProgressPercentageValue != null && resyncProgressPercentageValue.Type != JTokenType.Null)
                                         {
                                             int resyncProgressPercentageInstance = ((int)resyncProgressPercentageValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.ResyncProgressPercentage = resyncProgressPercentageInstance;
                                         }
                                         
-                                        JToken rpoInSecondsValue = customSettingValue["rpoInSeconds"];
+                                        JToken rpoInSecondsValue = providerSpecificDetailsValue["rpoInSeconds"];
                                         if (rpoInSecondsValue != null && rpoInSecondsValue.Type != JTokenType.Null)
                                         {
                                             long rpoInSecondsInstance = ((long)rpoInSecondsValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.RpoInSeconds = rpoInSecondsInstance;
                                         }
                                         
-                                        JToken compressedDataRateInMBValue = customSettingValue["compressedDataRateInMB"];
+                                        JToken compressedDataRateInMBValue = providerSpecificDetailsValue["compressedDataRateInMB"];
                                         if (compressedDataRateInMBValue != null && compressedDataRateInMBValue.Type != JTokenType.Null)
                                         {
                                             double compressedDataRateInMBInstance = ((double)compressedDataRateInMBValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.CompressedDataRateInMB = compressedDataRateInMBInstance;
                                         }
                                         
-                                        JToken uncompressedDataRateInMBValue = customSettingValue["uncompressedDataRateInMB"];
+                                        JToken uncompressedDataRateInMBValue = providerSpecificDetailsValue["uncompressedDataRateInMB"];
                                         if (uncompressedDataRateInMBValue != null && uncompressedDataRateInMBValue.Type != JTokenType.Null)
                                         {
                                             double uncompressedDataRateInMBInstance = ((double)uncompressedDataRateInMBValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.UncompressedDataRateInMB = uncompressedDataRateInMBInstance;
                                         }
                                         
-                                        JToken ipAddressValue = customSettingValue["ipAddress"];
+                                        JToken ipAddressValue = providerSpecificDetailsValue["ipAddress"];
                                         if (ipAddressValue != null && ipAddressValue.Type != JTokenType.Null)
                                         {
                                             string ipAddressInstance = ((string)ipAddressValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.IpAddress = ipAddressInstance;
                                         }
                                         
-                                        JToken agentVersionValue = customSettingValue["agentVersion"];
+                                        JToken agentVersionValue = providerSpecificDetailsValue["agentVersion"];
                                         if (agentVersionValue != null && agentVersionValue.Type != JTokenType.Null)
                                         {
                                             string agentVersionInstance = ((string)agentVersionValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.AgentVersion = agentVersionInstance;
                                         }
                                         
-                                        JToken latestUpdateVersionValue = customSettingValue["latestUpdateVersion"];
+                                        JToken latestUpdateVersionValue = providerSpecificDetailsValue["latestUpdateVersion"];
                                         if (latestUpdateVersionValue != null && latestUpdateVersionValue.Type != JTokenType.Null)
                                         {
                                             string latestUpdateVersionInstance = ((string)latestUpdateVersionValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.LatestUpdateVersion = latestUpdateVersionInstance;
                                         }
                                         
-                                        JToken isAgentUpdateRequiredValue = customSettingValue["isAgentUpdateRequired"];
+                                        JToken isAgentUpdateRequiredValue = providerSpecificDetailsValue["isAgentUpdateRequired"];
                                         if (isAgentUpdateRequiredValue != null && isAgentUpdateRequiredValue.Type != JTokenType.Null)
                                         {
                                             bool isAgentUpdateRequiredInstance = ((bool)isAgentUpdateRequiredValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.IsAgentUpdateRequired = isAgentUpdateRequiredInstance;
                                         }
                                         
-                                        JToken isRebootAfterUpdateRequiredValue = customSettingValue["isRebootAfterUpdateRequired"];
+                                        JToken isRebootAfterUpdateRequiredValue = providerSpecificDetailsValue["isRebootAfterUpdateRequired"];
                                         if (isRebootAfterUpdateRequiredValue != null && isRebootAfterUpdateRequiredValue.Type != JTokenType.Null)
                                         {
                                             bool isRebootAfterUpdateRequiredInstance = ((bool)isRebootAfterUpdateRequiredValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.IsRebootAfterUpdateRequired = isRebootAfterUpdateRequiredInstance;
                                         }
                                         
-                                        JToken lastHeartbeatValue = customSettingValue["lastHeartbeat"];
+                                        JToken lastHeartbeatValue = providerSpecificDetailsValue["lastHeartbeat"];
                                         if (lastHeartbeatValue != null && lastHeartbeatValue.Type != JTokenType.Null)
                                         {
                                             DateTime lastHeartbeatInstance = ((DateTime)lastHeartbeatValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.LastHeartbeat = lastHeartbeatInstance;
                                         }
                                         
-                                        JToken processServerIdValue = customSettingValue["processServerId"];
+                                        JToken processServerIdValue = providerSpecificDetailsValue["processServerId"];
                                         if (processServerIdValue != null && processServerIdValue.Type != JTokenType.Null)
                                         {
                                             string processServerIdInstance = ((string)processServerIdValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.ProcessServerId = processServerIdInstance;
                                         }
                                         
-                                        JToken multiVmGroupIdValue = customSettingValue["multiVmGroupId"];
+                                        JToken multiVmGroupIdValue = providerSpecificDetailsValue["multiVmGroupId"];
                                         if (multiVmGroupIdValue != null && multiVmGroupIdValue.Type != JTokenType.Null)
                                         {
                                             string multiVmGroupIdInstance = ((string)multiVmGroupIdValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.MultiVmGroupId = multiVmGroupIdInstance;
                                         }
                                         
-                                        JToken multiVmGroupNameValue = customSettingValue["multiVmGroupName"];
+                                        JToken multiVmGroupNameValue = providerSpecificDetailsValue["multiVmGroupName"];
                                         if (multiVmGroupNameValue != null && multiVmGroupNameValue.Type != JTokenType.Null)
                                         {
                                             string multiVmGroupNameInstance = ((string)multiVmGroupNameValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.MultiVmGroupName = multiVmGroupNameInstance;
                                         }
                                         
-                                        JToken protectedVolumesArray = customSettingValue["protectedVolumes"];
+                                        JToken protectedVolumesArray = providerSpecificDetailsValue["protectedVolumes"];
                                         if (protectedVolumesArray != null && protectedVolumesArray.Type != JTokenType.Null)
                                         {
                                             foreach (JToken protectedVolumesValue in ((JArray)protectedVolumesArray))
@@ -6328,94 +6300,94 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken volumeResizedValue2 = customSettingValue["volumeResized"];
+                                        JToken volumeResizedValue2 = providerSpecificDetailsValue["volumeResized"];
                                         if (volumeResizedValue2 != null && volumeResizedValue2.Type != JTokenType.Null)
                                         {
                                             bool volumeResizedInstance2 = ((bool)volumeResizedValue2);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.VolumeResized = volumeResizedInstance2;
                                         }
                                         
-                                        JToken masterTargetIdValue = customSettingValue["masterTargetId"];
+                                        JToken masterTargetIdValue = providerSpecificDetailsValue["masterTargetId"];
                                         if (masterTargetIdValue != null && masterTargetIdValue.Type != JTokenType.Null)
                                         {
                                             string masterTargetIdInstance = ((string)masterTargetIdValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.MasterTargetId = masterTargetIdInstance;
                                         }
                                         
-                                        JToken sourceVmCPUCountValue = customSettingValue["sourceVmCPUCount"];
+                                        JToken sourceVmCPUCountValue = providerSpecificDetailsValue["sourceVmCPUCount"];
                                         if (sourceVmCPUCountValue != null && sourceVmCPUCountValue.Type != JTokenType.Null)
                                         {
                                             int sourceVmCPUCountInstance = ((int)sourceVmCPUCountValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.SourceVmCPUCount = sourceVmCPUCountInstance;
                                         }
                                         
-                                        JToken sourceVmRAMSizeInMBValue = customSettingValue["sourceVmRAMSizeInMB"];
+                                        JToken sourceVmRAMSizeInMBValue = providerSpecificDetailsValue["sourceVmRAMSizeInMB"];
                                         if (sourceVmRAMSizeInMBValue != null && sourceVmRAMSizeInMBValue.Type != JTokenType.Null)
                                         {
                                             int sourceVmRAMSizeInMBInstance = ((int)sourceVmRAMSizeInMBValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.SourceVmRAMSizeInMB = sourceVmRAMSizeInMBInstance;
                                         }
                                         
-                                        JToken osTypeValue = customSettingValue["osType"];
+                                        JToken osTypeValue = providerSpecificDetailsValue["osType"];
                                         if (osTypeValue != null && osTypeValue.Type != JTokenType.Null)
                                         {
                                             string osTypeInstance = ((string)osTypeValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.OSType = osTypeInstance;
                                         }
                                         
-                                        JToken vhdNameValue = customSettingValue["vhdName"];
-                                        if (vhdNameValue != null && vhdNameValue.Type != JTokenType.Null)
+                                        JToken vhdNameValue2 = providerSpecificDetailsValue["vhdName"];
+                                        if (vhdNameValue2 != null && vhdNameValue2.Type != JTokenType.Null)
                                         {
-                                            string vhdNameInstance = ((string)vhdNameValue);
-                                            vMwareAzureV2ProviderSpecificSettingsInstance.VHDName = vhdNameInstance;
+                                            string vhdNameInstance2 = ((string)vhdNameValue2);
+                                            vMwareAzureV2ProviderSpecificSettingsInstance.VHDName = vhdNameInstance2;
                                         }
                                         
-                                        JToken osDiskIdValue = customSettingValue["osDiskId"];
+                                        JToken osDiskIdValue = providerSpecificDetailsValue["osDiskId"];
                                         if (osDiskIdValue != null && osDiskIdValue.Type != JTokenType.Null)
                                         {
                                             string osDiskIdInstance = ((string)osDiskIdValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.OSDiskId = osDiskIdInstance;
                                         }
                                         
-                                        JToken typeValue2 = customSettingValue["__type"];
+                                        JToken typeValue2 = providerSpecificDetailsValue["__type"];
                                         if (typeValue2 != null && typeValue2.Type != JTokenType.Null)
                                         {
                                             string typeInstance2 = ((string)typeValue2);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.Type = typeInstance2;
                                         }
-                                        propertiesInstance.CustomSettings = vMwareAzureV2ProviderSpecificSettingsInstance;
+                                        propertiesInstance.ProviderSpecificDetails = vMwareAzureV2ProviderSpecificSettingsInstance;
                                     }
-                                    if (typeName == "HyperVReplicaAzureProviderSpecificSettings")
+                                    if (typeName == "HyperVReplicaAzureReplicationDetails")
                                     {
-                                        HyperVReplicaAzureProviderSpecificSettings hyperVReplicaAzureProviderSpecificSettingsInstance = new HyperVReplicaAzureProviderSpecificSettings();
+                                        HyperVReplicaAzureReplicationDetails hyperVReplicaAzureReplicationDetailsInstance = new HyperVReplicaAzureReplicationDetails();
                                         
-                                        JToken azureVMDiskDetailsArray = customSettingValue["azureVMDiskDetails"];
+                                        JToken azureVMDiskDetailsArray = providerSpecificDetailsValue["azureVMDiskDetails"];
                                         if (azureVMDiskDetailsArray != null && azureVMDiskDetailsArray.Type != JTokenType.Null)
                                         {
                                             foreach (JToken azureVMDiskDetailsValue in ((JArray)azureVMDiskDetailsArray))
                                             {
                                                 AzureVmDiskDetails azureVmDiskDetailsInstance = new AzureVmDiskDetails();
-                                                hyperVReplicaAzureProviderSpecificSettingsInstance.AzureVMDiskDetails.Add(azureVmDiskDetailsInstance);
+                                                hyperVReplicaAzureReplicationDetailsInstance.AzureVMDiskDetails.Add(azureVmDiskDetailsInstance);
                                                 
-                                                JToken vhdTypeValue = azureVMDiskDetailsValue["vhdType"];
-                                                if (vhdTypeValue != null && vhdTypeValue.Type != JTokenType.Null)
+                                                JToken vhdTypeValue2 = azureVMDiskDetailsValue["vhdType"];
+                                                if (vhdTypeValue2 != null && vhdTypeValue2.Type != JTokenType.Null)
                                                 {
-                                                    string vhdTypeInstance = ((string)vhdTypeValue);
-                                                    azureVmDiskDetailsInstance.VhdType = vhdTypeInstance;
+                                                    string vhdTypeInstance2 = ((string)vhdTypeValue2);
+                                                    azureVmDiskDetailsInstance.VhdType = vhdTypeInstance2;
                                                 }
                                                 
-                                                JToken vhdIdValue = azureVMDiskDetailsValue["vhdId"];
-                                                if (vhdIdValue != null && vhdIdValue.Type != JTokenType.Null)
+                                                JToken vhdIdValue2 = azureVMDiskDetailsValue["vhdId"];
+                                                if (vhdIdValue2 != null && vhdIdValue2.Type != JTokenType.Null)
                                                 {
-                                                    string vhdIdInstance = ((string)vhdIdValue);
-                                                    azureVmDiskDetailsInstance.VhdId = vhdIdInstance;
+                                                    string vhdIdInstance2 = ((string)vhdIdValue2);
+                                                    azureVmDiskDetailsInstance.VhdId = vhdIdInstance2;
                                                 }
                                                 
-                                                JToken vhdNameValue2 = azureVMDiskDetailsValue["vhdName"];
-                                                if (vhdNameValue2 != null && vhdNameValue2.Type != JTokenType.Null)
+                                                JToken vhdNameValue3 = azureVMDiskDetailsValue["vhdName"];
+                                                if (vhdNameValue3 != null && vhdNameValue3.Type != JTokenType.Null)
                                                 {
-                                                    string vhdNameInstance2 = ((string)vhdNameValue2);
-                                                    azureVmDiskDetailsInstance.VhdName = vhdNameInstance2;
+                                                    string vhdNameInstance3 = ((string)vhdNameValue3);
+                                                    azureVmDiskDetailsInstance.VhdName = vhdNameInstance3;
                                                 }
                                                 
                                                 JToken maxSizeMBValue2 = azureVMDiskDetailsValue["maxSizeMB"];
@@ -6425,11 +6397,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     azureVmDiskDetailsInstance.MaxSizeMB = maxSizeMBInstance2;
                                                 }
                                                 
-                                                JToken diskLocationValue = azureVMDiskDetailsValue["diskLocation"];
-                                                if (diskLocationValue != null && diskLocationValue.Type != JTokenType.Null)
+                                                JToken targetDiskLocationValue = azureVMDiskDetailsValue["targetDiskLocation"];
+                                                if (targetDiskLocationValue != null && targetDiskLocationValue.Type != JTokenType.Null)
                                                 {
-                                                    string diskLocationInstance = ((string)diskLocationValue);
-                                                    azureVmDiskDetailsInstance.DiskLocation = diskLocationInstance;
+                                                    string targetDiskLocationInstance = ((string)targetDiskLocationValue);
+                                                    azureVmDiskDetailsInstance.TargetDiskLocation = targetDiskLocationInstance;
                                                 }
                                                 
                                                 JToken lunIdValue = azureVMDiskDetailsValue["lunId"];
@@ -6439,55 +6411,55 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     azureVmDiskDetailsInstance.LunId = lunIdInstance;
                                                 }
                                                 
-                                                JToken primaryDiskCorelationIdValue = azureVMDiskDetailsValue["primaryDiskCorelationId"];
-                                                if (primaryDiskCorelationIdValue != null && primaryDiskCorelationIdValue.Type != JTokenType.Null)
+                                                JToken targetDiskNameValue = azureVMDiskDetailsValue["targetDiskName"];
+                                                if (targetDiskNameValue != null && targetDiskNameValue.Type != JTokenType.Null)
                                                 {
-                                                    string primaryDiskCorelationIdInstance = ((string)primaryDiskCorelationIdValue);
-                                                    azureVmDiskDetailsInstance.PrimaryDiskCorelationId = primaryDiskCorelationIdInstance;
+                                                    string targetDiskNameInstance = ((string)targetDiskNameValue);
+                                                    azureVmDiskDetailsInstance.TargetDiskName = targetDiskNameInstance;
                                                 }
                                             }
                                         }
                                         
-                                        JToken recoveryAzureVMNameValue = customSettingValue["recoveryAzureVMName"];
+                                        JToken recoveryAzureVMNameValue = providerSpecificDetailsValue["recoveryAzureVMName"];
                                         if (recoveryAzureVMNameValue != null && recoveryAzureVMNameValue.Type != JTokenType.Null)
                                         {
                                             string recoveryAzureVMNameInstance = ((string)recoveryAzureVMNameValue);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.RecoveryAzureVMName = recoveryAzureVMNameInstance;
+                                            hyperVReplicaAzureReplicationDetailsInstance.RecoveryAzureVMName = recoveryAzureVMNameInstance;
                                         }
                                         
-                                        JToken recoveryAzureVMSizeValue = customSettingValue["recoveryAzureVMSize"];
+                                        JToken recoveryAzureVMSizeValue = providerSpecificDetailsValue["recoveryAzureVMSize"];
                                         if (recoveryAzureVMSizeValue != null && recoveryAzureVMSizeValue.Type != JTokenType.Null)
                                         {
                                             string recoveryAzureVMSizeInstance = ((string)recoveryAzureVMSizeValue);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.RecoveryAzureVMSize = recoveryAzureVMSizeInstance;
+                                            hyperVReplicaAzureReplicationDetailsInstance.RecoveryAzureVMSize = recoveryAzureVMSizeInstance;
                                         }
                                         
-                                        JToken recoveryAzureStorageAccountValue = customSettingValue["recoveryAzureStorageAccount"];
+                                        JToken recoveryAzureStorageAccountValue = providerSpecificDetailsValue["recoveryAzureStorageAccount"];
                                         if (recoveryAzureStorageAccountValue != null && recoveryAzureStorageAccountValue.Type != JTokenType.Null)
                                         {
                                             string recoveryAzureStorageAccountInstance = ((string)recoveryAzureStorageAccountValue);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.RecoveryAzureStorageAccount = recoveryAzureStorageAccountInstance;
+                                            hyperVReplicaAzureReplicationDetailsInstance.RecoveryAzureStorageAccount = recoveryAzureStorageAccountInstance;
                                         }
                                         
-                                        JToken selectedRecoveryAzureNetworkIdValue = customSettingValue["selectedRecoveryAzureNetworkId"];
+                                        JToken selectedRecoveryAzureNetworkIdValue = providerSpecificDetailsValue["selectedRecoveryAzureNetworkId"];
                                         if (selectedRecoveryAzureNetworkIdValue != null && selectedRecoveryAzureNetworkIdValue.Type != JTokenType.Null)
                                         {
                                             string selectedRecoveryAzureNetworkIdInstance = ((string)selectedRecoveryAzureNetworkIdValue);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.SelectedRecoveryAzureNetworkId = selectedRecoveryAzureNetworkIdInstance;
+                                            hyperVReplicaAzureReplicationDetailsInstance.SelectedRecoveryAzureNetworkId = selectedRecoveryAzureNetworkIdInstance;
                                         }
                                         
-                                        JToken lastReplicatedTimeValue2 = customSettingValue["lastReplicatedTime"];
+                                        JToken lastReplicatedTimeValue2 = providerSpecificDetailsValue["lastReplicatedTime"];
                                         if (lastReplicatedTimeValue2 != null && lastReplicatedTimeValue2.Type != JTokenType.Null)
                                         {
                                             string lastReplicatedTimeInstance2 = ((string)lastReplicatedTimeValue2);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.LastReplicatedTime = lastReplicatedTimeInstance2;
+                                            hyperVReplicaAzureReplicationDetailsInstance.LastReplicatedTime = lastReplicatedTimeInstance2;
                                         }
                                         
-                                        JToken initialReplicationDetailsValue2 = customSettingValue["initialReplicationDetails"];
+                                        JToken initialReplicationDetailsValue2 = providerSpecificDetailsValue["initialReplicationDetails"];
                                         if (initialReplicationDetailsValue2 != null && initialReplicationDetailsValue2.Type != JTokenType.Null)
                                         {
                                             InitialReplicationDetails initialReplicationDetailsInstance2 = new InitialReplicationDetails();
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.InitialReplicationDetails = initialReplicationDetailsInstance2;
+                                            hyperVReplicaAzureReplicationDetailsInstance.InitialReplicationDetails = initialReplicationDetailsInstance2;
                                             
                                             JToken initialReplicationTypeValue2 = initialReplicationDetailsValue2["initialReplicationType"];
                                             if (initialReplicationTypeValue2 != null && initialReplicationTypeValue2.Type != JTokenType.Null)
@@ -6504,13 +6476,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken vmNicsArray2 = customSettingValue["vmNics"];
+                                        JToken vmNicsArray2 = providerSpecificDetailsValue["vmNics"];
                                         if (vmNicsArray2 != null && vmNicsArray2.Type != JTokenType.Null)
                                         {
                                             foreach (JToken vmNicsValue2 in ((JArray)vmNicsArray2))
                                             {
                                                 VMNicDetails vMNicDetailsInstance2 = new VMNicDetails();
-                                                hyperVReplicaAzureProviderSpecificSettingsInstance.VMNics.Add(vMNicDetailsInstance2);
+                                                hyperVReplicaAzureReplicationDetailsInstance.VMNics.Add(vMNicDetailsInstance2);
                                                 
                                                 JToken nicIdValue2 = vmNicsValue2["nicId"];
                                                 if (nicIdValue2 != null && nicIdValue2.Type != JTokenType.Null)
@@ -6556,13 +6528,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken typeValue3 = customSettingValue["__type"];
+                                        JToken typeValue3 = providerSpecificDetailsValue["__type"];
                                         if (typeValue3 != null && typeValue3.Type != JTokenType.Null)
                                         {
                                             string typeInstance3 = ((string)typeValue3);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.Type = typeInstance3;
+                                            hyperVReplicaAzureReplicationDetailsInstance.Type = typeInstance3;
                                         }
-                                        propertiesInstance.CustomSettings = hyperVReplicaAzureProviderSpecificSettingsInstance;
+                                        propertiesInstance.ProviderSpecificDetails = hyperVReplicaAzureReplicationDetailsInstance;
                                     }
                                 }
                             }
@@ -6810,11 +6782,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.ProtectedItemType = protectedItemTypeInstance;
                                 }
                                 
-                                JToken protectedItemSourceIdValue = propertiesValue["protectedItemSourceId"];
-                                if (protectedItemSourceIdValue != null && protectedItemSourceIdValue.Type != JTokenType.Null)
+                                JToken protectedItemIdValue = propertiesValue["protectedItemId"];
+                                if (protectedItemIdValue != null && protectedItemIdValue.Type != JTokenType.Null)
                                 {
-                                    string protectedItemSourceIdInstance = ((string)protectedItemSourceIdValue);
-                                    propertiesInstance.ProtectedItemSourceId = protectedItemSourceIdInstance;
+                                    string protectedItemIdInstance = ((string)protectedItemIdValue);
+                                    propertiesInstance.ProtectedItemId = protectedItemIdInstance;
                                 }
                                 
                                 JToken recoveryServicesProviderNameValue = propertiesValue["recoveryServicesProviderName"];
@@ -6852,11 +6824,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.RecoveryProtectionContainerFriendlyName = recoveryProtectionContainerFriendlyNameInstance;
                                 }
                                 
-                                JToken protectionStatusValue = propertiesValue["protectionStatus"];
-                                if (protectionStatusValue != null && protectionStatusValue.Type != JTokenType.Null)
+                                JToken protectionStateValue = propertiesValue["protectionState"];
+                                if (protectionStateValue != null && protectionStateValue.Type != JTokenType.Null)
                                 {
-                                    string protectionStatusInstance = ((string)protectionStatusValue);
-                                    propertiesInstance.ProtectionStatus = protectionStatusInstance;
+                                    string protectionStateInstance = ((string)protectionStateValue);
+                                    propertiesInstance.ProtectionState = protectionStateInstance;
                                 }
                                 
                                 JToken activeLocationValue = propertiesValue["activeLocation"];
@@ -6864,13 +6836,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 {
                                     string activeLocationInstance = ((string)activeLocationValue);
                                     propertiesInstance.ActiveLocation = activeLocationInstance;
-                                }
-                                
-                                JToken testFailoverStateDescriptionValue = propertiesValue["testFailoverStateDescription"];
-                                if (testFailoverStateDescriptionValue != null && testFailoverStateDescriptionValue.Type != JTokenType.Null)
-                                {
-                                    string testFailoverStateDescriptionInstance = ((string)testFailoverStateDescriptionValue);
-                                    propertiesInstance.TestFailoverStateDescription = testFailoverStateDescriptionInstance;
                                 }
                                 
                                 JToken allowedOperationsArray = propertiesValue["allowedOperations"];
@@ -7018,28 +6983,28 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     }
                                 }
                                 
-                                JToken customSettingValue = propertiesValue["customSetting"];
-                                if (customSettingValue != null && customSettingValue.Type != JTokenType.Null)
+                                JToken providerSpecificDetailsValue = propertiesValue["providerSpecificDetails"];
+                                if (providerSpecificDetailsValue != null && providerSpecificDetailsValue.Type != JTokenType.Null)
                                 {
-                                    string typeName = ((string)customSettingValue["__type"]);
-                                    if (typeName == "HyperVReplicaProviderSpecificSettings")
+                                    string typeName = ((string)providerSpecificDetailsValue["__type"]);
+                                    if (typeName == "HyperVReplicaReplicationDetails")
                                     {
-                                        HyperVReplicaProviderSpecificSettings hyperVReplicaProviderSpecificSettingsInstance = new HyperVReplicaProviderSpecificSettings();
+                                        HyperVReplicaReplicationDetails hyperVReplicaReplicationDetailsInstance = new HyperVReplicaReplicationDetails();
                                         
-                                        JToken lastReplicatedTimeValue = customSettingValue["lastReplicatedTime"];
+                                        JToken lastReplicatedTimeValue = providerSpecificDetailsValue["lastReplicatedTime"];
                                         if (lastReplicatedTimeValue != null && lastReplicatedTimeValue.Type != JTokenType.Null)
                                         {
                                             string lastReplicatedTimeInstance = ((string)lastReplicatedTimeValue);
-                                            hyperVReplicaProviderSpecificSettingsInstance.LastReplicatedTime = lastReplicatedTimeInstance;
+                                            hyperVReplicaReplicationDetailsInstance.LastReplicatedTime = lastReplicatedTimeInstance;
                                         }
                                         
-                                        JToken vmNicsArray = customSettingValue["vmNics"];
+                                        JToken vmNicsArray = providerSpecificDetailsValue["vmNics"];
                                         if (vmNicsArray != null && vmNicsArray.Type != JTokenType.Null)
                                         {
                                             foreach (JToken vmNicsValue in ((JArray)vmNicsArray))
                                             {
                                                 VMNicDetails vMNicDetailsInstance = new VMNicDetails();
-                                                hyperVReplicaProviderSpecificSettingsInstance.VmNics.Add(vMNicDetailsInstance);
+                                                hyperVReplicaReplicationDetailsInstance.VmNics.Add(vMNicDetailsInstance);
                                                 
                                                 JToken nicIdValue = vmNicsValue["nicId"];
                                                 if (nicIdValue != null && nicIdValue.Type != JTokenType.Null)
@@ -7085,11 +7050,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken initialReplicationDetailsValue = customSettingValue["initialReplicationDetails"];
+                                        JToken initialReplicationDetailsValue = providerSpecificDetailsValue["initialReplicationDetails"];
                                         if (initialReplicationDetailsValue != null && initialReplicationDetailsValue.Type != JTokenType.Null)
                                         {
                                             InitialReplicationDetails initialReplicationDetailsInstance = new InitialReplicationDetails();
-                                            hyperVReplicaProviderSpecificSettingsInstance.InitialReplicationDetails = initialReplicationDetailsInstance;
+                                            hyperVReplicaReplicationDetailsInstance.InitialReplicationDetails = initialReplicationDetailsInstance;
                                             
                                             JToken initialReplicationTypeValue = initialReplicationDetailsValue["initialReplicationType"];
                                             if (initialReplicationTypeValue != null && initialReplicationTypeValue.Type != JTokenType.Null)
@@ -7106,13 +7071,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken vMDiskDetailsArray = customSettingValue["vMDiskDetails"];
+                                        JToken vMDiskDetailsArray = providerSpecificDetailsValue["vMDiskDetails"];
                                         if (vMDiskDetailsArray != null && vMDiskDetailsArray.Type != JTokenType.Null)
                                         {
                                             foreach (JToken vMDiskDetailsValue in ((JArray)vMDiskDetailsArray))
                                             {
                                                 DiskDetails diskDetailsInstance = new DiskDetails();
-                                                hyperVReplicaProviderSpecificSettingsInstance.VMDiskDetails.Add(diskDetailsInstance);
+                                                hyperVReplicaReplicationDetailsInstance.VMDiskDetails.Add(diskDetailsInstance);
                                                 
                                                 JToken maxSizeMBValue = vMDiskDetailsValue["maxSizeMB"];
                                                 if (maxSizeMBValue != null && maxSizeMBValue.Type != JTokenType.Null)
@@ -7121,154 +7086,154 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     diskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
                                                 }
                                                 
-                                                JToken vHDStatusValue = vMDiskDetailsValue["vHDStatus"];
-                                                if (vHDStatusValue != null && vHDStatusValue.Type != JTokenType.Null)
+                                                JToken vhdTypeValue = vMDiskDetailsValue["vhdType"];
+                                                if (vhdTypeValue != null && vhdTypeValue.Type != JTokenType.Null)
                                                 {
-                                                    string vHDStatusInstance = ((string)vHDStatusValue);
-                                                    diskDetailsInstance.VHDStatus = vHDStatusInstance;
+                                                    string vhdTypeInstance = ((string)vhdTypeValue);
+                                                    diskDetailsInstance.VhdType = vhdTypeInstance;
                                                 }
                                                 
-                                                JToken vHDIdValue = vMDiskDetailsValue["vHDId"];
-                                                if (vHDIdValue != null && vHDIdValue.Type != JTokenType.Null)
+                                                JToken vhdIdValue = vMDiskDetailsValue["vhdId"];
+                                                if (vhdIdValue != null && vhdIdValue.Type != JTokenType.Null)
                                                 {
-                                                    string vHDIdInstance = ((string)vHDIdValue);
-                                                    diskDetailsInstance.VHDId = vHDIdInstance;
+                                                    string vhdIdInstance = ((string)vhdIdValue);
+                                                    diskDetailsInstance.VhdId = vhdIdInstance;
                                                 }
                                                 
-                                                JToken vHDNameValue = vMDiskDetailsValue["vHDName"];
-                                                if (vHDNameValue != null && vHDNameValue.Type != JTokenType.Null)
+                                                JToken vhdNameValue = vMDiskDetailsValue["vhdName"];
+                                                if (vhdNameValue != null && vhdNameValue.Type != JTokenType.Null)
                                                 {
-                                                    string vHDNameInstance = ((string)vHDNameValue);
-                                                    diskDetailsInstance.VHDName = vHDNameInstance;
+                                                    string vhdNameInstance = ((string)vhdNameValue);
+                                                    diskDetailsInstance.VhdName = vhdNameInstance;
                                                 }
                                             }
                                         }
                                         
-                                        JToken typeValue = customSettingValue["__type"];
+                                        JToken typeValue = providerSpecificDetailsValue["__type"];
                                         if (typeValue != null && typeValue.Type != JTokenType.Null)
                                         {
                                             string typeInstance = ((string)typeValue);
-                                            hyperVReplicaProviderSpecificSettingsInstance.Type = typeInstance;
+                                            hyperVReplicaReplicationDetailsInstance.Type = typeInstance;
                                         }
-                                        propertiesInstance.CustomSettings = hyperVReplicaProviderSpecificSettingsInstance;
+                                        propertiesInstance.ProviderSpecificDetails = hyperVReplicaReplicationDetailsInstance;
                                     }
                                     if (typeName == "VMwareAzureV2ProviderSpecificSettings")
                                     {
                                         VMwareAzureV2ProviderSpecificSettings vMwareAzureV2ProviderSpecificSettingsInstance = new VMwareAzureV2ProviderSpecificSettings();
                                         
-                                        JToken protectionStageValue = customSettingValue["protectionStage"];
+                                        JToken protectionStageValue = providerSpecificDetailsValue["protectionStage"];
                                         if (protectionStageValue != null && protectionStageValue.Type != JTokenType.Null)
                                         {
                                             string protectionStageInstance = ((string)protectionStageValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.ProtectionStage = protectionStageInstance;
                                         }
                                         
-                                        JToken healthErrorCodeValue = customSettingValue["healthErrorCode"];
+                                        JToken healthErrorCodeValue = providerSpecificDetailsValue["healthErrorCode"];
                                         if (healthErrorCodeValue != null && healthErrorCodeValue.Type != JTokenType.Null)
                                         {
                                             string healthErrorCodeInstance = ((string)healthErrorCodeValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.HealthErrorCode = healthErrorCodeInstance;
                                         }
                                         
-                                        JToken resyncRequiredValue = customSettingValue["resyncRequired"];
+                                        JToken resyncRequiredValue = providerSpecificDetailsValue["resyncRequired"];
                                         if (resyncRequiredValue != null && resyncRequiredValue.Type != JTokenType.Null)
                                         {
                                             bool resyncRequiredInstance = ((bool)resyncRequiredValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.ResyncRequired = resyncRequiredInstance;
                                         }
                                         
-                                        JToken resyncProgressPercentageValue = customSettingValue["resyncProgressPercentage"];
+                                        JToken resyncProgressPercentageValue = providerSpecificDetailsValue["resyncProgressPercentage"];
                                         if (resyncProgressPercentageValue != null && resyncProgressPercentageValue.Type != JTokenType.Null)
                                         {
                                             int resyncProgressPercentageInstance = ((int)resyncProgressPercentageValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.ResyncProgressPercentage = resyncProgressPercentageInstance;
                                         }
                                         
-                                        JToken rpoInSecondsValue = customSettingValue["rpoInSeconds"];
+                                        JToken rpoInSecondsValue = providerSpecificDetailsValue["rpoInSeconds"];
                                         if (rpoInSecondsValue != null && rpoInSecondsValue.Type != JTokenType.Null)
                                         {
                                             long rpoInSecondsInstance = ((long)rpoInSecondsValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.RpoInSeconds = rpoInSecondsInstance;
                                         }
                                         
-                                        JToken compressedDataRateInMBValue = customSettingValue["compressedDataRateInMB"];
+                                        JToken compressedDataRateInMBValue = providerSpecificDetailsValue["compressedDataRateInMB"];
                                         if (compressedDataRateInMBValue != null && compressedDataRateInMBValue.Type != JTokenType.Null)
                                         {
                                             double compressedDataRateInMBInstance = ((double)compressedDataRateInMBValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.CompressedDataRateInMB = compressedDataRateInMBInstance;
                                         }
                                         
-                                        JToken uncompressedDataRateInMBValue = customSettingValue["uncompressedDataRateInMB"];
+                                        JToken uncompressedDataRateInMBValue = providerSpecificDetailsValue["uncompressedDataRateInMB"];
                                         if (uncompressedDataRateInMBValue != null && uncompressedDataRateInMBValue.Type != JTokenType.Null)
                                         {
                                             double uncompressedDataRateInMBInstance = ((double)uncompressedDataRateInMBValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.UncompressedDataRateInMB = uncompressedDataRateInMBInstance;
                                         }
                                         
-                                        JToken ipAddressValue = customSettingValue["ipAddress"];
+                                        JToken ipAddressValue = providerSpecificDetailsValue["ipAddress"];
                                         if (ipAddressValue != null && ipAddressValue.Type != JTokenType.Null)
                                         {
                                             string ipAddressInstance = ((string)ipAddressValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.IpAddress = ipAddressInstance;
                                         }
                                         
-                                        JToken agentVersionValue = customSettingValue["agentVersion"];
+                                        JToken agentVersionValue = providerSpecificDetailsValue["agentVersion"];
                                         if (agentVersionValue != null && agentVersionValue.Type != JTokenType.Null)
                                         {
                                             string agentVersionInstance = ((string)agentVersionValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.AgentVersion = agentVersionInstance;
                                         }
                                         
-                                        JToken latestUpdateVersionValue = customSettingValue["latestUpdateVersion"];
+                                        JToken latestUpdateVersionValue = providerSpecificDetailsValue["latestUpdateVersion"];
                                         if (latestUpdateVersionValue != null && latestUpdateVersionValue.Type != JTokenType.Null)
                                         {
                                             string latestUpdateVersionInstance = ((string)latestUpdateVersionValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.LatestUpdateVersion = latestUpdateVersionInstance;
                                         }
                                         
-                                        JToken isAgentUpdateRequiredValue = customSettingValue["isAgentUpdateRequired"];
+                                        JToken isAgentUpdateRequiredValue = providerSpecificDetailsValue["isAgentUpdateRequired"];
                                         if (isAgentUpdateRequiredValue != null && isAgentUpdateRequiredValue.Type != JTokenType.Null)
                                         {
                                             bool isAgentUpdateRequiredInstance = ((bool)isAgentUpdateRequiredValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.IsAgentUpdateRequired = isAgentUpdateRequiredInstance;
                                         }
                                         
-                                        JToken isRebootAfterUpdateRequiredValue = customSettingValue["isRebootAfterUpdateRequired"];
+                                        JToken isRebootAfterUpdateRequiredValue = providerSpecificDetailsValue["isRebootAfterUpdateRequired"];
                                         if (isRebootAfterUpdateRequiredValue != null && isRebootAfterUpdateRequiredValue.Type != JTokenType.Null)
                                         {
                                             bool isRebootAfterUpdateRequiredInstance = ((bool)isRebootAfterUpdateRequiredValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.IsRebootAfterUpdateRequired = isRebootAfterUpdateRequiredInstance;
                                         }
                                         
-                                        JToken lastHeartbeatValue = customSettingValue["lastHeartbeat"];
+                                        JToken lastHeartbeatValue = providerSpecificDetailsValue["lastHeartbeat"];
                                         if (lastHeartbeatValue != null && lastHeartbeatValue.Type != JTokenType.Null)
                                         {
                                             DateTime lastHeartbeatInstance = ((DateTime)lastHeartbeatValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.LastHeartbeat = lastHeartbeatInstance;
                                         }
                                         
-                                        JToken processServerIdValue = customSettingValue["processServerId"];
+                                        JToken processServerIdValue = providerSpecificDetailsValue["processServerId"];
                                         if (processServerIdValue != null && processServerIdValue.Type != JTokenType.Null)
                                         {
                                             string processServerIdInstance = ((string)processServerIdValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.ProcessServerId = processServerIdInstance;
                                         }
                                         
-                                        JToken multiVmGroupIdValue = customSettingValue["multiVmGroupId"];
+                                        JToken multiVmGroupIdValue = providerSpecificDetailsValue["multiVmGroupId"];
                                         if (multiVmGroupIdValue != null && multiVmGroupIdValue.Type != JTokenType.Null)
                                         {
                                             string multiVmGroupIdInstance = ((string)multiVmGroupIdValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.MultiVmGroupId = multiVmGroupIdInstance;
                                         }
                                         
-                                        JToken multiVmGroupNameValue = customSettingValue["multiVmGroupName"];
+                                        JToken multiVmGroupNameValue = providerSpecificDetailsValue["multiVmGroupName"];
                                         if (multiVmGroupNameValue != null && multiVmGroupNameValue.Type != JTokenType.Null)
                                         {
                                             string multiVmGroupNameInstance = ((string)multiVmGroupNameValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.MultiVmGroupName = multiVmGroupNameInstance;
                                         }
                                         
-                                        JToken protectedVolumesArray = customSettingValue["protectedVolumes"];
+                                        JToken protectedVolumesArray = providerSpecificDetailsValue["protectedVolumes"];
                                         if (protectedVolumesArray != null && protectedVolumesArray.Type != JTokenType.Null)
                                         {
                                             foreach (JToken protectedVolumesValue in ((JArray)protectedVolumesArray))
@@ -7369,94 +7334,94 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken volumeResizedValue2 = customSettingValue["volumeResized"];
+                                        JToken volumeResizedValue2 = providerSpecificDetailsValue["volumeResized"];
                                         if (volumeResizedValue2 != null && volumeResizedValue2.Type != JTokenType.Null)
                                         {
                                             bool volumeResizedInstance2 = ((bool)volumeResizedValue2);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.VolumeResized = volumeResizedInstance2;
                                         }
                                         
-                                        JToken masterTargetIdValue = customSettingValue["masterTargetId"];
+                                        JToken masterTargetIdValue = providerSpecificDetailsValue["masterTargetId"];
                                         if (masterTargetIdValue != null && masterTargetIdValue.Type != JTokenType.Null)
                                         {
                                             string masterTargetIdInstance = ((string)masterTargetIdValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.MasterTargetId = masterTargetIdInstance;
                                         }
                                         
-                                        JToken sourceVmCPUCountValue = customSettingValue["sourceVmCPUCount"];
+                                        JToken sourceVmCPUCountValue = providerSpecificDetailsValue["sourceVmCPUCount"];
                                         if (sourceVmCPUCountValue != null && sourceVmCPUCountValue.Type != JTokenType.Null)
                                         {
                                             int sourceVmCPUCountInstance = ((int)sourceVmCPUCountValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.SourceVmCPUCount = sourceVmCPUCountInstance;
                                         }
                                         
-                                        JToken sourceVmRAMSizeInMBValue = customSettingValue["sourceVmRAMSizeInMB"];
+                                        JToken sourceVmRAMSizeInMBValue = providerSpecificDetailsValue["sourceVmRAMSizeInMB"];
                                         if (sourceVmRAMSizeInMBValue != null && sourceVmRAMSizeInMBValue.Type != JTokenType.Null)
                                         {
                                             int sourceVmRAMSizeInMBInstance = ((int)sourceVmRAMSizeInMBValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.SourceVmRAMSizeInMB = sourceVmRAMSizeInMBInstance;
                                         }
                                         
-                                        JToken osTypeValue = customSettingValue["osType"];
+                                        JToken osTypeValue = providerSpecificDetailsValue["osType"];
                                         if (osTypeValue != null && osTypeValue.Type != JTokenType.Null)
                                         {
                                             string osTypeInstance = ((string)osTypeValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.OSType = osTypeInstance;
                                         }
                                         
-                                        JToken vhdNameValue = customSettingValue["vhdName"];
-                                        if (vhdNameValue != null && vhdNameValue.Type != JTokenType.Null)
+                                        JToken vhdNameValue2 = providerSpecificDetailsValue["vhdName"];
+                                        if (vhdNameValue2 != null && vhdNameValue2.Type != JTokenType.Null)
                                         {
-                                            string vhdNameInstance = ((string)vhdNameValue);
-                                            vMwareAzureV2ProviderSpecificSettingsInstance.VHDName = vhdNameInstance;
+                                            string vhdNameInstance2 = ((string)vhdNameValue2);
+                                            vMwareAzureV2ProviderSpecificSettingsInstance.VHDName = vhdNameInstance2;
                                         }
                                         
-                                        JToken osDiskIdValue = customSettingValue["osDiskId"];
+                                        JToken osDiskIdValue = providerSpecificDetailsValue["osDiskId"];
                                         if (osDiskIdValue != null && osDiskIdValue.Type != JTokenType.Null)
                                         {
                                             string osDiskIdInstance = ((string)osDiskIdValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.OSDiskId = osDiskIdInstance;
                                         }
                                         
-                                        JToken typeValue2 = customSettingValue["__type"];
+                                        JToken typeValue2 = providerSpecificDetailsValue["__type"];
                                         if (typeValue2 != null && typeValue2.Type != JTokenType.Null)
                                         {
                                             string typeInstance2 = ((string)typeValue2);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.Type = typeInstance2;
                                         }
-                                        propertiesInstance.CustomSettings = vMwareAzureV2ProviderSpecificSettingsInstance;
+                                        propertiesInstance.ProviderSpecificDetails = vMwareAzureV2ProviderSpecificSettingsInstance;
                                     }
-                                    if (typeName == "HyperVReplicaAzureProviderSpecificSettings")
+                                    if (typeName == "HyperVReplicaAzureReplicationDetails")
                                     {
-                                        HyperVReplicaAzureProviderSpecificSettings hyperVReplicaAzureProviderSpecificSettingsInstance = new HyperVReplicaAzureProviderSpecificSettings();
+                                        HyperVReplicaAzureReplicationDetails hyperVReplicaAzureReplicationDetailsInstance = new HyperVReplicaAzureReplicationDetails();
                                         
-                                        JToken azureVMDiskDetailsArray = customSettingValue["azureVMDiskDetails"];
+                                        JToken azureVMDiskDetailsArray = providerSpecificDetailsValue["azureVMDiskDetails"];
                                         if (azureVMDiskDetailsArray != null && azureVMDiskDetailsArray.Type != JTokenType.Null)
                                         {
                                             foreach (JToken azureVMDiskDetailsValue in ((JArray)azureVMDiskDetailsArray))
                                             {
                                                 AzureVmDiskDetails azureVmDiskDetailsInstance = new AzureVmDiskDetails();
-                                                hyperVReplicaAzureProviderSpecificSettingsInstance.AzureVMDiskDetails.Add(azureVmDiskDetailsInstance);
+                                                hyperVReplicaAzureReplicationDetailsInstance.AzureVMDiskDetails.Add(azureVmDiskDetailsInstance);
                                                 
-                                                JToken vhdTypeValue = azureVMDiskDetailsValue["vhdType"];
-                                                if (vhdTypeValue != null && vhdTypeValue.Type != JTokenType.Null)
+                                                JToken vhdTypeValue2 = azureVMDiskDetailsValue["vhdType"];
+                                                if (vhdTypeValue2 != null && vhdTypeValue2.Type != JTokenType.Null)
                                                 {
-                                                    string vhdTypeInstance = ((string)vhdTypeValue);
-                                                    azureVmDiskDetailsInstance.VhdType = vhdTypeInstance;
+                                                    string vhdTypeInstance2 = ((string)vhdTypeValue2);
+                                                    azureVmDiskDetailsInstance.VhdType = vhdTypeInstance2;
                                                 }
                                                 
-                                                JToken vhdIdValue = azureVMDiskDetailsValue["vhdId"];
-                                                if (vhdIdValue != null && vhdIdValue.Type != JTokenType.Null)
+                                                JToken vhdIdValue2 = azureVMDiskDetailsValue["vhdId"];
+                                                if (vhdIdValue2 != null && vhdIdValue2.Type != JTokenType.Null)
                                                 {
-                                                    string vhdIdInstance = ((string)vhdIdValue);
-                                                    azureVmDiskDetailsInstance.VhdId = vhdIdInstance;
+                                                    string vhdIdInstance2 = ((string)vhdIdValue2);
+                                                    azureVmDiskDetailsInstance.VhdId = vhdIdInstance2;
                                                 }
                                                 
-                                                JToken vhdNameValue2 = azureVMDiskDetailsValue["vhdName"];
-                                                if (vhdNameValue2 != null && vhdNameValue2.Type != JTokenType.Null)
+                                                JToken vhdNameValue3 = azureVMDiskDetailsValue["vhdName"];
+                                                if (vhdNameValue3 != null && vhdNameValue3.Type != JTokenType.Null)
                                                 {
-                                                    string vhdNameInstance2 = ((string)vhdNameValue2);
-                                                    azureVmDiskDetailsInstance.VhdName = vhdNameInstance2;
+                                                    string vhdNameInstance3 = ((string)vhdNameValue3);
+                                                    azureVmDiskDetailsInstance.VhdName = vhdNameInstance3;
                                                 }
                                                 
                                                 JToken maxSizeMBValue2 = azureVMDiskDetailsValue["maxSizeMB"];
@@ -7466,11 +7431,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     azureVmDiskDetailsInstance.MaxSizeMB = maxSizeMBInstance2;
                                                 }
                                                 
-                                                JToken diskLocationValue = azureVMDiskDetailsValue["diskLocation"];
-                                                if (diskLocationValue != null && diskLocationValue.Type != JTokenType.Null)
+                                                JToken targetDiskLocationValue = azureVMDiskDetailsValue["targetDiskLocation"];
+                                                if (targetDiskLocationValue != null && targetDiskLocationValue.Type != JTokenType.Null)
                                                 {
-                                                    string diskLocationInstance = ((string)diskLocationValue);
-                                                    azureVmDiskDetailsInstance.DiskLocation = diskLocationInstance;
+                                                    string targetDiskLocationInstance = ((string)targetDiskLocationValue);
+                                                    azureVmDiskDetailsInstance.TargetDiskLocation = targetDiskLocationInstance;
                                                 }
                                                 
                                                 JToken lunIdValue = azureVMDiskDetailsValue["lunId"];
@@ -7480,55 +7445,55 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     azureVmDiskDetailsInstance.LunId = lunIdInstance;
                                                 }
                                                 
-                                                JToken primaryDiskCorelationIdValue = azureVMDiskDetailsValue["primaryDiskCorelationId"];
-                                                if (primaryDiskCorelationIdValue != null && primaryDiskCorelationIdValue.Type != JTokenType.Null)
+                                                JToken targetDiskNameValue = azureVMDiskDetailsValue["targetDiskName"];
+                                                if (targetDiskNameValue != null && targetDiskNameValue.Type != JTokenType.Null)
                                                 {
-                                                    string primaryDiskCorelationIdInstance = ((string)primaryDiskCorelationIdValue);
-                                                    azureVmDiskDetailsInstance.PrimaryDiskCorelationId = primaryDiskCorelationIdInstance;
+                                                    string targetDiskNameInstance = ((string)targetDiskNameValue);
+                                                    azureVmDiskDetailsInstance.TargetDiskName = targetDiskNameInstance;
                                                 }
                                             }
                                         }
                                         
-                                        JToken recoveryAzureVMNameValue = customSettingValue["recoveryAzureVMName"];
+                                        JToken recoveryAzureVMNameValue = providerSpecificDetailsValue["recoveryAzureVMName"];
                                         if (recoveryAzureVMNameValue != null && recoveryAzureVMNameValue.Type != JTokenType.Null)
                                         {
                                             string recoveryAzureVMNameInstance = ((string)recoveryAzureVMNameValue);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.RecoveryAzureVMName = recoveryAzureVMNameInstance;
+                                            hyperVReplicaAzureReplicationDetailsInstance.RecoveryAzureVMName = recoveryAzureVMNameInstance;
                                         }
                                         
-                                        JToken recoveryAzureVMSizeValue = customSettingValue["recoveryAzureVMSize"];
+                                        JToken recoveryAzureVMSizeValue = providerSpecificDetailsValue["recoveryAzureVMSize"];
                                         if (recoveryAzureVMSizeValue != null && recoveryAzureVMSizeValue.Type != JTokenType.Null)
                                         {
                                             string recoveryAzureVMSizeInstance = ((string)recoveryAzureVMSizeValue);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.RecoveryAzureVMSize = recoveryAzureVMSizeInstance;
+                                            hyperVReplicaAzureReplicationDetailsInstance.RecoveryAzureVMSize = recoveryAzureVMSizeInstance;
                                         }
                                         
-                                        JToken recoveryAzureStorageAccountValue = customSettingValue["recoveryAzureStorageAccount"];
+                                        JToken recoveryAzureStorageAccountValue = providerSpecificDetailsValue["recoveryAzureStorageAccount"];
                                         if (recoveryAzureStorageAccountValue != null && recoveryAzureStorageAccountValue.Type != JTokenType.Null)
                                         {
                                             string recoveryAzureStorageAccountInstance = ((string)recoveryAzureStorageAccountValue);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.RecoveryAzureStorageAccount = recoveryAzureStorageAccountInstance;
+                                            hyperVReplicaAzureReplicationDetailsInstance.RecoveryAzureStorageAccount = recoveryAzureStorageAccountInstance;
                                         }
                                         
-                                        JToken selectedRecoveryAzureNetworkIdValue = customSettingValue["selectedRecoveryAzureNetworkId"];
+                                        JToken selectedRecoveryAzureNetworkIdValue = providerSpecificDetailsValue["selectedRecoveryAzureNetworkId"];
                                         if (selectedRecoveryAzureNetworkIdValue != null && selectedRecoveryAzureNetworkIdValue.Type != JTokenType.Null)
                                         {
                                             string selectedRecoveryAzureNetworkIdInstance = ((string)selectedRecoveryAzureNetworkIdValue);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.SelectedRecoveryAzureNetworkId = selectedRecoveryAzureNetworkIdInstance;
+                                            hyperVReplicaAzureReplicationDetailsInstance.SelectedRecoveryAzureNetworkId = selectedRecoveryAzureNetworkIdInstance;
                                         }
                                         
-                                        JToken lastReplicatedTimeValue2 = customSettingValue["lastReplicatedTime"];
+                                        JToken lastReplicatedTimeValue2 = providerSpecificDetailsValue["lastReplicatedTime"];
                                         if (lastReplicatedTimeValue2 != null && lastReplicatedTimeValue2.Type != JTokenType.Null)
                                         {
                                             string lastReplicatedTimeInstance2 = ((string)lastReplicatedTimeValue2);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.LastReplicatedTime = lastReplicatedTimeInstance2;
+                                            hyperVReplicaAzureReplicationDetailsInstance.LastReplicatedTime = lastReplicatedTimeInstance2;
                                         }
                                         
-                                        JToken initialReplicationDetailsValue2 = customSettingValue["initialReplicationDetails"];
+                                        JToken initialReplicationDetailsValue2 = providerSpecificDetailsValue["initialReplicationDetails"];
                                         if (initialReplicationDetailsValue2 != null && initialReplicationDetailsValue2.Type != JTokenType.Null)
                                         {
                                             InitialReplicationDetails initialReplicationDetailsInstance2 = new InitialReplicationDetails();
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.InitialReplicationDetails = initialReplicationDetailsInstance2;
+                                            hyperVReplicaAzureReplicationDetailsInstance.InitialReplicationDetails = initialReplicationDetailsInstance2;
                                             
                                             JToken initialReplicationTypeValue2 = initialReplicationDetailsValue2["initialReplicationType"];
                                             if (initialReplicationTypeValue2 != null && initialReplicationTypeValue2.Type != JTokenType.Null)
@@ -7545,13 +7510,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken vmNicsArray2 = customSettingValue["vmNics"];
+                                        JToken vmNicsArray2 = providerSpecificDetailsValue["vmNics"];
                                         if (vmNicsArray2 != null && vmNicsArray2.Type != JTokenType.Null)
                                         {
                                             foreach (JToken vmNicsValue2 in ((JArray)vmNicsArray2))
                                             {
                                                 VMNicDetails vMNicDetailsInstance2 = new VMNicDetails();
-                                                hyperVReplicaAzureProviderSpecificSettingsInstance.VMNics.Add(vMNicDetailsInstance2);
+                                                hyperVReplicaAzureReplicationDetailsInstance.VMNics.Add(vMNicDetailsInstance2);
                                                 
                                                 JToken nicIdValue2 = vmNicsValue2["nicId"];
                                                 if (nicIdValue2 != null && nicIdValue2.Type != JTokenType.Null)
@@ -7597,13 +7562,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken typeValue3 = customSettingValue["__type"];
+                                        JToken typeValue3 = providerSpecificDetailsValue["__type"];
                                         if (typeValue3 != null && typeValue3.Type != JTokenType.Null)
                                         {
                                             string typeInstance3 = ((string)typeValue3);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.Type = typeInstance3;
+                                            hyperVReplicaAzureReplicationDetailsInstance.Type = typeInstance3;
                                         }
-                                        propertiesInstance.CustomSettings = hyperVReplicaAzureProviderSpecificSettingsInstance;
+                                        propertiesInstance.ProviderSpecificDetails = hyperVReplicaAzureReplicationDetailsInstance;
                                     }
                                 }
                             }
@@ -7851,11 +7816,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.ProtectedItemType = protectedItemTypeInstance;
                                 }
                                 
-                                JToken protectedItemSourceIdValue = propertiesValue["protectedItemSourceId"];
-                                if (protectedItemSourceIdValue != null && protectedItemSourceIdValue.Type != JTokenType.Null)
+                                JToken protectedItemIdValue = propertiesValue["protectedItemId"];
+                                if (protectedItemIdValue != null && protectedItemIdValue.Type != JTokenType.Null)
                                 {
-                                    string protectedItemSourceIdInstance = ((string)protectedItemSourceIdValue);
-                                    propertiesInstance.ProtectedItemSourceId = protectedItemSourceIdInstance;
+                                    string protectedItemIdInstance = ((string)protectedItemIdValue);
+                                    propertiesInstance.ProtectedItemId = protectedItemIdInstance;
                                 }
                                 
                                 JToken recoveryServicesProviderNameValue = propertiesValue["recoveryServicesProviderName"];
@@ -7893,11 +7858,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.RecoveryProtectionContainerFriendlyName = recoveryProtectionContainerFriendlyNameInstance;
                                 }
                                 
-                                JToken protectionStatusValue = propertiesValue["protectionStatus"];
-                                if (protectionStatusValue != null && protectionStatusValue.Type != JTokenType.Null)
+                                JToken protectionStateValue = propertiesValue["protectionState"];
+                                if (protectionStateValue != null && protectionStateValue.Type != JTokenType.Null)
                                 {
-                                    string protectionStatusInstance = ((string)protectionStatusValue);
-                                    propertiesInstance.ProtectionStatus = protectionStatusInstance;
+                                    string protectionStateInstance = ((string)protectionStateValue);
+                                    propertiesInstance.ProtectionState = protectionStateInstance;
                                 }
                                 
                                 JToken activeLocationValue = propertiesValue["activeLocation"];
@@ -7905,13 +7870,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 {
                                     string activeLocationInstance = ((string)activeLocationValue);
                                     propertiesInstance.ActiveLocation = activeLocationInstance;
-                                }
-                                
-                                JToken testFailoverStateDescriptionValue = propertiesValue["testFailoverStateDescription"];
-                                if (testFailoverStateDescriptionValue != null && testFailoverStateDescriptionValue.Type != JTokenType.Null)
-                                {
-                                    string testFailoverStateDescriptionInstance = ((string)testFailoverStateDescriptionValue);
-                                    propertiesInstance.TestFailoverStateDescription = testFailoverStateDescriptionInstance;
                                 }
                                 
                                 JToken allowedOperationsArray = propertiesValue["allowedOperations"];
@@ -8059,28 +8017,28 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     }
                                 }
                                 
-                                JToken customSettingValue = propertiesValue["customSetting"];
-                                if (customSettingValue != null && customSettingValue.Type != JTokenType.Null)
+                                JToken providerSpecificDetailsValue = propertiesValue["providerSpecificDetails"];
+                                if (providerSpecificDetailsValue != null && providerSpecificDetailsValue.Type != JTokenType.Null)
                                 {
-                                    string typeName = ((string)customSettingValue["__type"]);
-                                    if (typeName == "HyperVReplicaProviderSpecificSettings")
+                                    string typeName = ((string)providerSpecificDetailsValue["__type"]);
+                                    if (typeName == "HyperVReplicaReplicationDetails")
                                     {
-                                        HyperVReplicaProviderSpecificSettings hyperVReplicaProviderSpecificSettingsInstance = new HyperVReplicaProviderSpecificSettings();
+                                        HyperVReplicaReplicationDetails hyperVReplicaReplicationDetailsInstance = new HyperVReplicaReplicationDetails();
                                         
-                                        JToken lastReplicatedTimeValue = customSettingValue["lastReplicatedTime"];
+                                        JToken lastReplicatedTimeValue = providerSpecificDetailsValue["lastReplicatedTime"];
                                         if (lastReplicatedTimeValue != null && lastReplicatedTimeValue.Type != JTokenType.Null)
                                         {
                                             string lastReplicatedTimeInstance = ((string)lastReplicatedTimeValue);
-                                            hyperVReplicaProviderSpecificSettingsInstance.LastReplicatedTime = lastReplicatedTimeInstance;
+                                            hyperVReplicaReplicationDetailsInstance.LastReplicatedTime = lastReplicatedTimeInstance;
                                         }
                                         
-                                        JToken vmNicsArray = customSettingValue["vmNics"];
+                                        JToken vmNicsArray = providerSpecificDetailsValue["vmNics"];
                                         if (vmNicsArray != null && vmNicsArray.Type != JTokenType.Null)
                                         {
                                             foreach (JToken vmNicsValue in ((JArray)vmNicsArray))
                                             {
                                                 VMNicDetails vMNicDetailsInstance = new VMNicDetails();
-                                                hyperVReplicaProviderSpecificSettingsInstance.VmNics.Add(vMNicDetailsInstance);
+                                                hyperVReplicaReplicationDetailsInstance.VmNics.Add(vMNicDetailsInstance);
                                                 
                                                 JToken nicIdValue = vmNicsValue["nicId"];
                                                 if (nicIdValue != null && nicIdValue.Type != JTokenType.Null)
@@ -8126,11 +8084,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken initialReplicationDetailsValue = customSettingValue["initialReplicationDetails"];
+                                        JToken initialReplicationDetailsValue = providerSpecificDetailsValue["initialReplicationDetails"];
                                         if (initialReplicationDetailsValue != null && initialReplicationDetailsValue.Type != JTokenType.Null)
                                         {
                                             InitialReplicationDetails initialReplicationDetailsInstance = new InitialReplicationDetails();
-                                            hyperVReplicaProviderSpecificSettingsInstance.InitialReplicationDetails = initialReplicationDetailsInstance;
+                                            hyperVReplicaReplicationDetailsInstance.InitialReplicationDetails = initialReplicationDetailsInstance;
                                             
                                             JToken initialReplicationTypeValue = initialReplicationDetailsValue["initialReplicationType"];
                                             if (initialReplicationTypeValue != null && initialReplicationTypeValue.Type != JTokenType.Null)
@@ -8147,13 +8105,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken vMDiskDetailsArray = customSettingValue["vMDiskDetails"];
+                                        JToken vMDiskDetailsArray = providerSpecificDetailsValue["vMDiskDetails"];
                                         if (vMDiskDetailsArray != null && vMDiskDetailsArray.Type != JTokenType.Null)
                                         {
                                             foreach (JToken vMDiskDetailsValue in ((JArray)vMDiskDetailsArray))
                                             {
                                                 DiskDetails diskDetailsInstance = new DiskDetails();
-                                                hyperVReplicaProviderSpecificSettingsInstance.VMDiskDetails.Add(diskDetailsInstance);
+                                                hyperVReplicaReplicationDetailsInstance.VMDiskDetails.Add(diskDetailsInstance);
                                                 
                                                 JToken maxSizeMBValue = vMDiskDetailsValue["maxSizeMB"];
                                                 if (maxSizeMBValue != null && maxSizeMBValue.Type != JTokenType.Null)
@@ -8162,154 +8120,154 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     diskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
                                                 }
                                                 
-                                                JToken vHDStatusValue = vMDiskDetailsValue["vHDStatus"];
-                                                if (vHDStatusValue != null && vHDStatusValue.Type != JTokenType.Null)
+                                                JToken vhdTypeValue = vMDiskDetailsValue["vhdType"];
+                                                if (vhdTypeValue != null && vhdTypeValue.Type != JTokenType.Null)
                                                 {
-                                                    string vHDStatusInstance = ((string)vHDStatusValue);
-                                                    diskDetailsInstance.VHDStatus = vHDStatusInstance;
+                                                    string vhdTypeInstance = ((string)vhdTypeValue);
+                                                    diskDetailsInstance.VhdType = vhdTypeInstance;
                                                 }
                                                 
-                                                JToken vHDIdValue = vMDiskDetailsValue["vHDId"];
-                                                if (vHDIdValue != null && vHDIdValue.Type != JTokenType.Null)
+                                                JToken vhdIdValue = vMDiskDetailsValue["vhdId"];
+                                                if (vhdIdValue != null && vhdIdValue.Type != JTokenType.Null)
                                                 {
-                                                    string vHDIdInstance = ((string)vHDIdValue);
-                                                    diskDetailsInstance.VHDId = vHDIdInstance;
+                                                    string vhdIdInstance = ((string)vhdIdValue);
+                                                    diskDetailsInstance.VhdId = vhdIdInstance;
                                                 }
                                                 
-                                                JToken vHDNameValue = vMDiskDetailsValue["vHDName"];
-                                                if (vHDNameValue != null && vHDNameValue.Type != JTokenType.Null)
+                                                JToken vhdNameValue = vMDiskDetailsValue["vhdName"];
+                                                if (vhdNameValue != null && vhdNameValue.Type != JTokenType.Null)
                                                 {
-                                                    string vHDNameInstance = ((string)vHDNameValue);
-                                                    diskDetailsInstance.VHDName = vHDNameInstance;
+                                                    string vhdNameInstance = ((string)vhdNameValue);
+                                                    diskDetailsInstance.VhdName = vhdNameInstance;
                                                 }
                                             }
                                         }
                                         
-                                        JToken typeValue = customSettingValue["__type"];
+                                        JToken typeValue = providerSpecificDetailsValue["__type"];
                                         if (typeValue != null && typeValue.Type != JTokenType.Null)
                                         {
                                             string typeInstance = ((string)typeValue);
-                                            hyperVReplicaProviderSpecificSettingsInstance.Type = typeInstance;
+                                            hyperVReplicaReplicationDetailsInstance.Type = typeInstance;
                                         }
-                                        propertiesInstance.CustomSettings = hyperVReplicaProviderSpecificSettingsInstance;
+                                        propertiesInstance.ProviderSpecificDetails = hyperVReplicaReplicationDetailsInstance;
                                     }
                                     if (typeName == "VMwareAzureV2ProviderSpecificSettings")
                                     {
                                         VMwareAzureV2ProviderSpecificSettings vMwareAzureV2ProviderSpecificSettingsInstance = new VMwareAzureV2ProviderSpecificSettings();
                                         
-                                        JToken protectionStageValue = customSettingValue["protectionStage"];
+                                        JToken protectionStageValue = providerSpecificDetailsValue["protectionStage"];
                                         if (protectionStageValue != null && protectionStageValue.Type != JTokenType.Null)
                                         {
                                             string protectionStageInstance = ((string)protectionStageValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.ProtectionStage = protectionStageInstance;
                                         }
                                         
-                                        JToken healthErrorCodeValue = customSettingValue["healthErrorCode"];
+                                        JToken healthErrorCodeValue = providerSpecificDetailsValue["healthErrorCode"];
                                         if (healthErrorCodeValue != null && healthErrorCodeValue.Type != JTokenType.Null)
                                         {
                                             string healthErrorCodeInstance = ((string)healthErrorCodeValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.HealthErrorCode = healthErrorCodeInstance;
                                         }
                                         
-                                        JToken resyncRequiredValue = customSettingValue["resyncRequired"];
+                                        JToken resyncRequiredValue = providerSpecificDetailsValue["resyncRequired"];
                                         if (resyncRequiredValue != null && resyncRequiredValue.Type != JTokenType.Null)
                                         {
                                             bool resyncRequiredInstance = ((bool)resyncRequiredValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.ResyncRequired = resyncRequiredInstance;
                                         }
                                         
-                                        JToken resyncProgressPercentageValue = customSettingValue["resyncProgressPercentage"];
+                                        JToken resyncProgressPercentageValue = providerSpecificDetailsValue["resyncProgressPercentage"];
                                         if (resyncProgressPercentageValue != null && resyncProgressPercentageValue.Type != JTokenType.Null)
                                         {
                                             int resyncProgressPercentageInstance = ((int)resyncProgressPercentageValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.ResyncProgressPercentage = resyncProgressPercentageInstance;
                                         }
                                         
-                                        JToken rpoInSecondsValue = customSettingValue["rpoInSeconds"];
+                                        JToken rpoInSecondsValue = providerSpecificDetailsValue["rpoInSeconds"];
                                         if (rpoInSecondsValue != null && rpoInSecondsValue.Type != JTokenType.Null)
                                         {
                                             long rpoInSecondsInstance = ((long)rpoInSecondsValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.RpoInSeconds = rpoInSecondsInstance;
                                         }
                                         
-                                        JToken compressedDataRateInMBValue = customSettingValue["compressedDataRateInMB"];
+                                        JToken compressedDataRateInMBValue = providerSpecificDetailsValue["compressedDataRateInMB"];
                                         if (compressedDataRateInMBValue != null && compressedDataRateInMBValue.Type != JTokenType.Null)
                                         {
                                             double compressedDataRateInMBInstance = ((double)compressedDataRateInMBValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.CompressedDataRateInMB = compressedDataRateInMBInstance;
                                         }
                                         
-                                        JToken uncompressedDataRateInMBValue = customSettingValue["uncompressedDataRateInMB"];
+                                        JToken uncompressedDataRateInMBValue = providerSpecificDetailsValue["uncompressedDataRateInMB"];
                                         if (uncompressedDataRateInMBValue != null && uncompressedDataRateInMBValue.Type != JTokenType.Null)
                                         {
                                             double uncompressedDataRateInMBInstance = ((double)uncompressedDataRateInMBValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.UncompressedDataRateInMB = uncompressedDataRateInMBInstance;
                                         }
                                         
-                                        JToken ipAddressValue = customSettingValue["ipAddress"];
+                                        JToken ipAddressValue = providerSpecificDetailsValue["ipAddress"];
                                         if (ipAddressValue != null && ipAddressValue.Type != JTokenType.Null)
                                         {
                                             string ipAddressInstance = ((string)ipAddressValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.IpAddress = ipAddressInstance;
                                         }
                                         
-                                        JToken agentVersionValue = customSettingValue["agentVersion"];
+                                        JToken agentVersionValue = providerSpecificDetailsValue["agentVersion"];
                                         if (agentVersionValue != null && agentVersionValue.Type != JTokenType.Null)
                                         {
                                             string agentVersionInstance = ((string)agentVersionValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.AgentVersion = agentVersionInstance;
                                         }
                                         
-                                        JToken latestUpdateVersionValue = customSettingValue["latestUpdateVersion"];
+                                        JToken latestUpdateVersionValue = providerSpecificDetailsValue["latestUpdateVersion"];
                                         if (latestUpdateVersionValue != null && latestUpdateVersionValue.Type != JTokenType.Null)
                                         {
                                             string latestUpdateVersionInstance = ((string)latestUpdateVersionValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.LatestUpdateVersion = latestUpdateVersionInstance;
                                         }
                                         
-                                        JToken isAgentUpdateRequiredValue = customSettingValue["isAgentUpdateRequired"];
+                                        JToken isAgentUpdateRequiredValue = providerSpecificDetailsValue["isAgentUpdateRequired"];
                                         if (isAgentUpdateRequiredValue != null && isAgentUpdateRequiredValue.Type != JTokenType.Null)
                                         {
                                             bool isAgentUpdateRequiredInstance = ((bool)isAgentUpdateRequiredValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.IsAgentUpdateRequired = isAgentUpdateRequiredInstance;
                                         }
                                         
-                                        JToken isRebootAfterUpdateRequiredValue = customSettingValue["isRebootAfterUpdateRequired"];
+                                        JToken isRebootAfterUpdateRequiredValue = providerSpecificDetailsValue["isRebootAfterUpdateRequired"];
                                         if (isRebootAfterUpdateRequiredValue != null && isRebootAfterUpdateRequiredValue.Type != JTokenType.Null)
                                         {
                                             bool isRebootAfterUpdateRequiredInstance = ((bool)isRebootAfterUpdateRequiredValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.IsRebootAfterUpdateRequired = isRebootAfterUpdateRequiredInstance;
                                         }
                                         
-                                        JToken lastHeartbeatValue = customSettingValue["lastHeartbeat"];
+                                        JToken lastHeartbeatValue = providerSpecificDetailsValue["lastHeartbeat"];
                                         if (lastHeartbeatValue != null && lastHeartbeatValue.Type != JTokenType.Null)
                                         {
                                             DateTime lastHeartbeatInstance = ((DateTime)lastHeartbeatValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.LastHeartbeat = lastHeartbeatInstance;
                                         }
                                         
-                                        JToken processServerIdValue = customSettingValue["processServerId"];
+                                        JToken processServerIdValue = providerSpecificDetailsValue["processServerId"];
                                         if (processServerIdValue != null && processServerIdValue.Type != JTokenType.Null)
                                         {
                                             string processServerIdInstance = ((string)processServerIdValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.ProcessServerId = processServerIdInstance;
                                         }
                                         
-                                        JToken multiVmGroupIdValue = customSettingValue["multiVmGroupId"];
+                                        JToken multiVmGroupIdValue = providerSpecificDetailsValue["multiVmGroupId"];
                                         if (multiVmGroupIdValue != null && multiVmGroupIdValue.Type != JTokenType.Null)
                                         {
                                             string multiVmGroupIdInstance = ((string)multiVmGroupIdValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.MultiVmGroupId = multiVmGroupIdInstance;
                                         }
                                         
-                                        JToken multiVmGroupNameValue = customSettingValue["multiVmGroupName"];
+                                        JToken multiVmGroupNameValue = providerSpecificDetailsValue["multiVmGroupName"];
                                         if (multiVmGroupNameValue != null && multiVmGroupNameValue.Type != JTokenType.Null)
                                         {
                                             string multiVmGroupNameInstance = ((string)multiVmGroupNameValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.MultiVmGroupName = multiVmGroupNameInstance;
                                         }
                                         
-                                        JToken protectedVolumesArray = customSettingValue["protectedVolumes"];
+                                        JToken protectedVolumesArray = providerSpecificDetailsValue["protectedVolumes"];
                                         if (protectedVolumesArray != null && protectedVolumesArray.Type != JTokenType.Null)
                                         {
                                             foreach (JToken protectedVolumesValue in ((JArray)protectedVolumesArray))
@@ -8410,94 +8368,94 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken volumeResizedValue2 = customSettingValue["volumeResized"];
+                                        JToken volumeResizedValue2 = providerSpecificDetailsValue["volumeResized"];
                                         if (volumeResizedValue2 != null && volumeResizedValue2.Type != JTokenType.Null)
                                         {
                                             bool volumeResizedInstance2 = ((bool)volumeResizedValue2);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.VolumeResized = volumeResizedInstance2;
                                         }
                                         
-                                        JToken masterTargetIdValue = customSettingValue["masterTargetId"];
+                                        JToken masterTargetIdValue = providerSpecificDetailsValue["masterTargetId"];
                                         if (masterTargetIdValue != null && masterTargetIdValue.Type != JTokenType.Null)
                                         {
                                             string masterTargetIdInstance = ((string)masterTargetIdValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.MasterTargetId = masterTargetIdInstance;
                                         }
                                         
-                                        JToken sourceVmCPUCountValue = customSettingValue["sourceVmCPUCount"];
+                                        JToken sourceVmCPUCountValue = providerSpecificDetailsValue["sourceVmCPUCount"];
                                         if (sourceVmCPUCountValue != null && sourceVmCPUCountValue.Type != JTokenType.Null)
                                         {
                                             int sourceVmCPUCountInstance = ((int)sourceVmCPUCountValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.SourceVmCPUCount = sourceVmCPUCountInstance;
                                         }
                                         
-                                        JToken sourceVmRAMSizeInMBValue = customSettingValue["sourceVmRAMSizeInMB"];
+                                        JToken sourceVmRAMSizeInMBValue = providerSpecificDetailsValue["sourceVmRAMSizeInMB"];
                                         if (sourceVmRAMSizeInMBValue != null && sourceVmRAMSizeInMBValue.Type != JTokenType.Null)
                                         {
                                             int sourceVmRAMSizeInMBInstance = ((int)sourceVmRAMSizeInMBValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.SourceVmRAMSizeInMB = sourceVmRAMSizeInMBInstance;
                                         }
                                         
-                                        JToken osTypeValue = customSettingValue["osType"];
+                                        JToken osTypeValue = providerSpecificDetailsValue["osType"];
                                         if (osTypeValue != null && osTypeValue.Type != JTokenType.Null)
                                         {
                                             string osTypeInstance = ((string)osTypeValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.OSType = osTypeInstance;
                                         }
                                         
-                                        JToken vhdNameValue = customSettingValue["vhdName"];
-                                        if (vhdNameValue != null && vhdNameValue.Type != JTokenType.Null)
+                                        JToken vhdNameValue2 = providerSpecificDetailsValue["vhdName"];
+                                        if (vhdNameValue2 != null && vhdNameValue2.Type != JTokenType.Null)
                                         {
-                                            string vhdNameInstance = ((string)vhdNameValue);
-                                            vMwareAzureV2ProviderSpecificSettingsInstance.VHDName = vhdNameInstance;
+                                            string vhdNameInstance2 = ((string)vhdNameValue2);
+                                            vMwareAzureV2ProviderSpecificSettingsInstance.VHDName = vhdNameInstance2;
                                         }
                                         
-                                        JToken osDiskIdValue = customSettingValue["osDiskId"];
+                                        JToken osDiskIdValue = providerSpecificDetailsValue["osDiskId"];
                                         if (osDiskIdValue != null && osDiskIdValue.Type != JTokenType.Null)
                                         {
                                             string osDiskIdInstance = ((string)osDiskIdValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.OSDiskId = osDiskIdInstance;
                                         }
                                         
-                                        JToken typeValue2 = customSettingValue["__type"];
+                                        JToken typeValue2 = providerSpecificDetailsValue["__type"];
                                         if (typeValue2 != null && typeValue2.Type != JTokenType.Null)
                                         {
                                             string typeInstance2 = ((string)typeValue2);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.Type = typeInstance2;
                                         }
-                                        propertiesInstance.CustomSettings = vMwareAzureV2ProviderSpecificSettingsInstance;
+                                        propertiesInstance.ProviderSpecificDetails = vMwareAzureV2ProviderSpecificSettingsInstance;
                                     }
-                                    if (typeName == "HyperVReplicaAzureProviderSpecificSettings")
+                                    if (typeName == "HyperVReplicaAzureReplicationDetails")
                                     {
-                                        HyperVReplicaAzureProviderSpecificSettings hyperVReplicaAzureProviderSpecificSettingsInstance = new HyperVReplicaAzureProviderSpecificSettings();
+                                        HyperVReplicaAzureReplicationDetails hyperVReplicaAzureReplicationDetailsInstance = new HyperVReplicaAzureReplicationDetails();
                                         
-                                        JToken azureVMDiskDetailsArray = customSettingValue["azureVMDiskDetails"];
+                                        JToken azureVMDiskDetailsArray = providerSpecificDetailsValue["azureVMDiskDetails"];
                                         if (azureVMDiskDetailsArray != null && azureVMDiskDetailsArray.Type != JTokenType.Null)
                                         {
                                             foreach (JToken azureVMDiskDetailsValue in ((JArray)azureVMDiskDetailsArray))
                                             {
                                                 AzureVmDiskDetails azureVmDiskDetailsInstance = new AzureVmDiskDetails();
-                                                hyperVReplicaAzureProviderSpecificSettingsInstance.AzureVMDiskDetails.Add(azureVmDiskDetailsInstance);
+                                                hyperVReplicaAzureReplicationDetailsInstance.AzureVMDiskDetails.Add(azureVmDiskDetailsInstance);
                                                 
-                                                JToken vhdTypeValue = azureVMDiskDetailsValue["vhdType"];
-                                                if (vhdTypeValue != null && vhdTypeValue.Type != JTokenType.Null)
+                                                JToken vhdTypeValue2 = azureVMDiskDetailsValue["vhdType"];
+                                                if (vhdTypeValue2 != null && vhdTypeValue2.Type != JTokenType.Null)
                                                 {
-                                                    string vhdTypeInstance = ((string)vhdTypeValue);
-                                                    azureVmDiskDetailsInstance.VhdType = vhdTypeInstance;
+                                                    string vhdTypeInstance2 = ((string)vhdTypeValue2);
+                                                    azureVmDiskDetailsInstance.VhdType = vhdTypeInstance2;
                                                 }
                                                 
-                                                JToken vhdIdValue = azureVMDiskDetailsValue["vhdId"];
-                                                if (vhdIdValue != null && vhdIdValue.Type != JTokenType.Null)
+                                                JToken vhdIdValue2 = azureVMDiskDetailsValue["vhdId"];
+                                                if (vhdIdValue2 != null && vhdIdValue2.Type != JTokenType.Null)
                                                 {
-                                                    string vhdIdInstance = ((string)vhdIdValue);
-                                                    azureVmDiskDetailsInstance.VhdId = vhdIdInstance;
+                                                    string vhdIdInstance2 = ((string)vhdIdValue2);
+                                                    azureVmDiskDetailsInstance.VhdId = vhdIdInstance2;
                                                 }
                                                 
-                                                JToken vhdNameValue2 = azureVMDiskDetailsValue["vhdName"];
-                                                if (vhdNameValue2 != null && vhdNameValue2.Type != JTokenType.Null)
+                                                JToken vhdNameValue3 = azureVMDiskDetailsValue["vhdName"];
+                                                if (vhdNameValue3 != null && vhdNameValue3.Type != JTokenType.Null)
                                                 {
-                                                    string vhdNameInstance2 = ((string)vhdNameValue2);
-                                                    azureVmDiskDetailsInstance.VhdName = vhdNameInstance2;
+                                                    string vhdNameInstance3 = ((string)vhdNameValue3);
+                                                    azureVmDiskDetailsInstance.VhdName = vhdNameInstance3;
                                                 }
                                                 
                                                 JToken maxSizeMBValue2 = azureVMDiskDetailsValue["maxSizeMB"];
@@ -8507,11 +8465,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     azureVmDiskDetailsInstance.MaxSizeMB = maxSizeMBInstance2;
                                                 }
                                                 
-                                                JToken diskLocationValue = azureVMDiskDetailsValue["diskLocation"];
-                                                if (diskLocationValue != null && diskLocationValue.Type != JTokenType.Null)
+                                                JToken targetDiskLocationValue = azureVMDiskDetailsValue["targetDiskLocation"];
+                                                if (targetDiskLocationValue != null && targetDiskLocationValue.Type != JTokenType.Null)
                                                 {
-                                                    string diskLocationInstance = ((string)diskLocationValue);
-                                                    azureVmDiskDetailsInstance.DiskLocation = diskLocationInstance;
+                                                    string targetDiskLocationInstance = ((string)targetDiskLocationValue);
+                                                    azureVmDiskDetailsInstance.TargetDiskLocation = targetDiskLocationInstance;
                                                 }
                                                 
                                                 JToken lunIdValue = azureVMDiskDetailsValue["lunId"];
@@ -8521,55 +8479,55 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     azureVmDiskDetailsInstance.LunId = lunIdInstance;
                                                 }
                                                 
-                                                JToken primaryDiskCorelationIdValue = azureVMDiskDetailsValue["primaryDiskCorelationId"];
-                                                if (primaryDiskCorelationIdValue != null && primaryDiskCorelationIdValue.Type != JTokenType.Null)
+                                                JToken targetDiskNameValue = azureVMDiskDetailsValue["targetDiskName"];
+                                                if (targetDiskNameValue != null && targetDiskNameValue.Type != JTokenType.Null)
                                                 {
-                                                    string primaryDiskCorelationIdInstance = ((string)primaryDiskCorelationIdValue);
-                                                    azureVmDiskDetailsInstance.PrimaryDiskCorelationId = primaryDiskCorelationIdInstance;
+                                                    string targetDiskNameInstance = ((string)targetDiskNameValue);
+                                                    azureVmDiskDetailsInstance.TargetDiskName = targetDiskNameInstance;
                                                 }
                                             }
                                         }
                                         
-                                        JToken recoveryAzureVMNameValue = customSettingValue["recoveryAzureVMName"];
+                                        JToken recoveryAzureVMNameValue = providerSpecificDetailsValue["recoveryAzureVMName"];
                                         if (recoveryAzureVMNameValue != null && recoveryAzureVMNameValue.Type != JTokenType.Null)
                                         {
                                             string recoveryAzureVMNameInstance = ((string)recoveryAzureVMNameValue);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.RecoveryAzureVMName = recoveryAzureVMNameInstance;
+                                            hyperVReplicaAzureReplicationDetailsInstance.RecoveryAzureVMName = recoveryAzureVMNameInstance;
                                         }
                                         
-                                        JToken recoveryAzureVMSizeValue = customSettingValue["recoveryAzureVMSize"];
+                                        JToken recoveryAzureVMSizeValue = providerSpecificDetailsValue["recoveryAzureVMSize"];
                                         if (recoveryAzureVMSizeValue != null && recoveryAzureVMSizeValue.Type != JTokenType.Null)
                                         {
                                             string recoveryAzureVMSizeInstance = ((string)recoveryAzureVMSizeValue);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.RecoveryAzureVMSize = recoveryAzureVMSizeInstance;
+                                            hyperVReplicaAzureReplicationDetailsInstance.RecoveryAzureVMSize = recoveryAzureVMSizeInstance;
                                         }
                                         
-                                        JToken recoveryAzureStorageAccountValue = customSettingValue["recoveryAzureStorageAccount"];
+                                        JToken recoveryAzureStorageAccountValue = providerSpecificDetailsValue["recoveryAzureStorageAccount"];
                                         if (recoveryAzureStorageAccountValue != null && recoveryAzureStorageAccountValue.Type != JTokenType.Null)
                                         {
                                             string recoveryAzureStorageAccountInstance = ((string)recoveryAzureStorageAccountValue);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.RecoveryAzureStorageAccount = recoveryAzureStorageAccountInstance;
+                                            hyperVReplicaAzureReplicationDetailsInstance.RecoveryAzureStorageAccount = recoveryAzureStorageAccountInstance;
                                         }
                                         
-                                        JToken selectedRecoveryAzureNetworkIdValue = customSettingValue["selectedRecoveryAzureNetworkId"];
+                                        JToken selectedRecoveryAzureNetworkIdValue = providerSpecificDetailsValue["selectedRecoveryAzureNetworkId"];
                                         if (selectedRecoveryAzureNetworkIdValue != null && selectedRecoveryAzureNetworkIdValue.Type != JTokenType.Null)
                                         {
                                             string selectedRecoveryAzureNetworkIdInstance = ((string)selectedRecoveryAzureNetworkIdValue);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.SelectedRecoveryAzureNetworkId = selectedRecoveryAzureNetworkIdInstance;
+                                            hyperVReplicaAzureReplicationDetailsInstance.SelectedRecoveryAzureNetworkId = selectedRecoveryAzureNetworkIdInstance;
                                         }
                                         
-                                        JToken lastReplicatedTimeValue2 = customSettingValue["lastReplicatedTime"];
+                                        JToken lastReplicatedTimeValue2 = providerSpecificDetailsValue["lastReplicatedTime"];
                                         if (lastReplicatedTimeValue2 != null && lastReplicatedTimeValue2.Type != JTokenType.Null)
                                         {
                                             string lastReplicatedTimeInstance2 = ((string)lastReplicatedTimeValue2);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.LastReplicatedTime = lastReplicatedTimeInstance2;
+                                            hyperVReplicaAzureReplicationDetailsInstance.LastReplicatedTime = lastReplicatedTimeInstance2;
                                         }
                                         
-                                        JToken initialReplicationDetailsValue2 = customSettingValue["initialReplicationDetails"];
+                                        JToken initialReplicationDetailsValue2 = providerSpecificDetailsValue["initialReplicationDetails"];
                                         if (initialReplicationDetailsValue2 != null && initialReplicationDetailsValue2.Type != JTokenType.Null)
                                         {
                                             InitialReplicationDetails initialReplicationDetailsInstance2 = new InitialReplicationDetails();
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.InitialReplicationDetails = initialReplicationDetailsInstance2;
+                                            hyperVReplicaAzureReplicationDetailsInstance.InitialReplicationDetails = initialReplicationDetailsInstance2;
                                             
                                             JToken initialReplicationTypeValue2 = initialReplicationDetailsValue2["initialReplicationType"];
                                             if (initialReplicationTypeValue2 != null && initialReplicationTypeValue2.Type != JTokenType.Null)
@@ -8586,13 +8544,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken vmNicsArray2 = customSettingValue["vmNics"];
+                                        JToken vmNicsArray2 = providerSpecificDetailsValue["vmNics"];
                                         if (vmNicsArray2 != null && vmNicsArray2.Type != JTokenType.Null)
                                         {
                                             foreach (JToken vmNicsValue2 in ((JArray)vmNicsArray2))
                                             {
                                                 VMNicDetails vMNicDetailsInstance2 = new VMNicDetails();
-                                                hyperVReplicaAzureProviderSpecificSettingsInstance.VMNics.Add(vMNicDetailsInstance2);
+                                                hyperVReplicaAzureReplicationDetailsInstance.VMNics.Add(vMNicDetailsInstance2);
                                                 
                                                 JToken nicIdValue2 = vmNicsValue2["nicId"];
                                                 if (nicIdValue2 != null && nicIdValue2.Type != JTokenType.Null)
@@ -8638,13 +8596,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken typeValue3 = customSettingValue["__type"];
+                                        JToken typeValue3 = providerSpecificDetailsValue["__type"];
                                         if (typeValue3 != null && typeValue3.Type != JTokenType.Null)
                                         {
                                             string typeInstance3 = ((string)typeValue3);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.Type = typeInstance3;
+                                            hyperVReplicaAzureReplicationDetailsInstance.Type = typeInstance3;
                                         }
-                                        propertiesInstance.CustomSettings = hyperVReplicaAzureProviderSpecificSettingsInstance;
+                                        propertiesInstance.ProviderSpecificDetails = hyperVReplicaAzureReplicationDetailsInstance;
                                     }
                                 }
                             }
@@ -8892,11 +8850,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.ProtectedItemType = protectedItemTypeInstance;
                                 }
                                 
-                                JToken protectedItemSourceIdValue = propertiesValue["protectedItemSourceId"];
-                                if (protectedItemSourceIdValue != null && protectedItemSourceIdValue.Type != JTokenType.Null)
+                                JToken protectedItemIdValue = propertiesValue["protectedItemId"];
+                                if (protectedItemIdValue != null && protectedItemIdValue.Type != JTokenType.Null)
                                 {
-                                    string protectedItemSourceIdInstance = ((string)protectedItemSourceIdValue);
-                                    propertiesInstance.ProtectedItemSourceId = protectedItemSourceIdInstance;
+                                    string protectedItemIdInstance = ((string)protectedItemIdValue);
+                                    propertiesInstance.ProtectedItemId = protectedItemIdInstance;
                                 }
                                 
                                 JToken recoveryServicesProviderNameValue = propertiesValue["recoveryServicesProviderName"];
@@ -8934,11 +8892,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.RecoveryProtectionContainerFriendlyName = recoveryProtectionContainerFriendlyNameInstance;
                                 }
                                 
-                                JToken protectionStatusValue = propertiesValue["protectionStatus"];
-                                if (protectionStatusValue != null && protectionStatusValue.Type != JTokenType.Null)
+                                JToken protectionStateValue = propertiesValue["protectionState"];
+                                if (protectionStateValue != null && protectionStateValue.Type != JTokenType.Null)
                                 {
-                                    string protectionStatusInstance = ((string)protectionStatusValue);
-                                    propertiesInstance.ProtectionStatus = protectionStatusInstance;
+                                    string protectionStateInstance = ((string)protectionStateValue);
+                                    propertiesInstance.ProtectionState = protectionStateInstance;
                                 }
                                 
                                 JToken activeLocationValue = propertiesValue["activeLocation"];
@@ -8946,13 +8904,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 {
                                     string activeLocationInstance = ((string)activeLocationValue);
                                     propertiesInstance.ActiveLocation = activeLocationInstance;
-                                }
-                                
-                                JToken testFailoverStateDescriptionValue = propertiesValue["testFailoverStateDescription"];
-                                if (testFailoverStateDescriptionValue != null && testFailoverStateDescriptionValue.Type != JTokenType.Null)
-                                {
-                                    string testFailoverStateDescriptionInstance = ((string)testFailoverStateDescriptionValue);
-                                    propertiesInstance.TestFailoverStateDescription = testFailoverStateDescriptionInstance;
                                 }
                                 
                                 JToken allowedOperationsArray = propertiesValue["allowedOperations"];
@@ -9100,28 +9051,28 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     }
                                 }
                                 
-                                JToken customSettingValue = propertiesValue["customSetting"];
-                                if (customSettingValue != null && customSettingValue.Type != JTokenType.Null)
+                                JToken providerSpecificDetailsValue = propertiesValue["providerSpecificDetails"];
+                                if (providerSpecificDetailsValue != null && providerSpecificDetailsValue.Type != JTokenType.Null)
                                 {
-                                    string typeName = ((string)customSettingValue["__type"]);
-                                    if (typeName == "HyperVReplicaProviderSpecificSettings")
+                                    string typeName = ((string)providerSpecificDetailsValue["__type"]);
+                                    if (typeName == "HyperVReplicaReplicationDetails")
                                     {
-                                        HyperVReplicaProviderSpecificSettings hyperVReplicaProviderSpecificSettingsInstance = new HyperVReplicaProviderSpecificSettings();
+                                        HyperVReplicaReplicationDetails hyperVReplicaReplicationDetailsInstance = new HyperVReplicaReplicationDetails();
                                         
-                                        JToken lastReplicatedTimeValue = customSettingValue["lastReplicatedTime"];
+                                        JToken lastReplicatedTimeValue = providerSpecificDetailsValue["lastReplicatedTime"];
                                         if (lastReplicatedTimeValue != null && lastReplicatedTimeValue.Type != JTokenType.Null)
                                         {
                                             string lastReplicatedTimeInstance = ((string)lastReplicatedTimeValue);
-                                            hyperVReplicaProviderSpecificSettingsInstance.LastReplicatedTime = lastReplicatedTimeInstance;
+                                            hyperVReplicaReplicationDetailsInstance.LastReplicatedTime = lastReplicatedTimeInstance;
                                         }
                                         
-                                        JToken vmNicsArray = customSettingValue["vmNics"];
+                                        JToken vmNicsArray = providerSpecificDetailsValue["vmNics"];
                                         if (vmNicsArray != null && vmNicsArray.Type != JTokenType.Null)
                                         {
                                             foreach (JToken vmNicsValue in ((JArray)vmNicsArray))
                                             {
                                                 VMNicDetails vMNicDetailsInstance = new VMNicDetails();
-                                                hyperVReplicaProviderSpecificSettingsInstance.VmNics.Add(vMNicDetailsInstance);
+                                                hyperVReplicaReplicationDetailsInstance.VmNics.Add(vMNicDetailsInstance);
                                                 
                                                 JToken nicIdValue = vmNicsValue["nicId"];
                                                 if (nicIdValue != null && nicIdValue.Type != JTokenType.Null)
@@ -9167,11 +9118,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken initialReplicationDetailsValue = customSettingValue["initialReplicationDetails"];
+                                        JToken initialReplicationDetailsValue = providerSpecificDetailsValue["initialReplicationDetails"];
                                         if (initialReplicationDetailsValue != null && initialReplicationDetailsValue.Type != JTokenType.Null)
                                         {
                                             InitialReplicationDetails initialReplicationDetailsInstance = new InitialReplicationDetails();
-                                            hyperVReplicaProviderSpecificSettingsInstance.InitialReplicationDetails = initialReplicationDetailsInstance;
+                                            hyperVReplicaReplicationDetailsInstance.InitialReplicationDetails = initialReplicationDetailsInstance;
                                             
                                             JToken initialReplicationTypeValue = initialReplicationDetailsValue["initialReplicationType"];
                                             if (initialReplicationTypeValue != null && initialReplicationTypeValue.Type != JTokenType.Null)
@@ -9188,13 +9139,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken vMDiskDetailsArray = customSettingValue["vMDiskDetails"];
+                                        JToken vMDiskDetailsArray = providerSpecificDetailsValue["vMDiskDetails"];
                                         if (vMDiskDetailsArray != null && vMDiskDetailsArray.Type != JTokenType.Null)
                                         {
                                             foreach (JToken vMDiskDetailsValue in ((JArray)vMDiskDetailsArray))
                                             {
                                                 DiskDetails diskDetailsInstance = new DiskDetails();
-                                                hyperVReplicaProviderSpecificSettingsInstance.VMDiskDetails.Add(diskDetailsInstance);
+                                                hyperVReplicaReplicationDetailsInstance.VMDiskDetails.Add(diskDetailsInstance);
                                                 
                                                 JToken maxSizeMBValue = vMDiskDetailsValue["maxSizeMB"];
                                                 if (maxSizeMBValue != null && maxSizeMBValue.Type != JTokenType.Null)
@@ -9203,154 +9154,154 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     diskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
                                                 }
                                                 
-                                                JToken vHDStatusValue = vMDiskDetailsValue["vHDStatus"];
-                                                if (vHDStatusValue != null && vHDStatusValue.Type != JTokenType.Null)
+                                                JToken vhdTypeValue = vMDiskDetailsValue["vhdType"];
+                                                if (vhdTypeValue != null && vhdTypeValue.Type != JTokenType.Null)
                                                 {
-                                                    string vHDStatusInstance = ((string)vHDStatusValue);
-                                                    diskDetailsInstance.VHDStatus = vHDStatusInstance;
+                                                    string vhdTypeInstance = ((string)vhdTypeValue);
+                                                    diskDetailsInstance.VhdType = vhdTypeInstance;
                                                 }
                                                 
-                                                JToken vHDIdValue = vMDiskDetailsValue["vHDId"];
-                                                if (vHDIdValue != null && vHDIdValue.Type != JTokenType.Null)
+                                                JToken vhdIdValue = vMDiskDetailsValue["vhdId"];
+                                                if (vhdIdValue != null && vhdIdValue.Type != JTokenType.Null)
                                                 {
-                                                    string vHDIdInstance = ((string)vHDIdValue);
-                                                    diskDetailsInstance.VHDId = vHDIdInstance;
+                                                    string vhdIdInstance = ((string)vhdIdValue);
+                                                    diskDetailsInstance.VhdId = vhdIdInstance;
                                                 }
                                                 
-                                                JToken vHDNameValue = vMDiskDetailsValue["vHDName"];
-                                                if (vHDNameValue != null && vHDNameValue.Type != JTokenType.Null)
+                                                JToken vhdNameValue = vMDiskDetailsValue["vhdName"];
+                                                if (vhdNameValue != null && vhdNameValue.Type != JTokenType.Null)
                                                 {
-                                                    string vHDNameInstance = ((string)vHDNameValue);
-                                                    diskDetailsInstance.VHDName = vHDNameInstance;
+                                                    string vhdNameInstance = ((string)vhdNameValue);
+                                                    diskDetailsInstance.VhdName = vhdNameInstance;
                                                 }
                                             }
                                         }
                                         
-                                        JToken typeValue = customSettingValue["__type"];
+                                        JToken typeValue = providerSpecificDetailsValue["__type"];
                                         if (typeValue != null && typeValue.Type != JTokenType.Null)
                                         {
                                             string typeInstance = ((string)typeValue);
-                                            hyperVReplicaProviderSpecificSettingsInstance.Type = typeInstance;
+                                            hyperVReplicaReplicationDetailsInstance.Type = typeInstance;
                                         }
-                                        propertiesInstance.CustomSettings = hyperVReplicaProviderSpecificSettingsInstance;
+                                        propertiesInstance.ProviderSpecificDetails = hyperVReplicaReplicationDetailsInstance;
                                     }
                                     if (typeName == "VMwareAzureV2ProviderSpecificSettings")
                                     {
                                         VMwareAzureV2ProviderSpecificSettings vMwareAzureV2ProviderSpecificSettingsInstance = new VMwareAzureV2ProviderSpecificSettings();
                                         
-                                        JToken protectionStageValue = customSettingValue["protectionStage"];
+                                        JToken protectionStageValue = providerSpecificDetailsValue["protectionStage"];
                                         if (protectionStageValue != null && protectionStageValue.Type != JTokenType.Null)
                                         {
                                             string protectionStageInstance = ((string)protectionStageValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.ProtectionStage = protectionStageInstance;
                                         }
                                         
-                                        JToken healthErrorCodeValue = customSettingValue["healthErrorCode"];
+                                        JToken healthErrorCodeValue = providerSpecificDetailsValue["healthErrorCode"];
                                         if (healthErrorCodeValue != null && healthErrorCodeValue.Type != JTokenType.Null)
                                         {
                                             string healthErrorCodeInstance = ((string)healthErrorCodeValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.HealthErrorCode = healthErrorCodeInstance;
                                         }
                                         
-                                        JToken resyncRequiredValue = customSettingValue["resyncRequired"];
+                                        JToken resyncRequiredValue = providerSpecificDetailsValue["resyncRequired"];
                                         if (resyncRequiredValue != null && resyncRequiredValue.Type != JTokenType.Null)
                                         {
                                             bool resyncRequiredInstance = ((bool)resyncRequiredValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.ResyncRequired = resyncRequiredInstance;
                                         }
                                         
-                                        JToken resyncProgressPercentageValue = customSettingValue["resyncProgressPercentage"];
+                                        JToken resyncProgressPercentageValue = providerSpecificDetailsValue["resyncProgressPercentage"];
                                         if (resyncProgressPercentageValue != null && resyncProgressPercentageValue.Type != JTokenType.Null)
                                         {
                                             int resyncProgressPercentageInstance = ((int)resyncProgressPercentageValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.ResyncProgressPercentage = resyncProgressPercentageInstance;
                                         }
                                         
-                                        JToken rpoInSecondsValue = customSettingValue["rpoInSeconds"];
+                                        JToken rpoInSecondsValue = providerSpecificDetailsValue["rpoInSeconds"];
                                         if (rpoInSecondsValue != null && rpoInSecondsValue.Type != JTokenType.Null)
                                         {
                                             long rpoInSecondsInstance = ((long)rpoInSecondsValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.RpoInSeconds = rpoInSecondsInstance;
                                         }
                                         
-                                        JToken compressedDataRateInMBValue = customSettingValue["compressedDataRateInMB"];
+                                        JToken compressedDataRateInMBValue = providerSpecificDetailsValue["compressedDataRateInMB"];
                                         if (compressedDataRateInMBValue != null && compressedDataRateInMBValue.Type != JTokenType.Null)
                                         {
                                             double compressedDataRateInMBInstance = ((double)compressedDataRateInMBValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.CompressedDataRateInMB = compressedDataRateInMBInstance;
                                         }
                                         
-                                        JToken uncompressedDataRateInMBValue = customSettingValue["uncompressedDataRateInMB"];
+                                        JToken uncompressedDataRateInMBValue = providerSpecificDetailsValue["uncompressedDataRateInMB"];
                                         if (uncompressedDataRateInMBValue != null && uncompressedDataRateInMBValue.Type != JTokenType.Null)
                                         {
                                             double uncompressedDataRateInMBInstance = ((double)uncompressedDataRateInMBValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.UncompressedDataRateInMB = uncompressedDataRateInMBInstance;
                                         }
                                         
-                                        JToken ipAddressValue = customSettingValue["ipAddress"];
+                                        JToken ipAddressValue = providerSpecificDetailsValue["ipAddress"];
                                         if (ipAddressValue != null && ipAddressValue.Type != JTokenType.Null)
                                         {
                                             string ipAddressInstance = ((string)ipAddressValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.IpAddress = ipAddressInstance;
                                         }
                                         
-                                        JToken agentVersionValue = customSettingValue["agentVersion"];
+                                        JToken agentVersionValue = providerSpecificDetailsValue["agentVersion"];
                                         if (agentVersionValue != null && agentVersionValue.Type != JTokenType.Null)
                                         {
                                             string agentVersionInstance = ((string)agentVersionValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.AgentVersion = agentVersionInstance;
                                         }
                                         
-                                        JToken latestUpdateVersionValue = customSettingValue["latestUpdateVersion"];
+                                        JToken latestUpdateVersionValue = providerSpecificDetailsValue["latestUpdateVersion"];
                                         if (latestUpdateVersionValue != null && latestUpdateVersionValue.Type != JTokenType.Null)
                                         {
                                             string latestUpdateVersionInstance = ((string)latestUpdateVersionValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.LatestUpdateVersion = latestUpdateVersionInstance;
                                         }
                                         
-                                        JToken isAgentUpdateRequiredValue = customSettingValue["isAgentUpdateRequired"];
+                                        JToken isAgentUpdateRequiredValue = providerSpecificDetailsValue["isAgentUpdateRequired"];
                                         if (isAgentUpdateRequiredValue != null && isAgentUpdateRequiredValue.Type != JTokenType.Null)
                                         {
                                             bool isAgentUpdateRequiredInstance = ((bool)isAgentUpdateRequiredValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.IsAgentUpdateRequired = isAgentUpdateRequiredInstance;
                                         }
                                         
-                                        JToken isRebootAfterUpdateRequiredValue = customSettingValue["isRebootAfterUpdateRequired"];
+                                        JToken isRebootAfterUpdateRequiredValue = providerSpecificDetailsValue["isRebootAfterUpdateRequired"];
                                         if (isRebootAfterUpdateRequiredValue != null && isRebootAfterUpdateRequiredValue.Type != JTokenType.Null)
                                         {
                                             bool isRebootAfterUpdateRequiredInstance = ((bool)isRebootAfterUpdateRequiredValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.IsRebootAfterUpdateRequired = isRebootAfterUpdateRequiredInstance;
                                         }
                                         
-                                        JToken lastHeartbeatValue = customSettingValue["lastHeartbeat"];
+                                        JToken lastHeartbeatValue = providerSpecificDetailsValue["lastHeartbeat"];
                                         if (lastHeartbeatValue != null && lastHeartbeatValue.Type != JTokenType.Null)
                                         {
                                             DateTime lastHeartbeatInstance = ((DateTime)lastHeartbeatValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.LastHeartbeat = lastHeartbeatInstance;
                                         }
                                         
-                                        JToken processServerIdValue = customSettingValue["processServerId"];
+                                        JToken processServerIdValue = providerSpecificDetailsValue["processServerId"];
                                         if (processServerIdValue != null && processServerIdValue.Type != JTokenType.Null)
                                         {
                                             string processServerIdInstance = ((string)processServerIdValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.ProcessServerId = processServerIdInstance;
                                         }
                                         
-                                        JToken multiVmGroupIdValue = customSettingValue["multiVmGroupId"];
+                                        JToken multiVmGroupIdValue = providerSpecificDetailsValue["multiVmGroupId"];
                                         if (multiVmGroupIdValue != null && multiVmGroupIdValue.Type != JTokenType.Null)
                                         {
                                             string multiVmGroupIdInstance = ((string)multiVmGroupIdValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.MultiVmGroupId = multiVmGroupIdInstance;
                                         }
                                         
-                                        JToken multiVmGroupNameValue = customSettingValue["multiVmGroupName"];
+                                        JToken multiVmGroupNameValue = providerSpecificDetailsValue["multiVmGroupName"];
                                         if (multiVmGroupNameValue != null && multiVmGroupNameValue.Type != JTokenType.Null)
                                         {
                                             string multiVmGroupNameInstance = ((string)multiVmGroupNameValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.MultiVmGroupName = multiVmGroupNameInstance;
                                         }
                                         
-                                        JToken protectedVolumesArray = customSettingValue["protectedVolumes"];
+                                        JToken protectedVolumesArray = providerSpecificDetailsValue["protectedVolumes"];
                                         if (protectedVolumesArray != null && protectedVolumesArray.Type != JTokenType.Null)
                                         {
                                             foreach (JToken protectedVolumesValue in ((JArray)protectedVolumesArray))
@@ -9451,94 +9402,94 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken volumeResizedValue2 = customSettingValue["volumeResized"];
+                                        JToken volumeResizedValue2 = providerSpecificDetailsValue["volumeResized"];
                                         if (volumeResizedValue2 != null && volumeResizedValue2.Type != JTokenType.Null)
                                         {
                                             bool volumeResizedInstance2 = ((bool)volumeResizedValue2);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.VolumeResized = volumeResizedInstance2;
                                         }
                                         
-                                        JToken masterTargetIdValue = customSettingValue["masterTargetId"];
+                                        JToken masterTargetIdValue = providerSpecificDetailsValue["masterTargetId"];
                                         if (masterTargetIdValue != null && masterTargetIdValue.Type != JTokenType.Null)
                                         {
                                             string masterTargetIdInstance = ((string)masterTargetIdValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.MasterTargetId = masterTargetIdInstance;
                                         }
                                         
-                                        JToken sourceVmCPUCountValue = customSettingValue["sourceVmCPUCount"];
+                                        JToken sourceVmCPUCountValue = providerSpecificDetailsValue["sourceVmCPUCount"];
                                         if (sourceVmCPUCountValue != null && sourceVmCPUCountValue.Type != JTokenType.Null)
                                         {
                                             int sourceVmCPUCountInstance = ((int)sourceVmCPUCountValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.SourceVmCPUCount = sourceVmCPUCountInstance;
                                         }
                                         
-                                        JToken sourceVmRAMSizeInMBValue = customSettingValue["sourceVmRAMSizeInMB"];
+                                        JToken sourceVmRAMSizeInMBValue = providerSpecificDetailsValue["sourceVmRAMSizeInMB"];
                                         if (sourceVmRAMSizeInMBValue != null && sourceVmRAMSizeInMBValue.Type != JTokenType.Null)
                                         {
                                             int sourceVmRAMSizeInMBInstance = ((int)sourceVmRAMSizeInMBValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.SourceVmRAMSizeInMB = sourceVmRAMSizeInMBInstance;
                                         }
                                         
-                                        JToken osTypeValue = customSettingValue["osType"];
+                                        JToken osTypeValue = providerSpecificDetailsValue["osType"];
                                         if (osTypeValue != null && osTypeValue.Type != JTokenType.Null)
                                         {
                                             string osTypeInstance = ((string)osTypeValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.OSType = osTypeInstance;
                                         }
                                         
-                                        JToken vhdNameValue = customSettingValue["vhdName"];
-                                        if (vhdNameValue != null && vhdNameValue.Type != JTokenType.Null)
+                                        JToken vhdNameValue2 = providerSpecificDetailsValue["vhdName"];
+                                        if (vhdNameValue2 != null && vhdNameValue2.Type != JTokenType.Null)
                                         {
-                                            string vhdNameInstance = ((string)vhdNameValue);
-                                            vMwareAzureV2ProviderSpecificSettingsInstance.VHDName = vhdNameInstance;
+                                            string vhdNameInstance2 = ((string)vhdNameValue2);
+                                            vMwareAzureV2ProviderSpecificSettingsInstance.VHDName = vhdNameInstance2;
                                         }
                                         
-                                        JToken osDiskIdValue = customSettingValue["osDiskId"];
+                                        JToken osDiskIdValue = providerSpecificDetailsValue["osDiskId"];
                                         if (osDiskIdValue != null && osDiskIdValue.Type != JTokenType.Null)
                                         {
                                             string osDiskIdInstance = ((string)osDiskIdValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.OSDiskId = osDiskIdInstance;
                                         }
                                         
-                                        JToken typeValue2 = customSettingValue["__type"];
+                                        JToken typeValue2 = providerSpecificDetailsValue["__type"];
                                         if (typeValue2 != null && typeValue2.Type != JTokenType.Null)
                                         {
                                             string typeInstance2 = ((string)typeValue2);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.Type = typeInstance2;
                                         }
-                                        propertiesInstance.CustomSettings = vMwareAzureV2ProviderSpecificSettingsInstance;
+                                        propertiesInstance.ProviderSpecificDetails = vMwareAzureV2ProviderSpecificSettingsInstance;
                                     }
-                                    if (typeName == "HyperVReplicaAzureProviderSpecificSettings")
+                                    if (typeName == "HyperVReplicaAzureReplicationDetails")
                                     {
-                                        HyperVReplicaAzureProviderSpecificSettings hyperVReplicaAzureProviderSpecificSettingsInstance = new HyperVReplicaAzureProviderSpecificSettings();
+                                        HyperVReplicaAzureReplicationDetails hyperVReplicaAzureReplicationDetailsInstance = new HyperVReplicaAzureReplicationDetails();
                                         
-                                        JToken azureVMDiskDetailsArray = customSettingValue["azureVMDiskDetails"];
+                                        JToken azureVMDiskDetailsArray = providerSpecificDetailsValue["azureVMDiskDetails"];
                                         if (azureVMDiskDetailsArray != null && azureVMDiskDetailsArray.Type != JTokenType.Null)
                                         {
                                             foreach (JToken azureVMDiskDetailsValue in ((JArray)azureVMDiskDetailsArray))
                                             {
                                                 AzureVmDiskDetails azureVmDiskDetailsInstance = new AzureVmDiskDetails();
-                                                hyperVReplicaAzureProviderSpecificSettingsInstance.AzureVMDiskDetails.Add(azureVmDiskDetailsInstance);
+                                                hyperVReplicaAzureReplicationDetailsInstance.AzureVMDiskDetails.Add(azureVmDiskDetailsInstance);
                                                 
-                                                JToken vhdTypeValue = azureVMDiskDetailsValue["vhdType"];
-                                                if (vhdTypeValue != null && vhdTypeValue.Type != JTokenType.Null)
+                                                JToken vhdTypeValue2 = azureVMDiskDetailsValue["vhdType"];
+                                                if (vhdTypeValue2 != null && vhdTypeValue2.Type != JTokenType.Null)
                                                 {
-                                                    string vhdTypeInstance = ((string)vhdTypeValue);
-                                                    azureVmDiskDetailsInstance.VhdType = vhdTypeInstance;
+                                                    string vhdTypeInstance2 = ((string)vhdTypeValue2);
+                                                    azureVmDiskDetailsInstance.VhdType = vhdTypeInstance2;
                                                 }
                                                 
-                                                JToken vhdIdValue = azureVMDiskDetailsValue["vhdId"];
-                                                if (vhdIdValue != null && vhdIdValue.Type != JTokenType.Null)
+                                                JToken vhdIdValue2 = azureVMDiskDetailsValue["vhdId"];
+                                                if (vhdIdValue2 != null && vhdIdValue2.Type != JTokenType.Null)
                                                 {
-                                                    string vhdIdInstance = ((string)vhdIdValue);
-                                                    azureVmDiskDetailsInstance.VhdId = vhdIdInstance;
+                                                    string vhdIdInstance2 = ((string)vhdIdValue2);
+                                                    azureVmDiskDetailsInstance.VhdId = vhdIdInstance2;
                                                 }
                                                 
-                                                JToken vhdNameValue2 = azureVMDiskDetailsValue["vhdName"];
-                                                if (vhdNameValue2 != null && vhdNameValue2.Type != JTokenType.Null)
+                                                JToken vhdNameValue3 = azureVMDiskDetailsValue["vhdName"];
+                                                if (vhdNameValue3 != null && vhdNameValue3.Type != JTokenType.Null)
                                                 {
-                                                    string vhdNameInstance2 = ((string)vhdNameValue2);
-                                                    azureVmDiskDetailsInstance.VhdName = vhdNameInstance2;
+                                                    string vhdNameInstance3 = ((string)vhdNameValue3);
+                                                    azureVmDiskDetailsInstance.VhdName = vhdNameInstance3;
                                                 }
                                                 
                                                 JToken maxSizeMBValue2 = azureVMDiskDetailsValue["maxSizeMB"];
@@ -9548,11 +9499,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     azureVmDiskDetailsInstance.MaxSizeMB = maxSizeMBInstance2;
                                                 }
                                                 
-                                                JToken diskLocationValue = azureVMDiskDetailsValue["diskLocation"];
-                                                if (diskLocationValue != null && diskLocationValue.Type != JTokenType.Null)
+                                                JToken targetDiskLocationValue = azureVMDiskDetailsValue["targetDiskLocation"];
+                                                if (targetDiskLocationValue != null && targetDiskLocationValue.Type != JTokenType.Null)
                                                 {
-                                                    string diskLocationInstance = ((string)diskLocationValue);
-                                                    azureVmDiskDetailsInstance.DiskLocation = diskLocationInstance;
+                                                    string targetDiskLocationInstance = ((string)targetDiskLocationValue);
+                                                    azureVmDiskDetailsInstance.TargetDiskLocation = targetDiskLocationInstance;
                                                 }
                                                 
                                                 JToken lunIdValue = azureVMDiskDetailsValue["lunId"];
@@ -9562,55 +9513,55 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     azureVmDiskDetailsInstance.LunId = lunIdInstance;
                                                 }
                                                 
-                                                JToken primaryDiskCorelationIdValue = azureVMDiskDetailsValue["primaryDiskCorelationId"];
-                                                if (primaryDiskCorelationIdValue != null && primaryDiskCorelationIdValue.Type != JTokenType.Null)
+                                                JToken targetDiskNameValue = azureVMDiskDetailsValue["targetDiskName"];
+                                                if (targetDiskNameValue != null && targetDiskNameValue.Type != JTokenType.Null)
                                                 {
-                                                    string primaryDiskCorelationIdInstance = ((string)primaryDiskCorelationIdValue);
-                                                    azureVmDiskDetailsInstance.PrimaryDiskCorelationId = primaryDiskCorelationIdInstance;
+                                                    string targetDiskNameInstance = ((string)targetDiskNameValue);
+                                                    azureVmDiskDetailsInstance.TargetDiskName = targetDiskNameInstance;
                                                 }
                                             }
                                         }
                                         
-                                        JToken recoveryAzureVMNameValue = customSettingValue["recoveryAzureVMName"];
+                                        JToken recoveryAzureVMNameValue = providerSpecificDetailsValue["recoveryAzureVMName"];
                                         if (recoveryAzureVMNameValue != null && recoveryAzureVMNameValue.Type != JTokenType.Null)
                                         {
                                             string recoveryAzureVMNameInstance = ((string)recoveryAzureVMNameValue);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.RecoveryAzureVMName = recoveryAzureVMNameInstance;
+                                            hyperVReplicaAzureReplicationDetailsInstance.RecoveryAzureVMName = recoveryAzureVMNameInstance;
                                         }
                                         
-                                        JToken recoveryAzureVMSizeValue = customSettingValue["recoveryAzureVMSize"];
+                                        JToken recoveryAzureVMSizeValue = providerSpecificDetailsValue["recoveryAzureVMSize"];
                                         if (recoveryAzureVMSizeValue != null && recoveryAzureVMSizeValue.Type != JTokenType.Null)
                                         {
                                             string recoveryAzureVMSizeInstance = ((string)recoveryAzureVMSizeValue);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.RecoveryAzureVMSize = recoveryAzureVMSizeInstance;
+                                            hyperVReplicaAzureReplicationDetailsInstance.RecoveryAzureVMSize = recoveryAzureVMSizeInstance;
                                         }
                                         
-                                        JToken recoveryAzureStorageAccountValue = customSettingValue["recoveryAzureStorageAccount"];
+                                        JToken recoveryAzureStorageAccountValue = providerSpecificDetailsValue["recoveryAzureStorageAccount"];
                                         if (recoveryAzureStorageAccountValue != null && recoveryAzureStorageAccountValue.Type != JTokenType.Null)
                                         {
                                             string recoveryAzureStorageAccountInstance = ((string)recoveryAzureStorageAccountValue);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.RecoveryAzureStorageAccount = recoveryAzureStorageAccountInstance;
+                                            hyperVReplicaAzureReplicationDetailsInstance.RecoveryAzureStorageAccount = recoveryAzureStorageAccountInstance;
                                         }
                                         
-                                        JToken selectedRecoveryAzureNetworkIdValue = customSettingValue["selectedRecoveryAzureNetworkId"];
+                                        JToken selectedRecoveryAzureNetworkIdValue = providerSpecificDetailsValue["selectedRecoveryAzureNetworkId"];
                                         if (selectedRecoveryAzureNetworkIdValue != null && selectedRecoveryAzureNetworkIdValue.Type != JTokenType.Null)
                                         {
                                             string selectedRecoveryAzureNetworkIdInstance = ((string)selectedRecoveryAzureNetworkIdValue);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.SelectedRecoveryAzureNetworkId = selectedRecoveryAzureNetworkIdInstance;
+                                            hyperVReplicaAzureReplicationDetailsInstance.SelectedRecoveryAzureNetworkId = selectedRecoveryAzureNetworkIdInstance;
                                         }
                                         
-                                        JToken lastReplicatedTimeValue2 = customSettingValue["lastReplicatedTime"];
+                                        JToken lastReplicatedTimeValue2 = providerSpecificDetailsValue["lastReplicatedTime"];
                                         if (lastReplicatedTimeValue2 != null && lastReplicatedTimeValue2.Type != JTokenType.Null)
                                         {
                                             string lastReplicatedTimeInstance2 = ((string)lastReplicatedTimeValue2);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.LastReplicatedTime = lastReplicatedTimeInstance2;
+                                            hyperVReplicaAzureReplicationDetailsInstance.LastReplicatedTime = lastReplicatedTimeInstance2;
                                         }
                                         
-                                        JToken initialReplicationDetailsValue2 = customSettingValue["initialReplicationDetails"];
+                                        JToken initialReplicationDetailsValue2 = providerSpecificDetailsValue["initialReplicationDetails"];
                                         if (initialReplicationDetailsValue2 != null && initialReplicationDetailsValue2.Type != JTokenType.Null)
                                         {
                                             InitialReplicationDetails initialReplicationDetailsInstance2 = new InitialReplicationDetails();
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.InitialReplicationDetails = initialReplicationDetailsInstance2;
+                                            hyperVReplicaAzureReplicationDetailsInstance.InitialReplicationDetails = initialReplicationDetailsInstance2;
                                             
                                             JToken initialReplicationTypeValue2 = initialReplicationDetailsValue2["initialReplicationType"];
                                             if (initialReplicationTypeValue2 != null && initialReplicationTypeValue2.Type != JTokenType.Null)
@@ -9627,13 +9578,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken vmNicsArray2 = customSettingValue["vmNics"];
+                                        JToken vmNicsArray2 = providerSpecificDetailsValue["vmNics"];
                                         if (vmNicsArray2 != null && vmNicsArray2.Type != JTokenType.Null)
                                         {
                                             foreach (JToken vmNicsValue2 in ((JArray)vmNicsArray2))
                                             {
                                                 VMNicDetails vMNicDetailsInstance2 = new VMNicDetails();
-                                                hyperVReplicaAzureProviderSpecificSettingsInstance.VMNics.Add(vMNicDetailsInstance2);
+                                                hyperVReplicaAzureReplicationDetailsInstance.VMNics.Add(vMNicDetailsInstance2);
                                                 
                                                 JToken nicIdValue2 = vmNicsValue2["nicId"];
                                                 if (nicIdValue2 != null && nicIdValue2.Type != JTokenType.Null)
@@ -9679,13 +9630,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken typeValue3 = customSettingValue["__type"];
+                                        JToken typeValue3 = providerSpecificDetailsValue["__type"];
                                         if (typeValue3 != null && typeValue3.Type != JTokenType.Null)
                                         {
                                             string typeInstance3 = ((string)typeValue3);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.Type = typeInstance3;
+                                            hyperVReplicaAzureReplicationDetailsInstance.Type = typeInstance3;
                                         }
-                                        propertiesInstance.CustomSettings = hyperVReplicaAzureProviderSpecificSettingsInstance;
+                                        propertiesInstance.ProviderSpecificDetails = hyperVReplicaAzureReplicationDetailsInstance;
                                     }
                                 }
                             }
@@ -9933,11 +9884,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.ProtectedItemType = protectedItemTypeInstance;
                                 }
                                 
-                                JToken protectedItemSourceIdValue = propertiesValue["protectedItemSourceId"];
-                                if (protectedItemSourceIdValue != null && protectedItemSourceIdValue.Type != JTokenType.Null)
+                                JToken protectedItemIdValue = propertiesValue["protectedItemId"];
+                                if (protectedItemIdValue != null && protectedItemIdValue.Type != JTokenType.Null)
                                 {
-                                    string protectedItemSourceIdInstance = ((string)protectedItemSourceIdValue);
-                                    propertiesInstance.ProtectedItemSourceId = protectedItemSourceIdInstance;
+                                    string protectedItemIdInstance = ((string)protectedItemIdValue);
+                                    propertiesInstance.ProtectedItemId = protectedItemIdInstance;
                                 }
                                 
                                 JToken recoveryServicesProviderNameValue = propertiesValue["recoveryServicesProviderName"];
@@ -9975,11 +9926,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.RecoveryProtectionContainerFriendlyName = recoveryProtectionContainerFriendlyNameInstance;
                                 }
                                 
-                                JToken protectionStatusValue = propertiesValue["protectionStatus"];
-                                if (protectionStatusValue != null && protectionStatusValue.Type != JTokenType.Null)
+                                JToken protectionStateValue = propertiesValue["protectionState"];
+                                if (protectionStateValue != null && protectionStateValue.Type != JTokenType.Null)
                                 {
-                                    string protectionStatusInstance = ((string)protectionStatusValue);
-                                    propertiesInstance.ProtectionStatus = protectionStatusInstance;
+                                    string protectionStateInstance = ((string)protectionStateValue);
+                                    propertiesInstance.ProtectionState = protectionStateInstance;
                                 }
                                 
                                 JToken activeLocationValue = propertiesValue["activeLocation"];
@@ -9987,13 +9938,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 {
                                     string activeLocationInstance = ((string)activeLocationValue);
                                     propertiesInstance.ActiveLocation = activeLocationInstance;
-                                }
-                                
-                                JToken testFailoverStateDescriptionValue = propertiesValue["testFailoverStateDescription"];
-                                if (testFailoverStateDescriptionValue != null && testFailoverStateDescriptionValue.Type != JTokenType.Null)
-                                {
-                                    string testFailoverStateDescriptionInstance = ((string)testFailoverStateDescriptionValue);
-                                    propertiesInstance.TestFailoverStateDescription = testFailoverStateDescriptionInstance;
                                 }
                                 
                                 JToken allowedOperationsArray = propertiesValue["allowedOperations"];
@@ -10141,28 +10085,28 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     }
                                 }
                                 
-                                JToken customSettingValue = propertiesValue["customSetting"];
-                                if (customSettingValue != null && customSettingValue.Type != JTokenType.Null)
+                                JToken providerSpecificDetailsValue = propertiesValue["providerSpecificDetails"];
+                                if (providerSpecificDetailsValue != null && providerSpecificDetailsValue.Type != JTokenType.Null)
                                 {
-                                    string typeName = ((string)customSettingValue["__type"]);
-                                    if (typeName == "HyperVReplicaProviderSpecificSettings")
+                                    string typeName = ((string)providerSpecificDetailsValue["__type"]);
+                                    if (typeName == "HyperVReplicaReplicationDetails")
                                     {
-                                        HyperVReplicaProviderSpecificSettings hyperVReplicaProviderSpecificSettingsInstance = new HyperVReplicaProviderSpecificSettings();
+                                        HyperVReplicaReplicationDetails hyperVReplicaReplicationDetailsInstance = new HyperVReplicaReplicationDetails();
                                         
-                                        JToken lastReplicatedTimeValue = customSettingValue["lastReplicatedTime"];
+                                        JToken lastReplicatedTimeValue = providerSpecificDetailsValue["lastReplicatedTime"];
                                         if (lastReplicatedTimeValue != null && lastReplicatedTimeValue.Type != JTokenType.Null)
                                         {
                                             string lastReplicatedTimeInstance = ((string)lastReplicatedTimeValue);
-                                            hyperVReplicaProviderSpecificSettingsInstance.LastReplicatedTime = lastReplicatedTimeInstance;
+                                            hyperVReplicaReplicationDetailsInstance.LastReplicatedTime = lastReplicatedTimeInstance;
                                         }
                                         
-                                        JToken vmNicsArray = customSettingValue["vmNics"];
+                                        JToken vmNicsArray = providerSpecificDetailsValue["vmNics"];
                                         if (vmNicsArray != null && vmNicsArray.Type != JTokenType.Null)
                                         {
                                             foreach (JToken vmNicsValue in ((JArray)vmNicsArray))
                                             {
                                                 VMNicDetails vMNicDetailsInstance = new VMNicDetails();
-                                                hyperVReplicaProviderSpecificSettingsInstance.VmNics.Add(vMNicDetailsInstance);
+                                                hyperVReplicaReplicationDetailsInstance.VmNics.Add(vMNicDetailsInstance);
                                                 
                                                 JToken nicIdValue = vmNicsValue["nicId"];
                                                 if (nicIdValue != null && nicIdValue.Type != JTokenType.Null)
@@ -10208,11 +10152,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken initialReplicationDetailsValue = customSettingValue["initialReplicationDetails"];
+                                        JToken initialReplicationDetailsValue = providerSpecificDetailsValue["initialReplicationDetails"];
                                         if (initialReplicationDetailsValue != null && initialReplicationDetailsValue.Type != JTokenType.Null)
                                         {
                                             InitialReplicationDetails initialReplicationDetailsInstance = new InitialReplicationDetails();
-                                            hyperVReplicaProviderSpecificSettingsInstance.InitialReplicationDetails = initialReplicationDetailsInstance;
+                                            hyperVReplicaReplicationDetailsInstance.InitialReplicationDetails = initialReplicationDetailsInstance;
                                             
                                             JToken initialReplicationTypeValue = initialReplicationDetailsValue["initialReplicationType"];
                                             if (initialReplicationTypeValue != null && initialReplicationTypeValue.Type != JTokenType.Null)
@@ -10229,13 +10173,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken vMDiskDetailsArray = customSettingValue["vMDiskDetails"];
+                                        JToken vMDiskDetailsArray = providerSpecificDetailsValue["vMDiskDetails"];
                                         if (vMDiskDetailsArray != null && vMDiskDetailsArray.Type != JTokenType.Null)
                                         {
                                             foreach (JToken vMDiskDetailsValue in ((JArray)vMDiskDetailsArray))
                                             {
                                                 DiskDetails diskDetailsInstance = new DiskDetails();
-                                                hyperVReplicaProviderSpecificSettingsInstance.VMDiskDetails.Add(diskDetailsInstance);
+                                                hyperVReplicaReplicationDetailsInstance.VMDiskDetails.Add(diskDetailsInstance);
                                                 
                                                 JToken maxSizeMBValue = vMDiskDetailsValue["maxSizeMB"];
                                                 if (maxSizeMBValue != null && maxSizeMBValue.Type != JTokenType.Null)
@@ -10244,154 +10188,154 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     diskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
                                                 }
                                                 
-                                                JToken vHDStatusValue = vMDiskDetailsValue["vHDStatus"];
-                                                if (vHDStatusValue != null && vHDStatusValue.Type != JTokenType.Null)
+                                                JToken vhdTypeValue = vMDiskDetailsValue["vhdType"];
+                                                if (vhdTypeValue != null && vhdTypeValue.Type != JTokenType.Null)
                                                 {
-                                                    string vHDStatusInstance = ((string)vHDStatusValue);
-                                                    diskDetailsInstance.VHDStatus = vHDStatusInstance;
+                                                    string vhdTypeInstance = ((string)vhdTypeValue);
+                                                    diskDetailsInstance.VhdType = vhdTypeInstance;
                                                 }
                                                 
-                                                JToken vHDIdValue = vMDiskDetailsValue["vHDId"];
-                                                if (vHDIdValue != null && vHDIdValue.Type != JTokenType.Null)
+                                                JToken vhdIdValue = vMDiskDetailsValue["vhdId"];
+                                                if (vhdIdValue != null && vhdIdValue.Type != JTokenType.Null)
                                                 {
-                                                    string vHDIdInstance = ((string)vHDIdValue);
-                                                    diskDetailsInstance.VHDId = vHDIdInstance;
+                                                    string vhdIdInstance = ((string)vhdIdValue);
+                                                    diskDetailsInstance.VhdId = vhdIdInstance;
                                                 }
                                                 
-                                                JToken vHDNameValue = vMDiskDetailsValue["vHDName"];
-                                                if (vHDNameValue != null && vHDNameValue.Type != JTokenType.Null)
+                                                JToken vhdNameValue = vMDiskDetailsValue["vhdName"];
+                                                if (vhdNameValue != null && vhdNameValue.Type != JTokenType.Null)
                                                 {
-                                                    string vHDNameInstance = ((string)vHDNameValue);
-                                                    diskDetailsInstance.VHDName = vHDNameInstance;
+                                                    string vhdNameInstance = ((string)vhdNameValue);
+                                                    diskDetailsInstance.VhdName = vhdNameInstance;
                                                 }
                                             }
                                         }
                                         
-                                        JToken typeValue = customSettingValue["__type"];
+                                        JToken typeValue = providerSpecificDetailsValue["__type"];
                                         if (typeValue != null && typeValue.Type != JTokenType.Null)
                                         {
                                             string typeInstance = ((string)typeValue);
-                                            hyperVReplicaProviderSpecificSettingsInstance.Type = typeInstance;
+                                            hyperVReplicaReplicationDetailsInstance.Type = typeInstance;
                                         }
-                                        propertiesInstance.CustomSettings = hyperVReplicaProviderSpecificSettingsInstance;
+                                        propertiesInstance.ProviderSpecificDetails = hyperVReplicaReplicationDetailsInstance;
                                     }
                                     if (typeName == "VMwareAzureV2ProviderSpecificSettings")
                                     {
                                         VMwareAzureV2ProviderSpecificSettings vMwareAzureV2ProviderSpecificSettingsInstance = new VMwareAzureV2ProviderSpecificSettings();
                                         
-                                        JToken protectionStageValue = customSettingValue["protectionStage"];
+                                        JToken protectionStageValue = providerSpecificDetailsValue["protectionStage"];
                                         if (protectionStageValue != null && protectionStageValue.Type != JTokenType.Null)
                                         {
                                             string protectionStageInstance = ((string)protectionStageValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.ProtectionStage = protectionStageInstance;
                                         }
                                         
-                                        JToken healthErrorCodeValue = customSettingValue["healthErrorCode"];
+                                        JToken healthErrorCodeValue = providerSpecificDetailsValue["healthErrorCode"];
                                         if (healthErrorCodeValue != null && healthErrorCodeValue.Type != JTokenType.Null)
                                         {
                                             string healthErrorCodeInstance = ((string)healthErrorCodeValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.HealthErrorCode = healthErrorCodeInstance;
                                         }
                                         
-                                        JToken resyncRequiredValue = customSettingValue["resyncRequired"];
+                                        JToken resyncRequiredValue = providerSpecificDetailsValue["resyncRequired"];
                                         if (resyncRequiredValue != null && resyncRequiredValue.Type != JTokenType.Null)
                                         {
                                             bool resyncRequiredInstance = ((bool)resyncRequiredValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.ResyncRequired = resyncRequiredInstance;
                                         }
                                         
-                                        JToken resyncProgressPercentageValue = customSettingValue["resyncProgressPercentage"];
+                                        JToken resyncProgressPercentageValue = providerSpecificDetailsValue["resyncProgressPercentage"];
                                         if (resyncProgressPercentageValue != null && resyncProgressPercentageValue.Type != JTokenType.Null)
                                         {
                                             int resyncProgressPercentageInstance = ((int)resyncProgressPercentageValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.ResyncProgressPercentage = resyncProgressPercentageInstance;
                                         }
                                         
-                                        JToken rpoInSecondsValue = customSettingValue["rpoInSeconds"];
+                                        JToken rpoInSecondsValue = providerSpecificDetailsValue["rpoInSeconds"];
                                         if (rpoInSecondsValue != null && rpoInSecondsValue.Type != JTokenType.Null)
                                         {
                                             long rpoInSecondsInstance = ((long)rpoInSecondsValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.RpoInSeconds = rpoInSecondsInstance;
                                         }
                                         
-                                        JToken compressedDataRateInMBValue = customSettingValue["compressedDataRateInMB"];
+                                        JToken compressedDataRateInMBValue = providerSpecificDetailsValue["compressedDataRateInMB"];
                                         if (compressedDataRateInMBValue != null && compressedDataRateInMBValue.Type != JTokenType.Null)
                                         {
                                             double compressedDataRateInMBInstance = ((double)compressedDataRateInMBValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.CompressedDataRateInMB = compressedDataRateInMBInstance;
                                         }
                                         
-                                        JToken uncompressedDataRateInMBValue = customSettingValue["uncompressedDataRateInMB"];
+                                        JToken uncompressedDataRateInMBValue = providerSpecificDetailsValue["uncompressedDataRateInMB"];
                                         if (uncompressedDataRateInMBValue != null && uncompressedDataRateInMBValue.Type != JTokenType.Null)
                                         {
                                             double uncompressedDataRateInMBInstance = ((double)uncompressedDataRateInMBValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.UncompressedDataRateInMB = uncompressedDataRateInMBInstance;
                                         }
                                         
-                                        JToken ipAddressValue = customSettingValue["ipAddress"];
+                                        JToken ipAddressValue = providerSpecificDetailsValue["ipAddress"];
                                         if (ipAddressValue != null && ipAddressValue.Type != JTokenType.Null)
                                         {
                                             string ipAddressInstance = ((string)ipAddressValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.IpAddress = ipAddressInstance;
                                         }
                                         
-                                        JToken agentVersionValue = customSettingValue["agentVersion"];
+                                        JToken agentVersionValue = providerSpecificDetailsValue["agentVersion"];
                                         if (agentVersionValue != null && agentVersionValue.Type != JTokenType.Null)
                                         {
                                             string agentVersionInstance = ((string)agentVersionValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.AgentVersion = agentVersionInstance;
                                         }
                                         
-                                        JToken latestUpdateVersionValue = customSettingValue["latestUpdateVersion"];
+                                        JToken latestUpdateVersionValue = providerSpecificDetailsValue["latestUpdateVersion"];
                                         if (latestUpdateVersionValue != null && latestUpdateVersionValue.Type != JTokenType.Null)
                                         {
                                             string latestUpdateVersionInstance = ((string)latestUpdateVersionValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.LatestUpdateVersion = latestUpdateVersionInstance;
                                         }
                                         
-                                        JToken isAgentUpdateRequiredValue = customSettingValue["isAgentUpdateRequired"];
+                                        JToken isAgentUpdateRequiredValue = providerSpecificDetailsValue["isAgentUpdateRequired"];
                                         if (isAgentUpdateRequiredValue != null && isAgentUpdateRequiredValue.Type != JTokenType.Null)
                                         {
                                             bool isAgentUpdateRequiredInstance = ((bool)isAgentUpdateRequiredValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.IsAgentUpdateRequired = isAgentUpdateRequiredInstance;
                                         }
                                         
-                                        JToken isRebootAfterUpdateRequiredValue = customSettingValue["isRebootAfterUpdateRequired"];
+                                        JToken isRebootAfterUpdateRequiredValue = providerSpecificDetailsValue["isRebootAfterUpdateRequired"];
                                         if (isRebootAfterUpdateRequiredValue != null && isRebootAfterUpdateRequiredValue.Type != JTokenType.Null)
                                         {
                                             bool isRebootAfterUpdateRequiredInstance = ((bool)isRebootAfterUpdateRequiredValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.IsRebootAfterUpdateRequired = isRebootAfterUpdateRequiredInstance;
                                         }
                                         
-                                        JToken lastHeartbeatValue = customSettingValue["lastHeartbeat"];
+                                        JToken lastHeartbeatValue = providerSpecificDetailsValue["lastHeartbeat"];
                                         if (lastHeartbeatValue != null && lastHeartbeatValue.Type != JTokenType.Null)
                                         {
                                             DateTime lastHeartbeatInstance = ((DateTime)lastHeartbeatValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.LastHeartbeat = lastHeartbeatInstance;
                                         }
                                         
-                                        JToken processServerIdValue = customSettingValue["processServerId"];
+                                        JToken processServerIdValue = providerSpecificDetailsValue["processServerId"];
                                         if (processServerIdValue != null && processServerIdValue.Type != JTokenType.Null)
                                         {
                                             string processServerIdInstance = ((string)processServerIdValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.ProcessServerId = processServerIdInstance;
                                         }
                                         
-                                        JToken multiVmGroupIdValue = customSettingValue["multiVmGroupId"];
+                                        JToken multiVmGroupIdValue = providerSpecificDetailsValue["multiVmGroupId"];
                                         if (multiVmGroupIdValue != null && multiVmGroupIdValue.Type != JTokenType.Null)
                                         {
                                             string multiVmGroupIdInstance = ((string)multiVmGroupIdValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.MultiVmGroupId = multiVmGroupIdInstance;
                                         }
                                         
-                                        JToken multiVmGroupNameValue = customSettingValue["multiVmGroupName"];
+                                        JToken multiVmGroupNameValue = providerSpecificDetailsValue["multiVmGroupName"];
                                         if (multiVmGroupNameValue != null && multiVmGroupNameValue.Type != JTokenType.Null)
                                         {
                                             string multiVmGroupNameInstance = ((string)multiVmGroupNameValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.MultiVmGroupName = multiVmGroupNameInstance;
                                         }
                                         
-                                        JToken protectedVolumesArray = customSettingValue["protectedVolumes"];
+                                        JToken protectedVolumesArray = providerSpecificDetailsValue["protectedVolumes"];
                                         if (protectedVolumesArray != null && protectedVolumesArray.Type != JTokenType.Null)
                                         {
                                             foreach (JToken protectedVolumesValue in ((JArray)protectedVolumesArray))
@@ -10492,94 +10436,94 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken volumeResizedValue2 = customSettingValue["volumeResized"];
+                                        JToken volumeResizedValue2 = providerSpecificDetailsValue["volumeResized"];
                                         if (volumeResizedValue2 != null && volumeResizedValue2.Type != JTokenType.Null)
                                         {
                                             bool volumeResizedInstance2 = ((bool)volumeResizedValue2);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.VolumeResized = volumeResizedInstance2;
                                         }
                                         
-                                        JToken masterTargetIdValue = customSettingValue["masterTargetId"];
+                                        JToken masterTargetIdValue = providerSpecificDetailsValue["masterTargetId"];
                                         if (masterTargetIdValue != null && masterTargetIdValue.Type != JTokenType.Null)
                                         {
                                             string masterTargetIdInstance = ((string)masterTargetIdValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.MasterTargetId = masterTargetIdInstance;
                                         }
                                         
-                                        JToken sourceVmCPUCountValue = customSettingValue["sourceVmCPUCount"];
+                                        JToken sourceVmCPUCountValue = providerSpecificDetailsValue["sourceVmCPUCount"];
                                         if (sourceVmCPUCountValue != null && sourceVmCPUCountValue.Type != JTokenType.Null)
                                         {
                                             int sourceVmCPUCountInstance = ((int)sourceVmCPUCountValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.SourceVmCPUCount = sourceVmCPUCountInstance;
                                         }
                                         
-                                        JToken sourceVmRAMSizeInMBValue = customSettingValue["sourceVmRAMSizeInMB"];
+                                        JToken sourceVmRAMSizeInMBValue = providerSpecificDetailsValue["sourceVmRAMSizeInMB"];
                                         if (sourceVmRAMSizeInMBValue != null && sourceVmRAMSizeInMBValue.Type != JTokenType.Null)
                                         {
                                             int sourceVmRAMSizeInMBInstance = ((int)sourceVmRAMSizeInMBValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.SourceVmRAMSizeInMB = sourceVmRAMSizeInMBInstance;
                                         }
                                         
-                                        JToken osTypeValue = customSettingValue["osType"];
+                                        JToken osTypeValue = providerSpecificDetailsValue["osType"];
                                         if (osTypeValue != null && osTypeValue.Type != JTokenType.Null)
                                         {
                                             string osTypeInstance = ((string)osTypeValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.OSType = osTypeInstance;
                                         }
                                         
-                                        JToken vhdNameValue = customSettingValue["vhdName"];
-                                        if (vhdNameValue != null && vhdNameValue.Type != JTokenType.Null)
+                                        JToken vhdNameValue2 = providerSpecificDetailsValue["vhdName"];
+                                        if (vhdNameValue2 != null && vhdNameValue2.Type != JTokenType.Null)
                                         {
-                                            string vhdNameInstance = ((string)vhdNameValue);
-                                            vMwareAzureV2ProviderSpecificSettingsInstance.VHDName = vhdNameInstance;
+                                            string vhdNameInstance2 = ((string)vhdNameValue2);
+                                            vMwareAzureV2ProviderSpecificSettingsInstance.VHDName = vhdNameInstance2;
                                         }
                                         
-                                        JToken osDiskIdValue = customSettingValue["osDiskId"];
+                                        JToken osDiskIdValue = providerSpecificDetailsValue["osDiskId"];
                                         if (osDiskIdValue != null && osDiskIdValue.Type != JTokenType.Null)
                                         {
                                             string osDiskIdInstance = ((string)osDiskIdValue);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.OSDiskId = osDiskIdInstance;
                                         }
                                         
-                                        JToken typeValue2 = customSettingValue["__type"];
+                                        JToken typeValue2 = providerSpecificDetailsValue["__type"];
                                         if (typeValue2 != null && typeValue2.Type != JTokenType.Null)
                                         {
                                             string typeInstance2 = ((string)typeValue2);
                                             vMwareAzureV2ProviderSpecificSettingsInstance.Type = typeInstance2;
                                         }
-                                        propertiesInstance.CustomSettings = vMwareAzureV2ProviderSpecificSettingsInstance;
+                                        propertiesInstance.ProviderSpecificDetails = vMwareAzureV2ProviderSpecificSettingsInstance;
                                     }
-                                    if (typeName == "HyperVReplicaAzureProviderSpecificSettings")
+                                    if (typeName == "HyperVReplicaAzureReplicationDetails")
                                     {
-                                        HyperVReplicaAzureProviderSpecificSettings hyperVReplicaAzureProviderSpecificSettingsInstance = new HyperVReplicaAzureProviderSpecificSettings();
+                                        HyperVReplicaAzureReplicationDetails hyperVReplicaAzureReplicationDetailsInstance = new HyperVReplicaAzureReplicationDetails();
                                         
-                                        JToken azureVMDiskDetailsArray = customSettingValue["azureVMDiskDetails"];
+                                        JToken azureVMDiskDetailsArray = providerSpecificDetailsValue["azureVMDiskDetails"];
                                         if (azureVMDiskDetailsArray != null && azureVMDiskDetailsArray.Type != JTokenType.Null)
                                         {
                                             foreach (JToken azureVMDiskDetailsValue in ((JArray)azureVMDiskDetailsArray))
                                             {
                                                 AzureVmDiskDetails azureVmDiskDetailsInstance = new AzureVmDiskDetails();
-                                                hyperVReplicaAzureProviderSpecificSettingsInstance.AzureVMDiskDetails.Add(azureVmDiskDetailsInstance);
+                                                hyperVReplicaAzureReplicationDetailsInstance.AzureVMDiskDetails.Add(azureVmDiskDetailsInstance);
                                                 
-                                                JToken vhdTypeValue = azureVMDiskDetailsValue["vhdType"];
-                                                if (vhdTypeValue != null && vhdTypeValue.Type != JTokenType.Null)
+                                                JToken vhdTypeValue2 = azureVMDiskDetailsValue["vhdType"];
+                                                if (vhdTypeValue2 != null && vhdTypeValue2.Type != JTokenType.Null)
                                                 {
-                                                    string vhdTypeInstance = ((string)vhdTypeValue);
-                                                    azureVmDiskDetailsInstance.VhdType = vhdTypeInstance;
+                                                    string vhdTypeInstance2 = ((string)vhdTypeValue2);
+                                                    azureVmDiskDetailsInstance.VhdType = vhdTypeInstance2;
                                                 }
                                                 
-                                                JToken vhdIdValue = azureVMDiskDetailsValue["vhdId"];
-                                                if (vhdIdValue != null && vhdIdValue.Type != JTokenType.Null)
+                                                JToken vhdIdValue2 = azureVMDiskDetailsValue["vhdId"];
+                                                if (vhdIdValue2 != null && vhdIdValue2.Type != JTokenType.Null)
                                                 {
-                                                    string vhdIdInstance = ((string)vhdIdValue);
-                                                    azureVmDiskDetailsInstance.VhdId = vhdIdInstance;
+                                                    string vhdIdInstance2 = ((string)vhdIdValue2);
+                                                    azureVmDiskDetailsInstance.VhdId = vhdIdInstance2;
                                                 }
                                                 
-                                                JToken vhdNameValue2 = azureVMDiskDetailsValue["vhdName"];
-                                                if (vhdNameValue2 != null && vhdNameValue2.Type != JTokenType.Null)
+                                                JToken vhdNameValue3 = azureVMDiskDetailsValue["vhdName"];
+                                                if (vhdNameValue3 != null && vhdNameValue3.Type != JTokenType.Null)
                                                 {
-                                                    string vhdNameInstance2 = ((string)vhdNameValue2);
-                                                    azureVmDiskDetailsInstance.VhdName = vhdNameInstance2;
+                                                    string vhdNameInstance3 = ((string)vhdNameValue3);
+                                                    azureVmDiskDetailsInstance.VhdName = vhdNameInstance3;
                                                 }
                                                 
                                                 JToken maxSizeMBValue2 = azureVMDiskDetailsValue["maxSizeMB"];
@@ -10589,11 +10533,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     azureVmDiskDetailsInstance.MaxSizeMB = maxSizeMBInstance2;
                                                 }
                                                 
-                                                JToken diskLocationValue = azureVMDiskDetailsValue["diskLocation"];
-                                                if (diskLocationValue != null && diskLocationValue.Type != JTokenType.Null)
+                                                JToken targetDiskLocationValue = azureVMDiskDetailsValue["targetDiskLocation"];
+                                                if (targetDiskLocationValue != null && targetDiskLocationValue.Type != JTokenType.Null)
                                                 {
-                                                    string diskLocationInstance = ((string)diskLocationValue);
-                                                    azureVmDiskDetailsInstance.DiskLocation = diskLocationInstance;
+                                                    string targetDiskLocationInstance = ((string)targetDiskLocationValue);
+                                                    azureVmDiskDetailsInstance.TargetDiskLocation = targetDiskLocationInstance;
                                                 }
                                                 
                                                 JToken lunIdValue = azureVMDiskDetailsValue["lunId"];
@@ -10603,55 +10547,55 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     azureVmDiskDetailsInstance.LunId = lunIdInstance;
                                                 }
                                                 
-                                                JToken primaryDiskCorelationIdValue = azureVMDiskDetailsValue["primaryDiskCorelationId"];
-                                                if (primaryDiskCorelationIdValue != null && primaryDiskCorelationIdValue.Type != JTokenType.Null)
+                                                JToken targetDiskNameValue = azureVMDiskDetailsValue["targetDiskName"];
+                                                if (targetDiskNameValue != null && targetDiskNameValue.Type != JTokenType.Null)
                                                 {
-                                                    string primaryDiskCorelationIdInstance = ((string)primaryDiskCorelationIdValue);
-                                                    azureVmDiskDetailsInstance.PrimaryDiskCorelationId = primaryDiskCorelationIdInstance;
+                                                    string targetDiskNameInstance = ((string)targetDiskNameValue);
+                                                    azureVmDiskDetailsInstance.TargetDiskName = targetDiskNameInstance;
                                                 }
                                             }
                                         }
                                         
-                                        JToken recoveryAzureVMNameValue = customSettingValue["recoveryAzureVMName"];
+                                        JToken recoveryAzureVMNameValue = providerSpecificDetailsValue["recoveryAzureVMName"];
                                         if (recoveryAzureVMNameValue != null && recoveryAzureVMNameValue.Type != JTokenType.Null)
                                         {
                                             string recoveryAzureVMNameInstance = ((string)recoveryAzureVMNameValue);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.RecoveryAzureVMName = recoveryAzureVMNameInstance;
+                                            hyperVReplicaAzureReplicationDetailsInstance.RecoveryAzureVMName = recoveryAzureVMNameInstance;
                                         }
                                         
-                                        JToken recoveryAzureVMSizeValue = customSettingValue["recoveryAzureVMSize"];
+                                        JToken recoveryAzureVMSizeValue = providerSpecificDetailsValue["recoveryAzureVMSize"];
                                         if (recoveryAzureVMSizeValue != null && recoveryAzureVMSizeValue.Type != JTokenType.Null)
                                         {
                                             string recoveryAzureVMSizeInstance = ((string)recoveryAzureVMSizeValue);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.RecoveryAzureVMSize = recoveryAzureVMSizeInstance;
+                                            hyperVReplicaAzureReplicationDetailsInstance.RecoveryAzureVMSize = recoveryAzureVMSizeInstance;
                                         }
                                         
-                                        JToken recoveryAzureStorageAccountValue = customSettingValue["recoveryAzureStorageAccount"];
+                                        JToken recoveryAzureStorageAccountValue = providerSpecificDetailsValue["recoveryAzureStorageAccount"];
                                         if (recoveryAzureStorageAccountValue != null && recoveryAzureStorageAccountValue.Type != JTokenType.Null)
                                         {
                                             string recoveryAzureStorageAccountInstance = ((string)recoveryAzureStorageAccountValue);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.RecoveryAzureStorageAccount = recoveryAzureStorageAccountInstance;
+                                            hyperVReplicaAzureReplicationDetailsInstance.RecoveryAzureStorageAccount = recoveryAzureStorageAccountInstance;
                                         }
                                         
-                                        JToken selectedRecoveryAzureNetworkIdValue = customSettingValue["selectedRecoveryAzureNetworkId"];
+                                        JToken selectedRecoveryAzureNetworkIdValue = providerSpecificDetailsValue["selectedRecoveryAzureNetworkId"];
                                         if (selectedRecoveryAzureNetworkIdValue != null && selectedRecoveryAzureNetworkIdValue.Type != JTokenType.Null)
                                         {
                                             string selectedRecoveryAzureNetworkIdInstance = ((string)selectedRecoveryAzureNetworkIdValue);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.SelectedRecoveryAzureNetworkId = selectedRecoveryAzureNetworkIdInstance;
+                                            hyperVReplicaAzureReplicationDetailsInstance.SelectedRecoveryAzureNetworkId = selectedRecoveryAzureNetworkIdInstance;
                                         }
                                         
-                                        JToken lastReplicatedTimeValue2 = customSettingValue["lastReplicatedTime"];
+                                        JToken lastReplicatedTimeValue2 = providerSpecificDetailsValue["lastReplicatedTime"];
                                         if (lastReplicatedTimeValue2 != null && lastReplicatedTimeValue2.Type != JTokenType.Null)
                                         {
                                             string lastReplicatedTimeInstance2 = ((string)lastReplicatedTimeValue2);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.LastReplicatedTime = lastReplicatedTimeInstance2;
+                                            hyperVReplicaAzureReplicationDetailsInstance.LastReplicatedTime = lastReplicatedTimeInstance2;
                                         }
                                         
-                                        JToken initialReplicationDetailsValue2 = customSettingValue["initialReplicationDetails"];
+                                        JToken initialReplicationDetailsValue2 = providerSpecificDetailsValue["initialReplicationDetails"];
                                         if (initialReplicationDetailsValue2 != null && initialReplicationDetailsValue2.Type != JTokenType.Null)
                                         {
                                             InitialReplicationDetails initialReplicationDetailsInstance2 = new InitialReplicationDetails();
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.InitialReplicationDetails = initialReplicationDetailsInstance2;
+                                            hyperVReplicaAzureReplicationDetailsInstance.InitialReplicationDetails = initialReplicationDetailsInstance2;
                                             
                                             JToken initialReplicationTypeValue2 = initialReplicationDetailsValue2["initialReplicationType"];
                                             if (initialReplicationTypeValue2 != null && initialReplicationTypeValue2.Type != JTokenType.Null)
@@ -10668,13 +10612,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken vmNicsArray2 = customSettingValue["vmNics"];
+                                        JToken vmNicsArray2 = providerSpecificDetailsValue["vmNics"];
                                         if (vmNicsArray2 != null && vmNicsArray2.Type != JTokenType.Null)
                                         {
                                             foreach (JToken vmNicsValue2 in ((JArray)vmNicsArray2))
                                             {
                                                 VMNicDetails vMNicDetailsInstance2 = new VMNicDetails();
-                                                hyperVReplicaAzureProviderSpecificSettingsInstance.VMNics.Add(vMNicDetailsInstance2);
+                                                hyperVReplicaAzureReplicationDetailsInstance.VMNics.Add(vMNicDetailsInstance2);
                                                 
                                                 JToken nicIdValue2 = vmNicsValue2["nicId"];
                                                 if (nicIdValue2 != null && nicIdValue2.Type != JTokenType.Null)
@@ -10720,13 +10664,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken typeValue3 = customSettingValue["__type"];
+                                        JToken typeValue3 = providerSpecificDetailsValue["__type"];
                                         if (typeValue3 != null && typeValue3.Type != JTokenType.Null)
                                         {
                                             string typeInstance3 = ((string)typeValue3);
-                                            hyperVReplicaAzureProviderSpecificSettingsInstance.Type = typeInstance3;
+                                            hyperVReplicaAzureReplicationDetailsInstance.Type = typeInstance3;
                                         }
-                                        propertiesInstance.CustomSettings = hyperVReplicaAzureProviderSpecificSettingsInstance;
+                                        propertiesInstance.ProviderSpecificDetails = hyperVReplicaAzureReplicationDetailsInstance;
                                     }
                                 }
                             }
@@ -11021,11 +10965,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             propertiesInstance.ProtectedItemType = protectedItemTypeInstance;
                                         }
                                         
-                                        JToken protectedItemSourceIdValue = propertiesValue["protectedItemSourceId"];
-                                        if (protectedItemSourceIdValue != null && protectedItemSourceIdValue.Type != JTokenType.Null)
+                                        JToken protectedItemIdValue = propertiesValue["protectedItemId"];
+                                        if (protectedItemIdValue != null && protectedItemIdValue.Type != JTokenType.Null)
                                         {
-                                            string protectedItemSourceIdInstance = ((string)protectedItemSourceIdValue);
-                                            propertiesInstance.ProtectedItemSourceId = protectedItemSourceIdInstance;
+                                            string protectedItemIdInstance = ((string)protectedItemIdValue);
+                                            propertiesInstance.ProtectedItemId = protectedItemIdInstance;
                                         }
                                         
                                         JToken recoveryServicesProviderNameValue = propertiesValue["recoveryServicesProviderName"];
@@ -11063,11 +11007,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             propertiesInstance.RecoveryProtectionContainerFriendlyName = recoveryProtectionContainerFriendlyNameInstance;
                                         }
                                         
-                                        JToken protectionStatusValue = propertiesValue["protectionStatus"];
-                                        if (protectionStatusValue != null && protectionStatusValue.Type != JTokenType.Null)
+                                        JToken protectionStateValue = propertiesValue["protectionState"];
+                                        if (protectionStateValue != null && protectionStateValue.Type != JTokenType.Null)
                                         {
-                                            string protectionStatusInstance = ((string)protectionStatusValue);
-                                            propertiesInstance.ProtectionStatus = protectionStatusInstance;
+                                            string protectionStateInstance = ((string)protectionStateValue);
+                                            propertiesInstance.ProtectionState = protectionStateInstance;
                                         }
                                         
                                         JToken activeLocationValue = propertiesValue["activeLocation"];
@@ -11075,13 +11019,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             string activeLocationInstance = ((string)activeLocationValue);
                                             propertiesInstance.ActiveLocation = activeLocationInstance;
-                                        }
-                                        
-                                        JToken testFailoverStateDescriptionValue = propertiesValue["testFailoverStateDescription"];
-                                        if (testFailoverStateDescriptionValue != null && testFailoverStateDescriptionValue.Type != JTokenType.Null)
-                                        {
-                                            string testFailoverStateDescriptionInstance = ((string)testFailoverStateDescriptionValue);
-                                            propertiesInstance.TestFailoverStateDescription = testFailoverStateDescriptionInstance;
                                         }
                                         
                                         JToken allowedOperationsArray = propertiesValue["allowedOperations"];
@@ -11229,28 +11166,28 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken customSettingValue = propertiesValue["customSetting"];
-                                        if (customSettingValue != null && customSettingValue.Type != JTokenType.Null)
+                                        JToken providerSpecificDetailsValue = propertiesValue["providerSpecificDetails"];
+                                        if (providerSpecificDetailsValue != null && providerSpecificDetailsValue.Type != JTokenType.Null)
                                         {
-                                            string typeName = ((string)customSettingValue["__type"]);
-                                            if (typeName == "HyperVReplicaProviderSpecificSettings")
+                                            string typeName = ((string)providerSpecificDetailsValue["__type"]);
+                                            if (typeName == "HyperVReplicaReplicationDetails")
                                             {
-                                                HyperVReplicaProviderSpecificSettings hyperVReplicaProviderSpecificSettingsInstance = new HyperVReplicaProviderSpecificSettings();
+                                                HyperVReplicaReplicationDetails hyperVReplicaReplicationDetailsInstance = new HyperVReplicaReplicationDetails();
                                                 
-                                                JToken lastReplicatedTimeValue = customSettingValue["lastReplicatedTime"];
+                                                JToken lastReplicatedTimeValue = providerSpecificDetailsValue["lastReplicatedTime"];
                                                 if (lastReplicatedTimeValue != null && lastReplicatedTimeValue.Type != JTokenType.Null)
                                                 {
                                                     string lastReplicatedTimeInstance = ((string)lastReplicatedTimeValue);
-                                                    hyperVReplicaProviderSpecificSettingsInstance.LastReplicatedTime = lastReplicatedTimeInstance;
+                                                    hyperVReplicaReplicationDetailsInstance.LastReplicatedTime = lastReplicatedTimeInstance;
                                                 }
                                                 
-                                                JToken vmNicsArray = customSettingValue["vmNics"];
+                                                JToken vmNicsArray = providerSpecificDetailsValue["vmNics"];
                                                 if (vmNicsArray != null && vmNicsArray.Type != JTokenType.Null)
                                                 {
                                                     foreach (JToken vmNicsValue in ((JArray)vmNicsArray))
                                                     {
                                                         VMNicDetails vMNicDetailsInstance = new VMNicDetails();
-                                                        hyperVReplicaProviderSpecificSettingsInstance.VmNics.Add(vMNicDetailsInstance);
+                                                        hyperVReplicaReplicationDetailsInstance.VmNics.Add(vMNicDetailsInstance);
                                                         
                                                         JToken nicIdValue = vmNicsValue["nicId"];
                                                         if (nicIdValue != null && nicIdValue.Type != JTokenType.Null)
@@ -11296,11 +11233,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     }
                                                 }
                                                 
-                                                JToken initialReplicationDetailsValue = customSettingValue["initialReplicationDetails"];
+                                                JToken initialReplicationDetailsValue = providerSpecificDetailsValue["initialReplicationDetails"];
                                                 if (initialReplicationDetailsValue != null && initialReplicationDetailsValue.Type != JTokenType.Null)
                                                 {
                                                     InitialReplicationDetails initialReplicationDetailsInstance = new InitialReplicationDetails();
-                                                    hyperVReplicaProviderSpecificSettingsInstance.InitialReplicationDetails = initialReplicationDetailsInstance;
+                                                    hyperVReplicaReplicationDetailsInstance.InitialReplicationDetails = initialReplicationDetailsInstance;
                                                     
                                                     JToken initialReplicationTypeValue = initialReplicationDetailsValue["initialReplicationType"];
                                                     if (initialReplicationTypeValue != null && initialReplicationTypeValue.Type != JTokenType.Null)
@@ -11317,13 +11254,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     }
                                                 }
                                                 
-                                                JToken vMDiskDetailsArray = customSettingValue["vMDiskDetails"];
+                                                JToken vMDiskDetailsArray = providerSpecificDetailsValue["vMDiskDetails"];
                                                 if (vMDiskDetailsArray != null && vMDiskDetailsArray.Type != JTokenType.Null)
                                                 {
                                                     foreach (JToken vMDiskDetailsValue in ((JArray)vMDiskDetailsArray))
                                                     {
                                                         DiskDetails diskDetailsInstance = new DiskDetails();
-                                                        hyperVReplicaProviderSpecificSettingsInstance.VMDiskDetails.Add(diskDetailsInstance);
+                                                        hyperVReplicaReplicationDetailsInstance.VMDiskDetails.Add(diskDetailsInstance);
                                                         
                                                         JToken maxSizeMBValue = vMDiskDetailsValue["maxSizeMB"];
                                                         if (maxSizeMBValue != null && maxSizeMBValue.Type != JTokenType.Null)
@@ -11332,154 +11269,154 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                             diskDetailsInstance.MaxSizeMB = maxSizeMBInstance;
                                                         }
                                                         
-                                                        JToken vHDStatusValue = vMDiskDetailsValue["vHDStatus"];
-                                                        if (vHDStatusValue != null && vHDStatusValue.Type != JTokenType.Null)
+                                                        JToken vhdTypeValue = vMDiskDetailsValue["vhdType"];
+                                                        if (vhdTypeValue != null && vhdTypeValue.Type != JTokenType.Null)
                                                         {
-                                                            string vHDStatusInstance = ((string)vHDStatusValue);
-                                                            diskDetailsInstance.VHDStatus = vHDStatusInstance;
+                                                            string vhdTypeInstance = ((string)vhdTypeValue);
+                                                            diskDetailsInstance.VhdType = vhdTypeInstance;
                                                         }
                                                         
-                                                        JToken vHDIdValue = vMDiskDetailsValue["vHDId"];
-                                                        if (vHDIdValue != null && vHDIdValue.Type != JTokenType.Null)
+                                                        JToken vhdIdValue = vMDiskDetailsValue["vhdId"];
+                                                        if (vhdIdValue != null && vhdIdValue.Type != JTokenType.Null)
                                                         {
-                                                            string vHDIdInstance = ((string)vHDIdValue);
-                                                            diskDetailsInstance.VHDId = vHDIdInstance;
+                                                            string vhdIdInstance = ((string)vhdIdValue);
+                                                            diskDetailsInstance.VhdId = vhdIdInstance;
                                                         }
                                                         
-                                                        JToken vHDNameValue = vMDiskDetailsValue["vHDName"];
-                                                        if (vHDNameValue != null && vHDNameValue.Type != JTokenType.Null)
+                                                        JToken vhdNameValue = vMDiskDetailsValue["vhdName"];
+                                                        if (vhdNameValue != null && vhdNameValue.Type != JTokenType.Null)
                                                         {
-                                                            string vHDNameInstance = ((string)vHDNameValue);
-                                                            diskDetailsInstance.VHDName = vHDNameInstance;
+                                                            string vhdNameInstance = ((string)vhdNameValue);
+                                                            diskDetailsInstance.VhdName = vhdNameInstance;
                                                         }
                                                     }
                                                 }
                                                 
-                                                JToken typeValue = customSettingValue["__type"];
+                                                JToken typeValue = providerSpecificDetailsValue["__type"];
                                                 if (typeValue != null && typeValue.Type != JTokenType.Null)
                                                 {
                                                     string typeInstance = ((string)typeValue);
-                                                    hyperVReplicaProviderSpecificSettingsInstance.Type = typeInstance;
+                                                    hyperVReplicaReplicationDetailsInstance.Type = typeInstance;
                                                 }
-                                                propertiesInstance.CustomSettings = hyperVReplicaProviderSpecificSettingsInstance;
+                                                propertiesInstance.ProviderSpecificDetails = hyperVReplicaReplicationDetailsInstance;
                                             }
                                             if (typeName == "VMwareAzureV2ProviderSpecificSettings")
                                             {
                                                 VMwareAzureV2ProviderSpecificSettings vMwareAzureV2ProviderSpecificSettingsInstance = new VMwareAzureV2ProviderSpecificSettings();
                                                 
-                                                JToken protectionStageValue = customSettingValue["protectionStage"];
+                                                JToken protectionStageValue = providerSpecificDetailsValue["protectionStage"];
                                                 if (protectionStageValue != null && protectionStageValue.Type != JTokenType.Null)
                                                 {
                                                     string protectionStageInstance = ((string)protectionStageValue);
                                                     vMwareAzureV2ProviderSpecificSettingsInstance.ProtectionStage = protectionStageInstance;
                                                 }
                                                 
-                                                JToken healthErrorCodeValue = customSettingValue["healthErrorCode"];
+                                                JToken healthErrorCodeValue = providerSpecificDetailsValue["healthErrorCode"];
                                                 if (healthErrorCodeValue != null && healthErrorCodeValue.Type != JTokenType.Null)
                                                 {
                                                     string healthErrorCodeInstance = ((string)healthErrorCodeValue);
                                                     vMwareAzureV2ProviderSpecificSettingsInstance.HealthErrorCode = healthErrorCodeInstance;
                                                 }
                                                 
-                                                JToken resyncRequiredValue = customSettingValue["resyncRequired"];
+                                                JToken resyncRequiredValue = providerSpecificDetailsValue["resyncRequired"];
                                                 if (resyncRequiredValue != null && resyncRequiredValue.Type != JTokenType.Null)
                                                 {
                                                     bool resyncRequiredInstance = ((bool)resyncRequiredValue);
                                                     vMwareAzureV2ProviderSpecificSettingsInstance.ResyncRequired = resyncRequiredInstance;
                                                 }
                                                 
-                                                JToken resyncProgressPercentageValue = customSettingValue["resyncProgressPercentage"];
+                                                JToken resyncProgressPercentageValue = providerSpecificDetailsValue["resyncProgressPercentage"];
                                                 if (resyncProgressPercentageValue != null && resyncProgressPercentageValue.Type != JTokenType.Null)
                                                 {
                                                     int resyncProgressPercentageInstance = ((int)resyncProgressPercentageValue);
                                                     vMwareAzureV2ProviderSpecificSettingsInstance.ResyncProgressPercentage = resyncProgressPercentageInstance;
                                                 }
                                                 
-                                                JToken rpoInSecondsValue = customSettingValue["rpoInSeconds"];
+                                                JToken rpoInSecondsValue = providerSpecificDetailsValue["rpoInSeconds"];
                                                 if (rpoInSecondsValue != null && rpoInSecondsValue.Type != JTokenType.Null)
                                                 {
                                                     long rpoInSecondsInstance = ((long)rpoInSecondsValue);
                                                     vMwareAzureV2ProviderSpecificSettingsInstance.RpoInSeconds = rpoInSecondsInstance;
                                                 }
                                                 
-                                                JToken compressedDataRateInMBValue = customSettingValue["compressedDataRateInMB"];
+                                                JToken compressedDataRateInMBValue = providerSpecificDetailsValue["compressedDataRateInMB"];
                                                 if (compressedDataRateInMBValue != null && compressedDataRateInMBValue.Type != JTokenType.Null)
                                                 {
                                                     double compressedDataRateInMBInstance = ((double)compressedDataRateInMBValue);
                                                     vMwareAzureV2ProviderSpecificSettingsInstance.CompressedDataRateInMB = compressedDataRateInMBInstance;
                                                 }
                                                 
-                                                JToken uncompressedDataRateInMBValue = customSettingValue["uncompressedDataRateInMB"];
+                                                JToken uncompressedDataRateInMBValue = providerSpecificDetailsValue["uncompressedDataRateInMB"];
                                                 if (uncompressedDataRateInMBValue != null && uncompressedDataRateInMBValue.Type != JTokenType.Null)
                                                 {
                                                     double uncompressedDataRateInMBInstance = ((double)uncompressedDataRateInMBValue);
                                                     vMwareAzureV2ProviderSpecificSettingsInstance.UncompressedDataRateInMB = uncompressedDataRateInMBInstance;
                                                 }
                                                 
-                                                JToken ipAddressValue = customSettingValue["ipAddress"];
+                                                JToken ipAddressValue = providerSpecificDetailsValue["ipAddress"];
                                                 if (ipAddressValue != null && ipAddressValue.Type != JTokenType.Null)
                                                 {
                                                     string ipAddressInstance = ((string)ipAddressValue);
                                                     vMwareAzureV2ProviderSpecificSettingsInstance.IpAddress = ipAddressInstance;
                                                 }
                                                 
-                                                JToken agentVersionValue = customSettingValue["agentVersion"];
+                                                JToken agentVersionValue = providerSpecificDetailsValue["agentVersion"];
                                                 if (agentVersionValue != null && agentVersionValue.Type != JTokenType.Null)
                                                 {
                                                     string agentVersionInstance = ((string)agentVersionValue);
                                                     vMwareAzureV2ProviderSpecificSettingsInstance.AgentVersion = agentVersionInstance;
                                                 }
                                                 
-                                                JToken latestUpdateVersionValue = customSettingValue["latestUpdateVersion"];
+                                                JToken latestUpdateVersionValue = providerSpecificDetailsValue["latestUpdateVersion"];
                                                 if (latestUpdateVersionValue != null && latestUpdateVersionValue.Type != JTokenType.Null)
                                                 {
                                                     string latestUpdateVersionInstance = ((string)latestUpdateVersionValue);
                                                     vMwareAzureV2ProviderSpecificSettingsInstance.LatestUpdateVersion = latestUpdateVersionInstance;
                                                 }
                                                 
-                                                JToken isAgentUpdateRequiredValue = customSettingValue["isAgentUpdateRequired"];
+                                                JToken isAgentUpdateRequiredValue = providerSpecificDetailsValue["isAgentUpdateRequired"];
                                                 if (isAgentUpdateRequiredValue != null && isAgentUpdateRequiredValue.Type != JTokenType.Null)
                                                 {
                                                     bool isAgentUpdateRequiredInstance = ((bool)isAgentUpdateRequiredValue);
                                                     vMwareAzureV2ProviderSpecificSettingsInstance.IsAgentUpdateRequired = isAgentUpdateRequiredInstance;
                                                 }
                                                 
-                                                JToken isRebootAfterUpdateRequiredValue = customSettingValue["isRebootAfterUpdateRequired"];
+                                                JToken isRebootAfterUpdateRequiredValue = providerSpecificDetailsValue["isRebootAfterUpdateRequired"];
                                                 if (isRebootAfterUpdateRequiredValue != null && isRebootAfterUpdateRequiredValue.Type != JTokenType.Null)
                                                 {
                                                     bool isRebootAfterUpdateRequiredInstance = ((bool)isRebootAfterUpdateRequiredValue);
                                                     vMwareAzureV2ProviderSpecificSettingsInstance.IsRebootAfterUpdateRequired = isRebootAfterUpdateRequiredInstance;
                                                 }
                                                 
-                                                JToken lastHeartbeatValue = customSettingValue["lastHeartbeat"];
+                                                JToken lastHeartbeatValue = providerSpecificDetailsValue["lastHeartbeat"];
                                                 if (lastHeartbeatValue != null && lastHeartbeatValue.Type != JTokenType.Null)
                                                 {
                                                     DateTime lastHeartbeatInstance = ((DateTime)lastHeartbeatValue);
                                                     vMwareAzureV2ProviderSpecificSettingsInstance.LastHeartbeat = lastHeartbeatInstance;
                                                 }
                                                 
-                                                JToken processServerIdValue = customSettingValue["processServerId"];
+                                                JToken processServerIdValue = providerSpecificDetailsValue["processServerId"];
                                                 if (processServerIdValue != null && processServerIdValue.Type != JTokenType.Null)
                                                 {
                                                     string processServerIdInstance = ((string)processServerIdValue);
                                                     vMwareAzureV2ProviderSpecificSettingsInstance.ProcessServerId = processServerIdInstance;
                                                 }
                                                 
-                                                JToken multiVmGroupIdValue = customSettingValue["multiVmGroupId"];
+                                                JToken multiVmGroupIdValue = providerSpecificDetailsValue["multiVmGroupId"];
                                                 if (multiVmGroupIdValue != null && multiVmGroupIdValue.Type != JTokenType.Null)
                                                 {
                                                     string multiVmGroupIdInstance = ((string)multiVmGroupIdValue);
                                                     vMwareAzureV2ProviderSpecificSettingsInstance.MultiVmGroupId = multiVmGroupIdInstance;
                                                 }
                                                 
-                                                JToken multiVmGroupNameValue = customSettingValue["multiVmGroupName"];
+                                                JToken multiVmGroupNameValue = providerSpecificDetailsValue["multiVmGroupName"];
                                                 if (multiVmGroupNameValue != null && multiVmGroupNameValue.Type != JTokenType.Null)
                                                 {
                                                     string multiVmGroupNameInstance = ((string)multiVmGroupNameValue);
                                                     vMwareAzureV2ProviderSpecificSettingsInstance.MultiVmGroupName = multiVmGroupNameInstance;
                                                 }
                                                 
-                                                JToken protectedVolumesArray = customSettingValue["protectedVolumes"];
+                                                JToken protectedVolumesArray = providerSpecificDetailsValue["protectedVolumes"];
                                                 if (protectedVolumesArray != null && protectedVolumesArray.Type != JTokenType.Null)
                                                 {
                                                     foreach (JToken protectedVolumesValue in ((JArray)protectedVolumesArray))
@@ -11580,94 +11517,94 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     }
                                                 }
                                                 
-                                                JToken volumeResizedValue2 = customSettingValue["volumeResized"];
+                                                JToken volumeResizedValue2 = providerSpecificDetailsValue["volumeResized"];
                                                 if (volumeResizedValue2 != null && volumeResizedValue2.Type != JTokenType.Null)
                                                 {
                                                     bool volumeResizedInstance2 = ((bool)volumeResizedValue2);
                                                     vMwareAzureV2ProviderSpecificSettingsInstance.VolumeResized = volumeResizedInstance2;
                                                 }
                                                 
-                                                JToken masterTargetIdValue = customSettingValue["masterTargetId"];
+                                                JToken masterTargetIdValue = providerSpecificDetailsValue["masterTargetId"];
                                                 if (masterTargetIdValue != null && masterTargetIdValue.Type != JTokenType.Null)
                                                 {
                                                     string masterTargetIdInstance = ((string)masterTargetIdValue);
                                                     vMwareAzureV2ProviderSpecificSettingsInstance.MasterTargetId = masterTargetIdInstance;
                                                 }
                                                 
-                                                JToken sourceVmCPUCountValue = customSettingValue["sourceVmCPUCount"];
+                                                JToken sourceVmCPUCountValue = providerSpecificDetailsValue["sourceVmCPUCount"];
                                                 if (sourceVmCPUCountValue != null && sourceVmCPUCountValue.Type != JTokenType.Null)
                                                 {
                                                     int sourceVmCPUCountInstance = ((int)sourceVmCPUCountValue);
                                                     vMwareAzureV2ProviderSpecificSettingsInstance.SourceVmCPUCount = sourceVmCPUCountInstance;
                                                 }
                                                 
-                                                JToken sourceVmRAMSizeInMBValue = customSettingValue["sourceVmRAMSizeInMB"];
+                                                JToken sourceVmRAMSizeInMBValue = providerSpecificDetailsValue["sourceVmRAMSizeInMB"];
                                                 if (sourceVmRAMSizeInMBValue != null && sourceVmRAMSizeInMBValue.Type != JTokenType.Null)
                                                 {
                                                     int sourceVmRAMSizeInMBInstance = ((int)sourceVmRAMSizeInMBValue);
                                                     vMwareAzureV2ProviderSpecificSettingsInstance.SourceVmRAMSizeInMB = sourceVmRAMSizeInMBInstance;
                                                 }
                                                 
-                                                JToken osTypeValue = customSettingValue["osType"];
+                                                JToken osTypeValue = providerSpecificDetailsValue["osType"];
                                                 if (osTypeValue != null && osTypeValue.Type != JTokenType.Null)
                                                 {
                                                     string osTypeInstance = ((string)osTypeValue);
                                                     vMwareAzureV2ProviderSpecificSettingsInstance.OSType = osTypeInstance;
                                                 }
                                                 
-                                                JToken vhdNameValue = customSettingValue["vhdName"];
-                                                if (vhdNameValue != null && vhdNameValue.Type != JTokenType.Null)
+                                                JToken vhdNameValue2 = providerSpecificDetailsValue["vhdName"];
+                                                if (vhdNameValue2 != null && vhdNameValue2.Type != JTokenType.Null)
                                                 {
-                                                    string vhdNameInstance = ((string)vhdNameValue);
-                                                    vMwareAzureV2ProviderSpecificSettingsInstance.VHDName = vhdNameInstance;
+                                                    string vhdNameInstance2 = ((string)vhdNameValue2);
+                                                    vMwareAzureV2ProviderSpecificSettingsInstance.VHDName = vhdNameInstance2;
                                                 }
                                                 
-                                                JToken osDiskIdValue = customSettingValue["osDiskId"];
+                                                JToken osDiskIdValue = providerSpecificDetailsValue["osDiskId"];
                                                 if (osDiskIdValue != null && osDiskIdValue.Type != JTokenType.Null)
                                                 {
                                                     string osDiskIdInstance = ((string)osDiskIdValue);
                                                     vMwareAzureV2ProviderSpecificSettingsInstance.OSDiskId = osDiskIdInstance;
                                                 }
                                                 
-                                                JToken typeValue2 = customSettingValue["__type"];
+                                                JToken typeValue2 = providerSpecificDetailsValue["__type"];
                                                 if (typeValue2 != null && typeValue2.Type != JTokenType.Null)
                                                 {
                                                     string typeInstance2 = ((string)typeValue2);
                                                     vMwareAzureV2ProviderSpecificSettingsInstance.Type = typeInstance2;
                                                 }
-                                                propertiesInstance.CustomSettings = vMwareAzureV2ProviderSpecificSettingsInstance;
+                                                propertiesInstance.ProviderSpecificDetails = vMwareAzureV2ProviderSpecificSettingsInstance;
                                             }
-                                            if (typeName == "HyperVReplicaAzureProviderSpecificSettings")
+                                            if (typeName == "HyperVReplicaAzureReplicationDetails")
                                             {
-                                                HyperVReplicaAzureProviderSpecificSettings hyperVReplicaAzureProviderSpecificSettingsInstance = new HyperVReplicaAzureProviderSpecificSettings();
+                                                HyperVReplicaAzureReplicationDetails hyperVReplicaAzureReplicationDetailsInstance = new HyperVReplicaAzureReplicationDetails();
                                                 
-                                                JToken azureVMDiskDetailsArray = customSettingValue["azureVMDiskDetails"];
+                                                JToken azureVMDiskDetailsArray = providerSpecificDetailsValue["azureVMDiskDetails"];
                                                 if (azureVMDiskDetailsArray != null && azureVMDiskDetailsArray.Type != JTokenType.Null)
                                                 {
                                                     foreach (JToken azureVMDiskDetailsValue in ((JArray)azureVMDiskDetailsArray))
                                                     {
                                                         AzureVmDiskDetails azureVmDiskDetailsInstance = new AzureVmDiskDetails();
-                                                        hyperVReplicaAzureProviderSpecificSettingsInstance.AzureVMDiskDetails.Add(azureVmDiskDetailsInstance);
+                                                        hyperVReplicaAzureReplicationDetailsInstance.AzureVMDiskDetails.Add(azureVmDiskDetailsInstance);
                                                         
-                                                        JToken vhdTypeValue = azureVMDiskDetailsValue["vhdType"];
-                                                        if (vhdTypeValue != null && vhdTypeValue.Type != JTokenType.Null)
+                                                        JToken vhdTypeValue2 = azureVMDiskDetailsValue["vhdType"];
+                                                        if (vhdTypeValue2 != null && vhdTypeValue2.Type != JTokenType.Null)
                                                         {
-                                                            string vhdTypeInstance = ((string)vhdTypeValue);
-                                                            azureVmDiskDetailsInstance.VhdType = vhdTypeInstance;
+                                                            string vhdTypeInstance2 = ((string)vhdTypeValue2);
+                                                            azureVmDiskDetailsInstance.VhdType = vhdTypeInstance2;
                                                         }
                                                         
-                                                        JToken vhdIdValue = azureVMDiskDetailsValue["vhdId"];
-                                                        if (vhdIdValue != null && vhdIdValue.Type != JTokenType.Null)
+                                                        JToken vhdIdValue2 = azureVMDiskDetailsValue["vhdId"];
+                                                        if (vhdIdValue2 != null && vhdIdValue2.Type != JTokenType.Null)
                                                         {
-                                                            string vhdIdInstance = ((string)vhdIdValue);
-                                                            azureVmDiskDetailsInstance.VhdId = vhdIdInstance;
+                                                            string vhdIdInstance2 = ((string)vhdIdValue2);
+                                                            azureVmDiskDetailsInstance.VhdId = vhdIdInstance2;
                                                         }
                                                         
-                                                        JToken vhdNameValue2 = azureVMDiskDetailsValue["vhdName"];
-                                                        if (vhdNameValue2 != null && vhdNameValue2.Type != JTokenType.Null)
+                                                        JToken vhdNameValue3 = azureVMDiskDetailsValue["vhdName"];
+                                                        if (vhdNameValue3 != null && vhdNameValue3.Type != JTokenType.Null)
                                                         {
-                                                            string vhdNameInstance2 = ((string)vhdNameValue2);
-                                                            azureVmDiskDetailsInstance.VhdName = vhdNameInstance2;
+                                                            string vhdNameInstance3 = ((string)vhdNameValue3);
+                                                            azureVmDiskDetailsInstance.VhdName = vhdNameInstance3;
                                                         }
                                                         
                                                         JToken maxSizeMBValue2 = azureVMDiskDetailsValue["maxSizeMB"];
@@ -11677,11 +11614,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                             azureVmDiskDetailsInstance.MaxSizeMB = maxSizeMBInstance2;
                                                         }
                                                         
-                                                        JToken diskLocationValue = azureVMDiskDetailsValue["diskLocation"];
-                                                        if (diskLocationValue != null && diskLocationValue.Type != JTokenType.Null)
+                                                        JToken targetDiskLocationValue = azureVMDiskDetailsValue["targetDiskLocation"];
+                                                        if (targetDiskLocationValue != null && targetDiskLocationValue.Type != JTokenType.Null)
                                                         {
-                                                            string diskLocationInstance = ((string)diskLocationValue);
-                                                            azureVmDiskDetailsInstance.DiskLocation = diskLocationInstance;
+                                                            string targetDiskLocationInstance = ((string)targetDiskLocationValue);
+                                                            azureVmDiskDetailsInstance.TargetDiskLocation = targetDiskLocationInstance;
                                                         }
                                                         
                                                         JToken lunIdValue = azureVMDiskDetailsValue["lunId"];
@@ -11691,55 +11628,55 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                             azureVmDiskDetailsInstance.LunId = lunIdInstance;
                                                         }
                                                         
-                                                        JToken primaryDiskCorelationIdValue = azureVMDiskDetailsValue["primaryDiskCorelationId"];
-                                                        if (primaryDiskCorelationIdValue != null && primaryDiskCorelationIdValue.Type != JTokenType.Null)
+                                                        JToken targetDiskNameValue = azureVMDiskDetailsValue["targetDiskName"];
+                                                        if (targetDiskNameValue != null && targetDiskNameValue.Type != JTokenType.Null)
                                                         {
-                                                            string primaryDiskCorelationIdInstance = ((string)primaryDiskCorelationIdValue);
-                                                            azureVmDiskDetailsInstance.PrimaryDiskCorelationId = primaryDiskCorelationIdInstance;
+                                                            string targetDiskNameInstance = ((string)targetDiskNameValue);
+                                                            azureVmDiskDetailsInstance.TargetDiskName = targetDiskNameInstance;
                                                         }
                                                     }
                                                 }
                                                 
-                                                JToken recoveryAzureVMNameValue = customSettingValue["recoveryAzureVMName"];
+                                                JToken recoveryAzureVMNameValue = providerSpecificDetailsValue["recoveryAzureVMName"];
                                                 if (recoveryAzureVMNameValue != null && recoveryAzureVMNameValue.Type != JTokenType.Null)
                                                 {
                                                     string recoveryAzureVMNameInstance = ((string)recoveryAzureVMNameValue);
-                                                    hyperVReplicaAzureProviderSpecificSettingsInstance.RecoveryAzureVMName = recoveryAzureVMNameInstance;
+                                                    hyperVReplicaAzureReplicationDetailsInstance.RecoveryAzureVMName = recoveryAzureVMNameInstance;
                                                 }
                                                 
-                                                JToken recoveryAzureVMSizeValue = customSettingValue["recoveryAzureVMSize"];
+                                                JToken recoveryAzureVMSizeValue = providerSpecificDetailsValue["recoveryAzureVMSize"];
                                                 if (recoveryAzureVMSizeValue != null && recoveryAzureVMSizeValue.Type != JTokenType.Null)
                                                 {
                                                     string recoveryAzureVMSizeInstance = ((string)recoveryAzureVMSizeValue);
-                                                    hyperVReplicaAzureProviderSpecificSettingsInstance.RecoveryAzureVMSize = recoveryAzureVMSizeInstance;
+                                                    hyperVReplicaAzureReplicationDetailsInstance.RecoveryAzureVMSize = recoveryAzureVMSizeInstance;
                                                 }
                                                 
-                                                JToken recoveryAzureStorageAccountValue = customSettingValue["recoveryAzureStorageAccount"];
+                                                JToken recoveryAzureStorageAccountValue = providerSpecificDetailsValue["recoveryAzureStorageAccount"];
                                                 if (recoveryAzureStorageAccountValue != null && recoveryAzureStorageAccountValue.Type != JTokenType.Null)
                                                 {
                                                     string recoveryAzureStorageAccountInstance = ((string)recoveryAzureStorageAccountValue);
-                                                    hyperVReplicaAzureProviderSpecificSettingsInstance.RecoveryAzureStorageAccount = recoveryAzureStorageAccountInstance;
+                                                    hyperVReplicaAzureReplicationDetailsInstance.RecoveryAzureStorageAccount = recoveryAzureStorageAccountInstance;
                                                 }
                                                 
-                                                JToken selectedRecoveryAzureNetworkIdValue = customSettingValue["selectedRecoveryAzureNetworkId"];
+                                                JToken selectedRecoveryAzureNetworkIdValue = providerSpecificDetailsValue["selectedRecoveryAzureNetworkId"];
                                                 if (selectedRecoveryAzureNetworkIdValue != null && selectedRecoveryAzureNetworkIdValue.Type != JTokenType.Null)
                                                 {
                                                     string selectedRecoveryAzureNetworkIdInstance = ((string)selectedRecoveryAzureNetworkIdValue);
-                                                    hyperVReplicaAzureProviderSpecificSettingsInstance.SelectedRecoveryAzureNetworkId = selectedRecoveryAzureNetworkIdInstance;
+                                                    hyperVReplicaAzureReplicationDetailsInstance.SelectedRecoveryAzureNetworkId = selectedRecoveryAzureNetworkIdInstance;
                                                 }
                                                 
-                                                JToken lastReplicatedTimeValue2 = customSettingValue["lastReplicatedTime"];
+                                                JToken lastReplicatedTimeValue2 = providerSpecificDetailsValue["lastReplicatedTime"];
                                                 if (lastReplicatedTimeValue2 != null && lastReplicatedTimeValue2.Type != JTokenType.Null)
                                                 {
                                                     string lastReplicatedTimeInstance2 = ((string)lastReplicatedTimeValue2);
-                                                    hyperVReplicaAzureProviderSpecificSettingsInstance.LastReplicatedTime = lastReplicatedTimeInstance2;
+                                                    hyperVReplicaAzureReplicationDetailsInstance.LastReplicatedTime = lastReplicatedTimeInstance2;
                                                 }
                                                 
-                                                JToken initialReplicationDetailsValue2 = customSettingValue["initialReplicationDetails"];
+                                                JToken initialReplicationDetailsValue2 = providerSpecificDetailsValue["initialReplicationDetails"];
                                                 if (initialReplicationDetailsValue2 != null && initialReplicationDetailsValue2.Type != JTokenType.Null)
                                                 {
                                                     InitialReplicationDetails initialReplicationDetailsInstance2 = new InitialReplicationDetails();
-                                                    hyperVReplicaAzureProviderSpecificSettingsInstance.InitialReplicationDetails = initialReplicationDetailsInstance2;
+                                                    hyperVReplicaAzureReplicationDetailsInstance.InitialReplicationDetails = initialReplicationDetailsInstance2;
                                                     
                                                     JToken initialReplicationTypeValue2 = initialReplicationDetailsValue2["initialReplicationType"];
                                                     if (initialReplicationTypeValue2 != null && initialReplicationTypeValue2.Type != JTokenType.Null)
@@ -11756,13 +11693,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     }
                                                 }
                                                 
-                                                JToken vmNicsArray2 = customSettingValue["vmNics"];
+                                                JToken vmNicsArray2 = providerSpecificDetailsValue["vmNics"];
                                                 if (vmNicsArray2 != null && vmNicsArray2.Type != JTokenType.Null)
                                                 {
                                                     foreach (JToken vmNicsValue2 in ((JArray)vmNicsArray2))
                                                     {
                                                         VMNicDetails vMNicDetailsInstance2 = new VMNicDetails();
-                                                        hyperVReplicaAzureProviderSpecificSettingsInstance.VMNics.Add(vMNicDetailsInstance2);
+                                                        hyperVReplicaAzureReplicationDetailsInstance.VMNics.Add(vMNicDetailsInstance2);
                                                         
                                                         JToken nicIdValue2 = vmNicsValue2["nicId"];
                                                         if (nicIdValue2 != null && nicIdValue2.Type != JTokenType.Null)
@@ -11808,13 +11745,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     }
                                                 }
                                                 
-                                                JToken typeValue3 = customSettingValue["__type"];
+                                                JToken typeValue3 = providerSpecificDetailsValue["__type"];
                                                 if (typeValue3 != null && typeValue3.Type != JTokenType.Null)
                                                 {
                                                     string typeInstance3 = ((string)typeValue3);
-                                                    hyperVReplicaAzureProviderSpecificSettingsInstance.Type = typeInstance3;
+                                                    hyperVReplicaAzureReplicationDetailsInstance.Type = typeInstance3;
                                                 }
-                                                propertiesInstance.CustomSettings = hyperVReplicaAzureProviderSpecificSettingsInstance;
+                                                propertiesInstance.ProviderSpecificDetails = hyperVReplicaAzureReplicationDetailsInstance;
                                             }
                                         }
                                     }

@@ -26,37 +26,14 @@ using Microsoft.Azure.Management.SiteRecovery.Models;
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// The definition of a ReverseReplicationInput properties object.
+    /// VMM Fabric specific details.
     /// </summary>
-    public partial class ReverseReplicationInputProperties
+    public partial class VmmDetails : FabricSpecificDetails
     {
-        private string _failoverDirection;
-        
         /// <summary>
-        /// Optional. Gets or sets Failover direction.
+        /// Initializes a new instance of the VmmDetails class.
         /// </summary>
-        public string FailoverDirection
-        {
-            get { return this._failoverDirection; }
-            set { this._failoverDirection = value; }
-        }
-        
-        private ReverseReplicationProviderSpecificInput _providerSpecificDetails;
-        
-        /// <summary>
-        /// Optional. Gets or sets Provider specific reverse replication input.
-        /// </summary>
-        public ReverseReplicationProviderSpecificInput ProviderSpecificDetails
-        {
-            get { return this._providerSpecificDetails; }
-            set { this._providerSpecificDetails = value; }
-        }
-        
-        /// <summary>
-        /// Initializes a new instance of the ReverseReplicationInputProperties
-        /// class.
-        /// </summary>
-        public ReverseReplicationInputProperties()
+        public VmmDetails()
         {
         }
     }

@@ -54,7 +54,7 @@ namespace SiteRecovery.Tests
 
                 foreach (var fabric in fabrics.Fabrics)
                 {
-                    if (fabric.Properties.FabricType.Contains("VMM"))
+                    if (fabric.Properties.CustomDetails.InstanceType.Contains("VMM"))
                     {
                         selectedFabric = fabric;
                     }
@@ -113,7 +113,6 @@ namespace SiteRecovery.Tests
 
                     CreatePolicyInputProperties policyCreationProp = new CreatePolicyInputProperties()
                     {
-                        ReplicationProvider = "HyperVReplica",
                         ProviderSpecificInput = hvrProfileInput
                     };
 
@@ -196,7 +195,7 @@ namespace SiteRecovery.Tests
                 ///////////////////////////// PFO ////////////////////////////////
                 PlannedFailoverInputProperties plannedFailoverProp = new PlannedFailoverInputProperties()
                 {
-                    ProviderSpecificInput = new ProviderSpecificFailoverInput()
+                    ProviderSpecificDetails = new ProviderSpecificFailoverInput()
                 };
 
                 PlannedFailoverInput plannedFailoverInput = new PlannedFailoverInput()
@@ -206,7 +205,7 @@ namespace SiteRecovery.Tests
                 ////////////////////////////// RR ////////////////////////////////
                 ReverseReplicationInputProperties rrProp = new ReverseReplicationInputProperties()
                 {
-                    ProviderConfigurationSettings = new ReverseReplicationProviderSpecificInput()
+                    ProviderSpecificDetails = new ReverseReplicationProviderSpecificInput()
                 };
 
                 ReverseReplicationInput rrInput = new ReverseReplicationInput()
@@ -216,7 +215,7 @@ namespace SiteRecovery.Tests
                 ////////////////////////////////// UFO /////////////////////////////
                 UnplannedFailoverInputProperties ufoProp = new UnplannedFailoverInputProperties()
                 {
-                    ProviderSpecificInput = new ProviderSpecificFailoverInput(),
+                    ProviderSpecificDetails = new ProviderSpecificFailoverInput(),
                     SourceSiteOperations = "NotRequired"
                 };
 
@@ -227,7 +226,7 @@ namespace SiteRecovery.Tests
                 /////////////////////////////////// TFO //////////////////////////////
                 TestFailoverInputProperties tfoProp = new TestFailoverInputProperties()
                 {
-                    ProviderSpecificInput = new ProviderSpecificFailoverInput()
+                    ProviderSpecificDetails = new ProviderSpecificFailoverInput()
                 };
 
                 TestFailoverInput tfoInput = new TestFailoverInput()
@@ -237,19 +236,21 @@ namespace SiteRecovery.Tests
                 /////////////////////////////////////
                 if (pfo)
                 {
-                    //var plannedfailover = client.ReplicationProtectedItem.PlannedFailover(selectedFabric.Name, priCld, replicationProtectedItemName, plannedFailoverInput, RequestHeaders);
+                    //
                     var protectedItem = client.ReplicationProtectedItem.Get(
                         selectedFabric.Name,
                         priCld,
                         replicationProtectedItemName,
                         RequestHeaders);
 
-                    var unplannedFailoverReverse = client.ReplicationProtectedItem.UnplannedFailover(
-                        selectedFabric.Name, 
-                        priCld, 
-                        replicationProtectedItemName, 
-                        ufoInput, 
-                        RequestHeaders);
+                    var plannedfailover = client.ReplicationProtectedItem.PlannedFailover(selectedFabric.Name, priCld, replicationProtectedItemName, plannedFailoverInput, RequestHeaders);
+
+                    //var unplannedFailoverReverse = client.ReplicationProtectedItem.UnplannedFailover(
+                    //    selectedFabric.Name, 
+                    //    priCld, 
+                    //    replicationProtectedItemName, 
+                    //    ufoInput, 
+                    //    RequestHeaders);
                 }
 
                 if (commit)
@@ -264,10 +265,10 @@ namespace SiteRecovery.Tests
 
                 if (pfoReverse)
                 {
-                    var unplannedFailoverReverse = client.ReplicationProtectedItem.UnplannedFailover(
-                        selectedFabric.Name, priCld, replicationProtectedItemName, ufoInput, RequestHeaders);
+                    //var unplannedFailoverReverse = client.ReplicationProtectedItem.UnplannedFailover(
+                    //    selectedFabric.Name, priCld, replicationProtectedItemName, ufoInput, RequestHeaders);
 
-                    //var plannedFailoverReverse = client.ReplicationProtectedItem.PlannedFailover(selectedFabric.Name, priCld, replicationProtectedItemName, plannedFailoverInput, RequestHeaders);
+                    var plannedFailoverReverse = client.ReplicationProtectedItem.PlannedFailover(selectedFabric.Name, priCld, replicationProtectedItemName, plannedFailoverInput, RequestHeaders);
                 }
 
                 if (commitReverse)
@@ -352,15 +353,15 @@ namespace SiteRecovery.Tests
                 context.Start();
                 var client = GetSiteRecoveryClient(CustomHttpHandler);
 
-                bool createPolicy = true;
-                bool pairClouds = true;
-                bool enableDR = true;
-                bool pfo = true;
-                bool commit = false;
-                bool tfo = false;
-                bool pfoReverse = false;
-                bool commitReverse = false;
-                bool reprotect = false;
+                bool createPolicy = false;
+                bool pairClouds = false;
+                bool enableDR = false;
+                bool pfo = false;
+                bool commit = true;
+                bool tfo = true;
+                bool pfoReverse = true;
+                bool commitReverse = true;
+                bool reprotect = true;
                 bool disableDR = true;
                 bool unpair = true;
                 bool removePolicy = true;
@@ -368,11 +369,11 @@ namespace SiteRecovery.Tests
                 // Process Variables
                 string fabricName = string.Empty;
                 string recCldName = "Microsoft Azure";
-                string priCldName = string.Empty;
-                string policyName = "Hydra200" + (new Random()).Next();
-                string mappingName = "Mapping" + (new Random()).Next();
-                string enableDRName = string.Empty;
-                string protectedItemName = "PE" + (new Random()).Next();
+                string priCldName = "4f94127d-2eb3-449d-a708-250752e93cb4";// string.Empty;
+                string policyName = "Hydra2001547463780"; // "Hydra200" + (new Random()).Next();
+                string mappingName = "Mapping1547463780";// "Mapping" + (new Random()).Next();
+                string enableDRName = "E2ECld1VM1";// string.Empty;
+                string protectedItemName = "PE1547463780";// "PE" + (new Random()).Next();
 
                 // Data Variables
                 Fabric selectedFabric = null;
@@ -388,7 +389,7 @@ namespace SiteRecovery.Tests
 
                     foreach (var fabric in fabrics.Fabrics)
                     {
-                        if (fabric.Properties.FabricType.Contains("VMM"))
+                        if (fabric.Properties.CustomDetails.InstanceType.Contains("VMM"))
                         {
                             selectedFabric = fabric;
                             fabricName = selectedFabric.Name;
@@ -434,7 +435,6 @@ namespace SiteRecovery.Tests
 
                     CreatePolicyInputProperties createInputProp = new CreatePolicyInputProperties()
                     {
-                        ReplicationProvider = "HyperVReplicaAzure",
                         ProviderSpecificInput = hvrAPolicy
                     };
 
@@ -489,7 +489,7 @@ namespace SiteRecovery.Tests
                     {
                         HvHostVmId = (protectableItem.Properties.CustomDetails as HyperVVirtualMachineDetails).SourceItemId,
                         OSType = "Windows",
-                        VHDId = (protectableItem.Properties.CustomDetails as HyperVVirtualMachineDetails).DiskDetailsList[0].VHDId,
+                        VHDId = (protectableItem.Properties.CustomDetails as HyperVVirtualMachineDetails).DiskDetailsList[0].VhdId,
                         VmName = protectableItem.Properties.FriendlyName,
                         StorageAccountId = "/subscriptions/19b823e2-d1f3-4805-93d7-401c5d8230d5/resourceGroups/Default-Storage-WestUS/providers/Microsoft.ClassicStorage/storageAccounts/bvtmapped2storacc",
                     };
@@ -529,7 +529,7 @@ namespace SiteRecovery.Tests
                     PlannedFailoverInputProperties plannedFailoverProp = new PlannedFailoverInputProperties()
                     {
                         FailoverDirection = "",
-                        ProviderSpecificInput = hvrAFOInput
+                        ProviderSpecificDetails = hvrAFOInput
                     };
 
                     PlannedFailoverInput plannedFailoverInput = new PlannedFailoverInput()
@@ -545,7 +545,7 @@ namespace SiteRecovery.Tests
                     PlannedFailoverInputProperties plannedFailbackProp = new PlannedFailoverInputProperties()
                     {
                         FailoverDirection = "",
-                        ProviderSpecificInput = hvrAFBInput
+                        ProviderSpecificDetails = hvrAFBInput
                     };
 
                     PlannedFailoverInput plannedFailbackInput = new PlannedFailoverInput()
@@ -557,7 +557,7 @@ namespace SiteRecovery.Tests
                     {
                         HvHostVmId = (protectableItem.Properties.CustomDetails as HyperVVirtualMachineDetails).SourceItemId,
                         OSType = "Windows",
-                        VHDId = (protectableItem.Properties.CustomDetails as HyperVVirtualMachineDetails).DiskDetailsList[0].VHDId,
+                        VHDId = (protectableItem.Properties.CustomDetails as HyperVVirtualMachineDetails).DiskDetailsList[0].VhdId,
                         VmName = protectableItem.Properties.FriendlyName,
                         StorageAccountId = "/subscriptions/19b823e2-d1f3-4805-93d7-401c5d8230d5/resourceGroups/Default-Storage-WestUS/providers/Microsoft.ClassicStorage/storageAccounts/bvtmapped2storacc",
                     };
@@ -565,7 +565,7 @@ namespace SiteRecovery.Tests
                     ReverseReplicationInputProperties rrProp = new ReverseReplicationInputProperties()
                     {
                         FailoverDirection = "",
-                        ProviderConfigurationSettings = hvrARRInput
+                        ProviderSpecificDetails = hvrARRInput
                     };
 
                     ReverseReplicationInput rrInput = new ReverseReplicationInput()
@@ -576,7 +576,7 @@ namespace SiteRecovery.Tests
                     ////////////////////////////////// UFO /////////////////////////////////////////
                     UnplannedFailoverInputProperties ufoProp = new UnplannedFailoverInputProperties()
                     {
-                        ProviderSpecificInput = hvrAFOInput,
+                        ProviderSpecificDetails = hvrAFOInput,
                         SourceSiteOperations = "NotRequired"
                     };
 
@@ -588,7 +588,7 @@ namespace SiteRecovery.Tests
                     /////////////////////////////////// TFO /////////////////////////////////////////////
                     TestFailoverInputProperties tfoProp = new TestFailoverInputProperties()
                     {
-                        ProviderSpecificInput = hvrAFOInput
+                        ProviderSpecificDetails = hvrAFOInput
                     };
 
                     TestFailoverInput tfoInput = new TestFailoverInput()
@@ -693,7 +693,7 @@ namespace SiteRecovery.Tests
                 bool reprotect = true;
                 bool disableDR = true;
                 bool unpair = true;
-                bool removePolicy = false;
+                bool removePolicy = true;
 
                 // Process Variables
                 string fabricName = string.Empty;
@@ -711,14 +711,14 @@ namespace SiteRecovery.Tests
                 ProtectableItem protectableItem = null;
                 ReplicationProtectedItem protectedItem = null;
 
-                // Fetch VMMs
+                // Fetch HyperV
                 if (string.IsNullOrEmpty(fabricName))
                 {
                     var fabrics = client.Fabrics.List(RequestHeaders);
 
                     foreach (var fabric in fabrics.Fabrics)
                     {
-                        if (fabric.Properties.FabricType.Contains("HyperV"))
+                        if (fabric.Properties.CustomDetails.InstanceType.Contains("HyperV"))
                         {
                             selectedFabric = fabric;
                             fabricName = selectedFabric.Name;
@@ -748,7 +748,6 @@ namespace SiteRecovery.Tests
 
                     CreatePolicyInputProperties createInputProp = new CreatePolicyInputProperties()
                     {
-                        ReplicationProvider = "HyperVReplicaAzure",
                         ProviderSpecificInput = hvrAPolicy
                     };
 
@@ -802,7 +801,7 @@ namespace SiteRecovery.Tests
                     {
                         HvHostVmId = (protectableItem.Properties.CustomDetails as HyperVVirtualMachineDetails).SourceItemId,
                         OSType = "Windows",
-                        VHDId = (protectableItem.Properties.CustomDetails as HyperVVirtualMachineDetails).DiskDetailsList[0].VHDId,
+                        VHDId = (protectableItem.Properties.CustomDetails as HyperVVirtualMachineDetails).DiskDetailsList[0].VhdId,
                         VmName = protectableItem.Properties.FriendlyName,
                         StorageAccountId = "/subscriptions/19b823e2-d1f3-4805-93d7-401c5d8230d5/resourceGroups/Default-Storage-WestUS/providers/Microsoft.ClassicStorage/storageAccounts/bvtmapped2storacc",
                     };
@@ -833,8 +832,8 @@ namespace SiteRecovery.Tests
 
                 if (pfo || commit || tfo || pfoReverse || commitReverse || reprotect || disableDR)
                 {
-                    //protectableItem = client.ProtectableItem.Get(selectedFabric.Name, primaryCloud.Name, enableDRName, RequestHeaders).ProtectableItem;
-                    //protectedItem = client.ReplicationProtectedItem.Get(selectedFabric.Name, primaryCloud.Name, protectedItemName, RequestHeaders).ReplicationProtectedItem;
+                    protectableItem = client.ProtectableItem.Get(selectedFabric.Name, primaryCloud.Name, enableDRName, RequestHeaders).ProtectableItem;
+                    protectedItem = client.ReplicationProtectedItem.Get(selectedFabric.Name, primaryCloud.Name, protectedItemName, RequestHeaders).ReplicationProtectedItem;
 
                     // Create Input for Operations
                     ///////////////////////////// PFO /////////////////////////////////////
@@ -845,7 +844,7 @@ namespace SiteRecovery.Tests
                     PlannedFailoverInputProperties plannedFailoverProp = new PlannedFailoverInputProperties()
                     {
                         FailoverDirection = "",
-                        ProviderSpecificInput = hvrAFOInput
+                        ProviderSpecificDetails = hvrAFOInput
                     };
 
                     PlannedFailoverInput plannedFailoverInput = new PlannedFailoverInput()
@@ -861,7 +860,7 @@ namespace SiteRecovery.Tests
                     PlannedFailoverInputProperties plannedFailbackProp = new PlannedFailoverInputProperties()
                     {
                         FailoverDirection = "",
-                        ProviderSpecificInput = hvrAFBInput
+                        ProviderSpecificDetails = hvrAFBInput
                     };
 
                     PlannedFailoverInput plannedFailbackInput = new PlannedFailoverInput()
@@ -873,7 +872,7 @@ namespace SiteRecovery.Tests
                     {
                         HvHostVmId = (protectableItem.Properties.CustomDetails as HyperVVirtualMachineDetails).SourceItemId,
                         OSType = "Windows",
-                        VHDId = (protectableItem.Properties.CustomDetails as HyperVVirtualMachineDetails).DiskDetailsList[0].VHDId,
+                        VHDId = (protectableItem.Properties.CustomDetails as HyperVVirtualMachineDetails).DiskDetailsList[0].VhdId,
                         VmName = protectableItem.Properties.FriendlyName,
                         StorageAccountId = "/subscriptions/19b823e2-d1f3-4805-93d7-401c5d8230d5/resourceGroups/Default-Storage-WestUS/providers/Microsoft.ClassicStorage/storageAccounts/bvtmapped2storacc",
                     };
@@ -881,7 +880,7 @@ namespace SiteRecovery.Tests
                     ReverseReplicationInputProperties rrProp = new ReverseReplicationInputProperties()
                     {
                         FailoverDirection = "",
-                        ProviderConfigurationSettings = hvrARRInput
+                        ProviderSpecificDetails = hvrARRInput
                     };
 
                     ReverseReplicationInput rrInput = new ReverseReplicationInput()
@@ -892,7 +891,7 @@ namespace SiteRecovery.Tests
                     ////////////////////////////////// UFO /////////////////////////////////////////
                     UnplannedFailoverInputProperties ufoProp = new UnplannedFailoverInputProperties()
                     {
-                        ProviderSpecificInput = hvrAFOInput,
+                        ProviderSpecificDetails = hvrAFOInput,
                         SourceSiteOperations = "NotRequired"
                     };
 
@@ -904,7 +903,7 @@ namespace SiteRecovery.Tests
                     /////////////////////////////////// TFO /////////////////////////////////////////////
                     TestFailoverInputProperties tfoProp = new TestFailoverInputProperties()
                     {
-                        ProviderSpecificInput = hvrAFOInput
+                        ProviderSpecificDetails = hvrAFOInput
                     };
 
                     TestFailoverInput tfoInput = new TestFailoverInput()

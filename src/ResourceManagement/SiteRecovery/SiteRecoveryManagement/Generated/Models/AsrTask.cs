@@ -64,6 +64,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._id = value; }
         }
         
+        private string _name;
+        
+        /// <summary>
+        /// Required. Task name.
+        /// </summary>
+        public string Name
+        {
+            get { return this._name; }
+            set { this._name = value; }
+        }
+        
         private DateTime _startTime;
         
         /// <summary>
@@ -95,17 +106,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         {
             get { return this._taskFriendlyName; }
             set { this._taskFriendlyName = value; }
-        }
-        
-        private string _taskName;
-        
-        /// <summary>
-        /// Required. Unique Task name.
-        /// </summary>
-        public string TaskName
-        {
-            get { return this._taskName; }
-            set { this._taskName = value; }
         }
         
         /// <summary>

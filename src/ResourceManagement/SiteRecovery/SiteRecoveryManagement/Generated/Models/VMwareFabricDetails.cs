@@ -30,7 +30,7 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// <summary>
     /// Store the extended details of the VMware fabric.
     /// </summary>
-    public partial class VMwareFabricDetails : FabricSpecificSettings
+    public partial class VMwareFabricDetails : FabricSpecificDetails
     {
         private string _agentCount;
         

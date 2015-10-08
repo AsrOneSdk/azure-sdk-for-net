@@ -56,7 +56,7 @@ namespace SiteRecovery.Tests
                 Fabric selectedfabric = null;
                 foreach (var fabric in responseServers.Fabrics)
                 {
-                    if (fabric.Properties.FabricType.Contains("HyperV"))
+                    if (fabric.Properties.CustomDetails.InstanceType.Contains("HyperV"))
                     {
                         selectedfabric = fabric;
                         break;

@@ -855,35 +855,35 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 {
                                     foreach (JToken tasksValue in ((JArray)tasksArray))
                                     {
-                                        AsrTask asrTaskInstance = new AsrTask();
-                                        propertiesInstance.Tasks.Add(asrTaskInstance);
+                                        AsrTask taskInstance = new AsrTask();
+                                        propertiesInstance.Tasks.Add(taskInstance);
                                         
                                         JToken taskIdValue = tasksValue["taskId"];
                                         if (taskIdValue != null && taskIdValue.Type != JTokenType.Null)
                                         {
                                             string taskIdInstance = ((string)taskIdValue);
-                                            asrTaskInstance.ID = taskIdInstance;
+                                            taskInstance.ID = taskIdInstance;
                                         }
                                         
-                                        JToken taskNameValue = tasksValue["taskName"];
-                                        if (taskNameValue != null && taskNameValue.Type != JTokenType.Null)
+                                        JToken nameValue = tasksValue["name"];
+                                        if (nameValue != null && nameValue.Type != JTokenType.Null)
                                         {
-                                            string taskNameInstance = ((string)taskNameValue);
-                                            asrTaskInstance.TaskName = taskNameInstance;
+                                            string nameInstance = ((string)nameValue);
+                                            taskInstance.Name = nameInstance;
                                         }
                                         
                                         JToken startTimeValue2 = tasksValue["startTime"];
                                         if (startTimeValue2 != null && startTimeValue2.Type != JTokenType.Null)
                                         {
                                             DateTime startTimeInstance2 = ((DateTime)startTimeValue2);
-                                            asrTaskInstance.StartTime = startTimeInstance2;
+                                            taskInstance.StartTime = startTimeInstance2;
                                         }
                                         
                                         JToken endTimeValue2 = tasksValue["endTime"];
                                         if (endTimeValue2 != null && endTimeValue2.Type != JTokenType.Null)
                                         {
                                             DateTime endTimeInstance2 = ((DateTime)endTimeValue2);
-                                            asrTaskInstance.EndTime = endTimeInstance2;
+                                            taskInstance.EndTime = endTimeInstance2;
                                         }
                                         
                                         JToken allowedActionsArray2 = tasksValue["allowedActions"];
@@ -891,7 +891,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             foreach (JToken allowedActionsValue2 in ((JArray)allowedActionsArray2))
                                             {
-                                                asrTaskInstance.Actions.Add(((string)allowedActionsValue2));
+                                                taskInstance.Actions.Add(((string)allowedActionsValue2));
                                             }
                                         }
                                         
@@ -899,14 +899,14 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         if (friendlyNameValue2 != null && friendlyNameValue2.Type != JTokenType.Null)
                                         {
                                             string friendlyNameInstance2 = ((string)friendlyNameValue2);
-                                            asrTaskInstance.TaskFriendlyName = friendlyNameInstance2;
+                                            taskInstance.TaskFriendlyName = friendlyNameInstance2;
                                         }
                                         
                                         JToken stateValue2 = tasksValue["state"];
                                         if (stateValue2 != null && stateValue2.Type != JTokenType.Null)
                                         {
                                             string stateInstance2 = ((string)stateValue2);
-                                            asrTaskInstance.State = stateInstance2;
+                                            taskInstance.State = stateInstance2;
                                         }
                                     }
                                 }
@@ -1037,11 +1037,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.Id = idInstance;
                                 }
                                 
-                                JToken nameValue = propertiesValue["name"];
-                                if (nameValue != null && nameValue.Type != JTokenType.Null)
+                                JToken nameValue2 = propertiesValue["name"];
+                                if (nameValue2 != null && nameValue2.Type != JTokenType.Null)
                                 {
-                                    string nameInstance = ((string)nameValue);
-                                    propertiesInstance.Name = nameInstance;
+                                    string nameInstance2 = ((string)nameValue2);
+                                    propertiesInstance.Name = nameInstance2;
                                 }
                                 
                                 JToken typeValue = propertiesValue["type"];
@@ -1077,11 +1077,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 jobInstance.Id = idInstance2;
                             }
                             
-                            JToken nameValue2 = responseDoc["name"];
-                            if (nameValue2 != null && nameValue2.Type != JTokenType.Null)
+                            JToken nameValue3 = responseDoc["name"];
+                            if (nameValue3 != null && nameValue3.Type != JTokenType.Null)
                             {
-                                string nameInstance2 = ((string)nameValue2);
-                                jobInstance.Name = nameInstance2;
+                                string nameInstance3 = ((string)nameValue3);
+                                jobInstance.Name = nameInstance3;
                             }
                             
                             JToken typeValue2 = responseDoc["type"];
@@ -1512,35 +1512,35 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 {
                                     foreach (JToken tasksValue in ((JArray)tasksArray))
                                     {
-                                        AsrTask asrTaskInstance = new AsrTask();
-                                        propertiesInstance.Tasks.Add(asrTaskInstance);
+                                        AsrTask taskInstance = new AsrTask();
+                                        propertiesInstance.Tasks.Add(taskInstance);
                                         
                                         JToken taskIdValue = tasksValue["taskId"];
                                         if (taskIdValue != null && taskIdValue.Type != JTokenType.Null)
                                         {
                                             string taskIdInstance = ((string)taskIdValue);
-                                            asrTaskInstance.ID = taskIdInstance;
+                                            taskInstance.ID = taskIdInstance;
                                         }
                                         
-                                        JToken taskNameValue = tasksValue["taskName"];
-                                        if (taskNameValue != null && taskNameValue.Type != JTokenType.Null)
+                                        JToken nameValue = tasksValue["name"];
+                                        if (nameValue != null && nameValue.Type != JTokenType.Null)
                                         {
-                                            string taskNameInstance = ((string)taskNameValue);
-                                            asrTaskInstance.TaskName = taskNameInstance;
+                                            string nameInstance = ((string)nameValue);
+                                            taskInstance.Name = nameInstance;
                                         }
                                         
                                         JToken startTimeValue2 = tasksValue["startTime"];
                                         if (startTimeValue2 != null && startTimeValue2.Type != JTokenType.Null)
                                         {
                                             DateTime startTimeInstance2 = ((DateTime)startTimeValue2);
-                                            asrTaskInstance.StartTime = startTimeInstance2;
+                                            taskInstance.StartTime = startTimeInstance2;
                                         }
                                         
                                         JToken endTimeValue2 = tasksValue["endTime"];
                                         if (endTimeValue2 != null && endTimeValue2.Type != JTokenType.Null)
                                         {
                                             DateTime endTimeInstance2 = ((DateTime)endTimeValue2);
-                                            asrTaskInstance.EndTime = endTimeInstance2;
+                                            taskInstance.EndTime = endTimeInstance2;
                                         }
                                         
                                         JToken allowedActionsArray2 = tasksValue["allowedActions"];
@@ -1548,7 +1548,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             foreach (JToken allowedActionsValue2 in ((JArray)allowedActionsArray2))
                                             {
-                                                asrTaskInstance.Actions.Add(((string)allowedActionsValue2));
+                                                taskInstance.Actions.Add(((string)allowedActionsValue2));
                                             }
                                         }
                                         
@@ -1556,14 +1556,14 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         if (friendlyNameValue2 != null && friendlyNameValue2.Type != JTokenType.Null)
                                         {
                                             string friendlyNameInstance2 = ((string)friendlyNameValue2);
-                                            asrTaskInstance.TaskFriendlyName = friendlyNameInstance2;
+                                            taskInstance.TaskFriendlyName = friendlyNameInstance2;
                                         }
                                         
                                         JToken stateValue2 = tasksValue["state"];
                                         if (stateValue2 != null && stateValue2.Type != JTokenType.Null)
                                         {
                                             string stateInstance2 = ((string)stateValue2);
-                                            asrTaskInstance.State = stateInstance2;
+                                            taskInstance.State = stateInstance2;
                                         }
                                     }
                                 }
@@ -1694,11 +1694,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.Id = idInstance;
                                 }
                                 
-                                JToken nameValue = propertiesValue["name"];
-                                if (nameValue != null && nameValue.Type != JTokenType.Null)
+                                JToken nameValue2 = propertiesValue["name"];
+                                if (nameValue2 != null && nameValue2.Type != JTokenType.Null)
                                 {
-                                    string nameInstance = ((string)nameValue);
-                                    propertiesInstance.Name = nameInstance;
+                                    string nameInstance2 = ((string)nameValue2);
+                                    propertiesInstance.Name = nameInstance2;
                                 }
                                 
                                 JToken typeValue = propertiesValue["type"];
@@ -1734,11 +1734,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 jobInstance.Id = idInstance2;
                             }
                             
-                            JToken nameValue2 = responseDoc["name"];
-                            if (nameValue2 != null && nameValue2.Type != JTokenType.Null)
+                            JToken nameValue3 = responseDoc["name"];
+                            if (nameValue3 != null && nameValue3.Type != JTokenType.Null)
                             {
-                                string nameInstance2 = ((string)nameValue2);
-                                jobInstance.Name = nameInstance2;
+                                string nameInstance3 = ((string)nameValue3);
+                                jobInstance.Name = nameInstance3;
                             }
                             
                             JToken typeValue2 = responseDoc["type"];
@@ -2040,35 +2040,35 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 {
                                     foreach (JToken tasksValue in ((JArray)tasksArray))
                                     {
-                                        AsrTask asrTaskInstance = new AsrTask();
-                                        propertiesInstance.Tasks.Add(asrTaskInstance);
+                                        AsrTask taskInstance = new AsrTask();
+                                        propertiesInstance.Tasks.Add(taskInstance);
                                         
                                         JToken taskIdValue = tasksValue["taskId"];
                                         if (taskIdValue != null && taskIdValue.Type != JTokenType.Null)
                                         {
                                             string taskIdInstance = ((string)taskIdValue);
-                                            asrTaskInstance.ID = taskIdInstance;
+                                            taskInstance.ID = taskIdInstance;
                                         }
                                         
-                                        JToken taskNameValue = tasksValue["taskName"];
-                                        if (taskNameValue != null && taskNameValue.Type != JTokenType.Null)
+                                        JToken nameValue = tasksValue["name"];
+                                        if (nameValue != null && nameValue.Type != JTokenType.Null)
                                         {
-                                            string taskNameInstance = ((string)taskNameValue);
-                                            asrTaskInstance.TaskName = taskNameInstance;
+                                            string nameInstance = ((string)nameValue);
+                                            taskInstance.Name = nameInstance;
                                         }
                                         
                                         JToken startTimeValue2 = tasksValue["startTime"];
                                         if (startTimeValue2 != null && startTimeValue2.Type != JTokenType.Null)
                                         {
                                             DateTime startTimeInstance2 = ((DateTime)startTimeValue2);
-                                            asrTaskInstance.StartTime = startTimeInstance2;
+                                            taskInstance.StartTime = startTimeInstance2;
                                         }
                                         
                                         JToken endTimeValue2 = tasksValue["endTime"];
                                         if (endTimeValue2 != null && endTimeValue2.Type != JTokenType.Null)
                                         {
                                             DateTime endTimeInstance2 = ((DateTime)endTimeValue2);
-                                            asrTaskInstance.EndTime = endTimeInstance2;
+                                            taskInstance.EndTime = endTimeInstance2;
                                         }
                                         
                                         JToken allowedActionsArray2 = tasksValue["allowedActions"];
@@ -2076,7 +2076,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             foreach (JToken allowedActionsValue2 in ((JArray)allowedActionsArray2))
                                             {
-                                                asrTaskInstance.Actions.Add(((string)allowedActionsValue2));
+                                                taskInstance.Actions.Add(((string)allowedActionsValue2));
                                             }
                                         }
                                         
@@ -2084,14 +2084,14 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         if (friendlyNameValue2 != null && friendlyNameValue2.Type != JTokenType.Null)
                                         {
                                             string friendlyNameInstance2 = ((string)friendlyNameValue2);
-                                            asrTaskInstance.TaskFriendlyName = friendlyNameInstance2;
+                                            taskInstance.TaskFriendlyName = friendlyNameInstance2;
                                         }
                                         
                                         JToken stateValue2 = tasksValue["state"];
                                         if (stateValue2 != null && stateValue2.Type != JTokenType.Null)
                                         {
                                             string stateInstance2 = ((string)stateValue2);
-                                            asrTaskInstance.State = stateInstance2;
+                                            taskInstance.State = stateInstance2;
                                         }
                                     }
                                 }
@@ -2222,11 +2222,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.Id = idInstance;
                                 }
                                 
-                                JToken nameValue = propertiesValue["name"];
-                                if (nameValue != null && nameValue.Type != JTokenType.Null)
+                                JToken nameValue2 = propertiesValue["name"];
+                                if (nameValue2 != null && nameValue2.Type != JTokenType.Null)
                                 {
-                                    string nameInstance = ((string)nameValue);
-                                    propertiesInstance.Name = nameInstance;
+                                    string nameInstance2 = ((string)nameValue2);
+                                    propertiesInstance.Name = nameInstance2;
                                 }
                                 
                                 JToken typeValue = propertiesValue["type"];
@@ -2262,11 +2262,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 jobInstance.Id = idInstance2;
                             }
                             
-                            JToken nameValue2 = responseDoc["name"];
-                            if (nameValue2 != null && nameValue2.Type != JTokenType.Null)
+                            JToken nameValue3 = responseDoc["name"];
+                            if (nameValue3 != null && nameValue3.Type != JTokenType.Null)
                             {
-                                string nameInstance2 = ((string)nameValue2);
-                                jobInstance.Name = nameInstance2;
+                                string nameInstance3 = ((string)nameValue3);
+                                jobInstance.Name = nameInstance3;
                             }
                             
                             JToken typeValue2 = responseDoc["type"];
@@ -2603,35 +2603,35 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             foreach (JToken tasksValue in ((JArray)tasksArray))
                                             {
-                                                AsrTask asrTaskInstance = new AsrTask();
-                                                propertiesInstance.Tasks.Add(asrTaskInstance);
+                                                AsrTask taskInstance = new AsrTask();
+                                                propertiesInstance.Tasks.Add(taskInstance);
                                                 
                                                 JToken taskIdValue = tasksValue["taskId"];
                                                 if (taskIdValue != null && taskIdValue.Type != JTokenType.Null)
                                                 {
                                                     string taskIdInstance = ((string)taskIdValue);
-                                                    asrTaskInstance.ID = taskIdInstance;
+                                                    taskInstance.ID = taskIdInstance;
                                                 }
                                                 
-                                                JToken taskNameValue = tasksValue["taskName"];
-                                                if (taskNameValue != null && taskNameValue.Type != JTokenType.Null)
+                                                JToken nameValue = tasksValue["name"];
+                                                if (nameValue != null && nameValue.Type != JTokenType.Null)
                                                 {
-                                                    string taskNameInstance = ((string)taskNameValue);
-                                                    asrTaskInstance.TaskName = taskNameInstance;
+                                                    string nameInstance = ((string)nameValue);
+                                                    taskInstance.Name = nameInstance;
                                                 }
                                                 
                                                 JToken startTimeValue2 = tasksValue["startTime"];
                                                 if (startTimeValue2 != null && startTimeValue2.Type != JTokenType.Null)
                                                 {
                                                     DateTime startTimeInstance2 = ((DateTime)startTimeValue2);
-                                                    asrTaskInstance.StartTime = startTimeInstance2;
+                                                    taskInstance.StartTime = startTimeInstance2;
                                                 }
                                                 
                                                 JToken endTimeValue2 = tasksValue["endTime"];
                                                 if (endTimeValue2 != null && endTimeValue2.Type != JTokenType.Null)
                                                 {
                                                     DateTime endTimeInstance2 = ((DateTime)endTimeValue2);
-                                                    asrTaskInstance.EndTime = endTimeInstance2;
+                                                    taskInstance.EndTime = endTimeInstance2;
                                                 }
                                                 
                                                 JToken allowedActionsArray2 = tasksValue["allowedActions"];
@@ -2639,7 +2639,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 {
                                                     foreach (JToken allowedActionsValue2 in ((JArray)allowedActionsArray2))
                                                     {
-                                                        asrTaskInstance.Actions.Add(((string)allowedActionsValue2));
+                                                        taskInstance.Actions.Add(((string)allowedActionsValue2));
                                                     }
                                                 }
                                                 
@@ -2647,14 +2647,14 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 if (friendlyNameValue2 != null && friendlyNameValue2.Type != JTokenType.Null)
                                                 {
                                                     string friendlyNameInstance2 = ((string)friendlyNameValue2);
-                                                    asrTaskInstance.TaskFriendlyName = friendlyNameInstance2;
+                                                    taskInstance.TaskFriendlyName = friendlyNameInstance2;
                                                 }
                                                 
                                                 JToken stateValue2 = tasksValue["state"];
                                                 if (stateValue2 != null && stateValue2.Type != JTokenType.Null)
                                                 {
                                                     string stateInstance2 = ((string)stateValue2);
-                                                    asrTaskInstance.State = stateInstance2;
+                                                    taskInstance.State = stateInstance2;
                                                 }
                                             }
                                         }
@@ -2785,11 +2785,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             propertiesInstance.Id = idInstance;
                                         }
                                         
-                                        JToken nameValue = propertiesValue["name"];
-                                        if (nameValue != null && nameValue.Type != JTokenType.Null)
+                                        JToken nameValue2 = propertiesValue["name"];
+                                        if (nameValue2 != null && nameValue2.Type != JTokenType.Null)
                                         {
-                                            string nameInstance = ((string)nameValue);
-                                            propertiesInstance.Name = nameInstance;
+                                            string nameInstance2 = ((string)nameValue2);
+                                            propertiesInstance.Name = nameInstance2;
                                         }
                                         
                                         JToken typeValue = propertiesValue["type"];
@@ -2825,11 +2825,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         jobInstance.Id = idInstance2;
                                     }
                                     
-                                    JToken nameValue2 = jobsValue["name"];
-                                    if (nameValue2 != null && nameValue2.Type != JTokenType.Null)
+                                    JToken nameValue3 = jobsValue["name"];
+                                    if (nameValue3 != null && nameValue3.Type != JTokenType.Null)
                                     {
-                                        string nameInstance2 = ((string)nameValue2);
-                                        jobInstance.Name = nameInstance2;
+                                        string nameInstance3 = ((string)nameValue3);
+                                        jobInstance.Name = nameInstance3;
                                     }
                                     
                                     JToken typeValue2 = jobsValue["type"];

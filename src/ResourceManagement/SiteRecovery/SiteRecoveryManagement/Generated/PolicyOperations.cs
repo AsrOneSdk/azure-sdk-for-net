@@ -174,11 +174,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     JObject propertiesValue = new JObject();
                     createPolicyInputValue["properties"] = propertiesValue;
                     
-                    if (input.Properties.ReplicationProvider != null)
-                    {
-                        propertiesValue["replicationProvider"] = input.Properties.ReplicationProvider;
-                    }
-                    
                     if (input.Properties.ProviderSpecificInput != null)
                     {
                         JObject providerSpecificInputValue = new JObject();
@@ -1135,18 +1130,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.FriendlyName = friendlyNameInstance;
                                 }
                                 
-                                JToken replicationProviderValue = propertiesValue["replicationProvider"];
-                                if (replicationProviderValue != null && replicationProviderValue.Type != JTokenType.Null)
-                                {
-                                    string replicationProviderInstance = ((string)replicationProviderValue);
-                                    propertiesInstance.ReplicationProvider = replicationProviderInstance;
-                                }
-                                
                                 JToken providerSpecificDetailsValue = propertiesValue["providerSpecificDetails"];
                                 if (providerSpecificDetailsValue != null && providerSpecificDetailsValue.Type != JTokenType.Null)
                                 {
                                     string typeName = ((string)providerSpecificDetailsValue["__type"]);
-                                    if (typeName == "HyperVReplicaPolicyDetails")
+                                    if (typeName == "HyperVReplica")
                                     {
                                         HyperVReplicaPolicyDetails hyperVReplicaPolicyDetailsInstance = new HyperVReplicaPolicyDetails();
                                         
@@ -1235,7 +1223,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         }
                                         propertiesInstance.ProviderSpecificDetails = hyperVReplicaPolicyDetailsInstance;
                                     }
-                                    if (typeName == "HyperVReplicaAzurePolicyDetails")
+                                    if (typeName == "HyperVReplicaAzure")
                                     {
                                         HyperVReplicaAzurePolicyDetails hyperVReplicaAzurePolicyDetailsInstance = new HyperVReplicaAzurePolicyDetails();
                                         
@@ -1274,25 +1262,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             hyperVReplicaAzurePolicyDetailsInstance.Encryption = encryptionInstance;
                                         }
                                         
-                                        JToken activeStorageAccountValue = providerSpecificDetailsValue["activeStorageAccount"];
-                                        if (activeStorageAccountValue != null && activeStorageAccountValue.Type != JTokenType.Null)
+                                        JToken activeStorageAccountIdValue = providerSpecificDetailsValue["activeStorageAccountId"];
+                                        if (activeStorageAccountIdValue != null && activeStorageAccountIdValue.Type != JTokenType.Null)
                                         {
-                                            CustomerStorageAccount activeStorageAccountInstance = new CustomerStorageAccount();
-                                            hyperVReplicaAzurePolicyDetailsInstance.ActiveStorageAccount = activeStorageAccountInstance;
-                                            
-                                            JToken storageAccountNameValue = activeStorageAccountValue["storageAccountName"];
-                                            if (storageAccountNameValue != null && storageAccountNameValue.Type != JTokenType.Null)
-                                            {
-                                                string storageAccountNameInstance = ((string)storageAccountNameValue);
-                                                activeStorageAccountInstance.StorageAccountName = storageAccountNameInstance;
-                                            }
-                                            
-                                            JToken subscriptionIdValue = activeStorageAccountValue["subscriptionId"];
-                                            if (subscriptionIdValue != null && subscriptionIdValue.Type != JTokenType.Null)
-                                            {
-                                                string subscriptionIdInstance = ((string)subscriptionIdValue);
-                                                activeStorageAccountInstance.SubscriptionId = subscriptionIdInstance;
-                                            }
+                                            string activeStorageAccountIdInstance = ((string)activeStorageAccountIdValue);
+                                            hyperVReplicaAzurePolicyDetailsInstance.ActiveStorageAccountId = activeStorageAccountIdInstance;
                                         }
                                         
                                         JToken typeValue2 = providerSpecificDetailsValue["__type"];
@@ -1303,7 +1277,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         }
                                         propertiesInstance.ProviderSpecificDetails = hyperVReplicaAzurePolicyDetailsInstance;
                                     }
-                                    if (typeName == "VMwareAzureV2PolicyDetails")
+                                    if (typeName == "VMwareAzureV2")
                                     {
                                         VMwareAzureV2PolicyDetails vMwareAzureV2PolicyDetailsInstance = new VMwareAzureV2PolicyDetails();
                                         
@@ -1537,18 +1511,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.FriendlyName = friendlyNameInstance;
                                 }
                                 
-                                JToken replicationProviderValue = propertiesValue["replicationProvider"];
-                                if (replicationProviderValue != null && replicationProviderValue.Type != JTokenType.Null)
-                                {
-                                    string replicationProviderInstance = ((string)replicationProviderValue);
-                                    propertiesInstance.ReplicationProvider = replicationProviderInstance;
-                                }
-                                
                                 JToken providerSpecificDetailsValue = propertiesValue["providerSpecificDetails"];
                                 if (providerSpecificDetailsValue != null && providerSpecificDetailsValue.Type != JTokenType.Null)
                                 {
                                     string typeName = ((string)providerSpecificDetailsValue["__type"]);
-                                    if (typeName == "HyperVReplicaPolicyDetails")
+                                    if (typeName == "HyperVReplica")
                                     {
                                         HyperVReplicaPolicyDetails hyperVReplicaPolicyDetailsInstance = new HyperVReplicaPolicyDetails();
                                         
@@ -1637,7 +1604,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         }
                                         propertiesInstance.ProviderSpecificDetails = hyperVReplicaPolicyDetailsInstance;
                                     }
-                                    if (typeName == "HyperVReplicaAzurePolicyDetails")
+                                    if (typeName == "HyperVReplicaAzure")
                                     {
                                         HyperVReplicaAzurePolicyDetails hyperVReplicaAzurePolicyDetailsInstance = new HyperVReplicaAzurePolicyDetails();
                                         
@@ -1676,25 +1643,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             hyperVReplicaAzurePolicyDetailsInstance.Encryption = encryptionInstance;
                                         }
                                         
-                                        JToken activeStorageAccountValue = providerSpecificDetailsValue["activeStorageAccount"];
-                                        if (activeStorageAccountValue != null && activeStorageAccountValue.Type != JTokenType.Null)
+                                        JToken activeStorageAccountIdValue = providerSpecificDetailsValue["activeStorageAccountId"];
+                                        if (activeStorageAccountIdValue != null && activeStorageAccountIdValue.Type != JTokenType.Null)
                                         {
-                                            CustomerStorageAccount activeStorageAccountInstance = new CustomerStorageAccount();
-                                            hyperVReplicaAzurePolicyDetailsInstance.ActiveStorageAccount = activeStorageAccountInstance;
-                                            
-                                            JToken storageAccountNameValue = activeStorageAccountValue["storageAccountName"];
-                                            if (storageAccountNameValue != null && storageAccountNameValue.Type != JTokenType.Null)
-                                            {
-                                                string storageAccountNameInstance = ((string)storageAccountNameValue);
-                                                activeStorageAccountInstance.StorageAccountName = storageAccountNameInstance;
-                                            }
-                                            
-                                            JToken subscriptionIdValue = activeStorageAccountValue["subscriptionId"];
-                                            if (subscriptionIdValue != null && subscriptionIdValue.Type != JTokenType.Null)
-                                            {
-                                                string subscriptionIdInstance = ((string)subscriptionIdValue);
-                                                activeStorageAccountInstance.SubscriptionId = subscriptionIdInstance;
-                                            }
+                                            string activeStorageAccountIdInstance = ((string)activeStorageAccountIdValue);
+                                            hyperVReplicaAzurePolicyDetailsInstance.ActiveStorageAccountId = activeStorageAccountIdInstance;
                                         }
                                         
                                         JToken typeValue2 = providerSpecificDetailsValue["__type"];
@@ -1705,7 +1658,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         }
                                         propertiesInstance.ProviderSpecificDetails = hyperVReplicaAzurePolicyDetailsInstance;
                                     }
-                                    if (typeName == "VMwareAzureV2PolicyDetails")
+                                    if (typeName == "VMwareAzureV2")
                                     {
                                         VMwareAzureV2PolicyDetails vMwareAzureV2PolicyDetailsInstance = new VMwareAzureV2PolicyDetails();
                                         
@@ -2026,11 +1979,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     {
                         result.Status = OperationStatus.InProgress;
                     }
-                    if (statusCode == HttpStatusCode.OK)
+                    if (statusCode == HttpStatusCode.NoContent)
                     {
                         result.Status = OperationStatus.Succeeded;
                     }
-                    if (statusCode == HttpStatusCode.NoContent)
+                    if (statusCode == HttpStatusCode.OK)
                     {
                         result.Status = OperationStatus.Succeeded;
                     }
@@ -2172,18 +2125,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.FriendlyName = friendlyNameInstance;
                                 }
                                 
-                                JToken replicationProviderValue = propertiesValue["replicationProvider"];
-                                if (replicationProviderValue != null && replicationProviderValue.Type != JTokenType.Null)
-                                {
-                                    string replicationProviderInstance = ((string)replicationProviderValue);
-                                    propertiesInstance.ReplicationProvider = replicationProviderInstance;
-                                }
-                                
                                 JToken providerSpecificDetailsValue = propertiesValue["providerSpecificDetails"];
                                 if (providerSpecificDetailsValue != null && providerSpecificDetailsValue.Type != JTokenType.Null)
                                 {
                                     string typeName = ((string)providerSpecificDetailsValue["__type"]);
-                                    if (typeName == "HyperVReplicaPolicyDetails")
+                                    if (typeName == "HyperVReplica")
                                     {
                                         HyperVReplicaPolicyDetails hyperVReplicaPolicyDetailsInstance = new HyperVReplicaPolicyDetails();
                                         
@@ -2272,7 +2218,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         }
                                         propertiesInstance.ProviderSpecificDetails = hyperVReplicaPolicyDetailsInstance;
                                     }
-                                    if (typeName == "HyperVReplicaAzurePolicyDetails")
+                                    if (typeName == "HyperVReplicaAzure")
                                     {
                                         HyperVReplicaAzurePolicyDetails hyperVReplicaAzurePolicyDetailsInstance = new HyperVReplicaAzurePolicyDetails();
                                         
@@ -2311,25 +2257,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             hyperVReplicaAzurePolicyDetailsInstance.Encryption = encryptionInstance;
                                         }
                                         
-                                        JToken activeStorageAccountValue = providerSpecificDetailsValue["activeStorageAccount"];
-                                        if (activeStorageAccountValue != null && activeStorageAccountValue.Type != JTokenType.Null)
+                                        JToken activeStorageAccountIdValue = providerSpecificDetailsValue["activeStorageAccountId"];
+                                        if (activeStorageAccountIdValue != null && activeStorageAccountIdValue.Type != JTokenType.Null)
                                         {
-                                            CustomerStorageAccount activeStorageAccountInstance = new CustomerStorageAccount();
-                                            hyperVReplicaAzurePolicyDetailsInstance.ActiveStorageAccount = activeStorageAccountInstance;
-                                            
-                                            JToken storageAccountNameValue = activeStorageAccountValue["storageAccountName"];
-                                            if (storageAccountNameValue != null && storageAccountNameValue.Type != JTokenType.Null)
-                                            {
-                                                string storageAccountNameInstance = ((string)storageAccountNameValue);
-                                                activeStorageAccountInstance.StorageAccountName = storageAccountNameInstance;
-                                            }
-                                            
-                                            JToken subscriptionIdValue = activeStorageAccountValue["subscriptionId"];
-                                            if (subscriptionIdValue != null && subscriptionIdValue.Type != JTokenType.Null)
-                                            {
-                                                string subscriptionIdInstance = ((string)subscriptionIdValue);
-                                                activeStorageAccountInstance.SubscriptionId = subscriptionIdInstance;
-                                            }
+                                            string activeStorageAccountIdInstance = ((string)activeStorageAccountIdValue);
+                                            hyperVReplicaAzurePolicyDetailsInstance.ActiveStorageAccountId = activeStorageAccountIdInstance;
                                         }
                                         
                                         JToken typeValue2 = providerSpecificDetailsValue["__type"];
@@ -2340,7 +2272,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         }
                                         propertiesInstance.ProviderSpecificDetails = hyperVReplicaAzurePolicyDetailsInstance;
                                     }
-                                    if (typeName == "VMwareAzureV2PolicyDetails")
+                                    if (typeName == "VMwareAzureV2")
                                     {
                                         VMwareAzureV2PolicyDetails vMwareAzureV2PolicyDetailsInstance = new VMwareAzureV2PolicyDetails();
                                         
@@ -2653,18 +2585,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             propertiesInstance.FriendlyName = friendlyNameInstance;
                                         }
                                         
-                                        JToken replicationProviderValue = propertiesValue["replicationProvider"];
-                                        if (replicationProviderValue != null && replicationProviderValue.Type != JTokenType.Null)
-                                        {
-                                            string replicationProviderInstance = ((string)replicationProviderValue);
-                                            propertiesInstance.ReplicationProvider = replicationProviderInstance;
-                                        }
-                                        
                                         JToken providerSpecificDetailsValue = propertiesValue["providerSpecificDetails"];
                                         if (providerSpecificDetailsValue != null && providerSpecificDetailsValue.Type != JTokenType.Null)
                                         {
                                             string typeName = ((string)providerSpecificDetailsValue["__type"]);
-                                            if (typeName == "HyperVReplicaPolicyDetails")
+                                            if (typeName == "HyperVReplica")
                                             {
                                                 HyperVReplicaPolicyDetails hyperVReplicaPolicyDetailsInstance = new HyperVReplicaPolicyDetails();
                                                 
@@ -2753,7 +2678,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 }
                                                 propertiesInstance.ProviderSpecificDetails = hyperVReplicaPolicyDetailsInstance;
                                             }
-                                            if (typeName == "HyperVReplicaAzurePolicyDetails")
+                                            if (typeName == "HyperVReplicaAzure")
                                             {
                                                 HyperVReplicaAzurePolicyDetails hyperVReplicaAzurePolicyDetailsInstance = new HyperVReplicaAzurePolicyDetails();
                                                 
@@ -2792,25 +2717,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     hyperVReplicaAzurePolicyDetailsInstance.Encryption = encryptionInstance;
                                                 }
                                                 
-                                                JToken activeStorageAccountValue = providerSpecificDetailsValue["activeStorageAccount"];
-                                                if (activeStorageAccountValue != null && activeStorageAccountValue.Type != JTokenType.Null)
+                                                JToken activeStorageAccountIdValue = providerSpecificDetailsValue["activeStorageAccountId"];
+                                                if (activeStorageAccountIdValue != null && activeStorageAccountIdValue.Type != JTokenType.Null)
                                                 {
-                                                    CustomerStorageAccount activeStorageAccountInstance = new CustomerStorageAccount();
-                                                    hyperVReplicaAzurePolicyDetailsInstance.ActiveStorageAccount = activeStorageAccountInstance;
-                                                    
-                                                    JToken storageAccountNameValue = activeStorageAccountValue["storageAccountName"];
-                                                    if (storageAccountNameValue != null && storageAccountNameValue.Type != JTokenType.Null)
-                                                    {
-                                                        string storageAccountNameInstance = ((string)storageAccountNameValue);
-                                                        activeStorageAccountInstance.StorageAccountName = storageAccountNameInstance;
-                                                    }
-                                                    
-                                                    JToken subscriptionIdValue = activeStorageAccountValue["subscriptionId"];
-                                                    if (subscriptionIdValue != null && subscriptionIdValue.Type != JTokenType.Null)
-                                                    {
-                                                        string subscriptionIdInstance = ((string)subscriptionIdValue);
-                                                        activeStorageAccountInstance.SubscriptionId = subscriptionIdInstance;
-                                                    }
+                                                    string activeStorageAccountIdInstance = ((string)activeStorageAccountIdValue);
+                                                    hyperVReplicaAzurePolicyDetailsInstance.ActiveStorageAccountId = activeStorageAccountIdInstance;
                                                 }
                                                 
                                                 JToken typeValue2 = providerSpecificDetailsValue["__type"];
@@ -2821,7 +2732,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 }
                                                 propertiesInstance.ProviderSpecificDetails = hyperVReplicaAzurePolicyDetailsInstance;
                                             }
-                                            if (typeName == "VMwareAzureV2PolicyDetails")
+                                            if (typeName == "VMwareAzureV2")
                                             {
                                                 VMwareAzureV2PolicyDetails vMwareAzureV2PolicyDetailsInstance = new VMwareAzureV2PolicyDetails();
                                                 

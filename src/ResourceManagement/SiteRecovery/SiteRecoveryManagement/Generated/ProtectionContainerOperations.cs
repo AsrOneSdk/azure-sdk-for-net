@@ -832,6 +832,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.PairingStatus = pairingStatusInstance;
                                 }
                                 
+                                JToken roleValue = propertiesValue["role"];
+                                if (roleValue != null && roleValue.Type != JTokenType.Null)
+                                {
+                                    string roleInstance = ((string)roleValue);
+                                    propertiesInstance.Role = roleInstance;
+                                }
+                                
                                 JToken fabricConfigurationSettingsValue = propertiesValue["fabricConfigurationSettings"];
                                 if (fabricConfigurationSettingsValue != null && fabricConfigurationSettingsValue.Type != JTokenType.Null)
                                 {
@@ -1050,6 +1057,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 {
                                     string pairingStatusInstance = ((string)pairingStatusValue);
                                     propertiesInstance.PairingStatus = pairingStatusInstance;
+                                }
+                                
+                                JToken roleValue = propertiesValue["role"];
+                                if (roleValue != null && roleValue.Type != JTokenType.Null)
+                                {
+                                    string roleInstance = ((string)roleValue);
+                                    propertiesInstance.Role = roleInstance;
                                 }
                                 
                                 JToken fabricConfigurationSettingsValue = propertiesValue["fabricConfigurationSettings"];
@@ -1539,6 +1553,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             string pairingStatusInstance = ((string)pairingStatusValue);
                                             propertiesInstance.PairingStatus = pairingStatusInstance;
+                                        }
+                                        
+                                        JToken roleValue = propertiesValue["role"];
+                                        if (roleValue != null && roleValue.Type != JTokenType.Null)
+                                        {
+                                            string roleInstance = ((string)roleValue);
+                                            propertiesInstance.Role = roleInstance;
                                         }
                                         
                                         JToken fabricConfigurationSettingsValue = propertiesValue["fabricConfigurationSettings"];

@@ -96,6 +96,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._protectedItemCount = value; }
         }
         
+        private string _role;
+        
+        /// <summary>
+        /// Optional. Gets or sets the pairing role of this cloud.
+        /// </summary>
+        public string Role
+        {
+            get { return this._role; }
+            set { this._role = value; }
+        }
+        
         /// <summary>
         /// Initializes a new instance of the ProtectionContainerProperties
         /// class.
