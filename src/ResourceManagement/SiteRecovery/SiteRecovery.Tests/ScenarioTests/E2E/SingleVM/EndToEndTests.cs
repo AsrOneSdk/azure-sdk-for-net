@@ -353,10 +353,10 @@ namespace SiteRecovery.Tests
                 context.Start();
                 var client = GetSiteRecoveryClient(CustomHttpHandler);
 
-                bool createPolicy = false;
-                bool pairClouds = false;
-                bool enableDR = false;
-                bool pfo = false;
+                bool createPolicy = true;
+                bool pairClouds = true;
+                bool enableDR = true;
+                bool pfo = true;
                 bool commit = true;
                 bool tfo = true;
                 bool pfoReverse = true;
@@ -369,11 +369,11 @@ namespace SiteRecovery.Tests
                 // Process Variables
                 string fabricName = string.Empty;
                 string recCldName = "Microsoft Azure";
-                string priCldName = "4f94127d-2eb3-449d-a708-250752e93cb4";// string.Empty;
-                string policyName = "Hydra2001547463780"; // "Hydra200" + (new Random()).Next();
-                string mappingName = "Mapping1547463780";// "Mapping" + (new Random()).Next();
-                string enableDRName = "E2ECld1VM1";// string.Empty;
-                string protectedItemName = "PE1547463780";// "PE" + (new Random()).Next();
+                string priCldName = string.Empty;
+                string policyName = "Hydra200" + (new Random()).Next();
+                string mappingName = "Mapping" + (new Random()).Next();
+                string enableDRName = string.Empty;
+                string protectedItemName = "PE" + (new Random()).Next();
 
                 // Data Variables
                 Fabric selectedFabric = null;
@@ -485,13 +485,13 @@ namespace SiteRecovery.Tests
                         protectableItem = client.ProtectableItem.Get(selectedFabric.Name, primaryCloud.Name, enableDRName, RequestHeaders).ProtectableItem;
                     }
 
-                    AzureEnableProtectionInput hvrAEnableDRInput = new AzureEnableProtectionInput()
+                    HyperVReplicaAzureEnableProtectionInput hvrAEnableDRInput = new HyperVReplicaAzureEnableProtectionInput()
                     {
                         HvHostVmId = (protectableItem.Properties.CustomDetails as HyperVVirtualMachineDetails).SourceItemId,
                         OSType = "Windows",
-                        VHDId = (protectableItem.Properties.CustomDetails as HyperVVirtualMachineDetails).DiskDetailsList[0].VhdId,
+                        VhdId = (protectableItem.Properties.CustomDetails as HyperVVirtualMachineDetails).DiskDetailsList[0].VhdId,
                         VmName = protectableItem.Properties.FriendlyName,
-                        StorageAccountId = "/subscriptions/19b823e2-d1f3-4805-93d7-401c5d8230d5/resourceGroups/Default-Storage-WestUS/providers/Microsoft.ClassicStorage/storageAccounts/bvtmapped2storacc",
+                        TargetStorageAccountId = "/subscriptions/19b823e2-d1f3-4805-93d7-401c5d8230d5/resourceGroups/Default-Storage-WestUS/providers/Microsoft.ClassicStorage/storageAccounts/bvtmapped2storacc",
                     };
 
                     EnableProtectionInputProperties enableDRProp = new EnableProtectionInputProperties()
@@ -797,13 +797,13 @@ namespace SiteRecovery.Tests
                         protectableItem = client.ProtectableItem.Get(selectedFabric.Name, primaryCloud.Name, enableDRName, RequestHeaders).ProtectableItem;
                     }
 
-                    AzureEnableProtectionInput hvrAEnableDRInput = new AzureEnableProtectionInput()
+                    HyperVReplicaAzureEnableProtectionInput hvrAEnableDRInput = new HyperVReplicaAzureEnableProtectionInput()
                     {
                         HvHostVmId = (protectableItem.Properties.CustomDetails as HyperVVirtualMachineDetails).SourceItemId,
                         OSType = "Windows",
-                        VHDId = (protectableItem.Properties.CustomDetails as HyperVVirtualMachineDetails).DiskDetailsList[0].VhdId,
+                        VhdId = (protectableItem.Properties.CustomDetails as HyperVVirtualMachineDetails).DiskDetailsList[0].VhdId,
                         VmName = protectableItem.Properties.FriendlyName,
-                        StorageAccountId = "/subscriptions/19b823e2-d1f3-4805-93d7-401c5d8230d5/resourceGroups/Default-Storage-WestUS/providers/Microsoft.ClassicStorage/storageAccounts/bvtmapped2storacc",
+                        TargetStorageAccountId = "/subscriptions/19b823e2-d1f3-4805-93d7-401c5d8230d5/resourceGroups/Default-Storage-WestUS/providers/Microsoft.ClassicStorage/storageAccounts/bvtmapped2storacc",
                     };
 
                     EnableProtectionInputProperties enableDRProp = new EnableProtectionInputProperties()

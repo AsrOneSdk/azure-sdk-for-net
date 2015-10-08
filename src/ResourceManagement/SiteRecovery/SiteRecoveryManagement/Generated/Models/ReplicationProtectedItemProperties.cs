@@ -210,15 +210,15 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._recoveryProtectionContainerFriendlyName = value; }
         }
         
-        private string _recoveryServicesProviderName;
+        private string _recoveryServicesProviderId;
         
         /// <summary>
         /// Optional. Gets or sets the recovery provider name.
         /// </summary>
-        public string RecoveryServicesProviderName
+        public string RecoveryServicesProviderId
         {
-            get { return this._recoveryServicesProviderName; }
-            set { this._recoveryServicesProviderName = value; }
+            get { return this._recoveryServicesProviderId; }
+            set { this._recoveryServicesProviderId = value; }
         }
         
         private string _replicationHealth;
