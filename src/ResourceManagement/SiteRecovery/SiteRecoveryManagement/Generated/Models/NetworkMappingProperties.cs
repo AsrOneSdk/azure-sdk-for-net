@@ -40,6 +40,28 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._pairingStatus = value; }
         }
         
+        private string _primaryNetworkFriendlyName;
+        
+        /// <summary>
+        /// Optional. Friendly name of the primary network.
+        /// </summary>
+        public string PrimaryNetworkFriendlyName
+        {
+            get { return this._primaryNetworkFriendlyName; }
+            set { this._primaryNetworkFriendlyName = value; }
+        }
+        
+        private string _recoveryNetworkFriendlyName;
+        
+        /// <summary>
+        /// Optional. Friendly name of the recovery network.
+        /// </summary>
+        public string RecoveryNetworkFriendlyName
+        {
+            get { return this._recoveryNetworkFriendlyName; }
+            set { this._recoveryNetworkFriendlyName = value; }
+        }
+        
         private string _recoveryNetworkId;
         
         /// <summary>

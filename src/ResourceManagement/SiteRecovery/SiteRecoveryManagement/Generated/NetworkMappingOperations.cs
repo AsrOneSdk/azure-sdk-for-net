@@ -764,6 +764,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.PairingStatus = stateInstance;
                                 }
                                 
+                                JToken primaryNetworkFriendlyNameValue = propertiesValue["primaryNetworkFriendlyName"];
+                                if (primaryNetworkFriendlyNameValue != null && primaryNetworkFriendlyNameValue.Type != JTokenType.Null)
+                                {
+                                    string primaryNetworkFriendlyNameInstance = ((string)primaryNetworkFriendlyNameValue);
+                                    propertiesInstance.PrimaryNetworkFriendlyName = primaryNetworkFriendlyNameInstance;
+                                }
+                                
+                                JToken recoveryNetworkFriendlyNameValue = propertiesValue["recoveryNetworkFriendlyName"];
+                                if (recoveryNetworkFriendlyNameValue != null && recoveryNetworkFriendlyNameValue.Type != JTokenType.Null)
+                                {
+                                    string recoveryNetworkFriendlyNameInstance = ((string)recoveryNetworkFriendlyNameValue);
+                                    propertiesInstance.RecoveryNetworkFriendlyName = recoveryNetworkFriendlyNameInstance;
+                                }
+                                
                                 JToken recoveryNetworkIdValue = propertiesValue["recoveryNetworkId"];
                                 if (recoveryNetworkIdValue != null && recoveryNetworkIdValue.Type != JTokenType.Null)
                                 {
@@ -983,6 +997,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             propertiesInstance.PairingStatus = stateInstance;
                                         }
                                         
+                                        JToken primaryNetworkFriendlyNameValue = propertiesValue["primaryNetworkFriendlyName"];
+                                        if (primaryNetworkFriendlyNameValue != null && primaryNetworkFriendlyNameValue.Type != JTokenType.Null)
+                                        {
+                                            string primaryNetworkFriendlyNameInstance = ((string)primaryNetworkFriendlyNameValue);
+                                            propertiesInstance.PrimaryNetworkFriendlyName = primaryNetworkFriendlyNameInstance;
+                                        }
+                                        
+                                        JToken recoveryNetworkFriendlyNameValue = propertiesValue["recoveryNetworkFriendlyName"];
+                                        if (recoveryNetworkFriendlyNameValue != null && recoveryNetworkFriendlyNameValue.Type != JTokenType.Null)
+                                        {
+                                            string recoveryNetworkFriendlyNameInstance = ((string)recoveryNetworkFriendlyNameValue);
+                                            propertiesInstance.RecoveryNetworkFriendlyName = recoveryNetworkFriendlyNameInstance;
+                                        }
+                                        
                                         JToken recoveryNetworkIdValue = propertiesValue["recoveryNetworkId"];
                                         if (recoveryNetworkIdValue != null && recoveryNetworkIdValue.Type != JTokenType.Null)
                                         {
@@ -1182,6 +1210,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 {
                                     string stateInstance = ((string)stateValue);
                                     propertiesInstance.PairingStatus = stateInstance;
+                                }
+                                
+                                JToken primaryNetworkFriendlyNameValue = propertiesValue["primaryNetworkFriendlyName"];
+                                if (primaryNetworkFriendlyNameValue != null && primaryNetworkFriendlyNameValue.Type != JTokenType.Null)
+                                {
+                                    string primaryNetworkFriendlyNameInstance = ((string)primaryNetworkFriendlyNameValue);
+                                    propertiesInstance.PrimaryNetworkFriendlyName = primaryNetworkFriendlyNameInstance;
+                                }
+                                
+                                JToken recoveryNetworkFriendlyNameValue = propertiesValue["recoveryNetworkFriendlyName"];
+                                if (recoveryNetworkFriendlyNameValue != null && recoveryNetworkFriendlyNameValue.Type != JTokenType.Null)
+                                {
+                                    string recoveryNetworkFriendlyNameInstance = ((string)recoveryNetworkFriendlyNameValue);
+                                    propertiesInstance.RecoveryNetworkFriendlyName = recoveryNetworkFriendlyNameInstance;
                                 }
                                 
                                 JToken recoveryNetworkIdValue = propertiesValue["recoveryNetworkId"];
@@ -1654,6 +1696,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             string stateInstance = ((string)stateValue);
                                             propertiesInstance.PairingStatus = stateInstance;
+                                        }
+                                        
+                                        JToken primaryNetworkFriendlyNameValue = propertiesValue["primaryNetworkFriendlyName"];
+                                        if (primaryNetworkFriendlyNameValue != null && primaryNetworkFriendlyNameValue.Type != JTokenType.Null)
+                                        {
+                                            string primaryNetworkFriendlyNameInstance = ((string)primaryNetworkFriendlyNameValue);
+                                            propertiesInstance.PrimaryNetworkFriendlyName = primaryNetworkFriendlyNameInstance;
+                                        }
+                                        
+                                        JToken recoveryNetworkFriendlyNameValue = propertiesValue["recoveryNetworkFriendlyName"];
+                                        if (recoveryNetworkFriendlyNameValue != null && recoveryNetworkFriendlyNameValue.Type != JTokenType.Null)
+                                        {
+                                            string recoveryNetworkFriendlyNameInstance = ((string)recoveryNetworkFriendlyNameValue);
+                                            propertiesInstance.RecoveryNetworkFriendlyName = recoveryNetworkFriendlyNameInstance;
                                         }
                                         
                                         JToken recoveryNetworkIdValue = propertiesValue["recoveryNetworkId"];
