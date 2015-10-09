@@ -21,52 +21,63 @@
 
 using System;
 using System.Linq;
-using Microsoft.Azure.Management.RecoveryServices.Models;
 
 namespace Microsoft.Azure.Management.RecoveryServices.Models
 {
     /// <summary>
-    /// The definition of a cloud service object.
+    /// Resource Extended info properties.
     /// </summary>
-    public partial class VaultCreateArgs
+    public partial class ResourceExtendedInfoProperties
     {
-        private string _location;
+        private string _algorithm;
         
         /// <summary>
-        /// Optional. Label for the vault
+        /// Optional. Algorithm.
         /// </summary>
-        public string Location
+        public string Algorithm
         {
-            get { return this._location; }
-            set { this._location = value; }
+            get { return this._algorithm; }
+            set { this._algorithm = value; }
         }
         
-        private VaultProperties _properties;
+        private string _encryptionKey;
         
         /// <summary>
-        /// Optional. properties
+        /// Optional. Encryption  key.
         /// </summary>
-        public VaultProperties Properties
+        public string EncryptionKey
         {
-            get { return this._properties; }
-            set { this._properties = value; }
+            get { return this._encryptionKey; }
+            set { this._encryptionKey = value; }
         }
         
-        private VaultSku _sku;
+        private string _encryptionKeyThumbprint;
         
         /// <summary>
-        /// Optional. Sku
+        /// Optional. Encryption key thumbprint.
         /// </summary>
-        public VaultSku Sku
+        public string EncryptionKeyThumbprint
         {
-            get { return this._sku; }
-            set { this._sku = value; }
+            get { return this._encryptionKeyThumbprint; }
+            set { this._encryptionKeyThumbprint = value; }
+        }
+        
+        private string _integrityKey;
+        
+        /// <summary>
+        /// Optional. Integrity key.
+        /// </summary>
+        public string IntegrityKey
+        {
+            get { return this._integrityKey; }
+            set { this._integrityKey = value; }
         }
         
         /// <summary>
-        /// Initializes a new instance of the VaultCreateArgs class.
+        /// Initializes a new instance of the ResourceExtendedInfoProperties
+        /// class.
         /// </summary>
-        public VaultCreateArgs()
+        public ResourceExtendedInfoProperties()
         {
         }
     }

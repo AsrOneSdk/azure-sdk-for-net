@@ -21,6 +21,7 @@
 
 using System;
 using System.Linq;
+using Microsoft.Azure.Management.RecoveryServices.Models;
 
 namespace Microsoft.Azure.Management.RecoveryServices.Models
 {
@@ -29,37 +30,15 @@ namespace Microsoft.Azure.Management.RecoveryServices.Models
     /// </summary>
     public partial class ResourceExtendedInformationArgs
     {
-        private string _contractVersion;
+        private ResourceExtendedInfoProperties _properties;
         
         /// <summary>
         /// Required. Contract version for the entity.
         /// </summary>
-        public string ContractVersion
+        public ResourceExtendedInfoProperties Properties
         {
-            get { return this._contractVersion; }
-            set { this._contractVersion = value; }
-        }
-        
-        private string _extendedInfo;
-        
-        /// <summary>
-        /// Required. Serialized blob for the extended info
-        /// </summary>
-        public string ExtendedInfo
-        {
-            get { return this._extendedInfo; }
-            set { this._extendedInfo = value; }
-        }
-        
-        private string _extendedInfoETag;
-        
-        /// <summary>
-        /// Required. ETag for the request
-        /// </summary>
-        public string ExtendedInfoETag
-        {
-            get { return this._extendedInfoETag; }
-            set { this._extendedInfoETag = value; }
+            get { return this._properties; }
+            set { this._properties = value; }
         }
         
         /// <summary>
@@ -74,24 +53,14 @@ namespace Microsoft.Azure.Management.RecoveryServices.Models
         /// Initializes a new instance of the ResourceExtendedInformationArgs
         /// class with required arguments.
         /// </summary>
-        public ResourceExtendedInformationArgs(string contractVersion, string extendedInfo, string extendedInfoETag)
+        public ResourceExtendedInformationArgs(ResourceExtendedInfoProperties properties)
             : this()
         {
-            if (contractVersion == null)
+            if (properties == null)
             {
-                throw new ArgumentNullException("contractVersion");
+                throw new ArgumentNullException("properties");
             }
-            if (extendedInfo == null)
-            {
-                throw new ArgumentNullException("extendedInfo");
-            }
-            if (extendedInfoETag == null)
-            {
-                throw new ArgumentNullException("extendedInfoETag");
-            }
-            this.ContractVersion = contractVersion;
-            this.ExtendedInfo = extendedInfo;
-            this.ExtendedInfoETag = extendedInfoETag;
+            this.Properties = properties;
         }
     }
 }

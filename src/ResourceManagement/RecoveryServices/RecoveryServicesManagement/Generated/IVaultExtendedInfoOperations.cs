@@ -87,29 +87,6 @@ namespace Microsoft.Azure.Management.RecoveryServices
         /// <param name='resourceName'>
         /// The name of the resource.
         /// </param>
-        /// <param name='extendedInfoArgs'>
-        /// Update resource exnteded info input parameters.
-        /// </param>
-        /// <param name='customRequestHeaders'>
-        /// Request header parameters.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// Cancellation token.
-        /// </param>
-        /// <returns>
-        /// The response model for the resource extended information object
-        /// </returns>
-        Task<ResourceExtendedInformationResponse> UpdateExtendedInfoAsync(string resourceGroupName, string resourceName, ResourceExtendedInformationArgs extendedInfoArgs, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
-        
-        /// <summary>
-        /// Get the vault extended info.
-        /// </summary>
-        /// <param name='resourceGroupName'>
-        /// The name of the resource group containing the job collection.
-        /// </param>
-        /// <param name='resourceName'>
-        /// The name of the resource.
-        /// </param>
         /// <param name='parameters'>
         /// Upload Vault Certificate input parameters.
         /// </param>

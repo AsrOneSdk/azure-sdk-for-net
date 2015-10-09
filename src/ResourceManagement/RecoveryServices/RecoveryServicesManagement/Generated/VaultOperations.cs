@@ -167,31 +167,31 @@ namespace Microsoft.Azure.Management.RecoveryServices
                 JObject resourceValue = new JObject();
                 requestDoc = resourceValue;
                 
+                if (vaultCreationInput.Location != null)
+                {
+                    resourceValue["location"] = vaultCreationInput.Location;
+                }
+                
+                if (vaultCreationInput.Sku != null)
+                {
+                    JObject skuValue = new JObject();
+                    resourceValue["sku"] = skuValue;
+                    
+                    if (vaultCreationInput.Sku.Name != null)
+                    {
+                        skuValue["name"] = vaultCreationInput.Sku.Name;
+                    }
+                }
+                
                 if (vaultCreationInput.Properties != null)
                 {
                     JObject propertiesValue = new JObject();
                     resourceValue["properties"] = propertiesValue;
                     
-                    if (vaultCreationInput.Properties.Sku != null)
-                    {
-                        JObject skuValue = new JObject();
-                        propertiesValue["sku"] = skuValue;
-                        
-                        if (vaultCreationInput.Properties.Sku.Name != null)
-                        {
-                            skuValue["name"] = vaultCreationInput.Properties.Sku.Name;
-                        }
-                    }
-                    
                     if (vaultCreationInput.Properties.ProvisioningState != null)
                     {
                         propertiesValue["provisioningState"] = vaultCreationInput.Properties.ProvisioningState;
                     }
-                }
-                
-                if (vaultCreationInput.Location != null)
-                {
-                    resourceValue["location"] = vaultCreationInput.Location;
                 }
                 
                 requestContent = requestDoc.ToString(Newtonsoft.Json.Formatting.Indented);
@@ -284,20 +284,6 @@ namespace Microsoft.Azure.Management.RecoveryServices
                             {
                                 VaultProperties propertiesInstance = new VaultProperties();
                                 result.Properties = propertiesInstance;
-                                
-                                JToken skuValue2 = propertiesValue2["sku"];
-                                if (skuValue2 != null && skuValue2.Type != JTokenType.Null)
-                                {
-                                    VaultSku skuInstance = new VaultSku();
-                                    propertiesInstance.Sku = skuInstance;
-                                    
-                                    JToken nameValue2 = skuValue2["name"];
-                                    if (nameValue2 != null && nameValue2.Type != JTokenType.Null)
-                                    {
-                                        string nameInstance2 = ((string)nameValue2);
-                                        skuInstance.Name = nameInstance2;
-                                    }
-                                }
                                 
                                 JToken provisioningStateValue = propertiesValue2["provisioningState"];
                                 if (provisioningStateValue != null && provisioningStateValue.Type != JTokenType.Null)
@@ -879,20 +865,6 @@ namespace Microsoft.Azure.Management.RecoveryServices
                                     {
                                         VaultProperties propertiesInstance = new VaultProperties();
                                         vaultInstance.Properties = propertiesInstance;
-                                        
-                                        JToken skuValue = propertiesValue["sku"];
-                                        if (skuValue != null && skuValue.Type != JTokenType.Null)
-                                        {
-                                            VaultSku skuInstance = new VaultSku();
-                                            propertiesInstance.Sku = skuInstance;
-                                            
-                                            JToken nameValue2 = skuValue["name"];
-                                            if (nameValue2 != null && nameValue2.Type != JTokenType.Null)
-                                            {
-                                                string nameInstance2 = ((string)nameValue2);
-                                                skuInstance.Name = nameInstance2;
-                                            }
-                                        }
                                         
                                         JToken provisioningStateValue = propertiesValue["provisioningState"];
                                         if (provisioningStateValue != null && provisioningStateValue.Type != JTokenType.Null)

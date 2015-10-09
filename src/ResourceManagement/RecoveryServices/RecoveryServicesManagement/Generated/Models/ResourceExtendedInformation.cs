@@ -21,89 +21,25 @@
 
 using System;
 using System.Linq;
+using Microsoft.Azure;
+using Microsoft.Azure.Management.RecoveryServices.Models;
 
 namespace Microsoft.Azure.Management.RecoveryServices.Models
 {
     /// <summary>
     /// The definition of a Resource Extended Information object.
     /// </summary>
-    public partial class ResourceExtendedInformation
+    public partial class ResourceExtendedInformation : ResourceBaseExtended
     {
-        private string _extendedInfo;
+        private ResourceExtendedInfoProperties _properties;
         
         /// <summary>
-        /// Optional. Serialized blob of extended info for the vault.
+        /// Optional. Resource extended info properties.
         /// </summary>
-        public string ExtendedInfo
+        public ResourceExtendedInfoProperties Properties
         {
-            get { return this._extendedInfo; }
-            set { this._extendedInfo = value; }
-        }
-        
-        private string _extendedInfoETag;
-        
-        /// <summary>
-        /// Optional. ETag for the vault.
-        /// </summary>
-        public string ExtendedInfoETag
-        {
-            get { return this._extendedInfoETag; }
-            set { this._extendedInfoETag = value; }
-        }
-        
-        private string _resourceGroupName;
-        
-        /// <summary>
-        /// Optional. Resource group name for the vault.
-        /// </summary>
-        public string ResourceGroupName
-        {
-            get { return this._resourceGroupName; }
-            set { this._resourceGroupName = value; }
-        }
-        
-        private long _resourceId;
-        
-        /// <summary>
-        /// Optional. id of the vault.
-        /// </summary>
-        public long ResourceId
-        {
-            get { return this._resourceId; }
-            set { this._resourceId = value; }
-        }
-        
-        private string _resourceName;
-        
-        /// <summary>
-        /// Optional. name of the vault.
-        /// </summary>
-        public string ResourceName
-        {
-            get { return this._resourceName; }
-            set { this._resourceName = value; }
-        }
-        
-        private string _resourceType;
-        
-        /// <summary>
-        /// Optional. Type of the vault.
-        /// </summary>
-        public string ResourceType
-        {
-            get { return this._resourceType; }
-            set { this._resourceType = value; }
-        }
-        
-        private Guid _subscriptionId;
-        
-        /// <summary>
-        /// Optional. subscription id for the vault.
-        /// </summary>
-        public Guid SubscriptionId
-        {
-            get { return this._subscriptionId; }
-            set { this._subscriptionId = value; }
+            get { return this._properties; }
+            set { this._properties = value; }
         }
         
         /// <summary>
@@ -111,6 +47,20 @@ namespace Microsoft.Azure.Management.RecoveryServices.Models
         /// </summary>
         public ResourceExtendedInformation()
         {
+        }
+        
+        /// <summary>
+        /// Initializes a new instance of the ResourceExtendedInformation class
+        /// with required arguments.
+        /// </summary>
+        public ResourceExtendedInformation(string location)
+            : this()
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException("location");
+            }
+            this.Location = location;
         }
     }
 }

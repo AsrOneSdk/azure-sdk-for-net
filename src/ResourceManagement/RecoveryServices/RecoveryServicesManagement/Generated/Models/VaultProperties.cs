@@ -21,7 +21,6 @@
 
 using System;
 using System.Linq;
-using Microsoft.Azure.Management.RecoveryServices.Models;
 
 namespace Microsoft.Azure.Management.RecoveryServices.Models
 {
@@ -39,17 +38,6 @@ namespace Microsoft.Azure.Management.RecoveryServices.Models
         {
             get { return this._provisioningState; }
             set { this._provisioningState = value; }
-        }
-        
-        private VaultSku _sku;
-        
-        /// <summary>
-        /// Optional. Sku
-        /// </summary>
-        public VaultSku Sku
-        {
-            get { return this._sku; }
-            set { this._sku = value; }
         }
         
         /// <summary>
