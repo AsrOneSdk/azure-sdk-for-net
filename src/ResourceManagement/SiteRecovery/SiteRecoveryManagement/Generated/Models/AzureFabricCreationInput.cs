@@ -26,26 +26,25 @@ using Microsoft.Azure.Management.SiteRecovery.Models;
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// The definition of a Fabric creation object properties.
+    /// The Azure enable protection input.
     /// </summary>
-    public partial class FabricCreationInputProperties
+    public partial class AzureFabricCreationInput : FabricSpecificCreationSettings
     {
-        private FabricSpecificCreationSettings _customDetails;
+        private string _location;
         
         /// <summary>
-        /// Optional. Fabric specific creation input
+        /// Optional.
         /// </summary>
-        public FabricSpecificCreationSettings CustomDetails
+        public string Location
         {
-            get { return this._customDetails; }
-            set { this._customDetails = value; }
+            get { return this._location; }
+            set { this._location = value; }
         }
         
         /// <summary>
-        /// Initializes a new instance of the FabricCreationInputProperties
-        /// class.
+        /// Initializes a new instance of the AzureFabricCreationInput class.
         /// </summary>
-        public FabricCreationInputProperties()
+        public AzureFabricCreationInput()
         {
         }
     }

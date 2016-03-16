@@ -174,15 +174,25 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     JObject propertiesValue = new JObject();
                     fabricCreationInputValue["properties"] = propertiesValue;
                     
-                    if (input.Properties.FabricType != null)
-                    {
-                        propertiesValue["fabricType"] = input.Properties.FabricType;
-                    }
-                    
                     if (input.Properties.CustomDetails != null)
                     {
                         JObject customDetailsValue = new JObject();
                         propertiesValue["customDetails"] = customDetailsValue;
+                        if (input.Properties.CustomDetails is AzureFabricCreationInput)
+                        {
+                            customDetailsValue["instanceType"] = "Azure";
+                            AzureFabricCreationInput derived = ((AzureFabricCreationInput)input.Properties.CustomDetails);
+                            
+                            if (derived.Location != null)
+                            {
+                                customDetailsValue["location"] = derived.Location;
+                            }
+                            
+                            if (derived.InstanceType != null)
+                            {
+                                customDetailsValue["instanceType"] = derived.InstanceType;
+                            }
+                        }
                     }
                 }
                 
@@ -1718,6 +1728,25 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         }
                                         propertiesInstance.CustomDetails = hyperVSiteDetailsInstance;
                                     }
+                                    if (typeName == "Azure")
+                                    {
+                                        AzureFabricSpecificDetails azureFabricSpecificDetailsInstance = new AzureFabricSpecificDetails();
+                                        
+                                        JToken locationValue = customDetailsValue["location"];
+                                        if (locationValue != null && locationValue.Type != JTokenType.Null)
+                                        {
+                                            string locationInstance = ((string)locationValue);
+                                            azureFabricSpecificDetailsInstance.Location = locationInstance;
+                                        }
+                                        
+                                        JToken instanceTypeValue3 = customDetailsValue["instanceType"];
+                                        if (instanceTypeValue3 != null && instanceTypeValue3.Type != JTokenType.Null)
+                                        {
+                                            string instanceTypeInstance3 = ((string)instanceTypeValue3);
+                                            azureFabricSpecificDetailsInstance.InstanceType = instanceTypeInstance3;
+                                        }
+                                        propertiesInstance.CustomDetails = azureFabricSpecificDetailsInstance;
+                                    }
                                     if (typeName == "VMware")
                                     {
                                         VMwareFabricDetails vMwareFabricDetailsInstance = new VMwareFabricDetails();
@@ -2237,11 +2266,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareFabricDetailsInstance.VersionStatus = versionStatusInstance3;
                                         }
                                         
-                                        JToken instanceTypeValue3 = customDetailsValue["instanceType"];
-                                        if (instanceTypeValue3 != null && instanceTypeValue3.Type != JTokenType.Null)
+                                        JToken instanceTypeValue4 = customDetailsValue["instanceType"];
+                                        if (instanceTypeValue4 != null && instanceTypeValue4.Type != JTokenType.Null)
                                         {
-                                            string instanceTypeInstance3 = ((string)instanceTypeValue3);
-                                            vMwareFabricDetailsInstance.InstanceType = instanceTypeInstance3;
+                                            string instanceTypeInstance4 = ((string)instanceTypeValue4);
+                                            vMwareFabricDetailsInstance.InstanceType = instanceTypeInstance4;
                                         }
                                         propertiesInstance.CustomDetails = vMwareFabricDetailsInstance;
                                     }
@@ -2269,11 +2298,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 fabricInstance.Type = typeInstance;
                             }
                             
-                            JToken locationValue = responseDoc["location"];
-                            if (locationValue != null && locationValue.Type != JTokenType.Null)
+                            JToken locationValue2 = responseDoc["location"];
+                            if (locationValue2 != null && locationValue2.Type != JTokenType.Null)
                             {
-                                string locationInstance = ((string)locationValue);
-                                fabricInstance.Location = locationInstance;
+                                string locationInstance2 = ((string)locationValue2);
+                                fabricInstance.Location = locationInstance2;
                             }
                             
                             JToken tagsSequenceElement = ((JToken)responseDoc["tags"]);
@@ -2566,6 +2595,25 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         }
                                         propertiesInstance.CustomDetails = hyperVSiteDetailsInstance;
                                     }
+                                    if (typeName == "Azure")
+                                    {
+                                        AzureFabricSpecificDetails azureFabricSpecificDetailsInstance = new AzureFabricSpecificDetails();
+                                        
+                                        JToken locationValue = customDetailsValue["location"];
+                                        if (locationValue != null && locationValue.Type != JTokenType.Null)
+                                        {
+                                            string locationInstance = ((string)locationValue);
+                                            azureFabricSpecificDetailsInstance.Location = locationInstance;
+                                        }
+                                        
+                                        JToken instanceTypeValue3 = customDetailsValue["instanceType"];
+                                        if (instanceTypeValue3 != null && instanceTypeValue3.Type != JTokenType.Null)
+                                        {
+                                            string instanceTypeInstance3 = ((string)instanceTypeValue3);
+                                            azureFabricSpecificDetailsInstance.InstanceType = instanceTypeInstance3;
+                                        }
+                                        propertiesInstance.CustomDetails = azureFabricSpecificDetailsInstance;
+                                    }
                                     if (typeName == "VMware")
                                     {
                                         VMwareFabricDetails vMwareFabricDetailsInstance = new VMwareFabricDetails();
@@ -3085,11 +3133,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareFabricDetailsInstance.VersionStatus = versionStatusInstance3;
                                         }
                                         
-                                        JToken instanceTypeValue3 = customDetailsValue["instanceType"];
-                                        if (instanceTypeValue3 != null && instanceTypeValue3.Type != JTokenType.Null)
+                                        JToken instanceTypeValue4 = customDetailsValue["instanceType"];
+                                        if (instanceTypeValue4 != null && instanceTypeValue4.Type != JTokenType.Null)
                                         {
-                                            string instanceTypeInstance3 = ((string)instanceTypeValue3);
-                                            vMwareFabricDetailsInstance.InstanceType = instanceTypeInstance3;
+                                            string instanceTypeInstance4 = ((string)instanceTypeValue4);
+                                            vMwareFabricDetailsInstance.InstanceType = instanceTypeInstance4;
                                         }
                                         propertiesInstance.CustomDetails = vMwareFabricDetailsInstance;
                                     }
@@ -3117,11 +3165,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 fabricInstance.Type = typeInstance;
                             }
                             
-                            JToken locationValue = responseDoc["location"];
-                            if (locationValue != null && locationValue.Type != JTokenType.Null)
+                            JToken locationValue2 = responseDoc["location"];
+                            if (locationValue2 != null && locationValue2.Type != JTokenType.Null)
                             {
-                                string locationInstance = ((string)locationValue);
-                                fabricInstance.Location = locationInstance;
+                                string locationInstance2 = ((string)locationValue2);
+                                fabricInstance.Location = locationInstance2;
                             }
                             
                             JToken tagsSequenceElement = ((JToken)responseDoc["tags"]);
@@ -3135,11 +3183,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 }
                             }
                             
-                            JToken locationValue2 = responseDoc["Location"];
-                            if (locationValue2 != null && locationValue2.Type != JTokenType.Null)
+                            JToken locationValue3 = responseDoc["Location"];
+                            if (locationValue3 != null && locationValue3.Type != JTokenType.Null)
                             {
-                                string locationInstance2 = ((string)locationValue2);
-                                result.Location = locationInstance2;
+                                string locationInstance3 = ((string)locationValue3);
+                                result.Location = locationInstance3;
                             }
                             
                             JToken retryAfterValue = responseDoc["RetryAfter"];
@@ -3704,6 +3752,25 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         }
                                         propertiesInstance.CustomDetails = hyperVSiteDetailsInstance;
                                     }
+                                    if (typeName == "Azure")
+                                    {
+                                        AzureFabricSpecificDetails azureFabricSpecificDetailsInstance = new AzureFabricSpecificDetails();
+                                        
+                                        JToken locationValue = customDetailsValue["location"];
+                                        if (locationValue != null && locationValue.Type != JTokenType.Null)
+                                        {
+                                            string locationInstance = ((string)locationValue);
+                                            azureFabricSpecificDetailsInstance.Location = locationInstance;
+                                        }
+                                        
+                                        JToken instanceTypeValue3 = customDetailsValue["instanceType"];
+                                        if (instanceTypeValue3 != null && instanceTypeValue3.Type != JTokenType.Null)
+                                        {
+                                            string instanceTypeInstance3 = ((string)instanceTypeValue3);
+                                            azureFabricSpecificDetailsInstance.InstanceType = instanceTypeInstance3;
+                                        }
+                                        propertiesInstance.CustomDetails = azureFabricSpecificDetailsInstance;
+                                    }
                                     if (typeName == "VMware")
                                     {
                                         VMwareFabricDetails vMwareFabricDetailsInstance = new VMwareFabricDetails();
@@ -4223,11 +4290,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareFabricDetailsInstance.VersionStatus = versionStatusInstance3;
                                         }
                                         
-                                        JToken instanceTypeValue3 = customDetailsValue["instanceType"];
-                                        if (instanceTypeValue3 != null && instanceTypeValue3.Type != JTokenType.Null)
+                                        JToken instanceTypeValue4 = customDetailsValue["instanceType"];
+                                        if (instanceTypeValue4 != null && instanceTypeValue4.Type != JTokenType.Null)
                                         {
-                                            string instanceTypeInstance3 = ((string)instanceTypeValue3);
-                                            vMwareFabricDetailsInstance.InstanceType = instanceTypeInstance3;
+                                            string instanceTypeInstance4 = ((string)instanceTypeValue4);
+                                            vMwareFabricDetailsInstance.InstanceType = instanceTypeInstance4;
                                         }
                                         propertiesInstance.CustomDetails = vMwareFabricDetailsInstance;
                                     }
@@ -4255,11 +4322,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 fabricInstance.Type = typeInstance;
                             }
                             
-                            JToken locationValue = responseDoc["location"];
-                            if (locationValue != null && locationValue.Type != JTokenType.Null)
+                            JToken locationValue2 = responseDoc["location"];
+                            if (locationValue2 != null && locationValue2.Type != JTokenType.Null)
                             {
-                                string locationInstance = ((string)locationValue);
-                                fabricInstance.Location = locationInstance;
+                                string locationInstance2 = ((string)locationValue2);
+                                fabricInstance.Location = locationInstance2;
                             }
                             
                             JToken tagsSequenceElement = ((JToken)responseDoc["tags"]);
@@ -4273,11 +4340,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 }
                             }
                             
-                            JToken locationValue2 = responseDoc["Location"];
-                            if (locationValue2 != null && locationValue2.Type != JTokenType.Null)
+                            JToken locationValue3 = responseDoc["Location"];
+                            if (locationValue3 != null && locationValue3.Type != JTokenType.Null)
                             {
-                                string locationInstance2 = ((string)locationValue2);
-                                result.Location = locationInstance2;
+                                string locationInstance3 = ((string)locationValue3);
+                                result.Location = locationInstance3;
                             }
                             
                             JToken retryAfterValue = responseDoc["RetryAfter"];
@@ -4842,6 +4909,25 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         }
                                         propertiesInstance.CustomDetails = hyperVSiteDetailsInstance;
                                     }
+                                    if (typeName == "Azure")
+                                    {
+                                        AzureFabricSpecificDetails azureFabricSpecificDetailsInstance = new AzureFabricSpecificDetails();
+                                        
+                                        JToken locationValue = customDetailsValue["location"];
+                                        if (locationValue != null && locationValue.Type != JTokenType.Null)
+                                        {
+                                            string locationInstance = ((string)locationValue);
+                                            azureFabricSpecificDetailsInstance.Location = locationInstance;
+                                        }
+                                        
+                                        JToken instanceTypeValue3 = customDetailsValue["instanceType"];
+                                        if (instanceTypeValue3 != null && instanceTypeValue3.Type != JTokenType.Null)
+                                        {
+                                            string instanceTypeInstance3 = ((string)instanceTypeValue3);
+                                            azureFabricSpecificDetailsInstance.InstanceType = instanceTypeInstance3;
+                                        }
+                                        propertiesInstance.CustomDetails = azureFabricSpecificDetailsInstance;
+                                    }
                                     if (typeName == "VMware")
                                     {
                                         VMwareFabricDetails vMwareFabricDetailsInstance = new VMwareFabricDetails();
@@ -5361,11 +5447,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareFabricDetailsInstance.VersionStatus = versionStatusInstance3;
                                         }
                                         
-                                        JToken instanceTypeValue3 = customDetailsValue["instanceType"];
-                                        if (instanceTypeValue3 != null && instanceTypeValue3.Type != JTokenType.Null)
+                                        JToken instanceTypeValue4 = customDetailsValue["instanceType"];
+                                        if (instanceTypeValue4 != null && instanceTypeValue4.Type != JTokenType.Null)
                                         {
-                                            string instanceTypeInstance3 = ((string)instanceTypeValue3);
-                                            vMwareFabricDetailsInstance.InstanceType = instanceTypeInstance3;
+                                            string instanceTypeInstance4 = ((string)instanceTypeValue4);
+                                            vMwareFabricDetailsInstance.InstanceType = instanceTypeInstance4;
                                         }
                                         propertiesInstance.CustomDetails = vMwareFabricDetailsInstance;
                                     }
@@ -5393,11 +5479,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 fabricInstance.Type = typeInstance;
                             }
                             
-                            JToken locationValue = responseDoc["location"];
-                            if (locationValue != null && locationValue.Type != JTokenType.Null)
+                            JToken locationValue2 = responseDoc["location"];
+                            if (locationValue2 != null && locationValue2.Type != JTokenType.Null)
                             {
-                                string locationInstance = ((string)locationValue);
-                                fabricInstance.Location = locationInstance;
+                                string locationInstance2 = ((string)locationValue2);
+                                fabricInstance.Location = locationInstance2;
                             }
                             
                             JToken tagsSequenceElement = ((JToken)responseDoc["tags"]);
@@ -5411,11 +5497,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 }
                             }
                             
-                            JToken locationValue2 = responseDoc["Location"];
-                            if (locationValue2 != null && locationValue2.Type != JTokenType.Null)
+                            JToken locationValue3 = responseDoc["Location"];
+                            if (locationValue3 != null && locationValue3.Type != JTokenType.Null)
                             {
-                                string locationInstance2 = ((string)locationValue2);
-                                result.Location = locationInstance2;
+                                string locationInstance3 = ((string)locationValue3);
+                                result.Location = locationInstance3;
                             }
                             
                             JToken retryAfterValue = responseDoc["RetryAfter"];
@@ -5749,6 +5835,25 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         }
                                         propertiesInstance.CustomDetails = hyperVSiteDetailsInstance;
                                     }
+                                    if (typeName == "Azure")
+                                    {
+                                        AzureFabricSpecificDetails azureFabricSpecificDetailsInstance = new AzureFabricSpecificDetails();
+                                        
+                                        JToken locationValue = customDetailsValue["location"];
+                                        if (locationValue != null && locationValue.Type != JTokenType.Null)
+                                        {
+                                            string locationInstance = ((string)locationValue);
+                                            azureFabricSpecificDetailsInstance.Location = locationInstance;
+                                        }
+                                        
+                                        JToken instanceTypeValue3 = customDetailsValue["instanceType"];
+                                        if (instanceTypeValue3 != null && instanceTypeValue3.Type != JTokenType.Null)
+                                        {
+                                            string instanceTypeInstance3 = ((string)instanceTypeValue3);
+                                            azureFabricSpecificDetailsInstance.InstanceType = instanceTypeInstance3;
+                                        }
+                                        propertiesInstance.CustomDetails = azureFabricSpecificDetailsInstance;
+                                    }
                                     if (typeName == "VMware")
                                     {
                                         VMwareFabricDetails vMwareFabricDetailsInstance = new VMwareFabricDetails();
@@ -6268,11 +6373,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareFabricDetailsInstance.VersionStatus = versionStatusInstance3;
                                         }
                                         
-                                        JToken instanceTypeValue3 = customDetailsValue["instanceType"];
-                                        if (instanceTypeValue3 != null && instanceTypeValue3.Type != JTokenType.Null)
+                                        JToken instanceTypeValue4 = customDetailsValue["instanceType"];
+                                        if (instanceTypeValue4 != null && instanceTypeValue4.Type != JTokenType.Null)
                                         {
-                                            string instanceTypeInstance3 = ((string)instanceTypeValue3);
-                                            vMwareFabricDetailsInstance.InstanceType = instanceTypeInstance3;
+                                            string instanceTypeInstance4 = ((string)instanceTypeValue4);
+                                            vMwareFabricDetailsInstance.InstanceType = instanceTypeInstance4;
                                         }
                                         propertiesInstance.CustomDetails = vMwareFabricDetailsInstance;
                                     }
@@ -6300,11 +6405,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 fabricInstance.Type = typeInstance;
                             }
                             
-                            JToken locationValue = responseDoc["location"];
-                            if (locationValue != null && locationValue.Type != JTokenType.Null)
+                            JToken locationValue2 = responseDoc["location"];
+                            if (locationValue2 != null && locationValue2.Type != JTokenType.Null)
                             {
-                                string locationInstance = ((string)locationValue);
-                                fabricInstance.Location = locationInstance;
+                                string locationInstance2 = ((string)locationValue2);
+                                fabricInstance.Location = locationInstance2;
                             }
                             
                             JToken tagsSequenceElement = ((JToken)responseDoc["tags"]);
@@ -6318,11 +6423,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 }
                             }
                             
-                            JToken locationValue2 = responseDoc["Location"];
-                            if (locationValue2 != null && locationValue2.Type != JTokenType.Null)
+                            JToken locationValue3 = responseDoc["Location"];
+                            if (locationValue3 != null && locationValue3.Type != JTokenType.Null)
                             {
-                                string locationInstance2 = ((string)locationValue2);
-                                result.Location = locationInstance2;
+                                string locationInstance3 = ((string)locationValue3);
+                                result.Location = locationInstance3;
                             }
                             
                             JToken retryAfterValue = responseDoc["RetryAfter"];
@@ -6684,6 +6789,25 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     hyperVSiteDetailsInstance.InstanceType = instanceTypeInstance2;
                                                 }
                                                 propertiesInstance.CustomDetails = hyperVSiteDetailsInstance;
+                                            }
+                                            if (typeName == "Azure")
+                                            {
+                                                AzureFabricSpecificDetails azureFabricSpecificDetailsInstance = new AzureFabricSpecificDetails();
+                                                
+                                                JToken locationValue = customDetailsValue["location"];
+                                                if (locationValue != null && locationValue.Type != JTokenType.Null)
+                                                {
+                                                    string locationInstance = ((string)locationValue);
+                                                    azureFabricSpecificDetailsInstance.Location = locationInstance;
+                                                }
+                                                
+                                                JToken instanceTypeValue3 = customDetailsValue["instanceType"];
+                                                if (instanceTypeValue3 != null && instanceTypeValue3.Type != JTokenType.Null)
+                                                {
+                                                    string instanceTypeInstance3 = ((string)instanceTypeValue3);
+                                                    azureFabricSpecificDetailsInstance.InstanceType = instanceTypeInstance3;
+                                                }
+                                                propertiesInstance.CustomDetails = azureFabricSpecificDetailsInstance;
                                             }
                                             if (typeName == "VMware")
                                             {
@@ -7204,11 +7328,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareFabricDetailsInstance.VersionStatus = versionStatusInstance3;
                                                 }
                                                 
-                                                JToken instanceTypeValue3 = customDetailsValue["instanceType"];
-                                                if (instanceTypeValue3 != null && instanceTypeValue3.Type != JTokenType.Null)
+                                                JToken instanceTypeValue4 = customDetailsValue["instanceType"];
+                                                if (instanceTypeValue4 != null && instanceTypeValue4.Type != JTokenType.Null)
                                                 {
-                                                    string instanceTypeInstance3 = ((string)instanceTypeValue3);
-                                                    vMwareFabricDetailsInstance.InstanceType = instanceTypeInstance3;
+                                                    string instanceTypeInstance4 = ((string)instanceTypeValue4);
+                                                    vMwareFabricDetailsInstance.InstanceType = instanceTypeInstance4;
                                                 }
                                                 propertiesInstance.CustomDetails = vMwareFabricDetailsInstance;
                                             }
@@ -7236,11 +7360,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         fabricInstance.Type = typeInstance;
                                     }
                                     
-                                    JToken locationValue = valueValue["location"];
-                                    if (locationValue != null && locationValue.Type != JTokenType.Null)
+                                    JToken locationValue2 = valueValue["location"];
+                                    if (locationValue2 != null && locationValue2.Type != JTokenType.Null)
                                     {
-                                        string locationInstance = ((string)locationValue);
-                                        fabricInstance.Location = locationInstance;
+                                        string locationInstance2 = ((string)locationValue2);
+                                        fabricInstance.Location = locationInstance2;
                                     }
                                     
                                     JToken tagsSequenceElement = ((JToken)valueValue["tags"]);
