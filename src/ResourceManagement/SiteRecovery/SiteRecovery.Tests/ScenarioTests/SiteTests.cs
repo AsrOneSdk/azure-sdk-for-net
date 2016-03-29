@@ -27,8 +27,9 @@ namespace SiteRecovery.Tests
     public class SiteTests : SiteRecoveryTestsBase
     {
         string siteName = "site3";
-	
-	public void CreateSite()
+
+        [Fact]
+        public void CreateSite()
         {
             using (UndoContext context = UndoContext.Current)
             {
@@ -45,7 +46,8 @@ namespace SiteRecovery.Tests
             }
         }
 
-	public void DeleteSite()
+        [Fact]
+        public void DeleteSite()
         {
             using (UndoContext context = UndoContext.Current)
             {
