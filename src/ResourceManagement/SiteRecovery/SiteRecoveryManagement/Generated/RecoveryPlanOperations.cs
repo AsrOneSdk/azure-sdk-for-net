@@ -3165,13 +3165,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.LastPlannedFailoverTime = lastPlannedFailoverTimeInstance;
                                 }
                                 
-                                JToken lastUnplannedFailoverTimeValue = propertiesValue["lastUnplannedFailoverTime"];
-                                if (lastUnplannedFailoverTimeValue != null && lastUnplannedFailoverTimeValue.Type != JTokenType.Null)
-                                {
-                                    DateTime lastUnplannedFailoverTimeInstance = ((DateTime)lastUnplannedFailoverTimeValue);
-                                    propertiesInstance.LastUnplannedFailoverTime = lastUnplannedFailoverTimeInstance;
-                                }
-                                
                                 JToken lastTestFailoverTimeValue = propertiesValue["lastTestFailoverTime"];
                                 if (lastTestFailoverTimeValue != null && lastTestFailoverTimeValue.Type != JTokenType.Null)
                                 {
@@ -3800,13 +3793,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 {
                                     DateTime lastPlannedFailoverTimeInstance = ((DateTime)lastPlannedFailoverTimeValue);
                                     propertiesInstance.LastPlannedFailoverTime = lastPlannedFailoverTimeInstance;
-                                }
-                                
-                                JToken lastUnplannedFailoverTimeValue = propertiesValue["lastUnplannedFailoverTime"];
-                                if (lastUnplannedFailoverTimeValue != null && lastUnplannedFailoverTimeValue.Type != JTokenType.Null)
-                                {
-                                    DateTime lastUnplannedFailoverTimeInstance = ((DateTime)lastUnplannedFailoverTimeValue);
-                                    propertiesInstance.LastUnplannedFailoverTime = lastUnplannedFailoverTimeInstance;
                                 }
                                 
                                 JToken lastTestFailoverTimeValue = propertiesValue["lastTestFailoverTime"];
@@ -4498,13 +4484,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.LastPlannedFailoverTime = lastPlannedFailoverTimeInstance;
                                 }
                                 
-                                JToken lastUnplannedFailoverTimeValue = propertiesValue["lastUnplannedFailoverTime"];
-                                if (lastUnplannedFailoverTimeValue != null && lastUnplannedFailoverTimeValue.Type != JTokenType.Null)
-                                {
-                                    DateTime lastUnplannedFailoverTimeInstance = ((DateTime)lastUnplannedFailoverTimeValue);
-                                    propertiesInstance.LastUnplannedFailoverTime = lastUnplannedFailoverTimeInstance;
-                                }
-                                
                                 JToken lastTestFailoverTimeValue = propertiesValue["lastTestFailoverTime"];
                                 if (lastTestFailoverTimeValue != null && lastTestFailoverTimeValue.Type != JTokenType.Null)
                                 {
@@ -5192,13 +5171,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 {
                                     DateTime lastPlannedFailoverTimeInstance = ((DateTime)lastPlannedFailoverTimeValue);
                                     propertiesInstance.LastPlannedFailoverTime = lastPlannedFailoverTimeInstance;
-                                }
-                                
-                                JToken lastUnplannedFailoverTimeValue = propertiesValue["lastUnplannedFailoverTime"];
-                                if (lastUnplannedFailoverTimeValue != null && lastUnplannedFailoverTimeValue.Type != JTokenType.Null)
-                                {
-                                    DateTime lastUnplannedFailoverTimeInstance = ((DateTime)lastUnplannedFailoverTimeValue);
-                                    propertiesInstance.LastUnplannedFailoverTime = lastUnplannedFailoverTimeInstance;
                                 }
                                 
                                 JToken lastTestFailoverTimeValue = propertiesValue["lastTestFailoverTime"];
@@ -5890,13 +5862,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.LastPlannedFailoverTime = lastPlannedFailoverTimeInstance;
                                 }
                                 
-                                JToken lastUnplannedFailoverTimeValue = propertiesValue["lastUnplannedFailoverTime"];
-                                if (lastUnplannedFailoverTimeValue != null && lastUnplannedFailoverTimeValue.Type != JTokenType.Null)
-                                {
-                                    DateTime lastUnplannedFailoverTimeInstance = ((DateTime)lastUnplannedFailoverTimeValue);
-                                    propertiesInstance.LastUnplannedFailoverTime = lastUnplannedFailoverTimeInstance;
-                                }
-                                
                                 JToken lastTestFailoverTimeValue = propertiesValue["lastTestFailoverTime"];
                                 if (lastTestFailoverTimeValue != null && lastTestFailoverTimeValue.Type != JTokenType.Null)
                                 {
@@ -6584,13 +6549,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 {
                                     DateTime lastPlannedFailoverTimeInstance = ((DateTime)lastPlannedFailoverTimeValue);
                                     propertiesInstance.LastPlannedFailoverTime = lastPlannedFailoverTimeInstance;
-                                }
-                                
-                                JToken lastUnplannedFailoverTimeValue = propertiesValue["lastUnplannedFailoverTime"];
-                                if (lastUnplannedFailoverTimeValue != null && lastUnplannedFailoverTimeValue.Type != JTokenType.Null)
-                                {
-                                    DateTime lastUnplannedFailoverTimeInstance = ((DateTime)lastUnplannedFailoverTimeValue);
-                                    propertiesInstance.LastUnplannedFailoverTime = lastUnplannedFailoverTimeInstance;
                                 }
                                 
                                 JToken lastTestFailoverTimeValue = propertiesValue["lastTestFailoverTime"];
@@ -7282,13 +7240,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.LastPlannedFailoverTime = lastPlannedFailoverTimeInstance;
                                 }
                                 
-                                JToken lastUnplannedFailoverTimeValue = propertiesValue["lastUnplannedFailoverTime"];
-                                if (lastUnplannedFailoverTimeValue != null && lastUnplannedFailoverTimeValue.Type != JTokenType.Null)
-                                {
-                                    DateTime lastUnplannedFailoverTimeInstance = ((DateTime)lastUnplannedFailoverTimeValue);
-                                    propertiesInstance.LastUnplannedFailoverTime = lastUnplannedFailoverTimeInstance;
-                                }
-                                
                                 JToken lastTestFailoverTimeValue = propertiesValue["lastTestFailoverTime"];
                                 if (lastTestFailoverTimeValue != null && lastTestFailoverTimeValue.Type != JTokenType.Null)
                                 {
@@ -7976,13 +7927,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 {
                                     DateTime lastPlannedFailoverTimeInstance = ((DateTime)lastPlannedFailoverTimeValue);
                                     propertiesInstance.LastPlannedFailoverTime = lastPlannedFailoverTimeInstance;
-                                }
-                                
-                                JToken lastUnplannedFailoverTimeValue = propertiesValue["lastUnplannedFailoverTime"];
-                                if (lastUnplannedFailoverTimeValue != null && lastUnplannedFailoverTimeValue.Type != JTokenType.Null)
-                                {
-                                    DateTime lastUnplannedFailoverTimeInstance = ((DateTime)lastUnplannedFailoverTimeValue);
-                                    propertiesInstance.LastUnplannedFailoverTime = lastUnplannedFailoverTimeInstance;
                                 }
                                 
                                 JToken lastTestFailoverTimeValue = propertiesValue["lastTestFailoverTime"];
@@ -8674,13 +8618,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.LastPlannedFailoverTime = lastPlannedFailoverTimeInstance;
                                 }
                                 
-                                JToken lastUnplannedFailoverTimeValue = propertiesValue["lastUnplannedFailoverTime"];
-                                if (lastUnplannedFailoverTimeValue != null && lastUnplannedFailoverTimeValue.Type != JTokenType.Null)
-                                {
-                                    DateTime lastUnplannedFailoverTimeInstance = ((DateTime)lastUnplannedFailoverTimeValue);
-                                    propertiesInstance.LastUnplannedFailoverTime = lastUnplannedFailoverTimeInstance;
-                                }
-                                
                                 JToken lastTestFailoverTimeValue = propertiesValue["lastTestFailoverTime"];
                                 if (lastTestFailoverTimeValue != null && lastTestFailoverTimeValue.Type != JTokenType.Null)
                                 {
@@ -9368,13 +9305,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 {
                                     DateTime lastPlannedFailoverTimeInstance = ((DateTime)lastPlannedFailoverTimeValue);
                                     propertiesInstance.LastPlannedFailoverTime = lastPlannedFailoverTimeInstance;
-                                }
-                                
-                                JToken lastUnplannedFailoverTimeValue = propertiesValue["lastUnplannedFailoverTime"];
-                                if (lastUnplannedFailoverTimeValue != null && lastUnplannedFailoverTimeValue.Type != JTokenType.Null)
-                                {
-                                    DateTime lastUnplannedFailoverTimeInstance = ((DateTime)lastUnplannedFailoverTimeValue);
-                                    propertiesInstance.LastUnplannedFailoverTime = lastUnplannedFailoverTimeInstance;
                                 }
                                 
                                 JToken lastTestFailoverTimeValue = propertiesValue["lastTestFailoverTime"];
@@ -10093,13 +10023,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             DateTime lastPlannedFailoverTimeInstance = ((DateTime)lastPlannedFailoverTimeValue);
                                             propertiesInstance.LastPlannedFailoverTime = lastPlannedFailoverTimeInstance;
-                                        }
-                                        
-                                        JToken lastUnplannedFailoverTimeValue = propertiesValue["lastUnplannedFailoverTime"];
-                                        if (lastUnplannedFailoverTimeValue != null && lastUnplannedFailoverTimeValue.Type != JTokenType.Null)
-                                        {
-                                            DateTime lastUnplannedFailoverTimeInstance = ((DateTime)lastUnplannedFailoverTimeValue);
-                                            propertiesInstance.LastUnplannedFailoverTime = lastUnplannedFailoverTimeInstance;
                                         }
                                         
                                         JToken lastTestFailoverTimeValue = propertiesValue["lastTestFailoverTime"];

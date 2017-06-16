@@ -21,66 +21,12 @@
 
 using System;
 using System.Linq;
+using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
-    public partial class A2AProtectedDiskDetails
+    public partial class A2AProtectedDiskDetails : A2AProtectedDiskDetailsBase
     {
-        private double _dataPendingAtSourceAgentInMB;
-        
-        /// <summary>
-        /// Optional. The data pending at source virtual machine in MB.
-        /// </summary>
-        public double DataPendingAtSourceAgentInMB
-        {
-            get { return this._dataPendingAtSourceAgentInMB; }
-            set { this._dataPendingAtSourceAgentInMB = value; }
-        }
-        
-        private double _dataPendingInStagingStorageAccountInMB;
-        
-        /// <summary>
-        /// Optional. The data pending for replication in MB at staging account.
-        /// </summary>
-        public double DataPendingInStagingStorageAccountInMB
-        {
-            get { return this._dataPendingInStagingStorageAccountInMB; }
-            set { this._dataPendingInStagingStorageAccountInMB = value; }
-        }
-        
-        private long _diskCapacityInBytes;
-        
-        /// <summary>
-        /// Optional. The disk capacity in bytes.
-        /// </summary>
-        public long DiskCapacityInBytes
-        {
-            get { return this._diskCapacityInBytes; }
-            set { this._diskCapacityInBytes = value; }
-        }
-        
-        private string _diskName;
-        
-        /// <summary>
-        /// Optional. Disk name.
-        /// </summary>
-        public string DiskName
-        {
-            get { return this._diskName; }
-            set { this._diskName = value; }
-        }
-        
-        private string _diskType;
-        
-        /// <summary>
-        /// Optional. Type of the disk.
-        /// </summary>
-        public string DiskType
-        {
-            get { return this._diskType; }
-            set { this._diskType = value; }
-        }
-        
         private string _diskUri;
         
         /// <summary>
@@ -92,28 +38,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._diskUri = value; }
         }
         
-        private string _monitoringJobType;
-        
-        /// <summary>
-        /// Optional. The type of the monitoring job.
-        /// </summary>
-        public string MonitoringJobType
-        {
-            get { return this._monitoringJobType; }
-            set { this._monitoringJobType = value; }
-        }
-        
-        private int? _monitoringPercentageCompletion;
-        
-        /// <summary>
-        /// Optional. The percentage of the monitoring job.
-        /// </summary>
-        public int? MonitoringPercentageCompletion
-        {
-            get { return this._monitoringPercentageCompletion; }
-            set { this._monitoringPercentageCompletion = value; }
-        }
-        
         private string _primaryDiskAzureStorageAccountId;
         
         /// <summary>
@@ -123,17 +47,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         {
             get { return this._primaryDiskAzureStorageAccountId; }
             set { this._primaryDiskAzureStorageAccountId = value; }
-        }
-        
-        private string _primaryStagingAzureStorageAccountId;
-        
-        /// <summary>
-        /// Optional. Primary staging Azure storage account ARM Id.
-        /// </summary>
-        public string PrimaryStagingAzureStorageAccountId
-        {
-            get { return this._primaryStagingAzureStorageAccountId; }
-            set { this._primaryStagingAzureStorageAccountId = value; }
         }
         
         private string _recoveryAzureStorageAccountId;
@@ -156,17 +69,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         {
             get { return this._recoveryDiskUri; }
             set { this._recoveryDiskUri = value; }
-        }
-        
-        private bool _resyncRequired;
-        
-        /// <summary>
-        /// Optional. Value indicating whether resync is required by the disk.
-        /// </summary>
-        public bool ResyncRequired
-        {
-            get { return this._resyncRequired; }
-            set { this._resyncRequired = value; }
         }
         
         /// <summary>

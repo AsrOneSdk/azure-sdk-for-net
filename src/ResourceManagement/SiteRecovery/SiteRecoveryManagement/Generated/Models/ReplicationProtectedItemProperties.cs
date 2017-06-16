@@ -247,7 +247,7 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         private string _recoveryFabricId;
         
         /// <summary>
-        /// Optional. Gets or sets the Arm Id of recovery fabric.
+        /// Optional. Gets or sets the ARM Id of recovery fabric.
         /// </summary>
         public string RecoveryFabricId
         {

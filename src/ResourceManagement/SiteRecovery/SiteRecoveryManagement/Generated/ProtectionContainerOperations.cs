@@ -867,6 +867,35 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 }
                             }
                             
+                            if (derived.VmManagedDisks != null)
+                            {
+                                if (derived.VmManagedDisks is ILazyCollection == false || ((ILazyCollection)derived.VmManagedDisks).IsInitialized)
+                                {
+                                    JArray vmManagedDisksArray = new JArray();
+                                    foreach (A2AVmManagedDiskInputDetails vmManagedDisksItem in derived.VmManagedDisks)
+                                    {
+                                        JObject a2AVmManagedDiskInputDetailsValue = new JObject();
+                                        vmManagedDisksArray.Add(a2AVmManagedDiskInputDetailsValue);
+                                        
+                                        if (vmManagedDisksItem.DiskId != null)
+                                        {
+                                            a2AVmManagedDiskInputDetailsValue["diskId"] = vmManagedDisksItem.DiskId;
+                                        }
+                                        
+                                        if (vmManagedDisksItem.RecoveryResourceGroupId != null)
+                                        {
+                                            a2AVmManagedDiskInputDetailsValue["recoveryResourceGroupId"] = vmManagedDisksItem.RecoveryResourceGroupId;
+                                        }
+                                        
+                                        if (vmManagedDisksItem.PrimaryStagingAzureStorageAccountId != null)
+                                        {
+                                            a2AVmManagedDiskInputDetailsValue["primaryStagingAzureStorageAccountId"] = vmManagedDisksItem.PrimaryStagingAzureStorageAccountId;
+                                        }
+                                    }
+                                    providerSpecificDetailsValue["vmManagedDisks"] = vmManagedDisksArray;
+                                }
+                            }
+                            
                             if (derived.PolicyId != null)
                             {
                                 providerSpecificDetailsValue["policyId"] = derived.PolicyId;

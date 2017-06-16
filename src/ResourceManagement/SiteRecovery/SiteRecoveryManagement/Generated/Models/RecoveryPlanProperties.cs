@@ -131,17 +131,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._lastTestFailoverTime = value; }
         }
         
-        private System.DateTime? _lastUnplannedFailoverTime;
-        
-        /// <summary>
-        /// Optional. Last unplanned failover time.
-        /// </summary>
-        public System.DateTime? LastUnplannedFailoverTime
-        {
-            get { return this._lastUnplannedFailoverTime; }
-            set { this._lastUnplannedFailoverTime = value; }
-        }
-        
         private string _primaryFabricFriendlyName;
         
         /// <summary>

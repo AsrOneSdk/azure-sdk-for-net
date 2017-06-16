@@ -90,12 +90,24 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         private IList<A2AVmDiskInputDetails> _vmDisks;
         
         /// <summary>
-        /// Optional. List of disk specific details.
+        /// Optional. List of disk specific details. In case of managed disk
+        /// this will be null
         /// </summary>
         public IList<A2AVmDiskInputDetails> VmDisks
         {
             get { return this._vmDisks; }
             set { this._vmDisks = value; }
+        }
+        
+        private IList<A2AVmManagedDiskInputDetails> _vmManagedDisks;
+        
+        /// <summary>
+        /// Optional. List of disk specific details.
+        /// </summary>
+        public IList<A2AVmManagedDiskInputDetails> VmManagedDisks
+        {
+            get { return this._vmManagedDisks; }
+            set { this._vmManagedDisks = value; }
         }
         
         /// <summary>
@@ -104,6 +116,7 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         public A2AEnableProtectionInput()
         {
             this.VmDisks = new LazyList<A2AVmDiskInputDetails>();
+            this.VmManagedDisks = new LazyList<A2AVmManagedDiskInputDetails>();
         }
     }
 }

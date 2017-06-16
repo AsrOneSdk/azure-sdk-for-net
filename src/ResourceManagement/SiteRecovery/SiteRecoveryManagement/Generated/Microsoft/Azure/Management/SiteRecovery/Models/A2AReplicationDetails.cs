@@ -165,6 +165,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._protectedDisks = value; }
         }
         
+        private IList<A2AProtectedManagedDiskDetails> _protectedManagedDisks;
+        
+        /// <summary>
+        /// Optional. List of disk specific details.
+        /// </summary>
+        public IList<A2AProtectedManagedDiskDetails> ProtectedManagedDisks
+        {
+            get { return this._protectedManagedDisks; }
+            set { this._protectedManagedDisks = value; }
+        }
+        
         private string _recoveryAvailabilitySet;
         
         /// <summary>
@@ -314,6 +325,7 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         public A2AReplicationDetails()
         {
             this.ProtectedDisks = new LazyList<A2AProtectedDiskDetails>();
+            this.ProtectedManagedDisks = new LazyList<A2AProtectedManagedDiskDetails>();
             this.VMNics = new LazyList<VMNicDetails>();
         }
     }
