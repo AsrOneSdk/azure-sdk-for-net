@@ -77,6 +77,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._failoverHealth = value; }
         }
         
+        private IList<HealthError> _failoverHealthErrors;
+        
+        /// <summary>
+        /// Optional. Gets or sets list of failover health errors.
+        /// </summary>
+        public IList<HealthError> FailoverHealthErrors
+        {
+            get { return this._failoverHealthErrors; }
+            set { this._failoverHealthErrors = value; }
+        }
+        
         private string _failoverRecoveryPointId;
         
         /// <summary>
@@ -328,6 +339,7 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         public ReplicationProtectedItemProperties()
         {
             this.AllowedOperations = new LazyList<string>();
+            this.FailoverHealthErrors = new LazyList<HealthError>();
             this.ReplicationHealthErrors = new LazyList<HealthError>();
         }
     }
