@@ -77,6 +77,18 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._lastHeartbeat = value; }
         }
         
+        private System.DateTime? _lastRpoCalculatedTime;
+        
+        /// <summary>
+        /// Optional. Gets or sets the time (in UTC) when the last RPO value
+        /// was calculated by Protection Service.
+        /// </summary>
+        public System.DateTime? LastRpoCalculatedTime
+        {
+            get { return this._lastRpoCalculatedTime; }
+            set { this._lastRpoCalculatedTime = value; }
+        }
+        
         private string _lifecycleId;
         
         /// <summary>
@@ -251,6 +263,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         {
             get { return this._recoveryFabricObjectId; }
             set { this._recoveryFabricObjectId = value; }
+        }
+        
+        private long? _rpoInSeconds;
+        
+        /// <summary>
+        /// Optional. Gets or sets the last RPO value in seconds.
+        /// </summary>
+        public long? RpoInSeconds
+        {
+            get { return this._rpoInSeconds; }
+            set { this._rpoInSeconds = value; }
         }
         
         private string _selectedRecoveryAzureNetworkId;
