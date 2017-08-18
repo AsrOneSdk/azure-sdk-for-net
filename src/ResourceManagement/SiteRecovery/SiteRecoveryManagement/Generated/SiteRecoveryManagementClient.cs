@@ -296,6 +296,16 @@ namespace Microsoft.Azure.Management.SiteRecovery
             get { return this._storageClassification; }
         }
         
+        private IVaultHealthOperations _vaults;
+        
+        /// <summary>
+        /// Definition of vault operations for the Site Recovery extension.
+        /// </summary>
+        public virtual IVaultHealthOperations Vaults
+        {
+            get { return this._vaults; }
+        }
+        
         private IVCenterOperations _vCenters;
         
         /// <summary>
@@ -331,6 +341,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             this._replicationProtectedItem = new ReplicationProtectedItemOperations(this);
             this._storageClassificationMapping = new StorageClassificationMappingOperations(this);
             this._storageClassification = new StorageClassificationOperations(this);
+            this._vaults = new VaultHealthOperations(this);
             this._vCenters = new VCenterOperations(this);
             this._apiVersion = "2015-01-01";
             this._longRunningOperationInitialTimeout = -1;
@@ -481,6 +492,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             this._replicationProtectedItem = new ReplicationProtectedItemOperations(this);
             this._storageClassificationMapping = new StorageClassificationMappingOperations(this);
             this._storageClassification = new StorageClassificationOperations(this);
+            this._vaults = new VaultHealthOperations(this);
             this._vCenters = new VCenterOperations(this);
             this._apiVersion = "2015-01-01";
             this._longRunningOperationInitialTimeout = -1;

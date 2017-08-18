@@ -2413,6 +2413,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     int sslCertExpiryRemainingDaysInstance = ((int)sslCertExpiryRemainingDaysValue);
                                                     processServerInstance.SslCertExpiryRemainingDays = sslCertExpiryRemainingDaysInstance;
                                                 }
+                                                
+                                                JToken osVersionValue = processServersValue["osVersion"];
+                                                if (osVersionValue != null && osVersionValue.Type != JTokenType.Null)
+                                                {
+                                                    string osVersionInstance = ((string)osVersionValue);
+                                                    processServerInstance.OsVersion = osVersionInstance;
+                                                }
                                             }
                                         }
                                         
@@ -2641,6 +2648,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 {
                                                     int diskCountInstance = ((int)diskCountValue);
                                                     masterTargetServerInstance.DiskCount = diskCountInstance;
+                                                }
+                                                
+                                                JToken osVersionValue2 = masterTargetServersValue["osVersion"];
+                                                if (osVersionValue2 != null && osVersionValue2.Type != JTokenType.Null)
+                                                {
+                                                    string osVersionInstance2 = ((string)osVersionValue2);
+                                                    masterTargetServerInstance.OsVersion = osVersionInstance2;
                                                 }
                                             }
                                         }
@@ -3823,6 +3837,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     int sslCertExpiryRemainingDaysInstance = ((int)sslCertExpiryRemainingDaysValue);
                                                     processServerInstance.SslCertExpiryRemainingDays = sslCertExpiryRemainingDaysInstance;
                                                 }
+                                                
+                                                JToken osVersionValue = processServersValue["osVersion"];
+                                                if (osVersionValue != null && osVersionValue.Type != JTokenType.Null)
+                                                {
+                                                    string osVersionInstance = ((string)osVersionValue);
+                                                    processServerInstance.OsVersion = osVersionInstance;
+                                                }
                                             }
                                         }
                                         
@@ -4051,6 +4072,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 {
                                                     int diskCountInstance = ((int)diskCountValue);
                                                     masterTargetServerInstance.DiskCount = diskCountInstance;
+                                                }
+                                                
+                                                JToken osVersionValue2 = masterTargetServersValue["osVersion"];
+                                                if (osVersionValue2 != null && osVersionValue2.Type != JTokenType.Null)
+                                                {
+                                                    string osVersionInstance2 = ((string)osVersionValue2);
+                                                    masterTargetServerInstance.OsVersion = osVersionInstance2;
                                                 }
                                             }
                                         }
@@ -5292,6 +5320,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     int sslCertExpiryRemainingDaysInstance = ((int)sslCertExpiryRemainingDaysValue);
                                                     processServerInstance.SslCertExpiryRemainingDays = sslCertExpiryRemainingDaysInstance;
                                                 }
+                                                
+                                                JToken osVersionValue = processServersValue["osVersion"];
+                                                if (osVersionValue != null && osVersionValue.Type != JTokenType.Null)
+                                                {
+                                                    string osVersionInstance = ((string)osVersionValue);
+                                                    processServerInstance.OsVersion = osVersionInstance;
+                                                }
                                             }
                                         }
                                         
@@ -5520,6 +5555,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 {
                                                     int diskCountInstance = ((int)diskCountValue);
                                                     masterTargetServerInstance.DiskCount = diskCountInstance;
+                                                }
+                                                
+                                                JToken osVersionValue2 = masterTargetServersValue["osVersion"];
+                                                if (osVersionValue2 != null && osVersionValue2.Type != JTokenType.Null)
+                                                {
+                                                    string osVersionInstance2 = ((string)osVersionValue2);
+                                                    masterTargetServerInstance.OsVersion = osVersionInstance2;
                                                 }
                                             }
                                         }
@@ -6992,6 +7034,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     int sslCertExpiryRemainingDaysInstance = ((int)sslCertExpiryRemainingDaysValue);
                                                     processServerInstance.SslCertExpiryRemainingDays = sslCertExpiryRemainingDaysInstance;
                                                 }
+                                                
+                                                JToken osVersionValue = processServersValue["osVersion"];
+                                                if (osVersionValue != null && osVersionValue.Type != JTokenType.Null)
+                                                {
+                                                    string osVersionInstance = ((string)osVersionValue);
+                                                    processServerInstance.OsVersion = osVersionInstance;
+                                                }
                                             }
                                         }
                                         
@@ -7220,6 +7269,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 {
                                                     int diskCountInstance = ((int)diskCountValue);
                                                     masterTargetServerInstance.DiskCount = diskCountInstance;
+                                                }
+                                                
+                                                JToken osVersionValue2 = masterTargetServersValue["osVersion"];
+                                                if (osVersionValue2 != null && osVersionValue2.Type != JTokenType.Null)
+                                                {
+                                                    string osVersionInstance2 = ((string)osVersionValue2);
+                                                    masterTargetServerInstance.OsVersion = osVersionInstance2;
                                                 }
                                             }
                                         }
@@ -8230,6 +8286,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     int sslCertExpiryRemainingDaysInstance = ((int)sslCertExpiryRemainingDaysValue);
                                                     processServerInstance.SslCertExpiryRemainingDays = sslCertExpiryRemainingDaysInstance;
                                                 }
+                                                
+                                                JToken osVersionValue = processServersValue["osVersion"];
+                                                if (osVersionValue != null && osVersionValue.Type != JTokenType.Null)
+                                                {
+                                                    string osVersionInstance = ((string)osVersionValue);
+                                                    processServerInstance.OsVersion = osVersionInstance;
+                                                }
                                             }
                                         }
                                         
@@ -8458,6 +8521,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 {
                                                     int diskCountInstance = ((int)diskCountValue);
                                                     masterTargetServerInstance.DiskCount = diskCountInstance;
+                                                }
+                                                
+                                                JToken osVersionValue2 = masterTargetServersValue["osVersion"];
+                                                if (osVersionValue2 != null && osVersionValue2.Type != JTokenType.Null)
+                                                {
+                                                    string osVersionInstance2 = ((string)osVersionValue2);
+                                                    masterTargetServerInstance.OsVersion = osVersionInstance2;
                                                 }
                                             }
                                         }
@@ -9497,6 +9567,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                             int sslCertExpiryRemainingDaysInstance = ((int)sslCertExpiryRemainingDaysValue);
                                                             processServerInstance.SslCertExpiryRemainingDays = sslCertExpiryRemainingDaysInstance;
                                                         }
+                                                        
+                                                        JToken osVersionValue = processServersValue["osVersion"];
+                                                        if (osVersionValue != null && osVersionValue.Type != JTokenType.Null)
+                                                        {
+                                                            string osVersionInstance = ((string)osVersionValue);
+                                                            processServerInstance.OsVersion = osVersionInstance;
+                                                        }
                                                     }
                                                 }
                                                 
@@ -9725,6 +9802,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                         {
                                                             int diskCountInstance = ((int)diskCountValue);
                                                             masterTargetServerInstance.DiskCount = diskCountInstance;
+                                                        }
+                                                        
+                                                        JToken osVersionValue2 = masterTargetServersValue["osVersion"];
+                                                        if (osVersionValue2 != null && osVersionValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string osVersionInstance2 = ((string)osVersionValue2);
+                                                            masterTargetServerInstance.OsVersion = osVersionInstance2;
                                                         }
                                                     }
                                                 }

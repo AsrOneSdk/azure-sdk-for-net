@@ -120,6 +120,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._osType = value; }
         }
         
+        private string _osVersion;
+        
+        /// <summary>
+        /// Optional. The operating system version.
+        /// </summary>
+        public string OsVersion
+        {
+            get { return this._osVersion; }
+            set { this._osVersion = value; }
+        }
+        
         private IList<RetentionVolume> _retentionVolumes;
         
         /// <summary>
