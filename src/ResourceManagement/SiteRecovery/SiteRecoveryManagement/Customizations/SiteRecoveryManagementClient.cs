@@ -101,6 +101,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             this._replicationProtectedItem = new ReplicationProtectedItemOperations(this);
             this._storageClassificationMapping = new StorageClassificationMappingOperations(this);
             this._storageClassification = new StorageClassificationOperations(this);
+            this._vaults = new VaultHealthOperations(this);
             this._vCenters = new VCenterOperations(this);
             this._apiVersion = "2015-01-01";
             this._longRunningOperationInitialTimeout = -1;
