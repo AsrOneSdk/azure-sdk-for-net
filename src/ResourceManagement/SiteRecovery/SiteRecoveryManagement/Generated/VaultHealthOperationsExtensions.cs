@@ -117,6 +117,58 @@ namespace Microsoft.Azure.Management.SiteRecovery
         }
         
         /// <summary>
+        /// Get the vault health details.
+        /// </summary>
+        /// <param name='operations'>
+        /// Reference to the
+        /// Microsoft.Azure.Management.SiteRecovery.IVaultHealthOperations.
+        /// </param>
+        /// <param name='resourceGroupName'>
+        /// Required. The name of the resource group containing the resource.
+        /// </param>
+        /// <param name='resourceName'>
+        /// Required. The name of the resource.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Optional. Request header parameters.
+        /// </param>
+        /// <returns>
+        /// The response model for the vault health details object.
+        /// </returns>
+        public static VaultHealthDetailsResponse GetReplicationVaultHealth(this IVaultHealthOperations operations, string resourceGroupName, string resourceName, CustomRequestHeaders customRequestHeaders)
+        {
+            return Task.Factory.StartNew((object s) => 
+            {
+                return ((IVaultHealthOperations)s).GetReplicationVaultHealthAsync(resourceGroupName, resourceName, customRequestHeaders);
+            }
+            , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+        }
+        
+        /// <summary>
+        /// Get the vault health details.
+        /// </summary>
+        /// <param name='operations'>
+        /// Reference to the
+        /// Microsoft.Azure.Management.SiteRecovery.IVaultHealthOperations.
+        /// </param>
+        /// <param name='resourceGroupName'>
+        /// Required. The name of the resource group containing the resource.
+        /// </param>
+        /// <param name='resourceName'>
+        /// Required. The name of the resource.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Optional. Request header parameters.
+        /// </param>
+        /// <returns>
+        /// The response model for the vault health details object.
+        /// </returns>
+        public static Task<VaultHealthDetailsResponse> GetReplicationVaultHealthAsync(this IVaultHealthOperations operations, string resourceGroupName, string resourceName, CustomRequestHeaders customRequestHeaders)
+        {
+            return operations.GetReplicationVaultHealthAsync(resourceGroupName, resourceName, customRequestHeaders, CancellationToken.None);
+        }
+        
+        /// <summary>
         /// Refreshes health of the vault.
         /// </summary>
         /// <param name='operations'>

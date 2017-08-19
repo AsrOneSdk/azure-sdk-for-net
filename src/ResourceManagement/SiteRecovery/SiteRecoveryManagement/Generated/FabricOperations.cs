@@ -2623,7 +2623,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                         JToken creationTimeUtcValue = validationErrorsValue["creationTimeUtc"];
                                                         if (creationTimeUtcValue != null && creationTimeUtcValue.Type != JTokenType.Null)
                                                         {
-                                                            string creationTimeUtcInstance = ((string)creationTimeUtcValue);
+                                                            DateTime creationTimeUtcInstance = ((DateTime)creationTimeUtcValue);
                                                             healthErrorInstance.CreationTimeUtc = creationTimeUtcInstance;
                                                         }
                                                         
@@ -2942,7 +2942,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         JToken creationTimeUtcValue2 = healthErrorDetailsValue["creationTimeUtc"];
                                         if (creationTimeUtcValue2 != null && creationTimeUtcValue2.Type != JTokenType.Null)
                                         {
-                                            string creationTimeUtcInstance2 = ((string)creationTimeUtcValue2);
+                                            DateTime creationTimeUtcInstance2 = ((DateTime)creationTimeUtcValue2);
                                             healthErrorInstance2.CreationTimeUtc = creationTimeUtcInstance2;
                                         }
                                         
@@ -3022,7 +3022,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         JToken creationTimeUtcValue3 = failoverHealthErrorDetailsValue["creationTimeUtc"];
                                         if (creationTimeUtcValue3 != null && creationTimeUtcValue3.Type != JTokenType.Null)
                                         {
-                                            string creationTimeUtcInstance3 = ((string)creationTimeUtcValue3);
+                                            DateTime creationTimeUtcInstance3 = ((DateTime)creationTimeUtcValue3);
                                             healthErrorInstance3.CreationTimeUtc = creationTimeUtcInstance3;
                                         }
                                         
@@ -4047,7 +4047,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                         JToken creationTimeUtcValue = validationErrorsValue["creationTimeUtc"];
                                                         if (creationTimeUtcValue != null && creationTimeUtcValue.Type != JTokenType.Null)
                                                         {
-                                                            string creationTimeUtcInstance = ((string)creationTimeUtcValue);
+                                                            DateTime creationTimeUtcInstance = ((DateTime)creationTimeUtcValue);
                                                             healthErrorInstance.CreationTimeUtc = creationTimeUtcInstance;
                                                         }
                                                         
@@ -4366,7 +4366,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         JToken creationTimeUtcValue2 = healthErrorDetailsValue["creationTimeUtc"];
                                         if (creationTimeUtcValue2 != null && creationTimeUtcValue2.Type != JTokenType.Null)
                                         {
-                                            string creationTimeUtcInstance2 = ((string)creationTimeUtcValue2);
+                                            DateTime creationTimeUtcInstance2 = ((DateTime)creationTimeUtcValue2);
                                             healthErrorInstance2.CreationTimeUtc = creationTimeUtcInstance2;
                                         }
                                         
@@ -4446,7 +4446,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         JToken creationTimeUtcValue3 = failoverHealthErrorDetailsValue["creationTimeUtc"];
                                         if (creationTimeUtcValue3 != null && creationTimeUtcValue3.Type != JTokenType.Null)
                                         {
-                                            string creationTimeUtcInstance3 = ((string)creationTimeUtcValue3);
+                                            DateTime creationTimeUtcInstance3 = ((DateTime)creationTimeUtcValue3);
                                             healthErrorInstance3.CreationTimeUtc = creationTimeUtcInstance3;
                                         }
                                         
@@ -5530,7 +5530,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                         JToken creationTimeUtcValue = validationErrorsValue["creationTimeUtc"];
                                                         if (creationTimeUtcValue != null && creationTimeUtcValue.Type != JTokenType.Null)
                                                         {
-                                                            string creationTimeUtcInstance = ((string)creationTimeUtcValue);
+                                                            DateTime creationTimeUtcInstance = ((DateTime)creationTimeUtcValue);
                                                             healthErrorInstance.CreationTimeUtc = creationTimeUtcInstance;
                                                         }
                                                         
@@ -5849,7 +5849,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         JToken creationTimeUtcValue2 = healthErrorDetailsValue["creationTimeUtc"];
                                         if (creationTimeUtcValue2 != null && creationTimeUtcValue2.Type != JTokenType.Null)
                                         {
-                                            string creationTimeUtcInstance2 = ((string)creationTimeUtcValue2);
+                                            DateTime creationTimeUtcInstance2 = ((DateTime)creationTimeUtcValue2);
                                             healthErrorInstance2.CreationTimeUtc = creationTimeUtcInstance2;
                                         }
                                         
@@ -5929,7 +5929,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         JToken creationTimeUtcValue3 = failoverHealthErrorDetailsValue["creationTimeUtc"];
                                         if (creationTimeUtcValue3 != null && creationTimeUtcValue3.Type != JTokenType.Null)
                                         {
-                                            string creationTimeUtcInstance3 = ((string)creationTimeUtcValue3);
+                                            DateTime creationTimeUtcInstance3 = ((DateTime)creationTimeUtcValue3);
                                             healthErrorInstance3.CreationTimeUtc = creationTimeUtcInstance3;
                                         }
                                         
@@ -7244,7 +7244,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                         JToken creationTimeUtcValue = validationErrorsValue["creationTimeUtc"];
                                                         if (creationTimeUtcValue != null && creationTimeUtcValue.Type != JTokenType.Null)
                                                         {
-                                                            string creationTimeUtcInstance = ((string)creationTimeUtcValue);
+                                                            DateTime creationTimeUtcInstance = ((DateTime)creationTimeUtcValue);
                                                             healthErrorInstance.CreationTimeUtc = creationTimeUtcInstance;
                                                         }
                                                         
@@ -7563,7 +7563,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         JToken creationTimeUtcValue2 = healthErrorDetailsValue["creationTimeUtc"];
                                         if (creationTimeUtcValue2 != null && creationTimeUtcValue2.Type != JTokenType.Null)
                                         {
-                                            string creationTimeUtcInstance2 = ((string)creationTimeUtcValue2);
+                                            DateTime creationTimeUtcInstance2 = ((DateTime)creationTimeUtcValue2);
                                             healthErrorInstance2.CreationTimeUtc = creationTimeUtcInstance2;
                                         }
                                         
@@ -7643,7 +7643,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         JToken creationTimeUtcValue3 = failoverHealthErrorDetailsValue["creationTimeUtc"];
                                         if (creationTimeUtcValue3 != null && creationTimeUtcValue3.Type != JTokenType.Null)
                                         {
-                                            string creationTimeUtcInstance3 = ((string)creationTimeUtcValue3);
+                                            DateTime creationTimeUtcInstance3 = ((DateTime)creationTimeUtcValue3);
                                             healthErrorInstance3.CreationTimeUtc = creationTimeUtcInstance3;
                                         }
                                         
@@ -8496,7 +8496,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                         JToken creationTimeUtcValue = validationErrorsValue["creationTimeUtc"];
                                                         if (creationTimeUtcValue != null && creationTimeUtcValue.Type != JTokenType.Null)
                                                         {
-                                                            string creationTimeUtcInstance = ((string)creationTimeUtcValue);
+                                                            DateTime creationTimeUtcInstance = ((DateTime)creationTimeUtcValue);
                                                             healthErrorInstance.CreationTimeUtc = creationTimeUtcInstance;
                                                         }
                                                         
@@ -8815,7 +8815,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         JToken creationTimeUtcValue2 = healthErrorDetailsValue["creationTimeUtc"];
                                         if (creationTimeUtcValue2 != null && creationTimeUtcValue2.Type != JTokenType.Null)
                                         {
-                                            string creationTimeUtcInstance2 = ((string)creationTimeUtcValue2);
+                                            DateTime creationTimeUtcInstance2 = ((DateTime)creationTimeUtcValue2);
                                             healthErrorInstance2.CreationTimeUtc = creationTimeUtcInstance2;
                                         }
                                         
@@ -8895,7 +8895,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         JToken creationTimeUtcValue3 = failoverHealthErrorDetailsValue["creationTimeUtc"];
                                         if (creationTimeUtcValue3 != null && creationTimeUtcValue3.Type != JTokenType.Null)
                                         {
-                                            string creationTimeUtcInstance3 = ((string)creationTimeUtcValue3);
+                                            DateTime creationTimeUtcInstance3 = ((DateTime)creationTimeUtcValue3);
                                             healthErrorInstance3.CreationTimeUtc = creationTimeUtcInstance3;
                                         }
                                         
@@ -9777,7 +9777,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                                 JToken creationTimeUtcValue = validationErrorsValue["creationTimeUtc"];
                                                                 if (creationTimeUtcValue != null && creationTimeUtcValue.Type != JTokenType.Null)
                                                                 {
-                                                                    string creationTimeUtcInstance = ((string)creationTimeUtcValue);
+                                                                    DateTime creationTimeUtcInstance = ((DateTime)creationTimeUtcValue);
                                                                     healthErrorInstance.CreationTimeUtc = creationTimeUtcInstance;
                                                                 }
                                                                 
@@ -10096,7 +10096,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 JToken creationTimeUtcValue2 = healthErrorDetailsValue["creationTimeUtc"];
                                                 if (creationTimeUtcValue2 != null && creationTimeUtcValue2.Type != JTokenType.Null)
                                                 {
-                                                    string creationTimeUtcInstance2 = ((string)creationTimeUtcValue2);
+                                                    DateTime creationTimeUtcInstance2 = ((DateTime)creationTimeUtcValue2);
                                                     healthErrorInstance2.CreationTimeUtc = creationTimeUtcInstance2;
                                                 }
                                                 
@@ -10176,7 +10176,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 JToken creationTimeUtcValue3 = failoverHealthErrorDetailsValue["creationTimeUtc"];
                                                 if (creationTimeUtcValue3 != null && creationTimeUtcValue3.Type != JTokenType.Null)
                                                 {
-                                                    string creationTimeUtcInstance3 = ((string)creationTimeUtcValue3);
+                                                    DateTime creationTimeUtcInstance3 = ((DateTime)creationTimeUtcValue3);
                                                     healthErrorInstance3.CreationTimeUtc = creationTimeUtcInstance3;
                                                 }
                                                 

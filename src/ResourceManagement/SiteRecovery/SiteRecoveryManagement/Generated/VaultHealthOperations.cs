@@ -461,6 +461,497 @@ namespace Microsoft.Azure.Management.SiteRecovery
         }
         
         /// <summary>
+        /// Get the vault health details.
+        /// </summary>
+        /// <param name='resourceGroupName'>
+        /// Required. The name of the resource group containing the resource.
+        /// </param>
+        /// <param name='resourceName'>
+        /// Required. The name of the resource.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Optional. Request header parameters.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
+        /// The response model for the vault health details object.
+        /// </returns>
+        public async Task<VaultHealthDetailsResponse> GetReplicationVaultHealthAsync(string resourceGroupName, string resourceName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        {
+            // Validate
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException("resourceGroupName");
+            }
+            if (resourceName == null)
+            {
+                throw new ArgumentNullException("resourceName");
+            }
+            
+            // Tracing
+            bool shouldTrace = TracingAdapter.IsEnabled;
+            string invocationId = null;
+            if (shouldTrace)
+            {
+                invocationId = TracingAdapter.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("resourceGroupName", resourceGroupName);
+                tracingParameters.Add("resourceName", resourceName);
+                tracingParameters.Add("customRequestHeaders", customRequestHeaders);
+                TracingAdapter.Enter(invocationId, this, "GetReplicationVaultHealthAsync", tracingParameters);
+            }
+            
+            // Construct URL
+            string url = "";
+            url = url + "/Subscriptions/";
+            if (this.Client.Credentials.SubscriptionId != null)
+            {
+                url = url + Uri.EscapeDataString(this.Client.Credentials.SubscriptionId);
+            }
+            url = url + "/resourceGroups/";
+            url = url + Uri.EscapeDataString(resourceGroupName);
+            url = url + "/providers/";
+            url = url + Uri.EscapeDataString(this.Client.ResourceNamespace);
+            url = url + "/";
+            url = url + Uri.EscapeDataString(this.Client.ResourceType);
+            url = url + "/";
+            url = url + Uri.EscapeDataString(resourceName);
+            url = url + "/replicationVaultHealth";
+            List<string> queryParameters = new List<string>();
+            queryParameters.Add("api-version=2016-08-10");
+            if (queryParameters.Count > 0)
+            {
+                url = url + "?" + string.Join("&", queryParameters);
+            }
+            string baseUrl = this.Client.BaseUri.AbsoluteUri;
+            // Trim '/' character from the end of baseUrl and beginning of url.
+            if (baseUrl[baseUrl.Length - 1] == '/')
+            {
+                baseUrl = baseUrl.Substring(0, baseUrl.Length - 1);
+            }
+            if (url[0] == '/')
+            {
+                url = url.Substring(1);
+            }
+            url = baseUrl + "/" + url;
+            url = url.Replace(" ", "%20");
+            
+            // Create HTTP transport objects
+            HttpRequestMessage httpRequest = null;
+            try
+            {
+                httpRequest = new HttpRequestMessage();
+                httpRequest.Method = HttpMethod.Get;
+                httpRequest.RequestUri = new Uri(url);
+                
+                // Set Headers
+                httpRequest.Headers.Add("Accept-Language", customRequestHeaders.Culture);
+                httpRequest.Headers.Add("x-ms-client-request-id", customRequestHeaders.ClientRequestId);
+                httpRequest.Headers.Add("x-ms-version", "2015-01-01");
+                
+                // Set Credentials
+                cancellationToken.ThrowIfCancellationRequested();
+                await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+                
+                // Send Request
+                HttpResponseMessage httpResponse = null;
+                try
+                {
+                    if (shouldTrace)
+                    {
+                        TracingAdapter.SendRequest(invocationId, httpRequest);
+                    }
+                    cancellationToken.ThrowIfCancellationRequested();
+                    httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+                    if (shouldTrace)
+                    {
+                        TracingAdapter.ReceiveResponse(invocationId, httpResponse);
+                    }
+                    HttpStatusCode statusCode = httpResponse.StatusCode;
+                    if (statusCode != HttpStatusCode.OK)
+                    {
+                        cancellationToken.ThrowIfCancellationRequested();
+                        CloudException ex = CloudException.Create(httpRequest, null, httpResponse, await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false));
+                        if (shouldTrace)
+                        {
+                            TracingAdapter.Error(invocationId, ex);
+                        }
+                        throw ex;
+                    }
+                    
+                    // Create Result
+                    VaultHealthDetailsResponse result = null;
+                    // Deserialize Response
+                    if (statusCode == HttpStatusCode.OK)
+                    {
+                        cancellationToken.ThrowIfCancellationRequested();
+                        string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        result = new VaultHealthDetailsResponse();
+                        JToken responseDoc = null;
+                        if (string.IsNullOrEmpty(responseContent) == false)
+                        {
+                            responseDoc = JToken.Parse(responseContent);
+                        }
+                        
+                        if (responseDoc != null && responseDoc.Type != JTokenType.Null)
+                        {
+                            VaultHealthDetails vaultHealthDetailsInstance = new VaultHealthDetails();
+                            result.VaultHealthDetails = vaultHealthDetailsInstance;
+                            
+                            JToken propertiesValue = responseDoc["properties"];
+                            if (propertiesValue != null && propertiesValue.Type != JTokenType.Null)
+                            {
+                                VaultHealthProperties propertiesInstance = new VaultHealthProperties();
+                                vaultHealthDetailsInstance.Properties = propertiesInstance;
+                                
+                                JToken vaultErrorsArray = propertiesValue["vaultErrors"];
+                                if (vaultErrorsArray != null && vaultErrorsArray.Type != JTokenType.Null)
+                                {
+                                    foreach (JToken vaultErrorsValue in ((JArray)vaultErrorsArray))
+                                    {
+                                        HealthError healthErrorInstance = new HealthError();
+                                        propertiesInstance.VaultErrors.Add(healthErrorInstance);
+                                        
+                                        JToken errorSourceValue = vaultErrorsValue["errorSource"];
+                                        if (errorSourceValue != null && errorSourceValue.Type != JTokenType.Null)
+                                        {
+                                            string errorSourceInstance = ((string)errorSourceValue);
+                                            healthErrorInstance.ErrorSource = errorSourceInstance;
+                                        }
+                                        
+                                        JToken errorTypeValue = vaultErrorsValue["errorType"];
+                                        if (errorTypeValue != null && errorTypeValue.Type != JTokenType.Null)
+                                        {
+                                            string errorTypeInstance = ((string)errorTypeValue);
+                                            healthErrorInstance.ErrorType = errorTypeInstance;
+                                        }
+                                        
+                                        JToken errorLevelValue = vaultErrorsValue["errorLevel"];
+                                        if (errorLevelValue != null && errorLevelValue.Type != JTokenType.Null)
+                                        {
+                                            string errorLevelInstance = ((string)errorLevelValue);
+                                            healthErrorInstance.ErrorLevel = errorLevelInstance;
+                                        }
+                                        
+                                        JToken errorCodeValue = vaultErrorsValue["errorCode"];
+                                        if (errorCodeValue != null && errorCodeValue.Type != JTokenType.Null)
+                                        {
+                                            string errorCodeInstance = ((string)errorCodeValue);
+                                            healthErrorInstance.ErrorCode = errorCodeInstance;
+                                        }
+                                        
+                                        JToken errorMessageValue = vaultErrorsValue["errorMessage"];
+                                        if (errorMessageValue != null && errorMessageValue.Type != JTokenType.Null)
+                                        {
+                                            string errorMessageInstance = ((string)errorMessageValue);
+                                            healthErrorInstance.ErrorMessage = errorMessageInstance;
+                                        }
+                                        
+                                        JToken possibleCausesValue = vaultErrorsValue["possibleCauses"];
+                                        if (possibleCausesValue != null && possibleCausesValue.Type != JTokenType.Null)
+                                        {
+                                            string possibleCausesInstance = ((string)possibleCausesValue);
+                                            healthErrorInstance.PossibleCauses = possibleCausesInstance;
+                                        }
+                                        
+                                        JToken recommendedActionValue = vaultErrorsValue["recommendedAction"];
+                                        if (recommendedActionValue != null && recommendedActionValue.Type != JTokenType.Null)
+                                        {
+                                            string recommendedActionInstance = ((string)recommendedActionValue);
+                                            healthErrorInstance.RecommendedAction = recommendedActionInstance;
+                                        }
+                                        
+                                        JToken creationTimeUtcValue = vaultErrorsValue["creationTimeUtc"];
+                                        if (creationTimeUtcValue != null && creationTimeUtcValue.Type != JTokenType.Null)
+                                        {
+                                            DateTime creationTimeUtcInstance = ((DateTime)creationTimeUtcValue);
+                                            healthErrorInstance.CreationTimeUtc = creationTimeUtcInstance;
+                                        }
+                                        
+                                        JToken recoveryProviderErrorMessageValue = vaultErrorsValue["recoveryProviderErrorMessage"];
+                                        if (recoveryProviderErrorMessageValue != null && recoveryProviderErrorMessageValue.Type != JTokenType.Null)
+                                        {
+                                            string recoveryProviderErrorMessageInstance = ((string)recoveryProviderErrorMessageValue);
+                                            healthErrorInstance.RecoveryProviderErrorMessage = recoveryProviderErrorMessageInstance;
+                                        }
+                                        
+                                        JToken entityIdValue = vaultErrorsValue["entityId"];
+                                        if (entityIdValue != null && entityIdValue.Type != JTokenType.Null)
+                                        {
+                                            string entityIdInstance = ((string)entityIdValue);
+                                            healthErrorInstance.EntityId = entityIdInstance;
+                                        }
+                                    }
+                                }
+                                
+                                JToken fabricsHealthValue = propertiesValue["fabricsHealth"];
+                                if (fabricsHealthValue != null && fabricsHealthValue.Type != JTokenType.Null)
+                                {
+                                    ResourceHealthSummary fabricsHealthInstance = new ResourceHealthSummary();
+                                    propertiesInstance.FabricsHealth = fabricsHealthInstance;
+                                    
+                                    JToken resourceCountValue = fabricsHealthValue["resourceCount"];
+                                    if (resourceCountValue != null && resourceCountValue.Type != JTokenType.Null)
+                                    {
+                                        int resourceCountInstance = ((int)resourceCountValue);
+                                        fabricsHealthInstance.ResourceCount = resourceCountInstance;
+                                    }
+                                    
+                                    JToken issuesArray = fabricsHealthValue["issues"];
+                                    if (issuesArray != null && issuesArray.Type != JTokenType.Null)
+                                    {
+                                        foreach (JToken issuesValue in ((JArray)issuesArray))
+                                        {
+                                            HealthErrorSummary healthErrorSummaryInstance = new HealthErrorSummary();
+                                            fabricsHealthInstance.Issues.Add(healthErrorSummaryInstance);
+                                            
+                                            JToken summaryCodeValue = issuesValue["summaryCode"];
+                                            if (summaryCodeValue != null && summaryCodeValue.Type != JTokenType.Null)
+                                            {
+                                                string summaryCodeInstance = ((string)summaryCodeValue);
+                                                healthErrorSummaryInstance.SummaryCode = summaryCodeInstance;
+                                            }
+                                            
+                                            JToken categoryValue = issuesValue["category"];
+                                            if (categoryValue != null && categoryValue.Type != JTokenType.Null)
+                                            {
+                                                string categoryInstance = ((string)categoryValue);
+                                                healthErrorSummaryInstance.Category = categoryInstance;
+                                            }
+                                            
+                                            JToken severityValue = issuesValue["severity"];
+                                            if (severityValue != null && severityValue.Type != JTokenType.Null)
+                                            {
+                                                string severityInstance = ((string)severityValue);
+                                                healthErrorSummaryInstance.Severity = severityInstance;
+                                            }
+                                            
+                                            JToken summaryMessageValue = issuesValue["summaryMessage"];
+                                            if (summaryMessageValue != null && summaryMessageValue.Type != JTokenType.Null)
+                                            {
+                                                string summaryMessageInstance = ((string)summaryMessageValue);
+                                                healthErrorSummaryInstance.SummaryMessage = summaryMessageInstance;
+                                            }
+                                            
+                                            JToken affectedResourceTypeValue = issuesValue["affectedResourceType"];
+                                            if (affectedResourceTypeValue != null && affectedResourceTypeValue.Type != JTokenType.Null)
+                                            {
+                                                string affectedResourceTypeInstance = ((string)affectedResourceTypeValue);
+                                                healthErrorSummaryInstance.AffectedResourceType = affectedResourceTypeInstance;
+                                            }
+                                            
+                                            JToken affectedResourceSubtypeValue = issuesValue["affectedResourceSubtype"];
+                                            if (affectedResourceSubtypeValue != null && affectedResourceSubtypeValue.Type != JTokenType.Null)
+                                            {
+                                                string affectedResourceSubtypeInstance = ((string)affectedResourceSubtypeValue);
+                                                healthErrorSummaryInstance.AffectedResourceSubtype = affectedResourceSubtypeInstance;
+                                            }
+                                            
+                                            JToken affectedResourceCorrelationIdsArray = issuesValue["affectedResourceCorrelationIds"];
+                                            if (affectedResourceCorrelationIdsArray != null && affectedResourceCorrelationIdsArray.Type != JTokenType.Null)
+                                            {
+                                                foreach (JToken affectedResourceCorrelationIdsValue in ((JArray)affectedResourceCorrelationIdsArray))
+                                                {
+                                                    healthErrorSummaryInstance.AffectedResourceCorrelationIds.Add(((string)affectedResourceCorrelationIdsValue));
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                
+                                JToken protectedItemsHealthValue = propertiesValue["protectedItemsHealth"];
+                                if (protectedItemsHealthValue != null && protectedItemsHealthValue.Type != JTokenType.Null)
+                                {
+                                    ResourceHealthSummary protectedItemsHealthInstance = new ResourceHealthSummary();
+                                    propertiesInstance.ProtectedItemsHealth = protectedItemsHealthInstance;
+                                    
+                                    JToken resourceCountValue2 = protectedItemsHealthValue["resourceCount"];
+                                    if (resourceCountValue2 != null && resourceCountValue2.Type != JTokenType.Null)
+                                    {
+                                        int resourceCountInstance2 = ((int)resourceCountValue2);
+                                        protectedItemsHealthInstance.ResourceCount = resourceCountInstance2;
+                                    }
+                                    
+                                    JToken issuesArray2 = protectedItemsHealthValue["issues"];
+                                    if (issuesArray2 != null && issuesArray2.Type != JTokenType.Null)
+                                    {
+                                        foreach (JToken issuesValue2 in ((JArray)issuesArray2))
+                                        {
+                                            HealthErrorSummary healthErrorSummaryInstance2 = new HealthErrorSummary();
+                                            protectedItemsHealthInstance.Issues.Add(healthErrorSummaryInstance2);
+                                            
+                                            JToken summaryCodeValue2 = issuesValue2["summaryCode"];
+                                            if (summaryCodeValue2 != null && summaryCodeValue2.Type != JTokenType.Null)
+                                            {
+                                                string summaryCodeInstance2 = ((string)summaryCodeValue2);
+                                                healthErrorSummaryInstance2.SummaryCode = summaryCodeInstance2;
+                                            }
+                                            
+                                            JToken categoryValue2 = issuesValue2["category"];
+                                            if (categoryValue2 != null && categoryValue2.Type != JTokenType.Null)
+                                            {
+                                                string categoryInstance2 = ((string)categoryValue2);
+                                                healthErrorSummaryInstance2.Category = categoryInstance2;
+                                            }
+                                            
+                                            JToken severityValue2 = issuesValue2["severity"];
+                                            if (severityValue2 != null && severityValue2.Type != JTokenType.Null)
+                                            {
+                                                string severityInstance2 = ((string)severityValue2);
+                                                healthErrorSummaryInstance2.Severity = severityInstance2;
+                                            }
+                                            
+                                            JToken summaryMessageValue2 = issuesValue2["summaryMessage"];
+                                            if (summaryMessageValue2 != null && summaryMessageValue2.Type != JTokenType.Null)
+                                            {
+                                                string summaryMessageInstance2 = ((string)summaryMessageValue2);
+                                                healthErrorSummaryInstance2.SummaryMessage = summaryMessageInstance2;
+                                            }
+                                            
+                                            JToken affectedResourceTypeValue2 = issuesValue2["affectedResourceType"];
+                                            if (affectedResourceTypeValue2 != null && affectedResourceTypeValue2.Type != JTokenType.Null)
+                                            {
+                                                string affectedResourceTypeInstance2 = ((string)affectedResourceTypeValue2);
+                                                healthErrorSummaryInstance2.AffectedResourceType = affectedResourceTypeInstance2;
+                                            }
+                                            
+                                            JToken affectedResourceSubtypeValue2 = issuesValue2["affectedResourceSubtype"];
+                                            if (affectedResourceSubtypeValue2 != null && affectedResourceSubtypeValue2.Type != JTokenType.Null)
+                                            {
+                                                string affectedResourceSubtypeInstance2 = ((string)affectedResourceSubtypeValue2);
+                                                healthErrorSummaryInstance2.AffectedResourceSubtype = affectedResourceSubtypeInstance2;
+                                            }
+                                            
+                                            JToken affectedResourceCorrelationIdsArray2 = issuesValue2["affectedResourceCorrelationIds"];
+                                            if (affectedResourceCorrelationIdsArray2 != null && affectedResourceCorrelationIdsArray2.Type != JTokenType.Null)
+                                            {
+                                                foreach (JToken affectedResourceCorrelationIdsValue2 in ((JArray)affectedResourceCorrelationIdsArray2))
+                                                {
+                                                    healthErrorSummaryInstance2.AffectedResourceCorrelationIds.Add(((string)affectedResourceCorrelationIdsValue2));
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            
+                            JToken idValue = responseDoc["id"];
+                            if (idValue != null && idValue.Type != JTokenType.Null)
+                            {
+                                string idInstance = ((string)idValue);
+                                vaultHealthDetailsInstance.Id = idInstance;
+                            }
+                            
+                            JToken nameValue = responseDoc["name"];
+                            if (nameValue != null && nameValue.Type != JTokenType.Null)
+                            {
+                                string nameInstance = ((string)nameValue);
+                                vaultHealthDetailsInstance.Name = nameInstance;
+                            }
+                            
+                            JToken typeValue = responseDoc["type"];
+                            if (typeValue != null && typeValue.Type != JTokenType.Null)
+                            {
+                                string typeInstance = ((string)typeValue);
+                                vaultHealthDetailsInstance.Type = typeInstance;
+                            }
+                            
+                            JToken locationValue = responseDoc["location"];
+                            if (locationValue != null && locationValue.Type != JTokenType.Null)
+                            {
+                                string locationInstance = ((string)locationValue);
+                                vaultHealthDetailsInstance.Location = locationInstance;
+                            }
+                            
+                            JToken tagsSequenceElement = ((JToken)responseDoc["tags"]);
+                            if (tagsSequenceElement != null && tagsSequenceElement.Type != JTokenType.Null)
+                            {
+                                foreach (JProperty property in tagsSequenceElement)
+                                {
+                                    string tagsKey = ((string)property.Name);
+                                    string tagsValue = ((string)property.Value);
+                                    vaultHealthDetailsInstance.Tags.Add(tagsKey, tagsValue);
+                                }
+                            }
+                            
+                            JToken clientRequestIdValue = responseDoc["ClientRequestId"];
+                            if (clientRequestIdValue != null && clientRequestIdValue.Type != JTokenType.Null)
+                            {
+                                string clientRequestIdInstance = ((string)clientRequestIdValue);
+                                result.ClientRequestId = clientRequestIdInstance;
+                            }
+                            
+                            JToken correlationRequestIdValue = responseDoc["CorrelationRequestId"];
+                            if (correlationRequestIdValue != null && correlationRequestIdValue.Type != JTokenType.Null)
+                            {
+                                string correlationRequestIdInstance = ((string)correlationRequestIdValue);
+                                result.CorrelationRequestId = correlationRequestIdInstance;
+                            }
+                            
+                            JToken dateValue = responseDoc["Date"];
+                            if (dateValue != null && dateValue.Type != JTokenType.Null)
+                            {
+                                string dateInstance = ((string)dateValue);
+                                result.Date = dateInstance;
+                            }
+                            
+                            JToken contentTypeValue = responseDoc["ContentType"];
+                            if (contentTypeValue != null && contentTypeValue.Type != JTokenType.Null)
+                            {
+                                string contentTypeInstance = ((string)contentTypeValue);
+                                result.ContentType = contentTypeInstance;
+                            }
+                        }
+                        
+                    }
+                    result.StatusCode = statusCode;
+                    if (httpResponse.Content != null && httpResponse.Content.Headers.Contains("Content-Type"))
+                    {
+                        result.ContentType = httpResponse.Content.Headers.GetValues("Content-Type").FirstOrDefault();
+                    }
+                    if (httpResponse.Headers.Contains("Date"))
+                    {
+                        result.Date = httpResponse.Headers.GetValues("Date").FirstOrDefault();
+                    }
+                    if (httpResponse.Headers.Contains("x-ms-client-request-id"))
+                    {
+                        result.ClientRequestId = httpResponse.Headers.GetValues("x-ms-client-request-id").FirstOrDefault();
+                    }
+                    if (httpResponse.Headers.Contains("x-ms-correlation-request-id"))
+                    {
+                        result.CorrelationRequestId = httpResponse.Headers.GetValues("x-ms-correlation-request-id").FirstOrDefault();
+                    }
+                    if (httpResponse.Headers.Contains("x-ms-request-id"))
+                    {
+                        result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    
+                    if (shouldTrace)
+                    {
+                        TracingAdapter.Exit(invocationId, result);
+                    }
+                    return result;
+                }
+                finally
+                {
+                    if (httpResponse != null)
+                    {
+                        httpResponse.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (httpRequest != null)
+                {
+                    httpRequest.Dispose();
+                }
+            }
+        }
+        
+        /// <summary>
         /// Refreshes health of the vault.
         /// </summary>
         /// <param name='customRequestHeaders'>

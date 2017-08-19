@@ -64,6 +64,26 @@ namespace Microsoft.Azure.Management.SiteRecovery
         Task<LongRunningOperationResponse> GetRefreshHealthStatusAsync(string operationStatusLink, CancellationToken cancellationToken);
         
         /// <summary>
+        /// Get the vault health details.
+        /// </summary>
+        /// <param name='resourceGroupName'>
+        /// The name of the resource group containing the resource.
+        /// </param>
+        /// <param name='resourceName'>
+        /// The name of the resource.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Request header parameters.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
+        /// The response model for the vault health details object.
+        /// </returns>
+        Task<VaultHealthDetailsResponse> GetReplicationVaultHealthAsync(string resourceGroupName, string resourceName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        
+        /// <summary>
         /// Refreshes health of the vault.
         /// </summary>
         /// <param name='customRequestHeaders'>

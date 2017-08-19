@@ -25,16 +25,16 @@ using System.Linq;
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// The definition of a Protection Container mapping health object.
+    /// The definition of a mapping health object.
     /// </summary>
     public partial class HealthError
     {
-        private string _creationTimeUtc;
+        private DateTime _creationTimeUtc;
         
         /// <summary>
         /// Optional. Error creation time (UTC)
         /// </summary>
-        public string CreationTimeUtc
+        public DateTime CreationTimeUtc
         {
             get { return this._creationTimeUtc; }
             set { this._creationTimeUtc = value; }

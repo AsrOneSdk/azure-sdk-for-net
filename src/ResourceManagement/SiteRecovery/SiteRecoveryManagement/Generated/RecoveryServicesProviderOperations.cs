@@ -978,7 +978,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         JToken creationTimeUtcValue = healthErrorDetailsValue["creationTimeUtc"];
                                         if (creationTimeUtcValue != null && creationTimeUtcValue.Type != JTokenType.Null)
                                         {
-                                            string creationTimeUtcInstance = ((string)creationTimeUtcValue);
+                                            DateTime creationTimeUtcInstance = ((DateTime)creationTimeUtcValue);
                                             healthErrorInstance.CreationTimeUtc = creationTimeUtcInstance;
                                         }
                                         
@@ -2090,7 +2090,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 JToken creationTimeUtcValue = healthErrorDetailsValue["creationTimeUtc"];
                                                 if (creationTimeUtcValue != null && creationTimeUtcValue.Type != JTokenType.Null)
                                                 {
-                                                    string creationTimeUtcInstance = ((string)creationTimeUtcValue);
+                                                    DateTime creationTimeUtcInstance = ((DateTime)creationTimeUtcValue);
                                                     healthErrorInstance.CreationTimeUtc = creationTimeUtcInstance;
                                                 }
                                                 
@@ -2508,7 +2508,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 JToken creationTimeUtcValue = healthErrorDetailsValue["creationTimeUtc"];
                                                 if (creationTimeUtcValue != null && creationTimeUtcValue.Type != JTokenType.Null)
                                                 {
-                                                    string creationTimeUtcInstance = ((string)creationTimeUtcValue);
+                                                    DateTime creationTimeUtcInstance = ((DateTime)creationTimeUtcValue);
                                                     healthErrorInstance.CreationTimeUtc = creationTimeUtcInstance;
                                                 }
                                                 
