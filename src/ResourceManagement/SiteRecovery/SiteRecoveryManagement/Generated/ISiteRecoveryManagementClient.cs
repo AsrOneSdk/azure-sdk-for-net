@@ -237,6 +237,14 @@ namespace Microsoft.Azure.Management.SiteRecovery
         }
         
         /// <summary>
+        /// Definition of vault operations for the Site Recovery extension.
+        /// </summary>
+        IVaultHealthOperations Vaults
+        {
+            get; 
+        }
+        
+        /// <summary>
         /// Definition of vCenter entity operations for the Site Recovery
         /// extension.
         /// </summary>

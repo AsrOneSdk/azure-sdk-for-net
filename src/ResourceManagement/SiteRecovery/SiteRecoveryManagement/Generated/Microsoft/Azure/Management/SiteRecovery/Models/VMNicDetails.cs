@@ -62,6 +62,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._primaryNicStaticIPAddress = value; }
         }
         
+        private string _recoveryNicIpAddressType;
+        
+        /// <summary>
+        /// Optional. Gets or sets primary NIC static IP address.
+        /// </summary>
+        public string RecoveryNicIpAddressType
+        {
+            get { return this._recoveryNicIpAddressType; }
+            set { this._recoveryNicIpAddressType = value; }
+        }
+        
         private string _recoveryVMNetworkId;
         
         /// <summary>

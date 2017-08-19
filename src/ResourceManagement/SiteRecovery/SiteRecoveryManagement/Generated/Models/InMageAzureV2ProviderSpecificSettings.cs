@@ -270,6 +270,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._oSType = value; }
         }
         
+        private string _osVersion;
+        
+        /// <summary>
+        /// Optional. Gets or sets the OS version of the protected vm.
+        /// </summary>
+        public string OsVersion
+        {
+            get { return this._osVersion; }
+            set { this._osVersion = value; }
+        }
+        
         private string _processServerId;
         
         /// <summary>

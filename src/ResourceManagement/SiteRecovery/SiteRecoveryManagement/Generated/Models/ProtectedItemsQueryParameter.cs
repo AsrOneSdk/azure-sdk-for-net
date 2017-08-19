@@ -51,6 +51,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._sourceFabricName = value; }
         }
         
+        private string _vCenterName;
+        
+        /// <summary>
+        /// Optional. VCenter Name filter.
+        /// </summary>
+        public string VCenterName
+        {
+            get { return this._vCenterName; }
+            set { this._vCenterName = value; }
+        }
+        
         /// <summary>
         /// Initializes a new instance of the ProtectedItemsQueryParameter
         /// class.
