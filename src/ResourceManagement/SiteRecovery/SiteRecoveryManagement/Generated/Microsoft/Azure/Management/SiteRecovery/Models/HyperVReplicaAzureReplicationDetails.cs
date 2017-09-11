@@ -190,6 +190,18 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._selectedRecoveryAzureNetworkId = value; }
         }
         
+        private string _selectedSourceNicId;
+        
+        /// <summary>
+        /// Optional. Gets or sets the selected source nic id which will be
+        /// used as the primary nic during failover.
+        /// </summary>
+        public string SelectedSourceNicId
+        {
+            get { return this._selectedSourceNicId; }
+            set { this._selectedSourceNicId = value; }
+        }
+        
         private int _sourceVmCPUCount;
         
         /// <summary>
