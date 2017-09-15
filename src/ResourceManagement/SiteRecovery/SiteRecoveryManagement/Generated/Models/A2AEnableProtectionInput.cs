@@ -43,6 +43,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._fabricObjectId = value; }
         }
         
+        private string _multiVmGroupName;
+        
+        /// <summary>
+        /// Optional. Multi VM group name.
+        /// </summary>
+        public string MultiVmGroupName
+        {
+            get { return this._multiVmGroupName; }
+            set { this._multiVmGroupName = value; }
+        }
+        
         private string _recoveryAvailabilitySetId;
         
         /// <summary>
