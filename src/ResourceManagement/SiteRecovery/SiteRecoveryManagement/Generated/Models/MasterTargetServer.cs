@@ -65,6 +65,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._diskCount = value; }
         }
         
+        private IList<HealthError> _healthErrors;
+        
+        /// <summary>
+        /// Optional. List of health errors.
+        /// </summary>
+        public IList<HealthError> HealthErrors
+        {
+            get { return this._healthErrors; }
+            set { this._healthErrors = value; }
+        }
+        
         private string _id;
         
         /// <summary>
@@ -170,6 +181,7 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         public MasterTargetServer()
         {
             this.DataStores = new LazyList<DataStore>();
+            this.HealthErrors = new LazyList<HealthError>();
             this.RetentionVolumes = new LazyList<RetentionVolume>();
             this.ValidationErrors = new LazyList<HealthError>();
         }

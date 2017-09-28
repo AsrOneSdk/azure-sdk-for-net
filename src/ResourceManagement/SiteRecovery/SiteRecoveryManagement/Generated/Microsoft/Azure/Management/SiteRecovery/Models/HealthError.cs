@@ -20,7 +20,10 @@
 // code is regenerated.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using Hyak.Common;
+using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
@@ -106,6 +109,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._errorType = value; }
         }
         
+        private IList<InnerHealthError> _innerHealthErrors;
+        
+        /// <summary>
+        /// Optional. Inner health errors.
+        /// </summary>
+        public IList<InnerHealthError> InnerHealthErrors
+        {
+            get { return this._innerHealthErrors; }
+            set { this._innerHealthErrors = value; }
+        }
+        
         private string _possibleCauses;
         
         /// <summary>
@@ -139,11 +153,23 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._recoveryProviderErrorMessage = value; }
         }
         
+        private string _summaryMessage;
+        
+        /// <summary>
+        /// Optional. Summary message.
+        /// </summary>
+        public string SummaryMessage
+        {
+            get { return this._summaryMessage; }
+            set { this._summaryMessage = value; }
+        }
+        
         /// <summary>
         /// Initializes a new instance of the HealthError class.
         /// </summary>
         public HealthError()
         {
+            this.InnerHealthErrors = new LazyList<InnerHealthError>();
         }
     }
 }

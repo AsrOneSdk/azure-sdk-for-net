@@ -20,7 +20,10 @@
 // code is regenerated.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using Hyak.Common;
+using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
@@ -60,6 +63,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         {
             get { return this._friendlyName; }
             set { this._friendlyName = value; }
+        }
+        
+        private IList<HealthError> _healthErrors;
+        
+        /// <summary>
+        /// Optional. List of health errors.
+        /// </summary>
+        public IList<HealthError> HealthErrors
+        {
+            get { return this._healthErrors; }
+            set { this._healthErrors = value; }
         }
         
         private string _infrastructureId;
@@ -144,6 +158,7 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         /// </summary>
         public VCenterProperties()
         {
+            this.HealthErrors = new LazyList<HealthError>();
         }
     }
 }

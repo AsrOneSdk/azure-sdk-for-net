@@ -98,6 +98,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._friendlyName = value; }
         }
         
+        private IList<HealthError> _healthErrors;
+        
+        /// <summary>
+        /// Optional. List of health errors.
+        /// </summary>
+        public IList<HealthError> HealthErrors
+        {
+            get { return this._healthErrors; }
+            set { this._healthErrors = value; }
+        }
+        
         private string _hostId;
         
         /// <summary>
@@ -313,6 +324,7 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         /// </summary>
         public ProcessServer()
         {
+            this.HealthErrors = new LazyList<HealthError>();
             this.Updates = new LazyList<MobilityServiceUpdate>();
         }
     }

@@ -65,17 +65,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._encryptionDetails = value; }
         }
         
-        private IList<HealthError> _failoverHealthErrorDetails;
-        
-        /// <summary>
-        /// Optional. List of failover Health errors.
-        /// </summary>
-        public IList<HealthError> FailoverHealthErrorDetails
-        {
-            get { return this._failoverHealthErrorDetails; }
-            set { this._failoverHealthErrorDetails = value; }
-        }
-        
         private string _friendlyName;
         
         /// <summary>
@@ -136,7 +125,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         /// </summary>
         public FabricProperties()
         {
-            this.FailoverHealthErrorDetails = new LazyList<HealthError>();
             this.HealthErrorDetails = new LazyList<HealthError>();
         }
     }

@@ -1078,6 +1078,180 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     string fabricArmResourceNameInstance = ((string)fabricArmResourceNameValue);
                                     propertiesInstance.FabricArmResourceName = fabricArmResourceNameInstance;
                                 }
+                                
+                                JToken healthErrorsArray = propertiesValue["healthErrors"];
+                                if (healthErrorsArray != null && healthErrorsArray.Type != JTokenType.Null)
+                                {
+                                    foreach (JToken healthErrorsValue in ((JArray)healthErrorsArray))
+                                    {
+                                        HealthError healthErrorInstance = new HealthError();
+                                        propertiesInstance.HealthErrors.Add(healthErrorInstance);
+                                        
+                                        JToken errorSourceValue = healthErrorsValue["errorSource"];
+                                        if (errorSourceValue != null && errorSourceValue.Type != JTokenType.Null)
+                                        {
+                                            string errorSourceInstance = ((string)errorSourceValue);
+                                            healthErrorInstance.ErrorSource = errorSourceInstance;
+                                        }
+                                        
+                                        JToken errorTypeValue = healthErrorsValue["errorType"];
+                                        if (errorTypeValue != null && errorTypeValue.Type != JTokenType.Null)
+                                        {
+                                            string errorTypeInstance = ((string)errorTypeValue);
+                                            healthErrorInstance.ErrorType = errorTypeInstance;
+                                        }
+                                        
+                                        JToken errorLevelValue = healthErrorsValue["errorLevel"];
+                                        if (errorLevelValue != null && errorLevelValue.Type != JTokenType.Null)
+                                        {
+                                            string errorLevelInstance = ((string)errorLevelValue);
+                                            healthErrorInstance.ErrorLevel = errorLevelInstance;
+                                        }
+                                        
+                                        JToken errorCodeValue = healthErrorsValue["errorCode"];
+                                        if (errorCodeValue != null && errorCodeValue.Type != JTokenType.Null)
+                                        {
+                                            string errorCodeInstance = ((string)errorCodeValue);
+                                            healthErrorInstance.ErrorCode = errorCodeInstance;
+                                        }
+                                        
+                                        JToken errorMessageValue = healthErrorsValue["errorMessage"];
+                                        if (errorMessageValue != null && errorMessageValue.Type != JTokenType.Null)
+                                        {
+                                            string errorMessageInstance = ((string)errorMessageValue);
+                                            healthErrorInstance.ErrorMessage = errorMessageInstance;
+                                        }
+                                        
+                                        JToken summaryMessageValue = healthErrorsValue["summaryMessage"];
+                                        if (summaryMessageValue != null && summaryMessageValue.Type != JTokenType.Null)
+                                        {
+                                            string summaryMessageInstance = ((string)summaryMessageValue);
+                                            healthErrorInstance.SummaryMessage = summaryMessageInstance;
+                                        }
+                                        
+                                        JToken possibleCausesValue = healthErrorsValue["possibleCauses"];
+                                        if (possibleCausesValue != null && possibleCausesValue.Type != JTokenType.Null)
+                                        {
+                                            string possibleCausesInstance = ((string)possibleCausesValue);
+                                            healthErrorInstance.PossibleCauses = possibleCausesInstance;
+                                        }
+                                        
+                                        JToken recommendedActionValue = healthErrorsValue["recommendedAction"];
+                                        if (recommendedActionValue != null && recommendedActionValue.Type != JTokenType.Null)
+                                        {
+                                            string recommendedActionInstance = ((string)recommendedActionValue);
+                                            healthErrorInstance.RecommendedAction = recommendedActionInstance;
+                                        }
+                                        
+                                        JToken creationTimeUtcValue = healthErrorsValue["creationTimeUtc"];
+                                        if (creationTimeUtcValue != null && creationTimeUtcValue.Type != JTokenType.Null)
+                                        {
+                                            DateTime creationTimeUtcInstance = ((DateTime)creationTimeUtcValue);
+                                            healthErrorInstance.CreationTimeUtc = creationTimeUtcInstance;
+                                        }
+                                        
+                                        JToken recoveryProviderErrorMessageValue = healthErrorsValue["recoveryProviderErrorMessage"];
+                                        if (recoveryProviderErrorMessageValue != null && recoveryProviderErrorMessageValue.Type != JTokenType.Null)
+                                        {
+                                            string recoveryProviderErrorMessageInstance = ((string)recoveryProviderErrorMessageValue);
+                                            healthErrorInstance.RecoveryProviderErrorMessage = recoveryProviderErrorMessageInstance;
+                                        }
+                                        
+                                        JToken entityIdValue = healthErrorsValue["entityId"];
+                                        if (entityIdValue != null && entityIdValue.Type != JTokenType.Null)
+                                        {
+                                            string entityIdInstance = ((string)entityIdValue);
+                                            healthErrorInstance.EntityId = entityIdInstance;
+                                        }
+                                        
+                                        JToken innerHealthErrorsArray = healthErrorsValue["innerHealthErrors"];
+                                        if (innerHealthErrorsArray != null && innerHealthErrorsArray.Type != JTokenType.Null)
+                                        {
+                                            foreach (JToken innerHealthErrorsValue in ((JArray)innerHealthErrorsArray))
+                                            {
+                                                InnerHealthError innerHealthErrorInstance = new InnerHealthError();
+                                                healthErrorInstance.InnerHealthErrors.Add(innerHealthErrorInstance);
+                                                
+                                                JToken errorSourceValue2 = innerHealthErrorsValue["errorSource"];
+                                                if (errorSourceValue2 != null && errorSourceValue2.Type != JTokenType.Null)
+                                                {
+                                                    string errorSourceInstance2 = ((string)errorSourceValue2);
+                                                    innerHealthErrorInstance.ErrorSource = errorSourceInstance2;
+                                                }
+                                                
+                                                JToken errorTypeValue2 = innerHealthErrorsValue["errorType"];
+                                                if (errorTypeValue2 != null && errorTypeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string errorTypeInstance2 = ((string)errorTypeValue2);
+                                                    innerHealthErrorInstance.ErrorType = errorTypeInstance2;
+                                                }
+                                                
+                                                JToken errorLevelValue2 = innerHealthErrorsValue["errorLevel"];
+                                                if (errorLevelValue2 != null && errorLevelValue2.Type != JTokenType.Null)
+                                                {
+                                                    string errorLevelInstance2 = ((string)errorLevelValue2);
+                                                    innerHealthErrorInstance.ErrorLevel = errorLevelInstance2;
+                                                }
+                                                
+                                                JToken errorCodeValue2 = innerHealthErrorsValue["errorCode"];
+                                                if (errorCodeValue2 != null && errorCodeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string errorCodeInstance2 = ((string)errorCodeValue2);
+                                                    innerHealthErrorInstance.ErrorCode = errorCodeInstance2;
+                                                }
+                                                
+                                                JToken errorMessageValue2 = innerHealthErrorsValue["errorMessage"];
+                                                if (errorMessageValue2 != null && errorMessageValue2.Type != JTokenType.Null)
+                                                {
+                                                    string errorMessageInstance2 = ((string)errorMessageValue2);
+                                                    innerHealthErrorInstance.ErrorMessage = errorMessageInstance2;
+                                                }
+                                                
+                                                JToken summaryMessageValue2 = innerHealthErrorsValue["summaryMessage"];
+                                                if (summaryMessageValue2 != null && summaryMessageValue2.Type != JTokenType.Null)
+                                                {
+                                                    string summaryMessageInstance2 = ((string)summaryMessageValue2);
+                                                    innerHealthErrorInstance.SummaryMessage = summaryMessageInstance2;
+                                                }
+                                                
+                                                JToken possibleCausesValue2 = innerHealthErrorsValue["possibleCauses"];
+                                                if (possibleCausesValue2 != null && possibleCausesValue2.Type != JTokenType.Null)
+                                                {
+                                                    string possibleCausesInstance2 = ((string)possibleCausesValue2);
+                                                    innerHealthErrorInstance.PossibleCauses = possibleCausesInstance2;
+                                                }
+                                                
+                                                JToken recommendedActionValue2 = innerHealthErrorsValue["recommendedAction"];
+                                                if (recommendedActionValue2 != null && recommendedActionValue2.Type != JTokenType.Null)
+                                                {
+                                                    string recommendedActionInstance2 = ((string)recommendedActionValue2);
+                                                    innerHealthErrorInstance.RecommendedAction = recommendedActionInstance2;
+                                                }
+                                                
+                                                JToken creationTimeUtcValue2 = innerHealthErrorsValue["creationTimeUtc"];
+                                                if (creationTimeUtcValue2 != null && creationTimeUtcValue2.Type != JTokenType.Null)
+                                                {
+                                                    DateTime creationTimeUtcInstance2 = ((DateTime)creationTimeUtcValue2);
+                                                    innerHealthErrorInstance.CreationTimeUtc = creationTimeUtcInstance2;
+                                                }
+                                                
+                                                JToken recoveryProviderErrorMessageValue2 = innerHealthErrorsValue["recoveryProviderErrorMessage"];
+                                                if (recoveryProviderErrorMessageValue2 != null && recoveryProviderErrorMessageValue2.Type != JTokenType.Null)
+                                                {
+                                                    string recoveryProviderErrorMessageInstance2 = ((string)recoveryProviderErrorMessageValue2);
+                                                    innerHealthErrorInstance.RecoveryProviderErrorMessage = recoveryProviderErrorMessageInstance2;
+                                                }
+                                                
+                                                JToken entityIdValue2 = innerHealthErrorsValue["entityId"];
+                                                if (entityIdValue2 != null && entityIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string entityIdInstance2 = ((string)entityIdValue2);
+                                                    innerHealthErrorInstance.EntityId = entityIdInstance2;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             }
                             
                             JToken idValue = responseDoc["id"];
@@ -1368,6 +1542,180 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 {
                                     string fabricArmResourceNameInstance = ((string)fabricArmResourceNameValue);
                                     propertiesInstance.FabricArmResourceName = fabricArmResourceNameInstance;
+                                }
+                                
+                                JToken healthErrorsArray = propertiesValue["healthErrors"];
+                                if (healthErrorsArray != null && healthErrorsArray.Type != JTokenType.Null)
+                                {
+                                    foreach (JToken healthErrorsValue in ((JArray)healthErrorsArray))
+                                    {
+                                        HealthError healthErrorInstance = new HealthError();
+                                        propertiesInstance.HealthErrors.Add(healthErrorInstance);
+                                        
+                                        JToken errorSourceValue = healthErrorsValue["errorSource"];
+                                        if (errorSourceValue != null && errorSourceValue.Type != JTokenType.Null)
+                                        {
+                                            string errorSourceInstance = ((string)errorSourceValue);
+                                            healthErrorInstance.ErrorSource = errorSourceInstance;
+                                        }
+                                        
+                                        JToken errorTypeValue = healthErrorsValue["errorType"];
+                                        if (errorTypeValue != null && errorTypeValue.Type != JTokenType.Null)
+                                        {
+                                            string errorTypeInstance = ((string)errorTypeValue);
+                                            healthErrorInstance.ErrorType = errorTypeInstance;
+                                        }
+                                        
+                                        JToken errorLevelValue = healthErrorsValue["errorLevel"];
+                                        if (errorLevelValue != null && errorLevelValue.Type != JTokenType.Null)
+                                        {
+                                            string errorLevelInstance = ((string)errorLevelValue);
+                                            healthErrorInstance.ErrorLevel = errorLevelInstance;
+                                        }
+                                        
+                                        JToken errorCodeValue = healthErrorsValue["errorCode"];
+                                        if (errorCodeValue != null && errorCodeValue.Type != JTokenType.Null)
+                                        {
+                                            string errorCodeInstance = ((string)errorCodeValue);
+                                            healthErrorInstance.ErrorCode = errorCodeInstance;
+                                        }
+                                        
+                                        JToken errorMessageValue = healthErrorsValue["errorMessage"];
+                                        if (errorMessageValue != null && errorMessageValue.Type != JTokenType.Null)
+                                        {
+                                            string errorMessageInstance = ((string)errorMessageValue);
+                                            healthErrorInstance.ErrorMessage = errorMessageInstance;
+                                        }
+                                        
+                                        JToken summaryMessageValue = healthErrorsValue["summaryMessage"];
+                                        if (summaryMessageValue != null && summaryMessageValue.Type != JTokenType.Null)
+                                        {
+                                            string summaryMessageInstance = ((string)summaryMessageValue);
+                                            healthErrorInstance.SummaryMessage = summaryMessageInstance;
+                                        }
+                                        
+                                        JToken possibleCausesValue = healthErrorsValue["possibleCauses"];
+                                        if (possibleCausesValue != null && possibleCausesValue.Type != JTokenType.Null)
+                                        {
+                                            string possibleCausesInstance = ((string)possibleCausesValue);
+                                            healthErrorInstance.PossibleCauses = possibleCausesInstance;
+                                        }
+                                        
+                                        JToken recommendedActionValue = healthErrorsValue["recommendedAction"];
+                                        if (recommendedActionValue != null && recommendedActionValue.Type != JTokenType.Null)
+                                        {
+                                            string recommendedActionInstance = ((string)recommendedActionValue);
+                                            healthErrorInstance.RecommendedAction = recommendedActionInstance;
+                                        }
+                                        
+                                        JToken creationTimeUtcValue = healthErrorsValue["creationTimeUtc"];
+                                        if (creationTimeUtcValue != null && creationTimeUtcValue.Type != JTokenType.Null)
+                                        {
+                                            DateTime creationTimeUtcInstance = ((DateTime)creationTimeUtcValue);
+                                            healthErrorInstance.CreationTimeUtc = creationTimeUtcInstance;
+                                        }
+                                        
+                                        JToken recoveryProviderErrorMessageValue = healthErrorsValue["recoveryProviderErrorMessage"];
+                                        if (recoveryProviderErrorMessageValue != null && recoveryProviderErrorMessageValue.Type != JTokenType.Null)
+                                        {
+                                            string recoveryProviderErrorMessageInstance = ((string)recoveryProviderErrorMessageValue);
+                                            healthErrorInstance.RecoveryProviderErrorMessage = recoveryProviderErrorMessageInstance;
+                                        }
+                                        
+                                        JToken entityIdValue = healthErrorsValue["entityId"];
+                                        if (entityIdValue != null && entityIdValue.Type != JTokenType.Null)
+                                        {
+                                            string entityIdInstance = ((string)entityIdValue);
+                                            healthErrorInstance.EntityId = entityIdInstance;
+                                        }
+                                        
+                                        JToken innerHealthErrorsArray = healthErrorsValue["innerHealthErrors"];
+                                        if (innerHealthErrorsArray != null && innerHealthErrorsArray.Type != JTokenType.Null)
+                                        {
+                                            foreach (JToken innerHealthErrorsValue in ((JArray)innerHealthErrorsArray))
+                                            {
+                                                InnerHealthError innerHealthErrorInstance = new InnerHealthError();
+                                                healthErrorInstance.InnerHealthErrors.Add(innerHealthErrorInstance);
+                                                
+                                                JToken errorSourceValue2 = innerHealthErrorsValue["errorSource"];
+                                                if (errorSourceValue2 != null && errorSourceValue2.Type != JTokenType.Null)
+                                                {
+                                                    string errorSourceInstance2 = ((string)errorSourceValue2);
+                                                    innerHealthErrorInstance.ErrorSource = errorSourceInstance2;
+                                                }
+                                                
+                                                JToken errorTypeValue2 = innerHealthErrorsValue["errorType"];
+                                                if (errorTypeValue2 != null && errorTypeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string errorTypeInstance2 = ((string)errorTypeValue2);
+                                                    innerHealthErrorInstance.ErrorType = errorTypeInstance2;
+                                                }
+                                                
+                                                JToken errorLevelValue2 = innerHealthErrorsValue["errorLevel"];
+                                                if (errorLevelValue2 != null && errorLevelValue2.Type != JTokenType.Null)
+                                                {
+                                                    string errorLevelInstance2 = ((string)errorLevelValue2);
+                                                    innerHealthErrorInstance.ErrorLevel = errorLevelInstance2;
+                                                }
+                                                
+                                                JToken errorCodeValue2 = innerHealthErrorsValue["errorCode"];
+                                                if (errorCodeValue2 != null && errorCodeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string errorCodeInstance2 = ((string)errorCodeValue2);
+                                                    innerHealthErrorInstance.ErrorCode = errorCodeInstance2;
+                                                }
+                                                
+                                                JToken errorMessageValue2 = innerHealthErrorsValue["errorMessage"];
+                                                if (errorMessageValue2 != null && errorMessageValue2.Type != JTokenType.Null)
+                                                {
+                                                    string errorMessageInstance2 = ((string)errorMessageValue2);
+                                                    innerHealthErrorInstance.ErrorMessage = errorMessageInstance2;
+                                                }
+                                                
+                                                JToken summaryMessageValue2 = innerHealthErrorsValue["summaryMessage"];
+                                                if (summaryMessageValue2 != null && summaryMessageValue2.Type != JTokenType.Null)
+                                                {
+                                                    string summaryMessageInstance2 = ((string)summaryMessageValue2);
+                                                    innerHealthErrorInstance.SummaryMessage = summaryMessageInstance2;
+                                                }
+                                                
+                                                JToken possibleCausesValue2 = innerHealthErrorsValue["possibleCauses"];
+                                                if (possibleCausesValue2 != null && possibleCausesValue2.Type != JTokenType.Null)
+                                                {
+                                                    string possibleCausesInstance2 = ((string)possibleCausesValue2);
+                                                    innerHealthErrorInstance.PossibleCauses = possibleCausesInstance2;
+                                                }
+                                                
+                                                JToken recommendedActionValue2 = innerHealthErrorsValue["recommendedAction"];
+                                                if (recommendedActionValue2 != null && recommendedActionValue2.Type != JTokenType.Null)
+                                                {
+                                                    string recommendedActionInstance2 = ((string)recommendedActionValue2);
+                                                    innerHealthErrorInstance.RecommendedAction = recommendedActionInstance2;
+                                                }
+                                                
+                                                JToken creationTimeUtcValue2 = innerHealthErrorsValue["creationTimeUtc"];
+                                                if (creationTimeUtcValue2 != null && creationTimeUtcValue2.Type != JTokenType.Null)
+                                                {
+                                                    DateTime creationTimeUtcInstance2 = ((DateTime)creationTimeUtcValue2);
+                                                    innerHealthErrorInstance.CreationTimeUtc = creationTimeUtcInstance2;
+                                                }
+                                                
+                                                JToken recoveryProviderErrorMessageValue2 = innerHealthErrorsValue["recoveryProviderErrorMessage"];
+                                                if (recoveryProviderErrorMessageValue2 != null && recoveryProviderErrorMessageValue2.Type != JTokenType.Null)
+                                                {
+                                                    string recoveryProviderErrorMessageInstance2 = ((string)recoveryProviderErrorMessageValue2);
+                                                    innerHealthErrorInstance.RecoveryProviderErrorMessage = recoveryProviderErrorMessageInstance2;
+                                                }
+                                                
+                                                JToken entityIdValue2 = innerHealthErrorsValue["entityId"];
+                                                if (entityIdValue2 != null && entityIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string entityIdInstance2 = ((string)entityIdValue2);
+                                                    innerHealthErrorInstance.EntityId = entityIdInstance2;
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                             
@@ -1950,6 +2298,180 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     string fabricArmResourceNameInstance = ((string)fabricArmResourceNameValue);
                                     propertiesInstance.FabricArmResourceName = fabricArmResourceNameInstance;
                                 }
+                                
+                                JToken healthErrorsArray = propertiesValue["healthErrors"];
+                                if (healthErrorsArray != null && healthErrorsArray.Type != JTokenType.Null)
+                                {
+                                    foreach (JToken healthErrorsValue in ((JArray)healthErrorsArray))
+                                    {
+                                        HealthError healthErrorInstance = new HealthError();
+                                        propertiesInstance.HealthErrors.Add(healthErrorInstance);
+                                        
+                                        JToken errorSourceValue = healthErrorsValue["errorSource"];
+                                        if (errorSourceValue != null && errorSourceValue.Type != JTokenType.Null)
+                                        {
+                                            string errorSourceInstance = ((string)errorSourceValue);
+                                            healthErrorInstance.ErrorSource = errorSourceInstance;
+                                        }
+                                        
+                                        JToken errorTypeValue = healthErrorsValue["errorType"];
+                                        if (errorTypeValue != null && errorTypeValue.Type != JTokenType.Null)
+                                        {
+                                            string errorTypeInstance = ((string)errorTypeValue);
+                                            healthErrorInstance.ErrorType = errorTypeInstance;
+                                        }
+                                        
+                                        JToken errorLevelValue = healthErrorsValue["errorLevel"];
+                                        if (errorLevelValue != null && errorLevelValue.Type != JTokenType.Null)
+                                        {
+                                            string errorLevelInstance = ((string)errorLevelValue);
+                                            healthErrorInstance.ErrorLevel = errorLevelInstance;
+                                        }
+                                        
+                                        JToken errorCodeValue = healthErrorsValue["errorCode"];
+                                        if (errorCodeValue != null && errorCodeValue.Type != JTokenType.Null)
+                                        {
+                                            string errorCodeInstance = ((string)errorCodeValue);
+                                            healthErrorInstance.ErrorCode = errorCodeInstance;
+                                        }
+                                        
+                                        JToken errorMessageValue = healthErrorsValue["errorMessage"];
+                                        if (errorMessageValue != null && errorMessageValue.Type != JTokenType.Null)
+                                        {
+                                            string errorMessageInstance = ((string)errorMessageValue);
+                                            healthErrorInstance.ErrorMessage = errorMessageInstance;
+                                        }
+                                        
+                                        JToken summaryMessageValue = healthErrorsValue["summaryMessage"];
+                                        if (summaryMessageValue != null && summaryMessageValue.Type != JTokenType.Null)
+                                        {
+                                            string summaryMessageInstance = ((string)summaryMessageValue);
+                                            healthErrorInstance.SummaryMessage = summaryMessageInstance;
+                                        }
+                                        
+                                        JToken possibleCausesValue = healthErrorsValue["possibleCauses"];
+                                        if (possibleCausesValue != null && possibleCausesValue.Type != JTokenType.Null)
+                                        {
+                                            string possibleCausesInstance = ((string)possibleCausesValue);
+                                            healthErrorInstance.PossibleCauses = possibleCausesInstance;
+                                        }
+                                        
+                                        JToken recommendedActionValue = healthErrorsValue["recommendedAction"];
+                                        if (recommendedActionValue != null && recommendedActionValue.Type != JTokenType.Null)
+                                        {
+                                            string recommendedActionInstance = ((string)recommendedActionValue);
+                                            healthErrorInstance.RecommendedAction = recommendedActionInstance;
+                                        }
+                                        
+                                        JToken creationTimeUtcValue = healthErrorsValue["creationTimeUtc"];
+                                        if (creationTimeUtcValue != null && creationTimeUtcValue.Type != JTokenType.Null)
+                                        {
+                                            DateTime creationTimeUtcInstance = ((DateTime)creationTimeUtcValue);
+                                            healthErrorInstance.CreationTimeUtc = creationTimeUtcInstance;
+                                        }
+                                        
+                                        JToken recoveryProviderErrorMessageValue = healthErrorsValue["recoveryProviderErrorMessage"];
+                                        if (recoveryProviderErrorMessageValue != null && recoveryProviderErrorMessageValue.Type != JTokenType.Null)
+                                        {
+                                            string recoveryProviderErrorMessageInstance = ((string)recoveryProviderErrorMessageValue);
+                                            healthErrorInstance.RecoveryProviderErrorMessage = recoveryProviderErrorMessageInstance;
+                                        }
+                                        
+                                        JToken entityIdValue = healthErrorsValue["entityId"];
+                                        if (entityIdValue != null && entityIdValue.Type != JTokenType.Null)
+                                        {
+                                            string entityIdInstance = ((string)entityIdValue);
+                                            healthErrorInstance.EntityId = entityIdInstance;
+                                        }
+                                        
+                                        JToken innerHealthErrorsArray = healthErrorsValue["innerHealthErrors"];
+                                        if (innerHealthErrorsArray != null && innerHealthErrorsArray.Type != JTokenType.Null)
+                                        {
+                                            foreach (JToken innerHealthErrorsValue in ((JArray)innerHealthErrorsArray))
+                                            {
+                                                InnerHealthError innerHealthErrorInstance = new InnerHealthError();
+                                                healthErrorInstance.InnerHealthErrors.Add(innerHealthErrorInstance);
+                                                
+                                                JToken errorSourceValue2 = innerHealthErrorsValue["errorSource"];
+                                                if (errorSourceValue2 != null && errorSourceValue2.Type != JTokenType.Null)
+                                                {
+                                                    string errorSourceInstance2 = ((string)errorSourceValue2);
+                                                    innerHealthErrorInstance.ErrorSource = errorSourceInstance2;
+                                                }
+                                                
+                                                JToken errorTypeValue2 = innerHealthErrorsValue["errorType"];
+                                                if (errorTypeValue2 != null && errorTypeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string errorTypeInstance2 = ((string)errorTypeValue2);
+                                                    innerHealthErrorInstance.ErrorType = errorTypeInstance2;
+                                                }
+                                                
+                                                JToken errorLevelValue2 = innerHealthErrorsValue["errorLevel"];
+                                                if (errorLevelValue2 != null && errorLevelValue2.Type != JTokenType.Null)
+                                                {
+                                                    string errorLevelInstance2 = ((string)errorLevelValue2);
+                                                    innerHealthErrorInstance.ErrorLevel = errorLevelInstance2;
+                                                }
+                                                
+                                                JToken errorCodeValue2 = innerHealthErrorsValue["errorCode"];
+                                                if (errorCodeValue2 != null && errorCodeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string errorCodeInstance2 = ((string)errorCodeValue2);
+                                                    innerHealthErrorInstance.ErrorCode = errorCodeInstance2;
+                                                }
+                                                
+                                                JToken errorMessageValue2 = innerHealthErrorsValue["errorMessage"];
+                                                if (errorMessageValue2 != null && errorMessageValue2.Type != JTokenType.Null)
+                                                {
+                                                    string errorMessageInstance2 = ((string)errorMessageValue2);
+                                                    innerHealthErrorInstance.ErrorMessage = errorMessageInstance2;
+                                                }
+                                                
+                                                JToken summaryMessageValue2 = innerHealthErrorsValue["summaryMessage"];
+                                                if (summaryMessageValue2 != null && summaryMessageValue2.Type != JTokenType.Null)
+                                                {
+                                                    string summaryMessageInstance2 = ((string)summaryMessageValue2);
+                                                    innerHealthErrorInstance.SummaryMessage = summaryMessageInstance2;
+                                                }
+                                                
+                                                JToken possibleCausesValue2 = innerHealthErrorsValue["possibleCauses"];
+                                                if (possibleCausesValue2 != null && possibleCausesValue2.Type != JTokenType.Null)
+                                                {
+                                                    string possibleCausesInstance2 = ((string)possibleCausesValue2);
+                                                    innerHealthErrorInstance.PossibleCauses = possibleCausesInstance2;
+                                                }
+                                                
+                                                JToken recommendedActionValue2 = innerHealthErrorsValue["recommendedAction"];
+                                                if (recommendedActionValue2 != null && recommendedActionValue2.Type != JTokenType.Null)
+                                                {
+                                                    string recommendedActionInstance2 = ((string)recommendedActionValue2);
+                                                    innerHealthErrorInstance.RecommendedAction = recommendedActionInstance2;
+                                                }
+                                                
+                                                JToken creationTimeUtcValue2 = innerHealthErrorsValue["creationTimeUtc"];
+                                                if (creationTimeUtcValue2 != null && creationTimeUtcValue2.Type != JTokenType.Null)
+                                                {
+                                                    DateTime creationTimeUtcInstance2 = ((DateTime)creationTimeUtcValue2);
+                                                    innerHealthErrorInstance.CreationTimeUtc = creationTimeUtcInstance2;
+                                                }
+                                                
+                                                JToken recoveryProviderErrorMessageValue2 = innerHealthErrorsValue["recoveryProviderErrorMessage"];
+                                                if (recoveryProviderErrorMessageValue2 != null && recoveryProviderErrorMessageValue2.Type != JTokenType.Null)
+                                                {
+                                                    string recoveryProviderErrorMessageInstance2 = ((string)recoveryProviderErrorMessageValue2);
+                                                    innerHealthErrorInstance.RecoveryProviderErrorMessage = recoveryProviderErrorMessageInstance2;
+                                                }
+                                                
+                                                JToken entityIdValue2 = innerHealthErrorsValue["entityId"];
+                                                if (entityIdValue2 != null && entityIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string entityIdInstance2 = ((string)entityIdValue2);
+                                                    innerHealthErrorInstance.EntityId = entityIdInstance2;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             }
                             
                             JToken idValue = responseDoc["id"];
@@ -2339,6 +2861,180 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             string fabricArmResourceNameInstance = ((string)fabricArmResourceNameValue);
                                             propertiesInstance.FabricArmResourceName = fabricArmResourceNameInstance;
                                         }
+                                        
+                                        JToken healthErrorsArray = propertiesValue["healthErrors"];
+                                        if (healthErrorsArray != null && healthErrorsArray.Type != JTokenType.Null)
+                                        {
+                                            foreach (JToken healthErrorsValue in ((JArray)healthErrorsArray))
+                                            {
+                                                HealthError healthErrorInstance = new HealthError();
+                                                propertiesInstance.HealthErrors.Add(healthErrorInstance);
+                                                
+                                                JToken errorSourceValue = healthErrorsValue["errorSource"];
+                                                if (errorSourceValue != null && errorSourceValue.Type != JTokenType.Null)
+                                                {
+                                                    string errorSourceInstance = ((string)errorSourceValue);
+                                                    healthErrorInstance.ErrorSource = errorSourceInstance;
+                                                }
+                                                
+                                                JToken errorTypeValue = healthErrorsValue["errorType"];
+                                                if (errorTypeValue != null && errorTypeValue.Type != JTokenType.Null)
+                                                {
+                                                    string errorTypeInstance = ((string)errorTypeValue);
+                                                    healthErrorInstance.ErrorType = errorTypeInstance;
+                                                }
+                                                
+                                                JToken errorLevelValue = healthErrorsValue["errorLevel"];
+                                                if (errorLevelValue != null && errorLevelValue.Type != JTokenType.Null)
+                                                {
+                                                    string errorLevelInstance = ((string)errorLevelValue);
+                                                    healthErrorInstance.ErrorLevel = errorLevelInstance;
+                                                }
+                                                
+                                                JToken errorCodeValue = healthErrorsValue["errorCode"];
+                                                if (errorCodeValue != null && errorCodeValue.Type != JTokenType.Null)
+                                                {
+                                                    string errorCodeInstance = ((string)errorCodeValue);
+                                                    healthErrorInstance.ErrorCode = errorCodeInstance;
+                                                }
+                                                
+                                                JToken errorMessageValue = healthErrorsValue["errorMessage"];
+                                                if (errorMessageValue != null && errorMessageValue.Type != JTokenType.Null)
+                                                {
+                                                    string errorMessageInstance = ((string)errorMessageValue);
+                                                    healthErrorInstance.ErrorMessage = errorMessageInstance;
+                                                }
+                                                
+                                                JToken summaryMessageValue = healthErrorsValue["summaryMessage"];
+                                                if (summaryMessageValue != null && summaryMessageValue.Type != JTokenType.Null)
+                                                {
+                                                    string summaryMessageInstance = ((string)summaryMessageValue);
+                                                    healthErrorInstance.SummaryMessage = summaryMessageInstance;
+                                                }
+                                                
+                                                JToken possibleCausesValue = healthErrorsValue["possibleCauses"];
+                                                if (possibleCausesValue != null && possibleCausesValue.Type != JTokenType.Null)
+                                                {
+                                                    string possibleCausesInstance = ((string)possibleCausesValue);
+                                                    healthErrorInstance.PossibleCauses = possibleCausesInstance;
+                                                }
+                                                
+                                                JToken recommendedActionValue = healthErrorsValue["recommendedAction"];
+                                                if (recommendedActionValue != null && recommendedActionValue.Type != JTokenType.Null)
+                                                {
+                                                    string recommendedActionInstance = ((string)recommendedActionValue);
+                                                    healthErrorInstance.RecommendedAction = recommendedActionInstance;
+                                                }
+                                                
+                                                JToken creationTimeUtcValue = healthErrorsValue["creationTimeUtc"];
+                                                if (creationTimeUtcValue != null && creationTimeUtcValue.Type != JTokenType.Null)
+                                                {
+                                                    DateTime creationTimeUtcInstance = ((DateTime)creationTimeUtcValue);
+                                                    healthErrorInstance.CreationTimeUtc = creationTimeUtcInstance;
+                                                }
+                                                
+                                                JToken recoveryProviderErrorMessageValue = healthErrorsValue["recoveryProviderErrorMessage"];
+                                                if (recoveryProviderErrorMessageValue != null && recoveryProviderErrorMessageValue.Type != JTokenType.Null)
+                                                {
+                                                    string recoveryProviderErrorMessageInstance = ((string)recoveryProviderErrorMessageValue);
+                                                    healthErrorInstance.RecoveryProviderErrorMessage = recoveryProviderErrorMessageInstance;
+                                                }
+                                                
+                                                JToken entityIdValue = healthErrorsValue["entityId"];
+                                                if (entityIdValue != null && entityIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string entityIdInstance = ((string)entityIdValue);
+                                                    healthErrorInstance.EntityId = entityIdInstance;
+                                                }
+                                                
+                                                JToken innerHealthErrorsArray = healthErrorsValue["innerHealthErrors"];
+                                                if (innerHealthErrorsArray != null && innerHealthErrorsArray.Type != JTokenType.Null)
+                                                {
+                                                    foreach (JToken innerHealthErrorsValue in ((JArray)innerHealthErrorsArray))
+                                                    {
+                                                        InnerHealthError innerHealthErrorInstance = new InnerHealthError();
+                                                        healthErrorInstance.InnerHealthErrors.Add(innerHealthErrorInstance);
+                                                        
+                                                        JToken errorSourceValue2 = innerHealthErrorsValue["errorSource"];
+                                                        if (errorSourceValue2 != null && errorSourceValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string errorSourceInstance2 = ((string)errorSourceValue2);
+                                                            innerHealthErrorInstance.ErrorSource = errorSourceInstance2;
+                                                        }
+                                                        
+                                                        JToken errorTypeValue2 = innerHealthErrorsValue["errorType"];
+                                                        if (errorTypeValue2 != null && errorTypeValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string errorTypeInstance2 = ((string)errorTypeValue2);
+                                                            innerHealthErrorInstance.ErrorType = errorTypeInstance2;
+                                                        }
+                                                        
+                                                        JToken errorLevelValue2 = innerHealthErrorsValue["errorLevel"];
+                                                        if (errorLevelValue2 != null && errorLevelValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string errorLevelInstance2 = ((string)errorLevelValue2);
+                                                            innerHealthErrorInstance.ErrorLevel = errorLevelInstance2;
+                                                        }
+                                                        
+                                                        JToken errorCodeValue2 = innerHealthErrorsValue["errorCode"];
+                                                        if (errorCodeValue2 != null && errorCodeValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string errorCodeInstance2 = ((string)errorCodeValue2);
+                                                            innerHealthErrorInstance.ErrorCode = errorCodeInstance2;
+                                                        }
+                                                        
+                                                        JToken errorMessageValue2 = innerHealthErrorsValue["errorMessage"];
+                                                        if (errorMessageValue2 != null && errorMessageValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string errorMessageInstance2 = ((string)errorMessageValue2);
+                                                            innerHealthErrorInstance.ErrorMessage = errorMessageInstance2;
+                                                        }
+                                                        
+                                                        JToken summaryMessageValue2 = innerHealthErrorsValue["summaryMessage"];
+                                                        if (summaryMessageValue2 != null && summaryMessageValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string summaryMessageInstance2 = ((string)summaryMessageValue2);
+                                                            innerHealthErrorInstance.SummaryMessage = summaryMessageInstance2;
+                                                        }
+                                                        
+                                                        JToken possibleCausesValue2 = innerHealthErrorsValue["possibleCauses"];
+                                                        if (possibleCausesValue2 != null && possibleCausesValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string possibleCausesInstance2 = ((string)possibleCausesValue2);
+                                                            innerHealthErrorInstance.PossibleCauses = possibleCausesInstance2;
+                                                        }
+                                                        
+                                                        JToken recommendedActionValue2 = innerHealthErrorsValue["recommendedAction"];
+                                                        if (recommendedActionValue2 != null && recommendedActionValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string recommendedActionInstance2 = ((string)recommendedActionValue2);
+                                                            innerHealthErrorInstance.RecommendedAction = recommendedActionInstance2;
+                                                        }
+                                                        
+                                                        JToken creationTimeUtcValue2 = innerHealthErrorsValue["creationTimeUtc"];
+                                                        if (creationTimeUtcValue2 != null && creationTimeUtcValue2.Type != JTokenType.Null)
+                                                        {
+                                                            DateTime creationTimeUtcInstance2 = ((DateTime)creationTimeUtcValue2);
+                                                            innerHealthErrorInstance.CreationTimeUtc = creationTimeUtcInstance2;
+                                                        }
+                                                        
+                                                        JToken recoveryProviderErrorMessageValue2 = innerHealthErrorsValue["recoveryProviderErrorMessage"];
+                                                        if (recoveryProviderErrorMessageValue2 != null && recoveryProviderErrorMessageValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string recoveryProviderErrorMessageInstance2 = ((string)recoveryProviderErrorMessageValue2);
+                                                            innerHealthErrorInstance.RecoveryProviderErrorMessage = recoveryProviderErrorMessageInstance2;
+                                                        }
+                                                        
+                                                        JToken entityIdValue2 = innerHealthErrorsValue["entityId"];
+                                                        if (entityIdValue2 != null && entityIdValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string entityIdInstance2 = ((string)entityIdValue2);
+                                                            innerHealthErrorInstance.EntityId = entityIdInstance2;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
                                     }
                                     
                                     JToken idValue = valueValue["id"];
@@ -2667,6 +3363,180 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             string fabricArmResourceNameInstance = ((string)fabricArmResourceNameValue);
                                             propertiesInstance.FabricArmResourceName = fabricArmResourceNameInstance;
+                                        }
+                                        
+                                        JToken healthErrorsArray = propertiesValue["healthErrors"];
+                                        if (healthErrorsArray != null && healthErrorsArray.Type != JTokenType.Null)
+                                        {
+                                            foreach (JToken healthErrorsValue in ((JArray)healthErrorsArray))
+                                            {
+                                                HealthError healthErrorInstance = new HealthError();
+                                                propertiesInstance.HealthErrors.Add(healthErrorInstance);
+                                                
+                                                JToken errorSourceValue = healthErrorsValue["errorSource"];
+                                                if (errorSourceValue != null && errorSourceValue.Type != JTokenType.Null)
+                                                {
+                                                    string errorSourceInstance = ((string)errorSourceValue);
+                                                    healthErrorInstance.ErrorSource = errorSourceInstance;
+                                                }
+                                                
+                                                JToken errorTypeValue = healthErrorsValue["errorType"];
+                                                if (errorTypeValue != null && errorTypeValue.Type != JTokenType.Null)
+                                                {
+                                                    string errorTypeInstance = ((string)errorTypeValue);
+                                                    healthErrorInstance.ErrorType = errorTypeInstance;
+                                                }
+                                                
+                                                JToken errorLevelValue = healthErrorsValue["errorLevel"];
+                                                if (errorLevelValue != null && errorLevelValue.Type != JTokenType.Null)
+                                                {
+                                                    string errorLevelInstance = ((string)errorLevelValue);
+                                                    healthErrorInstance.ErrorLevel = errorLevelInstance;
+                                                }
+                                                
+                                                JToken errorCodeValue = healthErrorsValue["errorCode"];
+                                                if (errorCodeValue != null && errorCodeValue.Type != JTokenType.Null)
+                                                {
+                                                    string errorCodeInstance = ((string)errorCodeValue);
+                                                    healthErrorInstance.ErrorCode = errorCodeInstance;
+                                                }
+                                                
+                                                JToken errorMessageValue = healthErrorsValue["errorMessage"];
+                                                if (errorMessageValue != null && errorMessageValue.Type != JTokenType.Null)
+                                                {
+                                                    string errorMessageInstance = ((string)errorMessageValue);
+                                                    healthErrorInstance.ErrorMessage = errorMessageInstance;
+                                                }
+                                                
+                                                JToken summaryMessageValue = healthErrorsValue["summaryMessage"];
+                                                if (summaryMessageValue != null && summaryMessageValue.Type != JTokenType.Null)
+                                                {
+                                                    string summaryMessageInstance = ((string)summaryMessageValue);
+                                                    healthErrorInstance.SummaryMessage = summaryMessageInstance;
+                                                }
+                                                
+                                                JToken possibleCausesValue = healthErrorsValue["possibleCauses"];
+                                                if (possibleCausesValue != null && possibleCausesValue.Type != JTokenType.Null)
+                                                {
+                                                    string possibleCausesInstance = ((string)possibleCausesValue);
+                                                    healthErrorInstance.PossibleCauses = possibleCausesInstance;
+                                                }
+                                                
+                                                JToken recommendedActionValue = healthErrorsValue["recommendedAction"];
+                                                if (recommendedActionValue != null && recommendedActionValue.Type != JTokenType.Null)
+                                                {
+                                                    string recommendedActionInstance = ((string)recommendedActionValue);
+                                                    healthErrorInstance.RecommendedAction = recommendedActionInstance;
+                                                }
+                                                
+                                                JToken creationTimeUtcValue = healthErrorsValue["creationTimeUtc"];
+                                                if (creationTimeUtcValue != null && creationTimeUtcValue.Type != JTokenType.Null)
+                                                {
+                                                    DateTime creationTimeUtcInstance = ((DateTime)creationTimeUtcValue);
+                                                    healthErrorInstance.CreationTimeUtc = creationTimeUtcInstance;
+                                                }
+                                                
+                                                JToken recoveryProviderErrorMessageValue = healthErrorsValue["recoveryProviderErrorMessage"];
+                                                if (recoveryProviderErrorMessageValue != null && recoveryProviderErrorMessageValue.Type != JTokenType.Null)
+                                                {
+                                                    string recoveryProviderErrorMessageInstance = ((string)recoveryProviderErrorMessageValue);
+                                                    healthErrorInstance.RecoveryProviderErrorMessage = recoveryProviderErrorMessageInstance;
+                                                }
+                                                
+                                                JToken entityIdValue = healthErrorsValue["entityId"];
+                                                if (entityIdValue != null && entityIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string entityIdInstance = ((string)entityIdValue);
+                                                    healthErrorInstance.EntityId = entityIdInstance;
+                                                }
+                                                
+                                                JToken innerHealthErrorsArray = healthErrorsValue["innerHealthErrors"];
+                                                if (innerHealthErrorsArray != null && innerHealthErrorsArray.Type != JTokenType.Null)
+                                                {
+                                                    foreach (JToken innerHealthErrorsValue in ((JArray)innerHealthErrorsArray))
+                                                    {
+                                                        InnerHealthError innerHealthErrorInstance = new InnerHealthError();
+                                                        healthErrorInstance.InnerHealthErrors.Add(innerHealthErrorInstance);
+                                                        
+                                                        JToken errorSourceValue2 = innerHealthErrorsValue["errorSource"];
+                                                        if (errorSourceValue2 != null && errorSourceValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string errorSourceInstance2 = ((string)errorSourceValue2);
+                                                            innerHealthErrorInstance.ErrorSource = errorSourceInstance2;
+                                                        }
+                                                        
+                                                        JToken errorTypeValue2 = innerHealthErrorsValue["errorType"];
+                                                        if (errorTypeValue2 != null && errorTypeValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string errorTypeInstance2 = ((string)errorTypeValue2);
+                                                            innerHealthErrorInstance.ErrorType = errorTypeInstance2;
+                                                        }
+                                                        
+                                                        JToken errorLevelValue2 = innerHealthErrorsValue["errorLevel"];
+                                                        if (errorLevelValue2 != null && errorLevelValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string errorLevelInstance2 = ((string)errorLevelValue2);
+                                                            innerHealthErrorInstance.ErrorLevel = errorLevelInstance2;
+                                                        }
+                                                        
+                                                        JToken errorCodeValue2 = innerHealthErrorsValue["errorCode"];
+                                                        if (errorCodeValue2 != null && errorCodeValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string errorCodeInstance2 = ((string)errorCodeValue2);
+                                                            innerHealthErrorInstance.ErrorCode = errorCodeInstance2;
+                                                        }
+                                                        
+                                                        JToken errorMessageValue2 = innerHealthErrorsValue["errorMessage"];
+                                                        if (errorMessageValue2 != null && errorMessageValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string errorMessageInstance2 = ((string)errorMessageValue2);
+                                                            innerHealthErrorInstance.ErrorMessage = errorMessageInstance2;
+                                                        }
+                                                        
+                                                        JToken summaryMessageValue2 = innerHealthErrorsValue["summaryMessage"];
+                                                        if (summaryMessageValue2 != null && summaryMessageValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string summaryMessageInstance2 = ((string)summaryMessageValue2);
+                                                            innerHealthErrorInstance.SummaryMessage = summaryMessageInstance2;
+                                                        }
+                                                        
+                                                        JToken possibleCausesValue2 = innerHealthErrorsValue["possibleCauses"];
+                                                        if (possibleCausesValue2 != null && possibleCausesValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string possibleCausesInstance2 = ((string)possibleCausesValue2);
+                                                            innerHealthErrorInstance.PossibleCauses = possibleCausesInstance2;
+                                                        }
+                                                        
+                                                        JToken recommendedActionValue2 = innerHealthErrorsValue["recommendedAction"];
+                                                        if (recommendedActionValue2 != null && recommendedActionValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string recommendedActionInstance2 = ((string)recommendedActionValue2);
+                                                            innerHealthErrorInstance.RecommendedAction = recommendedActionInstance2;
+                                                        }
+                                                        
+                                                        JToken creationTimeUtcValue2 = innerHealthErrorsValue["creationTimeUtc"];
+                                                        if (creationTimeUtcValue2 != null && creationTimeUtcValue2.Type != JTokenType.Null)
+                                                        {
+                                                            DateTime creationTimeUtcInstance2 = ((DateTime)creationTimeUtcValue2);
+                                                            innerHealthErrorInstance.CreationTimeUtc = creationTimeUtcInstance2;
+                                                        }
+                                                        
+                                                        JToken recoveryProviderErrorMessageValue2 = innerHealthErrorsValue["recoveryProviderErrorMessage"];
+                                                        if (recoveryProviderErrorMessageValue2 != null && recoveryProviderErrorMessageValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string recoveryProviderErrorMessageInstance2 = ((string)recoveryProviderErrorMessageValue2);
+                                                            innerHealthErrorInstance.RecoveryProviderErrorMessage = recoveryProviderErrorMessageInstance2;
+                                                        }
+                                                        
+                                                        JToken entityIdValue2 = innerHealthErrorsValue["entityId"];
+                                                        if (entityIdValue2 != null && entityIdValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string entityIdInstance2 = ((string)entityIdValue2);
+                                                            innerHealthErrorInstance.EntityId = entityIdInstance2;
+                                                        }
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
                                     

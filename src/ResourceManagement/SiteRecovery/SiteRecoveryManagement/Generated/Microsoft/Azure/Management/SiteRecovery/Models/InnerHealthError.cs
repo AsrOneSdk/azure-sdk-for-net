@@ -20,17 +20,14 @@
 // code is regenerated.
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using Hyak.Common;
-using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// The definition of a mapping health object.
+    /// The definition of a mapping inner health object.
     /// </summary>
-    public partial class HealthError
+    public partial class InnerHealthError
     {
         private DateTime _creationTimeUtc;
         
@@ -109,17 +106,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._errorType = value; }
         }
         
-        private IList<InnerHealthError> _innerHealthErrors;
-        
-        /// <summary>
-        /// Optional. Inner health errors.
-        /// </summary>
-        public IList<InnerHealthError> InnerHealthErrors
-        {
-            get { return this._innerHealthErrors; }
-            set { this._innerHealthErrors = value; }
-        }
-        
         private string _possibleCauses;
         
         /// <summary>
@@ -165,11 +151,10 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         }
         
         /// <summary>
-        /// Initializes a new instance of the HealthError class.
+        /// Initializes a new instance of the InnerHealthError class.
         /// </summary>
-        public HealthError()
+        public InnerHealthError()
         {
-            this.InnerHealthErrors = new LazyList<InnerHealthError>();
         }
     }
 }

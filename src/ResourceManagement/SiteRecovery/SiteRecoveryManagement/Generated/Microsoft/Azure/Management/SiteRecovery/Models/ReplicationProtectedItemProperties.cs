@@ -166,6 +166,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._primaryFabricFriendlyName = value; }
         }
         
+        private string _primaryFabricProvider;
+        
+        /// <summary>
+        /// Optional. Gets or sets the provider of the primary fabric.
+        /// </summary>
+        public string PrimaryFabricProvider
+        {
+            get { return this._primaryFabricProvider; }
+            set { this._primaryFabricProvider = value; }
+        }
+        
         private string _primaryProtectionContainerFriendlyName;
         
         /// <summary>
