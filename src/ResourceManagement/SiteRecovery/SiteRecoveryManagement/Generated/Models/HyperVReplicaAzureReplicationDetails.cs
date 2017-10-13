@@ -88,6 +88,18 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._lastReplicatedTime = value; }
         }
         
+        private System.DateTime? _lastUpdateReceivedTime;
+        
+        /// <summary>
+        /// Optional. Gets or sets the last update time received from
+        /// Protection Service.
+        /// </summary>
+        public System.DateTime? LastUpdateReceivedTime
+        {
+            get { return this._lastUpdateReceivedTime; }
+            set { this._lastUpdateReceivedTime = value; }
+        }
+        
         private string _licenseType;
         
         /// <summary>
@@ -177,6 +189,18 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         {
             get { return this._recoveryAzureVMSize; }
             set { this._recoveryAzureVMSize = value; }
+        }
+        
+        private long? _rpoInSeconds;
+        
+        /// <summary>
+        /// Optional. Gets or sets last RPO value received from Protection
+        /// Service.
+        /// </summary>
+        public long? RpoInSeconds
+        {
+            get { return this._rpoInSeconds; }
+            set { this._rpoInSeconds = value; }
         }
         
         private string _selectedRecoveryAzureNetworkId;
