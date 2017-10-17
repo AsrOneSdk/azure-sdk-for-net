@@ -20,7 +20,9 @@
 // code is regenerated.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using Hyak.Common;
 using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
@@ -30,6 +32,28 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class A2AUpdateReplicationProtectedItemInput : UpdateReplicationProtectedItemProviderInput
     {
+        private string _bootDiagnosticStorageAccountId;
+        
+        /// <summary>
+        /// Optional. Boot Diagnostic Azure storage account ARM Id.
+        /// </summary>
+        public string BootDiagnosticStorageAccountId
+        {
+            get { return this._bootDiagnosticStorageAccountId; }
+            set { this._bootDiagnosticStorageAccountId = value; }
+        }
+        
+        private IList<A2AVmManagedDiskUpdateDetails> _managedDiskUpdateDetails;
+        
+        /// <summary>
+        /// Optional. List of disk specific details to update.
+        /// </summary>
+        public IList<A2AVmManagedDiskUpdateDetails> ManagedDiskUpdateDetails
+        {
+            get { return this._managedDiskUpdateDetails; }
+            set { this._managedDiskUpdateDetails = value; }
+        }
+        
         private string _recoveryCloudServiceId;
         
         /// <summary>
@@ -58,6 +82,7 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         /// </summary>
         public A2AUpdateReplicationProtectedItemInput()
         {
+            this.ManagedDiskUpdateDetails = new LazyList<A2AVmManagedDiskUpdateDetails>();
         }
     }
 }

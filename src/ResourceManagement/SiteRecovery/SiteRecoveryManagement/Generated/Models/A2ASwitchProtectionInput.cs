@@ -32,6 +32,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class A2ASwitchProtectionInput : SwitchProtectionProviderSpecificInput
     {
+        private string _bootDiagnosticStorageAccountId;
+        
+        /// <summary>
+        /// Optional. Boot diagnostic StorageAccount ARM Id.
+        /// </summary>
+        public string BootDiagnosticStorageAccountId
+        {
+            get { return this._bootDiagnosticStorageAccountId; }
+            set { this._bootDiagnosticStorageAccountId = value; }
+        }
+        
         private string _policyId;
         
         /// <summary>

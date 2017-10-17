@@ -862,6 +862,21 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             a2AVmDiskInputDetailsValue["primaryStagingAzureStorageAccountId"] = vmDisksItem.PrimaryStagingAzureStorageAccountId;
                                         }
+                                        
+                                        if (vmDisksItem.RecoveryAzureResourceGroupId != null)
+                                        {
+                                            a2AVmDiskInputDetailsValue["recoveryAzureResourceGroupId"] = vmDisksItem.RecoveryAzureResourceGroupId;
+                                        }
+                                        
+                                        if (vmDisksItem.RecoveryReplicaDiskType != null)
+                                        {
+                                            a2AVmDiskInputDetailsValue["recoveryReplicaDiskType"] = vmDisksItem.RecoveryReplicaDiskType;
+                                        }
+                                        
+                                        if (vmDisksItem.RecoveryTargetDiskType != null)
+                                        {
+                                            a2AVmDiskInputDetailsValue["recoveryTargetDiskType"] = vmDisksItem.RecoveryTargetDiskType;
+                                        }
                                     }
                                     providerSpecificDetailsValue["vmDisks"] = vmDisksArray;
                                 }
@@ -914,6 +929,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                             if (derived.RecoveryAvailabilitySetId != null)
                             {
                                 providerSpecificDetailsValue["recoveryAvailabilitySetId"] = derived.RecoveryAvailabilitySetId;
+                            }
+                            
+                            if (derived.BootDiagnosticStorageAccountId != null)
+                            {
+                                providerSpecificDetailsValue["bootDiagnosticStorageAccountId"] = derived.BootDiagnosticStorageAccountId;
                             }
                         }
                     }

@@ -43,6 +43,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._agentVersion = value; }
         }
         
+        private string _bootDiagnosticStorageAccount;
+        
+        /// <summary>
+        /// Optional. boot diagnostic storage account.
+        /// </summary>
+        public string BootDiagnosticStorageAccount
+        {
+            get { return this._bootDiagnosticStorageAccount; }
+            set { this._bootDiagnosticStorageAccount = value; }
+        }
+        
         private string _fabricObjectId;
         
         /// <summary>

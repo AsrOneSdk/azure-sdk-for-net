@@ -48,6 +48,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._primaryStagingAzureStorageAccountId = value; }
         }
         
+        private string _recoveryAzureResourceGroupId;
+        
+        /// <summary>
+        /// Optional. Recovery azure resource group ARM Id.
+        /// </summary>
+        public string RecoveryAzureResourceGroupId
+        {
+            get { return this._recoveryAzureResourceGroupId; }
+            set { this._recoveryAzureResourceGroupId = value; }
+        }
+        
         private string _recoveryAzureStorageAccountId;
         
         /// <summary>
@@ -57,6 +68,28 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         {
             get { return this._recoveryAzureStorageAccountId; }
             set { this._recoveryAzureStorageAccountId = value; }
+        }
+        
+        private string _recoveryReplicaDiskType;
+        
+        /// <summary>
+        /// Optional. Recovery ReplicaDiskType.
+        /// </summary>
+        public string RecoveryReplicaDiskType
+        {
+            get { return this._recoveryReplicaDiskType; }
+            set { this._recoveryReplicaDiskType = value; }
+        }
+        
+        private string _recoveryTargetDiskType;
+        
+        /// <summary>
+        /// Optional. Recovery TargetDiskType.
+        /// </summary>
+        public string RecoveryTargetDiskType
+        {
+            get { return this._recoveryTargetDiskType; }
+            set { this._recoveryTargetDiskType = value; }
         }
         
         /// <summary>
