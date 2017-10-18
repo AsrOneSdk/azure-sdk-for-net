@@ -48,6 +48,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._primaryStagingAzureStorageAccountId = value; }
         }
         
+        private string _recoveryReplicaDiskType;
+        
+        /// <summary>
+        /// Optional. Recovery ReplicaDiskType.
+        /// </summary>
+        public string RecoveryReplicaDiskType
+        {
+            get { return this._recoveryReplicaDiskType; }
+            set { this._recoveryReplicaDiskType = value; }
+        }
+        
         private string _recoveryResourceGroupId;
         
         /// <summary>
@@ -57,6 +68,28 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         {
             get { return this._recoveryResourceGroupId; }
             set { this._recoveryResourceGroupId = value; }
+        }
+        
+        private string _recoveryTargetDiskName;
+        
+        /// <summary>
+        /// Optional. Gets or sets the target disk name before failover.
+        /// </summary>
+        public string RecoveryTargetDiskName
+        {
+            get { return this._recoveryTargetDiskName; }
+            set { this._recoveryTargetDiskName = value; }
+        }
+        
+        private string _recoveryTargetDiskType;
+        
+        /// <summary>
+        /// Optional. Recovery TargetDiskType.
+        /// </summary>
+        public string RecoveryTargetDiskType
+        {
+            get { return this._recoveryTargetDiskType; }
+            set { this._recoveryTargetDiskType = value; }
         }
         
         /// <summary>

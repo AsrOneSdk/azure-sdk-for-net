@@ -862,21 +862,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             a2AVmDiskInputDetailsValue["primaryStagingAzureStorageAccountId"] = vmDisksItem.PrimaryStagingAzureStorageAccountId;
                                         }
-                                        
-                                        if (vmDisksItem.RecoveryAzureResourceGroupId != null)
-                                        {
-                                            a2AVmDiskInputDetailsValue["recoveryAzureResourceGroupId"] = vmDisksItem.RecoveryAzureResourceGroupId;
-                                        }
-                                        
-                                        if (vmDisksItem.RecoveryReplicaDiskType != null)
-                                        {
-                                            a2AVmDiskInputDetailsValue["recoveryReplicaDiskType"] = vmDisksItem.RecoveryReplicaDiskType;
-                                        }
-                                        
-                                        if (vmDisksItem.RecoveryTargetDiskType != null)
-                                        {
-                                            a2AVmDiskInputDetailsValue["recoveryTargetDiskType"] = vmDisksItem.RecoveryTargetDiskType;
-                                        }
                                     }
                                     providerSpecificDetailsValue["vmDisks"] = vmDisksArray;
                                 }
@@ -905,6 +890,21 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         if (vmManagedDisksItem.PrimaryStagingAzureStorageAccountId != null)
                                         {
                                             a2AVmManagedDiskInputDetailsValue["primaryStagingAzureStorageAccountId"] = vmManagedDisksItem.PrimaryStagingAzureStorageAccountId;
+                                        }
+                                        
+                                        if (vmManagedDisksItem.RecoveryReplicaDiskType != null)
+                                        {
+                                            a2AVmManagedDiskInputDetailsValue["recoveryReplicaDiskType"] = vmManagedDisksItem.RecoveryReplicaDiskType;
+                                        }
+                                        
+                                        if (vmManagedDisksItem.RecoveryTargetDiskType != null)
+                                        {
+                                            a2AVmManagedDiskInputDetailsValue["recoveryTargetDiskType"] = vmManagedDisksItem.RecoveryTargetDiskType;
+                                        }
+                                        
+                                        if (vmManagedDisksItem.RecoveryTargetDiskName != null)
+                                        {
+                                            a2AVmManagedDiskInputDetailsValue["recoveryTargetDiskName"] = vmManagedDisksItem.RecoveryTargetDiskName;
                                         }
                                     }
                                     providerSpecificDetailsValue["vmManagedDisks"] = vmManagedDisksArray;
