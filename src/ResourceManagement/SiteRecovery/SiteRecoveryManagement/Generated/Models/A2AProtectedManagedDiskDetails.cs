@@ -38,17 +38,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._diskId = value; }
         }
         
-        private string _recoveryAzureResourceGroupId;
-        
-        /// <summary>
-        /// Optional. Recovery disk resource group Arm Id.
-        /// </summary>
-        public string RecoveryAzureResourceGroupId
-        {
-            get { return this._recoveryAzureResourceGroupId; }
-            set { this._recoveryAzureResourceGroupId = value; }
-        }
-        
         private string _recoveryDiskId;
         
         /// <summary>
@@ -58,6 +47,39 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         {
             get { return this._recoveryDiskId; }
             set { this._recoveryDiskId = value; }
+        }
+        
+        private string _recoveryReplicaDiskType;
+        
+        /// <summary>
+        /// Optional. Recovery replica disk type.
+        /// </summary>
+        public string RecoveryReplicaDiskType
+        {
+            get { return this._recoveryReplicaDiskType; }
+            set { this._recoveryReplicaDiskType = value; }
+        }
+        
+        private string _recoveryResourceGroupId;
+        
+        /// <summary>
+        /// Optional. Recovery disk resource group Arm Id.
+        /// </summary>
+        public string RecoveryResourceGroupId
+        {
+            get { return this._recoveryResourceGroupId; }
+            set { this._recoveryResourceGroupId = value; }
+        }
+        
+        private string _recoveryTargetDiskType;
+        
+        /// <summary>
+        /// Optional. Recovery target disk type.
+        /// </summary>
+        public string RecoveryTargetDiskType
+        {
+            get { return this._recoveryTargetDiskType; }
+            set { this._recoveryTargetDiskType = value; }
         }
         
         /// <summary>

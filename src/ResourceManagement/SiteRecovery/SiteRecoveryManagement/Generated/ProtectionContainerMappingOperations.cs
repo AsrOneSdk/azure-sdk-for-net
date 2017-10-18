@@ -1202,6 +1202,49 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 if (providerSpecificDetailsValue != null && providerSpecificDetailsValue.Type != JTokenType.Null)
                                 {
                                     string typeName = ((string)providerSpecificDetailsValue["instanceType"]);
+                                    if (typeName == "A2A")
+                                    {
+                                        A2AContainerMappingDetails a2AContainerMappingDetailsInstance = new A2AContainerMappingDetails();
+                                        
+                                        JToken multiVmGroupSummaryArray = providerSpecificDetailsValue["multiVmGroupSummary"];
+                                        if (multiVmGroupSummaryArray != null && multiVmGroupSummaryArray.Type != JTokenType.Null)
+                                        {
+                                            foreach (JToken multiVmGroupSummaryValue in ((JArray)multiVmGroupSummaryArray))
+                                            {
+                                                MultiVMGroupSummary multiVMGroupSummaryInstance = new MultiVMGroupSummary();
+                                                a2AContainerMappingDetailsInstance.MultiVMGroupSummary.Add(multiVMGroupSummaryInstance);
+                                                
+                                                JToken multiVMGroupNameValue = multiVmGroupSummaryValue["multiVMGroupName"];
+                                                if (multiVMGroupNameValue != null && multiVMGroupNameValue.Type != JTokenType.Null)
+                                                {
+                                                    string multiVMGroupNameInstance = ((string)multiVMGroupNameValue);
+                                                    multiVMGroupSummaryInstance.MultiVMGroupName = multiVMGroupNameInstance;
+                                                }
+                                                
+                                                JToken multiVMGroupIdValue = multiVmGroupSummaryValue["multiVMGroupId"];
+                                                if (multiVMGroupIdValue != null && multiVMGroupIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string multiVMGroupIdInstance = ((string)multiVMGroupIdValue);
+                                                    multiVMGroupSummaryInstance.MultiVMGroupId = multiVMGroupIdInstance;
+                                                }
+                                                
+                                                JToken multiVmGroupCreateOptionValue = multiVmGroupSummaryValue["multiVmGroupCreateOption"];
+                                                if (multiVmGroupCreateOptionValue != null && multiVmGroupCreateOptionValue.Type != JTokenType.Null)
+                                                {
+                                                    string multiVmGroupCreateOptionInstance = ((string)multiVmGroupCreateOptionValue);
+                                                    multiVMGroupSummaryInstance.MultiVmGroupCreateOption = multiVmGroupCreateOptionInstance;
+                                                }
+                                            }
+                                        }
+                                        
+                                        JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
+                                        if (instanceTypeValue != null && instanceTypeValue.Type != JTokenType.Null)
+                                        {
+                                            string instanceTypeInstance = ((string)instanceTypeValue);
+                                            a2AContainerMappingDetailsInstance.InstanceType = instanceTypeInstance;
+                                        }
+                                        propertiesInstance.ProviderSpecificDetails = a2AContainerMappingDetailsInstance;
+                                    }
                                 }
                             }
                             
@@ -1667,6 +1710,49 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 if (providerSpecificDetailsValue != null && providerSpecificDetailsValue.Type != JTokenType.Null)
                                 {
                                     string typeName = ((string)providerSpecificDetailsValue["instanceType"]);
+                                    if (typeName == "A2A")
+                                    {
+                                        A2AContainerMappingDetails a2AContainerMappingDetailsInstance = new A2AContainerMappingDetails();
+                                        
+                                        JToken multiVmGroupSummaryArray = providerSpecificDetailsValue["multiVmGroupSummary"];
+                                        if (multiVmGroupSummaryArray != null && multiVmGroupSummaryArray.Type != JTokenType.Null)
+                                        {
+                                            foreach (JToken multiVmGroupSummaryValue in ((JArray)multiVmGroupSummaryArray))
+                                            {
+                                                MultiVMGroupSummary multiVMGroupSummaryInstance = new MultiVMGroupSummary();
+                                                a2AContainerMappingDetailsInstance.MultiVMGroupSummary.Add(multiVMGroupSummaryInstance);
+                                                
+                                                JToken multiVMGroupNameValue = multiVmGroupSummaryValue["multiVMGroupName"];
+                                                if (multiVMGroupNameValue != null && multiVMGroupNameValue.Type != JTokenType.Null)
+                                                {
+                                                    string multiVMGroupNameInstance = ((string)multiVMGroupNameValue);
+                                                    multiVMGroupSummaryInstance.MultiVMGroupName = multiVMGroupNameInstance;
+                                                }
+                                                
+                                                JToken multiVMGroupIdValue = multiVmGroupSummaryValue["multiVMGroupId"];
+                                                if (multiVMGroupIdValue != null && multiVMGroupIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string multiVMGroupIdInstance = ((string)multiVMGroupIdValue);
+                                                    multiVMGroupSummaryInstance.MultiVMGroupId = multiVMGroupIdInstance;
+                                                }
+                                                
+                                                JToken multiVmGroupCreateOptionValue = multiVmGroupSummaryValue["multiVmGroupCreateOption"];
+                                                if (multiVmGroupCreateOptionValue != null && multiVmGroupCreateOptionValue.Type != JTokenType.Null)
+                                                {
+                                                    string multiVmGroupCreateOptionInstance = ((string)multiVmGroupCreateOptionValue);
+                                                    multiVMGroupSummaryInstance.MultiVmGroupCreateOption = multiVmGroupCreateOptionInstance;
+                                                }
+                                            }
+                                        }
+                                        
+                                        JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
+                                        if (instanceTypeValue != null && instanceTypeValue.Type != JTokenType.Null)
+                                        {
+                                            string instanceTypeInstance = ((string)instanceTypeValue);
+                                            a2AContainerMappingDetailsInstance.InstanceType = instanceTypeInstance;
+                                        }
+                                        propertiesInstance.ProviderSpecificDetails = a2AContainerMappingDetailsInstance;
+                                    }
                                 }
                             }
                             
@@ -2345,6 +2431,49 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 if (providerSpecificDetailsValue != null && providerSpecificDetailsValue.Type != JTokenType.Null)
                                 {
                                     string typeName = ((string)providerSpecificDetailsValue["instanceType"]);
+                                    if (typeName == "A2A")
+                                    {
+                                        A2AContainerMappingDetails a2AContainerMappingDetailsInstance = new A2AContainerMappingDetails();
+                                        
+                                        JToken multiVmGroupSummaryArray = providerSpecificDetailsValue["multiVmGroupSummary"];
+                                        if (multiVmGroupSummaryArray != null && multiVmGroupSummaryArray.Type != JTokenType.Null)
+                                        {
+                                            foreach (JToken multiVmGroupSummaryValue in ((JArray)multiVmGroupSummaryArray))
+                                            {
+                                                MultiVMGroupSummary multiVMGroupSummaryInstance = new MultiVMGroupSummary();
+                                                a2AContainerMappingDetailsInstance.MultiVMGroupSummary.Add(multiVMGroupSummaryInstance);
+                                                
+                                                JToken multiVMGroupNameValue = multiVmGroupSummaryValue["multiVMGroupName"];
+                                                if (multiVMGroupNameValue != null && multiVMGroupNameValue.Type != JTokenType.Null)
+                                                {
+                                                    string multiVMGroupNameInstance = ((string)multiVMGroupNameValue);
+                                                    multiVMGroupSummaryInstance.MultiVMGroupName = multiVMGroupNameInstance;
+                                                }
+                                                
+                                                JToken multiVMGroupIdValue = multiVmGroupSummaryValue["multiVMGroupId"];
+                                                if (multiVMGroupIdValue != null && multiVMGroupIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string multiVMGroupIdInstance = ((string)multiVMGroupIdValue);
+                                                    multiVMGroupSummaryInstance.MultiVMGroupId = multiVMGroupIdInstance;
+                                                }
+                                                
+                                                JToken multiVmGroupCreateOptionValue = multiVmGroupSummaryValue["multiVmGroupCreateOption"];
+                                                if (multiVmGroupCreateOptionValue != null && multiVmGroupCreateOptionValue.Type != JTokenType.Null)
+                                                {
+                                                    string multiVmGroupCreateOptionInstance = ((string)multiVmGroupCreateOptionValue);
+                                                    multiVMGroupSummaryInstance.MultiVmGroupCreateOption = multiVmGroupCreateOptionInstance;
+                                                }
+                                            }
+                                        }
+                                        
+                                        JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
+                                        if (instanceTypeValue != null && instanceTypeValue.Type != JTokenType.Null)
+                                        {
+                                            string instanceTypeInstance = ((string)instanceTypeValue);
+                                            a2AContainerMappingDetailsInstance.InstanceType = instanceTypeInstance;
+                                        }
+                                        propertiesInstance.ProviderSpecificDetails = a2AContainerMappingDetailsInstance;
+                                    }
                                 }
                             }
                             
@@ -2918,6 +3047,49 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         if (providerSpecificDetailsValue != null && providerSpecificDetailsValue.Type != JTokenType.Null)
                                         {
                                             string typeName = ((string)providerSpecificDetailsValue["instanceType"]);
+                                            if (typeName == "A2A")
+                                            {
+                                                A2AContainerMappingDetails a2AContainerMappingDetailsInstance = new A2AContainerMappingDetails();
+                                                
+                                                JToken multiVmGroupSummaryArray = providerSpecificDetailsValue["multiVmGroupSummary"];
+                                                if (multiVmGroupSummaryArray != null && multiVmGroupSummaryArray.Type != JTokenType.Null)
+                                                {
+                                                    foreach (JToken multiVmGroupSummaryValue in ((JArray)multiVmGroupSummaryArray))
+                                                    {
+                                                        MultiVMGroupSummary multiVMGroupSummaryInstance = new MultiVMGroupSummary();
+                                                        a2AContainerMappingDetailsInstance.MultiVMGroupSummary.Add(multiVMGroupSummaryInstance);
+                                                        
+                                                        JToken multiVMGroupNameValue = multiVmGroupSummaryValue["multiVMGroupName"];
+                                                        if (multiVMGroupNameValue != null && multiVMGroupNameValue.Type != JTokenType.Null)
+                                                        {
+                                                            string multiVMGroupNameInstance = ((string)multiVMGroupNameValue);
+                                                            multiVMGroupSummaryInstance.MultiVMGroupName = multiVMGroupNameInstance;
+                                                        }
+                                                        
+                                                        JToken multiVMGroupIdValue = multiVmGroupSummaryValue["multiVMGroupId"];
+                                                        if (multiVMGroupIdValue != null && multiVMGroupIdValue.Type != JTokenType.Null)
+                                                        {
+                                                            string multiVMGroupIdInstance = ((string)multiVMGroupIdValue);
+                                                            multiVMGroupSummaryInstance.MultiVMGroupId = multiVMGroupIdInstance;
+                                                        }
+                                                        
+                                                        JToken multiVmGroupCreateOptionValue = multiVmGroupSummaryValue["multiVmGroupCreateOption"];
+                                                        if (multiVmGroupCreateOptionValue != null && multiVmGroupCreateOptionValue.Type != JTokenType.Null)
+                                                        {
+                                                            string multiVmGroupCreateOptionInstance = ((string)multiVmGroupCreateOptionValue);
+                                                            multiVMGroupSummaryInstance.MultiVmGroupCreateOption = multiVmGroupCreateOptionInstance;
+                                                        }
+                                                    }
+                                                }
+                                                
+                                                JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
+                                                if (instanceTypeValue != null && instanceTypeValue.Type != JTokenType.Null)
+                                                {
+                                                    string instanceTypeInstance = ((string)instanceTypeValue);
+                                                    a2AContainerMappingDetailsInstance.InstanceType = instanceTypeInstance;
+                                                }
+                                                propertiesInstance.ProviderSpecificDetails = a2AContainerMappingDetailsInstance;
+                                            }
                                         }
                                     }
                                     
@@ -3420,6 +3592,49 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         if (providerSpecificDetailsValue != null && providerSpecificDetailsValue.Type != JTokenType.Null)
                                         {
                                             string typeName = ((string)providerSpecificDetailsValue["instanceType"]);
+                                            if (typeName == "A2A")
+                                            {
+                                                A2AContainerMappingDetails a2AContainerMappingDetailsInstance = new A2AContainerMappingDetails();
+                                                
+                                                JToken multiVmGroupSummaryArray = providerSpecificDetailsValue["multiVmGroupSummary"];
+                                                if (multiVmGroupSummaryArray != null && multiVmGroupSummaryArray.Type != JTokenType.Null)
+                                                {
+                                                    foreach (JToken multiVmGroupSummaryValue in ((JArray)multiVmGroupSummaryArray))
+                                                    {
+                                                        MultiVMGroupSummary multiVMGroupSummaryInstance = new MultiVMGroupSummary();
+                                                        a2AContainerMappingDetailsInstance.MultiVMGroupSummary.Add(multiVMGroupSummaryInstance);
+                                                        
+                                                        JToken multiVMGroupNameValue = multiVmGroupSummaryValue["multiVMGroupName"];
+                                                        if (multiVMGroupNameValue != null && multiVMGroupNameValue.Type != JTokenType.Null)
+                                                        {
+                                                            string multiVMGroupNameInstance = ((string)multiVMGroupNameValue);
+                                                            multiVMGroupSummaryInstance.MultiVMGroupName = multiVMGroupNameInstance;
+                                                        }
+                                                        
+                                                        JToken multiVMGroupIdValue = multiVmGroupSummaryValue["multiVMGroupId"];
+                                                        if (multiVMGroupIdValue != null && multiVMGroupIdValue.Type != JTokenType.Null)
+                                                        {
+                                                            string multiVMGroupIdInstance = ((string)multiVMGroupIdValue);
+                                                            multiVMGroupSummaryInstance.MultiVMGroupId = multiVMGroupIdInstance;
+                                                        }
+                                                        
+                                                        JToken multiVmGroupCreateOptionValue = multiVmGroupSummaryValue["multiVmGroupCreateOption"];
+                                                        if (multiVmGroupCreateOptionValue != null && multiVmGroupCreateOptionValue.Type != JTokenType.Null)
+                                                        {
+                                                            string multiVmGroupCreateOptionInstance = ((string)multiVmGroupCreateOptionValue);
+                                                            multiVMGroupSummaryInstance.MultiVmGroupCreateOption = multiVmGroupCreateOptionInstance;
+                                                        }
+                                                    }
+                                                }
+                                                
+                                                JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
+                                                if (instanceTypeValue != null && instanceTypeValue.Type != JTokenType.Null)
+                                                {
+                                                    string instanceTypeInstance = ((string)instanceTypeValue);
+                                                    a2AContainerMappingDetailsInstance.InstanceType = instanceTypeInstance;
+                                                }
+                                                propertiesInstance.ProviderSpecificDetails = a2AContainerMappingDetailsInstance;
+                                            }
                                         }
                                     }
                                     

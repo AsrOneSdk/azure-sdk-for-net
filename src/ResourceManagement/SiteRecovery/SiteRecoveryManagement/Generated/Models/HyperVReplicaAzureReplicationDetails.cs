@@ -88,16 +88,16 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._lastReplicatedTime = value; }
         }
         
-        private System.DateTime? _lastUpdateReceivedTime;
+        private System.DateTime? _lastRpoCalculatedTime;
         
         /// <summary>
         /// Optional. Gets or sets the last update time received from
         /// Protection Service.
         /// </summary>
-        public System.DateTime? LastUpdateReceivedTime
+        public System.DateTime? LastRpoCalculatedTime
         {
-            get { return this._lastUpdateReceivedTime; }
-            set { this._lastUpdateReceivedTime = value; }
+            get { return this._lastRpoCalculatedTime; }
+            set { this._lastRpoCalculatedTime = value; }
         }
         
         private string _licenseType;

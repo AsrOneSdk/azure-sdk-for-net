@@ -29,6 +29,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class ProtectedItemsQueryParameter
     {
+        private string _multiVmGroupCreateOption;
+        
+        /// <summary>
+        /// Optional. MultiVM group create option filter.
+        /// </summary>
+        public string MultiVmGroupCreateOption
+        {
+            get { return this._multiVmGroupCreateOption; }
+            set { this._multiVmGroupCreateOption = value; }
+        }
+        
         private string _recoveryPlanName;
         
         /// <summary>
@@ -49,6 +60,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         {
             get { return this._sourceFabricName; }
             set { this._sourceFabricName = value; }
+        }
+        
+        private string _type;
+        
+        /// <summary>
+        /// Optional. Replication provider type filter.
+        /// </summary>
+        public string Type
+        {
+            get { return this._type; }
+            set { this._type = value; }
         }
         
         private string _vCenterName;

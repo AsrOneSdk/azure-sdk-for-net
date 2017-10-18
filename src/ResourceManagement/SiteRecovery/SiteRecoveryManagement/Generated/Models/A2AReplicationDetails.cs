@@ -133,6 +133,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._monitoringPercentageCompletion = value; }
         }
         
+        private string _multiVmGroupCreateOption;
+        
+        /// <summary>
+        /// Optional. Multi vm group create option.
+        /// </summary>
+        public string MultiVmGroupCreateOption
+        {
+            get { return this._multiVmGroupCreateOption; }
+            set { this._multiVmGroupCreateOption = value; }
+        }
+        
         private string _multiVmGroupId;
         
         /// <summary>
