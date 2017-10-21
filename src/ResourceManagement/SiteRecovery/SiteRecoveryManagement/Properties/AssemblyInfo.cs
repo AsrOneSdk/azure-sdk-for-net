@@ -18,8 +18,8 @@ using System.Reflection;
 [assembly: AssemblyTitle("Microsoft.Azure.Management.SiteRecovery.Specification")]
 [assembly: AssemblyDescription("Hydra specification for Recovery services Management")]
 
-[assembly: AssemblyVersion("0.0.0.0")]
-[assembly: AssemblyFileVersion("0.4.126.0")]
+[assembly: AssemblyVersion("5.0.0.0")]
+[assembly: AssemblyFileVersion("5.0.2.0")]
 
 [assembly: AssemblyCompany("Microsoft Corporation")]
 [assembly: AssemblyProduct("Windows Azure")]

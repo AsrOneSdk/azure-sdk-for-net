@@ -37,15 +37,26 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._diskId = value; }
         }
         
-        private string _recoveryReplicaDiskType;
+        private string _recoveryReplicaDiskAccountType;
         
         /// <summary>
         /// Optional. Gets or sets the replica disk type.
         /// </summary>
-        public string RecoveryReplicaDiskType
+        public string RecoveryReplicaDiskAccountType
         {
-            get { return this._recoveryReplicaDiskType; }
-            set { this._recoveryReplicaDiskType = value; }
+            get { return this._recoveryReplicaDiskAccountType; }
+            set { this._recoveryReplicaDiskAccountType = value; }
+        }
+        
+        private string _recoveryTargetDiskAccountType;
+        
+        /// <summary>
+        /// Optional. Gets or sets the target disk type before failover.
+        /// </summary>
+        public string RecoveryTargetDiskAccountType
+        {
+            get { return this._recoveryTargetDiskAccountType; }
+            set { this._recoveryTargetDiskAccountType = value; }
         }
         
         private string _recoveryTargetDiskName;
@@ -57,17 +68,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         {
             get { return this._recoveryTargetDiskName; }
             set { this._recoveryTargetDiskName = value; }
-        }
-        
-        private string _recoveryTargetDiskType;
-        
-        /// <summary>
-        /// Optional. Gets or sets the target disk type before failover.
-        /// </summary>
-        public string RecoveryTargetDiskType
-        {
-            get { return this._recoveryTargetDiskType; }
-            set { this._recoveryTargetDiskType = value; }
         }
         
         /// <summary>

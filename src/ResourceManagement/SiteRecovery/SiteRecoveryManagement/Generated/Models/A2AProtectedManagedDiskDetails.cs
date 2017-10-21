@@ -49,15 +49,15 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._recoveryDiskId = value; }
         }
         
-        private string _recoveryReplicaDiskType;
+        private string _recoveryReplicaDiskAccountType;
         
         /// <summary>
         /// Optional. Recovery replica disk type.
         /// </summary>
-        public string RecoveryReplicaDiskType
+        public string RecoveryReplicaDiskAccountType
         {
-            get { return this._recoveryReplicaDiskType; }
-            set { this._recoveryReplicaDiskType = value; }
+            get { return this._recoveryReplicaDiskAccountType; }
+            set { this._recoveryReplicaDiskAccountType = value; }
         }
         
         private string _recoveryResourceGroupId;
@@ -71,15 +71,15 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._recoveryResourceGroupId = value; }
         }
         
-        private string _recoveryTargetDiskType;
+        private string _recoveryTargetDiskAccountType;
         
         /// <summary>
         /// Optional. Recovery target disk type.
         /// </summary>
-        public string RecoveryTargetDiskType
+        public string RecoveryTargetDiskAccountType
         {
-            get { return this._recoveryTargetDiskType; }
-            set { this._recoveryTargetDiskType = value; }
+            get { return this._recoveryTargetDiskAccountType; }
+            set { this._recoveryTargetDiskAccountType = value; }
         }
         
         /// <summary>

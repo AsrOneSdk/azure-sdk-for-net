@@ -892,14 +892,14 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             a2AVmManagedDiskInputDetailsValue["primaryStagingAzureStorageAccountId"] = vmManagedDisksItem.PrimaryStagingAzureStorageAccountId;
                                         }
                                         
-                                        if (vmManagedDisksItem.RecoveryReplicaDiskType != null)
+                                        if (vmManagedDisksItem.RecoveryReplicaDiskAccountType != null)
                                         {
-                                            a2AVmManagedDiskInputDetailsValue["recoveryReplicaDiskType"] = vmManagedDisksItem.RecoveryReplicaDiskType;
+                                            a2AVmManagedDiskInputDetailsValue["recoveryReplicaDiskAccountType"] = vmManagedDisksItem.RecoveryReplicaDiskAccountType;
                                         }
                                         
-                                        if (vmManagedDisksItem.RecoveryTargetDiskType != null)
+                                        if (vmManagedDisksItem.RecoveryTargetDiskAccountType != null)
                                         {
-                                            a2AVmManagedDiskInputDetailsValue["recoveryTargetDiskType"] = vmManagedDisksItem.RecoveryTargetDiskType;
+                                            a2AVmManagedDiskInputDetailsValue["recoveryTargetDiskAccountType"] = vmManagedDisksItem.RecoveryTargetDiskAccountType;
                                         }
                                         
                                         if (vmManagedDisksItem.RecoveryTargetDiskName != null)
