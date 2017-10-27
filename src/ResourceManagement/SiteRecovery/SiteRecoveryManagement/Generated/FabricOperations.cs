@@ -2594,6 +2594,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                         }
                                                     }
                                                 }
+                                                
+                                                JToken agentExpiryDateValue = processServersValue["agentExpiryDate"];
+                                                if (agentExpiryDateValue != null && agentExpiryDateValue.Type != JTokenType.Null)
+                                                {
+                                                    DateTime agentExpiryDateInstance = ((DateTime)agentExpiryDateValue);
+                                                    processServerInstance.AgentExpiryDate = agentExpiryDateInstance;
+                                                }
                                             }
                                         }
                                         
@@ -3098,6 +3105,27 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     string osVersionInstance2 = ((string)osVersionValue2);
                                                     masterTargetServerInstance.OsVersion = osVersionInstance2;
                                                 }
+                                                
+                                                JToken agentExpiryDateValue2 = masterTargetServersValue["agentExpiryDate"];
+                                                if (agentExpiryDateValue2 != null && agentExpiryDateValue2.Type != JTokenType.Null)
+                                                {
+                                                    DateTime agentExpiryDateInstance2 = ((DateTime)agentExpiryDateValue2);
+                                                    masterTargetServerInstance.AgentExpiryDate = agentExpiryDateInstance2;
+                                                }
+                                                
+                                                JToken marsAgentVersionValue = masterTargetServersValue["marsAgentVersion"];
+                                                if (marsAgentVersionValue != null && marsAgentVersionValue.Type != JTokenType.Null)
+                                                {
+                                                    string marsAgentVersionInstance = ((string)marsAgentVersionValue);
+                                                    masterTargetServerInstance.MarsAgentVersion = marsAgentVersionInstance;
+                                                }
+                                                
+                                                JToken marsAgentExpiryDateValue = masterTargetServersValue["marsAgentExpiryDate"];
+                                                if (marsAgentExpiryDateValue != null && marsAgentExpiryDateValue.Type != JTokenType.Null)
+                                                {
+                                                    DateTime marsAgentExpiryDateInstance = ((DateTime)marsAgentExpiryDateValue);
+                                                    masterTargetServerInstance.MarsAgentExpiryDate = marsAgentExpiryDateInstance;
+                                                }
                                             }
                                         }
                                         
@@ -3312,6 +3340,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             string psTemplateVersionInstance = ((string)psTemplateVersionValue);
                                             vMwareFabricDetailsInstance.PsTemplateVersion = psTemplateVersionInstance;
+                                        }
+                                        
+                                        JToken agentExpiryDateValue3 = customDetailsValue["agentExpiryDate"];
+                                        if (agentExpiryDateValue3 != null && agentExpiryDateValue3.Type != JTokenType.Null)
+                                        {
+                                            DateTime agentExpiryDateInstance3 = ((DateTime)agentExpiryDateValue3);
+                                            vMwareFabricDetailsInstance.AgentExpiryDate = agentExpiryDateInstance3;
                                         }
                                         
                                         JToken instanceTypeValue4 = customDetailsValue["instanceType"];
@@ -4474,6 +4509,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                         }
                                                     }
                                                 }
+                                                
+                                                JToken agentExpiryDateValue = processServersValue["agentExpiryDate"];
+                                                if (agentExpiryDateValue != null && agentExpiryDateValue.Type != JTokenType.Null)
+                                                {
+                                                    DateTime agentExpiryDateInstance = ((DateTime)agentExpiryDateValue);
+                                                    processServerInstance.AgentExpiryDate = agentExpiryDateInstance;
+                                                }
                                             }
                                         }
                                         
@@ -4978,6 +5020,27 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     string osVersionInstance2 = ((string)osVersionValue2);
                                                     masterTargetServerInstance.OsVersion = osVersionInstance2;
                                                 }
+                                                
+                                                JToken agentExpiryDateValue2 = masterTargetServersValue["agentExpiryDate"];
+                                                if (agentExpiryDateValue2 != null && agentExpiryDateValue2.Type != JTokenType.Null)
+                                                {
+                                                    DateTime agentExpiryDateInstance2 = ((DateTime)agentExpiryDateValue2);
+                                                    masterTargetServerInstance.AgentExpiryDate = agentExpiryDateInstance2;
+                                                }
+                                                
+                                                JToken marsAgentVersionValue = masterTargetServersValue["marsAgentVersion"];
+                                                if (marsAgentVersionValue != null && marsAgentVersionValue.Type != JTokenType.Null)
+                                                {
+                                                    string marsAgentVersionInstance = ((string)marsAgentVersionValue);
+                                                    masterTargetServerInstance.MarsAgentVersion = marsAgentVersionInstance;
+                                                }
+                                                
+                                                JToken marsAgentExpiryDateValue = masterTargetServersValue["marsAgentExpiryDate"];
+                                                if (marsAgentExpiryDateValue != null && marsAgentExpiryDateValue.Type != JTokenType.Null)
+                                                {
+                                                    DateTime marsAgentExpiryDateInstance = ((DateTime)marsAgentExpiryDateValue);
+                                                    masterTargetServerInstance.MarsAgentExpiryDate = marsAgentExpiryDateInstance;
+                                                }
                                             }
                                         }
                                         
@@ -5192,6 +5255,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             string psTemplateVersionInstance = ((string)psTemplateVersionValue);
                                             vMwareFabricDetailsInstance.PsTemplateVersion = psTemplateVersionInstance;
+                                        }
+                                        
+                                        JToken agentExpiryDateValue3 = customDetailsValue["agentExpiryDate"];
+                                        if (agentExpiryDateValue3 != null && agentExpiryDateValue3.Type != JTokenType.Null)
+                                        {
+                                            DateTime agentExpiryDateInstance3 = ((DateTime)agentExpiryDateValue3);
+                                            vMwareFabricDetailsInstance.AgentExpiryDate = agentExpiryDateInstance3;
                                         }
                                         
                                         JToken instanceTypeValue4 = customDetailsValue["instanceType"];
@@ -6413,6 +6483,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                         }
                                                     }
                                                 }
+                                                
+                                                JToken agentExpiryDateValue = processServersValue["agentExpiryDate"];
+                                                if (agentExpiryDateValue != null && agentExpiryDateValue.Type != JTokenType.Null)
+                                                {
+                                                    DateTime agentExpiryDateInstance = ((DateTime)agentExpiryDateValue);
+                                                    processServerInstance.AgentExpiryDate = agentExpiryDateInstance;
+                                                }
                                             }
                                         }
                                         
@@ -6917,6 +6994,27 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     string osVersionInstance2 = ((string)osVersionValue2);
                                                     masterTargetServerInstance.OsVersion = osVersionInstance2;
                                                 }
+                                                
+                                                JToken agentExpiryDateValue2 = masterTargetServersValue["agentExpiryDate"];
+                                                if (agentExpiryDateValue2 != null && agentExpiryDateValue2.Type != JTokenType.Null)
+                                                {
+                                                    DateTime agentExpiryDateInstance2 = ((DateTime)agentExpiryDateValue2);
+                                                    masterTargetServerInstance.AgentExpiryDate = agentExpiryDateInstance2;
+                                                }
+                                                
+                                                JToken marsAgentVersionValue = masterTargetServersValue["marsAgentVersion"];
+                                                if (marsAgentVersionValue != null && marsAgentVersionValue.Type != JTokenType.Null)
+                                                {
+                                                    string marsAgentVersionInstance = ((string)marsAgentVersionValue);
+                                                    masterTargetServerInstance.MarsAgentVersion = marsAgentVersionInstance;
+                                                }
+                                                
+                                                JToken marsAgentExpiryDateValue = masterTargetServersValue["marsAgentExpiryDate"];
+                                                if (marsAgentExpiryDateValue != null && marsAgentExpiryDateValue.Type != JTokenType.Null)
+                                                {
+                                                    DateTime marsAgentExpiryDateInstance = ((DateTime)marsAgentExpiryDateValue);
+                                                    masterTargetServerInstance.MarsAgentExpiryDate = marsAgentExpiryDateInstance;
+                                                }
                                             }
                                         }
                                         
@@ -7131,6 +7229,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             string psTemplateVersionInstance = ((string)psTemplateVersionValue);
                                             vMwareFabricDetailsInstance.PsTemplateVersion = psTemplateVersionInstance;
+                                        }
+                                        
+                                        JToken agentExpiryDateValue3 = customDetailsValue["agentExpiryDate"];
+                                        if (agentExpiryDateValue3 != null && agentExpiryDateValue3.Type != JTokenType.Null)
+                                        {
+                                            DateTime agentExpiryDateInstance3 = ((DateTime)agentExpiryDateValue3);
+                                            vMwareFabricDetailsInstance.AgentExpiryDate = agentExpiryDateInstance3;
                                         }
                                         
                                         JToken instanceTypeValue4 = customDetailsValue["instanceType"];
@@ -8583,6 +8688,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                         }
                                                     }
                                                 }
+                                                
+                                                JToken agentExpiryDateValue = processServersValue["agentExpiryDate"];
+                                                if (agentExpiryDateValue != null && agentExpiryDateValue.Type != JTokenType.Null)
+                                                {
+                                                    DateTime agentExpiryDateInstance = ((DateTime)agentExpiryDateValue);
+                                                    processServerInstance.AgentExpiryDate = agentExpiryDateInstance;
+                                                }
                                             }
                                         }
                                         
@@ -9087,6 +9199,27 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     string osVersionInstance2 = ((string)osVersionValue2);
                                                     masterTargetServerInstance.OsVersion = osVersionInstance2;
                                                 }
+                                                
+                                                JToken agentExpiryDateValue2 = masterTargetServersValue["agentExpiryDate"];
+                                                if (agentExpiryDateValue2 != null && agentExpiryDateValue2.Type != JTokenType.Null)
+                                                {
+                                                    DateTime agentExpiryDateInstance2 = ((DateTime)agentExpiryDateValue2);
+                                                    masterTargetServerInstance.AgentExpiryDate = agentExpiryDateInstance2;
+                                                }
+                                                
+                                                JToken marsAgentVersionValue = masterTargetServersValue["marsAgentVersion"];
+                                                if (marsAgentVersionValue != null && marsAgentVersionValue.Type != JTokenType.Null)
+                                                {
+                                                    string marsAgentVersionInstance = ((string)marsAgentVersionValue);
+                                                    masterTargetServerInstance.MarsAgentVersion = marsAgentVersionInstance;
+                                                }
+                                                
+                                                JToken marsAgentExpiryDateValue = masterTargetServersValue["marsAgentExpiryDate"];
+                                                if (marsAgentExpiryDateValue != null && marsAgentExpiryDateValue.Type != JTokenType.Null)
+                                                {
+                                                    DateTime marsAgentExpiryDateInstance = ((DateTime)marsAgentExpiryDateValue);
+                                                    masterTargetServerInstance.MarsAgentExpiryDate = marsAgentExpiryDateInstance;
+                                                }
                                             }
                                         }
                                         
@@ -9301,6 +9434,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             string psTemplateVersionInstance = ((string)psTemplateVersionValue);
                                             vMwareFabricDetailsInstance.PsTemplateVersion = psTemplateVersionInstance;
+                                        }
+                                        
+                                        JToken agentExpiryDateValue3 = customDetailsValue["agentExpiryDate"];
+                                        if (agentExpiryDateValue3 != null && agentExpiryDateValue3.Type != JTokenType.Null)
+                                        {
+                                            DateTime agentExpiryDateInstance3 = ((DateTime)agentExpiryDateValue3);
+                                            vMwareFabricDetailsInstance.AgentExpiryDate = agentExpiryDateInstance3;
                                         }
                                         
                                         JToken instanceTypeValue4 = customDetailsValue["instanceType"];
@@ -10291,6 +10431,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                         }
                                                     }
                                                 }
+                                                
+                                                JToken agentExpiryDateValue = processServersValue["agentExpiryDate"];
+                                                if (agentExpiryDateValue != null && agentExpiryDateValue.Type != JTokenType.Null)
+                                                {
+                                                    DateTime agentExpiryDateInstance = ((DateTime)agentExpiryDateValue);
+                                                    processServerInstance.AgentExpiryDate = agentExpiryDateInstance;
+                                                }
                                             }
                                         }
                                         
@@ -10795,6 +10942,27 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     string osVersionInstance2 = ((string)osVersionValue2);
                                                     masterTargetServerInstance.OsVersion = osVersionInstance2;
                                                 }
+                                                
+                                                JToken agentExpiryDateValue2 = masterTargetServersValue["agentExpiryDate"];
+                                                if (agentExpiryDateValue2 != null && agentExpiryDateValue2.Type != JTokenType.Null)
+                                                {
+                                                    DateTime agentExpiryDateInstance2 = ((DateTime)agentExpiryDateValue2);
+                                                    masterTargetServerInstance.AgentExpiryDate = agentExpiryDateInstance2;
+                                                }
+                                                
+                                                JToken marsAgentVersionValue = masterTargetServersValue["marsAgentVersion"];
+                                                if (marsAgentVersionValue != null && marsAgentVersionValue.Type != JTokenType.Null)
+                                                {
+                                                    string marsAgentVersionInstance = ((string)marsAgentVersionValue);
+                                                    masterTargetServerInstance.MarsAgentVersion = marsAgentVersionInstance;
+                                                }
+                                                
+                                                JToken marsAgentExpiryDateValue = masterTargetServersValue["marsAgentExpiryDate"];
+                                                if (marsAgentExpiryDateValue != null && marsAgentExpiryDateValue.Type != JTokenType.Null)
+                                                {
+                                                    DateTime marsAgentExpiryDateInstance = ((DateTime)marsAgentExpiryDateValue);
+                                                    masterTargetServerInstance.MarsAgentExpiryDate = marsAgentExpiryDateInstance;
+                                                }
                                             }
                                         }
                                         
@@ -11009,6 +11177,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             string psTemplateVersionInstance = ((string)psTemplateVersionValue);
                                             vMwareFabricDetailsInstance.PsTemplateVersion = psTemplateVersionInstance;
+                                        }
+                                        
+                                        JToken agentExpiryDateValue3 = customDetailsValue["agentExpiryDate"];
+                                        if (agentExpiryDateValue3 != null && agentExpiryDateValue3.Type != JTokenType.Null)
+                                        {
+                                            DateTime agentExpiryDateInstance3 = ((DateTime)agentExpiryDateValue3);
+                                            vMwareFabricDetailsInstance.AgentExpiryDate = agentExpiryDateInstance3;
                                         }
                                         
                                         JToken instanceTypeValue4 = customDetailsValue["instanceType"];
@@ -12028,6 +12203,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                                 }
                                                             }
                                                         }
+                                                        
+                                                        JToken agentExpiryDateValue = processServersValue["agentExpiryDate"];
+                                                        if (agentExpiryDateValue != null && agentExpiryDateValue.Type != JTokenType.Null)
+                                                        {
+                                                            DateTime agentExpiryDateInstance = ((DateTime)agentExpiryDateValue);
+                                                            processServerInstance.AgentExpiryDate = agentExpiryDateInstance;
+                                                        }
                                                     }
                                                 }
                                                 
@@ -12532,6 +12714,27 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                             string osVersionInstance2 = ((string)osVersionValue2);
                                                             masterTargetServerInstance.OsVersion = osVersionInstance2;
                                                         }
+                                                        
+                                                        JToken agentExpiryDateValue2 = masterTargetServersValue["agentExpiryDate"];
+                                                        if (agentExpiryDateValue2 != null && agentExpiryDateValue2.Type != JTokenType.Null)
+                                                        {
+                                                            DateTime agentExpiryDateInstance2 = ((DateTime)agentExpiryDateValue2);
+                                                            masterTargetServerInstance.AgentExpiryDate = agentExpiryDateInstance2;
+                                                        }
+                                                        
+                                                        JToken marsAgentVersionValue = masterTargetServersValue["marsAgentVersion"];
+                                                        if (marsAgentVersionValue != null && marsAgentVersionValue.Type != JTokenType.Null)
+                                                        {
+                                                            string marsAgentVersionInstance = ((string)marsAgentVersionValue);
+                                                            masterTargetServerInstance.MarsAgentVersion = marsAgentVersionInstance;
+                                                        }
+                                                        
+                                                        JToken marsAgentExpiryDateValue = masterTargetServersValue["marsAgentExpiryDate"];
+                                                        if (marsAgentExpiryDateValue != null && marsAgentExpiryDateValue.Type != JTokenType.Null)
+                                                        {
+                                                            DateTime marsAgentExpiryDateInstance = ((DateTime)marsAgentExpiryDateValue);
+                                                            masterTargetServerInstance.MarsAgentExpiryDate = marsAgentExpiryDateInstance;
+                                                        }
                                                     }
                                                 }
                                                 
@@ -12746,6 +12949,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 {
                                                     string psTemplateVersionInstance = ((string)psTemplateVersionValue);
                                                     vMwareFabricDetailsInstance.PsTemplateVersion = psTemplateVersionInstance;
+                                                }
+                                                
+                                                JToken agentExpiryDateValue3 = customDetailsValue["agentExpiryDate"];
+                                                if (agentExpiryDateValue3 != null && agentExpiryDateValue3.Type != JTokenType.Null)
+                                                {
+                                                    DateTime agentExpiryDateInstance3 = ((DateTime)agentExpiryDateValue3);
+                                                    vMwareFabricDetailsInstance.AgentExpiryDate = agentExpiryDateInstance3;
                                                 }
                                                 
                                                 JToken instanceTypeValue4 = customDetailsValue["instanceType"];

@@ -136,7 +136,7 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         private System.DateTime? _providerVersionExpiryDate;
         
         /// <summary>
-        /// Optional. Provider expiry date if the version is deprecated.
+        /// Optional. Provider version expiry date.
         /// </summary>
         public System.DateTime? ProviderVersionExpiryDate
         {

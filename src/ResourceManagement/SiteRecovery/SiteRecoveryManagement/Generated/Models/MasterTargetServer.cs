@@ -32,6 +32,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class MasterTargetServer
     {
+        private DateTime _agentExpiryDate;
+        
+        /// <summary>
+        /// Optional. Agent expiry date.
+        /// </summary>
+        public DateTime AgentExpiryDate
+        {
+            get { return this._agentExpiryDate; }
+            set { this._agentExpiryDate = value; }
+        }
+        
         private string _agentVersion;
         
         /// <summary>
@@ -107,6 +118,28 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         {
             get { return this._lastHeartbeat; }
             set { this._lastHeartbeat = value; }
+        }
+        
+        private DateTime _marsAgentExpiryDate;
+        
+        /// <summary>
+        /// Optional. Mars agent expiry date.
+        /// </summary>
+        public DateTime MarsAgentExpiryDate
+        {
+            get { return this._marsAgentExpiryDate; }
+            set { this._marsAgentExpiryDate = value; }
+        }
+        
+        private string _marsAgentVersion;
+        
+        /// <summary>
+        /// Optional. The version of Mars agent.
+        /// </summary>
+        public string MarsAgentVersion
+        {
+            get { return this._marsAgentVersion; }
+            set { this._marsAgentVersion = value; }
         }
         
         private string _name;
