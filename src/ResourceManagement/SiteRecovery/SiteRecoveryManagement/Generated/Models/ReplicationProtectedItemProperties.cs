@@ -343,6 +343,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._testFailoverStateDescription = value; }
         }
         
+        private IList<HealthError> _versionExpiryHealthErrors;
+        
+        /// <summary>
+        /// Optional. Gets or sets list of version expiry health errors.
+        /// </summary>
+        public IList<HealthError> VersionExpiryHealthErrors
+        {
+            get { return this._versionExpiryHealthErrors; }
+            set { this._versionExpiryHealthErrors = value; }
+        }
+        
         /// <summary>
         /// Initializes a new instance of the
         /// ReplicationProtectedItemProperties class.
@@ -352,6 +363,7 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             this.AllowedOperations = new LazyList<string>();
             this.FailoverHealthErrors = new LazyList<HealthError>();
             this.ReplicationHealthErrors = new LazyList<HealthError>();
+            this.VersionExpiryHealthErrors = new LazyList<HealthError>();
         }
     }
 }

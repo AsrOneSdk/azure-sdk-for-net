@@ -32,12 +32,12 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class ProcessServer
     {
-        private DateTime _agentExpiryDate;
+        private System.DateTime? _agentExpiryDate;
         
         /// <summary>
         /// Optional. Agent expiry date.
         /// </summary>
-        public DateTime AgentExpiryDate
+        public System.DateTime? AgentExpiryDate
         {
             get { return this._agentExpiryDate; }
             set { this._agentExpiryDate = value; }

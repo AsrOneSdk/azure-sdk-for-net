@@ -32,12 +32,12 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class MasterTargetServer
     {
-        private DateTime _agentExpiryDate;
+        private System.DateTime? _agentExpiryDate;
         
         /// <summary>
         /// Optional. Agent expiry date.
         /// </summary>
-        public DateTime AgentExpiryDate
+        public System.DateTime? AgentExpiryDate
         {
             get { return this._agentExpiryDate; }
             set { this._agentExpiryDate = value; }
@@ -120,12 +120,12 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._lastHeartbeat = value; }
         }
         
-        private DateTime _marsAgentExpiryDate;
+        private System.DateTime? _marsAgentExpiryDate;
         
         /// <summary>
         /// Optional. Mars agent expiry date.
         /// </summary>
-        public DateTime MarsAgentExpiryDate
+        public System.DateTime? MarsAgentExpiryDate
         {
             get { return this._marsAgentExpiryDate; }
             set { this._marsAgentExpiryDate = value; }
