@@ -8,7 +8,7 @@ using System.Resources;
 [assembly: AssemblyDescription("Provides management functionality for Microsoft Azure Recovery Services SiteRecovery Resources.")]
 
 [assembly: AssemblyVersion("107.0.0.0")]
-[assembly: AssemblyFileVersion("107.0.4.0")]
+[assembly: AssemblyFileVersion("107.0.5.0")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft")]
 [assembly: AssemblyProduct("Microsoft Azure .NET SDK")]
