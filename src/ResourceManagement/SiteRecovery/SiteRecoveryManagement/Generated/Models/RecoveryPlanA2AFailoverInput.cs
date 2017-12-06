@@ -42,6 +42,19 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._cloudServiceCreationOption = value; }
         }
         
+        private string _multiVmSyncPointOption;
+        
+        /// <summary>
+        /// Optional. Indicates whether multi VM sync enabled VMs should multi
+        /// VM sync points for failover. Options: UseMultiVmSyncRecoveryPoint
+        /// or UsePerVmRecoveryPoint.
+        /// </summary>
+        public string MultiVmSyncPointOption
+        {
+            get { return this._multiVmSyncPointOption; }
+            set { this._multiVmSyncPointOption = value; }
+        }
+        
         private string _recoveryPointType;
         
         /// <summary>

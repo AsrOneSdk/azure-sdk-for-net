@@ -1143,6 +1143,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 
                                 recoveryPlanProviderSpecificFailoverInputValue["cloudServiceCreationOption"] = derived5.CloudServiceCreationOption;
                                 
+                                if (derived5.MultiVmSyncPointOption != null)
+                                {
+                                    recoveryPlanProviderSpecificFailoverInputValue["multiVmSyncPointOption"] = derived5.MultiVmSyncPointOption;
+                                }
+                                
                                 if (derived5.InstanceType != null)
                                 {
                                     recoveryPlanProviderSpecificFailoverInputValue["instanceType"] = derived5.InstanceType;
@@ -1641,6 +1646,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 recoveryPlanProviderSpecificFailoverInputValue["recoveryPointType"] = derived5.RecoveryPointType;
                                 
                                 recoveryPlanProviderSpecificFailoverInputValue["cloudServiceCreationOption"] = derived5.CloudServiceCreationOption;
+                                
+                                if (derived5.MultiVmSyncPointOption != null)
+                                {
+                                    recoveryPlanProviderSpecificFailoverInputValue["multiVmSyncPointOption"] = derived5.MultiVmSyncPointOption;
+                                }
                                 
                                 if (derived5.InstanceType != null)
                                 {
@@ -2161,6 +2171,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 recoveryPlanProviderSpecificFailoverInputValue["recoveryPointType"] = derived5.RecoveryPointType;
                                 
                                 recoveryPlanProviderSpecificFailoverInputValue["cloudServiceCreationOption"] = derived5.CloudServiceCreationOption;
+                                
+                                if (derived5.MultiVmSyncPointOption != null)
+                                {
+                                    recoveryPlanProviderSpecificFailoverInputValue["multiVmSyncPointOption"] = derived5.MultiVmSyncPointOption;
+                                }
                                 
                                 if (derived5.InstanceType != null)
                                 {

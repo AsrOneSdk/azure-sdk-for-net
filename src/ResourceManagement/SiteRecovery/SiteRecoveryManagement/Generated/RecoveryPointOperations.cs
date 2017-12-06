@@ -266,6 +266,25 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         }
                                         propertiesInstance.ProviderSpecificDetails = inMageAzureV2RecoveryPointDetailsInstance;
                                     }
+                                    if (typeName == "A2A")
+                                    {
+                                        A2ARecoveryPointDetails a2ARecoveryPointDetailsInstance = new A2ARecoveryPointDetails();
+                                        
+                                        JToken recoveryPointSyncTypeValue = providerSpecificDetailsValue["recoveryPointSyncType"];
+                                        if (recoveryPointSyncTypeValue != null && recoveryPointSyncTypeValue.Type != JTokenType.Null)
+                                        {
+                                            string recoveryPointSyncTypeInstance = ((string)recoveryPointSyncTypeValue);
+                                            a2ARecoveryPointDetailsInstance.RecoveryPointSyncType = recoveryPointSyncTypeInstance;
+                                        }
+                                        
+                                        JToken instanceTypeValue2 = providerSpecificDetailsValue["instanceType"];
+                                        if (instanceTypeValue2 != null && instanceTypeValue2.Type != JTokenType.Null)
+                                        {
+                                            string instanceTypeInstance2 = ((string)instanceTypeValue2);
+                                            a2ARecoveryPointDetailsInstance.InstanceType = instanceTypeInstance2;
+                                        }
+                                        propertiesInstance.ProviderSpecificDetails = a2ARecoveryPointDetailsInstance;
+                                    }
                                 }
                             }
                             
@@ -584,6 +603,25 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     inMageAzureV2RecoveryPointDetailsInstance.InstanceType = instanceTypeInstance;
                                                 }
                                                 propertiesInstance.ProviderSpecificDetails = inMageAzureV2RecoveryPointDetailsInstance;
+                                            }
+                                            if (typeName == "A2A")
+                                            {
+                                                A2ARecoveryPointDetails a2ARecoveryPointDetailsInstance = new A2ARecoveryPointDetails();
+                                                
+                                                JToken recoveryPointSyncTypeValue = providerSpecificDetailsValue["recoveryPointSyncType"];
+                                                if (recoveryPointSyncTypeValue != null && recoveryPointSyncTypeValue.Type != JTokenType.Null)
+                                                {
+                                                    string recoveryPointSyncTypeInstance = ((string)recoveryPointSyncTypeValue);
+                                                    a2ARecoveryPointDetailsInstance.RecoveryPointSyncType = recoveryPointSyncTypeInstance;
+                                                }
+                                                
+                                                JToken instanceTypeValue2 = providerSpecificDetailsValue["instanceType"];
+                                                if (instanceTypeValue2 != null && instanceTypeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string instanceTypeInstance2 = ((string)instanceTypeValue2);
+                                                    a2ARecoveryPointDetailsInstance.InstanceType = instanceTypeInstance2;
+                                                }
+                                                propertiesInstance.ProviderSpecificDetails = a2ARecoveryPointDetailsInstance;
                                             }
                                         }
                                     }
