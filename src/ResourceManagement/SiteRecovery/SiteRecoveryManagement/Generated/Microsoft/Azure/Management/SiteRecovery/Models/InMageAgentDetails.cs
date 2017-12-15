@@ -29,6 +29,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class InMageAgentDetails
     {
+        private System.DateTime? _agentExpiryDate;
+        
+        /// <summary>
+        /// Optional. Agent expiry date.
+        /// </summary>
+        public System.DateTime? AgentExpiryDate
+        {
+            get { return this._agentExpiryDate; }
+            set { this._agentExpiryDate = value; }
+        }
+        
         private string _agentUpdateStatus;
         
         /// <summary>
