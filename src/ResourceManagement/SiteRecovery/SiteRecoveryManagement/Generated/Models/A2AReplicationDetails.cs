@@ -43,17 +43,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._agentVersion = value; }
         }
         
-        private string _bootDiagnosticStorageAccount;
-        
-        /// <summary>
-        /// Optional. boot diagnostic storage account.
-        /// </summary>
-        public string BootDiagnosticStorageAccount
-        {
-            get { return this._bootDiagnosticStorageAccount; }
-            set { this._bootDiagnosticStorageAccount = value; }
-        }
-        
         private string _fabricObjectId;
         
         /// <summary>
@@ -252,6 +241,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         {
             get { return this._recoveryAzureVMSize; }
             set { this._recoveryAzureVMSize = value; }
+        }
+        
+        private string _recoveryBootDiagStorageAccountId;
+        
+        /// <summary>
+        /// Optional. Recovery boot diagnostic storage account Arm Id.
+        /// </summary>
+        public string RecoveryBootDiagStorageAccountId
+        {
+            get { return this._recoveryBootDiagStorageAccountId; }
+            set { this._recoveryBootDiagStorageAccountId = value; }
         }
         
         private string _recoveryCloudService;

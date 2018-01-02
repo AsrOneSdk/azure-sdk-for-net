@@ -32,17 +32,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class A2AEnableProtectionInput : EnableProtectionProviderSpecificInput
     {
-        private string _bootDiagnosticStorageAccountId;
-        
-        /// <summary>
-        /// Optional. Boot Diagnostic Azure storage account ARM Id.
-        /// </summary>
-        public string BootDiagnosticStorageAccountId
-        {
-            get { return this._bootDiagnosticStorageAccountId; }
-            set { this._bootDiagnosticStorageAccountId = value; }
-        }
-        
         private string _fabricObjectId;
         
         /// <summary>
@@ -74,6 +63,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         {
             get { return this._recoveryAvailabilitySetId; }
             set { this._recoveryAvailabilitySetId = value; }
+        }
+        
+        private string _recoveryBootDiagStorageAccountId;
+        
+        /// <summary>
+        /// Optional. Recovery Boot Diagnostic Azure storage account ARM Id.
+        /// </summary>
+        public string RecoveryBootDiagStorageAccountId
+        {
+            get { return this._recoveryBootDiagStorageAccountId; }
+            set { this._recoveryBootDiagStorageAccountId = value; }
         }
         
         private string _recoveryCloudServiceId;

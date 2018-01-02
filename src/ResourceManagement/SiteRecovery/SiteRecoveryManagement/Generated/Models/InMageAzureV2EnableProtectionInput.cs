@@ -203,6 +203,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._targetAzureVmName = value; }
         }
         
+        private string _targetBootDiagStorageAccountId;
+        
+        /// <summary>
+        /// Optional. Gets or sets the boot diagnostic storage account.
+        /// </summary>
+        public string TargetBootDiagStorageAccountId
+        {
+            get { return this._targetBootDiagStorageAccountId; }
+            set { this._targetBootDiagStorageAccountId = value; }
+        }
+        
         private string _useManagedDisks;
         
         /// <summary>

@@ -931,9 +931,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 providerSpecificDetailsValue["recoveryAvailabilitySetId"] = derived.RecoveryAvailabilitySetId;
                             }
                             
-                            if (derived.BootDiagnosticStorageAccountId != null)
+                            if (derived.RecoveryBootDiagStorageAccountId != null)
                             {
-                                providerSpecificDetailsValue["bootDiagnosticStorageAccountId"] = derived.BootDiagnosticStorageAccountId;
+                                providerSpecificDetailsValue["recoveryBootDiagStorageAccountId"] = derived.RecoveryBootDiagStorageAccountId;
                             }
                         }
                     }
