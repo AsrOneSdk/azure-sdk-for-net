@@ -891,6 +891,32 @@ namespace Microsoft.Azure.Management.SiteRecovery
         Task<LongRunningOperationResponse> ReprotectAsync(string fabricName, string protectionContainerName, string replicationProtectedItemName, ReverseReplicationInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
         
         /// <summary>
+        /// Submit feedback for the given replication protected item.
+        /// </summary>
+        /// <param name='fabricName'>
+        /// Fabric name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Protection container name.
+        /// </param>
+        /// <param name='replicationProtectedItemName'>
+        /// Replication protected item unique name.
+        /// </param>
+        /// <param name='input'>
+        /// Submit feedback input.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Request header parameters.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
+        /// A standard service response for Get operations.
+        /// </returns>
+        Task<OperationCommonResponse> SubmitFeedbackAsync(string fabricName, string protectionContainerName, string replicationProtectedItemName, SubmitFeedbackInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        
+        /// <summary>
         /// Execute Test failover for the given Replication protected item.
         /// </summary>
         /// <param name='fabricName'>
