@@ -7,7 +7,7 @@
     <VersionPrefix>1.0.0-preview</VersionPrefix>
   </PropertyGroup>
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp1.1</TargetFrameworks>
+    <TargetFrameworks>netcoreapp1.1.1</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Management.RecoveryServices.SiteRecovery\Microsoft.Azure.Management.RecoveryServices.SiteRecovery.csproj" />
