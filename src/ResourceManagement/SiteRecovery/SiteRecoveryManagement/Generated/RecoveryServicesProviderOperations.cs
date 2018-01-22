@@ -888,6 +888,34 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.ProviderVersionExpiryDate = providerVersionExpiryDateInstance;
                                 }
                                 
+                                JToken providerVersionDetailsValue = propertiesValue["providerVersionDetails"];
+                                if (providerVersionDetailsValue != null && providerVersionDetailsValue.Type != JTokenType.Null)
+                                {
+                                    VersionDetails providerVersionDetailsInstance = new VersionDetails();
+                                    propertiesInstance.ProviderVersionDetails = providerVersionDetailsInstance;
+                                    
+                                    JToken versionValue = providerVersionDetailsValue["version"];
+                                    if (versionValue != null && versionValue.Type != JTokenType.Null)
+                                    {
+                                        string versionInstance = ((string)versionValue);
+                                        providerVersionDetailsInstance.Version = versionInstance;
+                                    }
+                                    
+                                    JToken expiryDateValue = providerVersionDetailsValue["expiryDate"];
+                                    if (expiryDateValue != null && expiryDateValue.Type != JTokenType.Null)
+                                    {
+                                        DateTime expiryDateInstance = ((DateTime)expiryDateValue);
+                                        providerVersionDetailsInstance.ExpiryDate = expiryDateInstance;
+                                    }
+                                    
+                                    JToken statusValue = providerVersionDetailsValue["status"];
+                                    if (statusValue != null && statusValue.Type != JTokenType.Null)
+                                    {
+                                        string statusInstance = ((string)statusValue);
+                                        providerVersionDetailsInstance.Status = statusInstance;
+                                    }
+                                }
+                                
                                 JToken lastHeartBeatValue = propertiesValue["lastHeartBeat"];
                                 if (lastHeartBeatValue != null && lastHeartBeatValue.Type != JTokenType.Null)
                                 {
@@ -2094,6 +2122,34 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             propertiesInstance.ProviderVersionExpiryDate = providerVersionExpiryDateInstance;
                                         }
                                         
+                                        JToken providerVersionDetailsValue = propertiesValue["providerVersionDetails"];
+                                        if (providerVersionDetailsValue != null && providerVersionDetailsValue.Type != JTokenType.Null)
+                                        {
+                                            VersionDetails providerVersionDetailsInstance = new VersionDetails();
+                                            propertiesInstance.ProviderVersionDetails = providerVersionDetailsInstance;
+                                            
+                                            JToken versionValue = providerVersionDetailsValue["version"];
+                                            if (versionValue != null && versionValue.Type != JTokenType.Null)
+                                            {
+                                                string versionInstance = ((string)versionValue);
+                                                providerVersionDetailsInstance.Version = versionInstance;
+                                            }
+                                            
+                                            JToken expiryDateValue = providerVersionDetailsValue["expiryDate"];
+                                            if (expiryDateValue != null && expiryDateValue.Type != JTokenType.Null)
+                                            {
+                                                DateTime expiryDateInstance = ((DateTime)expiryDateValue);
+                                                providerVersionDetailsInstance.ExpiryDate = expiryDateInstance;
+                                            }
+                                            
+                                            JToken statusValue = providerVersionDetailsValue["status"];
+                                            if (statusValue != null && statusValue.Type != JTokenType.Null)
+                                            {
+                                                string statusInstance = ((string)statusValue);
+                                                providerVersionDetailsInstance.Status = statusInstance;
+                                            }
+                                        }
+                                        
                                         JToken lastHeartBeatValue = propertiesValue["lastHeartBeat"];
                                         if (lastHeartBeatValue != null && lastHeartBeatValue.Type != JTokenType.Null)
                                         {
@@ -2604,6 +2660,34 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             DateTime providerVersionExpiryDateInstance = ((DateTime)providerVersionExpiryDateValue);
                                             propertiesInstance.ProviderVersionExpiryDate = providerVersionExpiryDateInstance;
+                                        }
+                                        
+                                        JToken providerVersionDetailsValue = propertiesValue["providerVersionDetails"];
+                                        if (providerVersionDetailsValue != null && providerVersionDetailsValue.Type != JTokenType.Null)
+                                        {
+                                            VersionDetails providerVersionDetailsInstance = new VersionDetails();
+                                            propertiesInstance.ProviderVersionDetails = providerVersionDetailsInstance;
+                                            
+                                            JToken versionValue = providerVersionDetailsValue["version"];
+                                            if (versionValue != null && versionValue.Type != JTokenType.Null)
+                                            {
+                                                string versionInstance = ((string)versionValue);
+                                                providerVersionDetailsInstance.Version = versionInstance;
+                                            }
+                                            
+                                            JToken expiryDateValue = providerVersionDetailsValue["expiryDate"];
+                                            if (expiryDateValue != null && expiryDateValue.Type != JTokenType.Null)
+                                            {
+                                                DateTime expiryDateInstance = ((DateTime)expiryDateValue);
+                                                providerVersionDetailsInstance.ExpiryDate = expiryDateInstance;
+                                            }
+                                            
+                                            JToken statusValue = providerVersionDetailsValue["status"];
+                                            if (statusValue != null && statusValue.Type != JTokenType.Null)
+                                            {
+                                                string statusInstance = ((string)statusValue);
+                                                providerVersionDetailsInstance.Status = statusInstance;
+                                            }
                                         }
                                         
                                         JToken lastHeartBeatValue = propertiesValue["lastHeartBeat"];

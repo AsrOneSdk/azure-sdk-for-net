@@ -54,6 +54,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._agentVersion = value; }
         }
         
+        private VersionDetails _agentVersionDetails;
+        
+        /// <summary>
+        /// Optional. Agent version details.
+        /// </summary>
+        public VersionDetails AgentVersionDetails
+        {
+            get { return this._agentVersionDetails; }
+            set { this._agentVersionDetails = value; }
+        }
+        
         private IList<DataStore> _dataStores;
         
         /// <summary>
@@ -140,6 +151,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         {
             get { return this._marsAgentVersion; }
             set { this._marsAgentVersion = value; }
+        }
+        
+        private VersionDetails _marsAgentVersionDetails;
+        
+        /// <summary>
+        /// Optional. Mars agent version details.
+        /// </summary>
+        public VersionDetails MarsAgentVersionDetails
+        {
+            get { return this._marsAgentVersionDetails; }
+            set { this._marsAgentVersionDetails = value; }
         }
         
         private string _name;

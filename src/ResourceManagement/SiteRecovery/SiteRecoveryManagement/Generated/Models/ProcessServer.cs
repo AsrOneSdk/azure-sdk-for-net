@@ -54,6 +54,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._agentVersion = value; }
         }
         
+        private VersionDetails _agentVersionDetails;
+        
+        /// <summary>
+        /// Optional. Agent version details.
+        /// </summary>
+        public VersionDetails AgentVersionDetails
+        {
+            get { return this._agentVersionDetails; }
+            set { this._agentVersionDetails = value; }
+        }
+        
         private long _availableMemoryInBytes;
         
         /// <summary>

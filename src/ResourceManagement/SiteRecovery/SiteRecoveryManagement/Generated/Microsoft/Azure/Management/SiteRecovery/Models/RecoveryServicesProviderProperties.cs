@@ -133,6 +133,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._providerVersion = value; }
         }
         
+        private VersionDetails _providerVersionDetails;
+        
+        /// <summary>
+        /// Optional. Provider version details
+        /// </summary>
+        public VersionDetails ProviderVersionDetails
+        {
+            get { return this._providerVersionDetails; }
+            set { this._providerVersionDetails = value; }
+        }
+        
         private System.DateTime? _providerVersionExpiryDate;
         
         /// <summary>

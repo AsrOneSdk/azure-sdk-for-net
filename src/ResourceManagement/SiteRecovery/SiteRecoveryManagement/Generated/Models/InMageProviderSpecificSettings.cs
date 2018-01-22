@@ -57,6 +57,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._agentDetails = value; }
         }
         
+        private InMageAgentVersionDetails _agentVersionDetails;
+        
+        /// <summary>
+        /// Optional. The agent version details.
+        /// </summary>
+        public InMageAgentVersionDetails AgentVersionDetails
+        {
+            get { return this._agentVersionDetails; }
+            set { this._agentVersionDetails = value; }
+        }
+        
         private string _azureStorageAccountId;
         
         /// <summary>
