@@ -51,6 +51,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._entityId = value; }
         }
         
+        private string _errorCategory;
+        
+        /// <summary>
+        /// Optional. Health error category.
+        /// </summary>
+        public string ErrorCategory
+        {
+            get { return this._errorCategory; }
+            set { this._errorCategory = value; }
+        }
+        
         private string _errorCode;
         
         /// <summary>

@@ -2450,6 +2450,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                             healthErrorInstance.ErrorLevel = errorLevelInstance;
                                                         }
                                                         
+                                                        JToken errorCategoryValue = healthErrorsValue["errorCategory"];
+                                                        if (errorCategoryValue != null && errorCategoryValue.Type != JTokenType.Null)
+                                                        {
+                                                            string errorCategoryInstance = ((string)errorCategoryValue);
+                                                            healthErrorInstance.ErrorCategory = errorCategoryInstance;
+                                                        }
+                                                        
                                                         JToken errorCodeValue = healthErrorsValue["errorCode"];
                                                         if (errorCodeValue != null && errorCodeValue.Type != JTokenType.Null)
                                                         {
@@ -2533,6 +2540,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                                 {
                                                                     string errorLevelInstance2 = ((string)errorLevelValue2);
                                                                     innerHealthErrorInstance.ErrorLevel = errorLevelInstance2;
+                                                                }
+                                                                
+                                                                JToken errorCategoryValue2 = innerHealthErrorsValue["errorCategory"];
+                                                                if (errorCategoryValue2 != null && errorCategoryValue2.Type != JTokenType.Null)
+                                                                {
+                                                                    string errorCategoryInstance2 = ((string)errorCategoryValue2);
+                                                                    innerHealthErrorInstance.ErrorCategory = errorCategoryInstance2;
                                                                 }
                                                                 
                                                                 JToken errorCodeValue2 = innerHealthErrorsValue["errorCode"];
@@ -2801,6 +2815,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                             healthErrorInstance2.ErrorLevel = errorLevelInstance3;
                                                         }
                                                         
+                                                        JToken errorCategoryValue3 = validationErrorsValue["errorCategory"];
+                                                        if (errorCategoryValue3 != null && errorCategoryValue3.Type != JTokenType.Null)
+                                                        {
+                                                            string errorCategoryInstance3 = ((string)errorCategoryValue3);
+                                                            healthErrorInstance2.ErrorCategory = errorCategoryInstance3;
+                                                        }
+                                                        
                                                         JToken errorCodeValue3 = validationErrorsValue["errorCode"];
                                                         if (errorCodeValue3 != null && errorCodeValue3.Type != JTokenType.Null)
                                                         {
@@ -2884,6 +2905,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                                 {
                                                                     string errorLevelInstance4 = ((string)errorLevelValue4);
                                                                     innerHealthErrorInstance2.ErrorLevel = errorLevelInstance4;
+                                                                }
+                                                                
+                                                                JToken errorCategoryValue4 = innerHealthErrorsValue2["errorCategory"];
+                                                                if (errorCategoryValue4 != null && errorCategoryValue4.Type != JTokenType.Null)
+                                                                {
+                                                                    string errorCategoryInstance4 = ((string)errorCategoryValue4);
+                                                                    innerHealthErrorInstance2.ErrorCategory = errorCategoryInstance4;
                                                                 }
                                                                 
                                                                 JToken errorCodeValue4 = innerHealthErrorsValue2["errorCode"];
@@ -2975,6 +3003,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                             healthErrorInstance3.ErrorLevel = errorLevelInstance5;
                                                         }
                                                         
+                                                        JToken errorCategoryValue5 = healthErrorsValue2["errorCategory"];
+                                                        if (errorCategoryValue5 != null && errorCategoryValue5.Type != JTokenType.Null)
+                                                        {
+                                                            string errorCategoryInstance5 = ((string)errorCategoryValue5);
+                                                            healthErrorInstance3.ErrorCategory = errorCategoryInstance5;
+                                                        }
+                                                        
                                                         JToken errorCodeValue5 = healthErrorsValue2["errorCode"];
                                                         if (errorCodeValue5 != null && errorCodeValue5.Type != JTokenType.Null)
                                                         {
@@ -3058,6 +3093,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                                 {
                                                                     string errorLevelInstance6 = ((string)errorLevelValue6);
                                                                     innerHealthErrorInstance3.ErrorLevel = errorLevelInstance6;
+                                                                }
+                                                                
+                                                                JToken errorCategoryValue6 = innerHealthErrorsValue3["errorCategory"];
+                                                                if (errorCategoryValue6 != null && errorCategoryValue6.Type != JTokenType.Null)
+                                                                {
+                                                                    string errorCategoryInstance6 = ((string)errorCategoryValue6);
+                                                                    innerHealthErrorInstance3.ErrorCategory = errorCategoryInstance6;
                                                                 }
                                                                 
                                                                 JToken errorCodeValue6 = innerHealthErrorsValue3["errorCode"];
@@ -3500,6 +3542,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             healthErrorInstance4.ErrorLevel = errorLevelInstance7;
                                         }
                                         
+                                        JToken errorCategoryValue7 = healthErrorDetailsValue["errorCategory"];
+                                        if (errorCategoryValue7 != null && errorCategoryValue7.Type != JTokenType.Null)
+                                        {
+                                            string errorCategoryInstance7 = ((string)errorCategoryValue7);
+                                            healthErrorInstance4.ErrorCategory = errorCategoryInstance7;
+                                        }
+                                        
                                         JToken errorCodeValue7 = healthErrorDetailsValue["errorCode"];
                                         if (errorCodeValue7 != null && errorCodeValue7.Type != JTokenType.Null)
                                         {
@@ -3583,6 +3632,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 {
                                                     string errorLevelInstance8 = ((string)errorLevelValue8);
                                                     innerHealthErrorInstance4.ErrorLevel = errorLevelInstance8;
+                                                }
+                                                
+                                                JToken errorCategoryValue8 = innerHealthErrorsValue4["errorCategory"];
+                                                if (errorCategoryValue8 != null && errorCategoryValue8.Type != JTokenType.Null)
+                                                {
+                                                    string errorCategoryInstance8 = ((string)errorCategoryValue8);
+                                                    innerHealthErrorInstance4.ErrorCategory = errorCategoryInstance8;
                                                 }
                                                 
                                                 JToken errorCodeValue8 = innerHealthErrorsValue4["errorCode"];
@@ -4477,6 +4533,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                             healthErrorInstance.ErrorLevel = errorLevelInstance;
                                                         }
                                                         
+                                                        JToken errorCategoryValue = healthErrorsValue["errorCategory"];
+                                                        if (errorCategoryValue != null && errorCategoryValue.Type != JTokenType.Null)
+                                                        {
+                                                            string errorCategoryInstance = ((string)errorCategoryValue);
+                                                            healthErrorInstance.ErrorCategory = errorCategoryInstance;
+                                                        }
+                                                        
                                                         JToken errorCodeValue = healthErrorsValue["errorCode"];
                                                         if (errorCodeValue != null && errorCodeValue.Type != JTokenType.Null)
                                                         {
@@ -4560,6 +4623,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                                 {
                                                                     string errorLevelInstance2 = ((string)errorLevelValue2);
                                                                     innerHealthErrorInstance.ErrorLevel = errorLevelInstance2;
+                                                                }
+                                                                
+                                                                JToken errorCategoryValue2 = innerHealthErrorsValue["errorCategory"];
+                                                                if (errorCategoryValue2 != null && errorCategoryValue2.Type != JTokenType.Null)
+                                                                {
+                                                                    string errorCategoryInstance2 = ((string)errorCategoryValue2);
+                                                                    innerHealthErrorInstance.ErrorCategory = errorCategoryInstance2;
                                                                 }
                                                                 
                                                                 JToken errorCodeValue2 = innerHealthErrorsValue["errorCode"];
@@ -4828,6 +4898,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                             healthErrorInstance2.ErrorLevel = errorLevelInstance3;
                                                         }
                                                         
+                                                        JToken errorCategoryValue3 = validationErrorsValue["errorCategory"];
+                                                        if (errorCategoryValue3 != null && errorCategoryValue3.Type != JTokenType.Null)
+                                                        {
+                                                            string errorCategoryInstance3 = ((string)errorCategoryValue3);
+                                                            healthErrorInstance2.ErrorCategory = errorCategoryInstance3;
+                                                        }
+                                                        
                                                         JToken errorCodeValue3 = validationErrorsValue["errorCode"];
                                                         if (errorCodeValue3 != null && errorCodeValue3.Type != JTokenType.Null)
                                                         {
@@ -4911,6 +4988,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                                 {
                                                                     string errorLevelInstance4 = ((string)errorLevelValue4);
                                                                     innerHealthErrorInstance2.ErrorLevel = errorLevelInstance4;
+                                                                }
+                                                                
+                                                                JToken errorCategoryValue4 = innerHealthErrorsValue2["errorCategory"];
+                                                                if (errorCategoryValue4 != null && errorCategoryValue4.Type != JTokenType.Null)
+                                                                {
+                                                                    string errorCategoryInstance4 = ((string)errorCategoryValue4);
+                                                                    innerHealthErrorInstance2.ErrorCategory = errorCategoryInstance4;
                                                                 }
                                                                 
                                                                 JToken errorCodeValue4 = innerHealthErrorsValue2["errorCode"];
@@ -5002,6 +5086,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                             healthErrorInstance3.ErrorLevel = errorLevelInstance5;
                                                         }
                                                         
+                                                        JToken errorCategoryValue5 = healthErrorsValue2["errorCategory"];
+                                                        if (errorCategoryValue5 != null && errorCategoryValue5.Type != JTokenType.Null)
+                                                        {
+                                                            string errorCategoryInstance5 = ((string)errorCategoryValue5);
+                                                            healthErrorInstance3.ErrorCategory = errorCategoryInstance5;
+                                                        }
+                                                        
                                                         JToken errorCodeValue5 = healthErrorsValue2["errorCode"];
                                                         if (errorCodeValue5 != null && errorCodeValue5.Type != JTokenType.Null)
                                                         {
@@ -5085,6 +5176,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                                 {
                                                                     string errorLevelInstance6 = ((string)errorLevelValue6);
                                                                     innerHealthErrorInstance3.ErrorLevel = errorLevelInstance6;
+                                                                }
+                                                                
+                                                                JToken errorCategoryValue6 = innerHealthErrorsValue3["errorCategory"];
+                                                                if (errorCategoryValue6 != null && errorCategoryValue6.Type != JTokenType.Null)
+                                                                {
+                                                                    string errorCategoryInstance6 = ((string)errorCategoryValue6);
+                                                                    innerHealthErrorInstance3.ErrorCategory = errorCategoryInstance6;
                                                                 }
                                                                 
                                                                 JToken errorCodeValue6 = innerHealthErrorsValue3["errorCode"];
@@ -5527,6 +5625,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             healthErrorInstance4.ErrorLevel = errorLevelInstance7;
                                         }
                                         
+                                        JToken errorCategoryValue7 = healthErrorDetailsValue["errorCategory"];
+                                        if (errorCategoryValue7 != null && errorCategoryValue7.Type != JTokenType.Null)
+                                        {
+                                            string errorCategoryInstance7 = ((string)errorCategoryValue7);
+                                            healthErrorInstance4.ErrorCategory = errorCategoryInstance7;
+                                        }
+                                        
                                         JToken errorCodeValue7 = healthErrorDetailsValue["errorCode"];
                                         if (errorCodeValue7 != null && errorCodeValue7.Type != JTokenType.Null)
                                         {
@@ -5610,6 +5715,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 {
                                                     string errorLevelInstance8 = ((string)errorLevelValue8);
                                                     innerHealthErrorInstance4.ErrorLevel = errorLevelInstance8;
+                                                }
+                                                
+                                                JToken errorCategoryValue8 = innerHealthErrorsValue4["errorCategory"];
+                                                if (errorCategoryValue8 != null && errorCategoryValue8.Type != JTokenType.Null)
+                                                {
+                                                    string errorCategoryInstance8 = ((string)errorCategoryValue8);
+                                                    innerHealthErrorInstance4.ErrorCategory = errorCategoryInstance8;
                                                 }
                                                 
                                                 JToken errorCodeValue8 = innerHealthErrorsValue4["errorCode"];
@@ -6563,6 +6675,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                             healthErrorInstance.ErrorLevel = errorLevelInstance;
                                                         }
                                                         
+                                                        JToken errorCategoryValue = healthErrorsValue["errorCategory"];
+                                                        if (errorCategoryValue != null && errorCategoryValue.Type != JTokenType.Null)
+                                                        {
+                                                            string errorCategoryInstance = ((string)errorCategoryValue);
+                                                            healthErrorInstance.ErrorCategory = errorCategoryInstance;
+                                                        }
+                                                        
                                                         JToken errorCodeValue = healthErrorsValue["errorCode"];
                                                         if (errorCodeValue != null && errorCodeValue.Type != JTokenType.Null)
                                                         {
@@ -6646,6 +6765,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                                 {
                                                                     string errorLevelInstance2 = ((string)errorLevelValue2);
                                                                     innerHealthErrorInstance.ErrorLevel = errorLevelInstance2;
+                                                                }
+                                                                
+                                                                JToken errorCategoryValue2 = innerHealthErrorsValue["errorCategory"];
+                                                                if (errorCategoryValue2 != null && errorCategoryValue2.Type != JTokenType.Null)
+                                                                {
+                                                                    string errorCategoryInstance2 = ((string)errorCategoryValue2);
+                                                                    innerHealthErrorInstance.ErrorCategory = errorCategoryInstance2;
                                                                 }
                                                                 
                                                                 JToken errorCodeValue2 = innerHealthErrorsValue["errorCode"];
@@ -6914,6 +7040,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                             healthErrorInstance2.ErrorLevel = errorLevelInstance3;
                                                         }
                                                         
+                                                        JToken errorCategoryValue3 = validationErrorsValue["errorCategory"];
+                                                        if (errorCategoryValue3 != null && errorCategoryValue3.Type != JTokenType.Null)
+                                                        {
+                                                            string errorCategoryInstance3 = ((string)errorCategoryValue3);
+                                                            healthErrorInstance2.ErrorCategory = errorCategoryInstance3;
+                                                        }
+                                                        
                                                         JToken errorCodeValue3 = validationErrorsValue["errorCode"];
                                                         if (errorCodeValue3 != null && errorCodeValue3.Type != JTokenType.Null)
                                                         {
@@ -6997,6 +7130,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                                 {
                                                                     string errorLevelInstance4 = ((string)errorLevelValue4);
                                                                     innerHealthErrorInstance2.ErrorLevel = errorLevelInstance4;
+                                                                }
+                                                                
+                                                                JToken errorCategoryValue4 = innerHealthErrorsValue2["errorCategory"];
+                                                                if (errorCategoryValue4 != null && errorCategoryValue4.Type != JTokenType.Null)
+                                                                {
+                                                                    string errorCategoryInstance4 = ((string)errorCategoryValue4);
+                                                                    innerHealthErrorInstance2.ErrorCategory = errorCategoryInstance4;
                                                                 }
                                                                 
                                                                 JToken errorCodeValue4 = innerHealthErrorsValue2["errorCode"];
@@ -7088,6 +7228,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                             healthErrorInstance3.ErrorLevel = errorLevelInstance5;
                                                         }
                                                         
+                                                        JToken errorCategoryValue5 = healthErrorsValue2["errorCategory"];
+                                                        if (errorCategoryValue5 != null && errorCategoryValue5.Type != JTokenType.Null)
+                                                        {
+                                                            string errorCategoryInstance5 = ((string)errorCategoryValue5);
+                                                            healthErrorInstance3.ErrorCategory = errorCategoryInstance5;
+                                                        }
+                                                        
                                                         JToken errorCodeValue5 = healthErrorsValue2["errorCode"];
                                                         if (errorCodeValue5 != null && errorCodeValue5.Type != JTokenType.Null)
                                                         {
@@ -7171,6 +7318,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                                 {
                                                                     string errorLevelInstance6 = ((string)errorLevelValue6);
                                                                     innerHealthErrorInstance3.ErrorLevel = errorLevelInstance6;
+                                                                }
+                                                                
+                                                                JToken errorCategoryValue6 = innerHealthErrorsValue3["errorCategory"];
+                                                                if (errorCategoryValue6 != null && errorCategoryValue6.Type != JTokenType.Null)
+                                                                {
+                                                                    string errorCategoryInstance6 = ((string)errorCategoryValue6);
+                                                                    innerHealthErrorInstance3.ErrorCategory = errorCategoryInstance6;
                                                                 }
                                                                 
                                                                 JToken errorCodeValue6 = innerHealthErrorsValue3["errorCode"];
@@ -7613,6 +7767,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             healthErrorInstance4.ErrorLevel = errorLevelInstance7;
                                         }
                                         
+                                        JToken errorCategoryValue7 = healthErrorDetailsValue["errorCategory"];
+                                        if (errorCategoryValue7 != null && errorCategoryValue7.Type != JTokenType.Null)
+                                        {
+                                            string errorCategoryInstance7 = ((string)errorCategoryValue7);
+                                            healthErrorInstance4.ErrorCategory = errorCategoryInstance7;
+                                        }
+                                        
                                         JToken errorCodeValue7 = healthErrorDetailsValue["errorCode"];
                                         if (errorCodeValue7 != null && errorCodeValue7.Type != JTokenType.Null)
                                         {
@@ -7696,6 +7857,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 {
                                                     string errorLevelInstance8 = ((string)errorLevelValue8);
                                                     innerHealthErrorInstance4.ErrorLevel = errorLevelInstance8;
+                                                }
+                                                
+                                                JToken errorCategoryValue8 = innerHealthErrorsValue4["errorCategory"];
+                                                if (errorCategoryValue8 != null && errorCategoryValue8.Type != JTokenType.Null)
+                                                {
+                                                    string errorCategoryInstance8 = ((string)errorCategoryValue8);
+                                                    innerHealthErrorInstance4.ErrorCategory = errorCategoryInstance8;
                                                 }
                                                 
                                                 JToken errorCodeValue8 = innerHealthErrorsValue4["errorCode"];
@@ -8880,6 +9048,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                             healthErrorInstance.ErrorLevel = errorLevelInstance;
                                                         }
                                                         
+                                                        JToken errorCategoryValue = healthErrorsValue["errorCategory"];
+                                                        if (errorCategoryValue != null && errorCategoryValue.Type != JTokenType.Null)
+                                                        {
+                                                            string errorCategoryInstance = ((string)errorCategoryValue);
+                                                            healthErrorInstance.ErrorCategory = errorCategoryInstance;
+                                                        }
+                                                        
                                                         JToken errorCodeValue = healthErrorsValue["errorCode"];
                                                         if (errorCodeValue != null && errorCodeValue.Type != JTokenType.Null)
                                                         {
@@ -8963,6 +9138,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                                 {
                                                                     string errorLevelInstance2 = ((string)errorLevelValue2);
                                                                     innerHealthErrorInstance.ErrorLevel = errorLevelInstance2;
+                                                                }
+                                                                
+                                                                JToken errorCategoryValue2 = innerHealthErrorsValue["errorCategory"];
+                                                                if (errorCategoryValue2 != null && errorCategoryValue2.Type != JTokenType.Null)
+                                                                {
+                                                                    string errorCategoryInstance2 = ((string)errorCategoryValue2);
+                                                                    innerHealthErrorInstance.ErrorCategory = errorCategoryInstance2;
                                                                 }
                                                                 
                                                                 JToken errorCodeValue2 = innerHealthErrorsValue["errorCode"];
@@ -9231,6 +9413,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                             healthErrorInstance2.ErrorLevel = errorLevelInstance3;
                                                         }
                                                         
+                                                        JToken errorCategoryValue3 = validationErrorsValue["errorCategory"];
+                                                        if (errorCategoryValue3 != null && errorCategoryValue3.Type != JTokenType.Null)
+                                                        {
+                                                            string errorCategoryInstance3 = ((string)errorCategoryValue3);
+                                                            healthErrorInstance2.ErrorCategory = errorCategoryInstance3;
+                                                        }
+                                                        
                                                         JToken errorCodeValue3 = validationErrorsValue["errorCode"];
                                                         if (errorCodeValue3 != null && errorCodeValue3.Type != JTokenType.Null)
                                                         {
@@ -9314,6 +9503,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                                 {
                                                                     string errorLevelInstance4 = ((string)errorLevelValue4);
                                                                     innerHealthErrorInstance2.ErrorLevel = errorLevelInstance4;
+                                                                }
+                                                                
+                                                                JToken errorCategoryValue4 = innerHealthErrorsValue2["errorCategory"];
+                                                                if (errorCategoryValue4 != null && errorCategoryValue4.Type != JTokenType.Null)
+                                                                {
+                                                                    string errorCategoryInstance4 = ((string)errorCategoryValue4);
+                                                                    innerHealthErrorInstance2.ErrorCategory = errorCategoryInstance4;
                                                                 }
                                                                 
                                                                 JToken errorCodeValue4 = innerHealthErrorsValue2["errorCode"];
@@ -9405,6 +9601,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                             healthErrorInstance3.ErrorLevel = errorLevelInstance5;
                                                         }
                                                         
+                                                        JToken errorCategoryValue5 = healthErrorsValue2["errorCategory"];
+                                                        if (errorCategoryValue5 != null && errorCategoryValue5.Type != JTokenType.Null)
+                                                        {
+                                                            string errorCategoryInstance5 = ((string)errorCategoryValue5);
+                                                            healthErrorInstance3.ErrorCategory = errorCategoryInstance5;
+                                                        }
+                                                        
                                                         JToken errorCodeValue5 = healthErrorsValue2["errorCode"];
                                                         if (errorCodeValue5 != null && errorCodeValue5.Type != JTokenType.Null)
                                                         {
@@ -9488,6 +9691,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                                 {
                                                                     string errorLevelInstance6 = ((string)errorLevelValue6);
                                                                     innerHealthErrorInstance3.ErrorLevel = errorLevelInstance6;
+                                                                }
+                                                                
+                                                                JToken errorCategoryValue6 = innerHealthErrorsValue3["errorCategory"];
+                                                                if (errorCategoryValue6 != null && errorCategoryValue6.Type != JTokenType.Null)
+                                                                {
+                                                                    string errorCategoryInstance6 = ((string)errorCategoryValue6);
+                                                                    innerHealthErrorInstance3.ErrorCategory = errorCategoryInstance6;
                                                                 }
                                                                 
                                                                 JToken errorCodeValue6 = innerHealthErrorsValue3["errorCode"];
@@ -9930,6 +10140,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             healthErrorInstance4.ErrorLevel = errorLevelInstance7;
                                         }
                                         
+                                        JToken errorCategoryValue7 = healthErrorDetailsValue["errorCategory"];
+                                        if (errorCategoryValue7 != null && errorCategoryValue7.Type != JTokenType.Null)
+                                        {
+                                            string errorCategoryInstance7 = ((string)errorCategoryValue7);
+                                            healthErrorInstance4.ErrorCategory = errorCategoryInstance7;
+                                        }
+                                        
                                         JToken errorCodeValue7 = healthErrorDetailsValue["errorCode"];
                                         if (errorCodeValue7 != null && errorCodeValue7.Type != JTokenType.Null)
                                         {
@@ -10013,6 +10230,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 {
                                                     string errorLevelInstance8 = ((string)errorLevelValue8);
                                                     innerHealthErrorInstance4.ErrorLevel = errorLevelInstance8;
+                                                }
+                                                
+                                                JToken errorCategoryValue8 = innerHealthErrorsValue4["errorCategory"];
+                                                if (errorCategoryValue8 != null && errorCategoryValue8.Type != JTokenType.Null)
+                                                {
+                                                    string errorCategoryInstance8 = ((string)errorCategoryValue8);
+                                                    innerHealthErrorInstance4.ErrorCategory = errorCategoryInstance8;
                                                 }
                                                 
                                                 JToken errorCodeValue8 = innerHealthErrorsValue4["errorCode"];
@@ -10735,6 +10959,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                             healthErrorInstance.ErrorLevel = errorLevelInstance;
                                                         }
                                                         
+                                                        JToken errorCategoryValue = healthErrorsValue["errorCategory"];
+                                                        if (errorCategoryValue != null && errorCategoryValue.Type != JTokenType.Null)
+                                                        {
+                                                            string errorCategoryInstance = ((string)errorCategoryValue);
+                                                            healthErrorInstance.ErrorCategory = errorCategoryInstance;
+                                                        }
+                                                        
                                                         JToken errorCodeValue = healthErrorsValue["errorCode"];
                                                         if (errorCodeValue != null && errorCodeValue.Type != JTokenType.Null)
                                                         {
@@ -10818,6 +11049,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                                 {
                                                                     string errorLevelInstance2 = ((string)errorLevelValue2);
                                                                     innerHealthErrorInstance.ErrorLevel = errorLevelInstance2;
+                                                                }
+                                                                
+                                                                JToken errorCategoryValue2 = innerHealthErrorsValue["errorCategory"];
+                                                                if (errorCategoryValue2 != null && errorCategoryValue2.Type != JTokenType.Null)
+                                                                {
+                                                                    string errorCategoryInstance2 = ((string)errorCategoryValue2);
+                                                                    innerHealthErrorInstance.ErrorCategory = errorCategoryInstance2;
                                                                 }
                                                                 
                                                                 JToken errorCodeValue2 = innerHealthErrorsValue["errorCode"];
@@ -11086,6 +11324,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                             healthErrorInstance2.ErrorLevel = errorLevelInstance3;
                                                         }
                                                         
+                                                        JToken errorCategoryValue3 = validationErrorsValue["errorCategory"];
+                                                        if (errorCategoryValue3 != null && errorCategoryValue3.Type != JTokenType.Null)
+                                                        {
+                                                            string errorCategoryInstance3 = ((string)errorCategoryValue3);
+                                                            healthErrorInstance2.ErrorCategory = errorCategoryInstance3;
+                                                        }
+                                                        
                                                         JToken errorCodeValue3 = validationErrorsValue["errorCode"];
                                                         if (errorCodeValue3 != null && errorCodeValue3.Type != JTokenType.Null)
                                                         {
@@ -11169,6 +11414,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                                 {
                                                                     string errorLevelInstance4 = ((string)errorLevelValue4);
                                                                     innerHealthErrorInstance2.ErrorLevel = errorLevelInstance4;
+                                                                }
+                                                                
+                                                                JToken errorCategoryValue4 = innerHealthErrorsValue2["errorCategory"];
+                                                                if (errorCategoryValue4 != null && errorCategoryValue4.Type != JTokenType.Null)
+                                                                {
+                                                                    string errorCategoryInstance4 = ((string)errorCategoryValue4);
+                                                                    innerHealthErrorInstance2.ErrorCategory = errorCategoryInstance4;
                                                                 }
                                                                 
                                                                 JToken errorCodeValue4 = innerHealthErrorsValue2["errorCode"];
@@ -11260,6 +11512,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                             healthErrorInstance3.ErrorLevel = errorLevelInstance5;
                                                         }
                                                         
+                                                        JToken errorCategoryValue5 = healthErrorsValue2["errorCategory"];
+                                                        if (errorCategoryValue5 != null && errorCategoryValue5.Type != JTokenType.Null)
+                                                        {
+                                                            string errorCategoryInstance5 = ((string)errorCategoryValue5);
+                                                            healthErrorInstance3.ErrorCategory = errorCategoryInstance5;
+                                                        }
+                                                        
                                                         JToken errorCodeValue5 = healthErrorsValue2["errorCode"];
                                                         if (errorCodeValue5 != null && errorCodeValue5.Type != JTokenType.Null)
                                                         {
@@ -11343,6 +11602,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                                 {
                                                                     string errorLevelInstance6 = ((string)errorLevelValue6);
                                                                     innerHealthErrorInstance3.ErrorLevel = errorLevelInstance6;
+                                                                }
+                                                                
+                                                                JToken errorCategoryValue6 = innerHealthErrorsValue3["errorCategory"];
+                                                                if (errorCategoryValue6 != null && errorCategoryValue6.Type != JTokenType.Null)
+                                                                {
+                                                                    string errorCategoryInstance6 = ((string)errorCategoryValue6);
+                                                                    innerHealthErrorInstance3.ErrorCategory = errorCategoryInstance6;
                                                                 }
                                                                 
                                                                 JToken errorCodeValue6 = innerHealthErrorsValue3["errorCode"];
@@ -11785,6 +12051,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             healthErrorInstance4.ErrorLevel = errorLevelInstance7;
                                         }
                                         
+                                        JToken errorCategoryValue7 = healthErrorDetailsValue["errorCategory"];
+                                        if (errorCategoryValue7 != null && errorCategoryValue7.Type != JTokenType.Null)
+                                        {
+                                            string errorCategoryInstance7 = ((string)errorCategoryValue7);
+                                            healthErrorInstance4.ErrorCategory = errorCategoryInstance7;
+                                        }
+                                        
                                         JToken errorCodeValue7 = healthErrorDetailsValue["errorCode"];
                                         if (errorCodeValue7 != null && errorCodeValue7.Type != JTokenType.Null)
                                         {
@@ -11868,6 +12141,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 {
                                                     string errorLevelInstance8 = ((string)errorLevelValue8);
                                                     innerHealthErrorInstance4.ErrorLevel = errorLevelInstance8;
+                                                }
+                                                
+                                                JToken errorCategoryValue8 = innerHealthErrorsValue4["errorCategory"];
+                                                if (errorCategoryValue8 != null && errorCategoryValue8.Type != JTokenType.Null)
+                                                {
+                                                    string errorCategoryInstance8 = ((string)errorCategoryValue8);
+                                                    innerHealthErrorInstance4.ErrorCategory = errorCategoryInstance8;
                                                 }
                                                 
                                                 JToken errorCodeValue8 = innerHealthErrorsValue4["errorCode"];
@@ -12619,6 +12899,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                                     healthErrorInstance.ErrorLevel = errorLevelInstance;
                                                                 }
                                                                 
+                                                                JToken errorCategoryValue = healthErrorsValue["errorCategory"];
+                                                                if (errorCategoryValue != null && errorCategoryValue.Type != JTokenType.Null)
+                                                                {
+                                                                    string errorCategoryInstance = ((string)errorCategoryValue);
+                                                                    healthErrorInstance.ErrorCategory = errorCategoryInstance;
+                                                                }
+                                                                
                                                                 JToken errorCodeValue = healthErrorsValue["errorCode"];
                                                                 if (errorCodeValue != null && errorCodeValue.Type != JTokenType.Null)
                                                                 {
@@ -12702,6 +12989,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                                         {
                                                                             string errorLevelInstance2 = ((string)errorLevelValue2);
                                                                             innerHealthErrorInstance.ErrorLevel = errorLevelInstance2;
+                                                                        }
+                                                                        
+                                                                        JToken errorCategoryValue2 = innerHealthErrorsValue["errorCategory"];
+                                                                        if (errorCategoryValue2 != null && errorCategoryValue2.Type != JTokenType.Null)
+                                                                        {
+                                                                            string errorCategoryInstance2 = ((string)errorCategoryValue2);
+                                                                            innerHealthErrorInstance.ErrorCategory = errorCategoryInstance2;
                                                                         }
                                                                         
                                                                         JToken errorCodeValue2 = innerHealthErrorsValue["errorCode"];
@@ -12970,6 +13264,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                                     healthErrorInstance2.ErrorLevel = errorLevelInstance3;
                                                                 }
                                                                 
+                                                                JToken errorCategoryValue3 = validationErrorsValue["errorCategory"];
+                                                                if (errorCategoryValue3 != null && errorCategoryValue3.Type != JTokenType.Null)
+                                                                {
+                                                                    string errorCategoryInstance3 = ((string)errorCategoryValue3);
+                                                                    healthErrorInstance2.ErrorCategory = errorCategoryInstance3;
+                                                                }
+                                                                
                                                                 JToken errorCodeValue3 = validationErrorsValue["errorCode"];
                                                                 if (errorCodeValue3 != null && errorCodeValue3.Type != JTokenType.Null)
                                                                 {
@@ -13053,6 +13354,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                                         {
                                                                             string errorLevelInstance4 = ((string)errorLevelValue4);
                                                                             innerHealthErrorInstance2.ErrorLevel = errorLevelInstance4;
+                                                                        }
+                                                                        
+                                                                        JToken errorCategoryValue4 = innerHealthErrorsValue2["errorCategory"];
+                                                                        if (errorCategoryValue4 != null && errorCategoryValue4.Type != JTokenType.Null)
+                                                                        {
+                                                                            string errorCategoryInstance4 = ((string)errorCategoryValue4);
+                                                                            innerHealthErrorInstance2.ErrorCategory = errorCategoryInstance4;
                                                                         }
                                                                         
                                                                         JToken errorCodeValue4 = innerHealthErrorsValue2["errorCode"];
@@ -13144,6 +13452,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                                     healthErrorInstance3.ErrorLevel = errorLevelInstance5;
                                                                 }
                                                                 
+                                                                JToken errorCategoryValue5 = healthErrorsValue2["errorCategory"];
+                                                                if (errorCategoryValue5 != null && errorCategoryValue5.Type != JTokenType.Null)
+                                                                {
+                                                                    string errorCategoryInstance5 = ((string)errorCategoryValue5);
+                                                                    healthErrorInstance3.ErrorCategory = errorCategoryInstance5;
+                                                                }
+                                                                
                                                                 JToken errorCodeValue5 = healthErrorsValue2["errorCode"];
                                                                 if (errorCodeValue5 != null && errorCodeValue5.Type != JTokenType.Null)
                                                                 {
@@ -13227,6 +13542,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                                         {
                                                                             string errorLevelInstance6 = ((string)errorLevelValue6);
                                                                             innerHealthErrorInstance3.ErrorLevel = errorLevelInstance6;
+                                                                        }
+                                                                        
+                                                                        JToken errorCategoryValue6 = innerHealthErrorsValue3["errorCategory"];
+                                                                        if (errorCategoryValue6 != null && errorCategoryValue6.Type != JTokenType.Null)
+                                                                        {
+                                                                            string errorCategoryInstance6 = ((string)errorCategoryValue6);
+                                                                            innerHealthErrorInstance3.ErrorCategory = errorCategoryInstance6;
                                                                         }
                                                                         
                                                                         JToken errorCodeValue6 = innerHealthErrorsValue3["errorCode"];
@@ -13669,6 +13991,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     healthErrorInstance4.ErrorLevel = errorLevelInstance7;
                                                 }
                                                 
+                                                JToken errorCategoryValue7 = healthErrorDetailsValue["errorCategory"];
+                                                if (errorCategoryValue7 != null && errorCategoryValue7.Type != JTokenType.Null)
+                                                {
+                                                    string errorCategoryInstance7 = ((string)errorCategoryValue7);
+                                                    healthErrorInstance4.ErrorCategory = errorCategoryInstance7;
+                                                }
+                                                
                                                 JToken errorCodeValue7 = healthErrorDetailsValue["errorCode"];
                                                 if (errorCodeValue7 != null && errorCodeValue7.Type != JTokenType.Null)
                                                 {
@@ -13752,6 +14081,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                         {
                                                             string errorLevelInstance8 = ((string)errorLevelValue8);
                                                             innerHealthErrorInstance4.ErrorLevel = errorLevelInstance8;
+                                                        }
+                                                        
+                                                        JToken errorCategoryValue8 = innerHealthErrorsValue4["errorCategory"];
+                                                        if (errorCategoryValue8 != null && errorCategoryValue8.Type != JTokenType.Null)
+                                                        {
+                                                            string errorCategoryInstance8 = ((string)errorCategoryValue8);
+                                                            innerHealthErrorInstance4.ErrorCategory = errorCategoryInstance8;
                                                         }
                                                         
                                                         JToken errorCodeValue8 = innerHealthErrorsValue4["errorCode"];
