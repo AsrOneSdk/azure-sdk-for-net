@@ -69,13 +69,13 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// <summary>
         /// Gets or sets target compute size name.
         /// </summary>
-        [JsonProperty(PropertyName = "Name")]
+        [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or sets target compute size display name.
         /// </summary>
-        [JsonProperty(PropertyName = "FriendlyName")]
+        [JsonProperty(PropertyName = "friendlyName")]
         public string FriendlyName { get; set; }
 
         /// <summary>
