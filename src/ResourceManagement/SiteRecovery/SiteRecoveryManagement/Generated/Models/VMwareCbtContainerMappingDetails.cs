@@ -55,7 +55,7 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         private string _serviceBusConnectionStringSecretName;
         
         /// <summary>
-        /// Optional. Service bus connection secret name.
+        /// Optional. Service bus connection string secret name.
         /// </summary>
         public string ServiceBusConnectionStringSecretName
         {

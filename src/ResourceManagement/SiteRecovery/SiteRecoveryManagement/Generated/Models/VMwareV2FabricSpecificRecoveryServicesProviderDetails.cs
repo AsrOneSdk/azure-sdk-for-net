@@ -33,7 +33,7 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         private string _srsServiceEndpoint;
         
         /// <summary>
-        /// Optional.
+        /// Optional. SRS service endpoint.
         /// </summary>
         public string SrsServiceEndpoint
         {
@@ -44,7 +44,7 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         private string _vMwareSiteArmId;
         
         /// <summary>
-        /// Optional.
+        /// Optional. VMware Site ARM Id.
         /// </summary>
         public string VMwareSiteArmId
         {
