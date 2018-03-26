@@ -21,30 +21,32 @@
 
 using System;
 using System.Linq;
+using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// Provider specific input.
+    /// A standard service response for recovery services provider long running
+    /// operations.
     /// </summary>
-    public partial class ReplicationProviderSpecificContainerCreationInput
+    public partial class RecoveryServicesProviderOperationResponse : LongRunningOperationResponse
     {
-        private string _instanceType;
+        private RecoveryServicesProvider _recoveryServicesProvider;
         
         /// <summary>
-        /// Optional. Type of provider input.
+        /// Optional. Created RecoveryServicesProvider.
         /// </summary>
-        public string InstanceType
+        public RecoveryServicesProvider RecoveryServicesProvider
         {
-            get { return this._instanceType; }
-            set { this._instanceType = value; }
+            get { return this._recoveryServicesProvider; }
+            set { this._recoveryServicesProvider = value; }
         }
         
         /// <summary>
         /// Initializes a new instance of the
-        /// ReplicationProviderSpecificContainerCreationInput class.
+        /// RecoveryServicesProviderOperationResponse class.
         /// </summary>
-        public ReplicationProviderSpecificContainerCreationInput()
+        public RecoveryServicesProviderOperationResponse()
         {
         }
     }

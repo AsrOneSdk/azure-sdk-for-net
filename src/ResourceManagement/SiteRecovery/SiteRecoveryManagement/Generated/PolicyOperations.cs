@@ -375,6 +375,17 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 providerSpecificInputValue["multiVmSyncStatus"] = derived7.MultiVmSyncStatus;
                             }
                         }
+                        if (input.Properties.ProviderSpecificInput is VMwareCbtPolicyCreationInput)
+                        {
+                            providerSpecificInputValue["instanceType"] = "VMwareCbt";
+                            VMwareCbtPolicyCreationInput derived8 = ((VMwareCbtPolicyCreationInput)input.Properties.ProviderSpecificInput);
+                            
+                            providerSpecificInputValue["recoveryPointHistoryInMinutes"] = derived8.RecoveryPointHistoryInMinutes;
+                            
+                            providerSpecificInputValue["crashConsistentFrequencyInMinutes"] = derived8.CrashConsistentFrequencyInMinutes;
+                            
+                            providerSpecificInputValue["appConsistentFrequencyInMinutes"] = derived8.AppConsistentFrequencyInMinutes;
+                        }
                     }
                 }
                 
@@ -959,6 +970,17 @@ namespace Microsoft.Azure.Management.SiteRecovery
                         {
                             replicationProviderSettingsValue["multiVmSyncStatus"] = derived7.MultiVmSyncStatus;
                         }
+                    }
+                    if (input.Properties.ReplicationProviderSettings is VMwareCbtPolicyCreationInput)
+                    {
+                        replicationProviderSettingsValue["instanceType"] = "VMwareCbt";
+                        VMwareCbtPolicyCreationInput derived8 = ((VMwareCbtPolicyCreationInput)input.Properties.ReplicationProviderSettings);
+                        
+                        replicationProviderSettingsValue["recoveryPointHistoryInMinutes"] = derived8.RecoveryPointHistoryInMinutes;
+                        
+                        replicationProviderSettingsValue["crashConsistentFrequencyInMinutes"] = derived8.CrashConsistentFrequencyInMinutes;
+                        
+                        replicationProviderSettingsValue["appConsistentFrequencyInMinutes"] = derived8.AppConsistentFrequencyInMinutes;
                     }
                 }
                 
@@ -1692,6 +1714,39 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         }
                                         propertiesInstance.ProviderSpecificDetails = a2APolicyDetailsInstance;
                                     }
+                                    if (typeName == "VMwareCbt")
+                                    {
+                                        VMwareCbtPolicyDetails vMwareCbtPolicyDetailsInstance = new VMwareCbtPolicyDetails();
+                                        
+                                        JToken recoveryPointHistoryInMinutesValue = providerSpecificDetailsValue["recoveryPointHistoryInMinutes"];
+                                        if (recoveryPointHistoryInMinutesValue != null && recoveryPointHistoryInMinutesValue.Type != JTokenType.Null)
+                                        {
+                                            int recoveryPointHistoryInMinutesInstance = ((int)recoveryPointHistoryInMinutesValue);
+                                            vMwareCbtPolicyDetailsInstance.RecoveryPointHistoryInMinutes = recoveryPointHistoryInMinutesInstance;
+                                        }
+                                        
+                                        JToken crashConsistentFrequencyInMinutesValue3 = providerSpecificDetailsValue["crashConsistentFrequencyInMinutes"];
+                                        if (crashConsistentFrequencyInMinutesValue3 != null && crashConsistentFrequencyInMinutesValue3.Type != JTokenType.Null)
+                                        {
+                                            int crashConsistentFrequencyInMinutesInstance3 = ((int)crashConsistentFrequencyInMinutesValue3);
+                                            vMwareCbtPolicyDetailsInstance.CrashConsistentFrequencyInMinutes = crashConsistentFrequencyInMinutesInstance3;
+                                        }
+                                        
+                                        JToken appConsistentFrequencyInMinutesValue4 = providerSpecificDetailsValue["appConsistentFrequencyInMinutes"];
+                                        if (appConsistentFrequencyInMinutesValue4 != null && appConsistentFrequencyInMinutesValue4.Type != JTokenType.Null)
+                                        {
+                                            int appConsistentFrequencyInMinutesInstance4 = ((int)appConsistentFrequencyInMinutesValue4);
+                                            vMwareCbtPolicyDetailsInstance.AppConsistentFrequencyInMinutes = appConsistentFrequencyInMinutesInstance4;
+                                        }
+                                        
+                                        JToken instanceTypeValue7 = providerSpecificDetailsValue["instanceType"];
+                                        if (instanceTypeValue7 != null && instanceTypeValue7.Type != JTokenType.Null)
+                                        {
+                                            string instanceTypeInstance7 = ((string)instanceTypeValue7);
+                                            vMwareCbtPolicyDetailsInstance.InstanceType = instanceTypeInstance7;
+                                        }
+                                        propertiesInstance.ProviderSpecificDetails = vMwareCbtPolicyDetailsInstance;
+                                    }
                                 }
                             }
                             
@@ -2284,6 +2339,39 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             a2APolicyDetailsInstance.InstanceType = instanceTypeInstance6;
                                         }
                                         propertiesInstance.ProviderSpecificDetails = a2APolicyDetailsInstance;
+                                    }
+                                    if (typeName == "VMwareCbt")
+                                    {
+                                        VMwareCbtPolicyDetails vMwareCbtPolicyDetailsInstance = new VMwareCbtPolicyDetails();
+                                        
+                                        JToken recoveryPointHistoryInMinutesValue = providerSpecificDetailsValue["recoveryPointHistoryInMinutes"];
+                                        if (recoveryPointHistoryInMinutesValue != null && recoveryPointHistoryInMinutesValue.Type != JTokenType.Null)
+                                        {
+                                            int recoveryPointHistoryInMinutesInstance = ((int)recoveryPointHistoryInMinutesValue);
+                                            vMwareCbtPolicyDetailsInstance.RecoveryPointHistoryInMinutes = recoveryPointHistoryInMinutesInstance;
+                                        }
+                                        
+                                        JToken crashConsistentFrequencyInMinutesValue3 = providerSpecificDetailsValue["crashConsistentFrequencyInMinutes"];
+                                        if (crashConsistentFrequencyInMinutesValue3 != null && crashConsistentFrequencyInMinutesValue3.Type != JTokenType.Null)
+                                        {
+                                            int crashConsistentFrequencyInMinutesInstance3 = ((int)crashConsistentFrequencyInMinutesValue3);
+                                            vMwareCbtPolicyDetailsInstance.CrashConsistentFrequencyInMinutes = crashConsistentFrequencyInMinutesInstance3;
+                                        }
+                                        
+                                        JToken appConsistentFrequencyInMinutesValue4 = providerSpecificDetailsValue["appConsistentFrequencyInMinutes"];
+                                        if (appConsistentFrequencyInMinutesValue4 != null && appConsistentFrequencyInMinutesValue4.Type != JTokenType.Null)
+                                        {
+                                            int appConsistentFrequencyInMinutesInstance4 = ((int)appConsistentFrequencyInMinutesValue4);
+                                            vMwareCbtPolicyDetailsInstance.AppConsistentFrequencyInMinutes = appConsistentFrequencyInMinutesInstance4;
+                                        }
+                                        
+                                        JToken instanceTypeValue7 = providerSpecificDetailsValue["instanceType"];
+                                        if (instanceTypeValue7 != null && instanceTypeValue7.Type != JTokenType.Null)
+                                        {
+                                            string instanceTypeInstance7 = ((string)instanceTypeValue7);
+                                            vMwareCbtPolicyDetailsInstance.InstanceType = instanceTypeInstance7;
+                                        }
+                                        propertiesInstance.ProviderSpecificDetails = vMwareCbtPolicyDetailsInstance;
                                     }
                                 }
                             }
@@ -3168,6 +3256,39 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         }
                                         propertiesInstance.ProviderSpecificDetails = a2APolicyDetailsInstance;
                                     }
+                                    if (typeName == "VMwareCbt")
+                                    {
+                                        VMwareCbtPolicyDetails vMwareCbtPolicyDetailsInstance = new VMwareCbtPolicyDetails();
+                                        
+                                        JToken recoveryPointHistoryInMinutesValue = providerSpecificDetailsValue["recoveryPointHistoryInMinutes"];
+                                        if (recoveryPointHistoryInMinutesValue != null && recoveryPointHistoryInMinutesValue.Type != JTokenType.Null)
+                                        {
+                                            int recoveryPointHistoryInMinutesInstance = ((int)recoveryPointHistoryInMinutesValue);
+                                            vMwareCbtPolicyDetailsInstance.RecoveryPointHistoryInMinutes = recoveryPointHistoryInMinutesInstance;
+                                        }
+                                        
+                                        JToken crashConsistentFrequencyInMinutesValue3 = providerSpecificDetailsValue["crashConsistentFrequencyInMinutes"];
+                                        if (crashConsistentFrequencyInMinutesValue3 != null && crashConsistentFrequencyInMinutesValue3.Type != JTokenType.Null)
+                                        {
+                                            int crashConsistentFrequencyInMinutesInstance3 = ((int)crashConsistentFrequencyInMinutesValue3);
+                                            vMwareCbtPolicyDetailsInstance.CrashConsistentFrequencyInMinutes = crashConsistentFrequencyInMinutesInstance3;
+                                        }
+                                        
+                                        JToken appConsistentFrequencyInMinutesValue4 = providerSpecificDetailsValue["appConsistentFrequencyInMinutes"];
+                                        if (appConsistentFrequencyInMinutesValue4 != null && appConsistentFrequencyInMinutesValue4.Type != JTokenType.Null)
+                                        {
+                                            int appConsistentFrequencyInMinutesInstance4 = ((int)appConsistentFrequencyInMinutesValue4);
+                                            vMwareCbtPolicyDetailsInstance.AppConsistentFrequencyInMinutes = appConsistentFrequencyInMinutesInstance4;
+                                        }
+                                        
+                                        JToken instanceTypeValue7 = providerSpecificDetailsValue["instanceType"];
+                                        if (instanceTypeValue7 != null && instanceTypeValue7.Type != JTokenType.Null)
+                                        {
+                                            string instanceTypeInstance7 = ((string)instanceTypeValue7);
+                                            vMwareCbtPolicyDetailsInstance.InstanceType = instanceTypeInstance7;
+                                        }
+                                        propertiesInstance.ProviderSpecificDetails = vMwareCbtPolicyDetailsInstance;
+                                    }
                                 }
                             }
                             
@@ -3848,6 +3969,39 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     a2APolicyDetailsInstance.InstanceType = instanceTypeInstance6;
                                                 }
                                                 propertiesInstance.ProviderSpecificDetails = a2APolicyDetailsInstance;
+                                            }
+                                            if (typeName == "VMwareCbt")
+                                            {
+                                                VMwareCbtPolicyDetails vMwareCbtPolicyDetailsInstance = new VMwareCbtPolicyDetails();
+                                                
+                                                JToken recoveryPointHistoryInMinutesValue = providerSpecificDetailsValue["recoveryPointHistoryInMinutes"];
+                                                if (recoveryPointHistoryInMinutesValue != null && recoveryPointHistoryInMinutesValue.Type != JTokenType.Null)
+                                                {
+                                                    int recoveryPointHistoryInMinutesInstance = ((int)recoveryPointHistoryInMinutesValue);
+                                                    vMwareCbtPolicyDetailsInstance.RecoveryPointHistoryInMinutes = recoveryPointHistoryInMinutesInstance;
+                                                }
+                                                
+                                                JToken crashConsistentFrequencyInMinutesValue3 = providerSpecificDetailsValue["crashConsistentFrequencyInMinutes"];
+                                                if (crashConsistentFrequencyInMinutesValue3 != null && crashConsistentFrequencyInMinutesValue3.Type != JTokenType.Null)
+                                                {
+                                                    int crashConsistentFrequencyInMinutesInstance3 = ((int)crashConsistentFrequencyInMinutesValue3);
+                                                    vMwareCbtPolicyDetailsInstance.CrashConsistentFrequencyInMinutes = crashConsistentFrequencyInMinutesInstance3;
+                                                }
+                                                
+                                                JToken appConsistentFrequencyInMinutesValue4 = providerSpecificDetailsValue["appConsistentFrequencyInMinutes"];
+                                                if (appConsistentFrequencyInMinutesValue4 != null && appConsistentFrequencyInMinutesValue4.Type != JTokenType.Null)
+                                                {
+                                                    int appConsistentFrequencyInMinutesInstance4 = ((int)appConsistentFrequencyInMinutesValue4);
+                                                    vMwareCbtPolicyDetailsInstance.AppConsistentFrequencyInMinutes = appConsistentFrequencyInMinutesInstance4;
+                                                }
+                                                
+                                                JToken instanceTypeValue7 = providerSpecificDetailsValue["instanceType"];
+                                                if (instanceTypeValue7 != null && instanceTypeValue7.Type != JTokenType.Null)
+                                                {
+                                                    string instanceTypeInstance7 = ((string)instanceTypeValue7);
+                                                    vMwareCbtPolicyDetailsInstance.InstanceType = instanceTypeInstance7;
+                                                }
+                                                propertiesInstance.ProviderSpecificDetails = vMwareCbtPolicyDetailsInstance;
                                             }
                                         }
                                     }

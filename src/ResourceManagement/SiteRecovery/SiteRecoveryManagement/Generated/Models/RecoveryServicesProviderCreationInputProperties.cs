@@ -21,30 +21,42 @@
 
 using System;
 using System.Linq;
+using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// Provider specific input.
+    /// RecoveryServicesProvider creation input properties.
     /// </summary>
-    public partial class ReplicationProviderSpecificContainerCreationInput
+    public partial class RecoveryServicesProviderCreationInputProperties
     {
-        private string _instanceType;
+        private RecoveryServicesProviderFabricSpecificCreationSettings _customDetails;
         
         /// <summary>
-        /// Optional. Type of provider input.
+        /// Optional. Fabric specific RSP creation input.
         /// </summary>
-        public string InstanceType
+        public RecoveryServicesProviderFabricSpecificCreationSettings CustomDetails
         {
-            get { return this._instanceType; }
-            set { this._instanceType = value; }
+            get { return this._customDetails; }
+            set { this._customDetails = value; }
+        }
+        
+        private string _machineName;
+        
+        /// <summary>
+        /// Optional. Machine name.
+        /// </summary>
+        public string MachineName
+        {
+            get { return this._machineName; }
+            set { this._machineName = value; }
         }
         
         /// <summary>
         /// Initializes a new instance of the
-        /// ReplicationProviderSpecificContainerCreationInput class.
+        /// RecoveryServicesProviderCreationInputProperties class.
         /// </summary>
-        public ReplicationProviderSpecificContainerCreationInput()
+        public RecoveryServicesProviderCreationInputProperties()
         {
         }
     }

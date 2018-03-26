@@ -370,6 +370,16 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 customDetailsValue["instanceType"] = derived.InstanceType;
                             }
                         }
+                        if (input.Properties.CustomDetails is VMwareV2FabricCreationInput)
+                        {
+                            customDetailsValue["instanceType"] = "VMwareV2";
+                            VMwareV2FabricCreationInput derived2 = ((VMwareV2FabricCreationInput)input.Properties.CustomDetails);
+                            
+                            if (derived2.InstanceType != null)
+                            {
+                                customDetailsValue["instanceType"] = derived2.InstanceType;
+                            }
+                        }
                     }
                 }
                 
@@ -3511,6 +3521,18 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         }
                                         propertiesInstance.CustomDetails = vMwareFabricDetailsInstance;
                                     }
+                                    if (typeName == "VMwareV2")
+                                    {
+                                        VMwareV2FabricSpecificDetails vMwareV2FabricSpecificDetailsInstance = new VMwareV2FabricSpecificDetails();
+                                        
+                                        JToken instanceTypeValue5 = customDetailsValue["instanceType"];
+                                        if (instanceTypeValue5 != null && instanceTypeValue5.Type != JTokenType.Null)
+                                        {
+                                            string instanceTypeInstance5 = ((string)instanceTypeValue5);
+                                            vMwareV2FabricSpecificDetailsInstance.InstanceType = instanceTypeInstance5;
+                                        }
+                                        propertiesInstance.CustomDetails = vMwareV2FabricSpecificDetailsInstance;
+                                    }
                                 }
                                 
                                 JToken healthErrorDetailsArray = propertiesValue["healthErrorDetails"];
@@ -5593,6 +5615,18 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareFabricDetailsInstance.InstanceType = instanceTypeInstance4;
                                         }
                                         propertiesInstance.CustomDetails = vMwareFabricDetailsInstance;
+                                    }
+                                    if (typeName == "VMwareV2")
+                                    {
+                                        VMwareV2FabricSpecificDetails vMwareV2FabricSpecificDetailsInstance = new VMwareV2FabricSpecificDetails();
+                                        
+                                        JToken instanceTypeValue5 = customDetailsValue["instanceType"];
+                                        if (instanceTypeValue5 != null && instanceTypeValue5.Type != JTokenType.Null)
+                                        {
+                                            string instanceTypeInstance5 = ((string)instanceTypeValue5);
+                                            vMwareV2FabricSpecificDetailsInstance.InstanceType = instanceTypeInstance5;
+                                        }
+                                        propertiesInstance.CustomDetails = vMwareV2FabricSpecificDetailsInstance;
                                     }
                                 }
                                 
@@ -7735,6 +7769,18 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareFabricDetailsInstance.InstanceType = instanceTypeInstance4;
                                         }
                                         propertiesInstance.CustomDetails = vMwareFabricDetailsInstance;
+                                    }
+                                    if (typeName == "VMwareV2")
+                                    {
+                                        VMwareV2FabricSpecificDetails vMwareV2FabricSpecificDetailsInstance = new VMwareV2FabricSpecificDetails();
+                                        
+                                        JToken instanceTypeValue5 = customDetailsValue["instanceType"];
+                                        if (instanceTypeValue5 != null && instanceTypeValue5.Type != JTokenType.Null)
+                                        {
+                                            string instanceTypeInstance5 = ((string)instanceTypeValue5);
+                                            vMwareV2FabricSpecificDetailsInstance.InstanceType = instanceTypeInstance5;
+                                        }
+                                        propertiesInstance.CustomDetails = vMwareV2FabricSpecificDetailsInstance;
                                     }
                                 }
                                 
@@ -10109,6 +10155,18 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         }
                                         propertiesInstance.CustomDetails = vMwareFabricDetailsInstance;
                                     }
+                                    if (typeName == "VMwareV2")
+                                    {
+                                        VMwareV2FabricSpecificDetails vMwareV2FabricSpecificDetailsInstance = new VMwareV2FabricSpecificDetails();
+                                        
+                                        JToken instanceTypeValue5 = customDetailsValue["instanceType"];
+                                        if (instanceTypeValue5 != null && instanceTypeValue5.Type != JTokenType.Null)
+                                        {
+                                            string instanceTypeInstance5 = ((string)instanceTypeValue5);
+                                            vMwareV2FabricSpecificDetailsInstance.InstanceType = instanceTypeInstance5;
+                                        }
+                                        propertiesInstance.CustomDetails = vMwareV2FabricSpecificDetailsInstance;
+                                    }
                                 }
                                 
                                 JToken healthErrorDetailsArray = propertiesValue["healthErrorDetails"];
@@ -12019,6 +12077,18 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareFabricDetailsInstance.InstanceType = instanceTypeInstance4;
                                         }
                                         propertiesInstance.CustomDetails = vMwareFabricDetailsInstance;
+                                    }
+                                    if (typeName == "VMwareV2")
+                                    {
+                                        VMwareV2FabricSpecificDetails vMwareV2FabricSpecificDetailsInstance = new VMwareV2FabricSpecificDetails();
+                                        
+                                        JToken instanceTypeValue5 = customDetailsValue["instanceType"];
+                                        if (instanceTypeValue5 != null && instanceTypeValue5.Type != JTokenType.Null)
+                                        {
+                                            string instanceTypeInstance5 = ((string)instanceTypeValue5);
+                                            vMwareV2FabricSpecificDetailsInstance.InstanceType = instanceTypeInstance5;
+                                        }
+                                        propertiesInstance.CustomDetails = vMwareV2FabricSpecificDetailsInstance;
                                     }
                                 }
                                 
@@ -13959,6 +14029,18 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareFabricDetailsInstance.InstanceType = instanceTypeInstance4;
                                                 }
                                                 propertiesInstance.CustomDetails = vMwareFabricDetailsInstance;
+                                            }
+                                            if (typeName == "VMwareV2")
+                                            {
+                                                VMwareV2FabricSpecificDetails vMwareV2FabricSpecificDetailsInstance = new VMwareV2FabricSpecificDetails();
+                                                
+                                                JToken instanceTypeValue5 = customDetailsValue["instanceType"];
+                                                if (instanceTypeValue5 != null && instanceTypeValue5.Type != JTokenType.Null)
+                                                {
+                                                    string instanceTypeInstance5 = ((string)instanceTypeValue5);
+                                                    vMwareV2FabricSpecificDetailsInstance.InstanceType = instanceTypeInstance5;
+                                                }
+                                                propertiesInstance.CustomDetails = vMwareV2FabricSpecificDetailsInstance;
                                             }
                                         }
                                         

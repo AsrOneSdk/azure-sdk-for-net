@@ -54,6 +54,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._connectionStatus = value; }
         }
         
+        private FabricSpecificRecoveryServicesProviderDetails _customDetails;
+        
+        /// <summary>
+        /// Optional. Fabric provider specific RSP details.
+        /// </summary>
+        public FabricSpecificRecoveryServicesProviderDetails CustomDetails
+        {
+            get { return this._customDetails; }
+            set { this._customDetails = value; }
+        }
+        
         private string _fabricFriendlyName;
         
         /// <summary>

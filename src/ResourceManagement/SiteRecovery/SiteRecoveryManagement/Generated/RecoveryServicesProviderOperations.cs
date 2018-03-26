@@ -25,6 +25,8 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Hyak.Common;
@@ -61,6 +63,243 @@ namespace Microsoft.Azure.Management.SiteRecovery
         public SiteRecoveryManagementClient Client
         {
             get { return this._client; }
+        }
+        
+        /// <summary>
+        /// Creates a RSP.
+        /// </summary>
+        /// <param name='fabricName'>
+        /// Required. Fabric Name.
+        /// </param>
+        /// <param name='providerName'>
+        /// Required. Provider Name.
+        /// </param>
+        /// <param name='input'>
+        /// Required. Input to create RSP.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Optional. Request header parameters.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
+        /// A standard service response for long running operations.
+        /// </returns>
+        public async Task<LongRunningOperationResponse> BeginCreatingAsync(string fabricName, string providerName, RecoveryServicesProviderCreationInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        {
+            // Validate
+            if (fabricName == null)
+            {
+                throw new ArgumentNullException("fabricName");
+            }
+            if (providerName == null)
+            {
+                throw new ArgumentNullException("providerName");
+            }
+            if (input == null)
+            {
+                throw new ArgumentNullException("input");
+            }
+            
+            // Tracing
+            bool shouldTrace = TracingAdapter.IsEnabled;
+            string invocationId = null;
+            if (shouldTrace)
+            {
+                invocationId = TracingAdapter.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("fabricName", fabricName);
+                tracingParameters.Add("providerName", providerName);
+                tracingParameters.Add("input", input);
+                tracingParameters.Add("customRequestHeaders", customRequestHeaders);
+                TracingAdapter.Enter(invocationId, this, "BeginCreatingAsync", tracingParameters);
+            }
+            
+            // Construct URL
+            string url = "";
+            url = url + "/Subscriptions/";
+            if (this.Client.Credentials.SubscriptionId != null)
+            {
+                url = url + Uri.EscapeDataString(this.Client.Credentials.SubscriptionId);
+            }
+            url = url + "/resourceGroups/";
+            url = url + Uri.EscapeDataString(this.Client.ResourceGroupName);
+            url = url + "/providers/";
+            url = url + Uri.EscapeDataString(this.Client.ResourceNamespace);
+            url = url + "/";
+            url = url + Uri.EscapeDataString(this.Client.ResourceType);
+            url = url + "/";
+            url = url + Uri.EscapeDataString(this.Client.ResourceName);
+            url = url + "/replicationFabrics/";
+            url = url + Uri.EscapeDataString(fabricName);
+            url = url + "/replicationRecoveryServicesProviders/";
+            url = url + Uri.EscapeDataString(providerName);
+            List<string> queryParameters = new List<string>();
+            queryParameters.Add("api-version=2016-08-10");
+            if (queryParameters.Count > 0)
+            {
+                url = url + "?" + string.Join("&", queryParameters);
+            }
+            string baseUrl = this.Client.BaseUri.AbsoluteUri;
+            // Trim '/' character from the end of baseUrl and beginning of url.
+            if (baseUrl[baseUrl.Length - 1] == '/')
+            {
+                baseUrl = baseUrl.Substring(0, baseUrl.Length - 1);
+            }
+            if (url[0] == '/')
+            {
+                url = url.Substring(1);
+            }
+            url = baseUrl + "/" + url;
+            url = url.Replace(" ", "%20");
+            
+            // Create HTTP transport objects
+            HttpRequestMessage httpRequest = null;
+            try
+            {
+                httpRequest = new HttpRequestMessage();
+                httpRequest.Method = HttpMethod.Put;
+                httpRequest.RequestUri = new Uri(url);
+                
+                // Set Headers
+                httpRequest.Headers.Add("Accept-Language", customRequestHeaders.Culture);
+                httpRequest.Headers.Add("Agent-Authentication", customRequestHeaders.AgentAuthenticationHeader);
+                httpRequest.Headers.Add("x-ms-client-request-id", customRequestHeaders.ClientRequestId);
+                httpRequest.Headers.Add("x-ms-version", "2015-01-01");
+                
+                // Set Credentials
+                cancellationToken.ThrowIfCancellationRequested();
+                await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+                
+                // Serialize Request
+                string requestContent = null;
+                JToken requestDoc = null;
+                
+                JObject recoveryServicesProviderCreationInputValue = new JObject();
+                requestDoc = recoveryServicesProviderCreationInputValue;
+                
+                if (input.Properties != null)
+                {
+                    JObject propertiesValue = new JObject();
+                    recoveryServicesProviderCreationInputValue["properties"] = propertiesValue;
+                    
+                    if (input.Properties.MachineName != null)
+                    {
+                        propertiesValue["machineName"] = input.Properties.MachineName;
+                    }
+                    
+                    if (input.Properties.CustomDetails != null)
+                    {
+                        JObject customDetailsValue = new JObject();
+                        propertiesValue["customDetails"] = customDetailsValue;
+                        if (input.Properties.CustomDetails is VMwareV2RecoveryServicesProviderCreationInput)
+                        {
+                            customDetailsValue["instanceType"] = "VMwareV2";
+                            VMwareV2RecoveryServicesProviderCreationInput derived = ((VMwareV2RecoveryServicesProviderCreationInput)input.Properties.CustomDetails);
+                            
+                            if (derived.VMwareSiteArmId != null)
+                            {
+                                customDetailsValue["vmwareSiteArmId"] = derived.VMwareSiteArmId;
+                            }
+                            
+                            if (derived.InstanceType != null)
+                            {
+                                customDetailsValue["instanceType"] = derived.InstanceType;
+                            }
+                        }
+                    }
+                }
+                
+                requestContent = requestDoc.ToString(Newtonsoft.Json.Formatting.Indented);
+                httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
+                httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
+                
+                // Send Request
+                HttpResponseMessage httpResponse = null;
+                try
+                {
+                    if (shouldTrace)
+                    {
+                        TracingAdapter.SendRequest(invocationId, httpRequest);
+                    }
+                    cancellationToken.ThrowIfCancellationRequested();
+                    httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+                    if (shouldTrace)
+                    {
+                        TracingAdapter.ReceiveResponse(invocationId, httpResponse);
+                    }
+                    HttpStatusCode statusCode = httpResponse.StatusCode;
+                    if (statusCode != HttpStatusCode.OK && statusCode != HttpStatusCode.Accepted)
+                    {
+                        cancellationToken.ThrowIfCancellationRequested();
+                        CloudException ex = CloudException.Create(httpRequest, requestContent, httpResponse, await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false));
+                        if (shouldTrace)
+                        {
+                            TracingAdapter.Error(invocationId, ex);
+                        }
+                        throw ex;
+                    }
+                    
+                    // Create Result
+                    LongRunningOperationResponse result = null;
+                    // Deserialize Response
+                    result = new LongRunningOperationResponse();
+                    result.StatusCode = statusCode;
+                    if (httpResponse.Headers.Contains("Azure-AsyncOperation"))
+                    {
+                        result.AsyncOperation = httpResponse.Headers.GetValues("Azure-AsyncOperation").FirstOrDefault();
+                    }
+                    if (httpResponse.Content != null && httpResponse.Content.Headers.Contains("Content-Type"))
+                    {
+                        result.ContentType = httpResponse.Content.Headers.GetValues("Content-Type").FirstOrDefault();
+                    }
+                    if (httpResponse.Headers.Contains("Date"))
+                    {
+                        result.Date = httpResponse.Headers.GetValues("Date").FirstOrDefault();
+                    }
+                    if (httpResponse.Headers.Contains("Location"))
+                    {
+                        result.Location = httpResponse.Headers.GetValues("Location").FirstOrDefault();
+                    }
+                    if (httpResponse.Headers.Contains("Retry-After"))
+                    {
+                        result.RetryAfter = int.Parse(httpResponse.Headers.GetValues("Retry-After").FirstOrDefault(), CultureInfo.InvariantCulture);
+                    }
+                    if (httpResponse.Headers.Contains("x-ms-client-request-id"))
+                    {
+                        result.ClientRequestId = httpResponse.Headers.GetValues("x-ms-client-request-id").FirstOrDefault();
+                    }
+                    if (httpResponse.Headers.Contains("x-ms-correlation-request-id"))
+                    {
+                        result.CorrelationRequestId = httpResponse.Headers.GetValues("x-ms-correlation-request-id").FirstOrDefault();
+                    }
+                    if (httpResponse.Headers.Contains("x-ms-request-id"))
+                    {
+                        result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    
+                    if (shouldTrace)
+                    {
+                        TracingAdapter.Exit(invocationId, result);
+                    }
+                    return result;
+                }
+                finally
+                {
+                    if (httpResponse != null)
+                    {
+                        httpResponse.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (httpRequest != null)
+                {
+                    httpRequest.Dispose();
+                }
+            }
         }
         
         /// <summary>
@@ -624,6 +863,77 @@ namespace Microsoft.Azure.Management.SiteRecovery
         }
         
         /// <summary>
+        /// Creates a RSP.
+        /// </summary>
+        /// <param name='fabricName'>
+        /// Required. Fabric Name.
+        /// </param>
+        /// <param name='providerName'>
+        /// Required. Provider Name.
+        /// </param>
+        /// <param name='input'>
+        /// Required. Input to create RSP.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Optional. Request header parameters.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
+        /// A standard service response for long running operations.
+        /// </returns>
+        public async Task<LongRunningOperationResponse> CreateAsync(string fabricName, string providerName, RecoveryServicesProviderCreationInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        {
+            SiteRecoveryManagementClient client = this.Client;
+            bool shouldTrace = TracingAdapter.IsEnabled;
+            string invocationId = null;
+            if (shouldTrace)
+            {
+                invocationId = TracingAdapter.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("fabricName", fabricName);
+                tracingParameters.Add("providerName", providerName);
+                tracingParameters.Add("input", input);
+                tracingParameters.Add("customRequestHeaders", customRequestHeaders);
+                TracingAdapter.Enter(invocationId, this, "CreateAsync", tracingParameters);
+            }
+            
+            cancellationToken.ThrowIfCancellationRequested();
+            LongRunningOperationResponse response = await client.RecoveryServicesProvider.BeginCreatingAsync(fabricName, providerName, input, customRequestHeaders, cancellationToken).ConfigureAwait(false);
+            if (response.Status == OperationStatus.Succeeded)
+            {
+                return response;
+            }
+            cancellationToken.ThrowIfCancellationRequested();
+            RecoveryServicesProviderOperationResponse result = await client.RecoveryServicesProvider.GetCreateStatusAsync(response.Location, cancellationToken).ConfigureAwait(false);
+            int delayInSeconds = 30;
+            if (client.LongRunningOperationInitialTimeout >= 0)
+            {
+                delayInSeconds = client.LongRunningOperationInitialTimeout;
+            }
+            while (result.Status == OperationStatus.InProgress)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                await TaskEx.Delay(delayInSeconds * 1000, cancellationToken).ConfigureAwait(false);
+                cancellationToken.ThrowIfCancellationRequested();
+                result = await client.RecoveryServicesProvider.GetCreateStatusAsync(response.Location, cancellationToken).ConfigureAwait(false);
+                delayInSeconds = 30;
+                if (client.LongRunningOperationRetryTimeout >= 0)
+                {
+                    delayInSeconds = client.LongRunningOperationRetryTimeout;
+                }
+            }
+            
+            if (shouldTrace)
+            {
+                TracingAdapter.Exit(invocationId, result);
+            }
+            
+            return result;
+        }
+        
+        /// <summary>
         /// Deletes a provider
         /// </summary>
         /// <param name='fabricName'>
@@ -1133,6 +1443,38 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         }
                                     }
                                 }
+                                
+                                JToken customDetailsValue = propertiesValue["customDetails"];
+                                if (customDetailsValue != null && customDetailsValue.Type != JTokenType.Null)
+                                {
+                                    string typeName = ((string)customDetailsValue["instanceType"]);
+                                    if (typeName == "VMwareV2")
+                                    {
+                                        VMwareV2FabricSpecificRecoveryServicesProviderDetails vMwareV2FabricSpecificRecoveryServicesProviderDetailsInstance = new VMwareV2FabricSpecificRecoveryServicesProviderDetails();
+                                        
+                                        JToken vmwareSiteArmIdValue = customDetailsValue["vmwareSiteArmId"];
+                                        if (vmwareSiteArmIdValue != null && vmwareSiteArmIdValue.Type != JTokenType.Null)
+                                        {
+                                            string vmwareSiteArmIdInstance = ((string)vmwareSiteArmIdValue);
+                                            vMwareV2FabricSpecificRecoveryServicesProviderDetailsInstance.VMwareSiteArmId = vmwareSiteArmIdInstance;
+                                        }
+                                        
+                                        JToken srsServiceEndpointValue = customDetailsValue["srsServiceEndpoint"];
+                                        if (srsServiceEndpointValue != null && srsServiceEndpointValue.Type != JTokenType.Null)
+                                        {
+                                            string srsServiceEndpointInstance = ((string)srsServiceEndpointValue);
+                                            vMwareV2FabricSpecificRecoveryServicesProviderDetailsInstance.SrsServiceEndpoint = srsServiceEndpointInstance;
+                                        }
+                                        
+                                        JToken instanceTypeValue = customDetailsValue["instanceType"];
+                                        if (instanceTypeValue != null && instanceTypeValue.Type != JTokenType.Null)
+                                        {
+                                            string instanceTypeInstance = ((string)instanceTypeValue);
+                                            vMwareV2FabricSpecificRecoveryServicesProviderDetailsInstance.InstanceType = instanceTypeInstance;
+                                        }
+                                        propertiesInstance.CustomDetails = vMwareV2FabricSpecificRecoveryServicesProviderDetailsInstance;
+                                    }
+                                }
                             }
                             
                             JToken idValue = responseDoc["id"];
@@ -1224,6 +1566,614 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     if (httpResponse.Headers.Contains("x-ms-request-id"))
                     {
                         result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    
+                    if (shouldTrace)
+                    {
+                        TracingAdapter.Exit(invocationId, result);
+                    }
+                    return result;
+                }
+                finally
+                {
+                    if (httpResponse != null)
+                    {
+                        httpResponse.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (httpRequest != null)
+                {
+                    httpRequest.Dispose();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// The Get Operation Status operation returns the status of the
+        /// specified operation. After calling an asynchronous operation, you
+        /// can call Get Operation Status to determine whether the operation
+        /// has succeeded, failed, or is still in progress.
+        /// </summary>
+        /// <param name='operationStatusLink'>
+        /// Required. Location value returned by the Begin operation.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
+        /// A standard service response for recovery services provider long
+        /// running operations.
+        /// </returns>
+        public async Task<RecoveryServicesProviderOperationResponse> GetCreateStatusAsync(string operationStatusLink, CancellationToken cancellationToken)
+        {
+            // Validate
+            if (operationStatusLink == null)
+            {
+                throw new ArgumentNullException("operationStatusLink");
+            }
+            
+            // Tracing
+            bool shouldTrace = TracingAdapter.IsEnabled;
+            string invocationId = null;
+            if (shouldTrace)
+            {
+                invocationId = TracingAdapter.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("operationStatusLink", operationStatusLink);
+                TracingAdapter.Enter(invocationId, this, "GetCreateStatusAsync", tracingParameters);
+            }
+            
+            // Construct URL
+            string url = "";
+            url = url + operationStatusLink;
+            url = url.Replace(" ", "%20");
+            
+            // Create HTTP transport objects
+            HttpRequestMessage httpRequest = null;
+            try
+            {
+                httpRequest = new HttpRequestMessage();
+                httpRequest.Method = HttpMethod.Get;
+                httpRequest.RequestUri = new Uri(url);
+                
+                // Set Headers
+                httpRequest.Headers.Add("x-ms-client-request-id", Guid.NewGuid().ToString());
+                httpRequest.Headers.Add("x-ms-version", "2015-01-01");
+                
+                // Set Credentials
+                cancellationToken.ThrowIfCancellationRequested();
+                await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+                
+                // Send Request
+                HttpResponseMessage httpResponse = null;
+                try
+                {
+                    if (shouldTrace)
+                    {
+                        TracingAdapter.SendRequest(invocationId, httpRequest);
+                    }
+                    cancellationToken.ThrowIfCancellationRequested();
+                    httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+                    if (shouldTrace)
+                    {
+                        TracingAdapter.ReceiveResponse(invocationId, httpResponse);
+                    }
+                    HttpStatusCode statusCode = httpResponse.StatusCode;
+                    if (statusCode != HttpStatusCode.OK && statusCode != HttpStatusCode.Accepted)
+                    {
+                        cancellationToken.ThrowIfCancellationRequested();
+                        CloudException ex = CloudException.Create(httpRequest, null, httpResponse, await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false));
+                        if (shouldTrace)
+                        {
+                            TracingAdapter.Error(invocationId, ex);
+                        }
+                        throw ex;
+                    }
+                    
+                    // Create Result
+                    RecoveryServicesProviderOperationResponse result = null;
+                    // Deserialize Response
+                    if (statusCode == HttpStatusCode.OK || statusCode == HttpStatusCode.Accepted)
+                    {
+                        cancellationToken.ThrowIfCancellationRequested();
+                        string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        result = new RecoveryServicesProviderOperationResponse();
+                        JToken responseDoc = null;
+                        if (string.IsNullOrEmpty(responseContent) == false)
+                        {
+                            responseDoc = JToken.Parse(responseContent);
+                        }
+                        
+                        if (responseDoc != null && responseDoc.Type != JTokenType.Null)
+                        {
+                            RecoveryServicesProvider recoveryServicesProviderInstance = new RecoveryServicesProvider();
+                            result.RecoveryServicesProvider = recoveryServicesProviderInstance;
+                            
+                            JToken propertiesValue = responseDoc["properties"];
+                            if (propertiesValue != null && propertiesValue.Type != JTokenType.Null)
+                            {
+                                RecoveryServicesProviderProperties propertiesInstance = new RecoveryServicesProviderProperties();
+                                recoveryServicesProviderInstance.Properties = propertiesInstance;
+                                
+                                JToken fabricTypeValue = propertiesValue["fabricType"];
+                                if (fabricTypeValue != null && fabricTypeValue.Type != JTokenType.Null)
+                                {
+                                    string fabricTypeInstance = ((string)fabricTypeValue);
+                                    propertiesInstance.FabricType = fabricTypeInstance;
+                                }
+                                
+                                JToken friendlyNameValue = propertiesValue["friendlyName"];
+                                if (friendlyNameValue != null && friendlyNameValue.Type != JTokenType.Null)
+                                {
+                                    string friendlyNameInstance = ((string)friendlyNameValue);
+                                    propertiesInstance.FriendlyName = friendlyNameInstance;
+                                }
+                                
+                                JToken fabricFriendlyNameValue = propertiesValue["fabricFriendlyName"];
+                                if (fabricFriendlyNameValue != null && fabricFriendlyNameValue.Type != JTokenType.Null)
+                                {
+                                    string fabricFriendlyNameInstance = ((string)fabricFriendlyNameValue);
+                                    propertiesInstance.FabricFriendlyName = fabricFriendlyNameInstance;
+                                }
+                                
+                                JToken providerVersionValue = propertiesValue["providerVersion"];
+                                if (providerVersionValue != null && providerVersionValue.Type != JTokenType.Null)
+                                {
+                                    string providerVersionInstance = ((string)providerVersionValue);
+                                    propertiesInstance.ProviderVersion = providerVersionInstance;
+                                }
+                                
+                                JToken serverVersionValue = propertiesValue["serverVersion"];
+                                if (serverVersionValue != null && serverVersionValue.Type != JTokenType.Null)
+                                {
+                                    string serverVersionInstance = ((string)serverVersionValue);
+                                    propertiesInstance.ServerVersion = serverVersionInstance;
+                                }
+                                
+                                JToken providerVersionStateValue = propertiesValue["providerVersionState"];
+                                if (providerVersionStateValue != null && providerVersionStateValue.Type != JTokenType.Null)
+                                {
+                                    string providerVersionStateInstance = ((string)providerVersionStateValue);
+                                    propertiesInstance.ProviderVersionState = providerVersionStateInstance;
+                                }
+                                
+                                JToken providerVersionExpiryDateValue = propertiesValue["providerVersionExpiryDate"];
+                                if (providerVersionExpiryDateValue != null && providerVersionExpiryDateValue.Type != JTokenType.Null)
+                                {
+                                    DateTime providerVersionExpiryDateInstance = ((DateTime)providerVersionExpiryDateValue);
+                                    propertiesInstance.ProviderVersionExpiryDate = providerVersionExpiryDateInstance;
+                                }
+                                
+                                JToken providerVersionDetailsValue = propertiesValue["providerVersionDetails"];
+                                if (providerVersionDetailsValue != null && providerVersionDetailsValue.Type != JTokenType.Null)
+                                {
+                                    VersionDetails providerVersionDetailsInstance = new VersionDetails();
+                                    propertiesInstance.ProviderVersionDetails = providerVersionDetailsInstance;
+                                    
+                                    JToken versionValue = providerVersionDetailsValue["version"];
+                                    if (versionValue != null && versionValue.Type != JTokenType.Null)
+                                    {
+                                        string versionInstance = ((string)versionValue);
+                                        providerVersionDetailsInstance.Version = versionInstance;
+                                    }
+                                    
+                                    JToken expiryDateValue = providerVersionDetailsValue["expiryDate"];
+                                    if (expiryDateValue != null && expiryDateValue.Type != JTokenType.Null)
+                                    {
+                                        DateTime expiryDateInstance = ((DateTime)expiryDateValue);
+                                        providerVersionDetailsInstance.ExpiryDate = expiryDateInstance;
+                                    }
+                                    
+                                    JToken statusValue = providerVersionDetailsValue["status"];
+                                    if (statusValue != null && statusValue.Type != JTokenType.Null)
+                                    {
+                                        string statusInstance = ((string)statusValue);
+                                        providerVersionDetailsInstance.Status = statusInstance;
+                                    }
+                                }
+                                
+                                JToken lastHeartBeatValue = propertiesValue["lastHeartBeat"];
+                                if (lastHeartBeatValue != null && lastHeartBeatValue.Type != JTokenType.Null)
+                                {
+                                    DateTime lastHeartBeatInstance = ((DateTime)lastHeartBeatValue);
+                                    propertiesInstance.LastHeartbeat = lastHeartBeatInstance;
+                                }
+                                
+                                JToken connectionStatusValue = propertiesValue["connectionStatus"];
+                                if (connectionStatusValue != null && connectionStatusValue.Type != JTokenType.Null)
+                                {
+                                    string connectionStatusInstance = ((string)connectionStatusValue);
+                                    propertiesInstance.ConnectionStatus = connectionStatusInstance;
+                                }
+                                
+                                JToken allowedScenariosArray = propertiesValue["allowedScenarios"];
+                                if (allowedScenariosArray != null && allowedScenariosArray.Type != JTokenType.Null)
+                                {
+                                    foreach (JToken allowedScenariosValue in ((JArray)allowedScenariosArray))
+                                    {
+                                        propertiesInstance.AllowedScenarios.Add(((string)allowedScenariosValue));
+                                    }
+                                }
+                                
+                                JToken protectedItemCountValue = propertiesValue["protectedItemCount"];
+                                if (protectedItemCountValue != null && protectedItemCountValue.Type != JTokenType.Null)
+                                {
+                                    int protectedItemCountInstance = ((int)protectedItemCountValue);
+                                    propertiesInstance.ProtectedItemCount = protectedItemCountInstance;
+                                }
+                                
+                                JToken healthErrorDetailsArray = propertiesValue["healthErrorDetails"];
+                                if (healthErrorDetailsArray != null && healthErrorDetailsArray.Type != JTokenType.Null)
+                                {
+                                    foreach (JToken healthErrorDetailsValue in ((JArray)healthErrorDetailsArray))
+                                    {
+                                        HealthError healthErrorInstance = new HealthError();
+                                        propertiesInstance.HealthErrorDetails.Add(healthErrorInstance);
+                                        
+                                        JToken errorSourceValue = healthErrorDetailsValue["errorSource"];
+                                        if (errorSourceValue != null && errorSourceValue.Type != JTokenType.Null)
+                                        {
+                                            string errorSourceInstance = ((string)errorSourceValue);
+                                            healthErrorInstance.ErrorSource = errorSourceInstance;
+                                        }
+                                        
+                                        JToken errorTypeValue = healthErrorDetailsValue["errorType"];
+                                        if (errorTypeValue != null && errorTypeValue.Type != JTokenType.Null)
+                                        {
+                                            string errorTypeInstance = ((string)errorTypeValue);
+                                            healthErrorInstance.ErrorType = errorTypeInstance;
+                                        }
+                                        
+                                        JToken errorLevelValue = healthErrorDetailsValue["errorLevel"];
+                                        if (errorLevelValue != null && errorLevelValue.Type != JTokenType.Null)
+                                        {
+                                            string errorLevelInstance = ((string)errorLevelValue);
+                                            healthErrorInstance.ErrorLevel = errorLevelInstance;
+                                        }
+                                        
+                                        JToken errorCategoryValue = healthErrorDetailsValue["errorCategory"];
+                                        if (errorCategoryValue != null && errorCategoryValue.Type != JTokenType.Null)
+                                        {
+                                            string errorCategoryInstance = ((string)errorCategoryValue);
+                                            healthErrorInstance.ErrorCategory = errorCategoryInstance;
+                                        }
+                                        
+                                        JToken errorCodeValue = healthErrorDetailsValue["errorCode"];
+                                        if (errorCodeValue != null && errorCodeValue.Type != JTokenType.Null)
+                                        {
+                                            string errorCodeInstance = ((string)errorCodeValue);
+                                            healthErrorInstance.ErrorCode = errorCodeInstance;
+                                        }
+                                        
+                                        JToken errorMessageValue = healthErrorDetailsValue["errorMessage"];
+                                        if (errorMessageValue != null && errorMessageValue.Type != JTokenType.Null)
+                                        {
+                                            string errorMessageInstance = ((string)errorMessageValue);
+                                            healthErrorInstance.ErrorMessage = errorMessageInstance;
+                                        }
+                                        
+                                        JToken summaryMessageValue = healthErrorDetailsValue["summaryMessage"];
+                                        if (summaryMessageValue != null && summaryMessageValue.Type != JTokenType.Null)
+                                        {
+                                            string summaryMessageInstance = ((string)summaryMessageValue);
+                                            healthErrorInstance.SummaryMessage = summaryMessageInstance;
+                                        }
+                                        
+                                        JToken possibleCausesValue = healthErrorDetailsValue["possibleCauses"];
+                                        if (possibleCausesValue != null && possibleCausesValue.Type != JTokenType.Null)
+                                        {
+                                            string possibleCausesInstance = ((string)possibleCausesValue);
+                                            healthErrorInstance.PossibleCauses = possibleCausesInstance;
+                                        }
+                                        
+                                        JToken recommendedActionValue = healthErrorDetailsValue["recommendedAction"];
+                                        if (recommendedActionValue != null && recommendedActionValue.Type != JTokenType.Null)
+                                        {
+                                            string recommendedActionInstance = ((string)recommendedActionValue);
+                                            healthErrorInstance.RecommendedAction = recommendedActionInstance;
+                                        }
+                                        
+                                        JToken creationTimeUtcValue = healthErrorDetailsValue["creationTimeUtc"];
+                                        if (creationTimeUtcValue != null && creationTimeUtcValue.Type != JTokenType.Null)
+                                        {
+                                            DateTime creationTimeUtcInstance = ((DateTime)creationTimeUtcValue);
+                                            healthErrorInstance.CreationTimeUtc = creationTimeUtcInstance;
+                                        }
+                                        
+                                        JToken recoveryProviderErrorMessageValue = healthErrorDetailsValue["recoveryProviderErrorMessage"];
+                                        if (recoveryProviderErrorMessageValue != null && recoveryProviderErrorMessageValue.Type != JTokenType.Null)
+                                        {
+                                            string recoveryProviderErrorMessageInstance = ((string)recoveryProviderErrorMessageValue);
+                                            healthErrorInstance.RecoveryProviderErrorMessage = recoveryProviderErrorMessageInstance;
+                                        }
+                                        
+                                        JToken entityIdValue = healthErrorDetailsValue["entityId"];
+                                        if (entityIdValue != null && entityIdValue.Type != JTokenType.Null)
+                                        {
+                                            string entityIdInstance = ((string)entityIdValue);
+                                            healthErrorInstance.EntityId = entityIdInstance;
+                                        }
+                                        
+                                        JToken innerHealthErrorsArray = healthErrorDetailsValue["innerHealthErrors"];
+                                        if (innerHealthErrorsArray != null && innerHealthErrorsArray.Type != JTokenType.Null)
+                                        {
+                                            foreach (JToken innerHealthErrorsValue in ((JArray)innerHealthErrorsArray))
+                                            {
+                                                InnerHealthError innerHealthErrorInstance = new InnerHealthError();
+                                                healthErrorInstance.InnerHealthErrors.Add(innerHealthErrorInstance);
+                                                
+                                                JToken errorSourceValue2 = innerHealthErrorsValue["errorSource"];
+                                                if (errorSourceValue2 != null && errorSourceValue2.Type != JTokenType.Null)
+                                                {
+                                                    string errorSourceInstance2 = ((string)errorSourceValue2);
+                                                    innerHealthErrorInstance.ErrorSource = errorSourceInstance2;
+                                                }
+                                                
+                                                JToken errorTypeValue2 = innerHealthErrorsValue["errorType"];
+                                                if (errorTypeValue2 != null && errorTypeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string errorTypeInstance2 = ((string)errorTypeValue2);
+                                                    innerHealthErrorInstance.ErrorType = errorTypeInstance2;
+                                                }
+                                                
+                                                JToken errorLevelValue2 = innerHealthErrorsValue["errorLevel"];
+                                                if (errorLevelValue2 != null && errorLevelValue2.Type != JTokenType.Null)
+                                                {
+                                                    string errorLevelInstance2 = ((string)errorLevelValue2);
+                                                    innerHealthErrorInstance.ErrorLevel = errorLevelInstance2;
+                                                }
+                                                
+                                                JToken errorCategoryValue2 = innerHealthErrorsValue["errorCategory"];
+                                                if (errorCategoryValue2 != null && errorCategoryValue2.Type != JTokenType.Null)
+                                                {
+                                                    string errorCategoryInstance2 = ((string)errorCategoryValue2);
+                                                    innerHealthErrorInstance.ErrorCategory = errorCategoryInstance2;
+                                                }
+                                                
+                                                JToken errorCodeValue2 = innerHealthErrorsValue["errorCode"];
+                                                if (errorCodeValue2 != null && errorCodeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string errorCodeInstance2 = ((string)errorCodeValue2);
+                                                    innerHealthErrorInstance.ErrorCode = errorCodeInstance2;
+                                                }
+                                                
+                                                JToken errorMessageValue2 = innerHealthErrorsValue["errorMessage"];
+                                                if (errorMessageValue2 != null && errorMessageValue2.Type != JTokenType.Null)
+                                                {
+                                                    string errorMessageInstance2 = ((string)errorMessageValue2);
+                                                    innerHealthErrorInstance.ErrorMessage = errorMessageInstance2;
+                                                }
+                                                
+                                                JToken summaryMessageValue2 = innerHealthErrorsValue["summaryMessage"];
+                                                if (summaryMessageValue2 != null && summaryMessageValue2.Type != JTokenType.Null)
+                                                {
+                                                    string summaryMessageInstance2 = ((string)summaryMessageValue2);
+                                                    innerHealthErrorInstance.SummaryMessage = summaryMessageInstance2;
+                                                }
+                                                
+                                                JToken possibleCausesValue2 = innerHealthErrorsValue["possibleCauses"];
+                                                if (possibleCausesValue2 != null && possibleCausesValue2.Type != JTokenType.Null)
+                                                {
+                                                    string possibleCausesInstance2 = ((string)possibleCausesValue2);
+                                                    innerHealthErrorInstance.PossibleCauses = possibleCausesInstance2;
+                                                }
+                                                
+                                                JToken recommendedActionValue2 = innerHealthErrorsValue["recommendedAction"];
+                                                if (recommendedActionValue2 != null && recommendedActionValue2.Type != JTokenType.Null)
+                                                {
+                                                    string recommendedActionInstance2 = ((string)recommendedActionValue2);
+                                                    innerHealthErrorInstance.RecommendedAction = recommendedActionInstance2;
+                                                }
+                                                
+                                                JToken creationTimeUtcValue2 = innerHealthErrorsValue["creationTimeUtc"];
+                                                if (creationTimeUtcValue2 != null && creationTimeUtcValue2.Type != JTokenType.Null)
+                                                {
+                                                    DateTime creationTimeUtcInstance2 = ((DateTime)creationTimeUtcValue2);
+                                                    innerHealthErrorInstance.CreationTimeUtc = creationTimeUtcInstance2;
+                                                }
+                                                
+                                                JToken recoveryProviderErrorMessageValue2 = innerHealthErrorsValue["recoveryProviderErrorMessage"];
+                                                if (recoveryProviderErrorMessageValue2 != null && recoveryProviderErrorMessageValue2.Type != JTokenType.Null)
+                                                {
+                                                    string recoveryProviderErrorMessageInstance2 = ((string)recoveryProviderErrorMessageValue2);
+                                                    innerHealthErrorInstance.RecoveryProviderErrorMessage = recoveryProviderErrorMessageInstance2;
+                                                }
+                                                
+                                                JToken entityIdValue2 = innerHealthErrorsValue["entityId"];
+                                                if (entityIdValue2 != null && entityIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string entityIdInstance2 = ((string)entityIdValue2);
+                                                    innerHealthErrorInstance.EntityId = entityIdInstance2;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                
+                                JToken customDetailsValue = propertiesValue["customDetails"];
+                                if (customDetailsValue != null && customDetailsValue.Type != JTokenType.Null)
+                                {
+                                    string typeName = ((string)customDetailsValue["instanceType"]);
+                                    if (typeName == "VMwareV2")
+                                    {
+                                        VMwareV2FabricSpecificRecoveryServicesProviderDetails vMwareV2FabricSpecificRecoveryServicesProviderDetailsInstance = new VMwareV2FabricSpecificRecoveryServicesProviderDetails();
+                                        
+                                        JToken vmwareSiteArmIdValue = customDetailsValue["vmwareSiteArmId"];
+                                        if (vmwareSiteArmIdValue != null && vmwareSiteArmIdValue.Type != JTokenType.Null)
+                                        {
+                                            string vmwareSiteArmIdInstance = ((string)vmwareSiteArmIdValue);
+                                            vMwareV2FabricSpecificRecoveryServicesProviderDetailsInstance.VMwareSiteArmId = vmwareSiteArmIdInstance;
+                                        }
+                                        
+                                        JToken srsServiceEndpointValue = customDetailsValue["srsServiceEndpoint"];
+                                        if (srsServiceEndpointValue != null && srsServiceEndpointValue.Type != JTokenType.Null)
+                                        {
+                                            string srsServiceEndpointInstance = ((string)srsServiceEndpointValue);
+                                            vMwareV2FabricSpecificRecoveryServicesProviderDetailsInstance.SrsServiceEndpoint = srsServiceEndpointInstance;
+                                        }
+                                        
+                                        JToken instanceTypeValue = customDetailsValue["instanceType"];
+                                        if (instanceTypeValue != null && instanceTypeValue.Type != JTokenType.Null)
+                                        {
+                                            string instanceTypeInstance = ((string)instanceTypeValue);
+                                            vMwareV2FabricSpecificRecoveryServicesProviderDetailsInstance.InstanceType = instanceTypeInstance;
+                                        }
+                                        propertiesInstance.CustomDetails = vMwareV2FabricSpecificRecoveryServicesProviderDetailsInstance;
+                                    }
+                                }
+                            }
+                            
+                            JToken idValue = responseDoc["id"];
+                            if (idValue != null && idValue.Type != JTokenType.Null)
+                            {
+                                string idInstance = ((string)idValue);
+                                recoveryServicesProviderInstance.Id = idInstance;
+                            }
+                            
+                            JToken nameValue = responseDoc["name"];
+                            if (nameValue != null && nameValue.Type != JTokenType.Null)
+                            {
+                                string nameInstance = ((string)nameValue);
+                                recoveryServicesProviderInstance.Name = nameInstance;
+                            }
+                            
+                            JToken typeValue = responseDoc["type"];
+                            if (typeValue != null && typeValue.Type != JTokenType.Null)
+                            {
+                                string typeInstance = ((string)typeValue);
+                                recoveryServicesProviderInstance.Type = typeInstance;
+                            }
+                            
+                            JToken locationValue = responseDoc["location"];
+                            if (locationValue != null && locationValue.Type != JTokenType.Null)
+                            {
+                                string locationInstance = ((string)locationValue);
+                                recoveryServicesProviderInstance.Location = locationInstance;
+                            }
+                            
+                            JToken tagsSequenceElement = ((JToken)responseDoc["tags"]);
+                            if (tagsSequenceElement != null && tagsSequenceElement.Type != JTokenType.Null)
+                            {
+                                foreach (JProperty property in tagsSequenceElement)
+                                {
+                                    string tagsKey = ((string)property.Name);
+                                    string tagsValue = ((string)property.Value);
+                                    recoveryServicesProviderInstance.Tags.Add(tagsKey, tagsValue);
+                                }
+                            }
+                            
+                            JToken locationValue2 = responseDoc["Location"];
+                            if (locationValue2 != null && locationValue2.Type != JTokenType.Null)
+                            {
+                                string locationInstance2 = ((string)locationValue2);
+                                result.Location = locationInstance2;
+                            }
+                            
+                            JToken retryAfterValue = responseDoc["RetryAfter"];
+                            if (retryAfterValue != null && retryAfterValue.Type != JTokenType.Null)
+                            {
+                                int retryAfterInstance = ((int)retryAfterValue);
+                                result.RetryAfter = retryAfterInstance;
+                            }
+                            
+                            JToken asyncOperationValue = responseDoc["AsyncOperation"];
+                            if (asyncOperationValue != null && asyncOperationValue.Type != JTokenType.Null)
+                            {
+                                string asyncOperationInstance = ((string)asyncOperationValue);
+                                result.AsyncOperation = asyncOperationInstance;
+                            }
+                            
+                            JToken statusValue2 = responseDoc["Status"];
+                            if (statusValue2 != null && statusValue2.Type != JTokenType.Null)
+                            {
+                                OperationStatus statusInstance2 = ((OperationStatus)Enum.Parse(typeof(OperationStatus), ((string)statusValue2), true));
+                                result.Status = statusInstance2;
+                            }
+                            
+                            JToken cultureValue = responseDoc["Culture"];
+                            if (cultureValue != null && cultureValue.Type != JTokenType.Null)
+                            {
+                                string cultureInstance = ((string)cultureValue);
+                                result.Culture = cultureInstance;
+                            }
+                            
+                            JToken clientRequestIdValue = responseDoc["ClientRequestId"];
+                            if (clientRequestIdValue != null && clientRequestIdValue.Type != JTokenType.Null)
+                            {
+                                string clientRequestIdInstance = ((string)clientRequestIdValue);
+                                result.ClientRequestId = clientRequestIdInstance;
+                            }
+                            
+                            JToken correlationRequestIdValue = responseDoc["CorrelationRequestId"];
+                            if (correlationRequestIdValue != null && correlationRequestIdValue.Type != JTokenType.Null)
+                            {
+                                string correlationRequestIdInstance = ((string)correlationRequestIdValue);
+                                result.CorrelationRequestId = correlationRequestIdInstance;
+                            }
+                            
+                            JToken dateValue = responseDoc["Date"];
+                            if (dateValue != null && dateValue.Type != JTokenType.Null)
+                            {
+                                string dateInstance = ((string)dateValue);
+                                result.Date = dateInstance;
+                            }
+                            
+                            JToken contentTypeValue = responseDoc["ContentType"];
+                            if (contentTypeValue != null && contentTypeValue.Type != JTokenType.Null)
+                            {
+                                string contentTypeInstance = ((string)contentTypeValue);
+                                result.ContentType = contentTypeInstance;
+                            }
+                        }
+                        
+                    }
+                    result.StatusCode = statusCode;
+                    if (httpResponse.Headers.Contains("Azure-AsyncOperation"))
+                    {
+                        result.AsyncOperation = httpResponse.Headers.GetValues("Azure-AsyncOperation").FirstOrDefault();
+                    }
+                    if (httpResponse.Content != null && httpResponse.Content.Headers.Contains("Content-Type"))
+                    {
+                        result.ContentType = httpResponse.Content.Headers.GetValues("Content-Type").FirstOrDefault();
+                    }
+                    if (httpResponse.Headers.Contains("Date"))
+                    {
+                        result.Date = httpResponse.Headers.GetValues("Date").FirstOrDefault();
+                    }
+                    if (httpResponse.Headers.Contains("Location"))
+                    {
+                        result.Location = httpResponse.Headers.GetValues("Location").FirstOrDefault();
+                    }
+                    if (httpResponse.Headers.Contains("Retry-After"))
+                    {
+                        result.RetryAfter = int.Parse(httpResponse.Headers.GetValues("Retry-After").FirstOrDefault(), CultureInfo.InvariantCulture);
+                    }
+                    if (httpResponse.Headers.Contains("x-ms-client-request-id"))
+                    {
+                        result.ClientRequestId = httpResponse.Headers.GetValues("x-ms-client-request-id").FirstOrDefault();
+                    }
+                    if (httpResponse.Headers.Contains("x-ms-correlation-request-id"))
+                    {
+                        result.CorrelationRequestId = httpResponse.Headers.GetValues("x-ms-correlation-request-id").FirstOrDefault();
+                    }
+                    if (httpResponse.Headers.Contains("x-ms-request-id"))
+                    {
+                        result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    if (statusCode == HttpStatusCode.NoContent)
+                    {
+                        result.Status = OperationStatus.Failed;
+                    }
+                    if (statusCode == HttpStatusCode.Accepted)
+                    {
+                        result.Status = OperationStatus.InProgress;
+                    }
+                    if (statusCode == HttpStatusCode.OK)
+                    {
+                        result.Status = OperationStatus.Succeeded;
                     }
                     
                     if (shouldTrace)
@@ -2381,6 +3331,38 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 }
                                             }
                                         }
+                                        
+                                        JToken customDetailsValue = propertiesValue["customDetails"];
+                                        if (customDetailsValue != null && customDetailsValue.Type != JTokenType.Null)
+                                        {
+                                            string typeName = ((string)customDetailsValue["instanceType"]);
+                                            if (typeName == "VMwareV2")
+                                            {
+                                                VMwareV2FabricSpecificRecoveryServicesProviderDetails vMwareV2FabricSpecificRecoveryServicesProviderDetailsInstance = new VMwareV2FabricSpecificRecoveryServicesProviderDetails();
+                                                
+                                                JToken vmwareSiteArmIdValue = customDetailsValue["vmwareSiteArmId"];
+                                                if (vmwareSiteArmIdValue != null && vmwareSiteArmIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string vmwareSiteArmIdInstance = ((string)vmwareSiteArmIdValue);
+                                                    vMwareV2FabricSpecificRecoveryServicesProviderDetailsInstance.VMwareSiteArmId = vmwareSiteArmIdInstance;
+                                                }
+                                                
+                                                JToken srsServiceEndpointValue = customDetailsValue["srsServiceEndpoint"];
+                                                if (srsServiceEndpointValue != null && srsServiceEndpointValue.Type != JTokenType.Null)
+                                                {
+                                                    string srsServiceEndpointInstance = ((string)srsServiceEndpointValue);
+                                                    vMwareV2FabricSpecificRecoveryServicesProviderDetailsInstance.SrsServiceEndpoint = srsServiceEndpointInstance;
+                                                }
+                                                
+                                                JToken instanceTypeValue = customDetailsValue["instanceType"];
+                                                if (instanceTypeValue != null && instanceTypeValue.Type != JTokenType.Null)
+                                                {
+                                                    string instanceTypeInstance = ((string)instanceTypeValue);
+                                                    vMwareV2FabricSpecificRecoveryServicesProviderDetailsInstance.InstanceType = instanceTypeInstance;
+                                                }
+                                                propertiesInstance.CustomDetails = vMwareV2FabricSpecificRecoveryServicesProviderDetailsInstance;
+                                            }
+                                        }
                                     }
                                     
                                     JToken idValue = valueValue["id"];
@@ -2933,6 +3915,38 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                         }
                                                     }
                                                 }
+                                            }
+                                        }
+                                        
+                                        JToken customDetailsValue = propertiesValue["customDetails"];
+                                        if (customDetailsValue != null && customDetailsValue.Type != JTokenType.Null)
+                                        {
+                                            string typeName = ((string)customDetailsValue["instanceType"]);
+                                            if (typeName == "VMwareV2")
+                                            {
+                                                VMwareV2FabricSpecificRecoveryServicesProviderDetails vMwareV2FabricSpecificRecoveryServicesProviderDetailsInstance = new VMwareV2FabricSpecificRecoveryServicesProviderDetails();
+                                                
+                                                JToken vmwareSiteArmIdValue = customDetailsValue["vmwareSiteArmId"];
+                                                if (vmwareSiteArmIdValue != null && vmwareSiteArmIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string vmwareSiteArmIdInstance = ((string)vmwareSiteArmIdValue);
+                                                    vMwareV2FabricSpecificRecoveryServicesProviderDetailsInstance.VMwareSiteArmId = vmwareSiteArmIdInstance;
+                                                }
+                                                
+                                                JToken srsServiceEndpointValue = customDetailsValue["srsServiceEndpoint"];
+                                                if (srsServiceEndpointValue != null && srsServiceEndpointValue.Type != JTokenType.Null)
+                                                {
+                                                    string srsServiceEndpointInstance = ((string)srsServiceEndpointValue);
+                                                    vMwareV2FabricSpecificRecoveryServicesProviderDetailsInstance.SrsServiceEndpoint = srsServiceEndpointInstance;
+                                                }
+                                                
+                                                JToken instanceTypeValue = customDetailsValue["instanceType"];
+                                                if (instanceTypeValue != null && instanceTypeValue.Type != JTokenType.Null)
+                                                {
+                                                    string instanceTypeInstance = ((string)instanceTypeValue);
+                                                    vMwareV2FabricSpecificRecoveryServicesProviderDetailsInstance.InstanceType = instanceTypeInstance;
+                                                }
+                                                propertiesInstance.CustomDetails = vMwareV2FabricSpecificRecoveryServicesProviderDetailsInstance;
                                             }
                                         }
                                     }

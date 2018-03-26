@@ -25,14 +25,14 @@ using System.Linq;
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// Provider specific input.
+    /// Fabric specific RSP creation input.
     /// </summary>
-    public partial class ReplicationProviderSpecificContainerCreationInput
+    public partial class RecoveryServicesProviderFabricSpecificCreationSettings
     {
         private string _instanceType;
         
         /// <summary>
-        /// Optional. Type of provider input.
+        /// Optional. Type of derived class.
         /// </summary>
         public string InstanceType
         {
@@ -42,9 +42,9 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         
         /// <summary>
         /// Initializes a new instance of the
-        /// ReplicationProviderSpecificContainerCreationInput class.
+        /// RecoveryServicesProviderFabricSpecificCreationSettings class.
         /// </summary>
-        public ReplicationProviderSpecificContainerCreationInput()
+        public RecoveryServicesProviderFabricSpecificCreationSettings()
         {
         }
     }

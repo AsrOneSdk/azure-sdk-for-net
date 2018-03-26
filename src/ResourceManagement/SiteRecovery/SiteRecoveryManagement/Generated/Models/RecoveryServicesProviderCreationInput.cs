@@ -21,30 +21,31 @@
 
 using System;
 using System.Linq;
+using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// Provider specific input.
+    /// RecoveryServicesProvider creation input.
     /// </summary>
-    public partial class ReplicationProviderSpecificContainerCreationInput
+    public partial class RecoveryServicesProviderCreationInput
     {
-        private string _instanceType;
+        private RecoveryServicesProviderCreationInputProperties _properties;
         
         /// <summary>
-        /// Optional. Type of provider input.
+        /// Optional. RecoveryServicesProvider creation input properties.
         /// </summary>
-        public string InstanceType
+        public RecoveryServicesProviderCreationInputProperties Properties
         {
-            get { return this._instanceType; }
-            set { this._instanceType = value; }
+            get { return this._properties; }
+            set { this._properties = value; }
         }
         
         /// <summary>
         /// Initializes a new instance of the
-        /// ReplicationProviderSpecificContainerCreationInput class.
+        /// RecoveryServicesProviderCreationInput class.
         /// </summary>
-        public ReplicationProviderSpecificContainerCreationInput()
+        public RecoveryServicesProviderCreationInput()
         {
         }
     }

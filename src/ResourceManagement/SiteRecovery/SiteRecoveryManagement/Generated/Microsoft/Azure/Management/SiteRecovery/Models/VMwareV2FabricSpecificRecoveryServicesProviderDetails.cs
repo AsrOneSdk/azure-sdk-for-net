@@ -21,30 +21,42 @@
 
 using System;
 using System.Linq;
+using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// Provider specific input.
+    /// VMwareV2 fabric specific details.
     /// </summary>
-    public partial class ReplicationProviderSpecificContainerCreationInput
+    public partial class VMwareV2FabricSpecificRecoveryServicesProviderDetails : FabricSpecificRecoveryServicesProviderDetails
     {
-        private string _instanceType;
+        private string _srsServiceEndpoint;
         
         /// <summary>
-        /// Optional. Type of provider input.
+        /// Optional.
         /// </summary>
-        public string InstanceType
+        public string SrsServiceEndpoint
         {
-            get { return this._instanceType; }
-            set { this._instanceType = value; }
+            get { return this._srsServiceEndpoint; }
+            set { this._srsServiceEndpoint = value; }
+        }
+        
+        private string _vMwareSiteArmId;
+        
+        /// <summary>
+        /// Optional.
+        /// </summary>
+        public string VMwareSiteArmId
+        {
+            get { return this._vMwareSiteArmId; }
+            set { this._vMwareSiteArmId = value; }
         }
         
         /// <summary>
         /// Initializes a new instance of the
-        /// ReplicationProviderSpecificContainerCreationInput class.
+        /// VMwareV2FabricSpecificRecoveryServicesProviderDetails class.
         /// </summary>
-        public ReplicationProviderSpecificContainerCreationInput()
+        public VMwareV2FabricSpecificRecoveryServicesProviderDetails()
         {
         }
     }

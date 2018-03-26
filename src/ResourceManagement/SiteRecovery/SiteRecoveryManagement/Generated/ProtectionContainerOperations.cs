@@ -188,8 +188,36 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     
                     if (input.Properties.ProviderSpecificInputs != null)
                     {
-                        JObject providerSpecificInputsValue = new JObject();
-                        propertiesValue["providerSpecificInputs"] = providerSpecificInputsValue;
+                        if (input.Properties.ProviderSpecificInputs is ILazyCollection == false || ((ILazyCollection)input.Properties.ProviderSpecificInputs).IsInitialized)
+                        {
+                            JArray providerSpecificInputArray = new JArray();
+                            foreach (ReplicationProviderSpecificContainerCreationInput providerSpecificInputItem in input.Properties.ProviderSpecificInputs)
+                            {
+                                JObject replicationProviderSpecificContainerCreationInputValue = new JObject();
+                                providerSpecificInputArray.Add(replicationProviderSpecificContainerCreationInputValue);
+                                if (providerSpecificInputItem is A2AContainerCreationInput)
+                                {
+                                    replicationProviderSpecificContainerCreationInputValue["instanceType"] = "A2A";
+                                    A2AContainerCreationInput derived = ((A2AContainerCreationInput)providerSpecificInputItem);
+                                    
+                                    if (derived.InstanceType != null)
+                                    {
+                                        replicationProviderSpecificContainerCreationInputValue["instanceType"] = derived.InstanceType;
+                                    }
+                                }
+                                if (providerSpecificInputItem is VMwareCbtContainerCreationInput)
+                                {
+                                    replicationProviderSpecificContainerCreationInputValue["instanceType"] = "VMwareCbt";
+                                    VMwareCbtContainerCreationInput derived2 = ((VMwareCbtContainerCreationInput)providerSpecificInputItem);
+                                    
+                                    if (derived2.InstanceType != null)
+                                    {
+                                        replicationProviderSpecificContainerCreationInputValue["instanceType"] = derived2.InstanceType;
+                                    }
+                                }
+                            }
+                            propertiesValue["providerSpecificInput"] = providerSpecificInputArray;
+                        }
                     }
                 }
                 

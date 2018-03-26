@@ -21,30 +21,31 @@
 
 using System;
 using System.Linq;
+using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// Provider specific input.
+    /// The VMware V2 RSP creation input.
     /// </summary>
-    public partial class ReplicationProviderSpecificContainerCreationInput
+    public partial class VMwareV2RecoveryServicesProviderCreationInput : RecoveryServicesProviderFabricSpecificCreationSettings
     {
-        private string _instanceType;
+        private string _vMwareSiteArmId;
         
         /// <summary>
-        /// Optional. Type of provider input.
+        /// Optional.
         /// </summary>
-        public string InstanceType
+        public string VMwareSiteArmId
         {
-            get { return this._instanceType; }
-            set { this._instanceType = value; }
+            get { return this._vMwareSiteArmId; }
+            set { this._vMwareSiteArmId = value; }
         }
         
         /// <summary>
         /// Initializes a new instance of the
-        /// ReplicationProviderSpecificContainerCreationInput class.
+        /// VMwareV2RecoveryServicesProviderCreationInput class.
         /// </summary>
-        public ReplicationProviderSpecificContainerCreationInput()
+        public VMwareV2RecoveryServicesProviderCreationInput()
         {
         }
     }

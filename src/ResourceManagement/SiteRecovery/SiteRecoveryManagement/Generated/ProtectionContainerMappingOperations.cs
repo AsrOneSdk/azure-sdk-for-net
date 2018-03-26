@@ -209,6 +209,31 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     {
                         JObject providerSpecificInputValue = new JObject();
                         propertiesValue["providerSpecificInput"] = providerSpecificInputValue;
+                        if (input.Properties.ProviderSpecificInput is VMwareCbtPolicyContainerMappingInput)
+                        {
+                            providerSpecificInputValue["instanceType"] = "VMwareCbt";
+                            VMwareCbtPolicyContainerMappingInput derived = ((VMwareCbtPolicyContainerMappingInput)input.Properties.ProviderSpecificInput);
+                            
+                            if (derived.KeyVaultArmId != null)
+                            {
+                                providerSpecificInputValue["keyVaultArmId"] = derived.KeyVaultArmId;
+                            }
+                            
+                            if (derived.KeyVaultUrl != null)
+                            {
+                                providerSpecificInputValue["keyVaultUrl"] = derived.KeyVaultUrl;
+                            }
+                            
+                            if (derived.StorageAccountSasSecretName != null)
+                            {
+                                providerSpecificInputValue["storageAccountSasSecretName"] = derived.StorageAccountSasSecretName;
+                            }
+                            
+                            if (derived.ServiceBusConnectionStringSecretName != null)
+                            {
+                                providerSpecificInputValue["serviceBusConnectionStringSecretName"] = derived.ServiceBusConnectionStringSecretName;
+                            }
+                        }
                     }
                 }
                 
@@ -1259,6 +1284,46 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         }
                                         propertiesInstance.ProviderSpecificDetails = a2AContainerMappingDetailsInstance;
                                     }
+                                    if (typeName == "VMwareCbt")
+                                    {
+                                        VMwareCbtContainerMappingDetails vMwareCbtContainerMappingDetailsInstance = new VMwareCbtContainerMappingDetails();
+                                        
+                                        JToken keyVaultArmIdValue = providerSpecificDetailsValue["keyVaultArmId"];
+                                        if (keyVaultArmIdValue != null && keyVaultArmIdValue.Type != JTokenType.Null)
+                                        {
+                                            string keyVaultArmIdInstance = ((string)keyVaultArmIdValue);
+                                            vMwareCbtContainerMappingDetailsInstance.KeyVaultArmId = keyVaultArmIdInstance;
+                                        }
+                                        
+                                        JToken keyVaultUrlValue = providerSpecificDetailsValue["keyVaultUrl"];
+                                        if (keyVaultUrlValue != null && keyVaultUrlValue.Type != JTokenType.Null)
+                                        {
+                                            string keyVaultUrlInstance = ((string)keyVaultUrlValue);
+                                            vMwareCbtContainerMappingDetailsInstance.KeyVaultUrl = keyVaultUrlInstance;
+                                        }
+                                        
+                                        JToken storageAccountSasSecretNameValue = providerSpecificDetailsValue["storageAccountSasSecretName"];
+                                        if (storageAccountSasSecretNameValue != null && storageAccountSasSecretNameValue.Type != JTokenType.Null)
+                                        {
+                                            string storageAccountSasSecretNameInstance = ((string)storageAccountSasSecretNameValue);
+                                            vMwareCbtContainerMappingDetailsInstance.StorageAccountSasSecretName = storageAccountSasSecretNameInstance;
+                                        }
+                                        
+                                        JToken serviceBusConnectionStringSecretNameValue = providerSpecificDetailsValue["serviceBusConnectionStringSecretName"];
+                                        if (serviceBusConnectionStringSecretNameValue != null && serviceBusConnectionStringSecretNameValue.Type != JTokenType.Null)
+                                        {
+                                            string serviceBusConnectionStringSecretNameInstance = ((string)serviceBusConnectionStringSecretNameValue);
+                                            vMwareCbtContainerMappingDetailsInstance.ServiceBusConnectionStringSecretName = serviceBusConnectionStringSecretNameInstance;
+                                        }
+                                        
+                                        JToken instanceTypeValue2 = providerSpecificDetailsValue["instanceType"];
+                                        if (instanceTypeValue2 != null && instanceTypeValue2.Type != JTokenType.Null)
+                                        {
+                                            string instanceTypeInstance2 = ((string)instanceTypeValue2);
+                                            vMwareCbtContainerMappingDetailsInstance.InstanceType = instanceTypeInstance2;
+                                        }
+                                        propertiesInstance.ProviderSpecificDetails = vMwareCbtContainerMappingDetailsInstance;
+                                    }
                                 }
                             }
                             
@@ -1780,6 +1845,46 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             a2AContainerMappingDetailsInstance.InstanceType = instanceTypeInstance;
                                         }
                                         propertiesInstance.ProviderSpecificDetails = a2AContainerMappingDetailsInstance;
+                                    }
+                                    if (typeName == "VMwareCbt")
+                                    {
+                                        VMwareCbtContainerMappingDetails vMwareCbtContainerMappingDetailsInstance = new VMwareCbtContainerMappingDetails();
+                                        
+                                        JToken keyVaultArmIdValue = providerSpecificDetailsValue["keyVaultArmId"];
+                                        if (keyVaultArmIdValue != null && keyVaultArmIdValue.Type != JTokenType.Null)
+                                        {
+                                            string keyVaultArmIdInstance = ((string)keyVaultArmIdValue);
+                                            vMwareCbtContainerMappingDetailsInstance.KeyVaultArmId = keyVaultArmIdInstance;
+                                        }
+                                        
+                                        JToken keyVaultUrlValue = providerSpecificDetailsValue["keyVaultUrl"];
+                                        if (keyVaultUrlValue != null && keyVaultUrlValue.Type != JTokenType.Null)
+                                        {
+                                            string keyVaultUrlInstance = ((string)keyVaultUrlValue);
+                                            vMwareCbtContainerMappingDetailsInstance.KeyVaultUrl = keyVaultUrlInstance;
+                                        }
+                                        
+                                        JToken storageAccountSasSecretNameValue = providerSpecificDetailsValue["storageAccountSasSecretName"];
+                                        if (storageAccountSasSecretNameValue != null && storageAccountSasSecretNameValue.Type != JTokenType.Null)
+                                        {
+                                            string storageAccountSasSecretNameInstance = ((string)storageAccountSasSecretNameValue);
+                                            vMwareCbtContainerMappingDetailsInstance.StorageAccountSasSecretName = storageAccountSasSecretNameInstance;
+                                        }
+                                        
+                                        JToken serviceBusConnectionStringSecretNameValue = providerSpecificDetailsValue["serviceBusConnectionStringSecretName"];
+                                        if (serviceBusConnectionStringSecretNameValue != null && serviceBusConnectionStringSecretNameValue.Type != JTokenType.Null)
+                                        {
+                                            string serviceBusConnectionStringSecretNameInstance = ((string)serviceBusConnectionStringSecretNameValue);
+                                            vMwareCbtContainerMappingDetailsInstance.ServiceBusConnectionStringSecretName = serviceBusConnectionStringSecretNameInstance;
+                                        }
+                                        
+                                        JToken instanceTypeValue2 = providerSpecificDetailsValue["instanceType"];
+                                        if (instanceTypeValue2 != null && instanceTypeValue2.Type != JTokenType.Null)
+                                        {
+                                            string instanceTypeInstance2 = ((string)instanceTypeValue2);
+                                            vMwareCbtContainerMappingDetailsInstance.InstanceType = instanceTypeInstance2;
+                                        }
+                                        propertiesInstance.ProviderSpecificDetails = vMwareCbtContainerMappingDetailsInstance;
                                     }
                                 }
                             }
@@ -2516,6 +2621,46 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         }
                                         propertiesInstance.ProviderSpecificDetails = a2AContainerMappingDetailsInstance;
                                     }
+                                    if (typeName == "VMwareCbt")
+                                    {
+                                        VMwareCbtContainerMappingDetails vMwareCbtContainerMappingDetailsInstance = new VMwareCbtContainerMappingDetails();
+                                        
+                                        JToken keyVaultArmIdValue = providerSpecificDetailsValue["keyVaultArmId"];
+                                        if (keyVaultArmIdValue != null && keyVaultArmIdValue.Type != JTokenType.Null)
+                                        {
+                                            string keyVaultArmIdInstance = ((string)keyVaultArmIdValue);
+                                            vMwareCbtContainerMappingDetailsInstance.KeyVaultArmId = keyVaultArmIdInstance;
+                                        }
+                                        
+                                        JToken keyVaultUrlValue = providerSpecificDetailsValue["keyVaultUrl"];
+                                        if (keyVaultUrlValue != null && keyVaultUrlValue.Type != JTokenType.Null)
+                                        {
+                                            string keyVaultUrlInstance = ((string)keyVaultUrlValue);
+                                            vMwareCbtContainerMappingDetailsInstance.KeyVaultUrl = keyVaultUrlInstance;
+                                        }
+                                        
+                                        JToken storageAccountSasSecretNameValue = providerSpecificDetailsValue["storageAccountSasSecretName"];
+                                        if (storageAccountSasSecretNameValue != null && storageAccountSasSecretNameValue.Type != JTokenType.Null)
+                                        {
+                                            string storageAccountSasSecretNameInstance = ((string)storageAccountSasSecretNameValue);
+                                            vMwareCbtContainerMappingDetailsInstance.StorageAccountSasSecretName = storageAccountSasSecretNameInstance;
+                                        }
+                                        
+                                        JToken serviceBusConnectionStringSecretNameValue = providerSpecificDetailsValue["serviceBusConnectionStringSecretName"];
+                                        if (serviceBusConnectionStringSecretNameValue != null && serviceBusConnectionStringSecretNameValue.Type != JTokenType.Null)
+                                        {
+                                            string serviceBusConnectionStringSecretNameInstance = ((string)serviceBusConnectionStringSecretNameValue);
+                                            vMwareCbtContainerMappingDetailsInstance.ServiceBusConnectionStringSecretName = serviceBusConnectionStringSecretNameInstance;
+                                        }
+                                        
+                                        JToken instanceTypeValue2 = providerSpecificDetailsValue["instanceType"];
+                                        if (instanceTypeValue2 != null && instanceTypeValue2.Type != JTokenType.Null)
+                                        {
+                                            string instanceTypeInstance2 = ((string)instanceTypeValue2);
+                                            vMwareCbtContainerMappingDetailsInstance.InstanceType = instanceTypeInstance2;
+                                        }
+                                        propertiesInstance.ProviderSpecificDetails = vMwareCbtContainerMappingDetailsInstance;
+                                    }
                                 }
                             }
                             
@@ -3146,6 +3291,46 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 }
                                                 propertiesInstance.ProviderSpecificDetails = a2AContainerMappingDetailsInstance;
                                             }
+                                            if (typeName == "VMwareCbt")
+                                            {
+                                                VMwareCbtContainerMappingDetails vMwareCbtContainerMappingDetailsInstance = new VMwareCbtContainerMappingDetails();
+                                                
+                                                JToken keyVaultArmIdValue = providerSpecificDetailsValue["keyVaultArmId"];
+                                                if (keyVaultArmIdValue != null && keyVaultArmIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string keyVaultArmIdInstance = ((string)keyVaultArmIdValue);
+                                                    vMwareCbtContainerMappingDetailsInstance.KeyVaultArmId = keyVaultArmIdInstance;
+                                                }
+                                                
+                                                JToken keyVaultUrlValue = providerSpecificDetailsValue["keyVaultUrl"];
+                                                if (keyVaultUrlValue != null && keyVaultUrlValue.Type != JTokenType.Null)
+                                                {
+                                                    string keyVaultUrlInstance = ((string)keyVaultUrlValue);
+                                                    vMwareCbtContainerMappingDetailsInstance.KeyVaultUrl = keyVaultUrlInstance;
+                                                }
+                                                
+                                                JToken storageAccountSasSecretNameValue = providerSpecificDetailsValue["storageAccountSasSecretName"];
+                                                if (storageAccountSasSecretNameValue != null && storageAccountSasSecretNameValue.Type != JTokenType.Null)
+                                                {
+                                                    string storageAccountSasSecretNameInstance = ((string)storageAccountSasSecretNameValue);
+                                                    vMwareCbtContainerMappingDetailsInstance.StorageAccountSasSecretName = storageAccountSasSecretNameInstance;
+                                                }
+                                                
+                                                JToken serviceBusConnectionStringSecretNameValue = providerSpecificDetailsValue["serviceBusConnectionStringSecretName"];
+                                                if (serviceBusConnectionStringSecretNameValue != null && serviceBusConnectionStringSecretNameValue.Type != JTokenType.Null)
+                                                {
+                                                    string serviceBusConnectionStringSecretNameInstance = ((string)serviceBusConnectionStringSecretNameValue);
+                                                    vMwareCbtContainerMappingDetailsInstance.ServiceBusConnectionStringSecretName = serviceBusConnectionStringSecretNameInstance;
+                                                }
+                                                
+                                                JToken instanceTypeValue2 = providerSpecificDetailsValue["instanceType"];
+                                                if (instanceTypeValue2 != null && instanceTypeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string instanceTypeInstance2 = ((string)instanceTypeValue2);
+                                                    vMwareCbtContainerMappingDetailsInstance.InstanceType = instanceTypeInstance2;
+                                                }
+                                                propertiesInstance.ProviderSpecificDetails = vMwareCbtContainerMappingDetailsInstance;
+                                            }
                                         }
                                     }
                                     
@@ -3704,6 +3889,46 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     a2AContainerMappingDetailsInstance.InstanceType = instanceTypeInstance;
                                                 }
                                                 propertiesInstance.ProviderSpecificDetails = a2AContainerMappingDetailsInstance;
+                                            }
+                                            if (typeName == "VMwareCbt")
+                                            {
+                                                VMwareCbtContainerMappingDetails vMwareCbtContainerMappingDetailsInstance = new VMwareCbtContainerMappingDetails();
+                                                
+                                                JToken keyVaultArmIdValue = providerSpecificDetailsValue["keyVaultArmId"];
+                                                if (keyVaultArmIdValue != null && keyVaultArmIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string keyVaultArmIdInstance = ((string)keyVaultArmIdValue);
+                                                    vMwareCbtContainerMappingDetailsInstance.KeyVaultArmId = keyVaultArmIdInstance;
+                                                }
+                                                
+                                                JToken keyVaultUrlValue = providerSpecificDetailsValue["keyVaultUrl"];
+                                                if (keyVaultUrlValue != null && keyVaultUrlValue.Type != JTokenType.Null)
+                                                {
+                                                    string keyVaultUrlInstance = ((string)keyVaultUrlValue);
+                                                    vMwareCbtContainerMappingDetailsInstance.KeyVaultUrl = keyVaultUrlInstance;
+                                                }
+                                                
+                                                JToken storageAccountSasSecretNameValue = providerSpecificDetailsValue["storageAccountSasSecretName"];
+                                                if (storageAccountSasSecretNameValue != null && storageAccountSasSecretNameValue.Type != JTokenType.Null)
+                                                {
+                                                    string storageAccountSasSecretNameInstance = ((string)storageAccountSasSecretNameValue);
+                                                    vMwareCbtContainerMappingDetailsInstance.StorageAccountSasSecretName = storageAccountSasSecretNameInstance;
+                                                }
+                                                
+                                                JToken serviceBusConnectionStringSecretNameValue = providerSpecificDetailsValue["serviceBusConnectionStringSecretName"];
+                                                if (serviceBusConnectionStringSecretNameValue != null && serviceBusConnectionStringSecretNameValue.Type != JTokenType.Null)
+                                                {
+                                                    string serviceBusConnectionStringSecretNameInstance = ((string)serviceBusConnectionStringSecretNameValue);
+                                                    vMwareCbtContainerMappingDetailsInstance.ServiceBusConnectionStringSecretName = serviceBusConnectionStringSecretNameInstance;
+                                                }
+                                                
+                                                JToken instanceTypeValue2 = providerSpecificDetailsValue["instanceType"];
+                                                if (instanceTypeValue2 != null && instanceTypeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string instanceTypeInstance2 = ((string)instanceTypeValue2);
+                                                    vMwareCbtContainerMappingDetailsInstance.InstanceType = instanceTypeInstance2;
+                                                }
+                                                propertiesInstance.ProviderSpecificDetails = vMwareCbtContainerMappingDetailsInstance;
                                             }
                                         }
                                     }
