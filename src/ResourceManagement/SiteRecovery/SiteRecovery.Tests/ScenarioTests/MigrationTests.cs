@@ -64,7 +64,7 @@ namespace SiteRecovery.Tests.ScenarioTests
                             MachineName = draName,
                             CustomDetails = new VMwareV2RecoveryServicesProviderCreationInput()
                             {
-                                SiteId = "randomsiteid",
+                                VMwareSiteArmId = "randomsiteid",
                                 InstanceType = "VMwareV2"
 
                             }
