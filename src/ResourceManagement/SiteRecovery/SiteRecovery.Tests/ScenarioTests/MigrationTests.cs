@@ -12,13 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Azure.Management.SiteRecovery;
 using Microsoft.Azure.Management.SiteRecovery.Models;
 using Microsoft.Azure.Test;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using Xunit;
 
 
@@ -27,8 +26,10 @@ namespace SiteRecovery.Tests.ScenarioTests
     public class MigrationTests : SiteRecoveryTestsBase
     {
         private string vmwareFabricName = "vmwarefabric1";
-        private string azureFabricName = "azurefabric-sea";
-        private string azureContainerName = "azurefabric-sea-cloud";
+        private string vmwareContainerName = "vmwarefabric1-cloud";
+        private string azureFabricName = "azurefabric-we";
+        private string azureContainerName = "azurefabric-we-cloud";
+
         private string draName = "vmwaredra1";
         private string policyName = "vmwarepolicy1";
         private string containerMappingName = "vmwaremapping1";
@@ -56,6 +57,22 @@ namespace SiteRecovery.Tests.ScenarioTests
                     };
                     client.Fabrics.Create(vmwareFabricName, vmwareFabricInput, RequestHeaders);
 
+                    // Create VMware container.
+                    var vmwareContainerInput = new CreateProtectionContainerInput()
+                    {
+                        Properties = new CreateProtectionContainerInputProperties()
+                        {
+                            ProviderSpecificInputs = new List<ReplicationProviderSpecificContainerCreationInput>()
+                            {
+                                new VMwareCbtContainerCreationInput()
+                                {
+                                    InstanceType = "VMwareCbt"
+                                }
+                            }
+                        }
+                    };
+                    client.ProtectionContainer.Create(vmwareFabricName, vmwareContainerName, vmwareContainerInput, RequestHeaders);
+
                     // Create VMware DRA.
                     var draInput = new RecoveryServicesProviderCreationInput()
                     {
@@ -74,7 +91,7 @@ namespace SiteRecovery.Tests.ScenarioTests
                 }
                 catch (Exception)
                 {
-                    Debugger.Break();
+                    throw;
                 }
             }
         }
@@ -99,7 +116,7 @@ namespace SiteRecovery.Tests.ScenarioTests
                             CustomDetails = new AzureFabricCreationInput()
                             {
                                 InstanceType = "Azure",
-                                Location = "Southeast Asia"
+                                Location = "West Europe"
                             }
                         }
                     };
@@ -152,23 +169,26 @@ namespace SiteRecovery.Tests.ScenarioTests
                             ProviderSpecificInput = new VMwareCbtPolicyContainerMappingInput()
                             {
                                 KeyVaultArmId = "KVARMID",
-                                KeyVaultUrl = "KEYVAULTURL"
+                                KeyVaultUrl =
+                                    Environment.ExpandEnvironmentVariables("https://%COMPUTERNAME%-targetkv.vault.azure.net"),
+                                ServiceBusConnectionStringSecretName = "SBusRootManageSharedAccessKey",
+                                StorageAccountSasSecretName = "something"
                             }
                         }
                     };
                     client.ProtectionContainerMapping.ConfigureProtection(
                         vmwareFabricName,
-                        vmwareContainer.Name,
+                        vmwareContainerName,
                         containerMappingName,
                         mappingInput,
                         RequestHeaders);
 
                     // Get all mapings.
-                    var mappings = client.ProtectionContainerMapping.List(vmwareFabricName, vmwareContainer.Name, RequestHeaders);
+                    var mappings = client.ProtectionContainerMapping.List(vmwareFabricName, azureContainerName, RequestHeaders);
                 }
                 catch (Exception)
                 {
-                    Debugger.Break();
+                    throw;
                 }
             }
         }
