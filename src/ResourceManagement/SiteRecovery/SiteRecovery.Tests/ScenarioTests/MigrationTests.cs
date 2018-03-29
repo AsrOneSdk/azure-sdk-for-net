@@ -192,5 +192,92 @@ namespace SiteRecovery.Tests.ScenarioTests
                 }
             }
         }
+
+        [Fact]
+        public void Migration_Get()
+        {
+            using (UndoContext context = UndoContext.Current)
+            {
+                try
+                {
+                    context.Start();
+                    var client = GetSiteRecoveryClient(CustomHttpHandler);
+                    var vmwareContainer = client.ProtectionContainer
+                        .List(vmwareFabricName, RequestHeaders)
+                        .ProtectionContainers
+                        .Single();
+
+                    // Get all items.
+                    var items = client.MigrationItem.List(
+                        vmwareFabricName,
+                        vmwareContainer.Name,
+                        RequestHeaders);
+
+                    // Get single item.
+                    var migItem = client.MigrationItem.Get(
+                        vmwareFabricName,
+                        vmwareContainer.Name,
+                        "vmwareMigItem1",
+                        RequestHeaders);
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+        }
+
+        [Fact]
+        public void Migration_Enable()
+        {
+            using (UndoContext context = UndoContext.Current)
+            {
+                try
+                {
+                    context.Start();
+                    var client = GetSiteRecoveryClient(CustomHttpHandler);
+
+                    var vmwareContainer = client.ProtectionContainer
+                        .List(vmwareFabricName, RequestHeaders)
+                        .ProtectionContainers
+                        .Single();
+                    var vmwarePolicy = client.Policies
+                        .List(RequestHeaders)
+                        .Policies
+                        .Where(x => x.Name == policyName)
+                        .Single();
+
+                    var enableMigrationInput = new EnableMigrationInput
+                    {
+                        Properties = new EnableMigrationInputProperties
+                        {
+                            PolicyId = vmwarePolicy.Id,
+                            ProviderSpecificDetails = new VMwareCbtEnableMigrationInput
+                            {
+                                VMwareMachineArmId = "1234",
+                                VCenterArmId = "1234"
+                            }
+                        }
+                    };
+
+                    var response = client.MigrationItem.EnableMigration(
+                        vmwareFabricName,
+                        vmwareContainer.Name,
+                        "vmwareMigItem1",
+                        enableMigrationInput,
+                        RequestHeaders);
+
+                    // Get all items.
+                    var items = client.MigrationItem.List(
+                        vmwareFabricName,
+                        vmwareContainer.Name,
+                        RequestHeaders);
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+        }
     }
 }

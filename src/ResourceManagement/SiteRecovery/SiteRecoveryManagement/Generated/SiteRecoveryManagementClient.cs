@@ -168,6 +168,17 @@ namespace Microsoft.Azure.Management.SiteRecovery
             get { return this._logicalNetwork; }
         }
         
+        private IMigrationItemOperations _migrationItem;
+        
+        /// <summary>
+        /// Definition of migration item operations for the Site Recovery
+        /// extension.
+        /// </summary>
+        public virtual IMigrationItemOperations MigrationItem
+        {
+            get { return this._migrationItem; }
+        }
+        
         private INetworkMappingOperations _networkMapping;
         
         /// <summary>
@@ -329,6 +340,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             this._fabrics = new FabricOperations(this);
             this._jobs = new JobOperations(this);
             this._logicalNetwork = new LogicalNetworkOperations(this);
+            this._migrationItem = new MigrationItemOperations(this);
             this._networkMapping = new NetworkMappingOperations(this);
             this._network = new NetworkOperations(this);
             this._policies = new PolicyOperations(this);
@@ -480,6 +492,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             this._fabrics = new FabricOperations(this);
             this._jobs = new JobOperations(this);
             this._logicalNetwork = new LogicalNetworkOperations(this);
+            this._migrationItem = new MigrationItemOperations(this);
             this._networkMapping = new NetworkMappingOperations(this);
             this._network = new NetworkOperations(this);
             this._policies = new PolicyOperations(this);

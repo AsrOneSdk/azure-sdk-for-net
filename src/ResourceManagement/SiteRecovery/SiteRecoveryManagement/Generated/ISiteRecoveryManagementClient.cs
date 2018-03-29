@@ -133,6 +133,15 @@ namespace Microsoft.Azure.Management.SiteRecovery
         }
         
         /// <summary>
+        /// Definition of migration item operations for the Site Recovery
+        /// extension.
+        /// </summary>
+        IMigrationItemOperations MigrationItem
+        {
+            get; 
+        }
+        
+        /// <summary>
         /// Definition of NetworkMapping operations for the Site Recovery
         /// extension.
         /// </summary>
