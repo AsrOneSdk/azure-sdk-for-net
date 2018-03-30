@@ -943,6 +943,81 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         }
                                     }
                                 }
+                                
+                                JToken containersHealthValue = propertiesValue["containersHealth"];
+                                if (containersHealthValue != null && containersHealthValue.Type != JTokenType.Null)
+                                {
+                                    ResourceHealthSummary containersHealthInstance = new ResourceHealthSummary();
+                                    propertiesInstance.ContainersHealth = containersHealthInstance;
+                                    
+                                    JToken resourceCountValue3 = containersHealthValue["resourceCount"];
+                                    if (resourceCountValue3 != null && resourceCountValue3.Type != JTokenType.Null)
+                                    {
+                                        int resourceCountInstance3 = ((int)resourceCountValue3);
+                                        containersHealthInstance.ResourceCount = resourceCountInstance3;
+                                    }
+                                    
+                                    JToken issuesArray3 = containersHealthValue["issues"];
+                                    if (issuesArray3 != null && issuesArray3.Type != JTokenType.Null)
+                                    {
+                                        foreach (JToken issuesValue3 in ((JArray)issuesArray3))
+                                        {
+                                            HealthErrorSummary healthErrorSummaryInstance3 = new HealthErrorSummary();
+                                            containersHealthInstance.Issues.Add(healthErrorSummaryInstance3);
+                                            
+                                            JToken summaryCodeValue3 = issuesValue3["summaryCode"];
+                                            if (summaryCodeValue3 != null && summaryCodeValue3.Type != JTokenType.Null)
+                                            {
+                                                string summaryCodeInstance3 = ((string)summaryCodeValue3);
+                                                healthErrorSummaryInstance3.SummaryCode = summaryCodeInstance3;
+                                            }
+                                            
+                                            JToken categoryValue3 = issuesValue3["category"];
+                                            if (categoryValue3 != null && categoryValue3.Type != JTokenType.Null)
+                                            {
+                                                string categoryInstance3 = ((string)categoryValue3);
+                                                healthErrorSummaryInstance3.Category = categoryInstance3;
+                                            }
+                                            
+                                            JToken severityValue3 = issuesValue3["severity"];
+                                            if (severityValue3 != null && severityValue3.Type != JTokenType.Null)
+                                            {
+                                                string severityInstance3 = ((string)severityValue3);
+                                                healthErrorSummaryInstance3.Severity = severityInstance3;
+                                            }
+                                            
+                                            JToken summaryMessageValue5 = issuesValue3["summaryMessage"];
+                                            if (summaryMessageValue5 != null && summaryMessageValue5.Type != JTokenType.Null)
+                                            {
+                                                string summaryMessageInstance5 = ((string)summaryMessageValue5);
+                                                healthErrorSummaryInstance3.SummaryMessage = summaryMessageInstance5;
+                                            }
+                                            
+                                            JToken affectedResourceTypeValue3 = issuesValue3["affectedResourceType"];
+                                            if (affectedResourceTypeValue3 != null && affectedResourceTypeValue3.Type != JTokenType.Null)
+                                            {
+                                                string affectedResourceTypeInstance3 = ((string)affectedResourceTypeValue3);
+                                                healthErrorSummaryInstance3.AffectedResourceType = affectedResourceTypeInstance3;
+                                            }
+                                            
+                                            JToken affectedResourceSubtypeValue3 = issuesValue3["affectedResourceSubtype"];
+                                            if (affectedResourceSubtypeValue3 != null && affectedResourceSubtypeValue3.Type != JTokenType.Null)
+                                            {
+                                                string affectedResourceSubtypeInstance3 = ((string)affectedResourceSubtypeValue3);
+                                                healthErrorSummaryInstance3.AffectedResourceSubtype = affectedResourceSubtypeInstance3;
+                                            }
+                                            
+                                            JToken affectedResourceCorrelationIdsArray3 = issuesValue3["affectedResourceCorrelationIds"];
+                                            if (affectedResourceCorrelationIdsArray3 != null && affectedResourceCorrelationIdsArray3.Type != JTokenType.Null)
+                                            {
+                                                foreach (JToken affectedResourceCorrelationIdsValue3 in ((JArray)affectedResourceCorrelationIdsArray3))
+                                                {
+                                                    healthErrorSummaryInstance3.AffectedResourceCorrelationIds.Add(((string)affectedResourceCorrelationIdsValue3));
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             }
                             
                             JToken idValue = responseDoc["id"];

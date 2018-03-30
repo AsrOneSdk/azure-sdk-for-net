@@ -32,6 +32,18 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class VaultHealthProperties
     {
+        private ResourceHealthSummary _containersHealth;
+        
+        /// <summary>
+        /// Optional. The list of the health detail of the container in the
+        /// vault.
+        /// </summary>
+        public ResourceHealthSummary ContainersHealth
+        {
+            get { return this._containersHealth; }
+            set { this._containersHealth = value; }
+        }
+        
         private ResourceHealthSummary _fabricsHealth;
         
         /// <summary>
