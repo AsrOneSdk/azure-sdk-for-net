@@ -62,7 +62,7 @@ namespace Microsoft.Azure.Test
                     IgnoreCertificateErrorHandler;
             }
 
-            TestEnvironment environment = new CSMTestEnvironmentFactory().GetTestEnvironment();
+            TestEnvironment environment;
 
             switch(scenario)
             {
@@ -71,6 +71,8 @@ namespace Microsoft.Azure.Test
                     SiteRecoveryTestsBase.MyResourceGroupName = "rg1";
                     SiteRecoveryTestsBase.ResourceNamespace = "Microsoft.RecoveryServicesBVTD2";
                     SiteRecoveryTestsBase.ResourceType = "RecoveryServicesVault";
+
+                    environment = new CSMTestEnvironmentFactory().GetTestEnvironment();
                     environment.BaseUri = new Uri("https://sriramvu:8443/Rdfeproxy.svc");
                     break;
 
@@ -91,6 +93,8 @@ namespace Microsoft.Azure.Test
                     SiteRecoveryTestsBase.MyResourceGroupName = "RecoveryServices-WHNOWF6LI6NM4B55QDIYR3YG3YAEZNTDUOWHPQX7NJB2LHDGTXJA-West-US";
                     SiteRecoveryTestsBase.ResourceNamespace = "Microsoft.SiteRecoveryBVTD2";
                     SiteRecoveryTestsBase.ResourceType = "SiteRecoveryVault";
+
+                    environment = new CSMTestEnvironmentFactory().GetTestEnvironment();
                     break;
             };
 
