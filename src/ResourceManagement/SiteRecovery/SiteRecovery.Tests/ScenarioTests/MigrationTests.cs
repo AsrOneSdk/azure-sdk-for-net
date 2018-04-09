@@ -14,6 +14,7 @@
 //
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Microsoft.Azure.Management.SiteRecovery;
 using Microsoft.Azure.Management.SiteRecovery.Models;
@@ -55,22 +56,6 @@ namespace SiteRecovery.Tests.ScenarioTests
                         }
                     };
                     client.Fabrics.Create(vmwareFabricName, vmwareFabricInput, RequestHeaders);
-
-                    // Create VMware container.
-                    var vmwareContainerInput = new CreateProtectionContainerInput()
-                    {
-                        Properties = new CreateProtectionContainerInputProperties()
-                        {
-                            ProviderSpecificInputs = new List<ReplicationProviderSpecificContainerCreationInput>()
-                            {
-                                new VMwareCbtContainerCreationInput()
-                                {
-                                    InstanceType = "VMwareCbt"
-                                }
-                            }
-                        }
-                    };
-                    client.ProtectionContainer.Create(vmwareFabricName, vmwareContainerName, vmwareContainerInput, RequestHeaders);
 
                     // Create VMware DRA.
                     var vmwareDraInput = new RecoveryServicesProviderCreationInput()
@@ -132,7 +117,7 @@ namespace SiteRecovery.Tests.ScenarioTests
                             CustomDetails = new AzureFabricCreationInput()
                             {
                                 InstanceType = "Azure",
-                                Location = "West Europe"
+                                Location = "Southeast Asia"
                             }
                         }
                     };
@@ -262,7 +247,7 @@ namespace SiteRecovery.Tests.ScenarioTests
                     var vmwarePolicy = client.Policies
                         .List(RequestHeaders)
                         .Policies
-                        .Where(x => x.Name == policyName)
+                        .Where(x => x.Name == vmwarePolicyName)
                         .Single();
 
                     var enableMigrationInput = new EnableMigrationInput
