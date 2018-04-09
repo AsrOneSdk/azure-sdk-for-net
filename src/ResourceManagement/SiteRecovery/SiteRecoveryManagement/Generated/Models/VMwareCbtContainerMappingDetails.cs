@@ -41,15 +41,15 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._keyVaultArmId = value; }
         }
         
-        private string _keyVaultUrl;
+        private string _keyVaultUri;
         
         /// <summary>
-        /// Optional. Target key vault Url.
+        /// Optional. Target key vault Uri.
         /// </summary>
-        public string KeyVaultUrl
+        public string KeyVaultUri
         {
-            get { return this._keyVaultUrl; }
-            set { this._keyVaultUrl = value; }
+            get { return this._keyVaultUri; }
+            set { this._keyVaultUri = value; }
         }
         
         private string _serviceBusConnectionStringSecretName;
@@ -61,6 +61,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         {
             get { return this._serviceBusConnectionStringSecretName; }
             set { this._serviceBusConnectionStringSecretName = value; }
+        }
+        
+        private string _storageAccountArmId;
+        
+        /// <summary>
+        /// Optional. Storage account ARM Id.
+        /// </summary>
+        public string StorageAccountArmId
+        {
+            get { return this._storageAccountArmId; }
+            set { this._storageAccountArmId = value; }
         }
         
         private string _storageAccountSasSecretName;

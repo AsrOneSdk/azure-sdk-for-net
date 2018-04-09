@@ -27,11 +27,10 @@ namespace SiteRecovery.Tests.ScenarioTests
     {
         private string vmwareFabricName = "vmwarefabric1";
         private string vmwareContainerName = "vmwarefabric1-cloud";
-        private string azureFabricName = "azurefabric-we";
-        private string azureContainerName = "azurefabric-we-cloud";
-
-        private string draName = "vmwaredra1";
-        private string policyName = "vmwarepolicy1";
+        private string azureFabricName = "azurefabric-sea";
+        private string azureContainerName = "azurefabric-sea-cloud";
+        private string vmwareDraName = "vmwaredra1";
+        private string vmwarePolicyName = "vmwarepolicy1";
         private string containerMappingName = "vmwaremapping1";
 
         [Fact]
@@ -42,7 +41,7 @@ namespace SiteRecovery.Tests.ScenarioTests
                 try
                 {
                     context.Start();
-                    var client = GetSiteRecoveryClient(CustomHttpHandler);
+                    var client = GetSiteRecoveryClient(CustomHttpHandler, "Migration");
 
                     // Create VMware fabric.
                     var vmwareFabricInput = new FabricCreationInput()
@@ -74,11 +73,11 @@ namespace SiteRecovery.Tests.ScenarioTests
                     client.ProtectionContainer.Create(vmwareFabricName, vmwareContainerName, vmwareContainerInput, RequestHeaders);
 
                     // Create VMware DRA.
-                    var draInput = new RecoveryServicesProviderCreationInput()
+                    var vmwareDraInput = new RecoveryServicesProviderCreationInput()
                     {
                         Properties = new RecoveryServicesProviderCreationInputProperties()
                         {
-                            MachineName = draName,
+                            MachineName = vmwareDraName,
                             CustomDetails = new VMwareV2RecoveryServicesProviderCreationInput()
                             {
                                 VMwareSiteArmId = "randomsiteid",
@@ -87,10 +86,27 @@ namespace SiteRecovery.Tests.ScenarioTests
                             }
                         }
                     };
-                    client.RecoveryServicesProvider.Create(vmwareFabricName, draName, draInput, RequestHeaders);
+                    client.RecoveryServicesProvider.Create(vmwareFabricName, vmwareDraName, vmwareDraInput, RequestHeaders);
+
+                    // Create VMware container.
+                    var vmwareContainerInput = new CreateProtectionContainerInput()
+                    {
+                        Properties = new CreateProtectionContainerInputProperties()
+                        {
+                            ProviderSpecificInputs = new List<ReplicationProviderSpecificContainerCreationInput>()
+                            {
+                                new VMwareCbtContainerCreationInput()
+                                {
+                                    InstanceType = "VMwareCbt"
+                                }
+                            }
+                        }
+                    };
+                    client.ProtectionContainer.Create(vmwareFabricName, vmwareContainerName, vmwareContainerInput, RequestHeaders);
                 }
                 catch (Exception)
                 {
+                    Debugger.Break();
                     throw;
                 }
             }
@@ -106,7 +122,7 @@ namespace SiteRecovery.Tests.ScenarioTests
                     // Ensure DRA is running and the VMware cloud entity is created before running
                     // this test.
                     context.Start();
-                    var client = GetSiteRecoveryClient(CustomHttpHandler);
+                    var client = GetSiteRecoveryClient(CustomHttpHandler, "Migration");
 
                     // Create Azure fabric.
                     var azureFabricInput = new FabricCreationInput()
@@ -139,7 +155,7 @@ namespace SiteRecovery.Tests.ScenarioTests
                     client.ProtectionContainer.Create(azureFabricName, azureContainerName, azureContainerInput, RequestHeaders);
 
                     // Create VMware policy.
-                    var policyInput = new CreatePolicyInput()
+                    var vmwarePolicyInput = new CreatePolicyInput()
                     {
                         Properties = new CreatePolicyInputProperties()
                         {
@@ -151,13 +167,13 @@ namespace SiteRecovery.Tests.ScenarioTests
                             }
                         }
                     };
-                    client.Policies.Create(policyName, policyInput, RequestHeaders);
+                    client.Policies.Create(vmwarePolicyName, vmwarePolicyInput, RequestHeaders);
 
                     // Get the required entities.
                     var fabrics = client.Fabrics.List(RequestHeaders).Fabrics.ToList();
                     var vmwareContainer = client.ProtectionContainer.List(vmwareFabricName, RequestHeaders).ProtectionContainers.Single();
                     var azureContainer = client.ProtectionContainer.List(azureFabricName, RequestHeaders).ProtectionContainers.Single();
-                    var vmwarePolicy = client.Policies.List(RequestHeaders).Policies.Where(x => x.Name == policyName).Single();
+                    var vmwarePolicy = client.Policies.List(RequestHeaders).Policies.Where(x => x.Name == vmwarePolicyName).Single();
 
                     // Create container mappping.
                     var mappingInput = new CreateProtectionContainerMappingInput
@@ -169,10 +185,10 @@ namespace SiteRecovery.Tests.ScenarioTests
                             ProviderSpecificInput = new VMwareCbtPolicyContainerMappingInput()
                             {
                                 KeyVaultArmId = "KVARMID",
-                                KeyVaultUrl =
-                                    Environment.ExpandEnvironmentVariables("https://%COMPUTERNAME%-targetkv.vault.azure.net"),
-                                ServiceBusConnectionStringSecretName = "SBusRootManageSharedAccessKey",
-                                StorageAccountSasSecretName = "something"
+                                KeyVaultUri = "https://%COMPUTERNAME%-targetkv.vault.azure.net",
+                                StorageAccountArmId = "something",
+                                StorageAccountSasSecretName = "something",
+                                ServiceBusConnectionStringSecretName = "SBusRootManageSharedAccessKey"
                             }
                         }
                     };
@@ -188,6 +204,7 @@ namespace SiteRecovery.Tests.ScenarioTests
                 }
                 catch (Exception)
                 {
+                    Debugger.Break();
                     throw;
                 }
             }
@@ -201,7 +218,7 @@ namespace SiteRecovery.Tests.ScenarioTests
                 try
                 {
                     context.Start();
-                    var client = GetSiteRecoveryClient(CustomHttpHandler);
+                    var client = GetSiteRecoveryClient(CustomHttpHandler, "Migration");
                     var vmwareContainer = client.ProtectionContainer
                         .List(vmwareFabricName, RequestHeaders)
                         .ProtectionContainers
@@ -222,6 +239,7 @@ namespace SiteRecovery.Tests.ScenarioTests
                 }
                 catch (Exception)
                 {
+                    Debugger.Break();
                     throw;
                 }
             }
@@ -235,7 +253,7 @@ namespace SiteRecovery.Tests.ScenarioTests
                 try
                 {
                     context.Start();
-                    var client = GetSiteRecoveryClient(CustomHttpHandler);
+                    var client = GetSiteRecoveryClient(CustomHttpHandler, "Migration");
 
                     var vmwareContainer = client.ProtectionContainer
                         .List(vmwareFabricName, RequestHeaders)
@@ -275,6 +293,7 @@ namespace SiteRecovery.Tests.ScenarioTests
                 }
                 catch (Exception)
                 {
+                    Debugger.Break();
                     throw;
                 }
             }
