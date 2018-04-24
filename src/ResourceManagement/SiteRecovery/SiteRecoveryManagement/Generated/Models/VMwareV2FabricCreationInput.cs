@@ -30,6 +30,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class VMwareV2FabricCreationInput : FabricSpecificCreationSettings
     {
+        private string _vMwareSiteArmId;
+        
+        /// <summary>
+        /// Optional. VMware Site ARM Id.
+        /// </summary>
+        public string VMwareSiteArmId
+        {
+            get { return this._vMwareSiteArmId; }
+            set { this._vMwareSiteArmId = value; }
+        }
+        
         /// <summary>
         /// Initializes a new instance of the VMwareV2FabricCreationInput class.
         /// </summary>

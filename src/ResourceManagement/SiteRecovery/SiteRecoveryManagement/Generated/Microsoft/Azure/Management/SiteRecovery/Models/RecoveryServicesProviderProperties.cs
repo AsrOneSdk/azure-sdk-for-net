@@ -54,17 +54,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._connectionStatus = value; }
         }
         
-        private FabricSpecificRecoveryServicesProviderDetails _customDetails;
-        
-        /// <summary>
-        /// Optional. Fabric provider specific RSP details.
-        /// </summary>
-        public FabricSpecificRecoveryServicesProviderDetails CustomDetails
-        {
-            get { return this._customDetails; }
-            set { this._customDetails = value; }
-        }
-        
         private string _fabricFriendlyName;
         
         /// <summary>
@@ -108,6 +97,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         {
             get { return this._healthErrorDetails; }
             set { this._healthErrorDetails = value; }
+        }
+        
+        private IdentityProviderDetails _identityDetails;
+        
+        /// <summary>
+        /// Optional. Identity provider details.
+        /// </summary>
+        public IdentityProviderDetails IdentityDetails
+        {
+            get { return this._identityDetails; }
+            set { this._identityDetails = value; }
         }
         
         private System.DateTime? _lastHeartbeat;

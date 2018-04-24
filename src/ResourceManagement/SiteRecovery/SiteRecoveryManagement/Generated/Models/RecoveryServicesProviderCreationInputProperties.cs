@@ -30,15 +30,15 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class RecoveryServicesProviderCreationInputProperties
     {
-        private RecoveryServicesProviderFabricSpecificCreationSettings _customDetails;
+        private IdentityProviderDetails _identityInput;
         
         /// <summary>
-        /// Optional. Fabric specific RSP creation input.
+        /// Optional. Identity provider details.
         /// </summary>
-        public RecoveryServicesProviderFabricSpecificCreationSettings CustomDetails
+        public IdentityProviderDetails IdentityInput
         {
-            get { return this._customDetails; }
-            set { this._customDetails = value; }
+            get { return this._identityInput; }
+            set { this._identityInput = value; }
         }
         
         private string _machineName;

@@ -189,24 +189,34 @@ namespace Microsoft.Azure.Management.SiteRecovery
                         propertiesValue["machineName"] = input.Properties.MachineName;
                     }
                     
-                    if (input.Properties.CustomDetails != null)
+                    if (input.Properties.IdentityInput != null)
                     {
-                        JObject customDetailsValue = new JObject();
-                        propertiesValue["customDetails"] = customDetailsValue;
-                        if (input.Properties.CustomDetails is VMwareV2RecoveryServicesProviderCreationInput)
+                        JObject identityInputValue = new JObject();
+                        propertiesValue["identityInput"] = identityInputValue;
+                        
+                        if (input.Properties.IdentityInput.TenantId != null)
                         {
-                            customDetailsValue["instanceType"] = "VMwareV2";
-                            VMwareV2RecoveryServicesProviderCreationInput derived = ((VMwareV2RecoveryServicesProviderCreationInput)input.Properties.CustomDetails);
-                            
-                            if (derived.VMwareSiteArmId != null)
-                            {
-                                customDetailsValue["vmwareSiteArmId"] = derived.VMwareSiteArmId;
-                            }
-                            
-                            if (derived.InstanceType != null)
-                            {
-                                customDetailsValue["instanceType"] = derived.InstanceType;
-                            }
+                            identityInputValue["tenantId"] = input.Properties.IdentityInput.TenantId;
+                        }
+                        
+                        if (input.Properties.IdentityInput.ApplicationId != null)
+                        {
+                            identityInputValue["applicationId"] = input.Properties.IdentityInput.ApplicationId;
+                        }
+                        
+                        if (input.Properties.IdentityInput.ObjectId != null)
+                        {
+                            identityInputValue["objectId"] = input.Properties.IdentityInput.ObjectId;
+                        }
+                        
+                        if (input.Properties.IdentityInput.Audience != null)
+                        {
+                            identityInputValue["audience"] = input.Properties.IdentityInput.Audience;
+                        }
+                        
+                        if (input.Properties.IdentityInput.AadAuthority != null)
+                        {
+                            identityInputValue["aadAuthority"] = input.Properties.IdentityInput.AadAuthority;
                         }
                     }
                 }
@@ -1444,35 +1454,45 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     }
                                 }
                                 
-                                JToken customDetailsValue = propertiesValue["customDetails"];
-                                if (customDetailsValue != null && customDetailsValue.Type != JTokenType.Null)
+                                JToken identityDetailsValue = propertiesValue["identityDetails"];
+                                if (identityDetailsValue != null && identityDetailsValue.Type != JTokenType.Null)
                                 {
-                                    string typeName = ((string)customDetailsValue["instanceType"]);
-                                    if (typeName == "VMwareV2")
+                                    IdentityProviderDetails identityDetailsInstance = new IdentityProviderDetails();
+                                    propertiesInstance.IdentityDetails = identityDetailsInstance;
+                                    
+                                    JToken tenantIdValue = identityDetailsValue["tenantId"];
+                                    if (tenantIdValue != null && tenantIdValue.Type != JTokenType.Null)
                                     {
-                                        VMwareV2FabricSpecificRecoveryServicesProviderDetails vMwareV2FabricSpecificRecoveryServicesProviderDetailsInstance = new VMwareV2FabricSpecificRecoveryServicesProviderDetails();
-                                        
-                                        JToken vmwareSiteArmIdValue = customDetailsValue["vmwareSiteArmId"];
-                                        if (vmwareSiteArmIdValue != null && vmwareSiteArmIdValue.Type != JTokenType.Null)
-                                        {
-                                            string vmwareSiteArmIdInstance = ((string)vmwareSiteArmIdValue);
-                                            vMwareV2FabricSpecificRecoveryServicesProviderDetailsInstance.VMwareSiteArmId = vmwareSiteArmIdInstance;
-                                        }
-                                        
-                                        JToken srsServiceEndpointValue = customDetailsValue["srsServiceEndpoint"];
-                                        if (srsServiceEndpointValue != null && srsServiceEndpointValue.Type != JTokenType.Null)
-                                        {
-                                            string srsServiceEndpointInstance = ((string)srsServiceEndpointValue);
-                                            vMwareV2FabricSpecificRecoveryServicesProviderDetailsInstance.SrsServiceEndpoint = srsServiceEndpointInstance;
-                                        }
-                                        
-                                        JToken instanceTypeValue = customDetailsValue["instanceType"];
-                                        if (instanceTypeValue != null && instanceTypeValue.Type != JTokenType.Null)
-                                        {
-                                            string instanceTypeInstance = ((string)instanceTypeValue);
-                                            vMwareV2FabricSpecificRecoveryServicesProviderDetailsInstance.InstanceType = instanceTypeInstance;
-                                        }
-                                        propertiesInstance.CustomDetails = vMwareV2FabricSpecificRecoveryServicesProviderDetailsInstance;
+                                        string tenantIdInstance = ((string)tenantIdValue);
+                                        identityDetailsInstance.TenantId = tenantIdInstance;
+                                    }
+                                    
+                                    JToken applicationIdValue = identityDetailsValue["applicationId"];
+                                    if (applicationIdValue != null && applicationIdValue.Type != JTokenType.Null)
+                                    {
+                                        string applicationIdInstance = ((string)applicationIdValue);
+                                        identityDetailsInstance.ApplicationId = applicationIdInstance;
+                                    }
+                                    
+                                    JToken objectIdValue = identityDetailsValue["objectId"];
+                                    if (objectIdValue != null && objectIdValue.Type != JTokenType.Null)
+                                    {
+                                        string objectIdInstance = ((string)objectIdValue);
+                                        identityDetailsInstance.ObjectId = objectIdInstance;
+                                    }
+                                    
+                                    JToken audienceValue = identityDetailsValue["audience"];
+                                    if (audienceValue != null && audienceValue.Type != JTokenType.Null)
+                                    {
+                                        string audienceInstance = ((string)audienceValue);
+                                        identityDetailsInstance.Audience = audienceInstance;
+                                    }
+                                    
+                                    JToken aadAuthorityValue = identityDetailsValue["aadAuthority"];
+                                    if (aadAuthorityValue != null && aadAuthorityValue.Type != JTokenType.Null)
+                                    {
+                                        string aadAuthorityInstance = ((string)aadAuthorityValue);
+                                        identityDetailsInstance.AadAuthority = aadAuthorityInstance;
                                     }
                                 }
                             }
@@ -1993,35 +2013,45 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     }
                                 }
                                 
-                                JToken customDetailsValue = propertiesValue["customDetails"];
-                                if (customDetailsValue != null && customDetailsValue.Type != JTokenType.Null)
+                                JToken identityDetailsValue = propertiesValue["identityDetails"];
+                                if (identityDetailsValue != null && identityDetailsValue.Type != JTokenType.Null)
                                 {
-                                    string typeName = ((string)customDetailsValue["instanceType"]);
-                                    if (typeName == "VMwareV2")
+                                    IdentityProviderDetails identityDetailsInstance = new IdentityProviderDetails();
+                                    propertiesInstance.IdentityDetails = identityDetailsInstance;
+                                    
+                                    JToken tenantIdValue = identityDetailsValue["tenantId"];
+                                    if (tenantIdValue != null && tenantIdValue.Type != JTokenType.Null)
                                     {
-                                        VMwareV2FabricSpecificRecoveryServicesProviderDetails vMwareV2FabricSpecificRecoveryServicesProviderDetailsInstance = new VMwareV2FabricSpecificRecoveryServicesProviderDetails();
-                                        
-                                        JToken vmwareSiteArmIdValue = customDetailsValue["vmwareSiteArmId"];
-                                        if (vmwareSiteArmIdValue != null && vmwareSiteArmIdValue.Type != JTokenType.Null)
-                                        {
-                                            string vmwareSiteArmIdInstance = ((string)vmwareSiteArmIdValue);
-                                            vMwareV2FabricSpecificRecoveryServicesProviderDetailsInstance.VMwareSiteArmId = vmwareSiteArmIdInstance;
-                                        }
-                                        
-                                        JToken srsServiceEndpointValue = customDetailsValue["srsServiceEndpoint"];
-                                        if (srsServiceEndpointValue != null && srsServiceEndpointValue.Type != JTokenType.Null)
-                                        {
-                                            string srsServiceEndpointInstance = ((string)srsServiceEndpointValue);
-                                            vMwareV2FabricSpecificRecoveryServicesProviderDetailsInstance.SrsServiceEndpoint = srsServiceEndpointInstance;
-                                        }
-                                        
-                                        JToken instanceTypeValue = customDetailsValue["instanceType"];
-                                        if (instanceTypeValue != null && instanceTypeValue.Type != JTokenType.Null)
-                                        {
-                                            string instanceTypeInstance = ((string)instanceTypeValue);
-                                            vMwareV2FabricSpecificRecoveryServicesProviderDetailsInstance.InstanceType = instanceTypeInstance;
-                                        }
-                                        propertiesInstance.CustomDetails = vMwareV2FabricSpecificRecoveryServicesProviderDetailsInstance;
+                                        string tenantIdInstance = ((string)tenantIdValue);
+                                        identityDetailsInstance.TenantId = tenantIdInstance;
+                                    }
+                                    
+                                    JToken applicationIdValue = identityDetailsValue["applicationId"];
+                                    if (applicationIdValue != null && applicationIdValue.Type != JTokenType.Null)
+                                    {
+                                        string applicationIdInstance = ((string)applicationIdValue);
+                                        identityDetailsInstance.ApplicationId = applicationIdInstance;
+                                    }
+                                    
+                                    JToken objectIdValue = identityDetailsValue["objectId"];
+                                    if (objectIdValue != null && objectIdValue.Type != JTokenType.Null)
+                                    {
+                                        string objectIdInstance = ((string)objectIdValue);
+                                        identityDetailsInstance.ObjectId = objectIdInstance;
+                                    }
+                                    
+                                    JToken audienceValue = identityDetailsValue["audience"];
+                                    if (audienceValue != null && audienceValue.Type != JTokenType.Null)
+                                    {
+                                        string audienceInstance = ((string)audienceValue);
+                                        identityDetailsInstance.Audience = audienceInstance;
+                                    }
+                                    
+                                    JToken aadAuthorityValue = identityDetailsValue["aadAuthority"];
+                                    if (aadAuthorityValue != null && aadAuthorityValue.Type != JTokenType.Null)
+                                    {
+                                        string aadAuthorityInstance = ((string)aadAuthorityValue);
+                                        identityDetailsInstance.AadAuthority = aadAuthorityInstance;
                                     }
                                 }
                             }
@@ -3332,35 +3362,45 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken customDetailsValue = propertiesValue["customDetails"];
-                                        if (customDetailsValue != null && customDetailsValue.Type != JTokenType.Null)
+                                        JToken identityDetailsValue = propertiesValue["identityDetails"];
+                                        if (identityDetailsValue != null && identityDetailsValue.Type != JTokenType.Null)
                                         {
-                                            string typeName = ((string)customDetailsValue["instanceType"]);
-                                            if (typeName == "VMwareV2")
+                                            IdentityProviderDetails identityDetailsInstance = new IdentityProviderDetails();
+                                            propertiesInstance.IdentityDetails = identityDetailsInstance;
+                                            
+                                            JToken tenantIdValue = identityDetailsValue["tenantId"];
+                                            if (tenantIdValue != null && tenantIdValue.Type != JTokenType.Null)
                                             {
-                                                VMwareV2FabricSpecificRecoveryServicesProviderDetails vMwareV2FabricSpecificRecoveryServicesProviderDetailsInstance = new VMwareV2FabricSpecificRecoveryServicesProviderDetails();
-                                                
-                                                JToken vmwareSiteArmIdValue = customDetailsValue["vmwareSiteArmId"];
-                                                if (vmwareSiteArmIdValue != null && vmwareSiteArmIdValue.Type != JTokenType.Null)
-                                                {
-                                                    string vmwareSiteArmIdInstance = ((string)vmwareSiteArmIdValue);
-                                                    vMwareV2FabricSpecificRecoveryServicesProviderDetailsInstance.VMwareSiteArmId = vmwareSiteArmIdInstance;
-                                                }
-                                                
-                                                JToken srsServiceEndpointValue = customDetailsValue["srsServiceEndpoint"];
-                                                if (srsServiceEndpointValue != null && srsServiceEndpointValue.Type != JTokenType.Null)
-                                                {
-                                                    string srsServiceEndpointInstance = ((string)srsServiceEndpointValue);
-                                                    vMwareV2FabricSpecificRecoveryServicesProviderDetailsInstance.SrsServiceEndpoint = srsServiceEndpointInstance;
-                                                }
-                                                
-                                                JToken instanceTypeValue = customDetailsValue["instanceType"];
-                                                if (instanceTypeValue != null && instanceTypeValue.Type != JTokenType.Null)
-                                                {
-                                                    string instanceTypeInstance = ((string)instanceTypeValue);
-                                                    vMwareV2FabricSpecificRecoveryServicesProviderDetailsInstance.InstanceType = instanceTypeInstance;
-                                                }
-                                                propertiesInstance.CustomDetails = vMwareV2FabricSpecificRecoveryServicesProviderDetailsInstance;
+                                                string tenantIdInstance = ((string)tenantIdValue);
+                                                identityDetailsInstance.TenantId = tenantIdInstance;
+                                            }
+                                            
+                                            JToken applicationIdValue = identityDetailsValue["applicationId"];
+                                            if (applicationIdValue != null && applicationIdValue.Type != JTokenType.Null)
+                                            {
+                                                string applicationIdInstance = ((string)applicationIdValue);
+                                                identityDetailsInstance.ApplicationId = applicationIdInstance;
+                                            }
+                                            
+                                            JToken objectIdValue = identityDetailsValue["objectId"];
+                                            if (objectIdValue != null && objectIdValue.Type != JTokenType.Null)
+                                            {
+                                                string objectIdInstance = ((string)objectIdValue);
+                                                identityDetailsInstance.ObjectId = objectIdInstance;
+                                            }
+                                            
+                                            JToken audienceValue = identityDetailsValue["audience"];
+                                            if (audienceValue != null && audienceValue.Type != JTokenType.Null)
+                                            {
+                                                string audienceInstance = ((string)audienceValue);
+                                                identityDetailsInstance.Audience = audienceInstance;
+                                            }
+                                            
+                                            JToken aadAuthorityValue = identityDetailsValue["aadAuthority"];
+                                            if (aadAuthorityValue != null && aadAuthorityValue.Type != JTokenType.Null)
+                                            {
+                                                string aadAuthorityInstance = ((string)aadAuthorityValue);
+                                                identityDetailsInstance.AadAuthority = aadAuthorityInstance;
                                             }
                                         }
                                     }
@@ -3918,35 +3958,45 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken customDetailsValue = propertiesValue["customDetails"];
-                                        if (customDetailsValue != null && customDetailsValue.Type != JTokenType.Null)
+                                        JToken identityDetailsValue = propertiesValue["identityDetails"];
+                                        if (identityDetailsValue != null && identityDetailsValue.Type != JTokenType.Null)
                                         {
-                                            string typeName = ((string)customDetailsValue["instanceType"]);
-                                            if (typeName == "VMwareV2")
+                                            IdentityProviderDetails identityDetailsInstance = new IdentityProviderDetails();
+                                            propertiesInstance.IdentityDetails = identityDetailsInstance;
+                                            
+                                            JToken tenantIdValue = identityDetailsValue["tenantId"];
+                                            if (tenantIdValue != null && tenantIdValue.Type != JTokenType.Null)
                                             {
-                                                VMwareV2FabricSpecificRecoveryServicesProviderDetails vMwareV2FabricSpecificRecoveryServicesProviderDetailsInstance = new VMwareV2FabricSpecificRecoveryServicesProviderDetails();
-                                                
-                                                JToken vmwareSiteArmIdValue = customDetailsValue["vmwareSiteArmId"];
-                                                if (vmwareSiteArmIdValue != null && vmwareSiteArmIdValue.Type != JTokenType.Null)
-                                                {
-                                                    string vmwareSiteArmIdInstance = ((string)vmwareSiteArmIdValue);
-                                                    vMwareV2FabricSpecificRecoveryServicesProviderDetailsInstance.VMwareSiteArmId = vmwareSiteArmIdInstance;
-                                                }
-                                                
-                                                JToken srsServiceEndpointValue = customDetailsValue["srsServiceEndpoint"];
-                                                if (srsServiceEndpointValue != null && srsServiceEndpointValue.Type != JTokenType.Null)
-                                                {
-                                                    string srsServiceEndpointInstance = ((string)srsServiceEndpointValue);
-                                                    vMwareV2FabricSpecificRecoveryServicesProviderDetailsInstance.SrsServiceEndpoint = srsServiceEndpointInstance;
-                                                }
-                                                
-                                                JToken instanceTypeValue = customDetailsValue["instanceType"];
-                                                if (instanceTypeValue != null && instanceTypeValue.Type != JTokenType.Null)
-                                                {
-                                                    string instanceTypeInstance = ((string)instanceTypeValue);
-                                                    vMwareV2FabricSpecificRecoveryServicesProviderDetailsInstance.InstanceType = instanceTypeInstance;
-                                                }
-                                                propertiesInstance.CustomDetails = vMwareV2FabricSpecificRecoveryServicesProviderDetailsInstance;
+                                                string tenantIdInstance = ((string)tenantIdValue);
+                                                identityDetailsInstance.TenantId = tenantIdInstance;
+                                            }
+                                            
+                                            JToken applicationIdValue = identityDetailsValue["applicationId"];
+                                            if (applicationIdValue != null && applicationIdValue.Type != JTokenType.Null)
+                                            {
+                                                string applicationIdInstance = ((string)applicationIdValue);
+                                                identityDetailsInstance.ApplicationId = applicationIdInstance;
+                                            }
+                                            
+                                            JToken objectIdValue = identityDetailsValue["objectId"];
+                                            if (objectIdValue != null && objectIdValue.Type != JTokenType.Null)
+                                            {
+                                                string objectIdInstance = ((string)objectIdValue);
+                                                identityDetailsInstance.ObjectId = objectIdInstance;
+                                            }
+                                            
+                                            JToken audienceValue = identityDetailsValue["audience"];
+                                            if (audienceValue != null && audienceValue.Type != JTokenType.Null)
+                                            {
+                                                string audienceInstance = ((string)audienceValue);
+                                                identityDetailsInstance.Audience = audienceInstance;
+                                            }
+                                            
+                                            JToken aadAuthorityValue = identityDetailsValue["aadAuthority"];
+                                            if (aadAuthorityValue != null && aadAuthorityValue.Type != JTokenType.Null)
+                                            {
+                                                string aadAuthorityInstance = ((string)aadAuthorityValue);
+                                                identityDetailsInstance.AadAuthority = aadAuthorityInstance;
                                             }
                                         }
                                     }

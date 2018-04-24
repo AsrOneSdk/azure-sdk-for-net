@@ -26,13 +26,38 @@ namespace SiteRecovery.Tests.ScenarioTests
 {
     public class MigrationTests : SiteRecoveryTestsBase
     {
-        private string vmwareFabricName = "vmwarefabric1";
-        private string vmwareContainerName = "vmwarefabric1-cloud";
-        private string azureFabricName = "azurefabric-sea";
-        private string azureContainerName = "azurefabric-sea-cloud";
-        private string vmwareDraName = "vmwaredra1";
-        private string vmwarePolicyName = "vmwarepolicy1";
-        private string containerMappingName = "vmwaremapping1";
+        // VMware fabric input
+        private const string VMwareFabricName = "vmwarefabric1";
+        private const string VMwareContainerName = "vmwarefabric1-cloud";
+        private const string VMwareSiteId = "/subscriptions/sub123/resourceGroups/rg123/providers/Microsoft.VMware/sites/site123";
+
+        // Azure fabric input.
+        private const string AzureFabricName = "azurefabric-sea";
+        private const string AzureContainerName = "azurefabric-sea-cloud";
+        private const string AzureFabricLocation = "Southeast Asia";
+
+        // VMware DRA input.
+        private const string VMwareDraName = "vmwaredra1";
+        private const string TenantId = "72f988bf-86f1-41af-91ab-2d7cd011db47";
+        private const string ApplicationId = "6d3522b5-e5ee-429d-ba62-0c0866bbc6f2";
+        private const string ObjectId = "771b8f96-a189-40b6-a7a0-bca3db0e76d1";
+        private const string Audience = "https://GSINHA-Z230";
+        private const string AadAuthority = "https://login.microsoftonline.com";
+
+        // VMware policy input.
+        private const string VMwarePolicyName = "vmwarepolicy1";
+        private const int CrashInterval = 15;
+        private const int AppInterval = 60;
+        private const int RecoveryPointHistory = 60 * 24;
+
+        // Cloud pairing input.
+        private const string ContainerMappingName = "vmwaremapping1";
+        private const string KeyVaultArmId = "/subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/TestRG1/providers/Microsoft.KeyVault/vaults/TestKV1";
+        private const string KeyVaultUri = "https://%COMPUTERNAME%-targetkv.vault.azure.net";
+        private const string StorageAccountArmId = "/subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/TestRG1/providers/Microsoft.Storage/storageAccounts/TestSA1";
+        private const string StorageAccountSasSecretName = "something";
+        private const string ServiceBusConnectionStringSecretName = "SBusRootManageSharedAccessKey";
+
 
         [Fact]
         public void Migration_Initialize()
@@ -51,27 +76,30 @@ namespace SiteRecovery.Tests.ScenarioTests
                         {
                             CustomDetails = new VMwareV2FabricCreationInput()
                             {
-                                InstanceType = "VMwareV2"
+                                InstanceType = "VMwareV2",
+                                VMwareSiteArmId = VMwareSiteId
                             }
                         }
                     };
-                    client.Fabrics.Create(vmwareFabricName, vmwareFabricInput, RequestHeaders);
+                    client.Fabrics.Create(VMwareFabricName, vmwareFabricInput, RequestHeaders);
 
                     // Create VMware DRA.
                     var vmwareDraInput = new RecoveryServicesProviderCreationInput()
                     {
                         Properties = new RecoveryServicesProviderCreationInputProperties()
                         {
-                            MachineName = vmwareDraName,
-                            CustomDetails = new VMwareV2RecoveryServicesProviderCreationInput()
+                            MachineName = VMwareDraName,
+                            IdentityInput = new IdentityProviderDetails()
                             {
-                                VMwareSiteArmId = "randomsiteid",
-                                InstanceType = "VMwareV2"
-
-                            }
+                                TenantId = TenantId,
+                                ApplicationId = ApplicationId,
+                                ObjectId = ObjectId,
+                                Audience = Audience,
+                                AadAuthority = AadAuthority
+                            } 
                         }
                     };
-                    client.RecoveryServicesProvider.Create(vmwareFabricName, vmwareDraName, vmwareDraInput, RequestHeaders);
+                    client.RecoveryServicesProvider.Create(VMwareFabricName, VMwareDraName, vmwareDraInput, RequestHeaders);
 
                     // Create VMware container.
                     var vmwareContainerInput = new CreateProtectionContainerInput()
@@ -87,7 +115,7 @@ namespace SiteRecovery.Tests.ScenarioTests
                             }
                         }
                     };
-                    client.ProtectionContainer.Create(vmwareFabricName, vmwareContainerName, vmwareContainerInput, RequestHeaders);
+                    client.ProtectionContainer.Create(VMwareFabricName, VMwareContainerName, vmwareContainerInput, RequestHeaders);
                 }
                 catch (Exception)
                 {
@@ -117,11 +145,11 @@ namespace SiteRecovery.Tests.ScenarioTests
                             CustomDetails = new AzureFabricCreationInput()
                             {
                                 InstanceType = "Azure",
-                                Location = "Southeast Asia"
+                                Location = AzureFabricLocation
                             }
                         }
                     };
-                    client.Fabrics.Create(azureFabricName, azureFabricInput, RequestHeaders);
+                    client.Fabrics.Create(AzureFabricName, azureFabricInput, RequestHeaders);
 
                     // Create Azure container.
                     var azureContainerInput = new CreateProtectionContainerInput()
@@ -137,7 +165,7 @@ namespace SiteRecovery.Tests.ScenarioTests
                             }
                         }
                     };
-                    client.ProtectionContainer.Create(azureFabricName, azureContainerName, azureContainerInput, RequestHeaders);
+                    client.ProtectionContainer.Create(AzureFabricName, AzureContainerName, azureContainerInput, RequestHeaders);
 
                     // Create VMware policy.
                     var vmwarePolicyInput = new CreatePolicyInput()
@@ -146,19 +174,19 @@ namespace SiteRecovery.Tests.ScenarioTests
                         {
                             ProviderSpecificInput = new VMwareCbtPolicyCreationInput()
                             {
-                                RecoveryPointHistoryInMinutes = 24 * 60,
-                                CrashConsistentFrequencyInMinutes = 60,
-                                AppConsistentFrequencyInMinutes = 60
+                                RecoveryPointHistoryInMinutes = RecoveryPointHistory,
+                                CrashConsistentFrequencyInMinutes = CrashInterval,
+                                AppConsistentFrequencyInMinutes = AppInterval
                             }
                         }
                     };
-                    client.Policies.Create(vmwarePolicyName, vmwarePolicyInput, RequestHeaders);
+                    client.Policies.Create(VMwarePolicyName, vmwarePolicyInput, RequestHeaders);
 
                     // Get the required entities.
                     var fabrics = client.Fabrics.List(RequestHeaders).Fabrics.ToList();
-                    var vmwareContainer = client.ProtectionContainer.List(vmwareFabricName, RequestHeaders).ProtectionContainers.Single();
-                    var azureContainer = client.ProtectionContainer.List(azureFabricName, RequestHeaders).ProtectionContainers.Single();
-                    var vmwarePolicy = client.Policies.List(RequestHeaders).Policies.Where(x => x.Name == vmwarePolicyName).Single();
+                    var vmwareContainer = client.ProtectionContainer.List(VMwareFabricName, RequestHeaders).ProtectionContainers.Single();
+                    var azureContainer = client.ProtectionContainer.List(AzureFabricName, RequestHeaders).ProtectionContainers.Single();
+                    var vmwarePolicy = client.Policies.List(RequestHeaders).Policies.Where(x => x.Name == VMwarePolicyName).Single();
 
                     // Create container mappping.
                     var mappingInput = new CreateProtectionContainerMappingInput
@@ -169,23 +197,23 @@ namespace SiteRecovery.Tests.ScenarioTests
                             TargetProtectionContainerId = azureContainer.Id,
                             ProviderSpecificInput = new VMwareCbtPolicyContainerMappingInput()
                             {
-                                KeyVaultArmId = "KVARMID",
-                                KeyVaultUri = "https://%COMPUTERNAME%-targetkv.vault.azure.net",
-                                StorageAccountArmId = "something",
-                                StorageAccountSasSecretName = "something",
-                                ServiceBusConnectionStringSecretName = "SBusRootManageSharedAccessKey"
+                                KeyVaultArmId = KeyVaultArmId,
+                                KeyVaultUri = KeyVaultUri,
+                                StorageAccountArmId = StorageAccountArmId,
+                                StorageAccountSasSecretName = StorageAccountSasSecretName,
+                                ServiceBusConnectionStringSecretName = ServiceBusConnectionStringSecretName
                             }
                         }
                     };
                     client.ProtectionContainerMapping.ConfigureProtection(
-                        vmwareFabricName,
-                        vmwareContainerName,
-                        containerMappingName,
+                        VMwareFabricName,
+                        VMwareContainerName,
+                        ContainerMappingName,
                         mappingInput,
                         RequestHeaders);
 
                     // Get all mapings.
-                    var mappings = client.ProtectionContainerMapping.List(vmwareFabricName, azureContainerName, RequestHeaders);
+                    var mappings = client.ProtectionContainerMapping.List(VMwareFabricName, AzureContainerName, RequestHeaders);
                 }
                 catch (Exception)
                 {
@@ -205,19 +233,19 @@ namespace SiteRecovery.Tests.ScenarioTests
                     context.Start();
                     var client = GetSiteRecoveryClient(CustomHttpHandler, "Migration");
                     var vmwareContainer = client.ProtectionContainer
-                        .List(vmwareFabricName, RequestHeaders)
+                        .List(VMwareFabricName, RequestHeaders)
                         .ProtectionContainers
                         .Single();
 
                     // Get all items.
                     var items = client.MigrationItem.List(
-                        vmwareFabricName,
+                        VMwareFabricName,
                         vmwareContainer.Name,
                         RequestHeaders);
 
                     // Get single item.
                     var migItem = client.MigrationItem.Get(
-                        vmwareFabricName,
+                        VMwareFabricName,
                         vmwareContainer.Name,
                         "vmwareMigItem1",
                         RequestHeaders);
@@ -241,13 +269,13 @@ namespace SiteRecovery.Tests.ScenarioTests
                     var client = GetSiteRecoveryClient(CustomHttpHandler, "Migration");
 
                     var vmwareContainer = client.ProtectionContainer
-                        .List(vmwareFabricName, RequestHeaders)
+                        .List(VMwareFabricName, RequestHeaders)
                         .ProtectionContainers
                         .Single();
                     var vmwarePolicy = client.Policies
                         .List(RequestHeaders)
                         .Policies
-                        .Where(x => x.Name == vmwarePolicyName)
+                        .Where(x => x.Name == VMwarePolicyName)
                         .Single();
 
                     var enableMigrationInput = new EnableMigrationInput
@@ -264,7 +292,7 @@ namespace SiteRecovery.Tests.ScenarioTests
                     };
 
                     var response = client.MigrationItem.EnableMigration(
-                        vmwareFabricName,
+                        VMwareFabricName,
                         vmwareContainer.Name,
                         "vmwareMigItem1",
                         enableMigrationInput,
@@ -272,7 +300,7 @@ namespace SiteRecovery.Tests.ScenarioTests
 
                     // Get all items.
                     var items = client.MigrationItem.List(
-                        vmwareFabricName,
+                        VMwareFabricName,
                         vmwareContainer.Name,
                         RequestHeaders);
                 }

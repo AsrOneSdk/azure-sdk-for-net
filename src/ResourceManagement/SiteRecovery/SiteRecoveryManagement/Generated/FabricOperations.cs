@@ -375,6 +375,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                             customDetailsValue["instanceType"] = "VMwareV2";
                             VMwareV2FabricCreationInput derived2 = ((VMwareV2FabricCreationInput)input.Properties.CustomDetails);
                             
+                            if (derived2.VMwareSiteArmId != null)
+                            {
+                                customDetailsValue["vmwareSiteArmId"] = derived2.VMwareSiteArmId;
+                            }
+                            
                             if (derived2.InstanceType != null)
                             {
                                 customDetailsValue["instanceType"] = derived2.InstanceType;
@@ -3525,6 +3530,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     {
                                         VMwareV2FabricSpecificDetails vMwareV2FabricSpecificDetailsInstance = new VMwareV2FabricSpecificDetails();
                                         
+                                        JToken vmwareSiteArmIdValue = customDetailsValue["vmwareSiteArmId"];
+                                        if (vmwareSiteArmIdValue != null && vmwareSiteArmIdValue.Type != JTokenType.Null)
+                                        {
+                                            string vmwareSiteArmIdInstance = ((string)vmwareSiteArmIdValue);
+                                            vMwareV2FabricSpecificDetailsInstance.VMwareSiteArmId = vmwareSiteArmIdInstance;
+                                        }
+                                        
+                                        JToken srsServiceEndpointValue = customDetailsValue["srsServiceEndpoint"];
+                                        if (srsServiceEndpointValue != null && srsServiceEndpointValue.Type != JTokenType.Null)
+                                        {
+                                            string srsServiceEndpointInstance = ((string)srsServiceEndpointValue);
+                                            vMwareV2FabricSpecificDetailsInstance.SrsServiceEndpoint = srsServiceEndpointInstance;
+                                        }
+                                        
                                         JToken instanceTypeValue5 = customDetailsValue["instanceType"];
                                         if (instanceTypeValue5 != null && instanceTypeValue5.Type != JTokenType.Null)
                                         {
@@ -5619,6 +5638,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     if (typeName == "VMwareV2")
                                     {
                                         VMwareV2FabricSpecificDetails vMwareV2FabricSpecificDetailsInstance = new VMwareV2FabricSpecificDetails();
+                                        
+                                        JToken vmwareSiteArmIdValue = customDetailsValue["vmwareSiteArmId"];
+                                        if (vmwareSiteArmIdValue != null && vmwareSiteArmIdValue.Type != JTokenType.Null)
+                                        {
+                                            string vmwareSiteArmIdInstance = ((string)vmwareSiteArmIdValue);
+                                            vMwareV2FabricSpecificDetailsInstance.VMwareSiteArmId = vmwareSiteArmIdInstance;
+                                        }
+                                        
+                                        JToken srsServiceEndpointValue = customDetailsValue["srsServiceEndpoint"];
+                                        if (srsServiceEndpointValue != null && srsServiceEndpointValue.Type != JTokenType.Null)
+                                        {
+                                            string srsServiceEndpointInstance = ((string)srsServiceEndpointValue);
+                                            vMwareV2FabricSpecificDetailsInstance.SrsServiceEndpoint = srsServiceEndpointInstance;
+                                        }
                                         
                                         JToken instanceTypeValue5 = customDetailsValue["instanceType"];
                                         if (instanceTypeValue5 != null && instanceTypeValue5.Type != JTokenType.Null)
@@ -7773,6 +7806,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     if (typeName == "VMwareV2")
                                     {
                                         VMwareV2FabricSpecificDetails vMwareV2FabricSpecificDetailsInstance = new VMwareV2FabricSpecificDetails();
+                                        
+                                        JToken vmwareSiteArmIdValue = customDetailsValue["vmwareSiteArmId"];
+                                        if (vmwareSiteArmIdValue != null && vmwareSiteArmIdValue.Type != JTokenType.Null)
+                                        {
+                                            string vmwareSiteArmIdInstance = ((string)vmwareSiteArmIdValue);
+                                            vMwareV2FabricSpecificDetailsInstance.VMwareSiteArmId = vmwareSiteArmIdInstance;
+                                        }
+                                        
+                                        JToken srsServiceEndpointValue = customDetailsValue["srsServiceEndpoint"];
+                                        if (srsServiceEndpointValue != null && srsServiceEndpointValue.Type != JTokenType.Null)
+                                        {
+                                            string srsServiceEndpointInstance = ((string)srsServiceEndpointValue);
+                                            vMwareV2FabricSpecificDetailsInstance.SrsServiceEndpoint = srsServiceEndpointInstance;
+                                        }
                                         
                                         JToken instanceTypeValue5 = customDetailsValue["instanceType"];
                                         if (instanceTypeValue5 != null && instanceTypeValue5.Type != JTokenType.Null)
@@ -10159,6 +10206,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     {
                                         VMwareV2FabricSpecificDetails vMwareV2FabricSpecificDetailsInstance = new VMwareV2FabricSpecificDetails();
                                         
+                                        JToken vmwareSiteArmIdValue = customDetailsValue["vmwareSiteArmId"];
+                                        if (vmwareSiteArmIdValue != null && vmwareSiteArmIdValue.Type != JTokenType.Null)
+                                        {
+                                            string vmwareSiteArmIdInstance = ((string)vmwareSiteArmIdValue);
+                                            vMwareV2FabricSpecificDetailsInstance.VMwareSiteArmId = vmwareSiteArmIdInstance;
+                                        }
+                                        
+                                        JToken srsServiceEndpointValue = customDetailsValue["srsServiceEndpoint"];
+                                        if (srsServiceEndpointValue != null && srsServiceEndpointValue.Type != JTokenType.Null)
+                                        {
+                                            string srsServiceEndpointInstance = ((string)srsServiceEndpointValue);
+                                            vMwareV2FabricSpecificDetailsInstance.SrsServiceEndpoint = srsServiceEndpointInstance;
+                                        }
+                                        
                                         JToken instanceTypeValue5 = customDetailsValue["instanceType"];
                                         if (instanceTypeValue5 != null && instanceTypeValue5.Type != JTokenType.Null)
                                         {
@@ -12081,6 +12142,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     if (typeName == "VMwareV2")
                                     {
                                         VMwareV2FabricSpecificDetails vMwareV2FabricSpecificDetailsInstance = new VMwareV2FabricSpecificDetails();
+                                        
+                                        JToken vmwareSiteArmIdValue = customDetailsValue["vmwareSiteArmId"];
+                                        if (vmwareSiteArmIdValue != null && vmwareSiteArmIdValue.Type != JTokenType.Null)
+                                        {
+                                            string vmwareSiteArmIdInstance = ((string)vmwareSiteArmIdValue);
+                                            vMwareV2FabricSpecificDetailsInstance.VMwareSiteArmId = vmwareSiteArmIdInstance;
+                                        }
+                                        
+                                        JToken srsServiceEndpointValue = customDetailsValue["srsServiceEndpoint"];
+                                        if (srsServiceEndpointValue != null && srsServiceEndpointValue.Type != JTokenType.Null)
+                                        {
+                                            string srsServiceEndpointInstance = ((string)srsServiceEndpointValue);
+                                            vMwareV2FabricSpecificDetailsInstance.SrsServiceEndpoint = srsServiceEndpointInstance;
+                                        }
                                         
                                         JToken instanceTypeValue5 = customDetailsValue["instanceType"];
                                         if (instanceTypeValue5 != null && instanceTypeValue5.Type != JTokenType.Null)
@@ -14033,6 +14108,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             if (typeName == "VMwareV2")
                                             {
                                                 VMwareV2FabricSpecificDetails vMwareV2FabricSpecificDetailsInstance = new VMwareV2FabricSpecificDetails();
+                                                
+                                                JToken vmwareSiteArmIdValue = customDetailsValue["vmwareSiteArmId"];
+                                                if (vmwareSiteArmIdValue != null && vmwareSiteArmIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string vmwareSiteArmIdInstance = ((string)vmwareSiteArmIdValue);
+                                                    vMwareV2FabricSpecificDetailsInstance.VMwareSiteArmId = vmwareSiteArmIdInstance;
+                                                }
+                                                
+                                                JToken srsServiceEndpointValue = customDetailsValue["srsServiceEndpoint"];
+                                                if (srsServiceEndpointValue != null && srsServiceEndpointValue.Type != JTokenType.Null)
+                                                {
+                                                    string srsServiceEndpointInstance = ((string)srsServiceEndpointValue);
+                                                    vMwareV2FabricSpecificDetailsInstance.SrsServiceEndpoint = srsServiceEndpointInstance;
+                                                }
                                                 
                                                 JToken instanceTypeValue5 = customDetailsValue["instanceType"];
                                                 if (instanceTypeValue5 != null && instanceTypeValue5.Type != JTokenType.Null)
