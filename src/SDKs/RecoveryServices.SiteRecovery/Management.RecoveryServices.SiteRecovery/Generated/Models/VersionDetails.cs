@@ -14,7 +14,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
     using System.Linq;
 
     /// <summary>
-    /// Version related deatils.
+    /// Version related details.
     /// </summary>
     public partial class VersionDetails
     {

@@ -32,7 +32,9 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         [EnumMember(Value = "FabricInfrastructure")]
         FabricInfrastructure,
         [EnumMember(Value = "VersionExpiry")]
-        VersionExpiry
+        VersionExpiry,
+        [EnumMember(Value = "AgentAutoUpdate")]
+        AgentAutoUpdate
     }
     internal static class HealthErrorCategoryEnumExtension
     {
@@ -57,6 +59,8 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
                     return "FabricInfrastructure";
                 case HealthErrorCategory.VersionExpiry:
                     return "VersionExpiry";
+                case HealthErrorCategory.AgentAutoUpdate:
+                    return "AgentAutoUpdate";
             }
             return null;
         }
@@ -77,6 +81,8 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
                     return HealthErrorCategory.FabricInfrastructure;
                 case "VersionExpiry":
                     return HealthErrorCategory.VersionExpiry;
+                case "AgentAutoUpdate":
+                    return HealthErrorCategory.AgentAutoUpdate;
             }
             return null;
         }
