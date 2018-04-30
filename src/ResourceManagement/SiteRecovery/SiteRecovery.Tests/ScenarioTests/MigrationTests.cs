@@ -89,14 +89,22 @@ namespace SiteRecovery.Tests.ScenarioTests
                         Properties = new RecoveryServicesProviderCreationInputProperties()
                         {
                             MachineName = VMwareDraName,
-                            IdentityInput = new IdentityProviderDetails()
+                            AuthenticationIdentityInput = new IdentityProviderDetails()
                             {
                                 TenantId = TenantId,
                                 ApplicationId = ApplicationId,
                                 ObjectId = ObjectId,
                                 Audience = Audience,
                                 AadAuthority = AadAuthority
-                            } 
+                            },
+                            ResourceAccessIdentityInput = new IdentityProviderDetails()
+                            {
+                                TenantId = TenantId,
+                                ApplicationId = ApplicationId,
+                                ObjectId = ObjectId,
+                                Audience = Audience,
+                                AadAuthority = AadAuthority
+                            }
                         }
                     };
                     client.RecoveryServicesProvider.Create(VMwareFabricName, VMwareDraName, vmwareDraInput, RequestHeaders);

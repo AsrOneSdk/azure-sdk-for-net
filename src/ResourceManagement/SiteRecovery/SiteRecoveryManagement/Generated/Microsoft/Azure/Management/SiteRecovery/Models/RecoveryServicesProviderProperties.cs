@@ -43,6 +43,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._allowedScenarios = value; }
         }
         
+        private IdentityProviderDetails _authenticationIdentityInput;
+        
+        /// <summary>
+        /// Optional. Authentication identity provider details.
+        /// </summary>
+        public IdentityProviderDetails AuthenticationIdentityInput
+        {
+            get { return this._authenticationIdentityInput; }
+            set { this._authenticationIdentityInput = value; }
+        }
+        
         private string _connectionStatus;
         
         /// <summary>
@@ -97,17 +108,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         {
             get { return this._healthErrorDetails; }
             set { this._healthErrorDetails = value; }
-        }
-        
-        private IdentityProviderDetails _identityDetails;
-        
-        /// <summary>
-        /// Optional. Identity provider details.
-        /// </summary>
-        public IdentityProviderDetails IdentityDetails
-        {
-            get { return this._identityDetails; }
-            set { this._identityDetails = value; }
         }
         
         private System.DateTime? _lastHeartbeat;
@@ -175,6 +175,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         {
             get { return this._providerVersionState; }
             set { this._providerVersionState = value; }
+        }
+        
+        private IdentityProviderDetails _resourceAccessIdentityInput;
+        
+        /// <summary>
+        /// Optional. Resoure access identity provider details.
+        /// </summary>
+        public IdentityProviderDetails ResourceAccessIdentityInput
+        {
+            get { return this._resourceAccessIdentityInput; }
+            set { this._resourceAccessIdentityInput = value; }
         }
         
         private string _serverVersion;

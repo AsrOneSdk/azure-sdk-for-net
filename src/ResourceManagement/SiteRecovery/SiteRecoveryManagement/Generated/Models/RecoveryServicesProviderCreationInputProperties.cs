@@ -30,15 +30,15 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class RecoveryServicesProviderCreationInputProperties
     {
-        private IdentityProviderDetails _identityInput;
+        private IdentityProviderDetails _authenticationIdentityInput;
         
         /// <summary>
-        /// Optional. Identity provider details.
+        /// Optional. Authentication identity provider input.
         /// </summary>
-        public IdentityProviderDetails IdentityInput
+        public IdentityProviderDetails AuthenticationIdentityInput
         {
-            get { return this._identityInput; }
-            set { this._identityInput = value; }
+            get { return this._authenticationIdentityInput; }
+            set { this._authenticationIdentityInput = value; }
         }
         
         private string _machineName;
@@ -50,6 +50,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         {
             get { return this._machineName; }
             set { this._machineName = value; }
+        }
+        
+        private IdentityProviderDetails _resourceAccessIdentityInput;
+        
+        /// <summary>
+        /// Optional. Resoure access identity provider input.
+        /// </summary>
+        public IdentityProviderDetails ResourceAccessIdentityInput
+        {
+            get { return this._resourceAccessIdentityInput; }
+            set { this._resourceAccessIdentityInput = value; }
         }
         
         /// <summary>

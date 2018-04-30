@@ -79,9 +79,9 @@ namespace Microsoft.Azure.Test
                 case "Migration":
                     SiteRecoveryTestsBase.MyVaultName = "hydratest";
                     SiteRecoveryTestsBase.VaultKey = "loMUdckuT9SEvpQKcSG07A==";
-                    SiteRecoveryTestsBase.MyResourceGroupName = "RecoveryServices-WHNOWF6LI6NM4B55QDIYR3YG3YAEZNTDUOWHPQX7NJB2LHDGTXJA-West-US";
-                    SiteRecoveryTestsBase.ResourceNamespace = "Microsoft.SiteRecoveryBVTD2";
-                    SiteRecoveryTestsBase.ResourceType = "RecoveryServicesVault";
+                    SiteRecoveryTestsBase.MyResourceGroupName = "hydratestrg";
+                    SiteRecoveryTestsBase.ResourceNamespace = "Microsoft.RecoveryServicesBVTD2";
+                    SiteRecoveryTestsBase.ResourceType = "Vaults";
 
                     environment = new RDFETestEnvironmentFactory().GetTestEnvironment();
                     environment.BaseUri = new Uri("https://localhost:8443/Rdfeproxy.svc");

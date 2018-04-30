@@ -189,34 +189,65 @@ namespace Microsoft.Azure.Management.SiteRecovery
                         propertiesValue["machineName"] = input.Properties.MachineName;
                     }
                     
-                    if (input.Properties.IdentityInput != null)
+                    if (input.Properties.AuthenticationIdentityInput != null)
                     {
-                        JObject identityInputValue = new JObject();
-                        propertiesValue["identityInput"] = identityInputValue;
+                        JObject authenticationIdentityInputValue = new JObject();
+                        propertiesValue["authenticationIdentityInput"] = authenticationIdentityInputValue;
                         
-                        if (input.Properties.IdentityInput.TenantId != null)
+                        if (input.Properties.AuthenticationIdentityInput.TenantId != null)
                         {
-                            identityInputValue["tenantId"] = input.Properties.IdentityInput.TenantId;
+                            authenticationIdentityInputValue["tenantId"] = input.Properties.AuthenticationIdentityInput.TenantId;
                         }
                         
-                        if (input.Properties.IdentityInput.ApplicationId != null)
+                        if (input.Properties.AuthenticationIdentityInput.ApplicationId != null)
                         {
-                            identityInputValue["applicationId"] = input.Properties.IdentityInput.ApplicationId;
+                            authenticationIdentityInputValue["applicationId"] = input.Properties.AuthenticationIdentityInput.ApplicationId;
                         }
                         
-                        if (input.Properties.IdentityInput.ObjectId != null)
+                        if (input.Properties.AuthenticationIdentityInput.ObjectId != null)
                         {
-                            identityInputValue["objectId"] = input.Properties.IdentityInput.ObjectId;
+                            authenticationIdentityInputValue["objectId"] = input.Properties.AuthenticationIdentityInput.ObjectId;
                         }
                         
-                        if (input.Properties.IdentityInput.Audience != null)
+                        if (input.Properties.AuthenticationIdentityInput.Audience != null)
                         {
-                            identityInputValue["audience"] = input.Properties.IdentityInput.Audience;
+                            authenticationIdentityInputValue["audience"] = input.Properties.AuthenticationIdentityInput.Audience;
                         }
                         
-                        if (input.Properties.IdentityInput.AadAuthority != null)
+                        if (input.Properties.AuthenticationIdentityInput.AadAuthority != null)
                         {
-                            identityInputValue["aadAuthority"] = input.Properties.IdentityInput.AadAuthority;
+                            authenticationIdentityInputValue["aadAuthority"] = input.Properties.AuthenticationIdentityInput.AadAuthority;
+                        }
+                    }
+                    
+                    if (input.Properties.ResourceAccessIdentityInput != null)
+                    {
+                        JObject resourceAccessIdentityInputValue = new JObject();
+                        propertiesValue["resourceAccessIdentityInput"] = resourceAccessIdentityInputValue;
+                        
+                        if (input.Properties.ResourceAccessIdentityInput.TenantId != null)
+                        {
+                            resourceAccessIdentityInputValue["tenantId"] = input.Properties.ResourceAccessIdentityInput.TenantId;
+                        }
+                        
+                        if (input.Properties.ResourceAccessIdentityInput.ApplicationId != null)
+                        {
+                            resourceAccessIdentityInputValue["applicationId"] = input.Properties.ResourceAccessIdentityInput.ApplicationId;
+                        }
+                        
+                        if (input.Properties.ResourceAccessIdentityInput.ObjectId != null)
+                        {
+                            resourceAccessIdentityInputValue["objectId"] = input.Properties.ResourceAccessIdentityInput.ObjectId;
+                        }
+                        
+                        if (input.Properties.ResourceAccessIdentityInput.Audience != null)
+                        {
+                            resourceAccessIdentityInputValue["audience"] = input.Properties.ResourceAccessIdentityInput.Audience;
+                        }
+                        
+                        if (input.Properties.ResourceAccessIdentityInput.AadAuthority != null)
+                        {
+                            resourceAccessIdentityInputValue["aadAuthority"] = input.Properties.ResourceAccessIdentityInput.AadAuthority;
                         }
                     }
                 }
@@ -1454,45 +1485,87 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     }
                                 }
                                 
-                                JToken identityDetailsValue = propertiesValue["identityDetails"];
-                                if (identityDetailsValue != null && identityDetailsValue.Type != JTokenType.Null)
+                                JToken authenticationIdentityDetailsValue = propertiesValue["authenticationIdentityDetails"];
+                                if (authenticationIdentityDetailsValue != null && authenticationIdentityDetailsValue.Type != JTokenType.Null)
                                 {
-                                    IdentityProviderDetails identityDetailsInstance = new IdentityProviderDetails();
-                                    propertiesInstance.IdentityDetails = identityDetailsInstance;
+                                    IdentityProviderDetails authenticationIdentityDetailsInstance = new IdentityProviderDetails();
+                                    propertiesInstance.AuthenticationIdentityInput = authenticationIdentityDetailsInstance;
                                     
-                                    JToken tenantIdValue = identityDetailsValue["tenantId"];
+                                    JToken tenantIdValue = authenticationIdentityDetailsValue["tenantId"];
                                     if (tenantIdValue != null && tenantIdValue.Type != JTokenType.Null)
                                     {
                                         string tenantIdInstance = ((string)tenantIdValue);
-                                        identityDetailsInstance.TenantId = tenantIdInstance;
+                                        authenticationIdentityDetailsInstance.TenantId = tenantIdInstance;
                                     }
                                     
-                                    JToken applicationIdValue = identityDetailsValue["applicationId"];
+                                    JToken applicationIdValue = authenticationIdentityDetailsValue["applicationId"];
                                     if (applicationIdValue != null && applicationIdValue.Type != JTokenType.Null)
                                     {
                                         string applicationIdInstance = ((string)applicationIdValue);
-                                        identityDetailsInstance.ApplicationId = applicationIdInstance;
+                                        authenticationIdentityDetailsInstance.ApplicationId = applicationIdInstance;
                                     }
                                     
-                                    JToken objectIdValue = identityDetailsValue["objectId"];
+                                    JToken objectIdValue = authenticationIdentityDetailsValue["objectId"];
                                     if (objectIdValue != null && objectIdValue.Type != JTokenType.Null)
                                     {
                                         string objectIdInstance = ((string)objectIdValue);
-                                        identityDetailsInstance.ObjectId = objectIdInstance;
+                                        authenticationIdentityDetailsInstance.ObjectId = objectIdInstance;
                                     }
                                     
-                                    JToken audienceValue = identityDetailsValue["audience"];
+                                    JToken audienceValue = authenticationIdentityDetailsValue["audience"];
                                     if (audienceValue != null && audienceValue.Type != JTokenType.Null)
                                     {
                                         string audienceInstance = ((string)audienceValue);
-                                        identityDetailsInstance.Audience = audienceInstance;
+                                        authenticationIdentityDetailsInstance.Audience = audienceInstance;
                                     }
                                     
-                                    JToken aadAuthorityValue = identityDetailsValue["aadAuthority"];
+                                    JToken aadAuthorityValue = authenticationIdentityDetailsValue["aadAuthority"];
                                     if (aadAuthorityValue != null && aadAuthorityValue.Type != JTokenType.Null)
                                     {
                                         string aadAuthorityInstance = ((string)aadAuthorityValue);
-                                        identityDetailsInstance.AadAuthority = aadAuthorityInstance;
+                                        authenticationIdentityDetailsInstance.AadAuthority = aadAuthorityInstance;
+                                    }
+                                }
+                                
+                                JToken resourceAccessIdentityDetailsValue = propertiesValue["resourceAccessIdentityDetails"];
+                                if (resourceAccessIdentityDetailsValue != null && resourceAccessIdentityDetailsValue.Type != JTokenType.Null)
+                                {
+                                    IdentityProviderDetails resourceAccessIdentityDetailsInstance = new IdentityProviderDetails();
+                                    propertiesInstance.ResourceAccessIdentityInput = resourceAccessIdentityDetailsInstance;
+                                    
+                                    JToken tenantIdValue2 = resourceAccessIdentityDetailsValue["tenantId"];
+                                    if (tenantIdValue2 != null && tenantIdValue2.Type != JTokenType.Null)
+                                    {
+                                        string tenantIdInstance2 = ((string)tenantIdValue2);
+                                        resourceAccessIdentityDetailsInstance.TenantId = tenantIdInstance2;
+                                    }
+                                    
+                                    JToken applicationIdValue2 = resourceAccessIdentityDetailsValue["applicationId"];
+                                    if (applicationIdValue2 != null && applicationIdValue2.Type != JTokenType.Null)
+                                    {
+                                        string applicationIdInstance2 = ((string)applicationIdValue2);
+                                        resourceAccessIdentityDetailsInstance.ApplicationId = applicationIdInstance2;
+                                    }
+                                    
+                                    JToken objectIdValue2 = resourceAccessIdentityDetailsValue["objectId"];
+                                    if (objectIdValue2 != null && objectIdValue2.Type != JTokenType.Null)
+                                    {
+                                        string objectIdInstance2 = ((string)objectIdValue2);
+                                        resourceAccessIdentityDetailsInstance.ObjectId = objectIdInstance2;
+                                    }
+                                    
+                                    JToken audienceValue2 = resourceAccessIdentityDetailsValue["audience"];
+                                    if (audienceValue2 != null && audienceValue2.Type != JTokenType.Null)
+                                    {
+                                        string audienceInstance2 = ((string)audienceValue2);
+                                        resourceAccessIdentityDetailsInstance.Audience = audienceInstance2;
+                                    }
+                                    
+                                    JToken aadAuthorityValue2 = resourceAccessIdentityDetailsValue["aadAuthority"];
+                                    if (aadAuthorityValue2 != null && aadAuthorityValue2.Type != JTokenType.Null)
+                                    {
+                                        string aadAuthorityInstance2 = ((string)aadAuthorityValue2);
+                                        resourceAccessIdentityDetailsInstance.AadAuthority = aadAuthorityInstance2;
                                     }
                                 }
                             }
@@ -2013,45 +2086,87 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     }
                                 }
                                 
-                                JToken identityDetailsValue = propertiesValue["identityDetails"];
-                                if (identityDetailsValue != null && identityDetailsValue.Type != JTokenType.Null)
+                                JToken authenticationIdentityDetailsValue = propertiesValue["authenticationIdentityDetails"];
+                                if (authenticationIdentityDetailsValue != null && authenticationIdentityDetailsValue.Type != JTokenType.Null)
                                 {
-                                    IdentityProviderDetails identityDetailsInstance = new IdentityProviderDetails();
-                                    propertiesInstance.IdentityDetails = identityDetailsInstance;
+                                    IdentityProviderDetails authenticationIdentityDetailsInstance = new IdentityProviderDetails();
+                                    propertiesInstance.AuthenticationIdentityInput = authenticationIdentityDetailsInstance;
                                     
-                                    JToken tenantIdValue = identityDetailsValue["tenantId"];
+                                    JToken tenantIdValue = authenticationIdentityDetailsValue["tenantId"];
                                     if (tenantIdValue != null && tenantIdValue.Type != JTokenType.Null)
                                     {
                                         string tenantIdInstance = ((string)tenantIdValue);
-                                        identityDetailsInstance.TenantId = tenantIdInstance;
+                                        authenticationIdentityDetailsInstance.TenantId = tenantIdInstance;
                                     }
                                     
-                                    JToken applicationIdValue = identityDetailsValue["applicationId"];
+                                    JToken applicationIdValue = authenticationIdentityDetailsValue["applicationId"];
                                     if (applicationIdValue != null && applicationIdValue.Type != JTokenType.Null)
                                     {
                                         string applicationIdInstance = ((string)applicationIdValue);
-                                        identityDetailsInstance.ApplicationId = applicationIdInstance;
+                                        authenticationIdentityDetailsInstance.ApplicationId = applicationIdInstance;
                                     }
                                     
-                                    JToken objectIdValue = identityDetailsValue["objectId"];
+                                    JToken objectIdValue = authenticationIdentityDetailsValue["objectId"];
                                     if (objectIdValue != null && objectIdValue.Type != JTokenType.Null)
                                     {
                                         string objectIdInstance = ((string)objectIdValue);
-                                        identityDetailsInstance.ObjectId = objectIdInstance;
+                                        authenticationIdentityDetailsInstance.ObjectId = objectIdInstance;
                                     }
                                     
-                                    JToken audienceValue = identityDetailsValue["audience"];
+                                    JToken audienceValue = authenticationIdentityDetailsValue["audience"];
                                     if (audienceValue != null && audienceValue.Type != JTokenType.Null)
                                     {
                                         string audienceInstance = ((string)audienceValue);
-                                        identityDetailsInstance.Audience = audienceInstance;
+                                        authenticationIdentityDetailsInstance.Audience = audienceInstance;
                                     }
                                     
-                                    JToken aadAuthorityValue = identityDetailsValue["aadAuthority"];
+                                    JToken aadAuthorityValue = authenticationIdentityDetailsValue["aadAuthority"];
                                     if (aadAuthorityValue != null && aadAuthorityValue.Type != JTokenType.Null)
                                     {
                                         string aadAuthorityInstance = ((string)aadAuthorityValue);
-                                        identityDetailsInstance.AadAuthority = aadAuthorityInstance;
+                                        authenticationIdentityDetailsInstance.AadAuthority = aadAuthorityInstance;
+                                    }
+                                }
+                                
+                                JToken resourceAccessIdentityDetailsValue = propertiesValue["resourceAccessIdentityDetails"];
+                                if (resourceAccessIdentityDetailsValue != null && resourceAccessIdentityDetailsValue.Type != JTokenType.Null)
+                                {
+                                    IdentityProviderDetails resourceAccessIdentityDetailsInstance = new IdentityProviderDetails();
+                                    propertiesInstance.ResourceAccessIdentityInput = resourceAccessIdentityDetailsInstance;
+                                    
+                                    JToken tenantIdValue2 = resourceAccessIdentityDetailsValue["tenantId"];
+                                    if (tenantIdValue2 != null && tenantIdValue2.Type != JTokenType.Null)
+                                    {
+                                        string tenantIdInstance2 = ((string)tenantIdValue2);
+                                        resourceAccessIdentityDetailsInstance.TenantId = tenantIdInstance2;
+                                    }
+                                    
+                                    JToken applicationIdValue2 = resourceAccessIdentityDetailsValue["applicationId"];
+                                    if (applicationIdValue2 != null && applicationIdValue2.Type != JTokenType.Null)
+                                    {
+                                        string applicationIdInstance2 = ((string)applicationIdValue2);
+                                        resourceAccessIdentityDetailsInstance.ApplicationId = applicationIdInstance2;
+                                    }
+                                    
+                                    JToken objectIdValue2 = resourceAccessIdentityDetailsValue["objectId"];
+                                    if (objectIdValue2 != null && objectIdValue2.Type != JTokenType.Null)
+                                    {
+                                        string objectIdInstance2 = ((string)objectIdValue2);
+                                        resourceAccessIdentityDetailsInstance.ObjectId = objectIdInstance2;
+                                    }
+                                    
+                                    JToken audienceValue2 = resourceAccessIdentityDetailsValue["audience"];
+                                    if (audienceValue2 != null && audienceValue2.Type != JTokenType.Null)
+                                    {
+                                        string audienceInstance2 = ((string)audienceValue2);
+                                        resourceAccessIdentityDetailsInstance.Audience = audienceInstance2;
+                                    }
+                                    
+                                    JToken aadAuthorityValue2 = resourceAccessIdentityDetailsValue["aadAuthority"];
+                                    if (aadAuthorityValue2 != null && aadAuthorityValue2.Type != JTokenType.Null)
+                                    {
+                                        string aadAuthorityInstance2 = ((string)aadAuthorityValue2);
+                                        resourceAccessIdentityDetailsInstance.AadAuthority = aadAuthorityInstance2;
                                     }
                                 }
                             }
@@ -3362,45 +3477,87 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken identityDetailsValue = propertiesValue["identityDetails"];
-                                        if (identityDetailsValue != null && identityDetailsValue.Type != JTokenType.Null)
+                                        JToken authenticationIdentityDetailsValue = propertiesValue["authenticationIdentityDetails"];
+                                        if (authenticationIdentityDetailsValue != null && authenticationIdentityDetailsValue.Type != JTokenType.Null)
                                         {
-                                            IdentityProviderDetails identityDetailsInstance = new IdentityProviderDetails();
-                                            propertiesInstance.IdentityDetails = identityDetailsInstance;
+                                            IdentityProviderDetails authenticationIdentityDetailsInstance = new IdentityProviderDetails();
+                                            propertiesInstance.AuthenticationIdentityInput = authenticationIdentityDetailsInstance;
                                             
-                                            JToken tenantIdValue = identityDetailsValue["tenantId"];
+                                            JToken tenantIdValue = authenticationIdentityDetailsValue["tenantId"];
                                             if (tenantIdValue != null && tenantIdValue.Type != JTokenType.Null)
                                             {
                                                 string tenantIdInstance = ((string)tenantIdValue);
-                                                identityDetailsInstance.TenantId = tenantIdInstance;
+                                                authenticationIdentityDetailsInstance.TenantId = tenantIdInstance;
                                             }
                                             
-                                            JToken applicationIdValue = identityDetailsValue["applicationId"];
+                                            JToken applicationIdValue = authenticationIdentityDetailsValue["applicationId"];
                                             if (applicationIdValue != null && applicationIdValue.Type != JTokenType.Null)
                                             {
                                                 string applicationIdInstance = ((string)applicationIdValue);
-                                                identityDetailsInstance.ApplicationId = applicationIdInstance;
+                                                authenticationIdentityDetailsInstance.ApplicationId = applicationIdInstance;
                                             }
                                             
-                                            JToken objectIdValue = identityDetailsValue["objectId"];
+                                            JToken objectIdValue = authenticationIdentityDetailsValue["objectId"];
                                             if (objectIdValue != null && objectIdValue.Type != JTokenType.Null)
                                             {
                                                 string objectIdInstance = ((string)objectIdValue);
-                                                identityDetailsInstance.ObjectId = objectIdInstance;
+                                                authenticationIdentityDetailsInstance.ObjectId = objectIdInstance;
                                             }
                                             
-                                            JToken audienceValue = identityDetailsValue["audience"];
+                                            JToken audienceValue = authenticationIdentityDetailsValue["audience"];
                                             if (audienceValue != null && audienceValue.Type != JTokenType.Null)
                                             {
                                                 string audienceInstance = ((string)audienceValue);
-                                                identityDetailsInstance.Audience = audienceInstance;
+                                                authenticationIdentityDetailsInstance.Audience = audienceInstance;
                                             }
                                             
-                                            JToken aadAuthorityValue = identityDetailsValue["aadAuthority"];
+                                            JToken aadAuthorityValue = authenticationIdentityDetailsValue["aadAuthority"];
                                             if (aadAuthorityValue != null && aadAuthorityValue.Type != JTokenType.Null)
                                             {
                                                 string aadAuthorityInstance = ((string)aadAuthorityValue);
-                                                identityDetailsInstance.AadAuthority = aadAuthorityInstance;
+                                                authenticationIdentityDetailsInstance.AadAuthority = aadAuthorityInstance;
+                                            }
+                                        }
+                                        
+                                        JToken resourceAccessIdentityDetailsValue = propertiesValue["resourceAccessIdentityDetails"];
+                                        if (resourceAccessIdentityDetailsValue != null && resourceAccessIdentityDetailsValue.Type != JTokenType.Null)
+                                        {
+                                            IdentityProviderDetails resourceAccessIdentityDetailsInstance = new IdentityProviderDetails();
+                                            propertiesInstance.ResourceAccessIdentityInput = resourceAccessIdentityDetailsInstance;
+                                            
+                                            JToken tenantIdValue2 = resourceAccessIdentityDetailsValue["tenantId"];
+                                            if (tenantIdValue2 != null && tenantIdValue2.Type != JTokenType.Null)
+                                            {
+                                                string tenantIdInstance2 = ((string)tenantIdValue2);
+                                                resourceAccessIdentityDetailsInstance.TenantId = tenantIdInstance2;
+                                            }
+                                            
+                                            JToken applicationIdValue2 = resourceAccessIdentityDetailsValue["applicationId"];
+                                            if (applicationIdValue2 != null && applicationIdValue2.Type != JTokenType.Null)
+                                            {
+                                                string applicationIdInstance2 = ((string)applicationIdValue2);
+                                                resourceAccessIdentityDetailsInstance.ApplicationId = applicationIdInstance2;
+                                            }
+                                            
+                                            JToken objectIdValue2 = resourceAccessIdentityDetailsValue["objectId"];
+                                            if (objectIdValue2 != null && objectIdValue2.Type != JTokenType.Null)
+                                            {
+                                                string objectIdInstance2 = ((string)objectIdValue2);
+                                                resourceAccessIdentityDetailsInstance.ObjectId = objectIdInstance2;
+                                            }
+                                            
+                                            JToken audienceValue2 = resourceAccessIdentityDetailsValue["audience"];
+                                            if (audienceValue2 != null && audienceValue2.Type != JTokenType.Null)
+                                            {
+                                                string audienceInstance2 = ((string)audienceValue2);
+                                                resourceAccessIdentityDetailsInstance.Audience = audienceInstance2;
+                                            }
+                                            
+                                            JToken aadAuthorityValue2 = resourceAccessIdentityDetailsValue["aadAuthority"];
+                                            if (aadAuthorityValue2 != null && aadAuthorityValue2.Type != JTokenType.Null)
+                                            {
+                                                string aadAuthorityInstance2 = ((string)aadAuthorityValue2);
+                                                resourceAccessIdentityDetailsInstance.AadAuthority = aadAuthorityInstance2;
                                             }
                                         }
                                     }
@@ -3958,45 +4115,87 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
-                                        JToken identityDetailsValue = propertiesValue["identityDetails"];
-                                        if (identityDetailsValue != null && identityDetailsValue.Type != JTokenType.Null)
+                                        JToken authenticationIdentityDetailsValue = propertiesValue["authenticationIdentityDetails"];
+                                        if (authenticationIdentityDetailsValue != null && authenticationIdentityDetailsValue.Type != JTokenType.Null)
                                         {
-                                            IdentityProviderDetails identityDetailsInstance = new IdentityProviderDetails();
-                                            propertiesInstance.IdentityDetails = identityDetailsInstance;
+                                            IdentityProviderDetails authenticationIdentityDetailsInstance = new IdentityProviderDetails();
+                                            propertiesInstance.AuthenticationIdentityInput = authenticationIdentityDetailsInstance;
                                             
-                                            JToken tenantIdValue = identityDetailsValue["tenantId"];
+                                            JToken tenantIdValue = authenticationIdentityDetailsValue["tenantId"];
                                             if (tenantIdValue != null && tenantIdValue.Type != JTokenType.Null)
                                             {
                                                 string tenantIdInstance = ((string)tenantIdValue);
-                                                identityDetailsInstance.TenantId = tenantIdInstance;
+                                                authenticationIdentityDetailsInstance.TenantId = tenantIdInstance;
                                             }
                                             
-                                            JToken applicationIdValue = identityDetailsValue["applicationId"];
+                                            JToken applicationIdValue = authenticationIdentityDetailsValue["applicationId"];
                                             if (applicationIdValue != null && applicationIdValue.Type != JTokenType.Null)
                                             {
                                                 string applicationIdInstance = ((string)applicationIdValue);
-                                                identityDetailsInstance.ApplicationId = applicationIdInstance;
+                                                authenticationIdentityDetailsInstance.ApplicationId = applicationIdInstance;
                                             }
                                             
-                                            JToken objectIdValue = identityDetailsValue["objectId"];
+                                            JToken objectIdValue = authenticationIdentityDetailsValue["objectId"];
                                             if (objectIdValue != null && objectIdValue.Type != JTokenType.Null)
                                             {
                                                 string objectIdInstance = ((string)objectIdValue);
-                                                identityDetailsInstance.ObjectId = objectIdInstance;
+                                                authenticationIdentityDetailsInstance.ObjectId = objectIdInstance;
                                             }
                                             
-                                            JToken audienceValue = identityDetailsValue["audience"];
+                                            JToken audienceValue = authenticationIdentityDetailsValue["audience"];
                                             if (audienceValue != null && audienceValue.Type != JTokenType.Null)
                                             {
                                                 string audienceInstance = ((string)audienceValue);
-                                                identityDetailsInstance.Audience = audienceInstance;
+                                                authenticationIdentityDetailsInstance.Audience = audienceInstance;
                                             }
                                             
-                                            JToken aadAuthorityValue = identityDetailsValue["aadAuthority"];
+                                            JToken aadAuthorityValue = authenticationIdentityDetailsValue["aadAuthority"];
                                             if (aadAuthorityValue != null && aadAuthorityValue.Type != JTokenType.Null)
                                             {
                                                 string aadAuthorityInstance = ((string)aadAuthorityValue);
-                                                identityDetailsInstance.AadAuthority = aadAuthorityInstance;
+                                                authenticationIdentityDetailsInstance.AadAuthority = aadAuthorityInstance;
+                                            }
+                                        }
+                                        
+                                        JToken resourceAccessIdentityDetailsValue = propertiesValue["resourceAccessIdentityDetails"];
+                                        if (resourceAccessIdentityDetailsValue != null && resourceAccessIdentityDetailsValue.Type != JTokenType.Null)
+                                        {
+                                            IdentityProviderDetails resourceAccessIdentityDetailsInstance = new IdentityProviderDetails();
+                                            propertiesInstance.ResourceAccessIdentityInput = resourceAccessIdentityDetailsInstance;
+                                            
+                                            JToken tenantIdValue2 = resourceAccessIdentityDetailsValue["tenantId"];
+                                            if (tenantIdValue2 != null && tenantIdValue2.Type != JTokenType.Null)
+                                            {
+                                                string tenantIdInstance2 = ((string)tenantIdValue2);
+                                                resourceAccessIdentityDetailsInstance.TenantId = tenantIdInstance2;
+                                            }
+                                            
+                                            JToken applicationIdValue2 = resourceAccessIdentityDetailsValue["applicationId"];
+                                            if (applicationIdValue2 != null && applicationIdValue2.Type != JTokenType.Null)
+                                            {
+                                                string applicationIdInstance2 = ((string)applicationIdValue2);
+                                                resourceAccessIdentityDetailsInstance.ApplicationId = applicationIdInstance2;
+                                            }
+                                            
+                                            JToken objectIdValue2 = resourceAccessIdentityDetailsValue["objectId"];
+                                            if (objectIdValue2 != null && objectIdValue2.Type != JTokenType.Null)
+                                            {
+                                                string objectIdInstance2 = ((string)objectIdValue2);
+                                                resourceAccessIdentityDetailsInstance.ObjectId = objectIdInstance2;
+                                            }
+                                            
+                                            JToken audienceValue2 = resourceAccessIdentityDetailsValue["audience"];
+                                            if (audienceValue2 != null && audienceValue2.Type != JTokenType.Null)
+                                            {
+                                                string audienceInstance2 = ((string)audienceValue2);
+                                                resourceAccessIdentityDetailsInstance.Audience = audienceInstance2;
+                                            }
+                                            
+                                            JToken aadAuthorityValue2 = resourceAccessIdentityDetailsValue["aadAuthority"];
+                                            if (aadAuthorityValue2 != null && aadAuthorityValue2.Type != JTokenType.Null)
+                                            {
+                                                string aadAuthorityInstance2 = ((string)aadAuthorityValue2);
+                                                resourceAccessIdentityDetailsInstance.AadAuthority = aadAuthorityInstance2;
                                             }
                                         }
                                     }
