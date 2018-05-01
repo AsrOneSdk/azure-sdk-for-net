@@ -10,57 +10,14 @@
 
 namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
 {
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
-    using System.Runtime;
-    using System.Runtime.Serialization;
 
     /// <summary>
     /// Defines values for PresenceStatus.
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
-    public enum PresenceStatus
+    public static class PresenceStatus
     {
-        [EnumMember(Value = "Unknown")]
-        Unknown,
-        [EnumMember(Value = "Present")]
-        Present,
-        [EnumMember(Value = "NotPresent")]
-        NotPresent
-    }
-    internal static class PresenceStatusEnumExtension
-    {
-        internal static string ToSerializedValue(this PresenceStatus? value)
-        {
-            return value == null ? null : ((PresenceStatus)value).ToSerializedValue();
-        }
-
-        internal static string ToSerializedValue(this PresenceStatus value)
-        {
-            switch( value )
-            {
-                case PresenceStatus.Unknown:
-                    return "Unknown";
-                case PresenceStatus.Present:
-                    return "Present";
-                case PresenceStatus.NotPresent:
-                    return "NotPresent";
-            }
-            return null;
-        }
-
-        internal static PresenceStatus? ParsePresenceStatus(this string value)
-        {
-            switch( value )
-            {
-                case "Unknown":
-                    return PresenceStatus.Unknown;
-                case "Present":
-                    return PresenceStatus.Present;
-                case "NotPresent":
-                    return PresenceStatus.NotPresent;
-            }
-            return null;
-        }
+        public const string Unknown = "Unknown";
+        public const string Present = "Present";
+        public const string NotPresent = "NotPresent";
     }
 }

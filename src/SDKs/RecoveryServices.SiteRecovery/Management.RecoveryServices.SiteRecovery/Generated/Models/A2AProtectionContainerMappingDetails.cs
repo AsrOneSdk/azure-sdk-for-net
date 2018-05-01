@@ -39,7 +39,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// id.</param>
         /// <param name="scheduleName">The schedule arm name.</param>
         /// <param name="jobScheduleName">The job schedule arm name.</param>
-        public A2AProtectionContainerMappingDetails(AgentAutoUpdateStatus? agentAutoUpdateStatus = default(AgentAutoUpdateStatus?), string automationAccountArmId = default(string), string scheduleName = default(string), string jobScheduleName = default(string))
+        public A2AProtectionContainerMappingDetails(string agentAutoUpdateStatus = default(string), string automationAccountArmId = default(string), string scheduleName = default(string), string jobScheduleName = default(string))
         {
             AgentAutoUpdateStatus = agentAutoUpdateStatus;
             AutomationAccountArmId = automationAccountArmId;
@@ -58,7 +58,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// Possible values include: 'Disabled', 'Enabled'
         /// </summary>
         [JsonProperty(PropertyName = "agentAutoUpdateStatus")]
-        public AgentAutoUpdateStatus? AgentAutoUpdateStatus { get; set; }
+        public string AgentAutoUpdateStatus { get; set; }
 
         /// <summary>
         /// Gets or sets the automation account arm id.

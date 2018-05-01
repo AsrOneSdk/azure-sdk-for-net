@@ -49,7 +49,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// resource correlation Ids. This can be used to uniquely identify the
         /// count of items affected by a specific category and severity as well
         /// as count of item affected by an specific issue.</param>
-        public HealthErrorSummary(string summaryCode = default(string), HealthErrorCategory? category = default(HealthErrorCategory?), Severity? severity = default(Severity?), string summaryMessage = default(string), string affectedResourceType = default(string), string affectedResourceSubtype = default(string), IList<string> affectedResourceCorrelationIds = default(IList<string>))
+        public HealthErrorSummary(string summaryCode = default(string), string category = default(string), string severity = default(string), string summaryMessage = default(string), string affectedResourceType = default(string), string affectedResourceSubtype = default(string), IList<string> affectedResourceCorrelationIds = default(IList<string>))
         {
             SummaryCode = summaryCode;
             Category = category;
@@ -78,14 +78,14 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// 'FabricInfrastructure', 'VersionExpiry', 'AgentAutoUpdate'
         /// </summary>
         [JsonProperty(PropertyName = "category")]
-        public HealthErrorCategory? Category { get; set; }
+        public string Category { get; set; }
 
         /// <summary>
         /// Gets or sets severity of error. Possible values include: 'NONE',
         /// 'Warning', 'Error', 'Info'
         /// </summary>
         [JsonProperty(PropertyName = "severity")]
-        public Severity? Severity { get; set; }
+        public string Severity { get; set; }
 
         /// <summary>
         /// Gets or sets the summary message of the health error.

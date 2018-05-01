@@ -10,51 +10,13 @@
 
 namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
 {
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
-    using System.Runtime;
-    using System.Runtime.Serialization;
 
     /// <summary>
     /// Defines values for AgentAutoUpdateStatus.
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
-    public enum AgentAutoUpdateStatus
+    public static class AgentAutoUpdateStatus
     {
-        [EnumMember(Value = "Disabled")]
-        Disabled,
-        [EnumMember(Value = "Enabled")]
-        Enabled
-    }
-    internal static class AgentAutoUpdateStatusEnumExtension
-    {
-        internal static string ToSerializedValue(this AgentAutoUpdateStatus? value)
-        {
-            return value == null ? null : ((AgentAutoUpdateStatus)value).ToSerializedValue();
-        }
-
-        internal static string ToSerializedValue(this AgentAutoUpdateStatus value)
-        {
-            switch( value )
-            {
-                case AgentAutoUpdateStatus.Disabled:
-                    return "Disabled";
-                case AgentAutoUpdateStatus.Enabled:
-                    return "Enabled";
-            }
-            return null;
-        }
-
-        internal static AgentAutoUpdateStatus? ParseAgentAutoUpdateStatus(this string value)
-        {
-            switch( value )
-            {
-                case "Disabled":
-                    return AgentAutoUpdateStatus.Disabled;
-                case "Enabled":
-                    return AgentAutoUpdateStatus.Enabled;
-            }
-            return null;
-        }
+        public const string Disabled = "Disabled";
+        public const string Enabled = "Enabled";
     }
 }

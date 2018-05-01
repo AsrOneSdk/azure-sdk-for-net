@@ -51,7 +51,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// shared VHD attached. String value of
         /// {SrsDataContract.PresenceStatus} enum. Possible values include:
         /// 'Unknown', 'Present', 'NotPresent'</param>
-        public HyperVVirtualMachineDetails(string sourceItemId = default(string), string generation = default(string), OSDetails osDetails = default(OSDetails), IList<DiskDetails> diskDetails = default(IList<DiskDetails>), PresenceStatus? hasPhysicalDisk = default(PresenceStatus?), PresenceStatus? hasFibreChannelAdapter = default(PresenceStatus?), PresenceStatus? hasSharedVhd = default(PresenceStatus?))
+        public HyperVVirtualMachineDetails(string sourceItemId = default(string), string generation = default(string), OSDetails osDetails = default(OSDetails), IList<DiskDetails> diskDetails = default(IList<DiskDetails>), string hasPhysicalDisk = default(string), string hasFibreChannelAdapter = default(string), string hasSharedVhd = default(string))
         {
             SourceItemId = sourceItemId;
             Generation = generation;
@@ -98,7 +98,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// Possible values include: 'Unknown', 'Present', 'NotPresent'
         /// </summary>
         [JsonProperty(PropertyName = "hasPhysicalDisk")]
-        public PresenceStatus? HasPhysicalDisk { get; set; }
+        public string HasPhysicalDisk { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether the VM has a fibre channel
@@ -106,7 +106,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// enum. Possible values include: 'Unknown', 'Present', 'NotPresent'
         /// </summary>
         [JsonProperty(PropertyName = "hasFibreChannelAdapter")]
-        public PresenceStatus? HasFibreChannelAdapter { get; set; }
+        public string HasFibreChannelAdapter { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether the VM has a shared VHD
@@ -114,7 +114,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// Possible values include: 'Unknown', 'Present', 'NotPresent'
         /// </summary>
         [JsonProperty(PropertyName = "hasSharedVhd")]
-        public PresenceStatus? HasSharedVhd { get; set; }
+        public string HasSharedVhd { get; set; }
 
     }
 }

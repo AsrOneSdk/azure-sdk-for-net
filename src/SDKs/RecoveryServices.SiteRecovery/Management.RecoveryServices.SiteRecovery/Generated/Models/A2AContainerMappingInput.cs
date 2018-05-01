@@ -35,7 +35,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// 'Enabled'</param>
         /// <param name="automationAccountArmId">The automation account arm
         /// id.</param>
-        public A2AContainerMappingInput(AgentAutoUpdateStatus? agentAutoUpdateStatus = default(AgentAutoUpdateStatus?), string automationAccountArmId = default(string))
+        public A2AContainerMappingInput(string agentAutoUpdateStatus = default(string), string automationAccountArmId = default(string))
         {
             AgentAutoUpdateStatus = agentAutoUpdateStatus;
             AutomationAccountArmId = automationAccountArmId;
@@ -52,7 +52,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// Possible values include: 'Disabled', 'Enabled'
         /// </summary>
         [JsonProperty(PropertyName = "agentAutoUpdateStatus")]
-        public AgentAutoUpdateStatus? AgentAutoUpdateStatus { get; set; }
+        public string AgentAutoUpdateStatus { get; set; }
 
         /// <summary>
         /// Gets or sets the automation account arm id.
