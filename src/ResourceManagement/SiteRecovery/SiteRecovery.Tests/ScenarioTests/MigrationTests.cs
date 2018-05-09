@@ -58,14 +58,15 @@ namespace SiteRecovery.Tests.ScenarioTests
         private const string StorageAccountSasSecretName = "something";
         private const string ServiceBusConnectionStringSecretName = "SBusRootManageSharedAccessKey";
 
-
         [Fact]
-        public void Migration_Initialize()
+        public void Migration_ContainerPairing()
         {
             using (UndoContext context = UndoContext.Current)
             {
                 try
                 {
+                    // Ensure DRA is running and the VMware cloud entity is created before running
+                    // this test.
                     context.Start();
                     var client = GetSiteRecoveryClient(CustomHttpHandler, "Migration");
 
@@ -124,26 +125,6 @@ namespace SiteRecovery.Tests.ScenarioTests
                         }
                     };
                     client.ProtectionContainer.Create(VMwareFabricName, VMwareContainerName, vmwareContainerInput, RequestHeaders);
-                }
-                catch (Exception)
-                {
-                    Debugger.Break();
-                    throw;
-                }
-            }
-        }
-
-        [Fact]
-        public void Migration_ContainerMapping()
-        {
-            using (UndoContext context = UndoContext.Current)
-            {
-                try
-                {
-                    // Ensure DRA is running and the VMware cloud entity is created before running
-                    // this test.
-                    context.Start();
-                    var client = GetSiteRecoveryClient(CustomHttpHandler, "Migration");
 
                     // Create Azure fabric.
                     var azureFabricInput = new FabricCreationInput()
@@ -191,8 +172,6 @@ namespace SiteRecovery.Tests.ScenarioTests
                     client.Policies.Create(VMwarePolicyName, vmwarePolicyInput, RequestHeaders);
 
                     // Get the required entities.
-                    var fabrics = client.Fabrics.List(RequestHeaders).Fabrics.ToList();
-                    var vmwareContainer = client.ProtectionContainer.List(VMwareFabricName, RequestHeaders).ProtectionContainers.Single();
                     var azureContainer = client.ProtectionContainer.List(AzureFabricName, RequestHeaders).ProtectionContainers.Single();
                     var vmwarePolicy = client.Policies.List(RequestHeaders).Policies.Where(x => x.Name == VMwarePolicyName).Single();
 
@@ -219,9 +198,50 @@ namespace SiteRecovery.Tests.ScenarioTests
                         ContainerMappingName,
                         mappingInput,
                         RequestHeaders);
+                }
+                catch (Exception)
+                {
+                    Debugger.Break();
+                    throw;
+                }
+            }
+        }
 
-                    // Get all mapings.
-                    var mappings = client.ProtectionContainerMapping.List(VMwareFabricName, AzureContainerName, RequestHeaders);
+        [Fact]
+        public void Migration_ContainerUnpairing()
+        {
+            using (UndoContext context = UndoContext.Current)
+            {
+                try
+                {
+                    context.Start();
+                    var client = GetSiteRecoveryClient(CustomHttpHandler, "Migration");
+
+                    // Delete container mappping.
+                    client.ProtectionContainerMapping.UnconfigureProtection(
+                        VMwareFabricName,
+                        VMwareContainerName,
+                        ContainerMappingName,
+                        new RemoveProtectionContainerMappingInput()
+                        {
+                            Properties = new RemoveProtectionContainerMappingInputProperties()
+                            {
+                                ProviderSpecificInput = new ReplicationProviderContainerUnmappingInput()
+                            }
+                        },
+                        RequestHeaders);
+
+                    // Delete VMware policy.
+                    client.Policies.Delete(VMwarePolicyName, RequestHeaders);
+
+                    // Delete Azure container/fabric.
+                    client.ProtectionContainer.Delete(AzureFabricName, AzureContainerName, RequestHeaders);
+                    client.Fabrics.Delete(AzureFabricName, RequestHeaders);
+
+                    // Delete VMware container/DRA/fabric.
+                    client.ProtectionContainer.Delete(VMwareFabricName, VMwareContainerName, RequestHeaders);
+                    client.RecoveryServicesProvider.Delete(VMwareFabricName, VMwareDraName, RequestHeaders);
+                    client.Fabrics.Delete(VMwareFabricName, RequestHeaders);
                 }
                 catch (Exception)
                 {
@@ -240,21 +260,37 @@ namespace SiteRecovery.Tests.ScenarioTests
                 {
                     context.Start();
                     var client = GetSiteRecoveryClient(CustomHttpHandler, "Migration");
-                    var vmwareContainer = client.ProtectionContainer
+
+                    // List all fabric entites.
+                    var fabrics = client.Fabrics.List(RequestHeaders).Fabrics.ToList();
+                    var policies = client.Policies.List(RequestHeaders).Policies.ToList();
+                    var vmwareDras = client.RecoveryServicesProvider
+                        .List(VMwareFabricName, RequestHeaders)
+                        .RecoveryServicesProviders
+                        .ToList();
+                    var vmwareContainers = client.ProtectionContainer
                         .List(VMwareFabricName, RequestHeaders)
                         .ProtectionContainers
-                        .Single();
+                        .ToList();
+                    var azureContainers = client.ProtectionContainer
+                        .List(AzureFabricName, RequestHeaders)
+                        .ProtectionContainers
+                        .ToList();
+                    var mappings = client.ProtectionContainerMapping
+                        .List(VMwareFabricName, VMwareContainerName, RequestHeaders)
+                        .ProtectionContainerMappings
+                        .ToList();
 
-                    // Get all items.
+                    // Get all migration items.
                     var items = client.MigrationItem.List(
                         VMwareFabricName,
-                        vmwareContainer.Name,
+                        VMwareContainerName,
                         RequestHeaders);
 
-                    // Get single item.
+                    // Get single migration item.
                     var migItem = client.MigrationItem.Get(
                         VMwareFabricName,
-                        vmwareContainer.Name,
+                        VMwareContainerName,
                         "vmwareMigItem1",
                         RequestHeaders);
                 }

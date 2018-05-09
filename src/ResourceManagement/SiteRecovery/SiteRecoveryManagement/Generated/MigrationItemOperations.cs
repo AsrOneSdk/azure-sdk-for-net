@@ -142,7 +142,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(fabricName);
             url = url + "/replicationProtectionContainers/";
             url = url + Uri.EscapeDataString(protectionContainerName);
-            url = url + "/migrationItems/";
+            url = url + "/replicationMigrationItems/";
             url = url + Uri.EscapeDataString(migrationItemName);
             List<string> queryParameters = new List<string>();
             queryParameters.Add("api-version=2018-01-10");
@@ -461,7 +461,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(fabricName);
             url = url + "/replicationProtectionContainers/";
             url = url + Uri.EscapeDataString(protectionContainerName);
-            url = url + "/migrationItems/";
+            url = url + "/replicationMigrationItems/";
             url = url + Uri.EscapeDataString(migrationItemName);
             List<string> queryParameters = new List<string>();
             queryParameters.Add("api-version=2018-01-10");
@@ -1113,7 +1113,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(fabricName);
             url = url + "/replicationProtectionContainers/";
             url = url + Uri.EscapeDataString(protectionContainerName);
-            url = url + "/migrationItems";
+            url = url + "/replicationMigrationItems";
             List<string> queryParameters = new List<string>();
             queryParameters.Add("api-version=2018-01-10");
             if (queryParameters.Count > 0)
@@ -1433,7 +1433,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(this.Client.ResourceType);
             url = url + "/";
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
-            url = url + "/migrationItems";
+            url = url + "/replicationMigrationItems";
             List<string> queryParameters = new List<string>();
             if (skipToken != null)
             {
