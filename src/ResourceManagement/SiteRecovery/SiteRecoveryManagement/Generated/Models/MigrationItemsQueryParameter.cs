@@ -29,6 +29,28 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class MigrationItemsQueryParameter
     {
+        private string _sourceFabricName;
+        
+        /// <summary>
+        /// Optional. Source fabric name filter.
+        /// </summary>
+        public string SourceFabricName
+        {
+            get { return this._sourceFabricName; }
+            set { this._sourceFabricName = value; }
+        }
+        
+        private string _type;
+        
+        /// <summary>
+        /// Optional. Replication provider type filter.
+        /// </summary>
+        public string Type
+        {
+            get { return this._type; }
+            set { this._type = value; }
+        }
+        
         /// <summary>
         /// Initializes a new instance of the MigrationItemsQueryParameter
         /// class.

@@ -20,7 +20,9 @@
 // code is regenerated.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using Hyak.Common;
 using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
@@ -30,26 +32,147 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class VMwareCbtMigrationDetails : MigrationProviderSpecificSettings
     {
-        private string _vCenterId;
+        private string _dataMoverRunAsAccountId;
         
         /// <summary>
-        /// Optional. ARM Id of the vCenter.
+        /// Optional. The data mover runas account Id
         /// </summary>
-        public string VCenterId
+        public string DataMoverRunAsAccountId
         {
-            get { return this._vCenterId; }
-            set { this._vCenterId = value; }
+            get { return this._dataMoverRunAsAccountId; }
+            set { this._dataMoverRunAsAccountId = value; }
         }
         
-        private string _vMwareMachineArmId;
+        private string _licenseType;
+        
+        /// <summary>
+        /// Optional. License Type of the VM.
+        /// </summary>
+        public string LicenseType
+        {
+            get { return this._licenseType; }
+            set { this._licenseType = value; }
+        }
+        
+        private string _oSType;
+        
+        /// <summary>
+        /// Optional. Type of the OS on the VM.
+        /// </summary>
+        public string OSType
+        {
+            get { return this._oSType; }
+            set { this._oSType = value; }
+        }
+        
+        private IList<VMwareCbtProtectedDiskDetails> _protectedDisks;
+        
+        /// <summary>
+        /// Optional. Protected disk details.
+        /// </summary>
+        public IList<VMwareCbtProtectedDiskDetails> ProtectedDisks
+        {
+            get { return this._protectedDisks; }
+            set { this._protectedDisks = value; }
+        }
+        
+        private string _snapshotRunAsAccountId;
+        
+        /// <summary>
+        /// Optional. The snapshot runas account Id
+        /// </summary>
+        public string SnapshotRunAsAccountId
+        {
+            get { return this._snapshotRunAsAccountId; }
+            set { this._snapshotRunAsAccountId = value; }
+        }
+        
+        private string _targetAvailabilitySetId;
+        
+        /// <summary>
+        /// Optional. Target Azure availability set Id.
+        /// </summary>
+        public string TargetAvailabilitySetId
+        {
+            get { return this._targetAvailabilitySetId; }
+            set { this._targetAvailabilitySetId = value; }
+        }
+        
+        private string _targetAzureNetworkId;
+        
+        /// <summary>
+        /// Optional. Target Azure network Id.
+        /// </summary>
+        public string TargetAzureNetworkId
+        {
+            get { return this._targetAzureNetworkId; }
+            set { this._targetAzureNetworkId = value; }
+        }
+        
+        private string _targetAzureSubnetName;
+        
+        /// <summary>
+        /// Optional. Target Azure subnet name.
+        /// </summary>
+        public string TargetAzureSubnetName
+        {
+            get { return this._targetAzureSubnetName; }
+            set { this._targetAzureSubnetName = value; }
+        }
+        
+        private string _targetAzureVmName;
+        
+        /// <summary>
+        /// Optional. Target Azure VM name.
+        /// </summary>
+        public string TargetAzureVmName
+        {
+            get { return this._targetAzureVmName; }
+            set { this._targetAzureVmName = value; }
+        }
+        
+        private string _targetAzureVmSize;
+        
+        /// <summary>
+        /// Optional. Target Azure VM size.
+        /// </summary>
+        public string TargetAzureVmSize
+        {
+            get { return this._targetAzureVmSize; }
+            set { this._targetAzureVmSize = value; }
+        }
+        
+        private string _targetResourceGroupId;
+        
+        /// <summary>
+        /// Optional. Target Azure resource group Id.
+        /// </summary>
+        public string TargetResourceGroupId
+        {
+            get { return this._targetResourceGroupId; }
+            set { this._targetResourceGroupId = value; }
+        }
+        
+        private IList<VMNicDetails> _vMNics;
+        
+        /// <summary>
+        /// Optional. Gets or sets the network details.
+        /// </summary>
+        public IList<VMNicDetails> VMNics
+        {
+            get { return this._vMNics; }
+            set { this._vMNics = value; }
+        }
+        
+        private string _vMwareMachineId;
         
         /// <summary>
         /// Optional. ARM Id of the VM discovered in VMware.
         /// </summary>
-        public string VMwareMachineArmId
+        public string VMwareMachineId
         {
-            get { return this._vMwareMachineArmId; }
-            set { this._vMwareMachineArmId = value; }
+            get { return this._vMwareMachineId; }
+            set { this._vMwareMachineId = value; }
         }
         
         /// <summary>
@@ -57,6 +180,8 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         /// </summary>
         public VMwareCbtMigrationDetails()
         {
+            this.ProtectedDisks = new LazyList<VMwareCbtProtectedDiskDetails>();
+            this.VMNics = new LazyList<VMNicDetails>();
         }
     }
 }

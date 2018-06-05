@@ -29,7 +29,7 @@ namespace SiteRecovery.Tests.ScenarioTests
         // VMware fabric input
         private const string VMwareFabricName = "vmwarefabric1";
         private const string VMwareContainerName = "vmwarefabric1-cloud";
-        private const string VMwareSiteId = "/subscriptions/sub123/resourceGroups/rg123/providers/Microsoft.VMware/sites/site123";
+        private const string VMwareSiteId = "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/lshaiRG/providers/Microsoft.VMware/sites/vmwSite1";
 
         // Azure fabric input.
         private const string AzureFabricName = "azurefabric-sea";
@@ -46,17 +46,28 @@ namespace SiteRecovery.Tests.ScenarioTests
 
         // VMware policy input.
         private const string VMwarePolicyName = "vmwarepolicy1";
-        private const int CrashInterval = 15;
+        private const int CrashInterval = 60;
         private const int AppInterval = 60;
         private const int RecoveryPointHistory = 60 * 24;
 
         // Cloud pairing input.
         private const string ContainerMappingName = "vmwaremapping1";
         private const string KeyVaultArmId = "/subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/TestRG1/providers/Microsoft.KeyVault/vaults/TestKV1";
-        private const string KeyVaultUri = "https://%COMPUTERNAME%-targetkv.vault.azure.net";
-        private const string StorageAccountArmId = "/subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/TestRG1/providers/Microsoft.Storage/storageAccounts/TestSA1";
-        private const string StorageAccountSasSecretName = "something";
+        private const string KeyVaultUri = "https://lubnapc-srskv.vault.azure.net/";
+        private const string StorageAccountArmId = "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/lshaiRG/providers/Microsoft.Storage/storageAccounts/lshaistorage";
+        private const string StorageAccountSasSecretName = "lshaistorage-ownerSas";
         private const string ServiceBusConnectionStringSecretName = "SBusRootManageSharedAccessKey";
+
+        // Enable input.
+        private const string VMwareVmArmId = "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/lshaiRG/providers/Microsoft.VMware/sites/vmwSite1/machines/vmwareVm1";
+        private const string TargetResourceGroupId = "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/lshaiRG";
+        private const string TargetNetworkId = "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/knasrvnet/providers/Microsoft.Network/virtualNetworks/asrvnet";
+        private const string TargetSubnetId = "default";
+        private const string LogStorageAccountArmId = "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/lshaiRG/providers/Microsoft.Storage/storageAccounts/lshaistorage";
+        private const string LogStorageAccountSasSecretName =  "KvSecret";
+        private const string DataMoverRunAsAccountId = "DMRunAs";
+        private const string SnapshotRunAsAccountId = "SnRunAs";
+        private const string TargetAvailabilitySetId = "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/lshaiRG/providers/Microsoft.Compute/availabilitySets/lshaiAvSet";
 
         [Fact]
         public void Migration_ContainerPairing()
@@ -78,7 +89,7 @@ namespace SiteRecovery.Tests.ScenarioTests
                             CustomDetails = new VMwareV2FabricCreationInput()
                             {
                                 InstanceType = "VMwareV2",
-                                VMwareSiteArmId = VMwareSiteId
+                                VMwareSiteId = VMwareSiteId
                             }
                         }
                     };
@@ -322,6 +333,26 @@ namespace SiteRecovery.Tests.ScenarioTests
                         .Where(x => x.Name == VMwarePolicyName)
                         .Single();
 
+                    var disksInput = new List<VMwareCbtDiskInput>
+                    {
+                        new VMwareCbtDiskInput
+                        {
+                            DiskId = "12345",
+                            IsOSDisk = "true",
+                            StorageAccountId = null,
+                            LogStorageAccountId = StorageAccountArmId,
+                            LogStorageAccountSasSecretName = StorageAccountSasSecretName
+                        },
+                        new VMwareCbtDiskInput
+                        {
+                            DiskId = "67890",
+                            IsOSDisk = "false",
+                            StorageAccountId = null,
+                            LogStorageAccountId = StorageAccountArmId,
+                            LogStorageAccountSasSecretName = StorageAccountSasSecretName
+                        }
+                    };
+
                     var enableMigrationInput = new EnableMigrationInput
                     {
                         Properties = new EnableMigrationInputProperties
@@ -329,8 +360,17 @@ namespace SiteRecovery.Tests.ScenarioTests
                             PolicyId = vmwarePolicy.Id,
                             ProviderSpecificDetails = new VMwareCbtEnableMigrationInput
                             {
-                                VMwareMachineArmId = "1234",
-                                VCenterArmId = "1234"
+                                VMwareMachineId = VMwareVmArmId,
+                                DisksToInclude = disksInput,
+                                LicenseType = "WindowsServer",
+                                TargetAzureVmName = "migVm1",
+                                TargetAzureVmSize = "Standard_A4",
+                                TargetResourceGroupId = TargetResourceGroupId,
+                                TargetAzureNetworkId = TargetNetworkId,
+                                TargetAzureSubnetName = TargetSubnetId,
+                                TargetAvailabilitySetId = TargetAvailabilitySetId,
+                                DataMoverRunAsAccountId = DataMoverRunAsAccountId,
+                                SnapshotRunAsAccountId = SnapshotRunAsAccountId
                             }
                         }
                     };
@@ -346,6 +386,43 @@ namespace SiteRecovery.Tests.ScenarioTests
                     var items = client.MigrationItem.List(
                         VMwareFabricName,
                         vmwareContainer.Name,
+                        RequestHeaders);
+                }
+                catch (Exception)
+                {
+                    Debugger.Break();
+                    throw;
+                }
+            }
+        }
+
+        [Fact]
+        public void Migration_Disable()
+        {
+            using (UndoContext context = UndoContext.Current)
+            {
+                try
+                {
+                    context.Start();
+                    var client = GetSiteRecoveryClient(CustomHttpHandler, "Migration");
+
+                    // Get single migration item.
+                    var migItem = client.MigrationItem.Get(
+                        VMwareFabricName,
+                        VMwareContainerName,
+                        "vmwareMigItem1",
+                        RequestHeaders);
+
+                    var response = client.MigrationItem.DisableMigration(
+                        VMwareFabricName,
+                        VMwareContainerName,
+                        "vmwareMigItem1",
+                        RequestHeaders);
+
+                    // Get all items.
+                    var items = client.MigrationItem.List(
+                        VMwareFabricName,
+                        VMwareContainerName,
                         RequestHeaders);
                 }
                 catch (Exception)

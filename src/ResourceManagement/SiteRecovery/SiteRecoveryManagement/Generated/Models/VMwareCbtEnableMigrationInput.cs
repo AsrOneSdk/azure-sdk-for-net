@@ -20,7 +20,9 @@
 // code is regenerated.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using Hyak.Common;
 using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
@@ -30,26 +32,126 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class VMwareCbtEnableMigrationInput : EnableMigrationProviderSpecificInput
     {
-        private string _vCenterArmId;
+        private string _dataMoverRunAsAccountId;
         
         /// <summary>
-        /// Optional. ARM Id of the vCenter.
+        /// Optional. Data mover runas account Id.
         /// </summary>
-        public string VCenterArmId
+        public string DataMoverRunAsAccountId
         {
-            get { return this._vCenterArmId; }
-            set { this._vCenterArmId = value; }
+            get { return this._dataMoverRunAsAccountId; }
+            set { this._dataMoverRunAsAccountId = value; }
         }
         
-        private string _vMwareMachineArmId;
+        private IList<VMwareCbtDiskInput> _disksToInclude;
+        
+        /// <summary>
+        /// Optional. Disks to include.
+        /// </summary>
+        public IList<VMwareCbtDiskInput> DisksToInclude
+        {
+            get { return this._disksToInclude; }
+            set { this._disksToInclude = value; }
+        }
+        
+        private string _licenseType;
+        
+        /// <summary>
+        /// Optional. Gets or sets License Type of the VM to be used for HUB
+        /// https://azure.microsoft.com/en-in/pricing/hybrid-use-benefit/.
+        /// </summary>
+        public string LicenseType
+        {
+            get { return this._licenseType; }
+            set { this._licenseType = value; }
+        }
+        
+        private string _snapshotRunAsAccountId;
+        
+        /// <summary>
+        /// Optional. Snapshot runas account Id.
+        /// </summary>
+        public string SnapshotRunAsAccountId
+        {
+            get { return this._snapshotRunAsAccountId; }
+            set { this._snapshotRunAsAccountId = value; }
+        }
+        
+        private string _targetAvailabilitySetId;
+        
+        /// <summary>
+        /// Optional. Target availability set Id.
+        /// </summary>
+        public string TargetAvailabilitySetId
+        {
+            get { return this._targetAvailabilitySetId; }
+            set { this._targetAvailabilitySetId = value; }
+        }
+        
+        private string _targetAzureNetworkId;
+        
+        /// <summary>
+        /// Optional. Target Azure network ARM Id.
+        /// </summary>
+        public string TargetAzureNetworkId
+        {
+            get { return this._targetAzureNetworkId; }
+            set { this._targetAzureNetworkId = value; }
+        }
+        
+        private string _targetAzureSubnetName;
+        
+        /// <summary>
+        /// Optional. Target Azure subnet Id.
+        /// </summary>
+        public string TargetAzureSubnetName
+        {
+            get { return this._targetAzureSubnetName; }
+            set { this._targetAzureSubnetName = value; }
+        }
+        
+        private string _targetAzureVmName;
+        
+        /// <summary>
+        /// Optional. Target Azure VM name.
+        /// </summary>
+        public string TargetAzureVmName
+        {
+            get { return this._targetAzureVmName; }
+            set { this._targetAzureVmName = value; }
+        }
+        
+        private string _targetAzureVmSize;
+        
+        /// <summary>
+        /// Optional. Target Azure VM size.
+        /// </summary>
+        public string TargetAzureVmSize
+        {
+            get { return this._targetAzureVmSize; }
+            set { this._targetAzureVmSize = value; }
+        }
+        
+        private string _targetResourceGroupId;
+        
+        /// <summary>
+        /// Optional. Target resource group Id.
+        /// </summary>
+        public string TargetResourceGroupId
+        {
+            get { return this._targetResourceGroupId; }
+            set { this._targetResourceGroupId = value; }
+        }
+        
+        private string _vMwareMachineId;
         
         /// <summary>
         /// Optional. ARM Id of the VM discovered in VMware.
         /// </summary>
-        public string VMwareMachineArmId
+        public string VMwareMachineId
         {
-            get { return this._vMwareMachineArmId; }
-            set { this._vMwareMachineArmId = value; }
+            get { return this._vMwareMachineId; }
+            set { this._vMwareMachineId = value; }
         }
         
         /// <summary>
@@ -58,6 +160,7 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         /// </summary>
         public VMwareCbtEnableMigrationInput()
         {
+            this.DisksToInclude = new LazyList<VMwareCbtDiskInput>();
         }
     }
 }

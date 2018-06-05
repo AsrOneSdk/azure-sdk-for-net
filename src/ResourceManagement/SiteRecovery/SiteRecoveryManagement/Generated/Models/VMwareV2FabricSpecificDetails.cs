@@ -41,15 +41,15 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._srsServiceEndpoint = value; }
         }
         
-        private string _vMwareSiteArmId;
+        private string _vMwareSiteId;
         
         /// <summary>
         /// Optional. VMware Site ARM Id.
         /// </summary>
-        public string VMwareSiteArmId
+        public string VMwareSiteId
         {
-            get { return this._vMwareSiteArmId; }
-            set { this._vMwareSiteArmId = value; }
+            get { return this._vMwareSiteId; }
+            set { this._vMwareSiteId = value; }
         }
         
         /// <summary>

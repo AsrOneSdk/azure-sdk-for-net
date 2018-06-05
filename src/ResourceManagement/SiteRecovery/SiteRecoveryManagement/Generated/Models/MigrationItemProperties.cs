@@ -20,7 +20,9 @@
 // code is regenerated.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using Hyak.Common;
 using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
@@ -30,6 +32,28 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class MigrationItemProperties
     {
+        private IList<string> _allowedOperations;
+        
+        /// <summary>
+        /// Optional. Allowed operations on the migration item.
+        /// </summary>
+        public IList<string> AllowedOperations
+        {
+            get { return this._allowedOperations; }
+            set { this._allowedOperations = value; }
+        }
+        
+        private CurrentScenarioDetails _currentScenario;
+        
+        /// <summary>
+        /// Optional. The current scenario.
+        /// </summary>
+        public CurrentScenarioDetails CurrentScenario
+        {
+            get { return this._currentScenario; }
+            set { this._currentScenario = value; }
+        }
+        
         private string _friendlyName;
         
         /// <summary>
@@ -41,15 +65,26 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._friendlyName = value; }
         }
         
-        private string _policyArmId;
+        private string _migrationState;
         
         /// <summary>
-        /// Optional. Id of policy governing this PE.
+        /// Optional. Migration state.
         /// </summary>
-        public string PolicyArmId
+        public string MigrationState
         {
-            get { return this._policyArmId; }
-            set { this._policyArmId = value; }
+            get { return this._migrationState; }
+            set { this._migrationState = value; }
+        }
+        
+        private string _migrationStateDescription;
+        
+        /// <summary>
+        /// Optional. Migration state description.
+        /// </summary>
+        public string MigrationStateDescription
+        {
+            get { return this._migrationStateDescription; }
+            set { this._migrationStateDescription = value; }
         }
         
         private string _policyFriendlyName;
@@ -63,6 +98,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._policyFriendlyName = value; }
         }
         
+        private string _policyId;
+        
+        /// <summary>
+        /// Optional. ARM Id of policy governing this PE.
+        /// </summary>
+        public string PolicyId
+        {
+            get { return this._policyId; }
+            set { this._policyId = value; }
+        }
+        
         private MigrationProviderSpecificSettings _providerSpecificDetails;
         
         /// <summary>
@@ -74,11 +120,45 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._providerSpecificDetails = value; }
         }
         
+        private string _recoveryServicesProviderId;
+        
+        /// <summary>
+        /// Optional. Recovery services provider ARM Id.
+        /// </summary>
+        public string RecoveryServicesProviderId
+        {
+            get { return this._recoveryServicesProviderId; }
+            set { this._recoveryServicesProviderId = value; }
+        }
+        
+        private string _testMigrateState;
+        
+        /// <summary>
+        /// Optional. Test migrate state.
+        /// </summary>
+        public string TestMigrateState
+        {
+            get { return this._testMigrateState; }
+            set { this._testMigrateState = value; }
+        }
+        
+        private string _testMigrateStateDescription;
+        
+        /// <summary>
+        /// Optional. Test migrate state description.
+        /// </summary>
+        public string TestMigrateStateDescription
+        {
+            get { return this._testMigrateStateDescription; }
+            set { this._testMigrateStateDescription = value; }
+        }
+        
         /// <summary>
         /// Initializes a new instance of the MigrationItemProperties class.
         /// </summary>
         public MigrationItemProperties()
         {
+            this.AllowedOperations = new LazyList<string>();
         }
     }
 }
