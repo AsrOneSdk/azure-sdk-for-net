@@ -30,15 +30,15 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class VMwareCbtContainerMappingDetails : MappingProviderConfigurationSettings
     {
-        private string _keyVaultArmId;
+        private string _keyVaultId;
         
         /// <summary>
         /// Optional. Target key vault ARM Id.
         /// </summary>
-        public string KeyVaultArmId
+        public string KeyVaultId
         {
-            get { return this._keyVaultArmId; }
-            set { this._keyVaultArmId = value; }
+            get { return this._keyVaultId; }
+            set { this._keyVaultId = value; }
         }
         
         private string _keyVaultUri;
@@ -63,15 +63,15 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._serviceBusConnectionStringSecretName = value; }
         }
         
-        private string _storageAccountArmId;
+        private string _storageAccountId;
         
         /// <summary>
         /// Optional. Storage account ARM Id.
         /// </summary>
-        public string StorageAccountArmId
+        public string StorageAccountId
         {
-            get { return this._storageAccountArmId; }
-            set { this._storageAccountArmId = value; }
+            get { return this._storageAccountId; }
+            set { this._storageAccountId = value; }
         }
         
         private string _storageAccountSasSecretName;

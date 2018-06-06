@@ -214,9 +214,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
                             providerSpecificInputValue["instanceType"] = "VMwareCbt";
                             VMwareCbtPolicyContainerMappingInput derived = ((VMwareCbtPolicyContainerMappingInput)input.Properties.ProviderSpecificInput);
                             
-                            if (derived.KeyVaultArmId != null)
+                            if (derived.KeyVaultId != null)
                             {
-                                providerSpecificInputValue["keyVaultArmId"] = derived.KeyVaultArmId;
+                                providerSpecificInputValue["keyVaultId"] = derived.KeyVaultId;
                             }
                             
                             if (derived.KeyVaultUri != null)
@@ -224,9 +224,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 providerSpecificInputValue["keyVaultUri"] = derived.KeyVaultUri;
                             }
                             
-                            if (derived.StorageAccountArmId != null)
+                            if (derived.StorageAccountId != null)
                             {
-                                providerSpecificInputValue["storageAccountArmId"] = derived.StorageAccountArmId;
+                                providerSpecificInputValue["storageAccountId"] = derived.StorageAccountId;
                             }
                             
                             if (derived.StorageAccountSasSecretName != null)
@@ -1293,11 +1293,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     {
                                         VMwareCbtContainerMappingDetails vMwareCbtContainerMappingDetailsInstance = new VMwareCbtContainerMappingDetails();
                                         
-                                        JToken keyVaultArmIdValue = providerSpecificDetailsValue["keyVaultArmId"];
-                                        if (keyVaultArmIdValue != null && keyVaultArmIdValue.Type != JTokenType.Null)
+                                        JToken keyVaultIdValue = providerSpecificDetailsValue["keyVaultId"];
+                                        if (keyVaultIdValue != null && keyVaultIdValue.Type != JTokenType.Null)
                                         {
-                                            string keyVaultArmIdInstance = ((string)keyVaultArmIdValue);
-                                            vMwareCbtContainerMappingDetailsInstance.KeyVaultArmId = keyVaultArmIdInstance;
+                                            string keyVaultIdInstance = ((string)keyVaultIdValue);
+                                            vMwareCbtContainerMappingDetailsInstance.KeyVaultId = keyVaultIdInstance;
                                         }
                                         
                                         JToken keyVaultUriValue = providerSpecificDetailsValue["keyVaultUri"];
@@ -1307,11 +1307,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtContainerMappingDetailsInstance.KeyVaultUri = keyVaultUriInstance;
                                         }
                                         
-                                        JToken storageAccountArmIdValue = providerSpecificDetailsValue["storageAccountArmId"];
-                                        if (storageAccountArmIdValue != null && storageAccountArmIdValue.Type != JTokenType.Null)
+                                        JToken storageAccountIdValue = providerSpecificDetailsValue["storageAccountId"];
+                                        if (storageAccountIdValue != null && storageAccountIdValue.Type != JTokenType.Null)
                                         {
-                                            string storageAccountArmIdInstance = ((string)storageAccountArmIdValue);
-                                            vMwareCbtContainerMappingDetailsInstance.StorageAccountArmId = storageAccountArmIdInstance;
+                                            string storageAccountIdInstance = ((string)storageAccountIdValue);
+                                            vMwareCbtContainerMappingDetailsInstance.StorageAccountId = storageAccountIdInstance;
                                         }
                                         
                                         JToken storageAccountSasSecretNameValue = providerSpecificDetailsValue["storageAccountSasSecretName"];
@@ -1862,11 +1862,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     {
                                         VMwareCbtContainerMappingDetails vMwareCbtContainerMappingDetailsInstance = new VMwareCbtContainerMappingDetails();
                                         
-                                        JToken keyVaultArmIdValue = providerSpecificDetailsValue["keyVaultArmId"];
-                                        if (keyVaultArmIdValue != null && keyVaultArmIdValue.Type != JTokenType.Null)
+                                        JToken keyVaultIdValue = providerSpecificDetailsValue["keyVaultId"];
+                                        if (keyVaultIdValue != null && keyVaultIdValue.Type != JTokenType.Null)
                                         {
-                                            string keyVaultArmIdInstance = ((string)keyVaultArmIdValue);
-                                            vMwareCbtContainerMappingDetailsInstance.KeyVaultArmId = keyVaultArmIdInstance;
+                                            string keyVaultIdInstance = ((string)keyVaultIdValue);
+                                            vMwareCbtContainerMappingDetailsInstance.KeyVaultId = keyVaultIdInstance;
                                         }
                                         
                                         JToken keyVaultUriValue = providerSpecificDetailsValue["keyVaultUri"];
@@ -1876,11 +1876,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtContainerMappingDetailsInstance.KeyVaultUri = keyVaultUriInstance;
                                         }
                                         
-                                        JToken storageAccountArmIdValue = providerSpecificDetailsValue["storageAccountArmId"];
-                                        if (storageAccountArmIdValue != null && storageAccountArmIdValue.Type != JTokenType.Null)
+                                        JToken storageAccountIdValue = providerSpecificDetailsValue["storageAccountId"];
+                                        if (storageAccountIdValue != null && storageAccountIdValue.Type != JTokenType.Null)
                                         {
-                                            string storageAccountArmIdInstance = ((string)storageAccountArmIdValue);
-                                            vMwareCbtContainerMappingDetailsInstance.StorageAccountArmId = storageAccountArmIdInstance;
+                                            string storageAccountIdInstance = ((string)storageAccountIdValue);
+                                            vMwareCbtContainerMappingDetailsInstance.StorageAccountId = storageAccountIdInstance;
                                         }
                                         
                                         JToken storageAccountSasSecretNameValue = providerSpecificDetailsValue["storageAccountSasSecretName"];
@@ -2644,11 +2644,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     {
                                         VMwareCbtContainerMappingDetails vMwareCbtContainerMappingDetailsInstance = new VMwareCbtContainerMappingDetails();
                                         
-                                        JToken keyVaultArmIdValue = providerSpecificDetailsValue["keyVaultArmId"];
-                                        if (keyVaultArmIdValue != null && keyVaultArmIdValue.Type != JTokenType.Null)
+                                        JToken keyVaultIdValue = providerSpecificDetailsValue["keyVaultId"];
+                                        if (keyVaultIdValue != null && keyVaultIdValue.Type != JTokenType.Null)
                                         {
-                                            string keyVaultArmIdInstance = ((string)keyVaultArmIdValue);
-                                            vMwareCbtContainerMappingDetailsInstance.KeyVaultArmId = keyVaultArmIdInstance;
+                                            string keyVaultIdInstance = ((string)keyVaultIdValue);
+                                            vMwareCbtContainerMappingDetailsInstance.KeyVaultId = keyVaultIdInstance;
                                         }
                                         
                                         JToken keyVaultUriValue = providerSpecificDetailsValue["keyVaultUri"];
@@ -2658,11 +2658,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtContainerMappingDetailsInstance.KeyVaultUri = keyVaultUriInstance;
                                         }
                                         
-                                        JToken storageAccountArmIdValue = providerSpecificDetailsValue["storageAccountArmId"];
-                                        if (storageAccountArmIdValue != null && storageAccountArmIdValue.Type != JTokenType.Null)
+                                        JToken storageAccountIdValue = providerSpecificDetailsValue["storageAccountId"];
+                                        if (storageAccountIdValue != null && storageAccountIdValue.Type != JTokenType.Null)
                                         {
-                                            string storageAccountArmIdInstance = ((string)storageAccountArmIdValue);
-                                            vMwareCbtContainerMappingDetailsInstance.StorageAccountArmId = storageAccountArmIdInstance;
+                                            string storageAccountIdInstance = ((string)storageAccountIdValue);
+                                            vMwareCbtContainerMappingDetailsInstance.StorageAccountId = storageAccountIdInstance;
                                         }
                                         
                                         JToken storageAccountSasSecretNameValue = providerSpecificDetailsValue["storageAccountSasSecretName"];
@@ -3321,11 +3321,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             {
                                                 VMwareCbtContainerMappingDetails vMwareCbtContainerMappingDetailsInstance = new VMwareCbtContainerMappingDetails();
                                                 
-                                                JToken keyVaultArmIdValue = providerSpecificDetailsValue["keyVaultArmId"];
-                                                if (keyVaultArmIdValue != null && keyVaultArmIdValue.Type != JTokenType.Null)
+                                                JToken keyVaultIdValue = providerSpecificDetailsValue["keyVaultId"];
+                                                if (keyVaultIdValue != null && keyVaultIdValue.Type != JTokenType.Null)
                                                 {
-                                                    string keyVaultArmIdInstance = ((string)keyVaultArmIdValue);
-                                                    vMwareCbtContainerMappingDetailsInstance.KeyVaultArmId = keyVaultArmIdInstance;
+                                                    string keyVaultIdInstance = ((string)keyVaultIdValue);
+                                                    vMwareCbtContainerMappingDetailsInstance.KeyVaultId = keyVaultIdInstance;
                                                 }
                                                 
                                                 JToken keyVaultUriValue = providerSpecificDetailsValue["keyVaultUri"];
@@ -3335,11 +3335,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtContainerMappingDetailsInstance.KeyVaultUri = keyVaultUriInstance;
                                                 }
                                                 
-                                                JToken storageAccountArmIdValue = providerSpecificDetailsValue["storageAccountArmId"];
-                                                if (storageAccountArmIdValue != null && storageAccountArmIdValue.Type != JTokenType.Null)
+                                                JToken storageAccountIdValue = providerSpecificDetailsValue["storageAccountId"];
+                                                if (storageAccountIdValue != null && storageAccountIdValue.Type != JTokenType.Null)
                                                 {
-                                                    string storageAccountArmIdInstance = ((string)storageAccountArmIdValue);
-                                                    vMwareCbtContainerMappingDetailsInstance.StorageAccountArmId = storageAccountArmIdInstance;
+                                                    string storageAccountIdInstance = ((string)storageAccountIdValue);
+                                                    vMwareCbtContainerMappingDetailsInstance.StorageAccountId = storageAccountIdInstance;
                                                 }
                                                 
                                                 JToken storageAccountSasSecretNameValue = providerSpecificDetailsValue["storageAccountSasSecretName"];
@@ -3927,11 +3927,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             {
                                                 VMwareCbtContainerMappingDetails vMwareCbtContainerMappingDetailsInstance = new VMwareCbtContainerMappingDetails();
                                                 
-                                                JToken keyVaultArmIdValue = providerSpecificDetailsValue["keyVaultArmId"];
-                                                if (keyVaultArmIdValue != null && keyVaultArmIdValue.Type != JTokenType.Null)
+                                                JToken keyVaultIdValue = providerSpecificDetailsValue["keyVaultId"];
+                                                if (keyVaultIdValue != null && keyVaultIdValue.Type != JTokenType.Null)
                                                 {
-                                                    string keyVaultArmIdInstance = ((string)keyVaultArmIdValue);
-                                                    vMwareCbtContainerMappingDetailsInstance.KeyVaultArmId = keyVaultArmIdInstance;
+                                                    string keyVaultIdInstance = ((string)keyVaultIdValue);
+                                                    vMwareCbtContainerMappingDetailsInstance.KeyVaultId = keyVaultIdInstance;
                                                 }
                                                 
                                                 JToken keyVaultUriValue = providerSpecificDetailsValue["keyVaultUri"];
@@ -3941,11 +3941,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtContainerMappingDetailsInstance.KeyVaultUri = keyVaultUriInstance;
                                                 }
                                                 
-                                                JToken storageAccountArmIdValue = providerSpecificDetailsValue["storageAccountArmId"];
-                                                if (storageAccountArmIdValue != null && storageAccountArmIdValue.Type != JTokenType.Null)
+                                                JToken storageAccountIdValue = providerSpecificDetailsValue["storageAccountId"];
+                                                if (storageAccountIdValue != null && storageAccountIdValue.Type != JTokenType.Null)
                                                 {
-                                                    string storageAccountArmIdInstance = ((string)storageAccountArmIdValue);
-                                                    vMwareCbtContainerMappingDetailsInstance.StorageAccountArmId = storageAccountArmIdInstance;
+                                                    string storageAccountIdInstance = ((string)storageAccountIdValue);
+                                                    vMwareCbtContainerMappingDetailsInstance.StorageAccountId = storageAccountIdInstance;
                                                 }
                                                 
                                                 JToken storageAccountSasSecretNameValue = providerSpecificDetailsValue["storageAccountSasSecretName"];
