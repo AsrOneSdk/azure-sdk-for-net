@@ -480,6 +480,37 @@ namespace SiteRecovery.Tests.ScenarioTests
         }
 
         [Fact]
+        public void Migration_CompleteMigration()
+        {
+            using (UndoContext context = UndoContext.Current)
+            {
+                try
+                {
+                    context.Start();
+                    var client = GetSiteRecoveryClient(CustomHttpHandler, "Migration");
+
+                    var response = client.MigrationItem.CompleteMigration(
+                        VMwareFabricName,
+                        VMwareContainerName,
+                        "vmwareMigItem1",
+                        RequestHeaders);
+
+                    // Get the item.
+                    var migItem = client.MigrationItem.Get(
+                        VMwareFabricName,
+                        VMwareContainerName,
+                        "vmwareMigItem1",
+                        RequestHeaders);
+                }
+                catch (Exception)
+                {
+                    Debugger.Break();
+                    throw;
+                }
+            }
+        }
+
+        [Fact]
         public void Migration_TestMigrate()
         {
             using (UndoContext context = UndoContext.Current)
@@ -506,6 +537,46 @@ namespace SiteRecovery.Tests.ScenarioTests
                         VMwareContainerName,
                         "vmwareMigItem1",
                         testMigrateInput,
+                        RequestHeaders);
+
+                    // Get the item.
+                    var migItem = client.MigrationItem.Get(
+                        VMwareFabricName,
+                        VMwareContainerName,
+                        "vmwareMigItem1",
+                        RequestHeaders);
+                }
+                catch (Exception)
+                {
+                    Debugger.Break();
+                    throw;
+                }
+            }
+        }
+
+        [Fact]
+        public void Migration_TestMigrateCleanup()
+        {
+            using (UndoContext context = UndoContext.Current)
+            {
+                try
+                {
+                    context.Start();
+                    var client = GetSiteRecoveryClient(CustomHttpHandler, "Migration");
+
+                    var testMigrateCleanupInput = new TestMigrateCleanupInput
+                    {
+                        Properties = new TestMigrateCleanupInputProperties
+                        {
+                            Comments = "Goodbye!"
+                        }
+                    };
+
+                    var response = client.MigrationItem.TestMigrateCleanup(
+                        VMwareFabricName,
+                        VMwareContainerName,
+                        "vmwareMigItem1",
+                        testMigrateCleanupInput,
                         RequestHeaders);
 
                     // Get the item.

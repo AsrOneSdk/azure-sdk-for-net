@@ -31,6 +31,64 @@ namespace Microsoft.Azure.Management.SiteRecovery
     public static partial class MigrationItemOperationsExtensions
     {
         /// <summary>
+        /// Execute complete migration for the given item.
+        /// </summary>
+        /// <param name='operations'>
+        /// Reference to the
+        /// Microsoft.Azure.Management.SiteRecovery.IMigrationItemOperations.
+        /// </param>
+        /// <param name='fabricName'>
+        /// Required. Fabric name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Required. Protection container name.
+        /// </param>
+        /// <param name='migrationItemName'>
+        /// Required. Migration item name.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Optional. Request header parameters.
+        /// </param>
+        /// <returns>
+        /// A standard service response for long running operations.
+        /// </returns>
+        public static LongRunningOperationResponse BeginCompleteMigration(this IMigrationItemOperations operations, string fabricName, string protectionContainerName, string migrationItemName, CustomRequestHeaders customRequestHeaders)
+        {
+            return Task.Factory.StartNew((object s) => 
+            {
+                return ((IMigrationItemOperations)s).BeginCompleteMigrationAsync(fabricName, protectionContainerName, migrationItemName, customRequestHeaders);
+            }
+            , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+        }
+        
+        /// <summary>
+        /// Execute complete migration for the given item.
+        /// </summary>
+        /// <param name='operations'>
+        /// Reference to the
+        /// Microsoft.Azure.Management.SiteRecovery.IMigrationItemOperations.
+        /// </param>
+        /// <param name='fabricName'>
+        /// Required. Fabric name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Required. Protection container name.
+        /// </param>
+        /// <param name='migrationItemName'>
+        /// Required. Migration item name.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Optional. Request header parameters.
+        /// </param>
+        /// <returns>
+        /// A standard service response for long running operations.
+        /// </returns>
+        public static Task<LongRunningOperationResponse> BeginCompleteMigrationAsync(this IMigrationItemOperations operations, string fabricName, string protectionContainerName, string migrationItemName, CustomRequestHeaders customRequestHeaders)
+        {
+            return operations.BeginCompleteMigrationAsync(fabricName, protectionContainerName, migrationItemName, customRequestHeaders, CancellationToken.None);
+        }
+        
+        /// <summary>
         /// Disable migration for the given item.
         /// </summary>
         /// <param name='operations'>
@@ -281,6 +339,128 @@ namespace Microsoft.Azure.Management.SiteRecovery
         }
         
         /// <summary>
+        /// Execute test migrate cleanup for the given item.
+        /// </summary>
+        /// <param name='operations'>
+        /// Reference to the
+        /// Microsoft.Azure.Management.SiteRecovery.IMigrationItemOperations.
+        /// </param>
+        /// <param name='fabricName'>
+        /// Required. Fabric name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Required. Protection container name.
+        /// </param>
+        /// <param name='migrationItemName'>
+        /// Required. Migration item name.
+        /// </param>
+        /// <param name='input'>
+        /// Required. Test migrate cleanup input.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Optional. Request header parameters.
+        /// </param>
+        /// <returns>
+        /// A standard service response for long running operations.
+        /// </returns>
+        public static LongRunningOperationResponse BeginTestMigrateCleanup(this IMigrationItemOperations operations, string fabricName, string protectionContainerName, string migrationItemName, TestMigrateCleanupInput input, CustomRequestHeaders customRequestHeaders)
+        {
+            return Task.Factory.StartNew((object s) => 
+            {
+                return ((IMigrationItemOperations)s).BeginTestMigrateCleanupAsync(fabricName, protectionContainerName, migrationItemName, input, customRequestHeaders);
+            }
+            , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+        }
+        
+        /// <summary>
+        /// Execute test migrate cleanup for the given item.
+        /// </summary>
+        /// <param name='operations'>
+        /// Reference to the
+        /// Microsoft.Azure.Management.SiteRecovery.IMigrationItemOperations.
+        /// </param>
+        /// <param name='fabricName'>
+        /// Required. Fabric name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Required. Protection container name.
+        /// </param>
+        /// <param name='migrationItemName'>
+        /// Required. Migration item name.
+        /// </param>
+        /// <param name='input'>
+        /// Required. Test migrate cleanup input.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Optional. Request header parameters.
+        /// </param>
+        /// <returns>
+        /// A standard service response for long running operations.
+        /// </returns>
+        public static Task<LongRunningOperationResponse> BeginTestMigrateCleanupAsync(this IMigrationItemOperations operations, string fabricName, string protectionContainerName, string migrationItemName, TestMigrateCleanupInput input, CustomRequestHeaders customRequestHeaders)
+        {
+            return operations.BeginTestMigrateCleanupAsync(fabricName, protectionContainerName, migrationItemName, input, customRequestHeaders, CancellationToken.None);
+        }
+        
+        /// <summary>
+        /// Execute complete migration for the given item.
+        /// </summary>
+        /// <param name='operations'>
+        /// Reference to the
+        /// Microsoft.Azure.Management.SiteRecovery.IMigrationItemOperations.
+        /// </param>
+        /// <param name='fabricName'>
+        /// Required. Fabric name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Required. Protection container name.
+        /// </param>
+        /// <param name='migrationItemName'>
+        /// Required. Migration item name.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Optional. Request header parameters.
+        /// </param>
+        /// <returns>
+        /// A standard service response for long running operations.
+        /// </returns>
+        public static LongRunningOperationResponse CompleteMigration(this IMigrationItemOperations operations, string fabricName, string protectionContainerName, string migrationItemName, CustomRequestHeaders customRequestHeaders)
+        {
+            return Task.Factory.StartNew((object s) => 
+            {
+                return ((IMigrationItemOperations)s).CompleteMigrationAsync(fabricName, protectionContainerName, migrationItemName, customRequestHeaders);
+            }
+            , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+        }
+        
+        /// <summary>
+        /// Execute complete migration for the given item.
+        /// </summary>
+        /// <param name='operations'>
+        /// Reference to the
+        /// Microsoft.Azure.Management.SiteRecovery.IMigrationItemOperations.
+        /// </param>
+        /// <param name='fabricName'>
+        /// Required. Fabric name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Required. Protection container name.
+        /// </param>
+        /// <param name='migrationItemName'>
+        /// Required. Migration item name.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Optional. Request header parameters.
+        /// </param>
+        /// <returns>
+        /// A standard service response for long running operations.
+        /// </returns>
+        public static Task<LongRunningOperationResponse> CompleteMigrationAsync(this IMigrationItemOperations operations, string fabricName, string protectionContainerName, string migrationItemName, CustomRequestHeaders customRequestHeaders)
+        {
+            return operations.CompleteMigrationAsync(fabricName, protectionContainerName, migrationItemName, customRequestHeaders, CancellationToken.None);
+        }
+        
+        /// <summary>
         /// Disable migration for the given item.
         /// </summary>
         /// <param name='operations'>
@@ -476,6 +656,52 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// Service response for migration items operation.
         /// </returns>
+        public static MigrationItemOperationResponse GetCompleteMigrationStatus(this IMigrationItemOperations operations, string operationStatusLink)
+        {
+            return Task.Factory.StartNew((object s) => 
+            {
+                return ((IMigrationItemOperations)s).GetCompleteMigrationStatusAsync(operationStatusLink);
+            }
+            , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+        }
+        
+        /// <summary>
+        /// The Get Operation Status operation returns the status of the
+        /// specified operation. After calling an asynchronous operation, you
+        /// can call Get Operation Status to determine whether the operation
+        /// has succeeded, failed, or is still in progress.
+        /// </summary>
+        /// <param name='operations'>
+        /// Reference to the
+        /// Microsoft.Azure.Management.SiteRecovery.IMigrationItemOperations.
+        /// </param>
+        /// <param name='operationStatusLink'>
+        /// Required. Location value returned by the Begin operation.
+        /// </param>
+        /// <returns>
+        /// Service response for migration items operation.
+        /// </returns>
+        public static Task<MigrationItemOperationResponse> GetCompleteMigrationStatusAsync(this IMigrationItemOperations operations, string operationStatusLink)
+        {
+            return operations.GetCompleteMigrationStatusAsync(operationStatusLink, CancellationToken.None);
+        }
+        
+        /// <summary>
+        /// The Get Operation Status operation returns the status of the
+        /// specified operation. After calling an asynchronous operation, you
+        /// can call Get Operation Status to determine whether the operation
+        /// has succeeded, failed, or is still in progress.
+        /// </summary>
+        /// <param name='operations'>
+        /// Reference to the
+        /// Microsoft.Azure.Management.SiteRecovery.IMigrationItemOperations.
+        /// </param>
+        /// <param name='operationStatusLink'>
+        /// Required. Location value returned by the Begin operation.
+        /// </param>
+        /// <returns>
+        /// Service response for migration items operation.
+        /// </returns>
         public static MigrationItemOperationResponse GetDisableMigrationStatus(this IMigrationItemOperations operations, string operationStatusLink)
         {
             return Task.Factory.StartNew((object s) => 
@@ -596,6 +822,52 @@ namespace Microsoft.Azure.Management.SiteRecovery
         public static Task<MigrationItemOperationResponse> GetMigrateStatusAsync(this IMigrationItemOperations operations, string operationStatusLink)
         {
             return operations.GetMigrateStatusAsync(operationStatusLink, CancellationToken.None);
+        }
+        
+        /// <summary>
+        /// The Get Operation Status operation returns the status of the
+        /// specified operation. After calling an asynchronous operation, you
+        /// can call Get Operation Status to determine whether the operation
+        /// has succeeded, failed, or is still in progress.
+        /// </summary>
+        /// <param name='operations'>
+        /// Reference to the
+        /// Microsoft.Azure.Management.SiteRecovery.IMigrationItemOperations.
+        /// </param>
+        /// <param name='operationStatusLink'>
+        /// Required. Location value returned by the Begin operation.
+        /// </param>
+        /// <returns>
+        /// Service response for migration items operation.
+        /// </returns>
+        public static MigrationItemOperationResponse GetTestMigrateCleanupStatus(this IMigrationItemOperations operations, string operationStatusLink)
+        {
+            return Task.Factory.StartNew((object s) => 
+            {
+                return ((IMigrationItemOperations)s).GetTestMigrateCleanupStatusAsync(operationStatusLink);
+            }
+            , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+        }
+        
+        /// <summary>
+        /// The Get Operation Status operation returns the status of the
+        /// specified operation. After calling an asynchronous operation, you
+        /// can call Get Operation Status to determine whether the operation
+        /// has succeeded, failed, or is still in progress.
+        /// </summary>
+        /// <param name='operations'>
+        /// Reference to the
+        /// Microsoft.Azure.Management.SiteRecovery.IMigrationItemOperations.
+        /// </param>
+        /// <param name='operationStatusLink'>
+        /// Required. Location value returned by the Begin operation.
+        /// </param>
+        /// <returns>
+        /// Service response for migration items operation.
+        /// </returns>
+        public static Task<MigrationItemOperationResponse> GetTestMigrateCleanupStatusAsync(this IMigrationItemOperations operations, string operationStatusLink)
+        {
+            return operations.GetTestMigrateCleanupStatusAsync(operationStatusLink, CancellationToken.None);
         }
         
         /// <summary>
@@ -920,6 +1192,70 @@ namespace Microsoft.Azure.Management.SiteRecovery
         public static Task<LongRunningOperationResponse> TestMigrateAsync(this IMigrationItemOperations operations, string fabricName, string protectionContainerName, string migrationItemName, TestMigrateInput input, CustomRequestHeaders customRequestHeaders)
         {
             return operations.TestMigrateAsync(fabricName, protectionContainerName, migrationItemName, input, customRequestHeaders, CancellationToken.None);
+        }
+        
+        /// <summary>
+        /// Execute test migrate cleanup for the given item.
+        /// </summary>
+        /// <param name='operations'>
+        /// Reference to the
+        /// Microsoft.Azure.Management.SiteRecovery.IMigrationItemOperations.
+        /// </param>
+        /// <param name='fabricName'>
+        /// Required. Fabric name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Required. Protection container name.
+        /// </param>
+        /// <param name='migrationItemName'>
+        /// Required. Migration item name.
+        /// </param>
+        /// <param name='input'>
+        /// Required. Test migrate cleanup input.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Optional. Request header parameters.
+        /// </param>
+        /// <returns>
+        /// A standard service response for long running operations.
+        /// </returns>
+        public static LongRunningOperationResponse TestMigrateCleanup(this IMigrationItemOperations operations, string fabricName, string protectionContainerName, string migrationItemName, TestMigrateCleanupInput input, CustomRequestHeaders customRequestHeaders)
+        {
+            return Task.Factory.StartNew((object s) => 
+            {
+                return ((IMigrationItemOperations)s).TestMigrateCleanupAsync(fabricName, protectionContainerName, migrationItemName, input, customRequestHeaders);
+            }
+            , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+        }
+        
+        /// <summary>
+        /// Execute test migrate cleanup for the given item.
+        /// </summary>
+        /// <param name='operations'>
+        /// Reference to the
+        /// Microsoft.Azure.Management.SiteRecovery.IMigrationItemOperations.
+        /// </param>
+        /// <param name='fabricName'>
+        /// Required. Fabric name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Required. Protection container name.
+        /// </param>
+        /// <param name='migrationItemName'>
+        /// Required. Migration item name.
+        /// </param>
+        /// <param name='input'>
+        /// Required. Test migrate cleanup input.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Optional. Request header parameters.
+        /// </param>
+        /// <returns>
+        /// A standard service response for long running operations.
+        /// </returns>
+        public static Task<LongRunningOperationResponse> TestMigrateCleanupAsync(this IMigrationItemOperations operations, string fabricName, string protectionContainerName, string migrationItemName, TestMigrateCleanupInput input, CustomRequestHeaders customRequestHeaders)
+        {
+            return operations.TestMigrateCleanupAsync(fabricName, protectionContainerName, migrationItemName, input, customRequestHeaders, CancellationToken.None);
         }
     }
 }
