@@ -29,7 +29,7 @@ namespace SiteRecovery.Tests.ScenarioTests
         // VMware fabric input
         private const string VMwareFabricName = "vmwarefabric1";
         private const string VMwareContainerName = "vmwarefabric1-cloud";
-        private const string VMwareSiteId = "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/lshaiRG/providers/Microsoft.VMware/sites/vmwSite1";
+        private const string VMwareSiteId = "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/lshaiRG/providers/Microsoft.OffAzure/VMwareSites/vmwSite1";
 
         // Azure fabric input.
         private const string AzureFabricName = "azurefabric-sea";
@@ -52,22 +52,25 @@ namespace SiteRecovery.Tests.ScenarioTests
 
         // Cloud pairing input.
         private const string ContainerMappingName = "vmwaremapping1";
-        private const string KeyVaultArmId = "/subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/TestRG1/providers/Microsoft.KeyVault/vaults/TestKV1";
+        private const string KeyVaultId = "/subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/TestRG1/providers/Microsoft.KeyVault/vaults/TestKV1";
         private const string KeyVaultUri = "https://lubnapc-srskv.vault.azure.net/";
-        private const string StorageAccountArmId = "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/lshaiRG/providers/Microsoft.Storage/storageAccounts/lshaistorage";
+        private const string StorageAccountId = "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/lshaiRG/providers/Microsoft.Storage/storageAccounts/lshaistorage";
         private const string StorageAccountSasSecretName = "lshaistorage-ownerSas";
         private const string ServiceBusConnectionStringSecretName = "SBusRootManageSharedAccessKey";
 
         // Enable input.
-        private const string VMwareVmArmId = "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/lshaiRG/providers/Microsoft.VMware/sites/vmwSite1/machines/vmwareVm1";
+        private const string VMwareVmId = "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/lshaiRG/providers/Microsoft.OffAzure/VMwareSites/vmwSite1/machines/vmwareVm1";
         private const string TargetResourceGroupId = "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/lshaiRG";
         private const string TargetNetworkId = "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/knasrvnet/providers/Microsoft.Network/virtualNetworks/asrvnet";
         private const string TargetSubnetId = "default";
         private const string LogStorageAccountArmId = "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/lshaiRG/providers/Microsoft.Storage/storageAccounts/lshaistorage";
         private const string LogStorageAccountSasSecretName =  "KvSecret";
-        private const string DataMoverRunAsAccountId = "DMRunAs";
-        private const string SnapshotRunAsAccountId = "SnRunAs";
+        private const string DataMoverRunAsAccountId = "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/lshaiRG/providers/Microsoft.OffAzure/VMwareSites/vmwSite1/runasaccounts/DMRunAs";
+        private const string SnapshotRunAsAccountId = "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/lshaiRG/providers/Microsoft.OffAzure/VMwareSites/vmwSite1/runasaccounts/SnRunAs";
         private const string TargetAvailabilitySetId = "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/lshaiRG/providers/Microsoft.Compute/availabilitySets/lshaiAvSet";
+
+        // Test migrate input.
+        private const string TfoNetworkId = "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/MPK-V2A/providers/Microsoft.Network/virtualNetworks/liangnetwork";
 
         [Fact]
         public void Migration_ContainerPairing()
@@ -195,9 +198,9 @@ namespace SiteRecovery.Tests.ScenarioTests
                             TargetProtectionContainerId = azureContainer.Id,
                             ProviderSpecificInput = new VMwareCbtPolicyContainerMappingInput()
                             {
-                                KeyVaultArmId = KeyVaultArmId,
+                                KeyVaultId = KeyVaultId,
                                 KeyVaultUri = KeyVaultUri,
-                                StorageAccountArmId = StorageAccountArmId,
+                                StorageAccountId = StorageAccountId,
                                 StorageAccountSasSecretName = StorageAccountSasSecretName,
                                 ServiceBusConnectionStringSecretName = ServiceBusConnectionStringSecretName
                             }
@@ -340,7 +343,7 @@ namespace SiteRecovery.Tests.ScenarioTests
                             DiskId = "12345",
                             IsOSDisk = "true",
                             StorageAccountId = null,
-                            LogStorageAccountId = StorageAccountArmId,
+                            LogStorageAccountId = StorageAccountId,
                             LogStorageAccountSasSecretName = StorageAccountSasSecretName
                         },
                         new VMwareCbtDiskInput
@@ -348,7 +351,7 @@ namespace SiteRecovery.Tests.ScenarioTests
                             DiskId = "67890",
                             IsOSDisk = "false",
                             StorageAccountId = null,
-                            LogStorageAccountId = StorageAccountArmId,
+                            LogStorageAccountId = StorageAccountId,
                             LogStorageAccountSasSecretName = StorageAccountSasSecretName
                         }
                     };
@@ -360,7 +363,7 @@ namespace SiteRecovery.Tests.ScenarioTests
                             PolicyId = vmwarePolicy.Id,
                             ProviderSpecificDetails = new VMwareCbtEnableMigrationInput
                             {
-                                VMwareMachineId = VMwareVmArmId,
+                                VMwareMachineId = VMwareVmId,
                                 DisksToInclude = disksInput,
                                 LicenseType = "WindowsServer",
                                 TargetAzureVmName = "migVm1",
@@ -423,6 +426,93 @@ namespace SiteRecovery.Tests.ScenarioTests
                     var items = client.MigrationItem.List(
                         VMwareFabricName,
                         VMwareContainerName,
+                        RequestHeaders);
+                }
+                catch (Exception)
+                {
+                    Debugger.Break();
+                    throw;
+                }
+            }
+        }
+
+        [Fact]
+        public void Migration_Migrate()
+        {
+            using (UndoContext context = UndoContext.Current)
+            {
+                try
+                {
+                    context.Start();
+                    var client = GetSiteRecoveryClient(CustomHttpHandler, "Migration");
+
+                    var migrateInput = new MigrateInput
+                    {
+                        Properties = new MigrateInputProperties
+                        {
+                            ProviderSpecificDetails = new VMwareCbtMigrateInput
+                            {
+                                RecoveryPointId = null
+                            }
+                        }
+                    };
+
+                    var response = client.MigrationItem.Migrate(
+                        VMwareFabricName,
+                        VMwareContainerName,
+                        "vmwareMigItem1",
+                        migrateInput,
+                        RequestHeaders);
+
+                    // Get the item.
+                    var migItem = client.MigrationItem.Get(
+                        VMwareFabricName,
+                        VMwareContainerName,
+                        "vmwareMigItem1",
+                        RequestHeaders);
+                }
+                catch (Exception)
+                {
+                    Debugger.Break();
+                    throw;
+                }
+            }
+        }
+
+        [Fact]
+        public void Migration_TestMigrate()
+        {
+            using (UndoContext context = UndoContext.Current)
+            {
+                try
+                {
+                    context.Start();
+                    var client = GetSiteRecoveryClient(CustomHttpHandler, "Migration");
+
+                    var testMigrateInput = new TestMigrateInput
+                    {
+                        Properties = new TestMigrateInputProperties
+                        {
+                            ProviderSpecificDetails = new VMwareCbtTestMigrateInput
+                            {
+                                RecoveryPointId = null,
+                                NetworkId = TfoNetworkId
+                            }
+                        }
+                    };
+
+                    var response = client.MigrationItem.TestMigrate(
+                        VMwareFabricName,
+                        VMwareContainerName,
+                        "vmwareMigItem1",
+                        testMigrateInput,
+                        RequestHeaders);
+
+                    // Get the item.
+                    var migItem = client.MigrationItem.Get(
+                        VMwareFabricName,
+                        VMwareContainerName,
+                        "vmwareMigItem1",
                         RequestHeaders);
                 }
                 catch (Exception)
