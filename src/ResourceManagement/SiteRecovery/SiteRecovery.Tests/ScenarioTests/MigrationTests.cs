@@ -29,19 +29,19 @@ namespace SiteRecovery.Tests.ScenarioTests
         // VMware fabric input
         private const string VMwareFabricName = "vmwarefabric1";
         private const string VMwareContainerName = "vmwarefabric1-cloud";
-        private const string VMwareSiteId = "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/lshaiRG/providers/Microsoft.OffAzure/VMwareSites/vmwSite1";
+        private const string VMwareSiteId = "/subscriptions/2a57d0a2-0955-4d1e-aa87-a0dbb87cbcab/resourceGroups/amit636640800574045018rg/providers/Microsoft.OffAzure/VMwareSites/amit636640800574045018Site";
 
         // Azure fabric input.
-        private const string AzureFabricName = "azurefabric-sea";
-        private const string AzureContainerName = "azurefabric-sea-cloud";
-        private const string AzureFabricLocation = "Southeast Asia";
+        private const string AzureFabricName = "azurefabric1";
+        private const string AzureContainerName = "azurefabriccloud1";
+        private const string AzureFabricLocation = "eastus";
 
         // VMware DRA input.
         private const string VMwareDraName = "vmwaredra1";
         private const string TenantId = "72f988bf-86f1-41af-91ab-2d7cd011db47";
-        private const string ApplicationId = "6d3522b5-e5ee-429d-ba62-0c0866bbc6f2";
-        private const string ObjectId = "771b8f96-a189-40b6-a7a0-bca3db0e76d1";
-        private const string Audience = "https://GSINHA-Z230";
+        private const string ApplicationId = "c7e42964-c7e3-403e-b10d-5fcf32b04488";
+        private const string ObjectId = "facfb768-c11c-42b3-b8c4-c63de2909c76";
+        private const string Audience = "http://admi636639380186746585adappspnsvcagt";
         private const string AadAuthority = "https://login.microsoftonline.com";
 
         // VMware policy input.
@@ -52,22 +52,23 @@ namespace SiteRecovery.Tests.ScenarioTests
 
         // Cloud pairing input.
         private const string ContainerMappingName = "vmwaremapping1";
-        private const string KeyVaultId = "/subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/TestRG1/providers/Microsoft.KeyVault/vaults/TestKV1";
-        private const string KeyVaultUri = "https://lubnapc-srskv.vault.azure.net/";
-        private const string StorageAccountId = "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/lshaiRG/providers/Microsoft.Storage/storageAccounts/lshaistorage";
-        private const string StorageAccountSasSecretName = "lshaistorage-ownerSas";
-        private const string ServiceBusConnectionStringSecretName = "SBusRootManageSharedAccessKey";
+        private const string KeyVaultId = "/subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/Admi636639380186746585RG/providers/Microsoft.KeyVault/vaults/Admi636639380186746585KV";
+        private const string KeyVaultUri = "https://admi636639380186746585kv.vault.azure.net/";
+        private const string StorageAccountId = "/subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/Admi636639380186746585RG/providers/Microsoft.Storage/storageAccounts/admi636639380186746585sa";
+        private const string StorageAccountSasSecretName = "admi636639380186746585sa-admi636639380186746585sasas";
+        private const string ServiceBusConnectionStringSecretName = "Admi636639380186746585sbus-secret";
 
         // Enable input.
-        private const string VMwareVmId = "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/lshaiRG/providers/Microsoft.OffAzure/VMwareSites/vmwSite1/machines/vmwareVm1";
-        private const string TargetResourceGroupId = "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/lshaiRG";
-        private const string TargetNetworkId = "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/knasrvnet/providers/Microsoft.Network/virtualNetworks/asrvnet";
-        private const string TargetSubnetId = "default";
-        private const string LogStorageAccountArmId = "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/lshaiRG/providers/Microsoft.Storage/storageAccounts/lshaistorage";
-        private const string LogStorageAccountSasSecretName =  "KvSecret";
-        private const string DataMoverRunAsAccountId = "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/lshaiRG/providers/Microsoft.OffAzure/VMwareSites/vmwSite1/runasaccounts/DMRunAs";
-        private const string SnapshotRunAsAccountId = "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/lshaiRG/providers/Microsoft.OffAzure/VMwareSites/vmwSite1/runasaccounts/SnRunAs";
-        private const string TargetAvailabilitySetId = "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/lshaiRG/providers/Microsoft.Compute/availabilitySets/lshaiAvSet";
+        private const string VMwareVmId = "/subscriptions/2a57d0a2-0955-4d1e-aa87-a0dbb87cbcab/resourceGroups/amit636640800574045018rg/providers/Microsoft.OffAzure/VMwareSites/amit636640800574045018Site/machines/amit636640800574045018vcenter_421e73ad-0574-b763-e92a-832f9c522241";
+        private const string TargetResourceGroupId = "/subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/Admi636639380186746585RG";
+        private const string TargetNetworkId = null;
+        private const string TargetSubnetId = null;
+        private const string ReplicationStorageAccountId = "/subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/Admi636639380186746585RG/providers/Microsoft.Storage/storageAccounts/gwyreplicationsa";
+        private const string LogStorageAccountId = "/subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/Admi636639380186746585RG/providers/Microsoft.Storage/storageAccounts/gwylogsa";
+        private const string LogStorageAccountSasSecretName = "gwylogsa-gwylogsasas";
+        private const string DataMoverRunAsAccountId = "/subscriptions/2a57d0a2-0955-4d1e-aa87-a0dbb87cbcab/resourceGroups/amit636640800574045018rg/providers/Microsoft.OffAzure/VMwareSites/amit636640800574045018Site/runasaccounts/account1";
+        private const string SnapshotRunAsAccountId = "/subscriptions/2a57d0a2-0955-4d1e-aa87-a0dbb87cbcab/resourceGroups/amit636640800574045018rg/providers/Microsoft.OffAzure/VMwareSites/amit636640800574045018Site/runasaccounts/account1";
+        private const string TargetAvailabilitySetId = null;
 
         // Test migrate input.
         private const string TfoNetworkId = "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/MPK-V2A/providers/Microsoft.Network/virtualNetworks/liangnetwork";
@@ -340,19 +341,11 @@ namespace SiteRecovery.Tests.ScenarioTests
                     {
                         new VMwareCbtDiskInput
                         {
-                            DiskId = "12345",
+                            DiskId = "2d259366-fabc-4d46-9389-36f4d9c49c56",
                             IsOSDisk = "true",
-                            StorageAccountId = null,
-                            LogStorageAccountId = StorageAccountId,
-                            LogStorageAccountSasSecretName = StorageAccountSasSecretName
-                        },
-                        new VMwareCbtDiskInput
-                        {
-                            DiskId = "67890",
-                            IsOSDisk = "false",
-                            StorageAccountId = null,
-                            LogStorageAccountId = StorageAccountId,
-                            LogStorageAccountSasSecretName = StorageAccountSasSecretName
+                            StorageAccountId = ReplicationStorageAccountId,
+                            LogStorageAccountId = LogStorageAccountId,
+                            LogStorageAccountSasSecretName = LogStorageAccountSasSecretName
                         }
                     };
 
