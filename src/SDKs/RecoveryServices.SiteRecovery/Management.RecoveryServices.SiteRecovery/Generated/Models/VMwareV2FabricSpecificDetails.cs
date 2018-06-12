@@ -14,7 +14,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
     using System.Linq;
 
     /// <summary>
-    /// VMwareV2 fabric Specific Details.
+    /// VMwareV2 fabric specific details.
     /// </summary>
     [Newtonsoft.Json.JsonObject("VMwareV2")]
     public partial class VMwareV2FabricSpecificDetails : FabricSpecificDetails
@@ -32,18 +32,13 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// Initializes a new instance of the VMwareV2FabricSpecificDetails
         /// class.
         /// </summary>
-        /// <param name="srsServiceEndpoint">The endpoint for making requests
-        /// to the SRS Service.</param>
-        /// <param name="rcmServiceEndpoint">The endpoint for making requests
-        /// to the RCM Service.</param>
-        /// <param name="keyVaultUrl">The Key Vault URL.</param>
-        /// <param name="keyVaultResourceArmId">The Key Vault ARM Id.</param>
-        public VMwareV2FabricSpecificDetails(string srsServiceEndpoint = default(string), string rcmServiceEndpoint = default(string), string keyVaultUrl = default(string), string keyVaultResourceArmId = default(string))
+        /// <param name="vmwareSiteArmId">The ARM Id of the VMware
+        /// site.</param>
+        /// <param name="srsServiceEndpoint">The SRS service endpoint.</param>
+        public VMwareV2FabricSpecificDetails(string vmwareSiteArmId = default(string), string srsServiceEndpoint = default(string))
         {
+            VmwareSiteArmId = vmwareSiteArmId;
             SrsServiceEndpoint = srsServiceEndpoint;
-            RcmServiceEndpoint = rcmServiceEndpoint;
-            KeyVaultUrl = keyVaultUrl;
-            KeyVaultResourceArmId = keyVaultResourceArmId;
             CustomInit();
         }
 
@@ -53,28 +48,16 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets the endpoint for making requests to the SRS Service.
+        /// Gets or sets the ARM Id of the VMware site.
+        /// </summary>
+        [JsonProperty(PropertyName = "vmwareSiteArmId")]
+        public string VmwareSiteArmId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the SRS service endpoint.
         /// </summary>
         [JsonProperty(PropertyName = "srsServiceEndpoint")]
         public string SrsServiceEndpoint { get; set; }
-
-        /// <summary>
-        /// Gets or sets the endpoint for making requests to the RCM Service.
-        /// </summary>
-        [JsonProperty(PropertyName = "rcmServiceEndpoint")]
-        public string RcmServiceEndpoint { get; set; }
-
-        /// <summary>
-        /// Gets or sets the Key Vault URL.
-        /// </summary>
-        [JsonProperty(PropertyName = "keyVaultUrl")]
-        public string KeyVaultUrl { get; set; }
-
-        /// <summary>
-        /// Gets or sets the Key Vault ARM Id.
-        /// </summary>
-        [JsonProperty(PropertyName = "keyVaultResourceArmId")]
-        public string KeyVaultResourceArmId { get; set; }
 
     }
 }

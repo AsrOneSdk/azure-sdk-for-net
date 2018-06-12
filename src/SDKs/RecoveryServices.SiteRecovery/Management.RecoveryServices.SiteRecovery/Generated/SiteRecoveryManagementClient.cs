@@ -122,6 +122,11 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
         public virtual IReplicationProtectionContainersOperations ReplicationProtectionContainers { get; private set; }
 
         /// <summary>
+        /// Gets the IReplicationMigrationItemsOperations.
+        /// </summary>
+        public virtual IReplicationMigrationItemsOperations ReplicationMigrationItems { get; private set; }
+
+        /// <summary>
         /// Gets the IReplicationProtectableItemsOperations.
         /// </summary>
         public virtual IReplicationProtectableItemsOperations ReplicationProtectableItems { get; private set; }
@@ -395,6 +400,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             ReplicationNetworks = new ReplicationNetworksOperations(this);
             ReplicationNetworkMappings = new ReplicationNetworkMappingsOperations(this);
             ReplicationProtectionContainers = new ReplicationProtectionContainersOperations(this);
+            ReplicationMigrationItems = new ReplicationMigrationItemsOperations(this);
             ReplicationProtectableItems = new ReplicationProtectableItemsOperations(this);
             ReplicationProtectedItems = new ReplicationProtectedItemsOperations(this);
             RecoveryPoints = new RecoveryPointsOperations(this);
@@ -458,6 +464,8 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<RecoveryPlanActionDetails>("instanceType"));
             SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<DisableProtectionProviderSpecificInput>("instanceType"));
             DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<DisableProtectionProviderSpecificInput>("instanceType"));
+            SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<EnableMigrationProviderSpecificInput>("instanceType"));
+            DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<EnableMigrationProviderSpecificInput>("instanceType"));
             SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<EnableProtectionProviderSpecificInput>("instanceType"));
             DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<EnableProtectionProviderSpecificInput>("instanceType"));
             SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<EventProviderSpecificDetails>("instanceType"));
@@ -472,6 +480,8 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<FabricSpecificUpdateNetworkMappingInput>("instanceType"));
             SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<JobDetails>("instanceType"));
             DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<JobDetails>("instanceType"));
+            SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<MigrationProviderSpecificSettings>("instanceType"));
+            DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<MigrationProviderSpecificSettings>("instanceType"));
             SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<NetworkMappingFabricSpecificSettings>("instanceType"));
             DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<NetworkMappingFabricSpecificSettings>("instanceType"));
             SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<ProviderSpecificFailoverInput>("instanceType"));

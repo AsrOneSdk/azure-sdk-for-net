@@ -119,6 +119,11 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
         IReplicationProtectionContainersOperations ReplicationProtectionContainers { get; }
 
         /// <summary>
+        /// Gets the IReplicationMigrationItemsOperations.
+        /// </summary>
+        IReplicationMigrationItemsOperations ReplicationMigrationItems { get; }
+
+        /// <summary>
         /// Gets the IReplicationProtectableItemsOperations.
         /// </summary>
         IReplicationProtectableItemsOperations ReplicationProtectableItems { get; }

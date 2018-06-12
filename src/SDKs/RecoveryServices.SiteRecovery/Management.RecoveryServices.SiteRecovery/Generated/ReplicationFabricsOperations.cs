@@ -51,7 +51,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
         public SiteRecoveryManagementClient Client { get; private set; }
 
         /// <summary>
-        /// Gets the list of ASR fabrics
+        /// Gets the list of ASR fabrics.
         /// </summary>
         /// <remarks>
         /// Gets a list of the Azure Site Recovery fabrics in the vault.
@@ -446,7 +446,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
         /// </summary>
         /// <remarks>
         /// The operation to create an Azure Site Recovery fabric (for e.g. Hyper-V
-        /// site)
+        /// site).
         /// </remarks>
         /// <param name='fabricName'>
         /// Name of the ASR fabric.
@@ -566,7 +566,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
         /// The operation to delete or remove an Azure Site Recovery fabric.
         /// </remarks>
         /// <param name='fabricName'>
-        /// ASR fabric to delete
+        /// ASR fabric to delete.
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -611,7 +611,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
         /// </summary>
         /// <remarks>
         /// The operation to create an Azure Site Recovery fabric (for e.g. Hyper-V
-        /// site)
+        /// site).
         /// </remarks>
         /// <param name='fabricName'>
         /// Name of the ASR fabric.
@@ -1601,7 +1601,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
         /// The operation to delete or remove an Azure Site Recovery fabric.
         /// </remarks>
         /// <param name='fabricName'>
-        /// ASR fabric to delete
+        /// ASR fabric to delete.
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -1988,7 +1988,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
         }
 
         /// <summary>
-        /// Gets the list of ASR fabrics
+        /// Gets the list of ASR fabrics.
         /// </summary>
         /// <remarks>
         /// Gets a list of the Azure Site Recovery fabrics in the vault.

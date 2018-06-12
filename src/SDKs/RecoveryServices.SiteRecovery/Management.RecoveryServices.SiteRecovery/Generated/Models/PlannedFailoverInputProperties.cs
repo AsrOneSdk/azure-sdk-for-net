@@ -33,7 +33,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// </summary>
         /// <param name="failoverDirection">Failover direction.</param>
         /// <param name="providerSpecificDetails">Provider specific
-        /// settings</param>
+        /// settings.</param>
         public PlannedFailoverInputProperties(string failoverDirection = default(string), ProviderSpecificFailoverInput providerSpecificDetails = default(ProviderSpecificFailoverInput))
         {
             FailoverDirection = failoverDirection;
@@ -53,7 +53,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         public string FailoverDirection { get; set; }
 
         /// <summary>
-        /// Gets or sets provider specific settings
+        /// Gets or sets provider specific settings.
         /// </summary>
         [JsonProperty(PropertyName = "providerSpecificDetails")]
         public ProviderSpecificFailoverInput ProviderSpecificDetails { get; set; }

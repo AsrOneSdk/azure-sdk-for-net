@@ -31,7 +31,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             /// The operations group for this extension method.
             /// </param>
             /// <param name='fabricName'>
-            /// Fabric name
+            /// Fabric name.
             /// </param>
             public static IPage<RecoveryServicesProvider> ListByReplicationFabrics(this IReplicationRecoveryServicesProvidersOperations operations, string fabricName)
             {
@@ -48,7 +48,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             /// The operations group for this extension method.
             /// </param>
             /// <param name='fabricName'>
-            /// Fabric name
+            /// Fabric name.
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
@@ -74,7 +74,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             /// Fabric name.
             /// </param>
             /// <param name='providerName'>
-            /// Recovery services provider name
+            /// Recovery services provider name.
             /// </param>
             public static RecoveryServicesProvider Get(this IReplicationRecoveryServicesProvidersOperations operations, string fabricName, string providerName)
             {
@@ -94,7 +94,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             /// Fabric name.
             /// </param>
             /// <param name='providerName'>
-            /// Recovery services provider name
+            /// Recovery services provider name.
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
@@ -108,7 +108,59 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             }
 
             /// <summary>
-            /// Purges recovery service provider from fabric
+            /// Adds a recovery services provider.
+            /// </summary>
+            /// <remarks>
+            /// The operation to add a recovery services provider.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='fabricName'>
+            /// Fabric name.
+            /// </param>
+            /// <param name='providerName'>
+            /// Recovery services provider name.
+            /// </param>
+            /// <param name='addProviderInput'>
+            /// Add provider input.
+            /// </param>
+            public static RecoveryServicesProvider Create(this IReplicationRecoveryServicesProvidersOperations operations, string fabricName, string providerName, AddRecoveryServicesProviderInput addProviderInput)
+            {
+                return operations.CreateAsync(fabricName, providerName, addProviderInput).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Adds a recovery services provider.
+            /// </summary>
+            /// <remarks>
+            /// The operation to add a recovery services provider.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='fabricName'>
+            /// Fabric name.
+            /// </param>
+            /// <param name='providerName'>
+            /// Recovery services provider name.
+            /// </param>
+            /// <param name='addProviderInput'>
+            /// Add provider input.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<RecoveryServicesProvider> CreateAsync(this IReplicationRecoveryServicesProvidersOperations operations, string fabricName, string providerName, AddRecoveryServicesProviderInput addProviderInput, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.CreateWithHttpMessagesAsync(fabricName, providerName, addProviderInput, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Purges recovery service provider from fabric.
             /// </summary>
             /// <remarks>
             /// The operation to purge(force delete) a recovery services provider from the
@@ -129,7 +181,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             }
 
             /// <summary>
-            /// Purges recovery service provider from fabric
+            /// Purges recovery service provider from fabric.
             /// </summary>
             /// <remarks>
             /// The operation to purge(force delete) a recovery services provider from the
@@ -208,7 +260,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             /// </summary>
             /// <remarks>
             /// The operation to removes/delete(unregister) a recovery services provider
-            /// from the vault
+            /// from the vault.
             /// </remarks>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -232,7 +284,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             /// </summary>
             /// <remarks>
             /// The operation to removes/delete(unregister) a recovery services provider
-            /// from the vault
+            /// from the vault.
             /// </remarks>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -256,7 +308,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             /// is a view only api.
             /// </summary>
             /// <remarks>
-            /// Lists the registered recovery services providers in the vault
+            /// Lists the registered recovery services providers in the vault.
             /// </remarks>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -271,7 +323,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             /// is a view only api.
             /// </summary>
             /// <remarks>
-            /// Lists the registered recovery services providers in the vault
+            /// Lists the registered recovery services providers in the vault.
             /// </remarks>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -288,7 +340,59 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             }
 
             /// <summary>
-            /// Purges recovery service provider from fabric
+            /// Adds a recovery services provider.
+            /// </summary>
+            /// <remarks>
+            /// The operation to add a recovery services provider.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='fabricName'>
+            /// Fabric name.
+            /// </param>
+            /// <param name='providerName'>
+            /// Recovery services provider name.
+            /// </param>
+            /// <param name='addProviderInput'>
+            /// Add provider input.
+            /// </param>
+            public static RecoveryServicesProvider BeginCreate(this IReplicationRecoveryServicesProvidersOperations operations, string fabricName, string providerName, AddRecoveryServicesProviderInput addProviderInput)
+            {
+                return operations.BeginCreateAsync(fabricName, providerName, addProviderInput).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Adds a recovery services provider.
+            /// </summary>
+            /// <remarks>
+            /// The operation to add a recovery services provider.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='fabricName'>
+            /// Fabric name.
+            /// </param>
+            /// <param name='providerName'>
+            /// Recovery services provider name.
+            /// </param>
+            /// <param name='addProviderInput'>
+            /// Add provider input.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<RecoveryServicesProvider> BeginCreateAsync(this IReplicationRecoveryServicesProvidersOperations operations, string fabricName, string providerName, AddRecoveryServicesProviderInput addProviderInput, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.BeginCreateWithHttpMessagesAsync(fabricName, providerName, addProviderInput, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Purges recovery service provider from fabric.
             /// </summary>
             /// <remarks>
             /// The operation to purge(force delete) a recovery services provider from the
@@ -309,7 +413,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             }
 
             /// <summary>
-            /// Purges recovery service provider from fabric
+            /// Purges recovery service provider from fabric.
             /// </summary>
             /// <remarks>
             /// The operation to purge(force delete) a recovery services provider from the
@@ -388,7 +492,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             /// </summary>
             /// <remarks>
             /// The operation to removes/delete(unregister) a recovery services provider
-            /// from the vault
+            /// from the vault.
             /// </remarks>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -412,7 +516,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             /// </summary>
             /// <remarks>
             /// The operation to removes/delete(unregister) a recovery services provider
-            /// from the vault
+            /// from the vault.
             /// </remarks>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -476,7 +580,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             /// is a view only api.
             /// </summary>
             /// <remarks>
-            /// Lists the registered recovery services providers in the vault
+            /// Lists the registered recovery services providers in the vault.
             /// </remarks>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -494,7 +598,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             /// is a view only api.
             /// </summary>
             /// <remarks>
-            /// Lists the registered recovery services providers in the vault
+            /// Lists the registered recovery services providers in the vault.
             /// </remarks>
             /// <param name='operations'>
             /// The operations group for this extension method.

@@ -16,7 +16,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
     using System.Linq;
 
     /// <summary>
-    /// InMageAzureV2 provider specific settings
+    /// InMageAzureV2 provider specific settings.
     /// </summary>
     [Newtonsoft.Json.JsonObject("InMageAzureV2")]
     public partial class InMageAzureV2ReplicationDetails : ReplicationProviderSpecificSettings

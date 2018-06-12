@@ -22,7 +22,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
     public static partial class ReplicationFabricsOperationsExtensions
     {
             /// <summary>
-            /// Gets the list of ASR fabrics
+            /// Gets the list of ASR fabrics.
             /// </summary>
             /// <remarks>
             /// Gets a list of the Azure Site Recovery fabrics in the vault.
@@ -36,7 +36,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             }
 
             /// <summary>
-            /// Gets the list of ASR fabrics
+            /// Gets the list of ASR fabrics.
             /// </summary>
             /// <remarks>
             /// Gets a list of the Azure Site Recovery fabrics in the vault.
@@ -100,7 +100,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             /// </summary>
             /// <remarks>
             /// The operation to create an Azure Site Recovery fabric (for e.g. Hyper-V
-            /// site)
+            /// site).
             /// </remarks>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -121,7 +121,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             /// </summary>
             /// <remarks>
             /// The operation to create an Azure Site Recovery fabric (for e.g. Hyper-V
-            /// site)
+            /// site).
             /// </remarks>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -315,7 +315,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             /// The operations group for this extension method.
             /// </param>
             /// <param name='fabricName'>
-            /// ASR fabric to delete
+            /// ASR fabric to delete.
             /// </param>
             public static void Delete(this IReplicationFabricsOperations operations, string fabricName)
             {
@@ -332,7 +332,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             /// The operations group for this extension method.
             /// </param>
             /// <param name='fabricName'>
-            /// ASR fabric to delete
+            /// ASR fabric to delete.
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
@@ -393,7 +393,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             /// </summary>
             /// <remarks>
             /// The operation to create an Azure Site Recovery fabric (for e.g. Hyper-V
-            /// site)
+            /// site).
             /// </remarks>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -414,7 +414,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             /// </summary>
             /// <remarks>
             /// The operation to create an Azure Site Recovery fabric (for e.g. Hyper-V
-            /// site)
+            /// site).
             /// </remarks>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -608,7 +608,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             /// The operations group for this extension method.
             /// </param>
             /// <param name='fabricName'>
-            /// ASR fabric to delete
+            /// ASR fabric to delete.
             /// </param>
             public static void BeginDelete(this IReplicationFabricsOperations operations, string fabricName)
             {
@@ -625,7 +625,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             /// The operations group for this extension method.
             /// </param>
             /// <param name='fabricName'>
-            /// ASR fabric to delete
+            /// ASR fabric to delete.
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
@@ -682,7 +682,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             }
 
             /// <summary>
-            /// Gets the list of ASR fabrics
+            /// Gets the list of ASR fabrics.
             /// </summary>
             /// <remarks>
             /// Gets a list of the Azure Site Recovery fabrics in the vault.
@@ -699,7 +699,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             }
 
             /// <summary>
-            /// Gets the list of ASR fabrics
+            /// Gets the list of ASR fabrics.
             /// </summary>
             /// <remarks>
             /// Gets a list of the Azure Site Recovery fabrics in the vault.
