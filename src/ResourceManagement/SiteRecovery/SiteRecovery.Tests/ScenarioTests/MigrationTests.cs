@@ -586,5 +586,54 @@ namespace SiteRecovery.Tests.ScenarioTests
                 }
             }
         }
+
+        [Fact]
+        public void Migration_UpdateMigrationItem()
+        {
+            using (UndoContext context = UndoContext.Current)
+            {
+                try
+                {
+                    context.Start();
+                    var client = GetSiteRecoveryClient(CustomHttpHandler, "Migration");
+
+                    var input = new UpdateMigrationItemInput
+                    {
+                        Properties = new UpdateMigrationItemInputProperties
+                        {
+                            ProviderSpecificDetails = new VMwareCbtUpdateMigrationItemInput()
+                            {
+                                TargetAzureVmName == "abcdefghij",
+                                TargetAzureVmSize = "",
+                                TargetNetworkId = "",
+                                TargetAvailabilitySetId = "",
+                                TargetResourceGroupId = "",
+                                LicenseType = ""
+                            }
+                        }
+                    };
+
+                    // Update the item.
+                    var response = client.MigrationItem.UpdateMigrationItem(
+                        VMwareFabricName,
+                        VMwareContainerName,
+                        "vmwareMigItem1",
+                        input,
+                        RequestHeaders);
+
+                    // Get the item.
+                    var migItem = client.MigrationItem.Get(
+                        VMwareFabricName,
+                        VMwareContainerName,
+                        "vmwareMigItem1",
+                        RequestHeaders);
+                }
+                catch (Exception)
+                {
+                    Debugger.Break();
+                    throw;
+                }
+            }
+        }
     }
 }
