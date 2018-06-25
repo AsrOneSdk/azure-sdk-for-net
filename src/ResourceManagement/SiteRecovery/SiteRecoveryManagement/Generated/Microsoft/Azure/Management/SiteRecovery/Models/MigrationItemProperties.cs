@@ -65,6 +65,28 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._friendlyName = value; }
         }
         
+        private System.DateTime? _lastSuccessfulMigrateTime;
+        
+        /// <summary>
+        /// Optional. Gets or sets the last successful migrate time.
+        /// </summary>
+        public System.DateTime? LastSuccessfulMigrateTime
+        {
+            get { return this._lastSuccessfulMigrateTime; }
+            set { this._lastSuccessfulMigrateTime = value; }
+        }
+        
+        private System.DateTime? _lastSuccessfulTestMigrateTime;
+        
+        /// <summary>
+        /// Optional. Gets or sets the last successful test migrate time.
+        /// </summary>
+        public System.DateTime? LastSuccessfulTestMigrateTime
+        {
+            get { return this._lastSuccessfulTestMigrateTime; }
+            set { this._lastSuccessfulTestMigrateTime = value; }
+        }
+        
         private string _migrationState;
         
         /// <summary>

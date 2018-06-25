@@ -88,48 +88,15 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._targetAvailabilitySetId = value; }
         }
         
-        private string _targetAzureNetworkId;
+        private string _targetNetworkId;
         
         /// <summary>
-        /// Optional. Target Azure network ARM Id.
+        /// Optional. Target network ARM Id.
         /// </summary>
-        public string TargetAzureNetworkId
+        public string TargetNetworkId
         {
-            get { return this._targetAzureNetworkId; }
-            set { this._targetAzureNetworkId = value; }
-        }
-        
-        private string _targetAzureSubnetName;
-        
-        /// <summary>
-        /// Optional. Target Azure subnet Id.
-        /// </summary>
-        public string TargetAzureSubnetName
-        {
-            get { return this._targetAzureSubnetName; }
-            set { this._targetAzureSubnetName = value; }
-        }
-        
-        private string _targetAzureVmName;
-        
-        /// <summary>
-        /// Optional. Target Azure VM name.
-        /// </summary>
-        public string TargetAzureVmName
-        {
-            get { return this._targetAzureVmName; }
-            set { this._targetAzureVmName = value; }
-        }
-        
-        private string _targetAzureVmSize;
-        
-        /// <summary>
-        /// Optional. Target Azure VM size.
-        /// </summary>
-        public string TargetAzureVmSize
-        {
-            get { return this._targetAzureVmSize; }
-            set { this._targetAzureVmSize = value; }
+            get { return this._targetNetworkId; }
+            set { this._targetNetworkId = value; }
         }
         
         private string _targetResourceGroupId;
@@ -141,6 +108,39 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         {
             get { return this._targetResourceGroupId; }
             set { this._targetResourceGroupId = value; }
+        }
+        
+        private string _targetSubnetName;
+        
+        /// <summary>
+        /// Optional. Target subnet name.
+        /// </summary>
+        public string TargetSubnetName
+        {
+            get { return this._targetSubnetName; }
+            set { this._targetSubnetName = value; }
+        }
+        
+        private string _targetVmName;
+        
+        /// <summary>
+        /// Optional. Target VM name.
+        /// </summary>
+        public string TargetVmName
+        {
+            get { return this._targetVmName; }
+            set { this._targetVmName = value; }
+        }
+        
+        private string _targetVmSize;
+        
+        /// <summary>
+        /// Optional. Target VM size.
+        /// </summary>
+        public string TargetVmSize
+        {
+            get { return this._targetVmSize; }
+            set { this._targetVmSize = value; }
         }
         
         private string _vMwareMachineId;

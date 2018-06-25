@@ -62,6 +62,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._diskName = value; }
         }
         
+        private string _diskType;
+        
+        /// <summary>
+        /// Optional. Disk type.
+        /// </summary>
+        public string DiskType
+        {
+            get { return this._diskType; }
+            set { this._diskType = value; }
+        }
+        
         private bool _isOSDisk;
         
         /// <summary>

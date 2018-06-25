@@ -506,6 +506,55 @@ namespace Microsoft.Azure.Management.SiteRecovery
         Task<LongRunningOperationResponse> MigrateAsync(string fabricName, string protectionContainerName, string migrationItemName, MigrateInput input, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
         
         /// <summary>
+        /// Get a specific recovery point for a migration item.
+        /// </summary>
+        /// <param name='fabricName'>
+        /// Fabric unique name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Protection container unique name.
+        /// </param>
+        /// <param name='migrationItemName'>
+        /// Migration item name.
+        /// </param>
+        /// <param name='recoveryPointName'>
+        /// Recovery point name.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Request header parameters.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
+        /// The response model for recovery point object.
+        /// </returns>
+        Task<RecoveryPointResponse> RecoveryPointGetAsync(string fabricName, string protectionContainerName, string migrationItemName, string recoveryPointName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        
+        /// <summary>
+        /// Get all recovery points for a migration item.
+        /// </summary>
+        /// <param name='fabricName'>
+        /// Fabric unique name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Protection container unique name.
+        /// </param>
+        /// <param name='migrationItemName'>
+        /// Migration item name.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Request header parameters.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
+        /// The response model for a list of recovery points.
+        /// </returns>
+        Task<RecoveryPointListResponse> RecoveryPointListAsync(string fabricName, string protectionContainerName, string migrationItemName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        
+        /// <summary>
         /// Execute test migration for the given item.
         /// </summary>
         /// <param name='fabricName'>

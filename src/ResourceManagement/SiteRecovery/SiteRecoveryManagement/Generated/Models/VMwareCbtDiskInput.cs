@@ -40,6 +40,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._diskId = value; }
         }
         
+        private string _diskType;
+        
+        /// <summary>
+        /// Optional. Gets or sets disk type.
+        /// </summary>
+        public string DiskType
+        {
+            get { return this._diskType; }
+            set { this._diskType = value; }
+        }
+        
         private string _isOSDisk;
         
         /// <summary>

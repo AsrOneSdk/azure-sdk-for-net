@@ -641,6 +641,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             vMwareCbtDiskInputValue["logStorageAccountSasSecretName"] = disksToIncludeItem.LogStorageAccountSasSecretName;
                                         }
+                                        
+                                        if (disksToIncludeItem.DiskType != null)
+                                        {
+                                            vMwareCbtDiskInputValue["diskType"] = disksToIncludeItem.DiskType;
+                                        }
                                     }
                                     providerSpecificDetailsValue["disksToInclude"] = disksToIncludeArray;
                                 }
@@ -651,14 +656,14 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 providerSpecificDetailsValue["licenseType"] = derived.LicenseType;
                             }
                             
-                            if (derived.TargetAzureVmName != null)
+                            if (derived.TargetVmName != null)
                             {
-                                providerSpecificDetailsValue["targetAzureVmName"] = derived.TargetAzureVmName;
+                                providerSpecificDetailsValue["targetVmName"] = derived.TargetVmName;
                             }
                             
-                            if (derived.TargetAzureVmSize != null)
+                            if (derived.TargetVmSize != null)
                             {
-                                providerSpecificDetailsValue["targetAzureVmSize"] = derived.TargetAzureVmSize;
+                                providerSpecificDetailsValue["targetVmSize"] = derived.TargetVmSize;
                             }
                             
                             if (derived.TargetResourceGroupId != null)
@@ -681,14 +686,14 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 providerSpecificDetailsValue["snapshotRunAsAccountId"] = derived.SnapshotRunAsAccountId;
                             }
                             
-                            if (derived.TargetAzureNetworkId != null)
+                            if (derived.TargetNetworkId != null)
                             {
-                                providerSpecificDetailsValue["targetAzureNetworkId"] = derived.TargetAzureNetworkId;
+                                providerSpecificDetailsValue["targetNetworkId"] = derived.TargetNetworkId;
                             }
                             
-                            if (derived.TargetAzureSubnetName != null)
+                            if (derived.TargetSubnetName != null)
                             {
-                                providerSpecificDetailsValue["targetAzureSubnetName"] = derived.TargetAzureSubnetName;
+                                providerSpecificDetailsValue["targetSubnetName"] = derived.TargetSubnetName;
                             }
                             
                             if (derived.Type != null)
@@ -1666,6 +1671,45 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 providerSpecificDetailsValue["targetNetworkId"] = derived.TargetNetworkId;
                             }
                             
+                            if (derived.SelectedSourceNicId != null)
+                            {
+                                providerSpecificDetailsValue["selectedSourceNicId"] = derived.SelectedSourceNicId;
+                            }
+                            
+                            if (derived.VmNics != null)
+                            {
+                                if (derived.VmNics is ILazyCollection == false || ((ILazyCollection)derived.VmNics).IsInitialized)
+                                {
+                                    JArray vmNicsArray = new JArray();
+                                    foreach (VMNicInputDetails vmNicsItem in derived.VmNics)
+                                    {
+                                        JObject vMNicInputDetailsValue = new JObject();
+                                        vmNicsArray.Add(vMNicInputDetailsValue);
+                                        
+                                        if (vmNicsItem.NicId != null)
+                                        {
+                                            vMNicInputDetailsValue["nicId"] = vmNicsItem.NicId;
+                                        }
+                                        
+                                        if (vmNicsItem.RecoveryVMSubnetName != null)
+                                        {
+                                            vMNicInputDetailsValue["recoveryVMSubnetName"] = vmNicsItem.RecoveryVMSubnetName;
+                                        }
+                                        
+                                        if (vmNicsItem.ReplicaNicStaticIPAddress != null)
+                                        {
+                                            vMNicInputDetailsValue["replicaNicStaticIPAddress"] = vmNicsItem.ReplicaNicStaticIPAddress;
+                                        }
+                                        
+                                        if (vmNicsItem.SelectionType != null)
+                                        {
+                                            vMNicInputDetailsValue["selectionType"] = vmNicsItem.SelectionType;
+                                        }
+                                    }
+                                    providerSpecificDetailsValue["vmNics"] = vmNicsArray;
+                                }
+                            }
+                            
                             if (derived.Type != null)
                             {
                                 providerSpecificDetailsValue["instanceType"] = derived.Type;
@@ -2183,6 +2227,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.MigrationStateDescription = migrationStateDescriptionInstance;
                                 }
                                 
+                                JToken lastSuccessfulMigrateTimeValue = propertiesValue["lastSuccessfulMigrateTime"];
+                                if (lastSuccessfulMigrateTimeValue != null && lastSuccessfulMigrateTimeValue.Type != JTokenType.Null)
+                                {
+                                    DateTime lastSuccessfulMigrateTimeInstance = ((DateTime)lastSuccessfulMigrateTimeValue);
+                                    propertiesInstance.LastSuccessfulMigrateTime = lastSuccessfulMigrateTimeInstance;
+                                }
+                                
+                                JToken lastSuccessfulTestMigrateTimeValue = propertiesValue["lastSuccessfulTestMigrateTime"];
+                                if (lastSuccessfulTestMigrateTimeValue != null && lastSuccessfulTestMigrateTimeValue.Type != JTokenType.Null)
+                                {
+                                    DateTime lastSuccessfulTestMigrateTimeInstance = ((DateTime)lastSuccessfulTestMigrateTimeValue);
+                                    propertiesInstance.LastSuccessfulTestMigrateTime = lastSuccessfulTestMigrateTimeInstance;
+                                }
+                                
                                 JToken testMigrateStateValue = propertiesValue["testMigrateState"];
                                 if (testMigrateStateValue != null && testMigrateStateValue.Type != JTokenType.Null)
                                 {
@@ -2277,18 +2335,18 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtMigrationDetailsInstance.SnapshotRunAsAccountId = snapshotRunAsAccountIdInstance;
                                         }
                                         
-                                        JToken targetAzureVmNameValue = providerSpecificDetailsValue["targetAzureVmName"];
-                                        if (targetAzureVmNameValue != null && targetAzureVmNameValue.Type != JTokenType.Null)
+                                        JToken targetVmNameValue = providerSpecificDetailsValue["targetVmName"];
+                                        if (targetVmNameValue != null && targetVmNameValue.Type != JTokenType.Null)
                                         {
-                                            string targetAzureVmNameInstance = ((string)targetAzureVmNameValue);
-                                            vMwareCbtMigrationDetailsInstance.TargetAzureVmName = targetAzureVmNameInstance;
+                                            string targetVmNameInstance = ((string)targetVmNameValue);
+                                            vMwareCbtMigrationDetailsInstance.TargetVmName = targetVmNameInstance;
                                         }
                                         
-                                        JToken targetAzureVmSizeValue = providerSpecificDetailsValue["targetAzureVmSize"];
-                                        if (targetAzureVmSizeValue != null && targetAzureVmSizeValue.Type != JTokenType.Null)
+                                        JToken targetVmSizeValue = providerSpecificDetailsValue["targetVmSize"];
+                                        if (targetVmSizeValue != null && targetVmSizeValue.Type != JTokenType.Null)
                                         {
-                                            string targetAzureVmSizeInstance = ((string)targetAzureVmSizeValue);
-                                            vMwareCbtMigrationDetailsInstance.TargetAzureVmSize = targetAzureVmSizeInstance;
+                                            string targetVmSizeInstance = ((string)targetVmSizeValue);
+                                            vMwareCbtMigrationDetailsInstance.TargetVmSize = targetVmSizeInstance;
                                         }
                                         
                                         JToken targetResourceGroupIdValue = providerSpecificDetailsValue["targetResourceGroupId"];
@@ -2298,18 +2356,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtMigrationDetailsInstance.TargetResourceGroupId = targetResourceGroupIdInstance;
                                         }
                                         
-                                        JToken targetAzureNetworkIdValue = providerSpecificDetailsValue["targetAzureNetworkId"];
-                                        if (targetAzureNetworkIdValue != null && targetAzureNetworkIdValue.Type != JTokenType.Null)
+                                        JToken targetNetworkIdValue = providerSpecificDetailsValue["targetNetworkId"];
+                                        if (targetNetworkIdValue != null && targetNetworkIdValue.Type != JTokenType.Null)
                                         {
-                                            string targetAzureNetworkIdInstance = ((string)targetAzureNetworkIdValue);
-                                            vMwareCbtMigrationDetailsInstance.TargetAzureNetworkId = targetAzureNetworkIdInstance;
-                                        }
-                                        
-                                        JToken targetAzureSubnetNameValue = providerSpecificDetailsValue["targetAzureSubnetName"];
-                                        if (targetAzureSubnetNameValue != null && targetAzureSubnetNameValue.Type != JTokenType.Null)
-                                        {
-                                            string targetAzureSubnetNameInstance = ((string)targetAzureSubnetNameValue);
-                                            vMwareCbtMigrationDetailsInstance.TargetAzureSubnetName = targetAzureSubnetNameInstance;
+                                            string targetNetworkIdInstance = ((string)targetNetworkIdValue);
+                                            vMwareCbtMigrationDetailsInstance.TargetNetworkId = targetNetworkIdInstance;
                                         }
                                         
                                         JToken targetAvailabilitySetIdValue = providerSpecificDetailsValue["targetAvailabilitySetId"];
@@ -2388,6 +2439,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 {
                                                     string seedBlobUriInstance = ((string)seedBlobUriValue);
                                                     vMwareCbtProtectedDiskDetailsInstance.SeedBlobUri = seedBlobUriInstance;
+                                                }
+                                                
+                                                JToken diskTypeValue = protectedDisksValue["diskType"];
+                                                if (diskTypeValue != null && diskTypeValue.Type != JTokenType.Null)
+                                                {
+                                                    string diskTypeInstance = ((string)diskTypeValue);
+                                                    vMwareCbtProtectedDiskDetailsInstance.DiskType = diskTypeInstance;
                                                 }
                                             }
                                         }
@@ -2477,6 +2535,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMNicDetailsInstance.RecoveryNicIpAddressType = recoveryNicIpAddressTypeInstance;
                                                 }
                                             }
+                                        }
+                                        
+                                        JToken selectedSourceNicIdValue = providerSpecificDetailsValue["selectedSourceNicId"];
+                                        if (selectedSourceNicIdValue != null && selectedSourceNicIdValue.Type != JTokenType.Null)
+                                        {
+                                            string selectedSourceNicIdInstance = ((string)selectedSourceNicIdValue);
+                                            vMwareCbtMigrationDetailsInstance.SelectedSourceNicId = selectedSourceNicIdInstance;
                                         }
                                         
                                         JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
@@ -2752,6 +2817,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.MigrationStateDescription = migrationStateDescriptionInstance;
                                 }
                                 
+                                JToken lastSuccessfulMigrateTimeValue = propertiesValue["lastSuccessfulMigrateTime"];
+                                if (lastSuccessfulMigrateTimeValue != null && lastSuccessfulMigrateTimeValue.Type != JTokenType.Null)
+                                {
+                                    DateTime lastSuccessfulMigrateTimeInstance = ((DateTime)lastSuccessfulMigrateTimeValue);
+                                    propertiesInstance.LastSuccessfulMigrateTime = lastSuccessfulMigrateTimeInstance;
+                                }
+                                
+                                JToken lastSuccessfulTestMigrateTimeValue = propertiesValue["lastSuccessfulTestMigrateTime"];
+                                if (lastSuccessfulTestMigrateTimeValue != null && lastSuccessfulTestMigrateTimeValue.Type != JTokenType.Null)
+                                {
+                                    DateTime lastSuccessfulTestMigrateTimeInstance = ((DateTime)lastSuccessfulTestMigrateTimeValue);
+                                    propertiesInstance.LastSuccessfulTestMigrateTime = lastSuccessfulTestMigrateTimeInstance;
+                                }
+                                
                                 JToken testMigrateStateValue = propertiesValue["testMigrateState"];
                                 if (testMigrateStateValue != null && testMigrateStateValue.Type != JTokenType.Null)
                                 {
@@ -2846,18 +2925,18 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtMigrationDetailsInstance.SnapshotRunAsAccountId = snapshotRunAsAccountIdInstance;
                                         }
                                         
-                                        JToken targetAzureVmNameValue = providerSpecificDetailsValue["targetAzureVmName"];
-                                        if (targetAzureVmNameValue != null && targetAzureVmNameValue.Type != JTokenType.Null)
+                                        JToken targetVmNameValue = providerSpecificDetailsValue["targetVmName"];
+                                        if (targetVmNameValue != null && targetVmNameValue.Type != JTokenType.Null)
                                         {
-                                            string targetAzureVmNameInstance = ((string)targetAzureVmNameValue);
-                                            vMwareCbtMigrationDetailsInstance.TargetAzureVmName = targetAzureVmNameInstance;
+                                            string targetVmNameInstance = ((string)targetVmNameValue);
+                                            vMwareCbtMigrationDetailsInstance.TargetVmName = targetVmNameInstance;
                                         }
                                         
-                                        JToken targetAzureVmSizeValue = providerSpecificDetailsValue["targetAzureVmSize"];
-                                        if (targetAzureVmSizeValue != null && targetAzureVmSizeValue.Type != JTokenType.Null)
+                                        JToken targetVmSizeValue = providerSpecificDetailsValue["targetVmSize"];
+                                        if (targetVmSizeValue != null && targetVmSizeValue.Type != JTokenType.Null)
                                         {
-                                            string targetAzureVmSizeInstance = ((string)targetAzureVmSizeValue);
-                                            vMwareCbtMigrationDetailsInstance.TargetAzureVmSize = targetAzureVmSizeInstance;
+                                            string targetVmSizeInstance = ((string)targetVmSizeValue);
+                                            vMwareCbtMigrationDetailsInstance.TargetVmSize = targetVmSizeInstance;
                                         }
                                         
                                         JToken targetResourceGroupIdValue = providerSpecificDetailsValue["targetResourceGroupId"];
@@ -2867,18 +2946,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtMigrationDetailsInstance.TargetResourceGroupId = targetResourceGroupIdInstance;
                                         }
                                         
-                                        JToken targetAzureNetworkIdValue = providerSpecificDetailsValue["targetAzureNetworkId"];
-                                        if (targetAzureNetworkIdValue != null && targetAzureNetworkIdValue.Type != JTokenType.Null)
+                                        JToken targetNetworkIdValue = providerSpecificDetailsValue["targetNetworkId"];
+                                        if (targetNetworkIdValue != null && targetNetworkIdValue.Type != JTokenType.Null)
                                         {
-                                            string targetAzureNetworkIdInstance = ((string)targetAzureNetworkIdValue);
-                                            vMwareCbtMigrationDetailsInstance.TargetAzureNetworkId = targetAzureNetworkIdInstance;
-                                        }
-                                        
-                                        JToken targetAzureSubnetNameValue = providerSpecificDetailsValue["targetAzureSubnetName"];
-                                        if (targetAzureSubnetNameValue != null && targetAzureSubnetNameValue.Type != JTokenType.Null)
-                                        {
-                                            string targetAzureSubnetNameInstance = ((string)targetAzureSubnetNameValue);
-                                            vMwareCbtMigrationDetailsInstance.TargetAzureSubnetName = targetAzureSubnetNameInstance;
+                                            string targetNetworkIdInstance = ((string)targetNetworkIdValue);
+                                            vMwareCbtMigrationDetailsInstance.TargetNetworkId = targetNetworkIdInstance;
                                         }
                                         
                                         JToken targetAvailabilitySetIdValue = providerSpecificDetailsValue["targetAvailabilitySetId"];
@@ -2957,6 +3029,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 {
                                                     string seedBlobUriInstance = ((string)seedBlobUriValue);
                                                     vMwareCbtProtectedDiskDetailsInstance.SeedBlobUri = seedBlobUriInstance;
+                                                }
+                                                
+                                                JToken diskTypeValue = protectedDisksValue["diskType"];
+                                                if (diskTypeValue != null && diskTypeValue.Type != JTokenType.Null)
+                                                {
+                                                    string diskTypeInstance = ((string)diskTypeValue);
+                                                    vMwareCbtProtectedDiskDetailsInstance.DiskType = diskTypeInstance;
                                                 }
                                             }
                                         }
@@ -3046,6 +3125,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMNicDetailsInstance.RecoveryNicIpAddressType = recoveryNicIpAddressTypeInstance;
                                                 }
                                             }
+                                        }
+                                        
+                                        JToken selectedSourceNicIdValue = providerSpecificDetailsValue["selectedSourceNicId"];
+                                        if (selectedSourceNicIdValue != null && selectedSourceNicIdValue.Type != JTokenType.Null)
+                                        {
+                                            string selectedSourceNicIdInstance = ((string)selectedSourceNicIdValue);
+                                            vMwareCbtMigrationDetailsInstance.SelectedSourceNicId = selectedSourceNicIdInstance;
                                         }
                                         
                                         JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
@@ -3380,6 +3466,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.MigrationStateDescription = migrationStateDescriptionInstance;
                                 }
                                 
+                                JToken lastSuccessfulMigrateTimeValue = propertiesValue["lastSuccessfulMigrateTime"];
+                                if (lastSuccessfulMigrateTimeValue != null && lastSuccessfulMigrateTimeValue.Type != JTokenType.Null)
+                                {
+                                    DateTime lastSuccessfulMigrateTimeInstance = ((DateTime)lastSuccessfulMigrateTimeValue);
+                                    propertiesInstance.LastSuccessfulMigrateTime = lastSuccessfulMigrateTimeInstance;
+                                }
+                                
+                                JToken lastSuccessfulTestMigrateTimeValue = propertiesValue["lastSuccessfulTestMigrateTime"];
+                                if (lastSuccessfulTestMigrateTimeValue != null && lastSuccessfulTestMigrateTimeValue.Type != JTokenType.Null)
+                                {
+                                    DateTime lastSuccessfulTestMigrateTimeInstance = ((DateTime)lastSuccessfulTestMigrateTimeValue);
+                                    propertiesInstance.LastSuccessfulTestMigrateTime = lastSuccessfulTestMigrateTimeInstance;
+                                }
+                                
                                 JToken testMigrateStateValue = propertiesValue["testMigrateState"];
                                 if (testMigrateStateValue != null && testMigrateStateValue.Type != JTokenType.Null)
                                 {
@@ -3474,18 +3574,18 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtMigrationDetailsInstance.SnapshotRunAsAccountId = snapshotRunAsAccountIdInstance;
                                         }
                                         
-                                        JToken targetAzureVmNameValue = providerSpecificDetailsValue["targetAzureVmName"];
-                                        if (targetAzureVmNameValue != null && targetAzureVmNameValue.Type != JTokenType.Null)
+                                        JToken targetVmNameValue = providerSpecificDetailsValue["targetVmName"];
+                                        if (targetVmNameValue != null && targetVmNameValue.Type != JTokenType.Null)
                                         {
-                                            string targetAzureVmNameInstance = ((string)targetAzureVmNameValue);
-                                            vMwareCbtMigrationDetailsInstance.TargetAzureVmName = targetAzureVmNameInstance;
+                                            string targetVmNameInstance = ((string)targetVmNameValue);
+                                            vMwareCbtMigrationDetailsInstance.TargetVmName = targetVmNameInstance;
                                         }
                                         
-                                        JToken targetAzureVmSizeValue = providerSpecificDetailsValue["targetAzureVmSize"];
-                                        if (targetAzureVmSizeValue != null && targetAzureVmSizeValue.Type != JTokenType.Null)
+                                        JToken targetVmSizeValue = providerSpecificDetailsValue["targetVmSize"];
+                                        if (targetVmSizeValue != null && targetVmSizeValue.Type != JTokenType.Null)
                                         {
-                                            string targetAzureVmSizeInstance = ((string)targetAzureVmSizeValue);
-                                            vMwareCbtMigrationDetailsInstance.TargetAzureVmSize = targetAzureVmSizeInstance;
+                                            string targetVmSizeInstance = ((string)targetVmSizeValue);
+                                            vMwareCbtMigrationDetailsInstance.TargetVmSize = targetVmSizeInstance;
                                         }
                                         
                                         JToken targetResourceGroupIdValue = providerSpecificDetailsValue["targetResourceGroupId"];
@@ -3495,18 +3595,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtMigrationDetailsInstance.TargetResourceGroupId = targetResourceGroupIdInstance;
                                         }
                                         
-                                        JToken targetAzureNetworkIdValue = providerSpecificDetailsValue["targetAzureNetworkId"];
-                                        if (targetAzureNetworkIdValue != null && targetAzureNetworkIdValue.Type != JTokenType.Null)
+                                        JToken targetNetworkIdValue = providerSpecificDetailsValue["targetNetworkId"];
+                                        if (targetNetworkIdValue != null && targetNetworkIdValue.Type != JTokenType.Null)
                                         {
-                                            string targetAzureNetworkIdInstance = ((string)targetAzureNetworkIdValue);
-                                            vMwareCbtMigrationDetailsInstance.TargetAzureNetworkId = targetAzureNetworkIdInstance;
-                                        }
-                                        
-                                        JToken targetAzureSubnetNameValue = providerSpecificDetailsValue["targetAzureSubnetName"];
-                                        if (targetAzureSubnetNameValue != null && targetAzureSubnetNameValue.Type != JTokenType.Null)
-                                        {
-                                            string targetAzureSubnetNameInstance = ((string)targetAzureSubnetNameValue);
-                                            vMwareCbtMigrationDetailsInstance.TargetAzureSubnetName = targetAzureSubnetNameInstance;
+                                            string targetNetworkIdInstance = ((string)targetNetworkIdValue);
+                                            vMwareCbtMigrationDetailsInstance.TargetNetworkId = targetNetworkIdInstance;
                                         }
                                         
                                         JToken targetAvailabilitySetIdValue = providerSpecificDetailsValue["targetAvailabilitySetId"];
@@ -3585,6 +3678,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 {
                                                     string seedBlobUriInstance = ((string)seedBlobUriValue);
                                                     vMwareCbtProtectedDiskDetailsInstance.SeedBlobUri = seedBlobUriInstance;
+                                                }
+                                                
+                                                JToken diskTypeValue = protectedDisksValue["diskType"];
+                                                if (diskTypeValue != null && diskTypeValue.Type != JTokenType.Null)
+                                                {
+                                                    string diskTypeInstance = ((string)diskTypeValue);
+                                                    vMwareCbtProtectedDiskDetailsInstance.DiskType = diskTypeInstance;
                                                 }
                                             }
                                         }
@@ -3674,6 +3774,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMNicDetailsInstance.RecoveryNicIpAddressType = recoveryNicIpAddressTypeInstance;
                                                 }
                                             }
+                                        }
+                                        
+                                        JToken selectedSourceNicIdValue = providerSpecificDetailsValue["selectedSourceNicId"];
+                                        if (selectedSourceNicIdValue != null && selectedSourceNicIdValue.Type != JTokenType.Null)
+                                        {
+                                            string selectedSourceNicIdInstance = ((string)selectedSourceNicIdValue);
+                                            vMwareCbtMigrationDetailsInstance.SelectedSourceNicId = selectedSourceNicIdInstance;
                                         }
                                         
                                         JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
@@ -4008,6 +4115,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.MigrationStateDescription = migrationStateDescriptionInstance;
                                 }
                                 
+                                JToken lastSuccessfulMigrateTimeValue = propertiesValue["lastSuccessfulMigrateTime"];
+                                if (lastSuccessfulMigrateTimeValue != null && lastSuccessfulMigrateTimeValue.Type != JTokenType.Null)
+                                {
+                                    DateTime lastSuccessfulMigrateTimeInstance = ((DateTime)lastSuccessfulMigrateTimeValue);
+                                    propertiesInstance.LastSuccessfulMigrateTime = lastSuccessfulMigrateTimeInstance;
+                                }
+                                
+                                JToken lastSuccessfulTestMigrateTimeValue = propertiesValue["lastSuccessfulTestMigrateTime"];
+                                if (lastSuccessfulTestMigrateTimeValue != null && lastSuccessfulTestMigrateTimeValue.Type != JTokenType.Null)
+                                {
+                                    DateTime lastSuccessfulTestMigrateTimeInstance = ((DateTime)lastSuccessfulTestMigrateTimeValue);
+                                    propertiesInstance.LastSuccessfulTestMigrateTime = lastSuccessfulTestMigrateTimeInstance;
+                                }
+                                
                                 JToken testMigrateStateValue = propertiesValue["testMigrateState"];
                                 if (testMigrateStateValue != null && testMigrateStateValue.Type != JTokenType.Null)
                                 {
@@ -4102,18 +4223,18 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtMigrationDetailsInstance.SnapshotRunAsAccountId = snapshotRunAsAccountIdInstance;
                                         }
                                         
-                                        JToken targetAzureVmNameValue = providerSpecificDetailsValue["targetAzureVmName"];
-                                        if (targetAzureVmNameValue != null && targetAzureVmNameValue.Type != JTokenType.Null)
+                                        JToken targetVmNameValue = providerSpecificDetailsValue["targetVmName"];
+                                        if (targetVmNameValue != null && targetVmNameValue.Type != JTokenType.Null)
                                         {
-                                            string targetAzureVmNameInstance = ((string)targetAzureVmNameValue);
-                                            vMwareCbtMigrationDetailsInstance.TargetAzureVmName = targetAzureVmNameInstance;
+                                            string targetVmNameInstance = ((string)targetVmNameValue);
+                                            vMwareCbtMigrationDetailsInstance.TargetVmName = targetVmNameInstance;
                                         }
                                         
-                                        JToken targetAzureVmSizeValue = providerSpecificDetailsValue["targetAzureVmSize"];
-                                        if (targetAzureVmSizeValue != null && targetAzureVmSizeValue.Type != JTokenType.Null)
+                                        JToken targetVmSizeValue = providerSpecificDetailsValue["targetVmSize"];
+                                        if (targetVmSizeValue != null && targetVmSizeValue.Type != JTokenType.Null)
                                         {
-                                            string targetAzureVmSizeInstance = ((string)targetAzureVmSizeValue);
-                                            vMwareCbtMigrationDetailsInstance.TargetAzureVmSize = targetAzureVmSizeInstance;
+                                            string targetVmSizeInstance = ((string)targetVmSizeValue);
+                                            vMwareCbtMigrationDetailsInstance.TargetVmSize = targetVmSizeInstance;
                                         }
                                         
                                         JToken targetResourceGroupIdValue = providerSpecificDetailsValue["targetResourceGroupId"];
@@ -4123,18 +4244,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtMigrationDetailsInstance.TargetResourceGroupId = targetResourceGroupIdInstance;
                                         }
                                         
-                                        JToken targetAzureNetworkIdValue = providerSpecificDetailsValue["targetAzureNetworkId"];
-                                        if (targetAzureNetworkIdValue != null && targetAzureNetworkIdValue.Type != JTokenType.Null)
+                                        JToken targetNetworkIdValue = providerSpecificDetailsValue["targetNetworkId"];
+                                        if (targetNetworkIdValue != null && targetNetworkIdValue.Type != JTokenType.Null)
                                         {
-                                            string targetAzureNetworkIdInstance = ((string)targetAzureNetworkIdValue);
-                                            vMwareCbtMigrationDetailsInstance.TargetAzureNetworkId = targetAzureNetworkIdInstance;
-                                        }
-                                        
-                                        JToken targetAzureSubnetNameValue = providerSpecificDetailsValue["targetAzureSubnetName"];
-                                        if (targetAzureSubnetNameValue != null && targetAzureSubnetNameValue.Type != JTokenType.Null)
-                                        {
-                                            string targetAzureSubnetNameInstance = ((string)targetAzureSubnetNameValue);
-                                            vMwareCbtMigrationDetailsInstance.TargetAzureSubnetName = targetAzureSubnetNameInstance;
+                                            string targetNetworkIdInstance = ((string)targetNetworkIdValue);
+                                            vMwareCbtMigrationDetailsInstance.TargetNetworkId = targetNetworkIdInstance;
                                         }
                                         
                                         JToken targetAvailabilitySetIdValue = providerSpecificDetailsValue["targetAvailabilitySetId"];
@@ -4213,6 +4327,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 {
                                                     string seedBlobUriInstance = ((string)seedBlobUriValue);
                                                     vMwareCbtProtectedDiskDetailsInstance.SeedBlobUri = seedBlobUriInstance;
+                                                }
+                                                
+                                                JToken diskTypeValue = protectedDisksValue["diskType"];
+                                                if (diskTypeValue != null && diskTypeValue.Type != JTokenType.Null)
+                                                {
+                                                    string diskTypeInstance = ((string)diskTypeValue);
+                                                    vMwareCbtProtectedDiskDetailsInstance.DiskType = diskTypeInstance;
                                                 }
                                             }
                                         }
@@ -4302,6 +4423,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMNicDetailsInstance.RecoveryNicIpAddressType = recoveryNicIpAddressTypeInstance;
                                                 }
                                             }
+                                        }
+                                        
+                                        JToken selectedSourceNicIdValue = providerSpecificDetailsValue["selectedSourceNicId"];
+                                        if (selectedSourceNicIdValue != null && selectedSourceNicIdValue.Type != JTokenType.Null)
+                                        {
+                                            string selectedSourceNicIdInstance = ((string)selectedSourceNicIdValue);
+                                            vMwareCbtMigrationDetailsInstance.SelectedSourceNicId = selectedSourceNicIdInstance;
                                         }
                                         
                                         JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
@@ -4636,6 +4764,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.MigrationStateDescription = migrationStateDescriptionInstance;
                                 }
                                 
+                                JToken lastSuccessfulMigrateTimeValue = propertiesValue["lastSuccessfulMigrateTime"];
+                                if (lastSuccessfulMigrateTimeValue != null && lastSuccessfulMigrateTimeValue.Type != JTokenType.Null)
+                                {
+                                    DateTime lastSuccessfulMigrateTimeInstance = ((DateTime)lastSuccessfulMigrateTimeValue);
+                                    propertiesInstance.LastSuccessfulMigrateTime = lastSuccessfulMigrateTimeInstance;
+                                }
+                                
+                                JToken lastSuccessfulTestMigrateTimeValue = propertiesValue["lastSuccessfulTestMigrateTime"];
+                                if (lastSuccessfulTestMigrateTimeValue != null && lastSuccessfulTestMigrateTimeValue.Type != JTokenType.Null)
+                                {
+                                    DateTime lastSuccessfulTestMigrateTimeInstance = ((DateTime)lastSuccessfulTestMigrateTimeValue);
+                                    propertiesInstance.LastSuccessfulTestMigrateTime = lastSuccessfulTestMigrateTimeInstance;
+                                }
+                                
                                 JToken testMigrateStateValue = propertiesValue["testMigrateState"];
                                 if (testMigrateStateValue != null && testMigrateStateValue.Type != JTokenType.Null)
                                 {
@@ -4730,18 +4872,18 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtMigrationDetailsInstance.SnapshotRunAsAccountId = snapshotRunAsAccountIdInstance;
                                         }
                                         
-                                        JToken targetAzureVmNameValue = providerSpecificDetailsValue["targetAzureVmName"];
-                                        if (targetAzureVmNameValue != null && targetAzureVmNameValue.Type != JTokenType.Null)
+                                        JToken targetVmNameValue = providerSpecificDetailsValue["targetVmName"];
+                                        if (targetVmNameValue != null && targetVmNameValue.Type != JTokenType.Null)
                                         {
-                                            string targetAzureVmNameInstance = ((string)targetAzureVmNameValue);
-                                            vMwareCbtMigrationDetailsInstance.TargetAzureVmName = targetAzureVmNameInstance;
+                                            string targetVmNameInstance = ((string)targetVmNameValue);
+                                            vMwareCbtMigrationDetailsInstance.TargetVmName = targetVmNameInstance;
                                         }
                                         
-                                        JToken targetAzureVmSizeValue = providerSpecificDetailsValue["targetAzureVmSize"];
-                                        if (targetAzureVmSizeValue != null && targetAzureVmSizeValue.Type != JTokenType.Null)
+                                        JToken targetVmSizeValue = providerSpecificDetailsValue["targetVmSize"];
+                                        if (targetVmSizeValue != null && targetVmSizeValue.Type != JTokenType.Null)
                                         {
-                                            string targetAzureVmSizeInstance = ((string)targetAzureVmSizeValue);
-                                            vMwareCbtMigrationDetailsInstance.TargetAzureVmSize = targetAzureVmSizeInstance;
+                                            string targetVmSizeInstance = ((string)targetVmSizeValue);
+                                            vMwareCbtMigrationDetailsInstance.TargetVmSize = targetVmSizeInstance;
                                         }
                                         
                                         JToken targetResourceGroupIdValue = providerSpecificDetailsValue["targetResourceGroupId"];
@@ -4751,18 +4893,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtMigrationDetailsInstance.TargetResourceGroupId = targetResourceGroupIdInstance;
                                         }
                                         
-                                        JToken targetAzureNetworkIdValue = providerSpecificDetailsValue["targetAzureNetworkId"];
-                                        if (targetAzureNetworkIdValue != null && targetAzureNetworkIdValue.Type != JTokenType.Null)
+                                        JToken targetNetworkIdValue = providerSpecificDetailsValue["targetNetworkId"];
+                                        if (targetNetworkIdValue != null && targetNetworkIdValue.Type != JTokenType.Null)
                                         {
-                                            string targetAzureNetworkIdInstance = ((string)targetAzureNetworkIdValue);
-                                            vMwareCbtMigrationDetailsInstance.TargetAzureNetworkId = targetAzureNetworkIdInstance;
-                                        }
-                                        
-                                        JToken targetAzureSubnetNameValue = providerSpecificDetailsValue["targetAzureSubnetName"];
-                                        if (targetAzureSubnetNameValue != null && targetAzureSubnetNameValue.Type != JTokenType.Null)
-                                        {
-                                            string targetAzureSubnetNameInstance = ((string)targetAzureSubnetNameValue);
-                                            vMwareCbtMigrationDetailsInstance.TargetAzureSubnetName = targetAzureSubnetNameInstance;
+                                            string targetNetworkIdInstance = ((string)targetNetworkIdValue);
+                                            vMwareCbtMigrationDetailsInstance.TargetNetworkId = targetNetworkIdInstance;
                                         }
                                         
                                         JToken targetAvailabilitySetIdValue = providerSpecificDetailsValue["targetAvailabilitySetId"];
@@ -4841,6 +4976,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 {
                                                     string seedBlobUriInstance = ((string)seedBlobUriValue);
                                                     vMwareCbtProtectedDiskDetailsInstance.SeedBlobUri = seedBlobUriInstance;
+                                                }
+                                                
+                                                JToken diskTypeValue = protectedDisksValue["diskType"];
+                                                if (diskTypeValue != null && diskTypeValue.Type != JTokenType.Null)
+                                                {
+                                                    string diskTypeInstance = ((string)diskTypeValue);
+                                                    vMwareCbtProtectedDiskDetailsInstance.DiskType = diskTypeInstance;
                                                 }
                                             }
                                         }
@@ -4930,6 +5072,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMNicDetailsInstance.RecoveryNicIpAddressType = recoveryNicIpAddressTypeInstance;
                                                 }
                                             }
+                                        }
+                                        
+                                        JToken selectedSourceNicIdValue = providerSpecificDetailsValue["selectedSourceNicId"];
+                                        if (selectedSourceNicIdValue != null && selectedSourceNicIdValue.Type != JTokenType.Null)
+                                        {
+                                            string selectedSourceNicIdInstance = ((string)selectedSourceNicIdValue);
+                                            vMwareCbtMigrationDetailsInstance.SelectedSourceNicId = selectedSourceNicIdInstance;
                                         }
                                         
                                         JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
@@ -5264,6 +5413,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.MigrationStateDescription = migrationStateDescriptionInstance;
                                 }
                                 
+                                JToken lastSuccessfulMigrateTimeValue = propertiesValue["lastSuccessfulMigrateTime"];
+                                if (lastSuccessfulMigrateTimeValue != null && lastSuccessfulMigrateTimeValue.Type != JTokenType.Null)
+                                {
+                                    DateTime lastSuccessfulMigrateTimeInstance = ((DateTime)lastSuccessfulMigrateTimeValue);
+                                    propertiesInstance.LastSuccessfulMigrateTime = lastSuccessfulMigrateTimeInstance;
+                                }
+                                
+                                JToken lastSuccessfulTestMigrateTimeValue = propertiesValue["lastSuccessfulTestMigrateTime"];
+                                if (lastSuccessfulTestMigrateTimeValue != null && lastSuccessfulTestMigrateTimeValue.Type != JTokenType.Null)
+                                {
+                                    DateTime lastSuccessfulTestMigrateTimeInstance = ((DateTime)lastSuccessfulTestMigrateTimeValue);
+                                    propertiesInstance.LastSuccessfulTestMigrateTime = lastSuccessfulTestMigrateTimeInstance;
+                                }
+                                
                                 JToken testMigrateStateValue = propertiesValue["testMigrateState"];
                                 if (testMigrateStateValue != null && testMigrateStateValue.Type != JTokenType.Null)
                                 {
@@ -5358,18 +5521,18 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtMigrationDetailsInstance.SnapshotRunAsAccountId = snapshotRunAsAccountIdInstance;
                                         }
                                         
-                                        JToken targetAzureVmNameValue = providerSpecificDetailsValue["targetAzureVmName"];
-                                        if (targetAzureVmNameValue != null && targetAzureVmNameValue.Type != JTokenType.Null)
+                                        JToken targetVmNameValue = providerSpecificDetailsValue["targetVmName"];
+                                        if (targetVmNameValue != null && targetVmNameValue.Type != JTokenType.Null)
                                         {
-                                            string targetAzureVmNameInstance = ((string)targetAzureVmNameValue);
-                                            vMwareCbtMigrationDetailsInstance.TargetAzureVmName = targetAzureVmNameInstance;
+                                            string targetVmNameInstance = ((string)targetVmNameValue);
+                                            vMwareCbtMigrationDetailsInstance.TargetVmName = targetVmNameInstance;
                                         }
                                         
-                                        JToken targetAzureVmSizeValue = providerSpecificDetailsValue["targetAzureVmSize"];
-                                        if (targetAzureVmSizeValue != null && targetAzureVmSizeValue.Type != JTokenType.Null)
+                                        JToken targetVmSizeValue = providerSpecificDetailsValue["targetVmSize"];
+                                        if (targetVmSizeValue != null && targetVmSizeValue.Type != JTokenType.Null)
                                         {
-                                            string targetAzureVmSizeInstance = ((string)targetAzureVmSizeValue);
-                                            vMwareCbtMigrationDetailsInstance.TargetAzureVmSize = targetAzureVmSizeInstance;
+                                            string targetVmSizeInstance = ((string)targetVmSizeValue);
+                                            vMwareCbtMigrationDetailsInstance.TargetVmSize = targetVmSizeInstance;
                                         }
                                         
                                         JToken targetResourceGroupIdValue = providerSpecificDetailsValue["targetResourceGroupId"];
@@ -5379,18 +5542,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtMigrationDetailsInstance.TargetResourceGroupId = targetResourceGroupIdInstance;
                                         }
                                         
-                                        JToken targetAzureNetworkIdValue = providerSpecificDetailsValue["targetAzureNetworkId"];
-                                        if (targetAzureNetworkIdValue != null && targetAzureNetworkIdValue.Type != JTokenType.Null)
+                                        JToken targetNetworkIdValue = providerSpecificDetailsValue["targetNetworkId"];
+                                        if (targetNetworkIdValue != null && targetNetworkIdValue.Type != JTokenType.Null)
                                         {
-                                            string targetAzureNetworkIdInstance = ((string)targetAzureNetworkIdValue);
-                                            vMwareCbtMigrationDetailsInstance.TargetAzureNetworkId = targetAzureNetworkIdInstance;
-                                        }
-                                        
-                                        JToken targetAzureSubnetNameValue = providerSpecificDetailsValue["targetAzureSubnetName"];
-                                        if (targetAzureSubnetNameValue != null && targetAzureSubnetNameValue.Type != JTokenType.Null)
-                                        {
-                                            string targetAzureSubnetNameInstance = ((string)targetAzureSubnetNameValue);
-                                            vMwareCbtMigrationDetailsInstance.TargetAzureSubnetName = targetAzureSubnetNameInstance;
+                                            string targetNetworkIdInstance = ((string)targetNetworkIdValue);
+                                            vMwareCbtMigrationDetailsInstance.TargetNetworkId = targetNetworkIdInstance;
                                         }
                                         
                                         JToken targetAvailabilitySetIdValue = providerSpecificDetailsValue["targetAvailabilitySetId"];
@@ -5469,6 +5625,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 {
                                                     string seedBlobUriInstance = ((string)seedBlobUriValue);
                                                     vMwareCbtProtectedDiskDetailsInstance.SeedBlobUri = seedBlobUriInstance;
+                                                }
+                                                
+                                                JToken diskTypeValue = protectedDisksValue["diskType"];
+                                                if (diskTypeValue != null && diskTypeValue.Type != JTokenType.Null)
+                                                {
+                                                    string diskTypeInstance = ((string)diskTypeValue);
+                                                    vMwareCbtProtectedDiskDetailsInstance.DiskType = diskTypeInstance;
                                                 }
                                             }
                                         }
@@ -5558,6 +5721,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMNicDetailsInstance.RecoveryNicIpAddressType = recoveryNicIpAddressTypeInstance;
                                                 }
                                             }
+                                        }
+                                        
+                                        JToken selectedSourceNicIdValue = providerSpecificDetailsValue["selectedSourceNicId"];
+                                        if (selectedSourceNicIdValue != null && selectedSourceNicIdValue.Type != JTokenType.Null)
+                                        {
+                                            string selectedSourceNicIdInstance = ((string)selectedSourceNicIdValue);
+                                            vMwareCbtMigrationDetailsInstance.SelectedSourceNicId = selectedSourceNicIdInstance;
                                         }
                                         
                                         JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
@@ -5892,6 +6062,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.MigrationStateDescription = migrationStateDescriptionInstance;
                                 }
                                 
+                                JToken lastSuccessfulMigrateTimeValue = propertiesValue["lastSuccessfulMigrateTime"];
+                                if (lastSuccessfulMigrateTimeValue != null && lastSuccessfulMigrateTimeValue.Type != JTokenType.Null)
+                                {
+                                    DateTime lastSuccessfulMigrateTimeInstance = ((DateTime)lastSuccessfulMigrateTimeValue);
+                                    propertiesInstance.LastSuccessfulMigrateTime = lastSuccessfulMigrateTimeInstance;
+                                }
+                                
+                                JToken lastSuccessfulTestMigrateTimeValue = propertiesValue["lastSuccessfulTestMigrateTime"];
+                                if (lastSuccessfulTestMigrateTimeValue != null && lastSuccessfulTestMigrateTimeValue.Type != JTokenType.Null)
+                                {
+                                    DateTime lastSuccessfulTestMigrateTimeInstance = ((DateTime)lastSuccessfulTestMigrateTimeValue);
+                                    propertiesInstance.LastSuccessfulTestMigrateTime = lastSuccessfulTestMigrateTimeInstance;
+                                }
+                                
                                 JToken testMigrateStateValue = propertiesValue["testMigrateState"];
                                 if (testMigrateStateValue != null && testMigrateStateValue.Type != JTokenType.Null)
                                 {
@@ -5986,18 +6170,18 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtMigrationDetailsInstance.SnapshotRunAsAccountId = snapshotRunAsAccountIdInstance;
                                         }
                                         
-                                        JToken targetAzureVmNameValue = providerSpecificDetailsValue["targetAzureVmName"];
-                                        if (targetAzureVmNameValue != null && targetAzureVmNameValue.Type != JTokenType.Null)
+                                        JToken targetVmNameValue = providerSpecificDetailsValue["targetVmName"];
+                                        if (targetVmNameValue != null && targetVmNameValue.Type != JTokenType.Null)
                                         {
-                                            string targetAzureVmNameInstance = ((string)targetAzureVmNameValue);
-                                            vMwareCbtMigrationDetailsInstance.TargetAzureVmName = targetAzureVmNameInstance;
+                                            string targetVmNameInstance = ((string)targetVmNameValue);
+                                            vMwareCbtMigrationDetailsInstance.TargetVmName = targetVmNameInstance;
                                         }
                                         
-                                        JToken targetAzureVmSizeValue = providerSpecificDetailsValue["targetAzureVmSize"];
-                                        if (targetAzureVmSizeValue != null && targetAzureVmSizeValue.Type != JTokenType.Null)
+                                        JToken targetVmSizeValue = providerSpecificDetailsValue["targetVmSize"];
+                                        if (targetVmSizeValue != null && targetVmSizeValue.Type != JTokenType.Null)
                                         {
-                                            string targetAzureVmSizeInstance = ((string)targetAzureVmSizeValue);
-                                            vMwareCbtMigrationDetailsInstance.TargetAzureVmSize = targetAzureVmSizeInstance;
+                                            string targetVmSizeInstance = ((string)targetVmSizeValue);
+                                            vMwareCbtMigrationDetailsInstance.TargetVmSize = targetVmSizeInstance;
                                         }
                                         
                                         JToken targetResourceGroupIdValue = providerSpecificDetailsValue["targetResourceGroupId"];
@@ -6007,18 +6191,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtMigrationDetailsInstance.TargetResourceGroupId = targetResourceGroupIdInstance;
                                         }
                                         
-                                        JToken targetAzureNetworkIdValue = providerSpecificDetailsValue["targetAzureNetworkId"];
-                                        if (targetAzureNetworkIdValue != null && targetAzureNetworkIdValue.Type != JTokenType.Null)
+                                        JToken targetNetworkIdValue = providerSpecificDetailsValue["targetNetworkId"];
+                                        if (targetNetworkIdValue != null && targetNetworkIdValue.Type != JTokenType.Null)
                                         {
-                                            string targetAzureNetworkIdInstance = ((string)targetAzureNetworkIdValue);
-                                            vMwareCbtMigrationDetailsInstance.TargetAzureNetworkId = targetAzureNetworkIdInstance;
-                                        }
-                                        
-                                        JToken targetAzureSubnetNameValue = providerSpecificDetailsValue["targetAzureSubnetName"];
-                                        if (targetAzureSubnetNameValue != null && targetAzureSubnetNameValue.Type != JTokenType.Null)
-                                        {
-                                            string targetAzureSubnetNameInstance = ((string)targetAzureSubnetNameValue);
-                                            vMwareCbtMigrationDetailsInstance.TargetAzureSubnetName = targetAzureSubnetNameInstance;
+                                            string targetNetworkIdInstance = ((string)targetNetworkIdValue);
+                                            vMwareCbtMigrationDetailsInstance.TargetNetworkId = targetNetworkIdInstance;
                                         }
                                         
                                         JToken targetAvailabilitySetIdValue = providerSpecificDetailsValue["targetAvailabilitySetId"];
@@ -6097,6 +6274,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 {
                                                     string seedBlobUriInstance = ((string)seedBlobUriValue);
                                                     vMwareCbtProtectedDiskDetailsInstance.SeedBlobUri = seedBlobUriInstance;
+                                                }
+                                                
+                                                JToken diskTypeValue = protectedDisksValue["diskType"];
+                                                if (diskTypeValue != null && diskTypeValue.Type != JTokenType.Null)
+                                                {
+                                                    string diskTypeInstance = ((string)diskTypeValue);
+                                                    vMwareCbtProtectedDiskDetailsInstance.DiskType = diskTypeInstance;
                                                 }
                                             }
                                         }
@@ -6186,6 +6370,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMNicDetailsInstance.RecoveryNicIpAddressType = recoveryNicIpAddressTypeInstance;
                                                 }
                                             }
+                                        }
+                                        
+                                        JToken selectedSourceNicIdValue = providerSpecificDetailsValue["selectedSourceNicId"];
+                                        if (selectedSourceNicIdValue != null && selectedSourceNicIdValue.Type != JTokenType.Null)
+                                        {
+                                            string selectedSourceNicIdInstance = ((string)selectedSourceNicIdValue);
+                                            vMwareCbtMigrationDetailsInstance.SelectedSourceNicId = selectedSourceNicIdInstance;
                                         }
                                         
                                         JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
@@ -6520,6 +6711,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.MigrationStateDescription = migrationStateDescriptionInstance;
                                 }
                                 
+                                JToken lastSuccessfulMigrateTimeValue = propertiesValue["lastSuccessfulMigrateTime"];
+                                if (lastSuccessfulMigrateTimeValue != null && lastSuccessfulMigrateTimeValue.Type != JTokenType.Null)
+                                {
+                                    DateTime lastSuccessfulMigrateTimeInstance = ((DateTime)lastSuccessfulMigrateTimeValue);
+                                    propertiesInstance.LastSuccessfulMigrateTime = lastSuccessfulMigrateTimeInstance;
+                                }
+                                
+                                JToken lastSuccessfulTestMigrateTimeValue = propertiesValue["lastSuccessfulTestMigrateTime"];
+                                if (lastSuccessfulTestMigrateTimeValue != null && lastSuccessfulTestMigrateTimeValue.Type != JTokenType.Null)
+                                {
+                                    DateTime lastSuccessfulTestMigrateTimeInstance = ((DateTime)lastSuccessfulTestMigrateTimeValue);
+                                    propertiesInstance.LastSuccessfulTestMigrateTime = lastSuccessfulTestMigrateTimeInstance;
+                                }
+                                
                                 JToken testMigrateStateValue = propertiesValue["testMigrateState"];
                                 if (testMigrateStateValue != null && testMigrateStateValue.Type != JTokenType.Null)
                                 {
@@ -6614,18 +6819,18 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtMigrationDetailsInstance.SnapshotRunAsAccountId = snapshotRunAsAccountIdInstance;
                                         }
                                         
-                                        JToken targetAzureVmNameValue = providerSpecificDetailsValue["targetAzureVmName"];
-                                        if (targetAzureVmNameValue != null && targetAzureVmNameValue.Type != JTokenType.Null)
+                                        JToken targetVmNameValue = providerSpecificDetailsValue["targetVmName"];
+                                        if (targetVmNameValue != null && targetVmNameValue.Type != JTokenType.Null)
                                         {
-                                            string targetAzureVmNameInstance = ((string)targetAzureVmNameValue);
-                                            vMwareCbtMigrationDetailsInstance.TargetAzureVmName = targetAzureVmNameInstance;
+                                            string targetVmNameInstance = ((string)targetVmNameValue);
+                                            vMwareCbtMigrationDetailsInstance.TargetVmName = targetVmNameInstance;
                                         }
                                         
-                                        JToken targetAzureVmSizeValue = providerSpecificDetailsValue["targetAzureVmSize"];
-                                        if (targetAzureVmSizeValue != null && targetAzureVmSizeValue.Type != JTokenType.Null)
+                                        JToken targetVmSizeValue = providerSpecificDetailsValue["targetVmSize"];
+                                        if (targetVmSizeValue != null && targetVmSizeValue.Type != JTokenType.Null)
                                         {
-                                            string targetAzureVmSizeInstance = ((string)targetAzureVmSizeValue);
-                                            vMwareCbtMigrationDetailsInstance.TargetAzureVmSize = targetAzureVmSizeInstance;
+                                            string targetVmSizeInstance = ((string)targetVmSizeValue);
+                                            vMwareCbtMigrationDetailsInstance.TargetVmSize = targetVmSizeInstance;
                                         }
                                         
                                         JToken targetResourceGroupIdValue = providerSpecificDetailsValue["targetResourceGroupId"];
@@ -6635,18 +6840,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtMigrationDetailsInstance.TargetResourceGroupId = targetResourceGroupIdInstance;
                                         }
                                         
-                                        JToken targetAzureNetworkIdValue = providerSpecificDetailsValue["targetAzureNetworkId"];
-                                        if (targetAzureNetworkIdValue != null && targetAzureNetworkIdValue.Type != JTokenType.Null)
+                                        JToken targetNetworkIdValue = providerSpecificDetailsValue["targetNetworkId"];
+                                        if (targetNetworkIdValue != null && targetNetworkIdValue.Type != JTokenType.Null)
                                         {
-                                            string targetAzureNetworkIdInstance = ((string)targetAzureNetworkIdValue);
-                                            vMwareCbtMigrationDetailsInstance.TargetAzureNetworkId = targetAzureNetworkIdInstance;
-                                        }
-                                        
-                                        JToken targetAzureSubnetNameValue = providerSpecificDetailsValue["targetAzureSubnetName"];
-                                        if (targetAzureSubnetNameValue != null && targetAzureSubnetNameValue.Type != JTokenType.Null)
-                                        {
-                                            string targetAzureSubnetNameInstance = ((string)targetAzureSubnetNameValue);
-                                            vMwareCbtMigrationDetailsInstance.TargetAzureSubnetName = targetAzureSubnetNameInstance;
+                                            string targetNetworkIdInstance = ((string)targetNetworkIdValue);
+                                            vMwareCbtMigrationDetailsInstance.TargetNetworkId = targetNetworkIdInstance;
                                         }
                                         
                                         JToken targetAvailabilitySetIdValue = providerSpecificDetailsValue["targetAvailabilitySetId"];
@@ -6725,6 +6923,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 {
                                                     string seedBlobUriInstance = ((string)seedBlobUriValue);
                                                     vMwareCbtProtectedDiskDetailsInstance.SeedBlobUri = seedBlobUriInstance;
+                                                }
+                                                
+                                                JToken diskTypeValue = protectedDisksValue["diskType"];
+                                                if (diskTypeValue != null && diskTypeValue.Type != JTokenType.Null)
+                                                {
+                                                    string diskTypeInstance = ((string)diskTypeValue);
+                                                    vMwareCbtProtectedDiskDetailsInstance.DiskType = diskTypeInstance;
                                                 }
                                             }
                                         }
@@ -6814,6 +7019,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMNicDetailsInstance.RecoveryNicIpAddressType = recoveryNicIpAddressTypeInstance;
                                                 }
                                             }
+                                        }
+                                        
+                                        JToken selectedSourceNicIdValue = providerSpecificDetailsValue["selectedSourceNicId"];
+                                        if (selectedSourceNicIdValue != null && selectedSourceNicIdValue.Type != JTokenType.Null)
+                                        {
+                                            string selectedSourceNicIdInstance = ((string)selectedSourceNicIdValue);
+                                            vMwareCbtMigrationDetailsInstance.SelectedSourceNicId = selectedSourceNicIdInstance;
                                         }
                                         
                                         JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
@@ -7197,6 +7409,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             propertiesInstance.MigrationStateDescription = migrationStateDescriptionInstance;
                                         }
                                         
+                                        JToken lastSuccessfulMigrateTimeValue = propertiesValue["lastSuccessfulMigrateTime"];
+                                        if (lastSuccessfulMigrateTimeValue != null && lastSuccessfulMigrateTimeValue.Type != JTokenType.Null)
+                                        {
+                                            DateTime lastSuccessfulMigrateTimeInstance = ((DateTime)lastSuccessfulMigrateTimeValue);
+                                            propertiesInstance.LastSuccessfulMigrateTime = lastSuccessfulMigrateTimeInstance;
+                                        }
+                                        
+                                        JToken lastSuccessfulTestMigrateTimeValue = propertiesValue["lastSuccessfulTestMigrateTime"];
+                                        if (lastSuccessfulTestMigrateTimeValue != null && lastSuccessfulTestMigrateTimeValue.Type != JTokenType.Null)
+                                        {
+                                            DateTime lastSuccessfulTestMigrateTimeInstance = ((DateTime)lastSuccessfulTestMigrateTimeValue);
+                                            propertiesInstance.LastSuccessfulTestMigrateTime = lastSuccessfulTestMigrateTimeInstance;
+                                        }
+                                        
                                         JToken testMigrateStateValue = propertiesValue["testMigrateState"];
                                         if (testMigrateStateValue != null && testMigrateStateValue.Type != JTokenType.Null)
                                         {
@@ -7291,18 +7517,18 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtMigrationDetailsInstance.SnapshotRunAsAccountId = snapshotRunAsAccountIdInstance;
                                                 }
                                                 
-                                                JToken targetAzureVmNameValue = providerSpecificDetailsValue["targetAzureVmName"];
-                                                if (targetAzureVmNameValue != null && targetAzureVmNameValue.Type != JTokenType.Null)
+                                                JToken targetVmNameValue = providerSpecificDetailsValue["targetVmName"];
+                                                if (targetVmNameValue != null && targetVmNameValue.Type != JTokenType.Null)
                                                 {
-                                                    string targetAzureVmNameInstance = ((string)targetAzureVmNameValue);
-                                                    vMwareCbtMigrationDetailsInstance.TargetAzureVmName = targetAzureVmNameInstance;
+                                                    string targetVmNameInstance = ((string)targetVmNameValue);
+                                                    vMwareCbtMigrationDetailsInstance.TargetVmName = targetVmNameInstance;
                                                 }
                                                 
-                                                JToken targetAzureVmSizeValue = providerSpecificDetailsValue["targetAzureVmSize"];
-                                                if (targetAzureVmSizeValue != null && targetAzureVmSizeValue.Type != JTokenType.Null)
+                                                JToken targetVmSizeValue = providerSpecificDetailsValue["targetVmSize"];
+                                                if (targetVmSizeValue != null && targetVmSizeValue.Type != JTokenType.Null)
                                                 {
-                                                    string targetAzureVmSizeInstance = ((string)targetAzureVmSizeValue);
-                                                    vMwareCbtMigrationDetailsInstance.TargetAzureVmSize = targetAzureVmSizeInstance;
+                                                    string targetVmSizeInstance = ((string)targetVmSizeValue);
+                                                    vMwareCbtMigrationDetailsInstance.TargetVmSize = targetVmSizeInstance;
                                                 }
                                                 
                                                 JToken targetResourceGroupIdValue = providerSpecificDetailsValue["targetResourceGroupId"];
@@ -7312,18 +7538,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtMigrationDetailsInstance.TargetResourceGroupId = targetResourceGroupIdInstance;
                                                 }
                                                 
-                                                JToken targetAzureNetworkIdValue = providerSpecificDetailsValue["targetAzureNetworkId"];
-                                                if (targetAzureNetworkIdValue != null && targetAzureNetworkIdValue.Type != JTokenType.Null)
+                                                JToken targetNetworkIdValue = providerSpecificDetailsValue["targetNetworkId"];
+                                                if (targetNetworkIdValue != null && targetNetworkIdValue.Type != JTokenType.Null)
                                                 {
-                                                    string targetAzureNetworkIdInstance = ((string)targetAzureNetworkIdValue);
-                                                    vMwareCbtMigrationDetailsInstance.TargetAzureNetworkId = targetAzureNetworkIdInstance;
-                                                }
-                                                
-                                                JToken targetAzureSubnetNameValue = providerSpecificDetailsValue["targetAzureSubnetName"];
-                                                if (targetAzureSubnetNameValue != null && targetAzureSubnetNameValue.Type != JTokenType.Null)
-                                                {
-                                                    string targetAzureSubnetNameInstance = ((string)targetAzureSubnetNameValue);
-                                                    vMwareCbtMigrationDetailsInstance.TargetAzureSubnetName = targetAzureSubnetNameInstance;
+                                                    string targetNetworkIdInstance = ((string)targetNetworkIdValue);
+                                                    vMwareCbtMigrationDetailsInstance.TargetNetworkId = targetNetworkIdInstance;
                                                 }
                                                 
                                                 JToken targetAvailabilitySetIdValue = providerSpecificDetailsValue["targetAvailabilitySetId"];
@@ -7402,6 +7621,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                         {
                                                             string seedBlobUriInstance = ((string)seedBlobUriValue);
                                                             vMwareCbtProtectedDiskDetailsInstance.SeedBlobUri = seedBlobUriInstance;
+                                                        }
+                                                        
+                                                        JToken diskTypeValue = protectedDisksValue["diskType"];
+                                                        if (diskTypeValue != null && diskTypeValue.Type != JTokenType.Null)
+                                                        {
+                                                            string diskTypeInstance = ((string)diskTypeValue);
+                                                            vMwareCbtProtectedDiskDetailsInstance.DiskType = diskTypeInstance;
                                                         }
                                                     }
                                                 }
@@ -7491,6 +7717,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                             vMNicDetailsInstance.RecoveryNicIpAddressType = recoveryNicIpAddressTypeInstance;
                                                         }
                                                     }
+                                                }
+                                                
+                                                JToken selectedSourceNicIdValue = providerSpecificDetailsValue["selectedSourceNicId"];
+                                                if (selectedSourceNicIdValue != null && selectedSourceNicIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string selectedSourceNicIdInstance = ((string)selectedSourceNicIdValue);
+                                                    vMwareCbtMigrationDetailsInstance.SelectedSourceNicId = selectedSourceNicIdInstance;
                                                 }
                                                 
                                                 JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
@@ -7825,6 +8058,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             propertiesInstance.MigrationStateDescription = migrationStateDescriptionInstance;
                                         }
                                         
+                                        JToken lastSuccessfulMigrateTimeValue = propertiesValue["lastSuccessfulMigrateTime"];
+                                        if (lastSuccessfulMigrateTimeValue != null && lastSuccessfulMigrateTimeValue.Type != JTokenType.Null)
+                                        {
+                                            DateTime lastSuccessfulMigrateTimeInstance = ((DateTime)lastSuccessfulMigrateTimeValue);
+                                            propertiesInstance.LastSuccessfulMigrateTime = lastSuccessfulMigrateTimeInstance;
+                                        }
+                                        
+                                        JToken lastSuccessfulTestMigrateTimeValue = propertiesValue["lastSuccessfulTestMigrateTime"];
+                                        if (lastSuccessfulTestMigrateTimeValue != null && lastSuccessfulTestMigrateTimeValue.Type != JTokenType.Null)
+                                        {
+                                            DateTime lastSuccessfulTestMigrateTimeInstance = ((DateTime)lastSuccessfulTestMigrateTimeValue);
+                                            propertiesInstance.LastSuccessfulTestMigrateTime = lastSuccessfulTestMigrateTimeInstance;
+                                        }
+                                        
                                         JToken testMigrateStateValue = propertiesValue["testMigrateState"];
                                         if (testMigrateStateValue != null && testMigrateStateValue.Type != JTokenType.Null)
                                         {
@@ -7919,18 +8166,18 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtMigrationDetailsInstance.SnapshotRunAsAccountId = snapshotRunAsAccountIdInstance;
                                                 }
                                                 
-                                                JToken targetAzureVmNameValue = providerSpecificDetailsValue["targetAzureVmName"];
-                                                if (targetAzureVmNameValue != null && targetAzureVmNameValue.Type != JTokenType.Null)
+                                                JToken targetVmNameValue = providerSpecificDetailsValue["targetVmName"];
+                                                if (targetVmNameValue != null && targetVmNameValue.Type != JTokenType.Null)
                                                 {
-                                                    string targetAzureVmNameInstance = ((string)targetAzureVmNameValue);
-                                                    vMwareCbtMigrationDetailsInstance.TargetAzureVmName = targetAzureVmNameInstance;
+                                                    string targetVmNameInstance = ((string)targetVmNameValue);
+                                                    vMwareCbtMigrationDetailsInstance.TargetVmName = targetVmNameInstance;
                                                 }
                                                 
-                                                JToken targetAzureVmSizeValue = providerSpecificDetailsValue["targetAzureVmSize"];
-                                                if (targetAzureVmSizeValue != null && targetAzureVmSizeValue.Type != JTokenType.Null)
+                                                JToken targetVmSizeValue = providerSpecificDetailsValue["targetVmSize"];
+                                                if (targetVmSizeValue != null && targetVmSizeValue.Type != JTokenType.Null)
                                                 {
-                                                    string targetAzureVmSizeInstance = ((string)targetAzureVmSizeValue);
-                                                    vMwareCbtMigrationDetailsInstance.TargetAzureVmSize = targetAzureVmSizeInstance;
+                                                    string targetVmSizeInstance = ((string)targetVmSizeValue);
+                                                    vMwareCbtMigrationDetailsInstance.TargetVmSize = targetVmSizeInstance;
                                                 }
                                                 
                                                 JToken targetResourceGroupIdValue = providerSpecificDetailsValue["targetResourceGroupId"];
@@ -7940,18 +8187,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtMigrationDetailsInstance.TargetResourceGroupId = targetResourceGroupIdInstance;
                                                 }
                                                 
-                                                JToken targetAzureNetworkIdValue = providerSpecificDetailsValue["targetAzureNetworkId"];
-                                                if (targetAzureNetworkIdValue != null && targetAzureNetworkIdValue.Type != JTokenType.Null)
+                                                JToken targetNetworkIdValue = providerSpecificDetailsValue["targetNetworkId"];
+                                                if (targetNetworkIdValue != null && targetNetworkIdValue.Type != JTokenType.Null)
                                                 {
-                                                    string targetAzureNetworkIdInstance = ((string)targetAzureNetworkIdValue);
-                                                    vMwareCbtMigrationDetailsInstance.TargetAzureNetworkId = targetAzureNetworkIdInstance;
-                                                }
-                                                
-                                                JToken targetAzureSubnetNameValue = providerSpecificDetailsValue["targetAzureSubnetName"];
-                                                if (targetAzureSubnetNameValue != null && targetAzureSubnetNameValue.Type != JTokenType.Null)
-                                                {
-                                                    string targetAzureSubnetNameInstance = ((string)targetAzureSubnetNameValue);
-                                                    vMwareCbtMigrationDetailsInstance.TargetAzureSubnetName = targetAzureSubnetNameInstance;
+                                                    string targetNetworkIdInstance = ((string)targetNetworkIdValue);
+                                                    vMwareCbtMigrationDetailsInstance.TargetNetworkId = targetNetworkIdInstance;
                                                 }
                                                 
                                                 JToken targetAvailabilitySetIdValue = providerSpecificDetailsValue["targetAvailabilitySetId"];
@@ -8030,6 +8270,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                         {
                                                             string seedBlobUriInstance = ((string)seedBlobUriValue);
                                                             vMwareCbtProtectedDiskDetailsInstance.SeedBlobUri = seedBlobUriInstance;
+                                                        }
+                                                        
+                                                        JToken diskTypeValue = protectedDisksValue["diskType"];
+                                                        if (diskTypeValue != null && diskTypeValue.Type != JTokenType.Null)
+                                                        {
+                                                            string diskTypeInstance = ((string)diskTypeValue);
+                                                            vMwareCbtProtectedDiskDetailsInstance.DiskType = diskTypeInstance;
                                                         }
                                                     }
                                                 }
@@ -8119,6 +8366,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                             vMNicDetailsInstance.RecoveryNicIpAddressType = recoveryNicIpAddressTypeInstance;
                                                         }
                                                     }
+                                                }
+                                                
+                                                JToken selectedSourceNicIdValue = providerSpecificDetailsValue["selectedSourceNicId"];
+                                                if (selectedSourceNicIdValue != null && selectedSourceNicIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string selectedSourceNicIdInstance = ((string)selectedSourceNicIdValue);
+                                                    vMwareCbtMigrationDetailsInstance.SelectedSourceNicId = selectedSourceNicIdInstance;
                                                 }
                                                 
                                                 JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
@@ -8410,6 +8664,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             propertiesInstance.MigrationStateDescription = migrationStateDescriptionInstance;
                                         }
                                         
+                                        JToken lastSuccessfulMigrateTimeValue = propertiesValue["lastSuccessfulMigrateTime"];
+                                        if (lastSuccessfulMigrateTimeValue != null && lastSuccessfulMigrateTimeValue.Type != JTokenType.Null)
+                                        {
+                                            DateTime lastSuccessfulMigrateTimeInstance = ((DateTime)lastSuccessfulMigrateTimeValue);
+                                            propertiesInstance.LastSuccessfulMigrateTime = lastSuccessfulMigrateTimeInstance;
+                                        }
+                                        
+                                        JToken lastSuccessfulTestMigrateTimeValue = propertiesValue["lastSuccessfulTestMigrateTime"];
+                                        if (lastSuccessfulTestMigrateTimeValue != null && lastSuccessfulTestMigrateTimeValue.Type != JTokenType.Null)
+                                        {
+                                            DateTime lastSuccessfulTestMigrateTimeInstance = ((DateTime)lastSuccessfulTestMigrateTimeValue);
+                                            propertiesInstance.LastSuccessfulTestMigrateTime = lastSuccessfulTestMigrateTimeInstance;
+                                        }
+                                        
                                         JToken testMigrateStateValue = propertiesValue["testMigrateState"];
                                         if (testMigrateStateValue != null && testMigrateStateValue.Type != JTokenType.Null)
                                         {
@@ -8504,18 +8772,18 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtMigrationDetailsInstance.SnapshotRunAsAccountId = snapshotRunAsAccountIdInstance;
                                                 }
                                                 
-                                                JToken targetAzureVmNameValue = providerSpecificDetailsValue["targetAzureVmName"];
-                                                if (targetAzureVmNameValue != null && targetAzureVmNameValue.Type != JTokenType.Null)
+                                                JToken targetVmNameValue = providerSpecificDetailsValue["targetVmName"];
+                                                if (targetVmNameValue != null && targetVmNameValue.Type != JTokenType.Null)
                                                 {
-                                                    string targetAzureVmNameInstance = ((string)targetAzureVmNameValue);
-                                                    vMwareCbtMigrationDetailsInstance.TargetAzureVmName = targetAzureVmNameInstance;
+                                                    string targetVmNameInstance = ((string)targetVmNameValue);
+                                                    vMwareCbtMigrationDetailsInstance.TargetVmName = targetVmNameInstance;
                                                 }
                                                 
-                                                JToken targetAzureVmSizeValue = providerSpecificDetailsValue["targetAzureVmSize"];
-                                                if (targetAzureVmSizeValue != null && targetAzureVmSizeValue.Type != JTokenType.Null)
+                                                JToken targetVmSizeValue = providerSpecificDetailsValue["targetVmSize"];
+                                                if (targetVmSizeValue != null && targetVmSizeValue.Type != JTokenType.Null)
                                                 {
-                                                    string targetAzureVmSizeInstance = ((string)targetAzureVmSizeValue);
-                                                    vMwareCbtMigrationDetailsInstance.TargetAzureVmSize = targetAzureVmSizeInstance;
+                                                    string targetVmSizeInstance = ((string)targetVmSizeValue);
+                                                    vMwareCbtMigrationDetailsInstance.TargetVmSize = targetVmSizeInstance;
                                                 }
                                                 
                                                 JToken targetResourceGroupIdValue = providerSpecificDetailsValue["targetResourceGroupId"];
@@ -8525,18 +8793,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtMigrationDetailsInstance.TargetResourceGroupId = targetResourceGroupIdInstance;
                                                 }
                                                 
-                                                JToken targetAzureNetworkIdValue = providerSpecificDetailsValue["targetAzureNetworkId"];
-                                                if (targetAzureNetworkIdValue != null && targetAzureNetworkIdValue.Type != JTokenType.Null)
+                                                JToken targetNetworkIdValue = providerSpecificDetailsValue["targetNetworkId"];
+                                                if (targetNetworkIdValue != null && targetNetworkIdValue.Type != JTokenType.Null)
                                                 {
-                                                    string targetAzureNetworkIdInstance = ((string)targetAzureNetworkIdValue);
-                                                    vMwareCbtMigrationDetailsInstance.TargetAzureNetworkId = targetAzureNetworkIdInstance;
-                                                }
-                                                
-                                                JToken targetAzureSubnetNameValue = providerSpecificDetailsValue["targetAzureSubnetName"];
-                                                if (targetAzureSubnetNameValue != null && targetAzureSubnetNameValue.Type != JTokenType.Null)
-                                                {
-                                                    string targetAzureSubnetNameInstance = ((string)targetAzureSubnetNameValue);
-                                                    vMwareCbtMigrationDetailsInstance.TargetAzureSubnetName = targetAzureSubnetNameInstance;
+                                                    string targetNetworkIdInstance = ((string)targetNetworkIdValue);
+                                                    vMwareCbtMigrationDetailsInstance.TargetNetworkId = targetNetworkIdInstance;
                                                 }
                                                 
                                                 JToken targetAvailabilitySetIdValue = providerSpecificDetailsValue["targetAvailabilitySetId"];
@@ -8615,6 +8876,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                         {
                                                             string seedBlobUriInstance = ((string)seedBlobUriValue);
                                                             vMwareCbtProtectedDiskDetailsInstance.SeedBlobUri = seedBlobUriInstance;
+                                                        }
+                                                        
+                                                        JToken diskTypeValue = protectedDisksValue["diskType"];
+                                                        if (diskTypeValue != null && diskTypeValue.Type != JTokenType.Null)
+                                                        {
+                                                            string diskTypeInstance = ((string)diskTypeValue);
+                                                            vMwareCbtProtectedDiskDetailsInstance.DiskType = diskTypeInstance;
                                                         }
                                                     }
                                                 }
@@ -8704,6 +8972,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                             vMNicDetailsInstance.RecoveryNicIpAddressType = recoveryNicIpAddressTypeInstance;
                                                         }
                                                     }
+                                                }
+                                                
+                                                JToken selectedSourceNicIdValue = providerSpecificDetailsValue["selectedSourceNicId"];
+                                                if (selectedSourceNicIdValue != null && selectedSourceNicIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string selectedSourceNicIdInstance = ((string)selectedSourceNicIdValue);
+                                                    vMwareCbtMigrationDetailsInstance.SelectedSourceNicId = selectedSourceNicIdInstance;
                                                 }
                                                 
                                                 JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
@@ -8913,6 +9188,695 @@ namespace Microsoft.Azure.Management.SiteRecovery
             }
             
             return result;
+        }
+        
+        /// <summary>
+        /// Get a specific recovery point for a migration item.
+        /// </summary>
+        /// <param name='fabricName'>
+        /// Required. Fabric unique name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Required. Protection container unique name.
+        /// </param>
+        /// <param name='migrationItemName'>
+        /// Required. Migration item name.
+        /// </param>
+        /// <param name='recoveryPointName'>
+        /// Required. Recovery point name.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Optional. Request header parameters.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
+        /// The response model for recovery point object.
+        /// </returns>
+        public async Task<RecoveryPointResponse> RecoveryPointGetAsync(string fabricName, string protectionContainerName, string migrationItemName, string recoveryPointName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        {
+            // Validate
+            if (fabricName == null)
+            {
+                throw new ArgumentNullException("fabricName");
+            }
+            if (protectionContainerName == null)
+            {
+                throw new ArgumentNullException("protectionContainerName");
+            }
+            if (migrationItemName == null)
+            {
+                throw new ArgumentNullException("migrationItemName");
+            }
+            if (recoveryPointName == null)
+            {
+                throw new ArgumentNullException("recoveryPointName");
+            }
+            
+            // Tracing
+            bool shouldTrace = TracingAdapter.IsEnabled;
+            string invocationId = null;
+            if (shouldTrace)
+            {
+                invocationId = TracingAdapter.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("fabricName", fabricName);
+                tracingParameters.Add("protectionContainerName", protectionContainerName);
+                tracingParameters.Add("migrationItemName", migrationItemName);
+                tracingParameters.Add("recoveryPointName", recoveryPointName);
+                tracingParameters.Add("customRequestHeaders", customRequestHeaders);
+                TracingAdapter.Enter(invocationId, this, "RecoveryPointGetAsync", tracingParameters);
+            }
+            
+            // Construct URL
+            string url = "";
+            url = url + "/Subscriptions/";
+            if (this.Client.Credentials.SubscriptionId != null)
+            {
+                url = url + Uri.EscapeDataString(this.Client.Credentials.SubscriptionId);
+            }
+            url = url + "/resourceGroups/";
+            url = url + Uri.EscapeDataString(this.Client.ResourceGroupName);
+            url = url + "/providers/";
+            url = url + Uri.EscapeDataString(this.Client.ResourceNamespace);
+            url = url + "/";
+            url = url + Uri.EscapeDataString(this.Client.ResourceType);
+            url = url + "/";
+            url = url + Uri.EscapeDataString(this.Client.ResourceName);
+            url = url + "/replicationFabrics/";
+            url = url + Uri.EscapeDataString(fabricName);
+            url = url + "/replicationProtectionContainers/";
+            url = url + Uri.EscapeDataString(protectionContainerName);
+            url = url + "/replicationMigrationItems/";
+            url = url + Uri.EscapeDataString(migrationItemName);
+            url = url + "/recoveryPoints/";
+            url = url + Uri.EscapeDataString(recoveryPointName);
+            List<string> queryParameters = new List<string>();
+            queryParameters.Add("api-version=2018-01-10");
+            if (queryParameters.Count > 0)
+            {
+                url = url + "?" + string.Join("&", queryParameters);
+            }
+            string baseUrl = this.Client.BaseUri.AbsoluteUri;
+            // Trim '/' character from the end of baseUrl and beginning of url.
+            if (baseUrl[baseUrl.Length - 1] == '/')
+            {
+                baseUrl = baseUrl.Substring(0, baseUrl.Length - 1);
+            }
+            if (url[0] == '/')
+            {
+                url = url.Substring(1);
+            }
+            url = baseUrl + "/" + url;
+            url = url.Replace(" ", "%20");
+            
+            // Create HTTP transport objects
+            HttpRequestMessage httpRequest = null;
+            try
+            {
+                httpRequest = new HttpRequestMessage();
+                httpRequest.Method = HttpMethod.Get;
+                httpRequest.RequestUri = new Uri(url);
+                
+                // Set Headers
+                httpRequest.Headers.Add("Accept-Language", customRequestHeaders.Culture);
+                httpRequest.Headers.Add("x-ms-client-request-id", customRequestHeaders.ClientRequestId);
+                httpRequest.Headers.Add("x-ms-version", "2015-01-01");
+                
+                // Set Credentials
+                cancellationToken.ThrowIfCancellationRequested();
+                await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+                
+                // Send Request
+                HttpResponseMessage httpResponse = null;
+                try
+                {
+                    if (shouldTrace)
+                    {
+                        TracingAdapter.SendRequest(invocationId, httpRequest);
+                    }
+                    cancellationToken.ThrowIfCancellationRequested();
+                    httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+                    if (shouldTrace)
+                    {
+                        TracingAdapter.ReceiveResponse(invocationId, httpResponse);
+                    }
+                    HttpStatusCode statusCode = httpResponse.StatusCode;
+                    if (statusCode != HttpStatusCode.OK)
+                    {
+                        cancellationToken.ThrowIfCancellationRequested();
+                        CloudException ex = CloudException.Create(httpRequest, null, httpResponse, await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false));
+                        if (shouldTrace)
+                        {
+                            TracingAdapter.Error(invocationId, ex);
+                        }
+                        throw ex;
+                    }
+                    
+                    // Create Result
+                    RecoveryPointResponse result = null;
+                    // Deserialize Response
+                    if (statusCode == HttpStatusCode.OK)
+                    {
+                        cancellationToken.ThrowIfCancellationRequested();
+                        string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        result = new RecoveryPointResponse();
+                        JToken responseDoc = null;
+                        if (string.IsNullOrEmpty(responseContent) == false)
+                        {
+                            responseDoc = JToken.Parse(responseContent);
+                        }
+                        
+                        if (responseDoc != null && responseDoc.Type != JTokenType.Null)
+                        {
+                            RecoveryPoint recoveryPointInstance = new RecoveryPoint();
+                            result.RecoveryPoint = recoveryPointInstance;
+                            
+                            JToken propertiesValue = responseDoc["properties"];
+                            if (propertiesValue != null && propertiesValue.Type != JTokenType.Null)
+                            {
+                                RecoveryPointProperties propertiesInstance = new RecoveryPointProperties();
+                                recoveryPointInstance.Properties = propertiesInstance;
+                                
+                                JToken recoveryPointTimeValue = propertiesValue["recoveryPointTime"];
+                                if (recoveryPointTimeValue != null && recoveryPointTimeValue.Type != JTokenType.Null)
+                                {
+                                    DateTime recoveryPointTimeInstance = ((DateTime)recoveryPointTimeValue);
+                                    propertiesInstance.RecoveryPointTime = recoveryPointTimeInstance;
+                                }
+                                
+                                JToken recoveryPointTypeValue = propertiesValue["recoveryPointType"];
+                                if (recoveryPointTypeValue != null && recoveryPointTypeValue.Type != JTokenType.Null)
+                                {
+                                    string recoveryPointTypeInstance = ((string)recoveryPointTypeValue);
+                                    propertiesInstance.RecoveryPointType = recoveryPointTypeInstance;
+                                }
+                                
+                                JToken providerSpecificDetailsValue = propertiesValue["providerSpecificDetails"];
+                                if (providerSpecificDetailsValue != null && providerSpecificDetailsValue.Type != JTokenType.Null)
+                                {
+                                    string typeName = ((string)providerSpecificDetailsValue["instanceType"]);
+                                    if (typeName == "InMageAzureV2")
+                                    {
+                                        InMageAzureV2RecoveryPointDetails inMageAzureV2RecoveryPointDetailsInstance = new InMageAzureV2RecoveryPointDetails();
+                                        
+                                        JToken isMultiVmSyncPointValue = providerSpecificDetailsValue["isMultiVmSyncPoint"];
+                                        if (isMultiVmSyncPointValue != null && isMultiVmSyncPointValue.Type != JTokenType.Null)
+                                        {
+                                            string isMultiVmSyncPointInstance = ((string)isMultiVmSyncPointValue);
+                                            inMageAzureV2RecoveryPointDetailsInstance.IsMultiVmSyncPoint = isMultiVmSyncPointInstance;
+                                        }
+                                        
+                                        JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
+                                        if (instanceTypeValue != null && instanceTypeValue.Type != JTokenType.Null)
+                                        {
+                                            string instanceTypeInstance = ((string)instanceTypeValue);
+                                            inMageAzureV2RecoveryPointDetailsInstance.InstanceType = instanceTypeInstance;
+                                        }
+                                        propertiesInstance.ProviderSpecificDetails = inMageAzureV2RecoveryPointDetailsInstance;
+                                    }
+                                    if (typeName == "A2A")
+                                    {
+                                        A2ARecoveryPointDetails a2ARecoveryPointDetailsInstance = new A2ARecoveryPointDetails();
+                                        
+                                        JToken recoveryPointSyncTypeValue = providerSpecificDetailsValue["recoveryPointSyncType"];
+                                        if (recoveryPointSyncTypeValue != null && recoveryPointSyncTypeValue.Type != JTokenType.Null)
+                                        {
+                                            string recoveryPointSyncTypeInstance = ((string)recoveryPointSyncTypeValue);
+                                            a2ARecoveryPointDetailsInstance.RecoveryPointSyncType = recoveryPointSyncTypeInstance;
+                                        }
+                                        
+                                        JToken instanceTypeValue2 = providerSpecificDetailsValue["instanceType"];
+                                        if (instanceTypeValue2 != null && instanceTypeValue2.Type != JTokenType.Null)
+                                        {
+                                            string instanceTypeInstance2 = ((string)instanceTypeValue2);
+                                            a2ARecoveryPointDetailsInstance.InstanceType = instanceTypeInstance2;
+                                        }
+                                        propertiesInstance.ProviderSpecificDetails = a2ARecoveryPointDetailsInstance;
+                                    }
+                                }
+                            }
+                            
+                            JToken idValue = responseDoc["id"];
+                            if (idValue != null && idValue.Type != JTokenType.Null)
+                            {
+                                string idInstance = ((string)idValue);
+                                recoveryPointInstance.Id = idInstance;
+                            }
+                            
+                            JToken nameValue = responseDoc["name"];
+                            if (nameValue != null && nameValue.Type != JTokenType.Null)
+                            {
+                                string nameInstance = ((string)nameValue);
+                                recoveryPointInstance.Name = nameInstance;
+                            }
+                            
+                            JToken typeValue = responseDoc["type"];
+                            if (typeValue != null && typeValue.Type != JTokenType.Null)
+                            {
+                                string typeInstance = ((string)typeValue);
+                                recoveryPointInstance.Type = typeInstance;
+                            }
+                            
+                            JToken locationValue = responseDoc["location"];
+                            if (locationValue != null && locationValue.Type != JTokenType.Null)
+                            {
+                                string locationInstance = ((string)locationValue);
+                                recoveryPointInstance.Location = locationInstance;
+                            }
+                            
+                            JToken tagsSequenceElement = ((JToken)responseDoc["tags"]);
+                            if (tagsSequenceElement != null && tagsSequenceElement.Type != JTokenType.Null)
+                            {
+                                foreach (JProperty property in tagsSequenceElement)
+                                {
+                                    string tagsKey = ((string)property.Name);
+                                    string tagsValue = ((string)property.Value);
+                                    recoveryPointInstance.Tags.Add(tagsKey, tagsValue);
+                                }
+                            }
+                            
+                            JToken clientRequestIdValue = responseDoc["ClientRequestId"];
+                            if (clientRequestIdValue != null && clientRequestIdValue.Type != JTokenType.Null)
+                            {
+                                string clientRequestIdInstance = ((string)clientRequestIdValue);
+                                result.ClientRequestId = clientRequestIdInstance;
+                            }
+                            
+                            JToken correlationRequestIdValue = responseDoc["CorrelationRequestId"];
+                            if (correlationRequestIdValue != null && correlationRequestIdValue.Type != JTokenType.Null)
+                            {
+                                string correlationRequestIdInstance = ((string)correlationRequestIdValue);
+                                result.CorrelationRequestId = correlationRequestIdInstance;
+                            }
+                            
+                            JToken dateValue = responseDoc["Date"];
+                            if (dateValue != null && dateValue.Type != JTokenType.Null)
+                            {
+                                string dateInstance = ((string)dateValue);
+                                result.Date = dateInstance;
+                            }
+                            
+                            JToken contentTypeValue = responseDoc["ContentType"];
+                            if (contentTypeValue != null && contentTypeValue.Type != JTokenType.Null)
+                            {
+                                string contentTypeInstance = ((string)contentTypeValue);
+                                result.ContentType = contentTypeInstance;
+                            }
+                        }
+                        
+                    }
+                    result.StatusCode = statusCode;
+                    if (httpResponse.Content != null && httpResponse.Content.Headers.Contains("Content-Type"))
+                    {
+                        result.ContentType = httpResponse.Content.Headers.GetValues("Content-Type").FirstOrDefault();
+                    }
+                    if (httpResponse.Headers.Contains("Date"))
+                    {
+                        result.Date = httpResponse.Headers.GetValues("Date").FirstOrDefault();
+                    }
+                    if (httpResponse.Headers.Contains("x-ms-client-request-id"))
+                    {
+                        result.ClientRequestId = httpResponse.Headers.GetValues("x-ms-client-request-id").FirstOrDefault();
+                    }
+                    if (httpResponse.Headers.Contains("x-ms-correlation-request-id"))
+                    {
+                        result.CorrelationRequestId = httpResponse.Headers.GetValues("x-ms-correlation-request-id").FirstOrDefault();
+                    }
+                    if (httpResponse.Headers.Contains("x-ms-request-id"))
+                    {
+                        result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    
+                    if (shouldTrace)
+                    {
+                        TracingAdapter.Exit(invocationId, result);
+                    }
+                    return result;
+                }
+                finally
+                {
+                    if (httpResponse != null)
+                    {
+                        httpResponse.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (httpRequest != null)
+                {
+                    httpRequest.Dispose();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Get all recovery points for a migration item.
+        /// </summary>
+        /// <param name='fabricName'>
+        /// Required. Fabric unique name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Required. Protection container unique name.
+        /// </param>
+        /// <param name='migrationItemName'>
+        /// Required. Migration item name.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Optional. Request header parameters.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
+        /// The response model for a list of recovery points.
+        /// </returns>
+        public async Task<RecoveryPointListResponse> RecoveryPointListAsync(string fabricName, string protectionContainerName, string migrationItemName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        {
+            // Validate
+            if (fabricName == null)
+            {
+                throw new ArgumentNullException("fabricName");
+            }
+            if (protectionContainerName == null)
+            {
+                throw new ArgumentNullException("protectionContainerName");
+            }
+            if (migrationItemName == null)
+            {
+                throw new ArgumentNullException("migrationItemName");
+            }
+            
+            // Tracing
+            bool shouldTrace = TracingAdapter.IsEnabled;
+            string invocationId = null;
+            if (shouldTrace)
+            {
+                invocationId = TracingAdapter.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("fabricName", fabricName);
+                tracingParameters.Add("protectionContainerName", protectionContainerName);
+                tracingParameters.Add("migrationItemName", migrationItemName);
+                tracingParameters.Add("customRequestHeaders", customRequestHeaders);
+                TracingAdapter.Enter(invocationId, this, "RecoveryPointListAsync", tracingParameters);
+            }
+            
+            // Construct URL
+            string url = "";
+            url = url + "/Subscriptions/";
+            if (this.Client.Credentials.SubscriptionId != null)
+            {
+                url = url + Uri.EscapeDataString(this.Client.Credentials.SubscriptionId);
+            }
+            url = url + "/resourceGroups/";
+            url = url + Uri.EscapeDataString(this.Client.ResourceGroupName);
+            url = url + "/providers/";
+            url = url + Uri.EscapeDataString(this.Client.ResourceNamespace);
+            url = url + "/";
+            url = url + Uri.EscapeDataString(this.Client.ResourceType);
+            url = url + "/";
+            url = url + Uri.EscapeDataString(this.Client.ResourceName);
+            url = url + "/replicationFabrics/";
+            url = url + Uri.EscapeDataString(fabricName);
+            url = url + "/replicationProtectionContainers/";
+            url = url + Uri.EscapeDataString(protectionContainerName);
+            url = url + "/replicationMigrationItems/";
+            url = url + Uri.EscapeDataString(migrationItemName);
+            url = url + "/recoveryPoints";
+            List<string> queryParameters = new List<string>();
+            queryParameters.Add("api-version=2018-01-10");
+            if (queryParameters.Count > 0)
+            {
+                url = url + "?" + string.Join("&", queryParameters);
+            }
+            string baseUrl = this.Client.BaseUri.AbsoluteUri;
+            // Trim '/' character from the end of baseUrl and beginning of url.
+            if (baseUrl[baseUrl.Length - 1] == '/')
+            {
+                baseUrl = baseUrl.Substring(0, baseUrl.Length - 1);
+            }
+            if (url[0] == '/')
+            {
+                url = url.Substring(1);
+            }
+            url = baseUrl + "/" + url;
+            url = url.Replace(" ", "%20");
+            
+            // Create HTTP transport objects
+            HttpRequestMessage httpRequest = null;
+            try
+            {
+                httpRequest = new HttpRequestMessage();
+                httpRequest.Method = HttpMethod.Get;
+                httpRequest.RequestUri = new Uri(url);
+                
+                // Set Headers
+                httpRequest.Headers.Add("Accept-Language", customRequestHeaders.Culture);
+                httpRequest.Headers.Add("x-ms-client-request-id", customRequestHeaders.ClientRequestId);
+                httpRequest.Headers.Add("x-ms-version", "2015-01-01");
+                
+                // Set Credentials
+                cancellationToken.ThrowIfCancellationRequested();
+                await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+                
+                // Send Request
+                HttpResponseMessage httpResponse = null;
+                try
+                {
+                    if (shouldTrace)
+                    {
+                        TracingAdapter.SendRequest(invocationId, httpRequest);
+                    }
+                    cancellationToken.ThrowIfCancellationRequested();
+                    httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+                    if (shouldTrace)
+                    {
+                        TracingAdapter.ReceiveResponse(invocationId, httpResponse);
+                    }
+                    HttpStatusCode statusCode = httpResponse.StatusCode;
+                    if (statusCode != HttpStatusCode.OK)
+                    {
+                        cancellationToken.ThrowIfCancellationRequested();
+                        CloudException ex = CloudException.Create(httpRequest, null, httpResponse, await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false));
+                        if (shouldTrace)
+                        {
+                            TracingAdapter.Error(invocationId, ex);
+                        }
+                        throw ex;
+                    }
+                    
+                    // Create Result
+                    RecoveryPointListResponse result = null;
+                    // Deserialize Response
+                    if (statusCode == HttpStatusCode.OK)
+                    {
+                        cancellationToken.ThrowIfCancellationRequested();
+                        string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        result = new RecoveryPointListResponse();
+                        JToken responseDoc = null;
+                        if (string.IsNullOrEmpty(responseContent) == false)
+                        {
+                            responseDoc = JToken.Parse(responseContent);
+                        }
+                        
+                        if (responseDoc != null && responseDoc.Type != JTokenType.Null)
+                        {
+                            JToken valueArray = responseDoc["value"];
+                            if (valueArray != null && valueArray.Type != JTokenType.Null)
+                            {
+                                foreach (JToken valueValue in ((JArray)valueArray))
+                                {
+                                    RecoveryPoint recoveryPointInstance = new RecoveryPoint();
+                                    result.RecoveryPoints.Add(recoveryPointInstance);
+                                    
+                                    JToken propertiesValue = valueValue["properties"];
+                                    if (propertiesValue != null && propertiesValue.Type != JTokenType.Null)
+                                    {
+                                        RecoveryPointProperties propertiesInstance = new RecoveryPointProperties();
+                                        recoveryPointInstance.Properties = propertiesInstance;
+                                        
+                                        JToken recoveryPointTimeValue = propertiesValue["recoveryPointTime"];
+                                        if (recoveryPointTimeValue != null && recoveryPointTimeValue.Type != JTokenType.Null)
+                                        {
+                                            DateTime recoveryPointTimeInstance = ((DateTime)recoveryPointTimeValue);
+                                            propertiesInstance.RecoveryPointTime = recoveryPointTimeInstance;
+                                        }
+                                        
+                                        JToken recoveryPointTypeValue = propertiesValue["recoveryPointType"];
+                                        if (recoveryPointTypeValue != null && recoveryPointTypeValue.Type != JTokenType.Null)
+                                        {
+                                            string recoveryPointTypeInstance = ((string)recoveryPointTypeValue);
+                                            propertiesInstance.RecoveryPointType = recoveryPointTypeInstance;
+                                        }
+                                        
+                                        JToken providerSpecificDetailsValue = propertiesValue["providerSpecificDetails"];
+                                        if (providerSpecificDetailsValue != null && providerSpecificDetailsValue.Type != JTokenType.Null)
+                                        {
+                                            string typeName = ((string)providerSpecificDetailsValue["instanceType"]);
+                                            if (typeName == "InMageAzureV2")
+                                            {
+                                                InMageAzureV2RecoveryPointDetails inMageAzureV2RecoveryPointDetailsInstance = new InMageAzureV2RecoveryPointDetails();
+                                                
+                                                JToken isMultiVmSyncPointValue = providerSpecificDetailsValue["isMultiVmSyncPoint"];
+                                                if (isMultiVmSyncPointValue != null && isMultiVmSyncPointValue.Type != JTokenType.Null)
+                                                {
+                                                    string isMultiVmSyncPointInstance = ((string)isMultiVmSyncPointValue);
+                                                    inMageAzureV2RecoveryPointDetailsInstance.IsMultiVmSyncPoint = isMultiVmSyncPointInstance;
+                                                }
+                                                
+                                                JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
+                                                if (instanceTypeValue != null && instanceTypeValue.Type != JTokenType.Null)
+                                                {
+                                                    string instanceTypeInstance = ((string)instanceTypeValue);
+                                                    inMageAzureV2RecoveryPointDetailsInstance.InstanceType = instanceTypeInstance;
+                                                }
+                                                propertiesInstance.ProviderSpecificDetails = inMageAzureV2RecoveryPointDetailsInstance;
+                                            }
+                                            if (typeName == "A2A")
+                                            {
+                                                A2ARecoveryPointDetails a2ARecoveryPointDetailsInstance = new A2ARecoveryPointDetails();
+                                                
+                                                JToken recoveryPointSyncTypeValue = providerSpecificDetailsValue["recoveryPointSyncType"];
+                                                if (recoveryPointSyncTypeValue != null && recoveryPointSyncTypeValue.Type != JTokenType.Null)
+                                                {
+                                                    string recoveryPointSyncTypeInstance = ((string)recoveryPointSyncTypeValue);
+                                                    a2ARecoveryPointDetailsInstance.RecoveryPointSyncType = recoveryPointSyncTypeInstance;
+                                                }
+                                                
+                                                JToken instanceTypeValue2 = providerSpecificDetailsValue["instanceType"];
+                                                if (instanceTypeValue2 != null && instanceTypeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string instanceTypeInstance2 = ((string)instanceTypeValue2);
+                                                    a2ARecoveryPointDetailsInstance.InstanceType = instanceTypeInstance2;
+                                                }
+                                                propertiesInstance.ProviderSpecificDetails = a2ARecoveryPointDetailsInstance;
+                                            }
+                                        }
+                                    }
+                                    
+                                    JToken idValue = valueValue["id"];
+                                    if (idValue != null && idValue.Type != JTokenType.Null)
+                                    {
+                                        string idInstance = ((string)idValue);
+                                        recoveryPointInstance.Id = idInstance;
+                                    }
+                                    
+                                    JToken nameValue = valueValue["name"];
+                                    if (nameValue != null && nameValue.Type != JTokenType.Null)
+                                    {
+                                        string nameInstance = ((string)nameValue);
+                                        recoveryPointInstance.Name = nameInstance;
+                                    }
+                                    
+                                    JToken typeValue = valueValue["type"];
+                                    if (typeValue != null && typeValue.Type != JTokenType.Null)
+                                    {
+                                        string typeInstance = ((string)typeValue);
+                                        recoveryPointInstance.Type = typeInstance;
+                                    }
+                                    
+                                    JToken locationValue = valueValue["location"];
+                                    if (locationValue != null && locationValue.Type != JTokenType.Null)
+                                    {
+                                        string locationInstance = ((string)locationValue);
+                                        recoveryPointInstance.Location = locationInstance;
+                                    }
+                                    
+                                    JToken tagsSequenceElement = ((JToken)valueValue["tags"]);
+                                    if (tagsSequenceElement != null && tagsSequenceElement.Type != JTokenType.Null)
+                                    {
+                                        foreach (JProperty property in tagsSequenceElement)
+                                        {
+                                            string tagsKey = ((string)property.Name);
+                                            string tagsValue = ((string)property.Value);
+                                            recoveryPointInstance.Tags.Add(tagsKey, tagsValue);
+                                        }
+                                    }
+                                }
+                            }
+                            
+                            JToken nextLinkValue = responseDoc["nextLink"];
+                            if (nextLinkValue != null && nextLinkValue.Type != JTokenType.Null)
+                            {
+                                string nextLinkInstance = ((string)nextLinkValue);
+                                result.NextLink = nextLinkInstance;
+                            }
+                            
+                            JToken clientRequestIdValue = responseDoc["ClientRequestId"];
+                            if (clientRequestIdValue != null && clientRequestIdValue.Type != JTokenType.Null)
+                            {
+                                string clientRequestIdInstance = ((string)clientRequestIdValue);
+                                result.ClientRequestId = clientRequestIdInstance;
+                            }
+                            
+                            JToken correlationRequestIdValue = responseDoc["CorrelationRequestId"];
+                            if (correlationRequestIdValue != null && correlationRequestIdValue.Type != JTokenType.Null)
+                            {
+                                string correlationRequestIdInstance = ((string)correlationRequestIdValue);
+                                result.CorrelationRequestId = correlationRequestIdInstance;
+                            }
+                            
+                            JToken dateValue = responseDoc["Date"];
+                            if (dateValue != null && dateValue.Type != JTokenType.Null)
+                            {
+                                string dateInstance = ((string)dateValue);
+                                result.Date = dateInstance;
+                            }
+                            
+                            JToken contentTypeValue = responseDoc["ContentType"];
+                            if (contentTypeValue != null && contentTypeValue.Type != JTokenType.Null)
+                            {
+                                string contentTypeInstance = ((string)contentTypeValue);
+                                result.ContentType = contentTypeInstance;
+                            }
+                        }
+                        
+                    }
+                    result.StatusCode = statusCode;
+                    if (httpResponse.Content != null && httpResponse.Content.Headers.Contains("Content-Type"))
+                    {
+                        result.ContentType = httpResponse.Content.Headers.GetValues("Content-Type").FirstOrDefault();
+                    }
+                    if (httpResponse.Headers.Contains("Date"))
+                    {
+                        result.Date = httpResponse.Headers.GetValues("Date").FirstOrDefault();
+                    }
+                    if (httpResponse.Headers.Contains("x-ms-client-request-id"))
+                    {
+                        result.ClientRequestId = httpResponse.Headers.GetValues("x-ms-client-request-id").FirstOrDefault();
+                    }
+                    if (httpResponse.Headers.Contains("x-ms-correlation-request-id"))
+                    {
+                        result.CorrelationRequestId = httpResponse.Headers.GetValues("x-ms-correlation-request-id").FirstOrDefault();
+                    }
+                    if (httpResponse.Headers.Contains("x-ms-request-id"))
+                    {
+                        result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    
+                    if (shouldTrace)
+                    {
+                        TracingAdapter.Exit(invocationId, result);
+                    }
+                    return result;
+                }
+                finally
+                {
+                    if (httpResponse != null)
+                    {
+                        httpResponse.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (httpRequest != null)
+                {
+                    httpRequest.Dispose();
+                }
+            }
         }
         
         /// <summary>

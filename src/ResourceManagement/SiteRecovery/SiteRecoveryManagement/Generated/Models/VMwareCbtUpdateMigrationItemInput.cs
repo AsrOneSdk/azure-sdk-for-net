@@ -20,7 +20,9 @@
 // code is regenerated.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using Hyak.Common;
 using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
@@ -39,6 +41,18 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         {
             get { return this._licenseType; }
             set { this._licenseType = value; }
+        }
+        
+        private string _selectedSourceNicId;
+        
+        /// <summary>
+        /// Optional. Selected source nic Id which will be used as primary nic
+        /// during failover.
+        /// </summary>
+        public string SelectedSourceNicId
+        {
+            get { return this._selectedSourceNicId; }
+            set { this._selectedSourceNicId = value; }
         }
         
         private string _targetAvailabilitySetId;
@@ -96,12 +110,38 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._targetResourceGroupId = value; }
         }
         
+        private IList<VMNicInputDetails> _vmNics;
+        
+        /// <summary>
+        /// Required. Gets or sets VM Nic Details
+        /// </summary>
+        public IList<VMNicInputDetails> VmNics
+        {
+            get { return this._vmNics; }
+            set { this._vmNics = value; }
+        }
+        
         /// <summary>
         /// Initializes a new instance of the VMwareCbtUpdateMigrationItemInput
         /// class.
         /// </summary>
         public VMwareCbtUpdateMigrationItemInput()
         {
+            this.VmNics = new LazyList<VMNicInputDetails>();
+        }
+        
+        /// <summary>
+        /// Initializes a new instance of the VMwareCbtUpdateMigrationItemInput
+        /// class with required arguments.
+        /// </summary>
+        public VMwareCbtUpdateMigrationItemInput(List<VMNicInputDetails> vmNics)
+            : this()
+        {
+            if (vmNics == null)
+            {
+                throw new ArgumentNullException("vmNics");
+            }
+            this.VmNics = vmNics;
         }
     }
 }
