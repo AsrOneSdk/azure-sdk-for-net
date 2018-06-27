@@ -76,18 +76,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._protectedDisks = value; }
         }
         
-        private string _selectedSourceNicId;
-        
-        /// <summary>
-        /// Optional. Selected source nic Id which will be used as primary nic
-        /// during failover.
-        /// </summary>
-        public string SelectedSourceNicId
-        {
-            get { return this._selectedSourceNicId; }
-            set { this._selectedSourceNicId = value; }
-        }
-        
         private string _snapshotRunAsAccountId;
         
         /// <summary>
@@ -154,12 +142,12 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._targetVmSize = value; }
         }
         
-        private IList<VMNicDetails> _vMNics;
+        private IList<VMwareCbtNicDetails> _vMNics;
         
         /// <summary>
         /// Optional. Gets or sets the network details.
         /// </summary>
-        public IList<VMNicDetails> VMNics
+        public IList<VMwareCbtNicDetails> VMNics
         {
             get { return this._vMNics; }
             set { this._vMNics = value; }
@@ -182,7 +170,7 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         public VMwareCbtMigrationDetails()
         {
             this.ProtectedDisks = new LazyList<VMwareCbtProtectedDiskDetails>();
-            this.VMNics = new LazyList<VMNicDetails>();
+            this.VMNics = new LazyList<VMwareCbtNicDetails>();
         }
     }
 }

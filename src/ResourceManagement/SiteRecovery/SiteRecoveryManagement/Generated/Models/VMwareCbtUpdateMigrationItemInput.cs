@@ -43,18 +43,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._licenseType = value; }
         }
         
-        private string _selectedSourceNicId;
-        
-        /// <summary>
-        /// Optional. Selected source nic Id which will be used as primary nic
-        /// during failover.
-        /// </summary>
-        public string SelectedSourceNicId
-        {
-            get { return this._selectedSourceNicId; }
-            set { this._selectedSourceNicId = value; }
-        }
-        
         private string _targetAvailabilitySetId;
         
         /// <summary>
@@ -110,12 +98,12 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._targetResourceGroupId = value; }
         }
         
-        private IList<VMNicInputDetails> _vmNics;
+        private IList<VMwareCbtNicInput> _vmNics;
         
         /// <summary>
         /// Required. Gets or sets VM Nic Details
         /// </summary>
-        public IList<VMNicInputDetails> VmNics
+        public IList<VMwareCbtNicInput> VmNics
         {
             get { return this._vmNics; }
             set { this._vmNics = value; }
@@ -127,14 +115,14 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         /// </summary>
         public VMwareCbtUpdateMigrationItemInput()
         {
-            this.VmNics = new LazyList<VMNicInputDetails>();
+            this.VmNics = new LazyList<VMwareCbtNicInput>();
         }
         
         /// <summary>
         /// Initializes a new instance of the VMwareCbtUpdateMigrationItemInput
         /// class with required arguments.
         /// </summary>
-        public VMwareCbtUpdateMigrationItemInput(List<VMNicInputDetails> vmNics)
+        public VMwareCbtUpdateMigrationItemInput(List<VMwareCbtNicInput> vmNics)
             : this()
         {
             if (vmNics == null)

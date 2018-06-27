@@ -25,7 +25,7 @@ using System.Linq;
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// Onprem disk details data.
+    /// VMwareCbt disk details.
     /// </summary>
     public partial class VMwareCbtProtectedDiskDetails
     {

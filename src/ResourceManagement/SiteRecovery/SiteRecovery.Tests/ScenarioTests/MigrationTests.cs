@@ -279,7 +279,7 @@ namespace SiteRecovery.Tests.ScenarioTests
                     var pits = client.MigrationItem.RecoveryPointList(
                         VMwareFabricName,
                         VMwareContainerName,
-                        "vmwareMigItem2",
+                        "vmwareMigItem4",
                         RequestHeaders);
                 }
                 catch (Exception)
@@ -398,7 +398,7 @@ namespace SiteRecovery.Tests.ScenarioTests
                     var response = client.MigrationItem.EnableMigration(
                         VMwareFabricName,
                         vmwareContainer.Name,
-                        "vmwareMigItem1",
+                        "vmwareMigItem4",
                         enableMigrationInput,
                         RequestHeaders);
 
@@ -621,6 +621,17 @@ namespace SiteRecovery.Tests.ScenarioTests
                     context.Start();
                     var client = GetSiteRecoveryClient(CustomHttpHandler, "Migration");
 
+                    var nicsInput = new List<VMwareCbtNicInput>
+                    {
+                        new VMwareCbtNicInput
+                        {
+                            NicId = "Network adapter 1",
+                            TargetSubnetName = "subnet1",
+                            IsPrimaryNic = "true",
+                            IsSelectedForMigration = "true"
+                        }
+                    };
+
                     var input = new UpdateMigrationItemInput
                     {
                         Properties = new UpdateMigrationItemInputProperties
@@ -628,11 +639,11 @@ namespace SiteRecovery.Tests.ScenarioTests
                             ProviderSpecificDetails = new VMwareCbtUpdateMigrationItemInput()
                             {
                                 TargetAzureVmName = "abcdefghij",
-                                TargetAzureVmSize = "",
-                                TargetNetworkId = "",
+                                TargetAzureVmSize = "Standard_A7",
+                                TargetNetworkId = TargetNetworkId,
                                 TargetAvailabilitySetId = "",
                                 TargetResourceGroupId = "",
-                                LicenseType = ""
+                                VmNics = nicsInput
                             }
                         }
                     };
@@ -641,7 +652,7 @@ namespace SiteRecovery.Tests.ScenarioTests
                     var response = client.MigrationItem.UpdateMigrationItem(
                         VMwareFabricName,
                         VMwareContainerName,
-                        "vmwareMigItem1",
+                        "vmwareMigItem2",
                         input,
                         RequestHeaders);
 
@@ -649,7 +660,7 @@ namespace SiteRecovery.Tests.ScenarioTests
                     var migItem = client.MigrationItem.Get(
                         VMwareFabricName,
                         VMwareContainerName,
-                        "vmwareMigItem1",
+                        "vmwareMigItem2",
                         RequestHeaders);
                 }
                 catch (Exception)

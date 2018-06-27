@@ -1671,39 +1671,39 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 providerSpecificDetailsValue["targetNetworkId"] = derived.TargetNetworkId;
                             }
                             
-                            if (derived.SelectedSourceNicId != null)
-                            {
-                                providerSpecificDetailsValue["selectedSourceNicId"] = derived.SelectedSourceNicId;
-                            }
-                            
                             if (derived.VmNics != null)
                             {
                                 if (derived.VmNics is ILazyCollection == false || ((ILazyCollection)derived.VmNics).IsInitialized)
                                 {
                                     JArray vmNicsArray = new JArray();
-                                    foreach (VMNicInputDetails vmNicsItem in derived.VmNics)
+                                    foreach (VMwareCbtNicInput vmNicsItem in derived.VmNics)
                                     {
-                                        JObject vMNicInputDetailsValue = new JObject();
-                                        vmNicsArray.Add(vMNicInputDetailsValue);
+                                        JObject vMwareCbtNicInputValue = new JObject();
+                                        vmNicsArray.Add(vMwareCbtNicInputValue);
                                         
                                         if (vmNicsItem.NicId != null)
                                         {
-                                            vMNicInputDetailsValue["nicId"] = vmNicsItem.NicId;
+                                            vMwareCbtNicInputValue["nicId"] = vmNicsItem.NicId;
                                         }
                                         
-                                        if (vmNicsItem.RecoveryVMSubnetName != null)
+                                        if (vmNicsItem.IsPrimaryNic != null)
                                         {
-                                            vMNicInputDetailsValue["recoveryVMSubnetName"] = vmNicsItem.RecoveryVMSubnetName;
+                                            vMwareCbtNicInputValue["isPrimaryNic"] = vmNicsItem.IsPrimaryNic;
                                         }
                                         
-                                        if (vmNicsItem.ReplicaNicStaticIPAddress != null)
+                                        if (vmNicsItem.TargetSubnetName != null)
                                         {
-                                            vMNicInputDetailsValue["replicaNicStaticIPAddress"] = vmNicsItem.ReplicaNicStaticIPAddress;
+                                            vMwareCbtNicInputValue["targetSubnetName"] = vmNicsItem.TargetSubnetName;
                                         }
                                         
-                                        if (vmNicsItem.SelectionType != null)
+                                        if (vmNicsItem.StaticIPAddress != null)
                                         {
-                                            vMNicInputDetailsValue["selectionType"] = vmNicsItem.SelectionType;
+                                            vMwareCbtNicInputValue["staticIPAddress"] = vmNicsItem.StaticIPAddress;
+                                        }
+                                        
+                                        if (vmNicsItem.IsSelectedForMigration != null)
+                                        {
+                                            vMwareCbtNicInputValue["isSelectedForMigration"] = vmNicsItem.IsSelectedForMigration;
                                         }
                                     }
                                     providerSpecificDetailsValue["vmNics"] = vmNicsArray;
@@ -2356,13 +2356,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtMigrationDetailsInstance.TargetResourceGroupId = targetResourceGroupIdInstance;
                                         }
                                         
-                                        JToken targetNetworkIdValue = providerSpecificDetailsValue["targetNetworkId"];
-                                        if (targetNetworkIdValue != null && targetNetworkIdValue.Type != JTokenType.Null)
-                                        {
-                                            string targetNetworkIdInstance = ((string)targetNetworkIdValue);
-                                            vMwareCbtMigrationDetailsInstance.TargetNetworkId = targetNetworkIdInstance;
-                                        }
-                                        
                                         JToken targetAvailabilitySetIdValue = providerSpecificDetailsValue["targetAvailabilitySetId"];
                                         if (targetAvailabilitySetIdValue != null && targetAvailabilitySetIdValue.Type != JTokenType.Null)
                                         {
@@ -2450,98 +2443,70 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
+                                        JToken targetNetworkIdValue = providerSpecificDetailsValue["targetNetworkId"];
+                                        if (targetNetworkIdValue != null && targetNetworkIdValue.Type != JTokenType.Null)
+                                        {
+                                            string targetNetworkIdInstance = ((string)targetNetworkIdValue);
+                                            vMwareCbtMigrationDetailsInstance.TargetNetworkId = targetNetworkIdInstance;
+                                        }
+                                        
                                         JToken vmNicsArray = providerSpecificDetailsValue["vmNics"];
                                         if (vmNicsArray != null && vmNicsArray.Type != JTokenType.Null)
                                         {
                                             foreach (JToken vmNicsValue in ((JArray)vmNicsArray))
                                             {
-                                                VMNicDetails vMNicDetailsInstance = new VMNicDetails();
-                                                vMwareCbtMigrationDetailsInstance.VMNics.Add(vMNicDetailsInstance);
+                                                VMwareCbtNicDetails vMwareCbtNicDetailsInstance = new VMwareCbtNicDetails();
+                                                vMwareCbtMigrationDetailsInstance.VMNics.Add(vMwareCbtNicDetailsInstance);
                                                 
                                                 JToken nicIdValue = vmNicsValue["nicId"];
                                                 if (nicIdValue != null && nicIdValue.Type != JTokenType.Null)
                                                 {
                                                     string nicIdInstance = ((string)nicIdValue);
-                                                    vMNicDetailsInstance.NicId = nicIdInstance;
+                                                    vMwareCbtNicDetailsInstance.NicId = nicIdInstance;
                                                 }
                                                 
-                                                JToken vMSubnetNameValue = vmNicsValue["vMSubnetName"];
-                                                if (vMSubnetNameValue != null && vMSubnetNameValue.Type != JTokenType.Null)
+                                                JToken isPrimaryNicValue = vmNicsValue["isPrimaryNic"];
+                                                if (isPrimaryNicValue != null && isPrimaryNicValue.Type != JTokenType.Null)
                                                 {
-                                                    string vMSubnetNameInstance = ((string)vMSubnetNameValue);
-                                                    vMNicDetailsInstance.VMSubnetName = vMSubnetNameInstance;
+                                                    bool isPrimaryNicInstance = ((bool)isPrimaryNicValue);
+                                                    vMwareCbtNicDetailsInstance.IsPrimaryNic = isPrimaryNicInstance;
                                                 }
                                                 
-                                                JToken vMNetworkNameValue = vmNicsValue["vMNetworkName"];
-                                                if (vMNetworkNameValue != null && vMNetworkNameValue.Type != JTokenType.Null)
+                                                JToken sourceNetworkIdValue = vmNicsValue["sourceNetworkId"];
+                                                if (sourceNetworkIdValue != null && sourceNetworkIdValue.Type != JTokenType.Null)
                                                 {
-                                                    string vMNetworkNameInstance = ((string)vMNetworkNameValue);
-                                                    vMNicDetailsInstance.VMNetworkName = vMNetworkNameInstance;
+                                                    string sourceNetworkIdInstance = ((string)sourceNetworkIdValue);
+                                                    vMwareCbtNicDetailsInstance.SourceNetworkId = sourceNetworkIdInstance;
                                                 }
                                                 
-                                                JToken recoveryVMNetworkIdValue = vmNicsValue["recoveryVMNetworkId"];
-                                                if (recoveryVMNetworkIdValue != null && recoveryVMNetworkIdValue.Type != JTokenType.Null)
+                                                JToken targetSubnetNameValue = vmNicsValue["targetSubnetName"];
+                                                if (targetSubnetNameValue != null && targetSubnetNameValue.Type != JTokenType.Null)
                                                 {
-                                                    string recoveryVMNetworkIdInstance = ((string)recoveryVMNetworkIdValue);
-                                                    vMNicDetailsInstance.RecoveryVMNetworkId = recoveryVMNetworkIdInstance;
-                                                }
-                                                
-                                                JToken recoveryVMSubnetNameValue = vmNicsValue["recoveryVMSubnetName"];
-                                                if (recoveryVMSubnetNameValue != null && recoveryVMSubnetNameValue.Type != JTokenType.Null)
-                                                {
-                                                    string recoveryVMSubnetNameInstance = ((string)recoveryVMSubnetNameValue);
-                                                    vMNicDetailsInstance.RecoveryVMSubnetName = recoveryVMSubnetNameInstance;
+                                                    string targetSubnetNameInstance = ((string)targetSubnetNameValue);
+                                                    vMwareCbtNicDetailsInstance.TargetSubnetName = targetSubnetNameInstance;
                                                 }
                                                 
                                                 JToken ipAddressTypeValue = vmNicsValue["ipAddressType"];
                                                 if (ipAddressTypeValue != null && ipAddressTypeValue.Type != JTokenType.Null)
                                                 {
                                                     string ipAddressTypeInstance = ((string)ipAddressTypeValue);
-                                                    vMNicDetailsInstance.IpAddressType = ipAddressTypeInstance;
+                                                    vMwareCbtNicDetailsInstance.IpAddressType = ipAddressTypeInstance;
                                                 }
                                                 
-                                                JToken replicaNicStaticIPAddressValue = vmNicsValue["replicaNicStaticIPAddress"];
-                                                if (replicaNicStaticIPAddressValue != null && replicaNicStaticIPAddressValue.Type != JTokenType.Null)
+                                                JToken staticIPAddressValue = vmNicsValue["staticIPAddress"];
+                                                if (staticIPAddressValue != null && staticIPAddressValue.Type != JTokenType.Null)
                                                 {
-                                                    string replicaNicStaticIPAddressInstance = ((string)replicaNicStaticIPAddressValue);
-                                                    vMNicDetailsInstance.ReplicaNicStaticIPAddress = replicaNicStaticIPAddressInstance;
+                                                    string staticIPAddressInstance = ((string)staticIPAddressValue);
+                                                    vMwareCbtNicDetailsInstance.StaticIPAddress = staticIPAddressInstance;
                                                 }
                                                 
-                                                JToken selectionTypeValue = vmNicsValue["selectionType"];
-                                                if (selectionTypeValue != null && selectionTypeValue.Type != JTokenType.Null)
+                                                JToken isSelectedForMigrationValue = vmNicsValue["isSelectedForMigration"];
+                                                if (isSelectedForMigrationValue != null && isSelectedForMigrationValue.Type != JTokenType.Null)
                                                 {
-                                                    string selectionTypeInstance = ((string)selectionTypeValue);
-                                                    vMNicDetailsInstance.SelectionType = selectionTypeInstance;
-                                                }
-                                                
-                                                JToken sourceNicArmIdValue = vmNicsValue["sourceNicArmId"];
-                                                if (sourceNicArmIdValue != null && sourceNicArmIdValue.Type != JTokenType.Null)
-                                                {
-                                                    string sourceNicArmIdInstance = ((string)sourceNicArmIdValue);
-                                                    vMNicDetailsInstance.SourceNicArmId = sourceNicArmIdInstance;
-                                                }
-                                                
-                                                JToken primaryNicStaticIPAddressValue = vmNicsValue["primaryNicStaticIPAddress"];
-                                                if (primaryNicStaticIPAddressValue != null && primaryNicStaticIPAddressValue.Type != JTokenType.Null)
-                                                {
-                                                    string primaryNicStaticIPAddressInstance = ((string)primaryNicStaticIPAddressValue);
-                                                    vMNicDetailsInstance.PrimaryNicStaticIPAddress = primaryNicStaticIPAddressInstance;
-                                                }
-                                                
-                                                JToken recoveryNicIpAddressTypeValue = vmNicsValue["recoveryNicIpAddressType"];
-                                                if (recoveryNicIpAddressTypeValue != null && recoveryNicIpAddressTypeValue.Type != JTokenType.Null)
-                                                {
-                                                    string recoveryNicIpAddressTypeInstance = ((string)recoveryNicIpAddressTypeValue);
-                                                    vMNicDetailsInstance.RecoveryNicIpAddressType = recoveryNicIpAddressTypeInstance;
+                                                    bool isSelectedForMigrationInstance = ((bool)isSelectedForMigrationValue);
+                                                    vMwareCbtNicDetailsInstance.IsSelectedForMigration = isSelectedForMigrationInstance;
                                                 }
                                             }
-                                        }
-                                        
-                                        JToken selectedSourceNicIdValue = providerSpecificDetailsValue["selectedSourceNicId"];
-                                        if (selectedSourceNicIdValue != null && selectedSourceNicIdValue.Type != JTokenType.Null)
-                                        {
-                                            string selectedSourceNicIdInstance = ((string)selectedSourceNicIdValue);
-                                            vMwareCbtMigrationDetailsInstance.SelectedSourceNicId = selectedSourceNicIdInstance;
                                         }
                                         
                                         JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
@@ -2946,13 +2911,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtMigrationDetailsInstance.TargetResourceGroupId = targetResourceGroupIdInstance;
                                         }
                                         
-                                        JToken targetNetworkIdValue = providerSpecificDetailsValue["targetNetworkId"];
-                                        if (targetNetworkIdValue != null && targetNetworkIdValue.Type != JTokenType.Null)
-                                        {
-                                            string targetNetworkIdInstance = ((string)targetNetworkIdValue);
-                                            vMwareCbtMigrationDetailsInstance.TargetNetworkId = targetNetworkIdInstance;
-                                        }
-                                        
                                         JToken targetAvailabilitySetIdValue = providerSpecificDetailsValue["targetAvailabilitySetId"];
                                         if (targetAvailabilitySetIdValue != null && targetAvailabilitySetIdValue.Type != JTokenType.Null)
                                         {
@@ -3040,98 +2998,70 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
+                                        JToken targetNetworkIdValue = providerSpecificDetailsValue["targetNetworkId"];
+                                        if (targetNetworkIdValue != null && targetNetworkIdValue.Type != JTokenType.Null)
+                                        {
+                                            string targetNetworkIdInstance = ((string)targetNetworkIdValue);
+                                            vMwareCbtMigrationDetailsInstance.TargetNetworkId = targetNetworkIdInstance;
+                                        }
+                                        
                                         JToken vmNicsArray = providerSpecificDetailsValue["vmNics"];
                                         if (vmNicsArray != null && vmNicsArray.Type != JTokenType.Null)
                                         {
                                             foreach (JToken vmNicsValue in ((JArray)vmNicsArray))
                                             {
-                                                VMNicDetails vMNicDetailsInstance = new VMNicDetails();
-                                                vMwareCbtMigrationDetailsInstance.VMNics.Add(vMNicDetailsInstance);
+                                                VMwareCbtNicDetails vMwareCbtNicDetailsInstance = new VMwareCbtNicDetails();
+                                                vMwareCbtMigrationDetailsInstance.VMNics.Add(vMwareCbtNicDetailsInstance);
                                                 
                                                 JToken nicIdValue = vmNicsValue["nicId"];
                                                 if (nicIdValue != null && nicIdValue.Type != JTokenType.Null)
                                                 {
                                                     string nicIdInstance = ((string)nicIdValue);
-                                                    vMNicDetailsInstance.NicId = nicIdInstance;
+                                                    vMwareCbtNicDetailsInstance.NicId = nicIdInstance;
                                                 }
                                                 
-                                                JToken vMSubnetNameValue = vmNicsValue["vMSubnetName"];
-                                                if (vMSubnetNameValue != null && vMSubnetNameValue.Type != JTokenType.Null)
+                                                JToken isPrimaryNicValue = vmNicsValue["isPrimaryNic"];
+                                                if (isPrimaryNicValue != null && isPrimaryNicValue.Type != JTokenType.Null)
                                                 {
-                                                    string vMSubnetNameInstance = ((string)vMSubnetNameValue);
-                                                    vMNicDetailsInstance.VMSubnetName = vMSubnetNameInstance;
+                                                    bool isPrimaryNicInstance = ((bool)isPrimaryNicValue);
+                                                    vMwareCbtNicDetailsInstance.IsPrimaryNic = isPrimaryNicInstance;
                                                 }
                                                 
-                                                JToken vMNetworkNameValue = vmNicsValue["vMNetworkName"];
-                                                if (vMNetworkNameValue != null && vMNetworkNameValue.Type != JTokenType.Null)
+                                                JToken sourceNetworkIdValue = vmNicsValue["sourceNetworkId"];
+                                                if (sourceNetworkIdValue != null && sourceNetworkIdValue.Type != JTokenType.Null)
                                                 {
-                                                    string vMNetworkNameInstance = ((string)vMNetworkNameValue);
-                                                    vMNicDetailsInstance.VMNetworkName = vMNetworkNameInstance;
+                                                    string sourceNetworkIdInstance = ((string)sourceNetworkIdValue);
+                                                    vMwareCbtNicDetailsInstance.SourceNetworkId = sourceNetworkIdInstance;
                                                 }
                                                 
-                                                JToken recoveryVMNetworkIdValue = vmNicsValue["recoveryVMNetworkId"];
-                                                if (recoveryVMNetworkIdValue != null && recoveryVMNetworkIdValue.Type != JTokenType.Null)
+                                                JToken targetSubnetNameValue = vmNicsValue["targetSubnetName"];
+                                                if (targetSubnetNameValue != null && targetSubnetNameValue.Type != JTokenType.Null)
                                                 {
-                                                    string recoveryVMNetworkIdInstance = ((string)recoveryVMNetworkIdValue);
-                                                    vMNicDetailsInstance.RecoveryVMNetworkId = recoveryVMNetworkIdInstance;
-                                                }
-                                                
-                                                JToken recoveryVMSubnetNameValue = vmNicsValue["recoveryVMSubnetName"];
-                                                if (recoveryVMSubnetNameValue != null && recoveryVMSubnetNameValue.Type != JTokenType.Null)
-                                                {
-                                                    string recoveryVMSubnetNameInstance = ((string)recoveryVMSubnetNameValue);
-                                                    vMNicDetailsInstance.RecoveryVMSubnetName = recoveryVMSubnetNameInstance;
+                                                    string targetSubnetNameInstance = ((string)targetSubnetNameValue);
+                                                    vMwareCbtNicDetailsInstance.TargetSubnetName = targetSubnetNameInstance;
                                                 }
                                                 
                                                 JToken ipAddressTypeValue = vmNicsValue["ipAddressType"];
                                                 if (ipAddressTypeValue != null && ipAddressTypeValue.Type != JTokenType.Null)
                                                 {
                                                     string ipAddressTypeInstance = ((string)ipAddressTypeValue);
-                                                    vMNicDetailsInstance.IpAddressType = ipAddressTypeInstance;
+                                                    vMwareCbtNicDetailsInstance.IpAddressType = ipAddressTypeInstance;
                                                 }
                                                 
-                                                JToken replicaNicStaticIPAddressValue = vmNicsValue["replicaNicStaticIPAddress"];
-                                                if (replicaNicStaticIPAddressValue != null && replicaNicStaticIPAddressValue.Type != JTokenType.Null)
+                                                JToken staticIPAddressValue = vmNicsValue["staticIPAddress"];
+                                                if (staticIPAddressValue != null && staticIPAddressValue.Type != JTokenType.Null)
                                                 {
-                                                    string replicaNicStaticIPAddressInstance = ((string)replicaNicStaticIPAddressValue);
-                                                    vMNicDetailsInstance.ReplicaNicStaticIPAddress = replicaNicStaticIPAddressInstance;
+                                                    string staticIPAddressInstance = ((string)staticIPAddressValue);
+                                                    vMwareCbtNicDetailsInstance.StaticIPAddress = staticIPAddressInstance;
                                                 }
                                                 
-                                                JToken selectionTypeValue = vmNicsValue["selectionType"];
-                                                if (selectionTypeValue != null && selectionTypeValue.Type != JTokenType.Null)
+                                                JToken isSelectedForMigrationValue = vmNicsValue["isSelectedForMigration"];
+                                                if (isSelectedForMigrationValue != null && isSelectedForMigrationValue.Type != JTokenType.Null)
                                                 {
-                                                    string selectionTypeInstance = ((string)selectionTypeValue);
-                                                    vMNicDetailsInstance.SelectionType = selectionTypeInstance;
-                                                }
-                                                
-                                                JToken sourceNicArmIdValue = vmNicsValue["sourceNicArmId"];
-                                                if (sourceNicArmIdValue != null && sourceNicArmIdValue.Type != JTokenType.Null)
-                                                {
-                                                    string sourceNicArmIdInstance = ((string)sourceNicArmIdValue);
-                                                    vMNicDetailsInstance.SourceNicArmId = sourceNicArmIdInstance;
-                                                }
-                                                
-                                                JToken primaryNicStaticIPAddressValue = vmNicsValue["primaryNicStaticIPAddress"];
-                                                if (primaryNicStaticIPAddressValue != null && primaryNicStaticIPAddressValue.Type != JTokenType.Null)
-                                                {
-                                                    string primaryNicStaticIPAddressInstance = ((string)primaryNicStaticIPAddressValue);
-                                                    vMNicDetailsInstance.PrimaryNicStaticIPAddress = primaryNicStaticIPAddressInstance;
-                                                }
-                                                
-                                                JToken recoveryNicIpAddressTypeValue = vmNicsValue["recoveryNicIpAddressType"];
-                                                if (recoveryNicIpAddressTypeValue != null && recoveryNicIpAddressTypeValue.Type != JTokenType.Null)
-                                                {
-                                                    string recoveryNicIpAddressTypeInstance = ((string)recoveryNicIpAddressTypeValue);
-                                                    vMNicDetailsInstance.RecoveryNicIpAddressType = recoveryNicIpAddressTypeInstance;
+                                                    bool isSelectedForMigrationInstance = ((bool)isSelectedForMigrationValue);
+                                                    vMwareCbtNicDetailsInstance.IsSelectedForMigration = isSelectedForMigrationInstance;
                                                 }
                                             }
-                                        }
-                                        
-                                        JToken selectedSourceNicIdValue = providerSpecificDetailsValue["selectedSourceNicId"];
-                                        if (selectedSourceNicIdValue != null && selectedSourceNicIdValue.Type != JTokenType.Null)
-                                        {
-                                            string selectedSourceNicIdInstance = ((string)selectedSourceNicIdValue);
-                                            vMwareCbtMigrationDetailsInstance.SelectedSourceNicId = selectedSourceNicIdInstance;
                                         }
                                         
                                         JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
@@ -3595,13 +3525,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtMigrationDetailsInstance.TargetResourceGroupId = targetResourceGroupIdInstance;
                                         }
                                         
-                                        JToken targetNetworkIdValue = providerSpecificDetailsValue["targetNetworkId"];
-                                        if (targetNetworkIdValue != null && targetNetworkIdValue.Type != JTokenType.Null)
-                                        {
-                                            string targetNetworkIdInstance = ((string)targetNetworkIdValue);
-                                            vMwareCbtMigrationDetailsInstance.TargetNetworkId = targetNetworkIdInstance;
-                                        }
-                                        
                                         JToken targetAvailabilitySetIdValue = providerSpecificDetailsValue["targetAvailabilitySetId"];
                                         if (targetAvailabilitySetIdValue != null && targetAvailabilitySetIdValue.Type != JTokenType.Null)
                                         {
@@ -3689,98 +3612,70 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
+                                        JToken targetNetworkIdValue = providerSpecificDetailsValue["targetNetworkId"];
+                                        if (targetNetworkIdValue != null && targetNetworkIdValue.Type != JTokenType.Null)
+                                        {
+                                            string targetNetworkIdInstance = ((string)targetNetworkIdValue);
+                                            vMwareCbtMigrationDetailsInstance.TargetNetworkId = targetNetworkIdInstance;
+                                        }
+                                        
                                         JToken vmNicsArray = providerSpecificDetailsValue["vmNics"];
                                         if (vmNicsArray != null && vmNicsArray.Type != JTokenType.Null)
                                         {
                                             foreach (JToken vmNicsValue in ((JArray)vmNicsArray))
                                             {
-                                                VMNicDetails vMNicDetailsInstance = new VMNicDetails();
-                                                vMwareCbtMigrationDetailsInstance.VMNics.Add(vMNicDetailsInstance);
+                                                VMwareCbtNicDetails vMwareCbtNicDetailsInstance = new VMwareCbtNicDetails();
+                                                vMwareCbtMigrationDetailsInstance.VMNics.Add(vMwareCbtNicDetailsInstance);
                                                 
                                                 JToken nicIdValue = vmNicsValue["nicId"];
                                                 if (nicIdValue != null && nicIdValue.Type != JTokenType.Null)
                                                 {
                                                     string nicIdInstance = ((string)nicIdValue);
-                                                    vMNicDetailsInstance.NicId = nicIdInstance;
+                                                    vMwareCbtNicDetailsInstance.NicId = nicIdInstance;
                                                 }
                                                 
-                                                JToken vMSubnetNameValue = vmNicsValue["vMSubnetName"];
-                                                if (vMSubnetNameValue != null && vMSubnetNameValue.Type != JTokenType.Null)
+                                                JToken isPrimaryNicValue = vmNicsValue["isPrimaryNic"];
+                                                if (isPrimaryNicValue != null && isPrimaryNicValue.Type != JTokenType.Null)
                                                 {
-                                                    string vMSubnetNameInstance = ((string)vMSubnetNameValue);
-                                                    vMNicDetailsInstance.VMSubnetName = vMSubnetNameInstance;
+                                                    bool isPrimaryNicInstance = ((bool)isPrimaryNicValue);
+                                                    vMwareCbtNicDetailsInstance.IsPrimaryNic = isPrimaryNicInstance;
                                                 }
                                                 
-                                                JToken vMNetworkNameValue = vmNicsValue["vMNetworkName"];
-                                                if (vMNetworkNameValue != null && vMNetworkNameValue.Type != JTokenType.Null)
+                                                JToken sourceNetworkIdValue = vmNicsValue["sourceNetworkId"];
+                                                if (sourceNetworkIdValue != null && sourceNetworkIdValue.Type != JTokenType.Null)
                                                 {
-                                                    string vMNetworkNameInstance = ((string)vMNetworkNameValue);
-                                                    vMNicDetailsInstance.VMNetworkName = vMNetworkNameInstance;
+                                                    string sourceNetworkIdInstance = ((string)sourceNetworkIdValue);
+                                                    vMwareCbtNicDetailsInstance.SourceNetworkId = sourceNetworkIdInstance;
                                                 }
                                                 
-                                                JToken recoveryVMNetworkIdValue = vmNicsValue["recoveryVMNetworkId"];
-                                                if (recoveryVMNetworkIdValue != null && recoveryVMNetworkIdValue.Type != JTokenType.Null)
+                                                JToken targetSubnetNameValue = vmNicsValue["targetSubnetName"];
+                                                if (targetSubnetNameValue != null && targetSubnetNameValue.Type != JTokenType.Null)
                                                 {
-                                                    string recoveryVMNetworkIdInstance = ((string)recoveryVMNetworkIdValue);
-                                                    vMNicDetailsInstance.RecoveryVMNetworkId = recoveryVMNetworkIdInstance;
-                                                }
-                                                
-                                                JToken recoveryVMSubnetNameValue = vmNicsValue["recoveryVMSubnetName"];
-                                                if (recoveryVMSubnetNameValue != null && recoveryVMSubnetNameValue.Type != JTokenType.Null)
-                                                {
-                                                    string recoveryVMSubnetNameInstance = ((string)recoveryVMSubnetNameValue);
-                                                    vMNicDetailsInstance.RecoveryVMSubnetName = recoveryVMSubnetNameInstance;
+                                                    string targetSubnetNameInstance = ((string)targetSubnetNameValue);
+                                                    vMwareCbtNicDetailsInstance.TargetSubnetName = targetSubnetNameInstance;
                                                 }
                                                 
                                                 JToken ipAddressTypeValue = vmNicsValue["ipAddressType"];
                                                 if (ipAddressTypeValue != null && ipAddressTypeValue.Type != JTokenType.Null)
                                                 {
                                                     string ipAddressTypeInstance = ((string)ipAddressTypeValue);
-                                                    vMNicDetailsInstance.IpAddressType = ipAddressTypeInstance;
+                                                    vMwareCbtNicDetailsInstance.IpAddressType = ipAddressTypeInstance;
                                                 }
                                                 
-                                                JToken replicaNicStaticIPAddressValue = vmNicsValue["replicaNicStaticIPAddress"];
-                                                if (replicaNicStaticIPAddressValue != null && replicaNicStaticIPAddressValue.Type != JTokenType.Null)
+                                                JToken staticIPAddressValue = vmNicsValue["staticIPAddress"];
+                                                if (staticIPAddressValue != null && staticIPAddressValue.Type != JTokenType.Null)
                                                 {
-                                                    string replicaNicStaticIPAddressInstance = ((string)replicaNicStaticIPAddressValue);
-                                                    vMNicDetailsInstance.ReplicaNicStaticIPAddress = replicaNicStaticIPAddressInstance;
+                                                    string staticIPAddressInstance = ((string)staticIPAddressValue);
+                                                    vMwareCbtNicDetailsInstance.StaticIPAddress = staticIPAddressInstance;
                                                 }
                                                 
-                                                JToken selectionTypeValue = vmNicsValue["selectionType"];
-                                                if (selectionTypeValue != null && selectionTypeValue.Type != JTokenType.Null)
+                                                JToken isSelectedForMigrationValue = vmNicsValue["isSelectedForMigration"];
+                                                if (isSelectedForMigrationValue != null && isSelectedForMigrationValue.Type != JTokenType.Null)
                                                 {
-                                                    string selectionTypeInstance = ((string)selectionTypeValue);
-                                                    vMNicDetailsInstance.SelectionType = selectionTypeInstance;
-                                                }
-                                                
-                                                JToken sourceNicArmIdValue = vmNicsValue["sourceNicArmId"];
-                                                if (sourceNicArmIdValue != null && sourceNicArmIdValue.Type != JTokenType.Null)
-                                                {
-                                                    string sourceNicArmIdInstance = ((string)sourceNicArmIdValue);
-                                                    vMNicDetailsInstance.SourceNicArmId = sourceNicArmIdInstance;
-                                                }
-                                                
-                                                JToken primaryNicStaticIPAddressValue = vmNicsValue["primaryNicStaticIPAddress"];
-                                                if (primaryNicStaticIPAddressValue != null && primaryNicStaticIPAddressValue.Type != JTokenType.Null)
-                                                {
-                                                    string primaryNicStaticIPAddressInstance = ((string)primaryNicStaticIPAddressValue);
-                                                    vMNicDetailsInstance.PrimaryNicStaticIPAddress = primaryNicStaticIPAddressInstance;
-                                                }
-                                                
-                                                JToken recoveryNicIpAddressTypeValue = vmNicsValue["recoveryNicIpAddressType"];
-                                                if (recoveryNicIpAddressTypeValue != null && recoveryNicIpAddressTypeValue.Type != JTokenType.Null)
-                                                {
-                                                    string recoveryNicIpAddressTypeInstance = ((string)recoveryNicIpAddressTypeValue);
-                                                    vMNicDetailsInstance.RecoveryNicIpAddressType = recoveryNicIpAddressTypeInstance;
+                                                    bool isSelectedForMigrationInstance = ((bool)isSelectedForMigrationValue);
+                                                    vMwareCbtNicDetailsInstance.IsSelectedForMigration = isSelectedForMigrationInstance;
                                                 }
                                             }
-                                        }
-                                        
-                                        JToken selectedSourceNicIdValue = providerSpecificDetailsValue["selectedSourceNicId"];
-                                        if (selectedSourceNicIdValue != null && selectedSourceNicIdValue.Type != JTokenType.Null)
-                                        {
-                                            string selectedSourceNicIdInstance = ((string)selectedSourceNicIdValue);
-                                            vMwareCbtMigrationDetailsInstance.SelectedSourceNicId = selectedSourceNicIdInstance;
                                         }
                                         
                                         JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
@@ -4244,13 +4139,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtMigrationDetailsInstance.TargetResourceGroupId = targetResourceGroupIdInstance;
                                         }
                                         
-                                        JToken targetNetworkIdValue = providerSpecificDetailsValue["targetNetworkId"];
-                                        if (targetNetworkIdValue != null && targetNetworkIdValue.Type != JTokenType.Null)
-                                        {
-                                            string targetNetworkIdInstance = ((string)targetNetworkIdValue);
-                                            vMwareCbtMigrationDetailsInstance.TargetNetworkId = targetNetworkIdInstance;
-                                        }
-                                        
                                         JToken targetAvailabilitySetIdValue = providerSpecificDetailsValue["targetAvailabilitySetId"];
                                         if (targetAvailabilitySetIdValue != null && targetAvailabilitySetIdValue.Type != JTokenType.Null)
                                         {
@@ -4338,98 +4226,70 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
+                                        JToken targetNetworkIdValue = providerSpecificDetailsValue["targetNetworkId"];
+                                        if (targetNetworkIdValue != null && targetNetworkIdValue.Type != JTokenType.Null)
+                                        {
+                                            string targetNetworkIdInstance = ((string)targetNetworkIdValue);
+                                            vMwareCbtMigrationDetailsInstance.TargetNetworkId = targetNetworkIdInstance;
+                                        }
+                                        
                                         JToken vmNicsArray = providerSpecificDetailsValue["vmNics"];
                                         if (vmNicsArray != null && vmNicsArray.Type != JTokenType.Null)
                                         {
                                             foreach (JToken vmNicsValue in ((JArray)vmNicsArray))
                                             {
-                                                VMNicDetails vMNicDetailsInstance = new VMNicDetails();
-                                                vMwareCbtMigrationDetailsInstance.VMNics.Add(vMNicDetailsInstance);
+                                                VMwareCbtNicDetails vMwareCbtNicDetailsInstance = new VMwareCbtNicDetails();
+                                                vMwareCbtMigrationDetailsInstance.VMNics.Add(vMwareCbtNicDetailsInstance);
                                                 
                                                 JToken nicIdValue = vmNicsValue["nicId"];
                                                 if (nicIdValue != null && nicIdValue.Type != JTokenType.Null)
                                                 {
                                                     string nicIdInstance = ((string)nicIdValue);
-                                                    vMNicDetailsInstance.NicId = nicIdInstance;
+                                                    vMwareCbtNicDetailsInstance.NicId = nicIdInstance;
                                                 }
                                                 
-                                                JToken vMSubnetNameValue = vmNicsValue["vMSubnetName"];
-                                                if (vMSubnetNameValue != null && vMSubnetNameValue.Type != JTokenType.Null)
+                                                JToken isPrimaryNicValue = vmNicsValue["isPrimaryNic"];
+                                                if (isPrimaryNicValue != null && isPrimaryNicValue.Type != JTokenType.Null)
                                                 {
-                                                    string vMSubnetNameInstance = ((string)vMSubnetNameValue);
-                                                    vMNicDetailsInstance.VMSubnetName = vMSubnetNameInstance;
+                                                    bool isPrimaryNicInstance = ((bool)isPrimaryNicValue);
+                                                    vMwareCbtNicDetailsInstance.IsPrimaryNic = isPrimaryNicInstance;
                                                 }
                                                 
-                                                JToken vMNetworkNameValue = vmNicsValue["vMNetworkName"];
-                                                if (vMNetworkNameValue != null && vMNetworkNameValue.Type != JTokenType.Null)
+                                                JToken sourceNetworkIdValue = vmNicsValue["sourceNetworkId"];
+                                                if (sourceNetworkIdValue != null && sourceNetworkIdValue.Type != JTokenType.Null)
                                                 {
-                                                    string vMNetworkNameInstance = ((string)vMNetworkNameValue);
-                                                    vMNicDetailsInstance.VMNetworkName = vMNetworkNameInstance;
+                                                    string sourceNetworkIdInstance = ((string)sourceNetworkIdValue);
+                                                    vMwareCbtNicDetailsInstance.SourceNetworkId = sourceNetworkIdInstance;
                                                 }
                                                 
-                                                JToken recoveryVMNetworkIdValue = vmNicsValue["recoveryVMNetworkId"];
-                                                if (recoveryVMNetworkIdValue != null && recoveryVMNetworkIdValue.Type != JTokenType.Null)
+                                                JToken targetSubnetNameValue = vmNicsValue["targetSubnetName"];
+                                                if (targetSubnetNameValue != null && targetSubnetNameValue.Type != JTokenType.Null)
                                                 {
-                                                    string recoveryVMNetworkIdInstance = ((string)recoveryVMNetworkIdValue);
-                                                    vMNicDetailsInstance.RecoveryVMNetworkId = recoveryVMNetworkIdInstance;
-                                                }
-                                                
-                                                JToken recoveryVMSubnetNameValue = vmNicsValue["recoveryVMSubnetName"];
-                                                if (recoveryVMSubnetNameValue != null && recoveryVMSubnetNameValue.Type != JTokenType.Null)
-                                                {
-                                                    string recoveryVMSubnetNameInstance = ((string)recoveryVMSubnetNameValue);
-                                                    vMNicDetailsInstance.RecoveryVMSubnetName = recoveryVMSubnetNameInstance;
+                                                    string targetSubnetNameInstance = ((string)targetSubnetNameValue);
+                                                    vMwareCbtNicDetailsInstance.TargetSubnetName = targetSubnetNameInstance;
                                                 }
                                                 
                                                 JToken ipAddressTypeValue = vmNicsValue["ipAddressType"];
                                                 if (ipAddressTypeValue != null && ipAddressTypeValue.Type != JTokenType.Null)
                                                 {
                                                     string ipAddressTypeInstance = ((string)ipAddressTypeValue);
-                                                    vMNicDetailsInstance.IpAddressType = ipAddressTypeInstance;
+                                                    vMwareCbtNicDetailsInstance.IpAddressType = ipAddressTypeInstance;
                                                 }
                                                 
-                                                JToken replicaNicStaticIPAddressValue = vmNicsValue["replicaNicStaticIPAddress"];
-                                                if (replicaNicStaticIPAddressValue != null && replicaNicStaticIPAddressValue.Type != JTokenType.Null)
+                                                JToken staticIPAddressValue = vmNicsValue["staticIPAddress"];
+                                                if (staticIPAddressValue != null && staticIPAddressValue.Type != JTokenType.Null)
                                                 {
-                                                    string replicaNicStaticIPAddressInstance = ((string)replicaNicStaticIPAddressValue);
-                                                    vMNicDetailsInstance.ReplicaNicStaticIPAddress = replicaNicStaticIPAddressInstance;
+                                                    string staticIPAddressInstance = ((string)staticIPAddressValue);
+                                                    vMwareCbtNicDetailsInstance.StaticIPAddress = staticIPAddressInstance;
                                                 }
                                                 
-                                                JToken selectionTypeValue = vmNicsValue["selectionType"];
-                                                if (selectionTypeValue != null && selectionTypeValue.Type != JTokenType.Null)
+                                                JToken isSelectedForMigrationValue = vmNicsValue["isSelectedForMigration"];
+                                                if (isSelectedForMigrationValue != null && isSelectedForMigrationValue.Type != JTokenType.Null)
                                                 {
-                                                    string selectionTypeInstance = ((string)selectionTypeValue);
-                                                    vMNicDetailsInstance.SelectionType = selectionTypeInstance;
-                                                }
-                                                
-                                                JToken sourceNicArmIdValue = vmNicsValue["sourceNicArmId"];
-                                                if (sourceNicArmIdValue != null && sourceNicArmIdValue.Type != JTokenType.Null)
-                                                {
-                                                    string sourceNicArmIdInstance = ((string)sourceNicArmIdValue);
-                                                    vMNicDetailsInstance.SourceNicArmId = sourceNicArmIdInstance;
-                                                }
-                                                
-                                                JToken primaryNicStaticIPAddressValue = vmNicsValue["primaryNicStaticIPAddress"];
-                                                if (primaryNicStaticIPAddressValue != null && primaryNicStaticIPAddressValue.Type != JTokenType.Null)
-                                                {
-                                                    string primaryNicStaticIPAddressInstance = ((string)primaryNicStaticIPAddressValue);
-                                                    vMNicDetailsInstance.PrimaryNicStaticIPAddress = primaryNicStaticIPAddressInstance;
-                                                }
-                                                
-                                                JToken recoveryNicIpAddressTypeValue = vmNicsValue["recoveryNicIpAddressType"];
-                                                if (recoveryNicIpAddressTypeValue != null && recoveryNicIpAddressTypeValue.Type != JTokenType.Null)
-                                                {
-                                                    string recoveryNicIpAddressTypeInstance = ((string)recoveryNicIpAddressTypeValue);
-                                                    vMNicDetailsInstance.RecoveryNicIpAddressType = recoveryNicIpAddressTypeInstance;
+                                                    bool isSelectedForMigrationInstance = ((bool)isSelectedForMigrationValue);
+                                                    vMwareCbtNicDetailsInstance.IsSelectedForMigration = isSelectedForMigrationInstance;
                                                 }
                                             }
-                                        }
-                                        
-                                        JToken selectedSourceNicIdValue = providerSpecificDetailsValue["selectedSourceNicId"];
-                                        if (selectedSourceNicIdValue != null && selectedSourceNicIdValue.Type != JTokenType.Null)
-                                        {
-                                            string selectedSourceNicIdInstance = ((string)selectedSourceNicIdValue);
-                                            vMwareCbtMigrationDetailsInstance.SelectedSourceNicId = selectedSourceNicIdInstance;
                                         }
                                         
                                         JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
@@ -4893,13 +4753,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtMigrationDetailsInstance.TargetResourceGroupId = targetResourceGroupIdInstance;
                                         }
                                         
-                                        JToken targetNetworkIdValue = providerSpecificDetailsValue["targetNetworkId"];
-                                        if (targetNetworkIdValue != null && targetNetworkIdValue.Type != JTokenType.Null)
-                                        {
-                                            string targetNetworkIdInstance = ((string)targetNetworkIdValue);
-                                            vMwareCbtMigrationDetailsInstance.TargetNetworkId = targetNetworkIdInstance;
-                                        }
-                                        
                                         JToken targetAvailabilitySetIdValue = providerSpecificDetailsValue["targetAvailabilitySetId"];
                                         if (targetAvailabilitySetIdValue != null && targetAvailabilitySetIdValue.Type != JTokenType.Null)
                                         {
@@ -4987,98 +4840,70 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
+                                        JToken targetNetworkIdValue = providerSpecificDetailsValue["targetNetworkId"];
+                                        if (targetNetworkIdValue != null && targetNetworkIdValue.Type != JTokenType.Null)
+                                        {
+                                            string targetNetworkIdInstance = ((string)targetNetworkIdValue);
+                                            vMwareCbtMigrationDetailsInstance.TargetNetworkId = targetNetworkIdInstance;
+                                        }
+                                        
                                         JToken vmNicsArray = providerSpecificDetailsValue["vmNics"];
                                         if (vmNicsArray != null && vmNicsArray.Type != JTokenType.Null)
                                         {
                                             foreach (JToken vmNicsValue in ((JArray)vmNicsArray))
                                             {
-                                                VMNicDetails vMNicDetailsInstance = new VMNicDetails();
-                                                vMwareCbtMigrationDetailsInstance.VMNics.Add(vMNicDetailsInstance);
+                                                VMwareCbtNicDetails vMwareCbtNicDetailsInstance = new VMwareCbtNicDetails();
+                                                vMwareCbtMigrationDetailsInstance.VMNics.Add(vMwareCbtNicDetailsInstance);
                                                 
                                                 JToken nicIdValue = vmNicsValue["nicId"];
                                                 if (nicIdValue != null && nicIdValue.Type != JTokenType.Null)
                                                 {
                                                     string nicIdInstance = ((string)nicIdValue);
-                                                    vMNicDetailsInstance.NicId = nicIdInstance;
+                                                    vMwareCbtNicDetailsInstance.NicId = nicIdInstance;
                                                 }
                                                 
-                                                JToken vMSubnetNameValue = vmNicsValue["vMSubnetName"];
-                                                if (vMSubnetNameValue != null && vMSubnetNameValue.Type != JTokenType.Null)
+                                                JToken isPrimaryNicValue = vmNicsValue["isPrimaryNic"];
+                                                if (isPrimaryNicValue != null && isPrimaryNicValue.Type != JTokenType.Null)
                                                 {
-                                                    string vMSubnetNameInstance = ((string)vMSubnetNameValue);
-                                                    vMNicDetailsInstance.VMSubnetName = vMSubnetNameInstance;
+                                                    bool isPrimaryNicInstance = ((bool)isPrimaryNicValue);
+                                                    vMwareCbtNicDetailsInstance.IsPrimaryNic = isPrimaryNicInstance;
                                                 }
                                                 
-                                                JToken vMNetworkNameValue = vmNicsValue["vMNetworkName"];
-                                                if (vMNetworkNameValue != null && vMNetworkNameValue.Type != JTokenType.Null)
+                                                JToken sourceNetworkIdValue = vmNicsValue["sourceNetworkId"];
+                                                if (sourceNetworkIdValue != null && sourceNetworkIdValue.Type != JTokenType.Null)
                                                 {
-                                                    string vMNetworkNameInstance = ((string)vMNetworkNameValue);
-                                                    vMNicDetailsInstance.VMNetworkName = vMNetworkNameInstance;
+                                                    string sourceNetworkIdInstance = ((string)sourceNetworkIdValue);
+                                                    vMwareCbtNicDetailsInstance.SourceNetworkId = sourceNetworkIdInstance;
                                                 }
                                                 
-                                                JToken recoveryVMNetworkIdValue = vmNicsValue["recoveryVMNetworkId"];
-                                                if (recoveryVMNetworkIdValue != null && recoveryVMNetworkIdValue.Type != JTokenType.Null)
+                                                JToken targetSubnetNameValue = vmNicsValue["targetSubnetName"];
+                                                if (targetSubnetNameValue != null && targetSubnetNameValue.Type != JTokenType.Null)
                                                 {
-                                                    string recoveryVMNetworkIdInstance = ((string)recoveryVMNetworkIdValue);
-                                                    vMNicDetailsInstance.RecoveryVMNetworkId = recoveryVMNetworkIdInstance;
-                                                }
-                                                
-                                                JToken recoveryVMSubnetNameValue = vmNicsValue["recoveryVMSubnetName"];
-                                                if (recoveryVMSubnetNameValue != null && recoveryVMSubnetNameValue.Type != JTokenType.Null)
-                                                {
-                                                    string recoveryVMSubnetNameInstance = ((string)recoveryVMSubnetNameValue);
-                                                    vMNicDetailsInstance.RecoveryVMSubnetName = recoveryVMSubnetNameInstance;
+                                                    string targetSubnetNameInstance = ((string)targetSubnetNameValue);
+                                                    vMwareCbtNicDetailsInstance.TargetSubnetName = targetSubnetNameInstance;
                                                 }
                                                 
                                                 JToken ipAddressTypeValue = vmNicsValue["ipAddressType"];
                                                 if (ipAddressTypeValue != null && ipAddressTypeValue.Type != JTokenType.Null)
                                                 {
                                                     string ipAddressTypeInstance = ((string)ipAddressTypeValue);
-                                                    vMNicDetailsInstance.IpAddressType = ipAddressTypeInstance;
+                                                    vMwareCbtNicDetailsInstance.IpAddressType = ipAddressTypeInstance;
                                                 }
                                                 
-                                                JToken replicaNicStaticIPAddressValue = vmNicsValue["replicaNicStaticIPAddress"];
-                                                if (replicaNicStaticIPAddressValue != null && replicaNicStaticIPAddressValue.Type != JTokenType.Null)
+                                                JToken staticIPAddressValue = vmNicsValue["staticIPAddress"];
+                                                if (staticIPAddressValue != null && staticIPAddressValue.Type != JTokenType.Null)
                                                 {
-                                                    string replicaNicStaticIPAddressInstance = ((string)replicaNicStaticIPAddressValue);
-                                                    vMNicDetailsInstance.ReplicaNicStaticIPAddress = replicaNicStaticIPAddressInstance;
+                                                    string staticIPAddressInstance = ((string)staticIPAddressValue);
+                                                    vMwareCbtNicDetailsInstance.StaticIPAddress = staticIPAddressInstance;
                                                 }
                                                 
-                                                JToken selectionTypeValue = vmNicsValue["selectionType"];
-                                                if (selectionTypeValue != null && selectionTypeValue.Type != JTokenType.Null)
+                                                JToken isSelectedForMigrationValue = vmNicsValue["isSelectedForMigration"];
+                                                if (isSelectedForMigrationValue != null && isSelectedForMigrationValue.Type != JTokenType.Null)
                                                 {
-                                                    string selectionTypeInstance = ((string)selectionTypeValue);
-                                                    vMNicDetailsInstance.SelectionType = selectionTypeInstance;
-                                                }
-                                                
-                                                JToken sourceNicArmIdValue = vmNicsValue["sourceNicArmId"];
-                                                if (sourceNicArmIdValue != null && sourceNicArmIdValue.Type != JTokenType.Null)
-                                                {
-                                                    string sourceNicArmIdInstance = ((string)sourceNicArmIdValue);
-                                                    vMNicDetailsInstance.SourceNicArmId = sourceNicArmIdInstance;
-                                                }
-                                                
-                                                JToken primaryNicStaticIPAddressValue = vmNicsValue["primaryNicStaticIPAddress"];
-                                                if (primaryNicStaticIPAddressValue != null && primaryNicStaticIPAddressValue.Type != JTokenType.Null)
-                                                {
-                                                    string primaryNicStaticIPAddressInstance = ((string)primaryNicStaticIPAddressValue);
-                                                    vMNicDetailsInstance.PrimaryNicStaticIPAddress = primaryNicStaticIPAddressInstance;
-                                                }
-                                                
-                                                JToken recoveryNicIpAddressTypeValue = vmNicsValue["recoveryNicIpAddressType"];
-                                                if (recoveryNicIpAddressTypeValue != null && recoveryNicIpAddressTypeValue.Type != JTokenType.Null)
-                                                {
-                                                    string recoveryNicIpAddressTypeInstance = ((string)recoveryNicIpAddressTypeValue);
-                                                    vMNicDetailsInstance.RecoveryNicIpAddressType = recoveryNicIpAddressTypeInstance;
+                                                    bool isSelectedForMigrationInstance = ((bool)isSelectedForMigrationValue);
+                                                    vMwareCbtNicDetailsInstance.IsSelectedForMigration = isSelectedForMigrationInstance;
                                                 }
                                             }
-                                        }
-                                        
-                                        JToken selectedSourceNicIdValue = providerSpecificDetailsValue["selectedSourceNicId"];
-                                        if (selectedSourceNicIdValue != null && selectedSourceNicIdValue.Type != JTokenType.Null)
-                                        {
-                                            string selectedSourceNicIdInstance = ((string)selectedSourceNicIdValue);
-                                            vMwareCbtMigrationDetailsInstance.SelectedSourceNicId = selectedSourceNicIdInstance;
                                         }
                                         
                                         JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
@@ -5542,13 +5367,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtMigrationDetailsInstance.TargetResourceGroupId = targetResourceGroupIdInstance;
                                         }
                                         
-                                        JToken targetNetworkIdValue = providerSpecificDetailsValue["targetNetworkId"];
-                                        if (targetNetworkIdValue != null && targetNetworkIdValue.Type != JTokenType.Null)
-                                        {
-                                            string targetNetworkIdInstance = ((string)targetNetworkIdValue);
-                                            vMwareCbtMigrationDetailsInstance.TargetNetworkId = targetNetworkIdInstance;
-                                        }
-                                        
                                         JToken targetAvailabilitySetIdValue = providerSpecificDetailsValue["targetAvailabilitySetId"];
                                         if (targetAvailabilitySetIdValue != null && targetAvailabilitySetIdValue.Type != JTokenType.Null)
                                         {
@@ -5636,98 +5454,70 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
+                                        JToken targetNetworkIdValue = providerSpecificDetailsValue["targetNetworkId"];
+                                        if (targetNetworkIdValue != null && targetNetworkIdValue.Type != JTokenType.Null)
+                                        {
+                                            string targetNetworkIdInstance = ((string)targetNetworkIdValue);
+                                            vMwareCbtMigrationDetailsInstance.TargetNetworkId = targetNetworkIdInstance;
+                                        }
+                                        
                                         JToken vmNicsArray = providerSpecificDetailsValue["vmNics"];
                                         if (vmNicsArray != null && vmNicsArray.Type != JTokenType.Null)
                                         {
                                             foreach (JToken vmNicsValue in ((JArray)vmNicsArray))
                                             {
-                                                VMNicDetails vMNicDetailsInstance = new VMNicDetails();
-                                                vMwareCbtMigrationDetailsInstance.VMNics.Add(vMNicDetailsInstance);
+                                                VMwareCbtNicDetails vMwareCbtNicDetailsInstance = new VMwareCbtNicDetails();
+                                                vMwareCbtMigrationDetailsInstance.VMNics.Add(vMwareCbtNicDetailsInstance);
                                                 
                                                 JToken nicIdValue = vmNicsValue["nicId"];
                                                 if (nicIdValue != null && nicIdValue.Type != JTokenType.Null)
                                                 {
                                                     string nicIdInstance = ((string)nicIdValue);
-                                                    vMNicDetailsInstance.NicId = nicIdInstance;
+                                                    vMwareCbtNicDetailsInstance.NicId = nicIdInstance;
                                                 }
                                                 
-                                                JToken vMSubnetNameValue = vmNicsValue["vMSubnetName"];
-                                                if (vMSubnetNameValue != null && vMSubnetNameValue.Type != JTokenType.Null)
+                                                JToken isPrimaryNicValue = vmNicsValue["isPrimaryNic"];
+                                                if (isPrimaryNicValue != null && isPrimaryNicValue.Type != JTokenType.Null)
                                                 {
-                                                    string vMSubnetNameInstance = ((string)vMSubnetNameValue);
-                                                    vMNicDetailsInstance.VMSubnetName = vMSubnetNameInstance;
+                                                    bool isPrimaryNicInstance = ((bool)isPrimaryNicValue);
+                                                    vMwareCbtNicDetailsInstance.IsPrimaryNic = isPrimaryNicInstance;
                                                 }
                                                 
-                                                JToken vMNetworkNameValue = vmNicsValue["vMNetworkName"];
-                                                if (vMNetworkNameValue != null && vMNetworkNameValue.Type != JTokenType.Null)
+                                                JToken sourceNetworkIdValue = vmNicsValue["sourceNetworkId"];
+                                                if (sourceNetworkIdValue != null && sourceNetworkIdValue.Type != JTokenType.Null)
                                                 {
-                                                    string vMNetworkNameInstance = ((string)vMNetworkNameValue);
-                                                    vMNicDetailsInstance.VMNetworkName = vMNetworkNameInstance;
+                                                    string sourceNetworkIdInstance = ((string)sourceNetworkIdValue);
+                                                    vMwareCbtNicDetailsInstance.SourceNetworkId = sourceNetworkIdInstance;
                                                 }
                                                 
-                                                JToken recoveryVMNetworkIdValue = vmNicsValue["recoveryVMNetworkId"];
-                                                if (recoveryVMNetworkIdValue != null && recoveryVMNetworkIdValue.Type != JTokenType.Null)
+                                                JToken targetSubnetNameValue = vmNicsValue["targetSubnetName"];
+                                                if (targetSubnetNameValue != null && targetSubnetNameValue.Type != JTokenType.Null)
                                                 {
-                                                    string recoveryVMNetworkIdInstance = ((string)recoveryVMNetworkIdValue);
-                                                    vMNicDetailsInstance.RecoveryVMNetworkId = recoveryVMNetworkIdInstance;
-                                                }
-                                                
-                                                JToken recoveryVMSubnetNameValue = vmNicsValue["recoveryVMSubnetName"];
-                                                if (recoveryVMSubnetNameValue != null && recoveryVMSubnetNameValue.Type != JTokenType.Null)
-                                                {
-                                                    string recoveryVMSubnetNameInstance = ((string)recoveryVMSubnetNameValue);
-                                                    vMNicDetailsInstance.RecoveryVMSubnetName = recoveryVMSubnetNameInstance;
+                                                    string targetSubnetNameInstance = ((string)targetSubnetNameValue);
+                                                    vMwareCbtNicDetailsInstance.TargetSubnetName = targetSubnetNameInstance;
                                                 }
                                                 
                                                 JToken ipAddressTypeValue = vmNicsValue["ipAddressType"];
                                                 if (ipAddressTypeValue != null && ipAddressTypeValue.Type != JTokenType.Null)
                                                 {
                                                     string ipAddressTypeInstance = ((string)ipAddressTypeValue);
-                                                    vMNicDetailsInstance.IpAddressType = ipAddressTypeInstance;
+                                                    vMwareCbtNicDetailsInstance.IpAddressType = ipAddressTypeInstance;
                                                 }
                                                 
-                                                JToken replicaNicStaticIPAddressValue = vmNicsValue["replicaNicStaticIPAddress"];
-                                                if (replicaNicStaticIPAddressValue != null && replicaNicStaticIPAddressValue.Type != JTokenType.Null)
+                                                JToken staticIPAddressValue = vmNicsValue["staticIPAddress"];
+                                                if (staticIPAddressValue != null && staticIPAddressValue.Type != JTokenType.Null)
                                                 {
-                                                    string replicaNicStaticIPAddressInstance = ((string)replicaNicStaticIPAddressValue);
-                                                    vMNicDetailsInstance.ReplicaNicStaticIPAddress = replicaNicStaticIPAddressInstance;
+                                                    string staticIPAddressInstance = ((string)staticIPAddressValue);
+                                                    vMwareCbtNicDetailsInstance.StaticIPAddress = staticIPAddressInstance;
                                                 }
                                                 
-                                                JToken selectionTypeValue = vmNicsValue["selectionType"];
-                                                if (selectionTypeValue != null && selectionTypeValue.Type != JTokenType.Null)
+                                                JToken isSelectedForMigrationValue = vmNicsValue["isSelectedForMigration"];
+                                                if (isSelectedForMigrationValue != null && isSelectedForMigrationValue.Type != JTokenType.Null)
                                                 {
-                                                    string selectionTypeInstance = ((string)selectionTypeValue);
-                                                    vMNicDetailsInstance.SelectionType = selectionTypeInstance;
-                                                }
-                                                
-                                                JToken sourceNicArmIdValue = vmNicsValue["sourceNicArmId"];
-                                                if (sourceNicArmIdValue != null && sourceNicArmIdValue.Type != JTokenType.Null)
-                                                {
-                                                    string sourceNicArmIdInstance = ((string)sourceNicArmIdValue);
-                                                    vMNicDetailsInstance.SourceNicArmId = sourceNicArmIdInstance;
-                                                }
-                                                
-                                                JToken primaryNicStaticIPAddressValue = vmNicsValue["primaryNicStaticIPAddress"];
-                                                if (primaryNicStaticIPAddressValue != null && primaryNicStaticIPAddressValue.Type != JTokenType.Null)
-                                                {
-                                                    string primaryNicStaticIPAddressInstance = ((string)primaryNicStaticIPAddressValue);
-                                                    vMNicDetailsInstance.PrimaryNicStaticIPAddress = primaryNicStaticIPAddressInstance;
-                                                }
-                                                
-                                                JToken recoveryNicIpAddressTypeValue = vmNicsValue["recoveryNicIpAddressType"];
-                                                if (recoveryNicIpAddressTypeValue != null && recoveryNicIpAddressTypeValue.Type != JTokenType.Null)
-                                                {
-                                                    string recoveryNicIpAddressTypeInstance = ((string)recoveryNicIpAddressTypeValue);
-                                                    vMNicDetailsInstance.RecoveryNicIpAddressType = recoveryNicIpAddressTypeInstance;
+                                                    bool isSelectedForMigrationInstance = ((bool)isSelectedForMigrationValue);
+                                                    vMwareCbtNicDetailsInstance.IsSelectedForMigration = isSelectedForMigrationInstance;
                                                 }
                                             }
-                                        }
-                                        
-                                        JToken selectedSourceNicIdValue = providerSpecificDetailsValue["selectedSourceNicId"];
-                                        if (selectedSourceNicIdValue != null && selectedSourceNicIdValue.Type != JTokenType.Null)
-                                        {
-                                            string selectedSourceNicIdInstance = ((string)selectedSourceNicIdValue);
-                                            vMwareCbtMigrationDetailsInstance.SelectedSourceNicId = selectedSourceNicIdInstance;
                                         }
                                         
                                         JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
@@ -6191,13 +5981,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtMigrationDetailsInstance.TargetResourceGroupId = targetResourceGroupIdInstance;
                                         }
                                         
-                                        JToken targetNetworkIdValue = providerSpecificDetailsValue["targetNetworkId"];
-                                        if (targetNetworkIdValue != null && targetNetworkIdValue.Type != JTokenType.Null)
-                                        {
-                                            string targetNetworkIdInstance = ((string)targetNetworkIdValue);
-                                            vMwareCbtMigrationDetailsInstance.TargetNetworkId = targetNetworkIdInstance;
-                                        }
-                                        
                                         JToken targetAvailabilitySetIdValue = providerSpecificDetailsValue["targetAvailabilitySetId"];
                                         if (targetAvailabilitySetIdValue != null && targetAvailabilitySetIdValue.Type != JTokenType.Null)
                                         {
@@ -6285,98 +6068,70 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
+                                        JToken targetNetworkIdValue = providerSpecificDetailsValue["targetNetworkId"];
+                                        if (targetNetworkIdValue != null && targetNetworkIdValue.Type != JTokenType.Null)
+                                        {
+                                            string targetNetworkIdInstance = ((string)targetNetworkIdValue);
+                                            vMwareCbtMigrationDetailsInstance.TargetNetworkId = targetNetworkIdInstance;
+                                        }
+                                        
                                         JToken vmNicsArray = providerSpecificDetailsValue["vmNics"];
                                         if (vmNicsArray != null && vmNicsArray.Type != JTokenType.Null)
                                         {
                                             foreach (JToken vmNicsValue in ((JArray)vmNicsArray))
                                             {
-                                                VMNicDetails vMNicDetailsInstance = new VMNicDetails();
-                                                vMwareCbtMigrationDetailsInstance.VMNics.Add(vMNicDetailsInstance);
+                                                VMwareCbtNicDetails vMwareCbtNicDetailsInstance = new VMwareCbtNicDetails();
+                                                vMwareCbtMigrationDetailsInstance.VMNics.Add(vMwareCbtNicDetailsInstance);
                                                 
                                                 JToken nicIdValue = vmNicsValue["nicId"];
                                                 if (nicIdValue != null && nicIdValue.Type != JTokenType.Null)
                                                 {
                                                     string nicIdInstance = ((string)nicIdValue);
-                                                    vMNicDetailsInstance.NicId = nicIdInstance;
+                                                    vMwareCbtNicDetailsInstance.NicId = nicIdInstance;
                                                 }
                                                 
-                                                JToken vMSubnetNameValue = vmNicsValue["vMSubnetName"];
-                                                if (vMSubnetNameValue != null && vMSubnetNameValue.Type != JTokenType.Null)
+                                                JToken isPrimaryNicValue = vmNicsValue["isPrimaryNic"];
+                                                if (isPrimaryNicValue != null && isPrimaryNicValue.Type != JTokenType.Null)
                                                 {
-                                                    string vMSubnetNameInstance = ((string)vMSubnetNameValue);
-                                                    vMNicDetailsInstance.VMSubnetName = vMSubnetNameInstance;
+                                                    bool isPrimaryNicInstance = ((bool)isPrimaryNicValue);
+                                                    vMwareCbtNicDetailsInstance.IsPrimaryNic = isPrimaryNicInstance;
                                                 }
                                                 
-                                                JToken vMNetworkNameValue = vmNicsValue["vMNetworkName"];
-                                                if (vMNetworkNameValue != null && vMNetworkNameValue.Type != JTokenType.Null)
+                                                JToken sourceNetworkIdValue = vmNicsValue["sourceNetworkId"];
+                                                if (sourceNetworkIdValue != null && sourceNetworkIdValue.Type != JTokenType.Null)
                                                 {
-                                                    string vMNetworkNameInstance = ((string)vMNetworkNameValue);
-                                                    vMNicDetailsInstance.VMNetworkName = vMNetworkNameInstance;
+                                                    string sourceNetworkIdInstance = ((string)sourceNetworkIdValue);
+                                                    vMwareCbtNicDetailsInstance.SourceNetworkId = sourceNetworkIdInstance;
                                                 }
                                                 
-                                                JToken recoveryVMNetworkIdValue = vmNicsValue["recoveryVMNetworkId"];
-                                                if (recoveryVMNetworkIdValue != null && recoveryVMNetworkIdValue.Type != JTokenType.Null)
+                                                JToken targetSubnetNameValue = vmNicsValue["targetSubnetName"];
+                                                if (targetSubnetNameValue != null && targetSubnetNameValue.Type != JTokenType.Null)
                                                 {
-                                                    string recoveryVMNetworkIdInstance = ((string)recoveryVMNetworkIdValue);
-                                                    vMNicDetailsInstance.RecoveryVMNetworkId = recoveryVMNetworkIdInstance;
-                                                }
-                                                
-                                                JToken recoveryVMSubnetNameValue = vmNicsValue["recoveryVMSubnetName"];
-                                                if (recoveryVMSubnetNameValue != null && recoveryVMSubnetNameValue.Type != JTokenType.Null)
-                                                {
-                                                    string recoveryVMSubnetNameInstance = ((string)recoveryVMSubnetNameValue);
-                                                    vMNicDetailsInstance.RecoveryVMSubnetName = recoveryVMSubnetNameInstance;
+                                                    string targetSubnetNameInstance = ((string)targetSubnetNameValue);
+                                                    vMwareCbtNicDetailsInstance.TargetSubnetName = targetSubnetNameInstance;
                                                 }
                                                 
                                                 JToken ipAddressTypeValue = vmNicsValue["ipAddressType"];
                                                 if (ipAddressTypeValue != null && ipAddressTypeValue.Type != JTokenType.Null)
                                                 {
                                                     string ipAddressTypeInstance = ((string)ipAddressTypeValue);
-                                                    vMNicDetailsInstance.IpAddressType = ipAddressTypeInstance;
+                                                    vMwareCbtNicDetailsInstance.IpAddressType = ipAddressTypeInstance;
                                                 }
                                                 
-                                                JToken replicaNicStaticIPAddressValue = vmNicsValue["replicaNicStaticIPAddress"];
-                                                if (replicaNicStaticIPAddressValue != null && replicaNicStaticIPAddressValue.Type != JTokenType.Null)
+                                                JToken staticIPAddressValue = vmNicsValue["staticIPAddress"];
+                                                if (staticIPAddressValue != null && staticIPAddressValue.Type != JTokenType.Null)
                                                 {
-                                                    string replicaNicStaticIPAddressInstance = ((string)replicaNicStaticIPAddressValue);
-                                                    vMNicDetailsInstance.ReplicaNicStaticIPAddress = replicaNicStaticIPAddressInstance;
+                                                    string staticIPAddressInstance = ((string)staticIPAddressValue);
+                                                    vMwareCbtNicDetailsInstance.StaticIPAddress = staticIPAddressInstance;
                                                 }
                                                 
-                                                JToken selectionTypeValue = vmNicsValue["selectionType"];
-                                                if (selectionTypeValue != null && selectionTypeValue.Type != JTokenType.Null)
+                                                JToken isSelectedForMigrationValue = vmNicsValue["isSelectedForMigration"];
+                                                if (isSelectedForMigrationValue != null && isSelectedForMigrationValue.Type != JTokenType.Null)
                                                 {
-                                                    string selectionTypeInstance = ((string)selectionTypeValue);
-                                                    vMNicDetailsInstance.SelectionType = selectionTypeInstance;
-                                                }
-                                                
-                                                JToken sourceNicArmIdValue = vmNicsValue["sourceNicArmId"];
-                                                if (sourceNicArmIdValue != null && sourceNicArmIdValue.Type != JTokenType.Null)
-                                                {
-                                                    string sourceNicArmIdInstance = ((string)sourceNicArmIdValue);
-                                                    vMNicDetailsInstance.SourceNicArmId = sourceNicArmIdInstance;
-                                                }
-                                                
-                                                JToken primaryNicStaticIPAddressValue = vmNicsValue["primaryNicStaticIPAddress"];
-                                                if (primaryNicStaticIPAddressValue != null && primaryNicStaticIPAddressValue.Type != JTokenType.Null)
-                                                {
-                                                    string primaryNicStaticIPAddressInstance = ((string)primaryNicStaticIPAddressValue);
-                                                    vMNicDetailsInstance.PrimaryNicStaticIPAddress = primaryNicStaticIPAddressInstance;
-                                                }
-                                                
-                                                JToken recoveryNicIpAddressTypeValue = vmNicsValue["recoveryNicIpAddressType"];
-                                                if (recoveryNicIpAddressTypeValue != null && recoveryNicIpAddressTypeValue.Type != JTokenType.Null)
-                                                {
-                                                    string recoveryNicIpAddressTypeInstance = ((string)recoveryNicIpAddressTypeValue);
-                                                    vMNicDetailsInstance.RecoveryNicIpAddressType = recoveryNicIpAddressTypeInstance;
+                                                    bool isSelectedForMigrationInstance = ((bool)isSelectedForMigrationValue);
+                                                    vMwareCbtNicDetailsInstance.IsSelectedForMigration = isSelectedForMigrationInstance;
                                                 }
                                             }
-                                        }
-                                        
-                                        JToken selectedSourceNicIdValue = providerSpecificDetailsValue["selectedSourceNicId"];
-                                        if (selectedSourceNicIdValue != null && selectedSourceNicIdValue.Type != JTokenType.Null)
-                                        {
-                                            string selectedSourceNicIdInstance = ((string)selectedSourceNicIdValue);
-                                            vMwareCbtMigrationDetailsInstance.SelectedSourceNicId = selectedSourceNicIdInstance;
                                         }
                                         
                                         JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
@@ -6840,13 +6595,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtMigrationDetailsInstance.TargetResourceGroupId = targetResourceGroupIdInstance;
                                         }
                                         
-                                        JToken targetNetworkIdValue = providerSpecificDetailsValue["targetNetworkId"];
-                                        if (targetNetworkIdValue != null && targetNetworkIdValue.Type != JTokenType.Null)
-                                        {
-                                            string targetNetworkIdInstance = ((string)targetNetworkIdValue);
-                                            vMwareCbtMigrationDetailsInstance.TargetNetworkId = targetNetworkIdInstance;
-                                        }
-                                        
                                         JToken targetAvailabilitySetIdValue = providerSpecificDetailsValue["targetAvailabilitySetId"];
                                         if (targetAvailabilitySetIdValue != null && targetAvailabilitySetIdValue.Type != JTokenType.Null)
                                         {
@@ -6934,98 +6682,70 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
+                                        JToken targetNetworkIdValue = providerSpecificDetailsValue["targetNetworkId"];
+                                        if (targetNetworkIdValue != null && targetNetworkIdValue.Type != JTokenType.Null)
+                                        {
+                                            string targetNetworkIdInstance = ((string)targetNetworkIdValue);
+                                            vMwareCbtMigrationDetailsInstance.TargetNetworkId = targetNetworkIdInstance;
+                                        }
+                                        
                                         JToken vmNicsArray = providerSpecificDetailsValue["vmNics"];
                                         if (vmNicsArray != null && vmNicsArray.Type != JTokenType.Null)
                                         {
                                             foreach (JToken vmNicsValue in ((JArray)vmNicsArray))
                                             {
-                                                VMNicDetails vMNicDetailsInstance = new VMNicDetails();
-                                                vMwareCbtMigrationDetailsInstance.VMNics.Add(vMNicDetailsInstance);
+                                                VMwareCbtNicDetails vMwareCbtNicDetailsInstance = new VMwareCbtNicDetails();
+                                                vMwareCbtMigrationDetailsInstance.VMNics.Add(vMwareCbtNicDetailsInstance);
                                                 
                                                 JToken nicIdValue = vmNicsValue["nicId"];
                                                 if (nicIdValue != null && nicIdValue.Type != JTokenType.Null)
                                                 {
                                                     string nicIdInstance = ((string)nicIdValue);
-                                                    vMNicDetailsInstance.NicId = nicIdInstance;
+                                                    vMwareCbtNicDetailsInstance.NicId = nicIdInstance;
                                                 }
                                                 
-                                                JToken vMSubnetNameValue = vmNicsValue["vMSubnetName"];
-                                                if (vMSubnetNameValue != null && vMSubnetNameValue.Type != JTokenType.Null)
+                                                JToken isPrimaryNicValue = vmNicsValue["isPrimaryNic"];
+                                                if (isPrimaryNicValue != null && isPrimaryNicValue.Type != JTokenType.Null)
                                                 {
-                                                    string vMSubnetNameInstance = ((string)vMSubnetNameValue);
-                                                    vMNicDetailsInstance.VMSubnetName = vMSubnetNameInstance;
+                                                    bool isPrimaryNicInstance = ((bool)isPrimaryNicValue);
+                                                    vMwareCbtNicDetailsInstance.IsPrimaryNic = isPrimaryNicInstance;
                                                 }
                                                 
-                                                JToken vMNetworkNameValue = vmNicsValue["vMNetworkName"];
-                                                if (vMNetworkNameValue != null && vMNetworkNameValue.Type != JTokenType.Null)
+                                                JToken sourceNetworkIdValue = vmNicsValue["sourceNetworkId"];
+                                                if (sourceNetworkIdValue != null && sourceNetworkIdValue.Type != JTokenType.Null)
                                                 {
-                                                    string vMNetworkNameInstance = ((string)vMNetworkNameValue);
-                                                    vMNicDetailsInstance.VMNetworkName = vMNetworkNameInstance;
+                                                    string sourceNetworkIdInstance = ((string)sourceNetworkIdValue);
+                                                    vMwareCbtNicDetailsInstance.SourceNetworkId = sourceNetworkIdInstance;
                                                 }
                                                 
-                                                JToken recoveryVMNetworkIdValue = vmNicsValue["recoveryVMNetworkId"];
-                                                if (recoveryVMNetworkIdValue != null && recoveryVMNetworkIdValue.Type != JTokenType.Null)
+                                                JToken targetSubnetNameValue = vmNicsValue["targetSubnetName"];
+                                                if (targetSubnetNameValue != null && targetSubnetNameValue.Type != JTokenType.Null)
                                                 {
-                                                    string recoveryVMNetworkIdInstance = ((string)recoveryVMNetworkIdValue);
-                                                    vMNicDetailsInstance.RecoveryVMNetworkId = recoveryVMNetworkIdInstance;
-                                                }
-                                                
-                                                JToken recoveryVMSubnetNameValue = vmNicsValue["recoveryVMSubnetName"];
-                                                if (recoveryVMSubnetNameValue != null && recoveryVMSubnetNameValue.Type != JTokenType.Null)
-                                                {
-                                                    string recoveryVMSubnetNameInstance = ((string)recoveryVMSubnetNameValue);
-                                                    vMNicDetailsInstance.RecoveryVMSubnetName = recoveryVMSubnetNameInstance;
+                                                    string targetSubnetNameInstance = ((string)targetSubnetNameValue);
+                                                    vMwareCbtNicDetailsInstance.TargetSubnetName = targetSubnetNameInstance;
                                                 }
                                                 
                                                 JToken ipAddressTypeValue = vmNicsValue["ipAddressType"];
                                                 if (ipAddressTypeValue != null && ipAddressTypeValue.Type != JTokenType.Null)
                                                 {
                                                     string ipAddressTypeInstance = ((string)ipAddressTypeValue);
-                                                    vMNicDetailsInstance.IpAddressType = ipAddressTypeInstance;
+                                                    vMwareCbtNicDetailsInstance.IpAddressType = ipAddressTypeInstance;
                                                 }
                                                 
-                                                JToken replicaNicStaticIPAddressValue = vmNicsValue["replicaNicStaticIPAddress"];
-                                                if (replicaNicStaticIPAddressValue != null && replicaNicStaticIPAddressValue.Type != JTokenType.Null)
+                                                JToken staticIPAddressValue = vmNicsValue["staticIPAddress"];
+                                                if (staticIPAddressValue != null && staticIPAddressValue.Type != JTokenType.Null)
                                                 {
-                                                    string replicaNicStaticIPAddressInstance = ((string)replicaNicStaticIPAddressValue);
-                                                    vMNicDetailsInstance.ReplicaNicStaticIPAddress = replicaNicStaticIPAddressInstance;
+                                                    string staticIPAddressInstance = ((string)staticIPAddressValue);
+                                                    vMwareCbtNicDetailsInstance.StaticIPAddress = staticIPAddressInstance;
                                                 }
                                                 
-                                                JToken selectionTypeValue = vmNicsValue["selectionType"];
-                                                if (selectionTypeValue != null && selectionTypeValue.Type != JTokenType.Null)
+                                                JToken isSelectedForMigrationValue = vmNicsValue["isSelectedForMigration"];
+                                                if (isSelectedForMigrationValue != null && isSelectedForMigrationValue.Type != JTokenType.Null)
                                                 {
-                                                    string selectionTypeInstance = ((string)selectionTypeValue);
-                                                    vMNicDetailsInstance.SelectionType = selectionTypeInstance;
-                                                }
-                                                
-                                                JToken sourceNicArmIdValue = vmNicsValue["sourceNicArmId"];
-                                                if (sourceNicArmIdValue != null && sourceNicArmIdValue.Type != JTokenType.Null)
-                                                {
-                                                    string sourceNicArmIdInstance = ((string)sourceNicArmIdValue);
-                                                    vMNicDetailsInstance.SourceNicArmId = sourceNicArmIdInstance;
-                                                }
-                                                
-                                                JToken primaryNicStaticIPAddressValue = vmNicsValue["primaryNicStaticIPAddress"];
-                                                if (primaryNicStaticIPAddressValue != null && primaryNicStaticIPAddressValue.Type != JTokenType.Null)
-                                                {
-                                                    string primaryNicStaticIPAddressInstance = ((string)primaryNicStaticIPAddressValue);
-                                                    vMNicDetailsInstance.PrimaryNicStaticIPAddress = primaryNicStaticIPAddressInstance;
-                                                }
-                                                
-                                                JToken recoveryNicIpAddressTypeValue = vmNicsValue["recoveryNicIpAddressType"];
-                                                if (recoveryNicIpAddressTypeValue != null && recoveryNicIpAddressTypeValue.Type != JTokenType.Null)
-                                                {
-                                                    string recoveryNicIpAddressTypeInstance = ((string)recoveryNicIpAddressTypeValue);
-                                                    vMNicDetailsInstance.RecoveryNicIpAddressType = recoveryNicIpAddressTypeInstance;
+                                                    bool isSelectedForMigrationInstance = ((bool)isSelectedForMigrationValue);
+                                                    vMwareCbtNicDetailsInstance.IsSelectedForMigration = isSelectedForMigrationInstance;
                                                 }
                                             }
-                                        }
-                                        
-                                        JToken selectedSourceNicIdValue = providerSpecificDetailsValue["selectedSourceNicId"];
-                                        if (selectedSourceNicIdValue != null && selectedSourceNicIdValue.Type != JTokenType.Null)
-                                        {
-                                            string selectedSourceNicIdInstance = ((string)selectedSourceNicIdValue);
-                                            vMwareCbtMigrationDetailsInstance.SelectedSourceNicId = selectedSourceNicIdInstance;
                                         }
                                         
                                         JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
@@ -7538,13 +7258,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtMigrationDetailsInstance.TargetResourceGroupId = targetResourceGroupIdInstance;
                                                 }
                                                 
-                                                JToken targetNetworkIdValue = providerSpecificDetailsValue["targetNetworkId"];
-                                                if (targetNetworkIdValue != null && targetNetworkIdValue.Type != JTokenType.Null)
-                                                {
-                                                    string targetNetworkIdInstance = ((string)targetNetworkIdValue);
-                                                    vMwareCbtMigrationDetailsInstance.TargetNetworkId = targetNetworkIdInstance;
-                                                }
-                                                
                                                 JToken targetAvailabilitySetIdValue = providerSpecificDetailsValue["targetAvailabilitySetId"];
                                                 if (targetAvailabilitySetIdValue != null && targetAvailabilitySetIdValue.Type != JTokenType.Null)
                                                 {
@@ -7632,98 +7345,70 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     }
                                                 }
                                                 
+                                                JToken targetNetworkIdValue = providerSpecificDetailsValue["targetNetworkId"];
+                                                if (targetNetworkIdValue != null && targetNetworkIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetNetworkIdInstance = ((string)targetNetworkIdValue);
+                                                    vMwareCbtMigrationDetailsInstance.TargetNetworkId = targetNetworkIdInstance;
+                                                }
+                                                
                                                 JToken vmNicsArray = providerSpecificDetailsValue["vmNics"];
                                                 if (vmNicsArray != null && vmNicsArray.Type != JTokenType.Null)
                                                 {
                                                     foreach (JToken vmNicsValue in ((JArray)vmNicsArray))
                                                     {
-                                                        VMNicDetails vMNicDetailsInstance = new VMNicDetails();
-                                                        vMwareCbtMigrationDetailsInstance.VMNics.Add(vMNicDetailsInstance);
+                                                        VMwareCbtNicDetails vMwareCbtNicDetailsInstance = new VMwareCbtNicDetails();
+                                                        vMwareCbtMigrationDetailsInstance.VMNics.Add(vMwareCbtNicDetailsInstance);
                                                         
                                                         JToken nicIdValue = vmNicsValue["nicId"];
                                                         if (nicIdValue != null && nicIdValue.Type != JTokenType.Null)
                                                         {
                                                             string nicIdInstance = ((string)nicIdValue);
-                                                            vMNicDetailsInstance.NicId = nicIdInstance;
+                                                            vMwareCbtNicDetailsInstance.NicId = nicIdInstance;
                                                         }
                                                         
-                                                        JToken vMSubnetNameValue = vmNicsValue["vMSubnetName"];
-                                                        if (vMSubnetNameValue != null && vMSubnetNameValue.Type != JTokenType.Null)
+                                                        JToken isPrimaryNicValue = vmNicsValue["isPrimaryNic"];
+                                                        if (isPrimaryNicValue != null && isPrimaryNicValue.Type != JTokenType.Null)
                                                         {
-                                                            string vMSubnetNameInstance = ((string)vMSubnetNameValue);
-                                                            vMNicDetailsInstance.VMSubnetName = vMSubnetNameInstance;
+                                                            bool isPrimaryNicInstance = ((bool)isPrimaryNicValue);
+                                                            vMwareCbtNicDetailsInstance.IsPrimaryNic = isPrimaryNicInstance;
                                                         }
                                                         
-                                                        JToken vMNetworkNameValue = vmNicsValue["vMNetworkName"];
-                                                        if (vMNetworkNameValue != null && vMNetworkNameValue.Type != JTokenType.Null)
+                                                        JToken sourceNetworkIdValue = vmNicsValue["sourceNetworkId"];
+                                                        if (sourceNetworkIdValue != null && sourceNetworkIdValue.Type != JTokenType.Null)
                                                         {
-                                                            string vMNetworkNameInstance = ((string)vMNetworkNameValue);
-                                                            vMNicDetailsInstance.VMNetworkName = vMNetworkNameInstance;
+                                                            string sourceNetworkIdInstance = ((string)sourceNetworkIdValue);
+                                                            vMwareCbtNicDetailsInstance.SourceNetworkId = sourceNetworkIdInstance;
                                                         }
                                                         
-                                                        JToken recoveryVMNetworkIdValue = vmNicsValue["recoveryVMNetworkId"];
-                                                        if (recoveryVMNetworkIdValue != null && recoveryVMNetworkIdValue.Type != JTokenType.Null)
+                                                        JToken targetSubnetNameValue = vmNicsValue["targetSubnetName"];
+                                                        if (targetSubnetNameValue != null && targetSubnetNameValue.Type != JTokenType.Null)
                                                         {
-                                                            string recoveryVMNetworkIdInstance = ((string)recoveryVMNetworkIdValue);
-                                                            vMNicDetailsInstance.RecoveryVMNetworkId = recoveryVMNetworkIdInstance;
-                                                        }
-                                                        
-                                                        JToken recoveryVMSubnetNameValue = vmNicsValue["recoveryVMSubnetName"];
-                                                        if (recoveryVMSubnetNameValue != null && recoveryVMSubnetNameValue.Type != JTokenType.Null)
-                                                        {
-                                                            string recoveryVMSubnetNameInstance = ((string)recoveryVMSubnetNameValue);
-                                                            vMNicDetailsInstance.RecoveryVMSubnetName = recoveryVMSubnetNameInstance;
+                                                            string targetSubnetNameInstance = ((string)targetSubnetNameValue);
+                                                            vMwareCbtNicDetailsInstance.TargetSubnetName = targetSubnetNameInstance;
                                                         }
                                                         
                                                         JToken ipAddressTypeValue = vmNicsValue["ipAddressType"];
                                                         if (ipAddressTypeValue != null && ipAddressTypeValue.Type != JTokenType.Null)
                                                         {
                                                             string ipAddressTypeInstance = ((string)ipAddressTypeValue);
-                                                            vMNicDetailsInstance.IpAddressType = ipAddressTypeInstance;
+                                                            vMwareCbtNicDetailsInstance.IpAddressType = ipAddressTypeInstance;
                                                         }
                                                         
-                                                        JToken replicaNicStaticIPAddressValue = vmNicsValue["replicaNicStaticIPAddress"];
-                                                        if (replicaNicStaticIPAddressValue != null && replicaNicStaticIPAddressValue.Type != JTokenType.Null)
+                                                        JToken staticIPAddressValue = vmNicsValue["staticIPAddress"];
+                                                        if (staticIPAddressValue != null && staticIPAddressValue.Type != JTokenType.Null)
                                                         {
-                                                            string replicaNicStaticIPAddressInstance = ((string)replicaNicStaticIPAddressValue);
-                                                            vMNicDetailsInstance.ReplicaNicStaticIPAddress = replicaNicStaticIPAddressInstance;
+                                                            string staticIPAddressInstance = ((string)staticIPAddressValue);
+                                                            vMwareCbtNicDetailsInstance.StaticIPAddress = staticIPAddressInstance;
                                                         }
                                                         
-                                                        JToken selectionTypeValue = vmNicsValue["selectionType"];
-                                                        if (selectionTypeValue != null && selectionTypeValue.Type != JTokenType.Null)
+                                                        JToken isSelectedForMigrationValue = vmNicsValue["isSelectedForMigration"];
+                                                        if (isSelectedForMigrationValue != null && isSelectedForMigrationValue.Type != JTokenType.Null)
                                                         {
-                                                            string selectionTypeInstance = ((string)selectionTypeValue);
-                                                            vMNicDetailsInstance.SelectionType = selectionTypeInstance;
-                                                        }
-                                                        
-                                                        JToken sourceNicArmIdValue = vmNicsValue["sourceNicArmId"];
-                                                        if (sourceNicArmIdValue != null && sourceNicArmIdValue.Type != JTokenType.Null)
-                                                        {
-                                                            string sourceNicArmIdInstance = ((string)sourceNicArmIdValue);
-                                                            vMNicDetailsInstance.SourceNicArmId = sourceNicArmIdInstance;
-                                                        }
-                                                        
-                                                        JToken primaryNicStaticIPAddressValue = vmNicsValue["primaryNicStaticIPAddress"];
-                                                        if (primaryNicStaticIPAddressValue != null && primaryNicStaticIPAddressValue.Type != JTokenType.Null)
-                                                        {
-                                                            string primaryNicStaticIPAddressInstance = ((string)primaryNicStaticIPAddressValue);
-                                                            vMNicDetailsInstance.PrimaryNicStaticIPAddress = primaryNicStaticIPAddressInstance;
-                                                        }
-                                                        
-                                                        JToken recoveryNicIpAddressTypeValue = vmNicsValue["recoveryNicIpAddressType"];
-                                                        if (recoveryNicIpAddressTypeValue != null && recoveryNicIpAddressTypeValue.Type != JTokenType.Null)
-                                                        {
-                                                            string recoveryNicIpAddressTypeInstance = ((string)recoveryNicIpAddressTypeValue);
-                                                            vMNicDetailsInstance.RecoveryNicIpAddressType = recoveryNicIpAddressTypeInstance;
+                                                            bool isSelectedForMigrationInstance = ((bool)isSelectedForMigrationValue);
+                                                            vMwareCbtNicDetailsInstance.IsSelectedForMigration = isSelectedForMigrationInstance;
                                                         }
                                                     }
-                                                }
-                                                
-                                                JToken selectedSourceNicIdValue = providerSpecificDetailsValue["selectedSourceNicId"];
-                                                if (selectedSourceNicIdValue != null && selectedSourceNicIdValue.Type != JTokenType.Null)
-                                                {
-                                                    string selectedSourceNicIdInstance = ((string)selectedSourceNicIdValue);
-                                                    vMwareCbtMigrationDetailsInstance.SelectedSourceNicId = selectedSourceNicIdInstance;
                                                 }
                                                 
                                                 JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
@@ -8187,13 +7872,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtMigrationDetailsInstance.TargetResourceGroupId = targetResourceGroupIdInstance;
                                                 }
                                                 
-                                                JToken targetNetworkIdValue = providerSpecificDetailsValue["targetNetworkId"];
-                                                if (targetNetworkIdValue != null && targetNetworkIdValue.Type != JTokenType.Null)
-                                                {
-                                                    string targetNetworkIdInstance = ((string)targetNetworkIdValue);
-                                                    vMwareCbtMigrationDetailsInstance.TargetNetworkId = targetNetworkIdInstance;
-                                                }
-                                                
                                                 JToken targetAvailabilitySetIdValue = providerSpecificDetailsValue["targetAvailabilitySetId"];
                                                 if (targetAvailabilitySetIdValue != null && targetAvailabilitySetIdValue.Type != JTokenType.Null)
                                                 {
@@ -8281,98 +7959,70 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     }
                                                 }
                                                 
+                                                JToken targetNetworkIdValue = providerSpecificDetailsValue["targetNetworkId"];
+                                                if (targetNetworkIdValue != null && targetNetworkIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetNetworkIdInstance = ((string)targetNetworkIdValue);
+                                                    vMwareCbtMigrationDetailsInstance.TargetNetworkId = targetNetworkIdInstance;
+                                                }
+                                                
                                                 JToken vmNicsArray = providerSpecificDetailsValue["vmNics"];
                                                 if (vmNicsArray != null && vmNicsArray.Type != JTokenType.Null)
                                                 {
                                                     foreach (JToken vmNicsValue in ((JArray)vmNicsArray))
                                                     {
-                                                        VMNicDetails vMNicDetailsInstance = new VMNicDetails();
-                                                        vMwareCbtMigrationDetailsInstance.VMNics.Add(vMNicDetailsInstance);
+                                                        VMwareCbtNicDetails vMwareCbtNicDetailsInstance = new VMwareCbtNicDetails();
+                                                        vMwareCbtMigrationDetailsInstance.VMNics.Add(vMwareCbtNicDetailsInstance);
                                                         
                                                         JToken nicIdValue = vmNicsValue["nicId"];
                                                         if (nicIdValue != null && nicIdValue.Type != JTokenType.Null)
                                                         {
                                                             string nicIdInstance = ((string)nicIdValue);
-                                                            vMNicDetailsInstance.NicId = nicIdInstance;
+                                                            vMwareCbtNicDetailsInstance.NicId = nicIdInstance;
                                                         }
                                                         
-                                                        JToken vMSubnetNameValue = vmNicsValue["vMSubnetName"];
-                                                        if (vMSubnetNameValue != null && vMSubnetNameValue.Type != JTokenType.Null)
+                                                        JToken isPrimaryNicValue = vmNicsValue["isPrimaryNic"];
+                                                        if (isPrimaryNicValue != null && isPrimaryNicValue.Type != JTokenType.Null)
                                                         {
-                                                            string vMSubnetNameInstance = ((string)vMSubnetNameValue);
-                                                            vMNicDetailsInstance.VMSubnetName = vMSubnetNameInstance;
+                                                            bool isPrimaryNicInstance = ((bool)isPrimaryNicValue);
+                                                            vMwareCbtNicDetailsInstance.IsPrimaryNic = isPrimaryNicInstance;
                                                         }
                                                         
-                                                        JToken vMNetworkNameValue = vmNicsValue["vMNetworkName"];
-                                                        if (vMNetworkNameValue != null && vMNetworkNameValue.Type != JTokenType.Null)
+                                                        JToken sourceNetworkIdValue = vmNicsValue["sourceNetworkId"];
+                                                        if (sourceNetworkIdValue != null && sourceNetworkIdValue.Type != JTokenType.Null)
                                                         {
-                                                            string vMNetworkNameInstance = ((string)vMNetworkNameValue);
-                                                            vMNicDetailsInstance.VMNetworkName = vMNetworkNameInstance;
+                                                            string sourceNetworkIdInstance = ((string)sourceNetworkIdValue);
+                                                            vMwareCbtNicDetailsInstance.SourceNetworkId = sourceNetworkIdInstance;
                                                         }
                                                         
-                                                        JToken recoveryVMNetworkIdValue = vmNicsValue["recoveryVMNetworkId"];
-                                                        if (recoveryVMNetworkIdValue != null && recoveryVMNetworkIdValue.Type != JTokenType.Null)
+                                                        JToken targetSubnetNameValue = vmNicsValue["targetSubnetName"];
+                                                        if (targetSubnetNameValue != null && targetSubnetNameValue.Type != JTokenType.Null)
                                                         {
-                                                            string recoveryVMNetworkIdInstance = ((string)recoveryVMNetworkIdValue);
-                                                            vMNicDetailsInstance.RecoveryVMNetworkId = recoveryVMNetworkIdInstance;
-                                                        }
-                                                        
-                                                        JToken recoveryVMSubnetNameValue = vmNicsValue["recoveryVMSubnetName"];
-                                                        if (recoveryVMSubnetNameValue != null && recoveryVMSubnetNameValue.Type != JTokenType.Null)
-                                                        {
-                                                            string recoveryVMSubnetNameInstance = ((string)recoveryVMSubnetNameValue);
-                                                            vMNicDetailsInstance.RecoveryVMSubnetName = recoveryVMSubnetNameInstance;
+                                                            string targetSubnetNameInstance = ((string)targetSubnetNameValue);
+                                                            vMwareCbtNicDetailsInstance.TargetSubnetName = targetSubnetNameInstance;
                                                         }
                                                         
                                                         JToken ipAddressTypeValue = vmNicsValue["ipAddressType"];
                                                         if (ipAddressTypeValue != null && ipAddressTypeValue.Type != JTokenType.Null)
                                                         {
                                                             string ipAddressTypeInstance = ((string)ipAddressTypeValue);
-                                                            vMNicDetailsInstance.IpAddressType = ipAddressTypeInstance;
+                                                            vMwareCbtNicDetailsInstance.IpAddressType = ipAddressTypeInstance;
                                                         }
                                                         
-                                                        JToken replicaNicStaticIPAddressValue = vmNicsValue["replicaNicStaticIPAddress"];
-                                                        if (replicaNicStaticIPAddressValue != null && replicaNicStaticIPAddressValue.Type != JTokenType.Null)
+                                                        JToken staticIPAddressValue = vmNicsValue["staticIPAddress"];
+                                                        if (staticIPAddressValue != null && staticIPAddressValue.Type != JTokenType.Null)
                                                         {
-                                                            string replicaNicStaticIPAddressInstance = ((string)replicaNicStaticIPAddressValue);
-                                                            vMNicDetailsInstance.ReplicaNicStaticIPAddress = replicaNicStaticIPAddressInstance;
+                                                            string staticIPAddressInstance = ((string)staticIPAddressValue);
+                                                            vMwareCbtNicDetailsInstance.StaticIPAddress = staticIPAddressInstance;
                                                         }
                                                         
-                                                        JToken selectionTypeValue = vmNicsValue["selectionType"];
-                                                        if (selectionTypeValue != null && selectionTypeValue.Type != JTokenType.Null)
+                                                        JToken isSelectedForMigrationValue = vmNicsValue["isSelectedForMigration"];
+                                                        if (isSelectedForMigrationValue != null && isSelectedForMigrationValue.Type != JTokenType.Null)
                                                         {
-                                                            string selectionTypeInstance = ((string)selectionTypeValue);
-                                                            vMNicDetailsInstance.SelectionType = selectionTypeInstance;
-                                                        }
-                                                        
-                                                        JToken sourceNicArmIdValue = vmNicsValue["sourceNicArmId"];
-                                                        if (sourceNicArmIdValue != null && sourceNicArmIdValue.Type != JTokenType.Null)
-                                                        {
-                                                            string sourceNicArmIdInstance = ((string)sourceNicArmIdValue);
-                                                            vMNicDetailsInstance.SourceNicArmId = sourceNicArmIdInstance;
-                                                        }
-                                                        
-                                                        JToken primaryNicStaticIPAddressValue = vmNicsValue["primaryNicStaticIPAddress"];
-                                                        if (primaryNicStaticIPAddressValue != null && primaryNicStaticIPAddressValue.Type != JTokenType.Null)
-                                                        {
-                                                            string primaryNicStaticIPAddressInstance = ((string)primaryNicStaticIPAddressValue);
-                                                            vMNicDetailsInstance.PrimaryNicStaticIPAddress = primaryNicStaticIPAddressInstance;
-                                                        }
-                                                        
-                                                        JToken recoveryNicIpAddressTypeValue = vmNicsValue["recoveryNicIpAddressType"];
-                                                        if (recoveryNicIpAddressTypeValue != null && recoveryNicIpAddressTypeValue.Type != JTokenType.Null)
-                                                        {
-                                                            string recoveryNicIpAddressTypeInstance = ((string)recoveryNicIpAddressTypeValue);
-                                                            vMNicDetailsInstance.RecoveryNicIpAddressType = recoveryNicIpAddressTypeInstance;
+                                                            bool isSelectedForMigrationInstance = ((bool)isSelectedForMigrationValue);
+                                                            vMwareCbtNicDetailsInstance.IsSelectedForMigration = isSelectedForMigrationInstance;
                                                         }
                                                     }
-                                                }
-                                                
-                                                JToken selectedSourceNicIdValue = providerSpecificDetailsValue["selectedSourceNicId"];
-                                                if (selectedSourceNicIdValue != null && selectedSourceNicIdValue.Type != JTokenType.Null)
-                                                {
-                                                    string selectedSourceNicIdInstance = ((string)selectedSourceNicIdValue);
-                                                    vMwareCbtMigrationDetailsInstance.SelectedSourceNicId = selectedSourceNicIdInstance;
                                                 }
                                                 
                                                 JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
@@ -8793,13 +8443,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtMigrationDetailsInstance.TargetResourceGroupId = targetResourceGroupIdInstance;
                                                 }
                                                 
-                                                JToken targetNetworkIdValue = providerSpecificDetailsValue["targetNetworkId"];
-                                                if (targetNetworkIdValue != null && targetNetworkIdValue.Type != JTokenType.Null)
-                                                {
-                                                    string targetNetworkIdInstance = ((string)targetNetworkIdValue);
-                                                    vMwareCbtMigrationDetailsInstance.TargetNetworkId = targetNetworkIdInstance;
-                                                }
-                                                
                                                 JToken targetAvailabilitySetIdValue = providerSpecificDetailsValue["targetAvailabilitySetId"];
                                                 if (targetAvailabilitySetIdValue != null && targetAvailabilitySetIdValue.Type != JTokenType.Null)
                                                 {
@@ -8887,98 +8530,70 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     }
                                                 }
                                                 
+                                                JToken targetNetworkIdValue = providerSpecificDetailsValue["targetNetworkId"];
+                                                if (targetNetworkIdValue != null && targetNetworkIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetNetworkIdInstance = ((string)targetNetworkIdValue);
+                                                    vMwareCbtMigrationDetailsInstance.TargetNetworkId = targetNetworkIdInstance;
+                                                }
+                                                
                                                 JToken vmNicsArray = providerSpecificDetailsValue["vmNics"];
                                                 if (vmNicsArray != null && vmNicsArray.Type != JTokenType.Null)
                                                 {
                                                     foreach (JToken vmNicsValue in ((JArray)vmNicsArray))
                                                     {
-                                                        VMNicDetails vMNicDetailsInstance = new VMNicDetails();
-                                                        vMwareCbtMigrationDetailsInstance.VMNics.Add(vMNicDetailsInstance);
+                                                        VMwareCbtNicDetails vMwareCbtNicDetailsInstance = new VMwareCbtNicDetails();
+                                                        vMwareCbtMigrationDetailsInstance.VMNics.Add(vMwareCbtNicDetailsInstance);
                                                         
                                                         JToken nicIdValue = vmNicsValue["nicId"];
                                                         if (nicIdValue != null && nicIdValue.Type != JTokenType.Null)
                                                         {
                                                             string nicIdInstance = ((string)nicIdValue);
-                                                            vMNicDetailsInstance.NicId = nicIdInstance;
+                                                            vMwareCbtNicDetailsInstance.NicId = nicIdInstance;
                                                         }
                                                         
-                                                        JToken vMSubnetNameValue = vmNicsValue["vMSubnetName"];
-                                                        if (vMSubnetNameValue != null && vMSubnetNameValue.Type != JTokenType.Null)
+                                                        JToken isPrimaryNicValue = vmNicsValue["isPrimaryNic"];
+                                                        if (isPrimaryNicValue != null && isPrimaryNicValue.Type != JTokenType.Null)
                                                         {
-                                                            string vMSubnetNameInstance = ((string)vMSubnetNameValue);
-                                                            vMNicDetailsInstance.VMSubnetName = vMSubnetNameInstance;
+                                                            bool isPrimaryNicInstance = ((bool)isPrimaryNicValue);
+                                                            vMwareCbtNicDetailsInstance.IsPrimaryNic = isPrimaryNicInstance;
                                                         }
                                                         
-                                                        JToken vMNetworkNameValue = vmNicsValue["vMNetworkName"];
-                                                        if (vMNetworkNameValue != null && vMNetworkNameValue.Type != JTokenType.Null)
+                                                        JToken sourceNetworkIdValue = vmNicsValue["sourceNetworkId"];
+                                                        if (sourceNetworkIdValue != null && sourceNetworkIdValue.Type != JTokenType.Null)
                                                         {
-                                                            string vMNetworkNameInstance = ((string)vMNetworkNameValue);
-                                                            vMNicDetailsInstance.VMNetworkName = vMNetworkNameInstance;
+                                                            string sourceNetworkIdInstance = ((string)sourceNetworkIdValue);
+                                                            vMwareCbtNicDetailsInstance.SourceNetworkId = sourceNetworkIdInstance;
                                                         }
                                                         
-                                                        JToken recoveryVMNetworkIdValue = vmNicsValue["recoveryVMNetworkId"];
-                                                        if (recoveryVMNetworkIdValue != null && recoveryVMNetworkIdValue.Type != JTokenType.Null)
+                                                        JToken targetSubnetNameValue = vmNicsValue["targetSubnetName"];
+                                                        if (targetSubnetNameValue != null && targetSubnetNameValue.Type != JTokenType.Null)
                                                         {
-                                                            string recoveryVMNetworkIdInstance = ((string)recoveryVMNetworkIdValue);
-                                                            vMNicDetailsInstance.RecoveryVMNetworkId = recoveryVMNetworkIdInstance;
-                                                        }
-                                                        
-                                                        JToken recoveryVMSubnetNameValue = vmNicsValue["recoveryVMSubnetName"];
-                                                        if (recoveryVMSubnetNameValue != null && recoveryVMSubnetNameValue.Type != JTokenType.Null)
-                                                        {
-                                                            string recoveryVMSubnetNameInstance = ((string)recoveryVMSubnetNameValue);
-                                                            vMNicDetailsInstance.RecoveryVMSubnetName = recoveryVMSubnetNameInstance;
+                                                            string targetSubnetNameInstance = ((string)targetSubnetNameValue);
+                                                            vMwareCbtNicDetailsInstance.TargetSubnetName = targetSubnetNameInstance;
                                                         }
                                                         
                                                         JToken ipAddressTypeValue = vmNicsValue["ipAddressType"];
                                                         if (ipAddressTypeValue != null && ipAddressTypeValue.Type != JTokenType.Null)
                                                         {
                                                             string ipAddressTypeInstance = ((string)ipAddressTypeValue);
-                                                            vMNicDetailsInstance.IpAddressType = ipAddressTypeInstance;
+                                                            vMwareCbtNicDetailsInstance.IpAddressType = ipAddressTypeInstance;
                                                         }
                                                         
-                                                        JToken replicaNicStaticIPAddressValue = vmNicsValue["replicaNicStaticIPAddress"];
-                                                        if (replicaNicStaticIPAddressValue != null && replicaNicStaticIPAddressValue.Type != JTokenType.Null)
+                                                        JToken staticIPAddressValue = vmNicsValue["staticIPAddress"];
+                                                        if (staticIPAddressValue != null && staticIPAddressValue.Type != JTokenType.Null)
                                                         {
-                                                            string replicaNicStaticIPAddressInstance = ((string)replicaNicStaticIPAddressValue);
-                                                            vMNicDetailsInstance.ReplicaNicStaticIPAddress = replicaNicStaticIPAddressInstance;
+                                                            string staticIPAddressInstance = ((string)staticIPAddressValue);
+                                                            vMwareCbtNicDetailsInstance.StaticIPAddress = staticIPAddressInstance;
                                                         }
                                                         
-                                                        JToken selectionTypeValue = vmNicsValue["selectionType"];
-                                                        if (selectionTypeValue != null && selectionTypeValue.Type != JTokenType.Null)
+                                                        JToken isSelectedForMigrationValue = vmNicsValue["isSelectedForMigration"];
+                                                        if (isSelectedForMigrationValue != null && isSelectedForMigrationValue.Type != JTokenType.Null)
                                                         {
-                                                            string selectionTypeInstance = ((string)selectionTypeValue);
-                                                            vMNicDetailsInstance.SelectionType = selectionTypeInstance;
-                                                        }
-                                                        
-                                                        JToken sourceNicArmIdValue = vmNicsValue["sourceNicArmId"];
-                                                        if (sourceNicArmIdValue != null && sourceNicArmIdValue.Type != JTokenType.Null)
-                                                        {
-                                                            string sourceNicArmIdInstance = ((string)sourceNicArmIdValue);
-                                                            vMNicDetailsInstance.SourceNicArmId = sourceNicArmIdInstance;
-                                                        }
-                                                        
-                                                        JToken primaryNicStaticIPAddressValue = vmNicsValue["primaryNicStaticIPAddress"];
-                                                        if (primaryNicStaticIPAddressValue != null && primaryNicStaticIPAddressValue.Type != JTokenType.Null)
-                                                        {
-                                                            string primaryNicStaticIPAddressInstance = ((string)primaryNicStaticIPAddressValue);
-                                                            vMNicDetailsInstance.PrimaryNicStaticIPAddress = primaryNicStaticIPAddressInstance;
-                                                        }
-                                                        
-                                                        JToken recoveryNicIpAddressTypeValue = vmNicsValue["recoveryNicIpAddressType"];
-                                                        if (recoveryNicIpAddressTypeValue != null && recoveryNicIpAddressTypeValue.Type != JTokenType.Null)
-                                                        {
-                                                            string recoveryNicIpAddressTypeInstance = ((string)recoveryNicIpAddressTypeValue);
-                                                            vMNicDetailsInstance.RecoveryNicIpAddressType = recoveryNicIpAddressTypeInstance;
+                                                            bool isSelectedForMigrationInstance = ((bool)isSelectedForMigrationValue);
+                                                            vMwareCbtNicDetailsInstance.IsSelectedForMigration = isSelectedForMigrationInstance;
                                                         }
                                                     }
-                                                }
-                                                
-                                                JToken selectedSourceNicIdValue = providerSpecificDetailsValue["selectedSourceNicId"];
-                                                if (selectedSourceNicIdValue != null && selectedSourceNicIdValue.Type != JTokenType.Null)
-                                                {
-                                                    string selectedSourceNicIdInstance = ((string)selectedSourceNicIdValue);
-                                                    vMwareCbtMigrationDetailsInstance.SelectedSourceNicId = selectedSourceNicIdInstance;
                                                 }
                                                 
                                                 JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
