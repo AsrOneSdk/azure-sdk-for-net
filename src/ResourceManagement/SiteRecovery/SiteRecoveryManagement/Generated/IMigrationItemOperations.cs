@@ -517,7 +517,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <param name='migrationItemName'>
         /// Migration item name.
         /// </param>
-        /// <param name='recoveryPointName'>
+        /// <param name='migrationRecoveryPointName'>
         /// Recovery point name.
         /// </param>
         /// <param name='customRequestHeaders'>
@@ -527,9 +527,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// Cancellation token.
         /// </param>
         /// <returns>
-        /// The response model for recovery point object.
+        /// The response model for migration recovery point object.
         /// </returns>
-        Task<RecoveryPointResponse> RecoveryPointGetAsync(string fabricName, string protectionContainerName, string migrationItemName, string recoveryPointName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        Task<MigrationRecoveryPointResponse> RecoveryPointGetAsync(string fabricName, string protectionContainerName, string migrationItemName, string migrationRecoveryPointName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
         
         /// <summary>
         /// Get all recovery points for a migration item.
@@ -550,9 +550,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// Cancellation token.
         /// </param>
         /// <returns>
-        /// The response model for a list of recovery points.
+        /// The response model for a list of migration recovery points.
         /// </returns>
-        Task<RecoveryPointListResponse> RecoveryPointListAsync(string fabricName, string protectionContainerName, string migrationItemName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
+        Task<MigrationRecoveryPointListResponse> RecoveryPointListAsync(string fabricName, string protectionContainerName, string migrationItemName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken);
         
         /// <summary>
         /// Execute test migration for the given item.

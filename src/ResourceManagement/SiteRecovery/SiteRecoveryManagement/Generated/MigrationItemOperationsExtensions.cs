@@ -1256,20 +1256,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <param name='migrationItemName'>
         /// Required. Migration item name.
         /// </param>
-        /// <param name='recoveryPointName'>
+        /// <param name='migrationRecoveryPointName'>
         /// Required. Recovery point name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
         /// </param>
         /// <returns>
-        /// The response model for recovery point object.
+        /// The response model for migration recovery point object.
         /// </returns>
-        public static RecoveryPointResponse RecoveryPointGet(this IMigrationItemOperations operations, string fabricName, string protectionContainerName, string migrationItemName, string recoveryPointName, CustomRequestHeaders customRequestHeaders)
+        public static MigrationRecoveryPointResponse RecoveryPointGet(this IMigrationItemOperations operations, string fabricName, string protectionContainerName, string migrationItemName, string migrationRecoveryPointName, CustomRequestHeaders customRequestHeaders)
         {
             return Task.Factory.StartNew((object s) => 
             {
-                return ((IMigrationItemOperations)s).RecoveryPointGetAsync(fabricName, protectionContainerName, migrationItemName, recoveryPointName, customRequestHeaders);
+                return ((IMigrationItemOperations)s).RecoveryPointGetAsync(fabricName, protectionContainerName, migrationItemName, migrationRecoveryPointName, customRequestHeaders);
             }
             , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
         }
@@ -1290,18 +1290,18 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <param name='migrationItemName'>
         /// Required. Migration item name.
         /// </param>
-        /// <param name='recoveryPointName'>
+        /// <param name='migrationRecoveryPointName'>
         /// Required. Recovery point name.
         /// </param>
         /// <param name='customRequestHeaders'>
         /// Optional. Request header parameters.
         /// </param>
         /// <returns>
-        /// The response model for recovery point object.
+        /// The response model for migration recovery point object.
         /// </returns>
-        public static Task<RecoveryPointResponse> RecoveryPointGetAsync(this IMigrationItemOperations operations, string fabricName, string protectionContainerName, string migrationItemName, string recoveryPointName, CustomRequestHeaders customRequestHeaders)
+        public static Task<MigrationRecoveryPointResponse> RecoveryPointGetAsync(this IMigrationItemOperations operations, string fabricName, string protectionContainerName, string migrationItemName, string migrationRecoveryPointName, CustomRequestHeaders customRequestHeaders)
         {
-            return operations.RecoveryPointGetAsync(fabricName, protectionContainerName, migrationItemName, recoveryPointName, customRequestHeaders, CancellationToken.None);
+            return operations.RecoveryPointGetAsync(fabricName, protectionContainerName, migrationItemName, migrationRecoveryPointName, customRequestHeaders, CancellationToken.None);
         }
         
         /// <summary>
@@ -1324,9 +1324,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// Optional. Request header parameters.
         /// </param>
         /// <returns>
-        /// The response model for a list of recovery points.
+        /// The response model for a list of migration recovery points.
         /// </returns>
-        public static RecoveryPointListResponse RecoveryPointList(this IMigrationItemOperations operations, string fabricName, string protectionContainerName, string migrationItemName, CustomRequestHeaders customRequestHeaders)
+        public static MigrationRecoveryPointListResponse RecoveryPointList(this IMigrationItemOperations operations, string fabricName, string protectionContainerName, string migrationItemName, CustomRequestHeaders customRequestHeaders)
         {
             return Task.Factory.StartNew((object s) => 
             {
@@ -1355,9 +1355,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// Optional. Request header parameters.
         /// </param>
         /// <returns>
-        /// The response model for a list of recovery points.
+        /// The response model for a list of migration recovery points.
         /// </returns>
-        public static Task<RecoveryPointListResponse> RecoveryPointListAsync(this IMigrationItemOperations operations, string fabricName, string protectionContainerName, string migrationItemName, CustomRequestHeaders customRequestHeaders)
+        public static Task<MigrationRecoveryPointListResponse> RecoveryPointListAsync(this IMigrationItemOperations operations, string fabricName, string protectionContainerName, string migrationItemName, CustomRequestHeaders customRequestHeaders)
         {
             return operations.RecoveryPointListAsync(fabricName, protectionContainerName, migrationItemName, customRequestHeaders, CancellationToken.None);
         }

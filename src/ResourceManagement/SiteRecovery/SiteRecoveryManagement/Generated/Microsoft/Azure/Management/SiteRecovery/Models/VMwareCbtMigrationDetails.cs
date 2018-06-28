@@ -54,6 +54,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._licenseType = value; }
         }
         
+        private string _migrationRecoveryPointId;
+        
+        /// <summary>
+        /// Optional.  The recovery point Id to which the VM was migrated.
+        /// </summary>
+        public string MigrationRecoveryPointId
+        {
+            get { return this._migrationRecoveryPointId; }
+            set { this._migrationRecoveryPointId = value; }
+        }
+        
         private string _oSType;
         
         /// <summary>

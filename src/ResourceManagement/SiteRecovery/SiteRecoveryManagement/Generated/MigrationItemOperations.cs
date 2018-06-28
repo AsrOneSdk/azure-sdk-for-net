@@ -2509,6 +2509,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
+                                        JToken migrationRecoveryPointIdValue = providerSpecificDetailsValue["migrationRecoveryPointId"];
+                                        if (migrationRecoveryPointIdValue != null && migrationRecoveryPointIdValue.Type != JTokenType.Null)
+                                        {
+                                            string migrationRecoveryPointIdInstance = ((string)migrationRecoveryPointIdValue);
+                                            vMwareCbtMigrationDetailsInstance.MigrationRecoveryPointId = migrationRecoveryPointIdInstance;
+                                        }
+                                        
                                         JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
                                         if (instanceTypeValue != null && instanceTypeValue.Type != JTokenType.Null)
                                         {
@@ -3062,6 +3069,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtNicDetailsInstance.IsSelectedForMigration = isSelectedForMigrationInstance;
                                                 }
                                             }
+                                        }
+                                        
+                                        JToken migrationRecoveryPointIdValue = providerSpecificDetailsValue["migrationRecoveryPointId"];
+                                        if (migrationRecoveryPointIdValue != null && migrationRecoveryPointIdValue.Type != JTokenType.Null)
+                                        {
+                                            string migrationRecoveryPointIdInstance = ((string)migrationRecoveryPointIdValue);
+                                            vMwareCbtMigrationDetailsInstance.MigrationRecoveryPointId = migrationRecoveryPointIdInstance;
                                         }
                                         
                                         JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
@@ -3678,6 +3692,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
+                                        JToken migrationRecoveryPointIdValue = providerSpecificDetailsValue["migrationRecoveryPointId"];
+                                        if (migrationRecoveryPointIdValue != null && migrationRecoveryPointIdValue.Type != JTokenType.Null)
+                                        {
+                                            string migrationRecoveryPointIdInstance = ((string)migrationRecoveryPointIdValue);
+                                            vMwareCbtMigrationDetailsInstance.MigrationRecoveryPointId = migrationRecoveryPointIdInstance;
+                                        }
+                                        
                                         JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
                                         if (instanceTypeValue != null && instanceTypeValue.Type != JTokenType.Null)
                                         {
@@ -4290,6 +4311,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtNicDetailsInstance.IsSelectedForMigration = isSelectedForMigrationInstance;
                                                 }
                                             }
+                                        }
+                                        
+                                        JToken migrationRecoveryPointIdValue = providerSpecificDetailsValue["migrationRecoveryPointId"];
+                                        if (migrationRecoveryPointIdValue != null && migrationRecoveryPointIdValue.Type != JTokenType.Null)
+                                        {
+                                            string migrationRecoveryPointIdInstance = ((string)migrationRecoveryPointIdValue);
+                                            vMwareCbtMigrationDetailsInstance.MigrationRecoveryPointId = migrationRecoveryPointIdInstance;
                                         }
                                         
                                         JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
@@ -4906,6 +4934,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
+                                        JToken migrationRecoveryPointIdValue = providerSpecificDetailsValue["migrationRecoveryPointId"];
+                                        if (migrationRecoveryPointIdValue != null && migrationRecoveryPointIdValue.Type != JTokenType.Null)
+                                        {
+                                            string migrationRecoveryPointIdInstance = ((string)migrationRecoveryPointIdValue);
+                                            vMwareCbtMigrationDetailsInstance.MigrationRecoveryPointId = migrationRecoveryPointIdInstance;
+                                        }
+                                        
                                         JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
                                         if (instanceTypeValue != null && instanceTypeValue.Type != JTokenType.Null)
                                         {
@@ -5518,6 +5553,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtNicDetailsInstance.IsSelectedForMigration = isSelectedForMigrationInstance;
                                                 }
                                             }
+                                        }
+                                        
+                                        JToken migrationRecoveryPointIdValue = providerSpecificDetailsValue["migrationRecoveryPointId"];
+                                        if (migrationRecoveryPointIdValue != null && migrationRecoveryPointIdValue.Type != JTokenType.Null)
+                                        {
+                                            string migrationRecoveryPointIdInstance = ((string)migrationRecoveryPointIdValue);
+                                            vMwareCbtMigrationDetailsInstance.MigrationRecoveryPointId = migrationRecoveryPointIdInstance;
                                         }
                                         
                                         JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
@@ -6134,6 +6176,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
+                                        JToken migrationRecoveryPointIdValue = providerSpecificDetailsValue["migrationRecoveryPointId"];
+                                        if (migrationRecoveryPointIdValue != null && migrationRecoveryPointIdValue.Type != JTokenType.Null)
+                                        {
+                                            string migrationRecoveryPointIdInstance = ((string)migrationRecoveryPointIdValue);
+                                            vMwareCbtMigrationDetailsInstance.MigrationRecoveryPointId = migrationRecoveryPointIdInstance;
+                                        }
+                                        
                                         JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
                                         if (instanceTypeValue != null && instanceTypeValue.Type != JTokenType.Null)
                                         {
@@ -6746,6 +6795,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtNicDetailsInstance.IsSelectedForMigration = isSelectedForMigrationInstance;
                                                 }
                                             }
+                                        }
+                                        
+                                        JToken migrationRecoveryPointIdValue = providerSpecificDetailsValue["migrationRecoveryPointId"];
+                                        if (migrationRecoveryPointIdValue != null && migrationRecoveryPointIdValue.Type != JTokenType.Null)
+                                        {
+                                            string migrationRecoveryPointIdInstance = ((string)migrationRecoveryPointIdValue);
+                                            vMwareCbtMigrationDetailsInstance.MigrationRecoveryPointId = migrationRecoveryPointIdInstance;
                                         }
                                         
                                         JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
@@ -7411,6 +7467,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     }
                                                 }
                                                 
+                                                JToken migrationRecoveryPointIdValue = providerSpecificDetailsValue["migrationRecoveryPointId"];
+                                                if (migrationRecoveryPointIdValue != null && migrationRecoveryPointIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string migrationRecoveryPointIdInstance = ((string)migrationRecoveryPointIdValue);
+                                                    vMwareCbtMigrationDetailsInstance.MigrationRecoveryPointId = migrationRecoveryPointIdInstance;
+                                                }
+                                                
                                                 JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
                                                 if (instanceTypeValue != null && instanceTypeValue.Type != JTokenType.Null)
                                                 {
@@ -8025,6 +8088,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     }
                                                 }
                                                 
+                                                JToken migrationRecoveryPointIdValue = providerSpecificDetailsValue["migrationRecoveryPointId"];
+                                                if (migrationRecoveryPointIdValue != null && migrationRecoveryPointIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string migrationRecoveryPointIdInstance = ((string)migrationRecoveryPointIdValue);
+                                                    vMwareCbtMigrationDetailsInstance.MigrationRecoveryPointId = migrationRecoveryPointIdInstance;
+                                                }
+                                                
                                                 JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
                                                 if (instanceTypeValue != null && instanceTypeValue.Type != JTokenType.Null)
                                                 {
@@ -8596,6 +8666,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     }
                                                 }
                                                 
+                                                JToken migrationRecoveryPointIdValue = providerSpecificDetailsValue["migrationRecoveryPointId"];
+                                                if (migrationRecoveryPointIdValue != null && migrationRecoveryPointIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string migrationRecoveryPointIdInstance = ((string)migrationRecoveryPointIdValue);
+                                                    vMwareCbtMigrationDetailsInstance.MigrationRecoveryPointId = migrationRecoveryPointIdInstance;
+                                                }
+                                                
                                                 JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
                                                 if (instanceTypeValue != null && instanceTypeValue.Type != JTokenType.Null)
                                                 {
@@ -8817,7 +8894,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <param name='migrationItemName'>
         /// Required. Migration item name.
         /// </param>
-        /// <param name='recoveryPointName'>
+        /// <param name='migrationRecoveryPointName'>
         /// Required. Recovery point name.
         /// </param>
         /// <param name='customRequestHeaders'>
@@ -8827,9 +8904,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// Cancellation token.
         /// </param>
         /// <returns>
-        /// The response model for recovery point object.
+        /// The response model for migration recovery point object.
         /// </returns>
-        public async Task<RecoveryPointResponse> RecoveryPointGetAsync(string fabricName, string protectionContainerName, string migrationItemName, string recoveryPointName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        public async Task<MigrationRecoveryPointResponse> RecoveryPointGetAsync(string fabricName, string protectionContainerName, string migrationItemName, string migrationRecoveryPointName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
         {
             // Validate
             if (fabricName == null)
@@ -8844,9 +8921,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
             {
                 throw new ArgumentNullException("migrationItemName");
             }
-            if (recoveryPointName == null)
+            if (migrationRecoveryPointName == null)
             {
-                throw new ArgumentNullException("recoveryPointName");
+                throw new ArgumentNullException("migrationRecoveryPointName");
             }
             
             // Tracing
@@ -8859,7 +8936,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 tracingParameters.Add("fabricName", fabricName);
                 tracingParameters.Add("protectionContainerName", protectionContainerName);
                 tracingParameters.Add("migrationItemName", migrationItemName);
-                tracingParameters.Add("recoveryPointName", recoveryPointName);
+                tracingParameters.Add("migrationRecoveryPointName", migrationRecoveryPointName);
                 tracingParameters.Add("customRequestHeaders", customRequestHeaders);
                 TracingAdapter.Enter(invocationId, this, "RecoveryPointGetAsync", tracingParameters);
             }
@@ -8885,8 +8962,8 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(protectionContainerName);
             url = url + "/replicationMigrationItems/";
             url = url + Uri.EscapeDataString(migrationItemName);
-            url = url + "/recoveryPoints/";
-            url = url + Uri.EscapeDataString(recoveryPointName);
+            url = url + "/migrationRecoveryPoints/";
+            url = url + Uri.EscapeDataString(migrationRecoveryPointName);
             List<string> queryParameters = new List<string>();
             queryParameters.Add("api-version=2018-01-10");
             if (queryParameters.Count > 0)
@@ -8950,13 +9027,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     }
                     
                     // Create Result
-                    RecoveryPointResponse result = null;
+                    MigrationRecoveryPointResponse result = null;
                     // Deserialize Response
                     if (statusCode == HttpStatusCode.OK)
                     {
                         cancellationToken.ThrowIfCancellationRequested();
                         string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        result = new RecoveryPointResponse();
+                        result = new MigrationRecoveryPointResponse();
                         JToken responseDoc = null;
                         if (string.IsNullOrEmpty(responseContent) == false)
                         {
@@ -8965,14 +9042,14 @@ namespace Microsoft.Azure.Management.SiteRecovery
                         
                         if (responseDoc != null && responseDoc.Type != JTokenType.Null)
                         {
-                            RecoveryPoint recoveryPointInstance = new RecoveryPoint();
-                            result.RecoveryPoint = recoveryPointInstance;
+                            MigrationRecoveryPoint migrationRecoveryPointInstance = new MigrationRecoveryPoint();
+                            result.MigrationRecoveryPoint = migrationRecoveryPointInstance;
                             
                             JToken propertiesValue = responseDoc["properties"];
                             if (propertiesValue != null && propertiesValue.Type != JTokenType.Null)
                             {
-                                RecoveryPointProperties propertiesInstance = new RecoveryPointProperties();
-                                recoveryPointInstance.Properties = propertiesInstance;
+                                MigrationRecoveryPointProperties propertiesInstance = new MigrationRecoveryPointProperties();
+                                migrationRecoveryPointInstance.Properties = propertiesInstance;
                                 
                                 JToken recoveryPointTimeValue = propertiesValue["recoveryPointTime"];
                                 if (recoveryPointTimeValue != null && recoveryPointTimeValue.Type != JTokenType.Null)
@@ -8987,78 +9064,34 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     string recoveryPointTypeInstance = ((string)recoveryPointTypeValue);
                                     propertiesInstance.RecoveryPointType = recoveryPointTypeInstance;
                                 }
-                                
-                                JToken providerSpecificDetailsValue = propertiesValue["providerSpecificDetails"];
-                                if (providerSpecificDetailsValue != null && providerSpecificDetailsValue.Type != JTokenType.Null)
-                                {
-                                    string typeName = ((string)providerSpecificDetailsValue["instanceType"]);
-                                    if (typeName == "InMageAzureV2")
-                                    {
-                                        InMageAzureV2RecoveryPointDetails inMageAzureV2RecoveryPointDetailsInstance = new InMageAzureV2RecoveryPointDetails();
-                                        
-                                        JToken isMultiVmSyncPointValue = providerSpecificDetailsValue["isMultiVmSyncPoint"];
-                                        if (isMultiVmSyncPointValue != null && isMultiVmSyncPointValue.Type != JTokenType.Null)
-                                        {
-                                            string isMultiVmSyncPointInstance = ((string)isMultiVmSyncPointValue);
-                                            inMageAzureV2RecoveryPointDetailsInstance.IsMultiVmSyncPoint = isMultiVmSyncPointInstance;
-                                        }
-                                        
-                                        JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
-                                        if (instanceTypeValue != null && instanceTypeValue.Type != JTokenType.Null)
-                                        {
-                                            string instanceTypeInstance = ((string)instanceTypeValue);
-                                            inMageAzureV2RecoveryPointDetailsInstance.InstanceType = instanceTypeInstance;
-                                        }
-                                        propertiesInstance.ProviderSpecificDetails = inMageAzureV2RecoveryPointDetailsInstance;
-                                    }
-                                    if (typeName == "A2A")
-                                    {
-                                        A2ARecoveryPointDetails a2ARecoveryPointDetailsInstance = new A2ARecoveryPointDetails();
-                                        
-                                        JToken recoveryPointSyncTypeValue = providerSpecificDetailsValue["recoveryPointSyncType"];
-                                        if (recoveryPointSyncTypeValue != null && recoveryPointSyncTypeValue.Type != JTokenType.Null)
-                                        {
-                                            string recoveryPointSyncTypeInstance = ((string)recoveryPointSyncTypeValue);
-                                            a2ARecoveryPointDetailsInstance.RecoveryPointSyncType = recoveryPointSyncTypeInstance;
-                                        }
-                                        
-                                        JToken instanceTypeValue2 = providerSpecificDetailsValue["instanceType"];
-                                        if (instanceTypeValue2 != null && instanceTypeValue2.Type != JTokenType.Null)
-                                        {
-                                            string instanceTypeInstance2 = ((string)instanceTypeValue2);
-                                            a2ARecoveryPointDetailsInstance.InstanceType = instanceTypeInstance2;
-                                        }
-                                        propertiesInstance.ProviderSpecificDetails = a2ARecoveryPointDetailsInstance;
-                                    }
-                                }
                             }
                             
                             JToken idValue = responseDoc["id"];
                             if (idValue != null && idValue.Type != JTokenType.Null)
                             {
                                 string idInstance = ((string)idValue);
-                                recoveryPointInstance.Id = idInstance;
+                                migrationRecoveryPointInstance.Id = idInstance;
                             }
                             
                             JToken nameValue = responseDoc["name"];
                             if (nameValue != null && nameValue.Type != JTokenType.Null)
                             {
                                 string nameInstance = ((string)nameValue);
-                                recoveryPointInstance.Name = nameInstance;
+                                migrationRecoveryPointInstance.Name = nameInstance;
                             }
                             
                             JToken typeValue = responseDoc["type"];
                             if (typeValue != null && typeValue.Type != JTokenType.Null)
                             {
                                 string typeInstance = ((string)typeValue);
-                                recoveryPointInstance.Type = typeInstance;
+                                migrationRecoveryPointInstance.Type = typeInstance;
                             }
                             
                             JToken locationValue = responseDoc["location"];
                             if (locationValue != null && locationValue.Type != JTokenType.Null)
                             {
                                 string locationInstance = ((string)locationValue);
-                                recoveryPointInstance.Location = locationInstance;
+                                migrationRecoveryPointInstance.Location = locationInstance;
                             }
                             
                             JToken tagsSequenceElement = ((JToken)responseDoc["tags"]);
@@ -9068,7 +9101,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 {
                                     string tagsKey = ((string)property.Name);
                                     string tagsValue = ((string)property.Value);
-                                    recoveryPointInstance.Tags.Add(tagsKey, tagsValue);
+                                    migrationRecoveryPointInstance.Tags.Add(tagsKey, tagsValue);
                                 }
                             }
                             
@@ -9166,9 +9199,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// Cancellation token.
         /// </param>
         /// <returns>
-        /// The response model for a list of recovery points.
+        /// The response model for a list of migration recovery points.
         /// </returns>
-        public async Task<RecoveryPointListResponse> RecoveryPointListAsync(string fabricName, string protectionContainerName, string migrationItemName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        public async Task<MigrationRecoveryPointListResponse> RecoveryPointListAsync(string fabricName, string protectionContainerName, string migrationItemName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
         {
             // Validate
             if (fabricName == null)
@@ -9219,7 +9252,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(protectionContainerName);
             url = url + "/replicationMigrationItems/";
             url = url + Uri.EscapeDataString(migrationItemName);
-            url = url + "/recoveryPoints";
+            url = url + "/migrationRecoveryPoints";
             List<string> queryParameters = new List<string>();
             queryParameters.Add("api-version=2018-01-10");
             if (queryParameters.Count > 0)
@@ -9283,13 +9316,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     }
                     
                     // Create Result
-                    RecoveryPointListResponse result = null;
+                    MigrationRecoveryPointListResponse result = null;
                     // Deserialize Response
                     if (statusCode == HttpStatusCode.OK)
                     {
                         cancellationToken.ThrowIfCancellationRequested();
                         string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        result = new RecoveryPointListResponse();
+                        result = new MigrationRecoveryPointListResponse();
                         JToken responseDoc = null;
                         if (string.IsNullOrEmpty(responseContent) == false)
                         {
@@ -9303,14 +9336,14 @@ namespace Microsoft.Azure.Management.SiteRecovery
                             {
                                 foreach (JToken valueValue in ((JArray)valueArray))
                                 {
-                                    RecoveryPoint recoveryPointInstance = new RecoveryPoint();
-                                    result.RecoveryPoints.Add(recoveryPointInstance);
+                                    MigrationRecoveryPoint migrationRecoveryPointInstance = new MigrationRecoveryPoint();
+                                    result.MigrationRecoveryPoints.Add(migrationRecoveryPointInstance);
                                     
                                     JToken propertiesValue = valueValue["properties"];
                                     if (propertiesValue != null && propertiesValue.Type != JTokenType.Null)
                                     {
-                                        RecoveryPointProperties propertiesInstance = new RecoveryPointProperties();
-                                        recoveryPointInstance.Properties = propertiesInstance;
+                                        MigrationRecoveryPointProperties propertiesInstance = new MigrationRecoveryPointProperties();
+                                        migrationRecoveryPointInstance.Properties = propertiesInstance;
                                         
                                         JToken recoveryPointTimeValue = propertiesValue["recoveryPointTime"];
                                         if (recoveryPointTimeValue != null && recoveryPointTimeValue.Type != JTokenType.Null)
@@ -9325,78 +9358,34 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             string recoveryPointTypeInstance = ((string)recoveryPointTypeValue);
                                             propertiesInstance.RecoveryPointType = recoveryPointTypeInstance;
                                         }
-                                        
-                                        JToken providerSpecificDetailsValue = propertiesValue["providerSpecificDetails"];
-                                        if (providerSpecificDetailsValue != null && providerSpecificDetailsValue.Type != JTokenType.Null)
-                                        {
-                                            string typeName = ((string)providerSpecificDetailsValue["instanceType"]);
-                                            if (typeName == "InMageAzureV2")
-                                            {
-                                                InMageAzureV2RecoveryPointDetails inMageAzureV2RecoveryPointDetailsInstance = new InMageAzureV2RecoveryPointDetails();
-                                                
-                                                JToken isMultiVmSyncPointValue = providerSpecificDetailsValue["isMultiVmSyncPoint"];
-                                                if (isMultiVmSyncPointValue != null && isMultiVmSyncPointValue.Type != JTokenType.Null)
-                                                {
-                                                    string isMultiVmSyncPointInstance = ((string)isMultiVmSyncPointValue);
-                                                    inMageAzureV2RecoveryPointDetailsInstance.IsMultiVmSyncPoint = isMultiVmSyncPointInstance;
-                                                }
-                                                
-                                                JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
-                                                if (instanceTypeValue != null && instanceTypeValue.Type != JTokenType.Null)
-                                                {
-                                                    string instanceTypeInstance = ((string)instanceTypeValue);
-                                                    inMageAzureV2RecoveryPointDetailsInstance.InstanceType = instanceTypeInstance;
-                                                }
-                                                propertiesInstance.ProviderSpecificDetails = inMageAzureV2RecoveryPointDetailsInstance;
-                                            }
-                                            if (typeName == "A2A")
-                                            {
-                                                A2ARecoveryPointDetails a2ARecoveryPointDetailsInstance = new A2ARecoveryPointDetails();
-                                                
-                                                JToken recoveryPointSyncTypeValue = providerSpecificDetailsValue["recoveryPointSyncType"];
-                                                if (recoveryPointSyncTypeValue != null && recoveryPointSyncTypeValue.Type != JTokenType.Null)
-                                                {
-                                                    string recoveryPointSyncTypeInstance = ((string)recoveryPointSyncTypeValue);
-                                                    a2ARecoveryPointDetailsInstance.RecoveryPointSyncType = recoveryPointSyncTypeInstance;
-                                                }
-                                                
-                                                JToken instanceTypeValue2 = providerSpecificDetailsValue["instanceType"];
-                                                if (instanceTypeValue2 != null && instanceTypeValue2.Type != JTokenType.Null)
-                                                {
-                                                    string instanceTypeInstance2 = ((string)instanceTypeValue2);
-                                                    a2ARecoveryPointDetailsInstance.InstanceType = instanceTypeInstance2;
-                                                }
-                                                propertiesInstance.ProviderSpecificDetails = a2ARecoveryPointDetailsInstance;
-                                            }
-                                        }
                                     }
                                     
                                     JToken idValue = valueValue["id"];
                                     if (idValue != null && idValue.Type != JTokenType.Null)
                                     {
                                         string idInstance = ((string)idValue);
-                                        recoveryPointInstance.Id = idInstance;
+                                        migrationRecoveryPointInstance.Id = idInstance;
                                     }
                                     
                                     JToken nameValue = valueValue["name"];
                                     if (nameValue != null && nameValue.Type != JTokenType.Null)
                                     {
                                         string nameInstance = ((string)nameValue);
-                                        recoveryPointInstance.Name = nameInstance;
+                                        migrationRecoveryPointInstance.Name = nameInstance;
                                     }
                                     
                                     JToken typeValue = valueValue["type"];
                                     if (typeValue != null && typeValue.Type != JTokenType.Null)
                                     {
                                         string typeInstance = ((string)typeValue);
-                                        recoveryPointInstance.Type = typeInstance;
+                                        migrationRecoveryPointInstance.Type = typeInstance;
                                     }
                                     
                                     JToken locationValue = valueValue["location"];
                                     if (locationValue != null && locationValue.Type != JTokenType.Null)
                                     {
                                         string locationInstance = ((string)locationValue);
-                                        recoveryPointInstance.Location = locationInstance;
+                                        migrationRecoveryPointInstance.Location = locationInstance;
                                     }
                                     
                                     JToken tagsSequenceElement = ((JToken)valueValue["tags"]);
@@ -9406,7 +9395,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             string tagsKey = ((string)property.Name);
                                             string tagsValue = ((string)property.Value);
-                                            recoveryPointInstance.Tags.Add(tagsKey, tagsValue);
+                                            migrationRecoveryPointInstance.Tags.Add(tagsKey, tagsValue);
                                         }
                                     }
                                 }
