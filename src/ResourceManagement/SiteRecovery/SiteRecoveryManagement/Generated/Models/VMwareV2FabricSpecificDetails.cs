@@ -30,15 +30,15 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class VMwareV2FabricSpecificDetails : FabricSpecificDetails
     {
-        private string _srsServiceEndpoint;
+        private string _serviceEndpoint;
         
         /// <summary>
         /// Optional. SRS service endpoint.
         /// </summary>
-        public string SrsServiceEndpoint
+        public string ServiceEndpoint
         {
-            get { return this._srsServiceEndpoint; }
-            set { this._srsServiceEndpoint = value; }
+            get { return this._serviceEndpoint; }
+            set { this._serviceEndpoint = value; }
         }
         
         private string _vMwareSiteId;

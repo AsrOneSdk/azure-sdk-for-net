@@ -139,6 +139,28 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._storageAccountId = value; }
         }
         
+        private string _targetBlobUri;
+        
+        /// <summary>
+        /// Optional. Uri of the target blob.
+        /// </summary>
+        public string TargetBlobUri
+        {
+            get { return this._targetBlobUri; }
+            set { this._targetBlobUri = value; }
+        }
+        
+        private string _targetManagedDiskId;
+        
+        /// <summary>
+        /// Optional. ARM Id of the target managed disk.
+        /// </summary>
+        public string TargetManagedDiskId
+        {
+            get { return this._targetManagedDiskId; }
+            set { this._targetManagedDiskId = value; }
+        }
+        
         /// <summary>
         /// Initializes a new instance of the VMwareCbtProtectedDiskDetails
         /// class.

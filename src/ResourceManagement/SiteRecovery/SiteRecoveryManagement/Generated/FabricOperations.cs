@@ -3537,11 +3537,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareV2FabricSpecificDetailsInstance.VMwareSiteId = vmwareSiteIdInstance;
                                         }
                                         
-                                        JToken srsServiceEndpointValue = customDetailsValue["srsServiceEndpoint"];
-                                        if (srsServiceEndpointValue != null && srsServiceEndpointValue.Type != JTokenType.Null)
+                                        JToken serviceEndpointValue = customDetailsValue["serviceEndpoint"];
+                                        if (serviceEndpointValue != null && serviceEndpointValue.Type != JTokenType.Null)
                                         {
-                                            string srsServiceEndpointInstance = ((string)srsServiceEndpointValue);
-                                            vMwareV2FabricSpecificDetailsInstance.SrsServiceEndpoint = srsServiceEndpointInstance;
+                                            string serviceEndpointInstance = ((string)serviceEndpointValue);
+                                            vMwareV2FabricSpecificDetailsInstance.ServiceEndpoint = serviceEndpointInstance;
                                         }
                                         
                                         JToken instanceTypeValue5 = customDetailsValue["instanceType"];
@@ -5646,11 +5646,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareV2FabricSpecificDetailsInstance.VMwareSiteId = vmwareSiteIdInstance;
                                         }
                                         
-                                        JToken srsServiceEndpointValue = customDetailsValue["srsServiceEndpoint"];
-                                        if (srsServiceEndpointValue != null && srsServiceEndpointValue.Type != JTokenType.Null)
+                                        JToken serviceEndpointValue = customDetailsValue["serviceEndpoint"];
+                                        if (serviceEndpointValue != null && serviceEndpointValue.Type != JTokenType.Null)
                                         {
-                                            string srsServiceEndpointInstance = ((string)srsServiceEndpointValue);
-                                            vMwareV2FabricSpecificDetailsInstance.SrsServiceEndpoint = srsServiceEndpointInstance;
+                                            string serviceEndpointInstance = ((string)serviceEndpointValue);
+                                            vMwareV2FabricSpecificDetailsInstance.ServiceEndpoint = serviceEndpointInstance;
                                         }
                                         
                                         JToken instanceTypeValue5 = customDetailsValue["instanceType"];
@@ -7814,11 +7814,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareV2FabricSpecificDetailsInstance.VMwareSiteId = vmwareSiteIdInstance;
                                         }
                                         
-                                        JToken srsServiceEndpointValue = customDetailsValue["srsServiceEndpoint"];
-                                        if (srsServiceEndpointValue != null && srsServiceEndpointValue.Type != JTokenType.Null)
+                                        JToken serviceEndpointValue = customDetailsValue["serviceEndpoint"];
+                                        if (serviceEndpointValue != null && serviceEndpointValue.Type != JTokenType.Null)
                                         {
-                                            string srsServiceEndpointInstance = ((string)srsServiceEndpointValue);
-                                            vMwareV2FabricSpecificDetailsInstance.SrsServiceEndpoint = srsServiceEndpointInstance;
+                                            string serviceEndpointInstance = ((string)serviceEndpointValue);
+                                            vMwareV2FabricSpecificDetailsInstance.ServiceEndpoint = serviceEndpointInstance;
                                         }
                                         
                                         JToken instanceTypeValue5 = customDetailsValue["instanceType"];
@@ -10213,11 +10213,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareV2FabricSpecificDetailsInstance.VMwareSiteId = vmwareSiteIdInstance;
                                         }
                                         
-                                        JToken srsServiceEndpointValue = customDetailsValue["srsServiceEndpoint"];
-                                        if (srsServiceEndpointValue != null && srsServiceEndpointValue.Type != JTokenType.Null)
+                                        JToken serviceEndpointValue = customDetailsValue["serviceEndpoint"];
+                                        if (serviceEndpointValue != null && serviceEndpointValue.Type != JTokenType.Null)
                                         {
-                                            string srsServiceEndpointInstance = ((string)srsServiceEndpointValue);
-                                            vMwareV2FabricSpecificDetailsInstance.SrsServiceEndpoint = srsServiceEndpointInstance;
+                                            string serviceEndpointInstance = ((string)serviceEndpointValue);
+                                            vMwareV2FabricSpecificDetailsInstance.ServiceEndpoint = serviceEndpointInstance;
                                         }
                                         
                                         JToken instanceTypeValue5 = customDetailsValue["instanceType"];
@@ -12150,11 +12150,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareV2FabricSpecificDetailsInstance.VMwareSiteId = vmwareSiteIdInstance;
                                         }
                                         
-                                        JToken srsServiceEndpointValue = customDetailsValue["srsServiceEndpoint"];
-                                        if (srsServiceEndpointValue != null && srsServiceEndpointValue.Type != JTokenType.Null)
+                                        JToken serviceEndpointValue = customDetailsValue["serviceEndpoint"];
+                                        if (serviceEndpointValue != null && serviceEndpointValue.Type != JTokenType.Null)
                                         {
-                                            string srsServiceEndpointInstance = ((string)srsServiceEndpointValue);
-                                            vMwareV2FabricSpecificDetailsInstance.SrsServiceEndpoint = srsServiceEndpointInstance;
+                                            string serviceEndpointInstance = ((string)serviceEndpointValue);
+                                            vMwareV2FabricSpecificDetailsInstance.ServiceEndpoint = serviceEndpointInstance;
                                         }
                                         
                                         JToken instanceTypeValue5 = customDetailsValue["instanceType"];
@@ -14116,11 +14116,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareV2FabricSpecificDetailsInstance.VMwareSiteId = vmwareSiteIdInstance;
                                                 }
                                                 
-                                                JToken srsServiceEndpointValue = customDetailsValue["srsServiceEndpoint"];
-                                                if (srsServiceEndpointValue != null && srsServiceEndpointValue.Type != JTokenType.Null)
+                                                JToken serviceEndpointValue = customDetailsValue["serviceEndpoint"];
+                                                if (serviceEndpointValue != null && serviceEndpointValue.Type != JTokenType.Null)
                                                 {
-                                                    string srsServiceEndpointInstance = ((string)srsServiceEndpointValue);
-                                                    vMwareV2FabricSpecificDetailsInstance.SrsServiceEndpoint = srsServiceEndpointInstance;
+                                                    string serviceEndpointInstance = ((string)serviceEndpointValue);
+                                                    vMwareV2FabricSpecificDetailsInstance.ServiceEndpoint = serviceEndpointInstance;
                                                 }
                                                 
                                                 JToken instanceTypeValue5 = customDetailsValue["instanceType"];

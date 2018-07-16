@@ -2434,6 +2434,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtProtectedDiskDetailsInstance.SeedBlobUri = seedBlobUriInstance;
                                                 }
                                                 
+                                                JToken targetManagedDiskIdValue = protectedDisksValue["targetManagedDiskId"];
+                                                if (targetManagedDiskIdValue != null && targetManagedDiskIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetManagedDiskIdInstance = ((string)targetManagedDiskIdValue);
+                                                    vMwareCbtProtectedDiskDetailsInstance.TargetManagedDiskId = targetManagedDiskIdInstance;
+                                                }
+                                                
+                                                JToken targetBlobUriValue = protectedDisksValue["targetBlobUri"];
+                                                if (targetBlobUriValue != null && targetBlobUriValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetBlobUriInstance = ((string)targetBlobUriValue);
+                                                    vMwareCbtProtectedDiskDetailsInstance.TargetBlobUri = targetBlobUriInstance;
+                                                }
+                                                
                                                 JToken diskTypeValue = protectedDisksValue["diskType"];
                                                 if (diskTypeValue != null && diskTypeValue.Type != JTokenType.Null)
                                                 {
@@ -2994,6 +3008,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 {
                                                     string seedBlobUriInstance = ((string)seedBlobUriValue);
                                                     vMwareCbtProtectedDiskDetailsInstance.SeedBlobUri = seedBlobUriInstance;
+                                                }
+                                                
+                                                JToken targetManagedDiskIdValue = protectedDisksValue["targetManagedDiskId"];
+                                                if (targetManagedDiskIdValue != null && targetManagedDiskIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetManagedDiskIdInstance = ((string)targetManagedDiskIdValue);
+                                                    vMwareCbtProtectedDiskDetailsInstance.TargetManagedDiskId = targetManagedDiskIdInstance;
+                                                }
+                                                
+                                                JToken targetBlobUriValue = protectedDisksValue["targetBlobUri"];
+                                                if (targetBlobUriValue != null && targetBlobUriValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetBlobUriInstance = ((string)targetBlobUriValue);
+                                                    vMwareCbtProtectedDiskDetailsInstance.TargetBlobUri = targetBlobUriInstance;
                                                 }
                                                 
                                                 JToken diskTypeValue = protectedDisksValue["diskType"];
@@ -3617,6 +3645,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtProtectedDiskDetailsInstance.SeedBlobUri = seedBlobUriInstance;
                                                 }
                                                 
+                                                JToken targetManagedDiskIdValue = protectedDisksValue["targetManagedDiskId"];
+                                                if (targetManagedDiskIdValue != null && targetManagedDiskIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetManagedDiskIdInstance = ((string)targetManagedDiskIdValue);
+                                                    vMwareCbtProtectedDiskDetailsInstance.TargetManagedDiskId = targetManagedDiskIdInstance;
+                                                }
+                                                
+                                                JToken targetBlobUriValue = protectedDisksValue["targetBlobUri"];
+                                                if (targetBlobUriValue != null && targetBlobUriValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetBlobUriInstance = ((string)targetBlobUriValue);
+                                                    vMwareCbtProtectedDiskDetailsInstance.TargetBlobUri = targetBlobUriInstance;
+                                                }
+                                                
                                                 JToken diskTypeValue = protectedDisksValue["diskType"];
                                                 if (diskTypeValue != null && diskTypeValue.Type != JTokenType.Null)
                                                 {
@@ -4236,6 +4278,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 {
                                                     string seedBlobUriInstance = ((string)seedBlobUriValue);
                                                     vMwareCbtProtectedDiskDetailsInstance.SeedBlobUri = seedBlobUriInstance;
+                                                }
+                                                
+                                                JToken targetManagedDiskIdValue = protectedDisksValue["targetManagedDiskId"];
+                                                if (targetManagedDiskIdValue != null && targetManagedDiskIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetManagedDiskIdInstance = ((string)targetManagedDiskIdValue);
+                                                    vMwareCbtProtectedDiskDetailsInstance.TargetManagedDiskId = targetManagedDiskIdInstance;
+                                                }
+                                                
+                                                JToken targetBlobUriValue = protectedDisksValue["targetBlobUri"];
+                                                if (targetBlobUriValue != null && targetBlobUriValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetBlobUriInstance = ((string)targetBlobUriValue);
+                                                    vMwareCbtProtectedDiskDetailsInstance.TargetBlobUri = targetBlobUriInstance;
                                                 }
                                                 
                                                 JToken diskTypeValue = protectedDisksValue["diskType"];
@@ -4859,6 +4915,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtProtectedDiskDetailsInstance.SeedBlobUri = seedBlobUriInstance;
                                                 }
                                                 
+                                                JToken targetManagedDiskIdValue = protectedDisksValue["targetManagedDiskId"];
+                                                if (targetManagedDiskIdValue != null && targetManagedDiskIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetManagedDiskIdInstance = ((string)targetManagedDiskIdValue);
+                                                    vMwareCbtProtectedDiskDetailsInstance.TargetManagedDiskId = targetManagedDiskIdInstance;
+                                                }
+                                                
+                                                JToken targetBlobUriValue = protectedDisksValue["targetBlobUri"];
+                                                if (targetBlobUriValue != null && targetBlobUriValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetBlobUriInstance = ((string)targetBlobUriValue);
+                                                    vMwareCbtProtectedDiskDetailsInstance.TargetBlobUri = targetBlobUriInstance;
+                                                }
+                                                
                                                 JToken diskTypeValue = protectedDisksValue["diskType"];
                                                 if (diskTypeValue != null && diskTypeValue.Type != JTokenType.Null)
                                                 {
@@ -5478,6 +5548,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 {
                                                     string seedBlobUriInstance = ((string)seedBlobUriValue);
                                                     vMwareCbtProtectedDiskDetailsInstance.SeedBlobUri = seedBlobUriInstance;
+                                                }
+                                                
+                                                JToken targetManagedDiskIdValue = protectedDisksValue["targetManagedDiskId"];
+                                                if (targetManagedDiskIdValue != null && targetManagedDiskIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetManagedDiskIdInstance = ((string)targetManagedDiskIdValue);
+                                                    vMwareCbtProtectedDiskDetailsInstance.TargetManagedDiskId = targetManagedDiskIdInstance;
+                                                }
+                                                
+                                                JToken targetBlobUriValue = protectedDisksValue["targetBlobUri"];
+                                                if (targetBlobUriValue != null && targetBlobUriValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetBlobUriInstance = ((string)targetBlobUriValue);
+                                                    vMwareCbtProtectedDiskDetailsInstance.TargetBlobUri = targetBlobUriInstance;
                                                 }
                                                 
                                                 JToken diskTypeValue = protectedDisksValue["diskType"];
@@ -6101,6 +6185,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtProtectedDiskDetailsInstance.SeedBlobUri = seedBlobUriInstance;
                                                 }
                                                 
+                                                JToken targetManagedDiskIdValue = protectedDisksValue["targetManagedDiskId"];
+                                                if (targetManagedDiskIdValue != null && targetManagedDiskIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetManagedDiskIdInstance = ((string)targetManagedDiskIdValue);
+                                                    vMwareCbtProtectedDiskDetailsInstance.TargetManagedDiskId = targetManagedDiskIdInstance;
+                                                }
+                                                
+                                                JToken targetBlobUriValue = protectedDisksValue["targetBlobUri"];
+                                                if (targetBlobUriValue != null && targetBlobUriValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetBlobUriInstance = ((string)targetBlobUriValue);
+                                                    vMwareCbtProtectedDiskDetailsInstance.TargetBlobUri = targetBlobUriInstance;
+                                                }
+                                                
                                                 JToken diskTypeValue = protectedDisksValue["diskType"];
                                                 if (diskTypeValue != null && diskTypeValue.Type != JTokenType.Null)
                                                 {
@@ -6720,6 +6818,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 {
                                                     string seedBlobUriInstance = ((string)seedBlobUriValue);
                                                     vMwareCbtProtectedDiskDetailsInstance.SeedBlobUri = seedBlobUriInstance;
+                                                }
+                                                
+                                                JToken targetManagedDiskIdValue = protectedDisksValue["targetManagedDiskId"];
+                                                if (targetManagedDiskIdValue != null && targetManagedDiskIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetManagedDiskIdInstance = ((string)targetManagedDiskIdValue);
+                                                    vMwareCbtProtectedDiskDetailsInstance.TargetManagedDiskId = targetManagedDiskIdInstance;
+                                                }
+                                                
+                                                JToken targetBlobUriValue = protectedDisksValue["targetBlobUri"];
+                                                if (targetBlobUriValue != null && targetBlobUriValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetBlobUriInstance = ((string)targetBlobUriValue);
+                                                    vMwareCbtProtectedDiskDetailsInstance.TargetBlobUri = targetBlobUriInstance;
                                                 }
                                                 
                                                 JToken diskTypeValue = protectedDisksValue["diskType"];
@@ -7392,6 +7504,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                             vMwareCbtProtectedDiskDetailsInstance.SeedBlobUri = seedBlobUriInstance;
                                                         }
                                                         
+                                                        JToken targetManagedDiskIdValue = protectedDisksValue["targetManagedDiskId"];
+                                                        if (targetManagedDiskIdValue != null && targetManagedDiskIdValue.Type != JTokenType.Null)
+                                                        {
+                                                            string targetManagedDiskIdInstance = ((string)targetManagedDiskIdValue);
+                                                            vMwareCbtProtectedDiskDetailsInstance.TargetManagedDiskId = targetManagedDiskIdInstance;
+                                                        }
+                                                        
+                                                        JToken targetBlobUriValue = protectedDisksValue["targetBlobUri"];
+                                                        if (targetBlobUriValue != null && targetBlobUriValue.Type != JTokenType.Null)
+                                                        {
+                                                            string targetBlobUriInstance = ((string)targetBlobUriValue);
+                                                            vMwareCbtProtectedDiskDetailsInstance.TargetBlobUri = targetBlobUriInstance;
+                                                        }
+                                                        
                                                         JToken diskTypeValue = protectedDisksValue["diskType"];
                                                         if (diskTypeValue != null && diskTypeValue.Type != JTokenType.Null)
                                                         {
@@ -8013,6 +8139,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                             vMwareCbtProtectedDiskDetailsInstance.SeedBlobUri = seedBlobUriInstance;
                                                         }
                                                         
+                                                        JToken targetManagedDiskIdValue = protectedDisksValue["targetManagedDiskId"];
+                                                        if (targetManagedDiskIdValue != null && targetManagedDiskIdValue.Type != JTokenType.Null)
+                                                        {
+                                                            string targetManagedDiskIdInstance = ((string)targetManagedDiskIdValue);
+                                                            vMwareCbtProtectedDiskDetailsInstance.TargetManagedDiskId = targetManagedDiskIdInstance;
+                                                        }
+                                                        
+                                                        JToken targetBlobUriValue = protectedDisksValue["targetBlobUri"];
+                                                        if (targetBlobUriValue != null && targetBlobUriValue.Type != JTokenType.Null)
+                                                        {
+                                                            string targetBlobUriInstance = ((string)targetBlobUriValue);
+                                                            vMwareCbtProtectedDiskDetailsInstance.TargetBlobUri = targetBlobUriInstance;
+                                                        }
+                                                        
                                                         JToken diskTypeValue = protectedDisksValue["diskType"];
                                                         if (diskTypeValue != null && diskTypeValue.Type != JTokenType.Null)
                                                         {
@@ -8589,6 +8729,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                         {
                                                             string seedBlobUriInstance = ((string)seedBlobUriValue);
                                                             vMwareCbtProtectedDiskDetailsInstance.SeedBlobUri = seedBlobUriInstance;
+                                                        }
+                                                        
+                                                        JToken targetManagedDiskIdValue = protectedDisksValue["targetManagedDiskId"];
+                                                        if (targetManagedDiskIdValue != null && targetManagedDiskIdValue.Type != JTokenType.Null)
+                                                        {
+                                                            string targetManagedDiskIdInstance = ((string)targetManagedDiskIdValue);
+                                                            vMwareCbtProtectedDiskDetailsInstance.TargetManagedDiskId = targetManagedDiskIdInstance;
+                                                        }
+                                                        
+                                                        JToken targetBlobUriValue = protectedDisksValue["targetBlobUri"];
+                                                        if (targetBlobUriValue != null && targetBlobUriValue.Type != JTokenType.Null)
+                                                        {
+                                                            string targetBlobUriInstance = ((string)targetBlobUriValue);
+                                                            vMwareCbtProtectedDiskDetailsInstance.TargetBlobUri = targetBlobUriInstance;
                                                         }
                                                         
                                                         JToken diskTypeValue = protectedDisksValue["diskType"];
