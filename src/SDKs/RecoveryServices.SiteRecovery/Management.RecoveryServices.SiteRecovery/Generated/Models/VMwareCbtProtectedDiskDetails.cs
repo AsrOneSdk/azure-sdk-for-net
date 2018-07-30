@@ -42,8 +42,10 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// name of the log storage account.</param>
         /// <param name="seedManagedDiskId">The ARM Id of the seed managed
         /// disk.</param>
-        /// <param name="seedBlobUri">The uri of the seed blob.</param>
-        public VMwareCbtProtectedDiskDetails(string diskId = default(string), string diskName = default(string), bool? isOSDisk = default(bool?), long? capacityInBytes = default(long?), string logStorageAccountId = default(string), string logStorageAccountSasSecretName = default(string), string seedManagedDiskId = default(string), string seedBlobUri = default(string))
+        /// <param name="targetManagedDiskId">The ARM Id of the target managed
+        /// disk.</param>
+        /// <param name="diskType">The disk type.</param>
+        public VMwareCbtProtectedDiskDetails(string diskId = default(string), string diskName = default(string), bool? isOSDisk = default(bool?), long? capacityInBytes = default(long?), string logStorageAccountId = default(string), string logStorageAccountSasSecretName = default(string), string seedManagedDiskId = default(string), string targetManagedDiskId = default(string), string diskType = default(string))
         {
             DiskId = diskId;
             DiskName = diskName;
@@ -52,7 +54,8 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
             LogStorageAccountId = logStorageAccountId;
             LogStorageAccountSasSecretName = logStorageAccountSasSecretName;
             SeedManagedDiskId = seedManagedDiskId;
-            SeedBlobUri = seedBlobUri;
+            TargetManagedDiskId = targetManagedDiskId;
+            DiskType = diskType;
             CustomInit();
         }
 
@@ -104,10 +107,16 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         public string SeedManagedDiskId { get; set; }
 
         /// <summary>
-        /// Gets or sets the uri of the seed blob.
+        /// Gets or sets the ARM Id of the target managed disk.
         /// </summary>
-        [JsonProperty(PropertyName = "seedBlobUri")]
-        public string SeedBlobUri { get; set; }
+        [JsonProperty(PropertyName = "targetManagedDiskId")]
+        public string TargetManagedDiskId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the disk type.
+        /// </summary>
+        [JsonProperty(PropertyName = "diskType")]
+        public string DiskType { get; set; }
 
     }
 }

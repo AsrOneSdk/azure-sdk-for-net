@@ -33,11 +33,10 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// Initializes a new instance of the VMwareV2FabricCreationInput
         /// class.
         /// </summary>
-        /// <param name="vmwareSiteArmId">The ARM Id of the VMware
-        /// site.</param>
-        public VMwareV2FabricCreationInput(string vmwareSiteArmId)
+        /// <param name="vmwareSiteId">The ARM Id of the VMware site.</param>
+        public VMwareV2FabricCreationInput(string vmwareSiteId)
         {
-            VmwareSiteArmId = vmwareSiteArmId;
+            VmwareSiteId = vmwareSiteId;
             CustomInit();
         }
 
@@ -49,8 +48,8 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// <summary>
         /// Gets or sets the ARM Id of the VMware site.
         /// </summary>
-        [JsonProperty(PropertyName = "vmwareSiteArmId")]
-        public string VmwareSiteArmId { get; set; }
+        [JsonProperty(PropertyName = "vmwareSiteId")]
+        public string VmwareSiteId { get; set; }
 
         /// <summary>
         /// Validate the object.
@@ -60,9 +59,9 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// </exception>
         public virtual void Validate()
         {
-            if (VmwareSiteArmId == null)
+            if (VmwareSiteId == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "VmwareSiteArmId");
+                throw new ValidationException(ValidationRules.CannotBeNull, "VmwareSiteId");
             }
         }
     }

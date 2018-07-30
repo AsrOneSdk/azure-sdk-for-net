@@ -37,12 +37,15 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// Id.</param>
         /// <param name="logStorageAccountSasSecretName">The key vault secret
         /// name of the log storage account.</param>
-        public VMwareCbtDiskInput(string diskId, string isOSDisk, string logStorageAccountId, string logStorageAccountSasSecretName)
+        /// <param name="diskType">The disk type. Possible values include:
+        /// 'Standard_LRS', 'Premium_LRS'</param>
+        public VMwareCbtDiskInput(string diskId, string isOSDisk, string logStorageAccountId, string logStorageAccountSasSecretName, string diskType = default(string))
         {
             DiskId = diskId;
             IsOSDisk = isOSDisk;
             LogStorageAccountId = logStorageAccountId;
             LogStorageAccountSasSecretName = logStorageAccountSasSecretName;
+            DiskType = diskType;
             CustomInit();
         }
 
@@ -74,6 +77,13 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// </summary>
         [JsonProperty(PropertyName = "logStorageAccountSasSecretName")]
         public string LogStorageAccountSasSecretName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the disk type. Possible values include:
+        /// 'Standard_LRS', 'Premium_LRS'
+        /// </summary>
+        [JsonProperty(PropertyName = "diskType")]
+        public string DiskType { get; set; }
 
         /// <summary>
         /// Validate the object.

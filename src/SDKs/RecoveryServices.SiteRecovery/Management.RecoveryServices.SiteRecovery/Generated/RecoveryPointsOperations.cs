@@ -86,7 +86,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<AzureOperationResponse<IPage<RecoveryPoint>>> ListByReplicationProtectedItemsWithHttpMessagesAsync(string fabricName, string protectionContainerName, string replicatedProtectedItemName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<IPage<RecoveryPoint1>>> ListByReplicationProtectedItemsWithHttpMessagesAsync(string fabricName, string protectionContainerName, string replicatedProtectedItemName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (Client.ApiVersion == null)
             {
@@ -236,7 +236,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
                 throw ex;
             }
             // Create Result
-            var _result = new AzureOperationResponse<IPage<RecoveryPoint>>();
+            var _result = new AzureOperationResponse<IPage<RecoveryPoint1>>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
@@ -249,7 +249,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Rest.Serialization.SafeJsonConvert.DeserializeObject<Page<RecoveryPoint>>(_responseContent, Client.DeserializationSettings);
+                    _result.Body = Rest.Serialization.SafeJsonConvert.DeserializeObject<Page<RecoveryPoint1>>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -307,7 +307,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<AzureOperationResponse<RecoveryPoint>> GetWithHttpMessagesAsync(string fabricName, string protectionContainerName, string replicatedProtectedItemName, string recoveryPointName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<RecoveryPoint1>> GetWithHttpMessagesAsync(string fabricName, string protectionContainerName, string replicatedProtectedItemName, string recoveryPointName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (Client.ApiVersion == null)
             {
@@ -463,7 +463,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
                 throw ex;
             }
             // Create Result
-            var _result = new AzureOperationResponse<RecoveryPoint>();
+            var _result = new AzureOperationResponse<RecoveryPoint1>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
@@ -476,7 +476,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Rest.Serialization.SafeJsonConvert.DeserializeObject<RecoveryPoint>(_responseContent, Client.DeserializationSettings);
+                    _result.Body = Rest.Serialization.SafeJsonConvert.DeserializeObject<RecoveryPoint1>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -525,7 +525,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<AzureOperationResponse<IPage<RecoveryPoint>>> ListByReplicationProtectedItemsNextWithHttpMessagesAsync(string nextPageLink, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<IPage<RecoveryPoint1>>> ListByReplicationProtectedItemsNextWithHttpMessagesAsync(string nextPageLink, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (nextPageLink == null)
             {
@@ -639,7 +639,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
                 throw ex;
             }
             // Create Result
-            var _result = new AzureOperationResponse<IPage<RecoveryPoint>>();
+            var _result = new AzureOperationResponse<IPage<RecoveryPoint1>>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
@@ -652,7 +652,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Rest.Serialization.SafeJsonConvert.DeserializeObject<Page<RecoveryPoint>>(_responseContent, Client.DeserializationSettings);
+                    _result.Body = Rest.Serialization.SafeJsonConvert.DeserializeObject<Page<RecoveryPoint1>>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {

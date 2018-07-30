@@ -41,15 +41,21 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// <param name="migrationState">The migration status.</param>
         /// <param name="migrationStateDescription">The migration state
         /// description.</param>
+        /// <param name="lastSuccessfulMigrateTime">The last successful migrate
+        /// time.</param>
+        /// <param name="lastSuccessfulTestMigrateTime">The last successful
+        /// test migrate time.</param>
         /// <param name="testMigrateState">The test migrate state.</param>
         /// <param name="testMigrateStateDescription">The test migrate state
         /// description.</param>
+        /// <param name="health">The consolidated health.</param>
+        /// <param name="healthErrors">The list of health errors.</param>
         /// <param name="allowedOperations">The allowed operations on the
         /// migration item.</param>
         /// <param name="currentScenario">The current scenario.</param>
         /// <param name="providerSpecificDetails">The migration provider custom
         /// settings.</param>
-        public MigrationItemProperties(string friendlyName = default(string), string policyId = default(string), string policyFriendlyName = default(string), string recoveryServicesProviderId = default(string), string migrationState = default(string), string migrationStateDescription = default(string), string testMigrateState = default(string), string testMigrateStateDescription = default(string), IList<string> allowedOperations = default(IList<string>), CurrentScenarioDetails currentScenario = default(CurrentScenarioDetails), MigrationProviderSpecificSettings providerSpecificDetails = default(MigrationProviderSpecificSettings))
+        public MigrationItemProperties(string friendlyName = default(string), string policyId = default(string), string policyFriendlyName = default(string), string recoveryServicesProviderId = default(string), string migrationState = default(string), string migrationStateDescription = default(string), System.DateTime? lastSuccessfulMigrateTime = default(System.DateTime?), System.DateTime? lastSuccessfulTestMigrateTime = default(System.DateTime?), string testMigrateState = default(string), string testMigrateStateDescription = default(string), string health = default(string), IList<HealthError> healthErrors = default(IList<HealthError>), IList<string> allowedOperations = default(IList<string>), CurrentScenarioDetails currentScenario = default(CurrentScenarioDetails), MigrationProviderSpecificSettings providerSpecificDetails = default(MigrationProviderSpecificSettings))
         {
             FriendlyName = friendlyName;
             PolicyId = policyId;
@@ -57,8 +63,12 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
             RecoveryServicesProviderId = recoveryServicesProviderId;
             MigrationState = migrationState;
             MigrationStateDescription = migrationStateDescription;
+            LastSuccessfulMigrateTime = lastSuccessfulMigrateTime;
+            LastSuccessfulTestMigrateTime = lastSuccessfulTestMigrateTime;
             TestMigrateState = testMigrateState;
             TestMigrateStateDescription = testMigrateStateDescription;
+            Health = health;
+            HealthErrors = healthErrors;
             AllowedOperations = allowedOperations;
             CurrentScenario = currentScenario;
             ProviderSpecificDetails = providerSpecificDetails;
@@ -107,6 +117,18 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         public string MigrationStateDescription { get; set; }
 
         /// <summary>
+        /// Gets or sets the last successful migrate time.
+        /// </summary>
+        [JsonProperty(PropertyName = "lastSuccessfulMigrateTime")]
+        public System.DateTime? LastSuccessfulMigrateTime { get; set; }
+
+        /// <summary>
+        /// Gets or sets the last successful test migrate time.
+        /// </summary>
+        [JsonProperty(PropertyName = "lastSuccessfulTestMigrateTime")]
+        public System.DateTime? LastSuccessfulTestMigrateTime { get; set; }
+
+        /// <summary>
         /// Gets or sets the test migrate state.
         /// </summary>
         [JsonProperty(PropertyName = "testMigrateState")]
@@ -117,6 +139,18 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// </summary>
         [JsonProperty(PropertyName = "testMigrateStateDescription")]
         public string TestMigrateStateDescription { get; set; }
+
+        /// <summary>
+        /// Gets or sets the consolidated health.
+        /// </summary>
+        [JsonProperty(PropertyName = "health")]
+        public string Health { get; set; }
+
+        /// <summary>
+        /// Gets or sets the list of health errors.
+        /// </summary>
+        [JsonProperty(PropertyName = "healthErrors")]
+        public IList<HealthError> HealthErrors { get; set; }
 
         /// <summary>
         /// Gets or sets the allowed operations on the migration item.

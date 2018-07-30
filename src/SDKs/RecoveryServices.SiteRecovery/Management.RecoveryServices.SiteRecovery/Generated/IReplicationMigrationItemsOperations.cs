@@ -145,6 +145,106 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
         /// </exception>
         Task<AzureOperationResponse> PurgeWithHttpMessagesAsync(string fabricName, string protectionContainerName, string migrationItemName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
+        /// Updates migration item.
+        /// </summary>
+        /// <remarks>
+        /// The operation to update the recovery settings of an ASR migration
+        /// item.
+        /// </remarks>
+        /// <param name='fabricName'>
+        /// Fabric name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Protection container name.
+        /// </param>
+        /// <param name='migrationItemName'>
+        /// Migration item name.
+        /// </param>
+        /// <param name='input'>
+        /// Update migration item input.
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        Task<AzureOperationResponse<MigrationItem>> UpdateWithHttpMessagesAsync(string fabricName, string protectionContainerName, string migrationItemName, UpdateMigrationItemInput input, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Complete migration.
+        /// </summary>
+        /// <remarks>
+        /// The operation to initiate complete migration of the item.
+        /// </remarks>
+        /// <param name='fabricName'>
+        /// Fabric name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Protection container name.
+        /// </param>
+        /// <param name='migrationItemName'>
+        /// Migration item name.
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        Task<AzureOperationResponse<MigrationItem>> CompleteWithHttpMessagesAsync(string fabricName, string protectionContainerName, string migrationItemName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Migrate item.
+        /// </summary>
+        /// <remarks>
+        /// The operation to initiate migration of the item.
+        /// </remarks>
+        /// <param name='fabricName'>
+        /// Fabric name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Protection container name.
+        /// </param>
+        /// <param name='migrationItemName'>
+        /// Migration item name.
+        /// </param>
+        /// <param name='migrateInput'>
+        /// Migrate input.
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        Task<AzureOperationResponse<MigrationItem>> MigrateWithHttpMessagesAsync(string fabricName, string protectionContainerName, string migrationItemName, MigrateInput migrateInput, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
         /// Disables migration.
         /// </summary>
         /// <remarks>
@@ -172,6 +272,74 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
         /// Thrown when a required parameter is null
         /// </exception>
         Task<AzureOperationResponse> DeleteWithHttpMessagesAsync(string fabricName, string protectionContainerName, string migrationItemName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Test migrate item.
+        /// </summary>
+        /// <remarks>
+        /// The operation to initiate test migration of the item.
+        /// </remarks>
+        /// <param name='fabricName'>
+        /// Fabric name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Protection container name.
+        /// </param>
+        /// <param name='migrationItemName'>
+        /// Migration item name.
+        /// </param>
+        /// <param name='testMigrateInput'>
+        /// Test migrate input.
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        Task<AzureOperationResponse<MigrationItem>> TestMigrateWithHttpMessagesAsync(string fabricName, string protectionContainerName, string migrationItemName, TestMigrateInput testMigrateInput, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Test migrate cleanup.
+        /// </summary>
+        /// <remarks>
+        /// The operation to initiate test migrate cleanup.
+        /// </remarks>
+        /// <param name='fabricName'>
+        /// Fabric name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Protection container name.
+        /// </param>
+        /// <param name='migrationItemName'>
+        /// Migration item name.
+        /// </param>
+        /// <param name='testMigrateCleanupInput'>
+        /// Test migrate cleanup input.
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        Task<AzureOperationResponse<MigrationItem>> TestMigrateCleanupWithHttpMessagesAsync(string fabricName, string protectionContainerName, string migrationItemName, TestMigrateCleanupInput testMigrateCleanupInput, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Gets the list of migration items in the vault.
         /// </summary>
@@ -262,6 +430,106 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
         /// </exception>
         Task<AzureOperationResponse> BeginPurgeWithHttpMessagesAsync(string fabricName, string protectionContainerName, string migrationItemName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
+        /// Updates migration item.
+        /// </summary>
+        /// <remarks>
+        /// The operation to update the recovery settings of an ASR migration
+        /// item.
+        /// </remarks>
+        /// <param name='fabricName'>
+        /// Fabric name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Protection container name.
+        /// </param>
+        /// <param name='migrationItemName'>
+        /// Migration item name.
+        /// </param>
+        /// <param name='input'>
+        /// Update migration item input.
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        Task<AzureOperationResponse<MigrationItem>> BeginUpdateWithHttpMessagesAsync(string fabricName, string protectionContainerName, string migrationItemName, UpdateMigrationItemInput input, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Complete migration.
+        /// </summary>
+        /// <remarks>
+        /// The operation to initiate complete migration of the item.
+        /// </remarks>
+        /// <param name='fabricName'>
+        /// Fabric name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Protection container name.
+        /// </param>
+        /// <param name='migrationItemName'>
+        /// Migration item name.
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        Task<AzureOperationResponse<MigrationItem>> BeginCompleteWithHttpMessagesAsync(string fabricName, string protectionContainerName, string migrationItemName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Migrate item.
+        /// </summary>
+        /// <remarks>
+        /// The operation to initiate migration of the item.
+        /// </remarks>
+        /// <param name='fabricName'>
+        /// Fabric name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Protection container name.
+        /// </param>
+        /// <param name='migrationItemName'>
+        /// Migration item name.
+        /// </param>
+        /// <param name='migrateInput'>
+        /// Migrate input.
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        Task<AzureOperationResponse<MigrationItem>> BeginMigrateWithHttpMessagesAsync(string fabricName, string protectionContainerName, string migrationItemName, MigrateInput migrateInput, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
         /// Disables migration.
         /// </summary>
         /// <remarks>
@@ -289,6 +557,74 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
         /// Thrown when a required parameter is null
         /// </exception>
         Task<AzureOperationResponse> BeginDeleteWithHttpMessagesAsync(string fabricName, string protectionContainerName, string migrationItemName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Test migrate item.
+        /// </summary>
+        /// <remarks>
+        /// The operation to initiate test migration of the item.
+        /// </remarks>
+        /// <param name='fabricName'>
+        /// Fabric name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Protection container name.
+        /// </param>
+        /// <param name='migrationItemName'>
+        /// Migration item name.
+        /// </param>
+        /// <param name='testMigrateInput'>
+        /// Test migrate input.
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        Task<AzureOperationResponse<MigrationItem>> BeginTestMigrateWithHttpMessagesAsync(string fabricName, string protectionContainerName, string migrationItemName, TestMigrateInput testMigrateInput, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Test migrate cleanup.
+        /// </summary>
+        /// <remarks>
+        /// The operation to initiate test migrate cleanup.
+        /// </remarks>
+        /// <param name='fabricName'>
+        /// Fabric name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Protection container name.
+        /// </param>
+        /// <param name='migrationItemName'>
+        /// Migration item name.
+        /// </param>
+        /// <param name='testMigrateCleanupInput'>
+        /// Test migrate cleanup input.
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        Task<AzureOperationResponse<MigrationItem>> BeginTestMigrateCleanupWithHttpMessagesAsync(string fabricName, string protectionContainerName, string migrationItemName, TestMigrateCleanupInput testMigrateCleanupInput, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Gets the list of migration items in the protection container.
         /// </summary>

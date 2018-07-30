@@ -226,6 +226,174 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             }
 
             /// <summary>
+            /// Updates migration item.
+            /// </summary>
+            /// <remarks>
+            /// The operation to update the recovery settings of an ASR migration item.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='fabricName'>
+            /// Fabric name.
+            /// </param>
+            /// <param name='protectionContainerName'>
+            /// Protection container name.
+            /// </param>
+            /// <param name='migrationItemName'>
+            /// Migration item name.
+            /// </param>
+            /// <param name='input'>
+            /// Update migration item input.
+            /// </param>
+            public static MigrationItem Update(this IReplicationMigrationItemsOperations operations, string fabricName, string protectionContainerName, string migrationItemName, UpdateMigrationItemInput input)
+            {
+                return operations.UpdateAsync(fabricName, protectionContainerName, migrationItemName, input).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Updates migration item.
+            /// </summary>
+            /// <remarks>
+            /// The operation to update the recovery settings of an ASR migration item.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='fabricName'>
+            /// Fabric name.
+            /// </param>
+            /// <param name='protectionContainerName'>
+            /// Protection container name.
+            /// </param>
+            /// <param name='migrationItemName'>
+            /// Migration item name.
+            /// </param>
+            /// <param name='input'>
+            /// Update migration item input.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<MigrationItem> UpdateAsync(this IReplicationMigrationItemsOperations operations, string fabricName, string protectionContainerName, string migrationItemName, UpdateMigrationItemInput input, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.UpdateWithHttpMessagesAsync(fabricName, protectionContainerName, migrationItemName, input, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Complete migration.
+            /// </summary>
+            /// <remarks>
+            /// The operation to initiate complete migration of the item.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='fabricName'>
+            /// Fabric name.
+            /// </param>
+            /// <param name='protectionContainerName'>
+            /// Protection container name.
+            /// </param>
+            /// <param name='migrationItemName'>
+            /// Migration item name.
+            /// </param>
+            public static MigrationItem Complete(this IReplicationMigrationItemsOperations operations, string fabricName, string protectionContainerName, string migrationItemName)
+            {
+                return operations.CompleteAsync(fabricName, protectionContainerName, migrationItemName).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Complete migration.
+            /// </summary>
+            /// <remarks>
+            /// The operation to initiate complete migration of the item.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='fabricName'>
+            /// Fabric name.
+            /// </param>
+            /// <param name='protectionContainerName'>
+            /// Protection container name.
+            /// </param>
+            /// <param name='migrationItemName'>
+            /// Migration item name.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<MigrationItem> CompleteAsync(this IReplicationMigrationItemsOperations operations, string fabricName, string protectionContainerName, string migrationItemName, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.CompleteWithHttpMessagesAsync(fabricName, protectionContainerName, migrationItemName, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Migrate item.
+            /// </summary>
+            /// <remarks>
+            /// The operation to initiate migration of the item.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='fabricName'>
+            /// Fabric name.
+            /// </param>
+            /// <param name='protectionContainerName'>
+            /// Protection container name.
+            /// </param>
+            /// <param name='migrationItemName'>
+            /// Migration item name.
+            /// </param>
+            /// <param name='migrateInput'>
+            /// Migrate input.
+            /// </param>
+            public static MigrationItem Migrate(this IReplicationMigrationItemsOperations operations, string fabricName, string protectionContainerName, string migrationItemName, MigrateInput migrateInput)
+            {
+                return operations.MigrateAsync(fabricName, protectionContainerName, migrationItemName, migrateInput).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Migrate item.
+            /// </summary>
+            /// <remarks>
+            /// The operation to initiate migration of the item.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='fabricName'>
+            /// Fabric name.
+            /// </param>
+            /// <param name='protectionContainerName'>
+            /// Protection container name.
+            /// </param>
+            /// <param name='migrationItemName'>
+            /// Migration item name.
+            /// </param>
+            /// <param name='migrateInput'>
+            /// Migrate input.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<MigrationItem> MigrateAsync(this IReplicationMigrationItemsOperations operations, string fabricName, string protectionContainerName, string migrationItemName, MigrateInput migrateInput, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.MigrateWithHttpMessagesAsync(fabricName, protectionContainerName, migrationItemName, migrateInput, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
             /// Disables migration.
             /// </summary>
             /// <remarks>
@@ -272,6 +440,122 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             public static async Task DeleteAsync(this IReplicationMigrationItemsOperations operations, string fabricName, string protectionContainerName, string migrationItemName, CancellationToken cancellationToken = default(CancellationToken))
             {
                 (await operations.DeleteWithHttpMessagesAsync(fabricName, protectionContainerName, migrationItemName, null, cancellationToken).ConfigureAwait(false)).Dispose();
+            }
+
+            /// <summary>
+            /// Test migrate item.
+            /// </summary>
+            /// <remarks>
+            /// The operation to initiate test migration of the item.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='fabricName'>
+            /// Fabric name.
+            /// </param>
+            /// <param name='protectionContainerName'>
+            /// Protection container name.
+            /// </param>
+            /// <param name='migrationItemName'>
+            /// Migration item name.
+            /// </param>
+            /// <param name='testMigrateInput'>
+            /// Test migrate input.
+            /// </param>
+            public static MigrationItem TestMigrate(this IReplicationMigrationItemsOperations operations, string fabricName, string protectionContainerName, string migrationItemName, TestMigrateInput testMigrateInput)
+            {
+                return operations.TestMigrateAsync(fabricName, protectionContainerName, migrationItemName, testMigrateInput).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Test migrate item.
+            /// </summary>
+            /// <remarks>
+            /// The operation to initiate test migration of the item.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='fabricName'>
+            /// Fabric name.
+            /// </param>
+            /// <param name='protectionContainerName'>
+            /// Protection container name.
+            /// </param>
+            /// <param name='migrationItemName'>
+            /// Migration item name.
+            /// </param>
+            /// <param name='testMigrateInput'>
+            /// Test migrate input.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<MigrationItem> TestMigrateAsync(this IReplicationMigrationItemsOperations operations, string fabricName, string protectionContainerName, string migrationItemName, TestMigrateInput testMigrateInput, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.TestMigrateWithHttpMessagesAsync(fabricName, protectionContainerName, migrationItemName, testMigrateInput, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Test migrate cleanup.
+            /// </summary>
+            /// <remarks>
+            /// The operation to initiate test migrate cleanup.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='fabricName'>
+            /// Fabric name.
+            /// </param>
+            /// <param name='protectionContainerName'>
+            /// Protection container name.
+            /// </param>
+            /// <param name='migrationItemName'>
+            /// Migration item name.
+            /// </param>
+            /// <param name='testMigrateCleanupInput'>
+            /// Test migrate cleanup input.
+            /// </param>
+            public static MigrationItem TestMigrateCleanup(this IReplicationMigrationItemsOperations operations, string fabricName, string protectionContainerName, string migrationItemName, TestMigrateCleanupInput testMigrateCleanupInput)
+            {
+                return operations.TestMigrateCleanupAsync(fabricName, protectionContainerName, migrationItemName, testMigrateCleanupInput).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Test migrate cleanup.
+            /// </summary>
+            /// <remarks>
+            /// The operation to initiate test migrate cleanup.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='fabricName'>
+            /// Fabric name.
+            /// </param>
+            /// <param name='protectionContainerName'>
+            /// Protection container name.
+            /// </param>
+            /// <param name='migrationItemName'>
+            /// Migration item name.
+            /// </param>
+            /// <param name='testMigrateCleanupInput'>
+            /// Test migrate cleanup input.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<MigrationItem> TestMigrateCleanupAsync(this IReplicationMigrationItemsOperations operations, string fabricName, string protectionContainerName, string migrationItemName, TestMigrateCleanupInput testMigrateCleanupInput, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.TestMigrateCleanupWithHttpMessagesAsync(fabricName, protectionContainerName, migrationItemName, testMigrateCleanupInput, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -426,6 +710,174 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             }
 
             /// <summary>
+            /// Updates migration item.
+            /// </summary>
+            /// <remarks>
+            /// The operation to update the recovery settings of an ASR migration item.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='fabricName'>
+            /// Fabric name.
+            /// </param>
+            /// <param name='protectionContainerName'>
+            /// Protection container name.
+            /// </param>
+            /// <param name='migrationItemName'>
+            /// Migration item name.
+            /// </param>
+            /// <param name='input'>
+            /// Update migration item input.
+            /// </param>
+            public static MigrationItem BeginUpdate(this IReplicationMigrationItemsOperations operations, string fabricName, string protectionContainerName, string migrationItemName, UpdateMigrationItemInput input)
+            {
+                return operations.BeginUpdateAsync(fabricName, protectionContainerName, migrationItemName, input).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Updates migration item.
+            /// </summary>
+            /// <remarks>
+            /// The operation to update the recovery settings of an ASR migration item.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='fabricName'>
+            /// Fabric name.
+            /// </param>
+            /// <param name='protectionContainerName'>
+            /// Protection container name.
+            /// </param>
+            /// <param name='migrationItemName'>
+            /// Migration item name.
+            /// </param>
+            /// <param name='input'>
+            /// Update migration item input.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<MigrationItem> BeginUpdateAsync(this IReplicationMigrationItemsOperations operations, string fabricName, string protectionContainerName, string migrationItemName, UpdateMigrationItemInput input, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.BeginUpdateWithHttpMessagesAsync(fabricName, protectionContainerName, migrationItemName, input, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Complete migration.
+            /// </summary>
+            /// <remarks>
+            /// The operation to initiate complete migration of the item.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='fabricName'>
+            /// Fabric name.
+            /// </param>
+            /// <param name='protectionContainerName'>
+            /// Protection container name.
+            /// </param>
+            /// <param name='migrationItemName'>
+            /// Migration item name.
+            /// </param>
+            public static MigrationItem BeginComplete(this IReplicationMigrationItemsOperations operations, string fabricName, string protectionContainerName, string migrationItemName)
+            {
+                return operations.BeginCompleteAsync(fabricName, protectionContainerName, migrationItemName).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Complete migration.
+            /// </summary>
+            /// <remarks>
+            /// The operation to initiate complete migration of the item.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='fabricName'>
+            /// Fabric name.
+            /// </param>
+            /// <param name='protectionContainerName'>
+            /// Protection container name.
+            /// </param>
+            /// <param name='migrationItemName'>
+            /// Migration item name.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<MigrationItem> BeginCompleteAsync(this IReplicationMigrationItemsOperations operations, string fabricName, string protectionContainerName, string migrationItemName, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.BeginCompleteWithHttpMessagesAsync(fabricName, protectionContainerName, migrationItemName, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Migrate item.
+            /// </summary>
+            /// <remarks>
+            /// The operation to initiate migration of the item.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='fabricName'>
+            /// Fabric name.
+            /// </param>
+            /// <param name='protectionContainerName'>
+            /// Protection container name.
+            /// </param>
+            /// <param name='migrationItemName'>
+            /// Migration item name.
+            /// </param>
+            /// <param name='migrateInput'>
+            /// Migrate input.
+            /// </param>
+            public static MigrationItem BeginMigrate(this IReplicationMigrationItemsOperations operations, string fabricName, string protectionContainerName, string migrationItemName, MigrateInput migrateInput)
+            {
+                return operations.BeginMigrateAsync(fabricName, protectionContainerName, migrationItemName, migrateInput).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Migrate item.
+            /// </summary>
+            /// <remarks>
+            /// The operation to initiate migration of the item.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='fabricName'>
+            /// Fabric name.
+            /// </param>
+            /// <param name='protectionContainerName'>
+            /// Protection container name.
+            /// </param>
+            /// <param name='migrationItemName'>
+            /// Migration item name.
+            /// </param>
+            /// <param name='migrateInput'>
+            /// Migrate input.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<MigrationItem> BeginMigrateAsync(this IReplicationMigrationItemsOperations operations, string fabricName, string protectionContainerName, string migrationItemName, MigrateInput migrateInput, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.BeginMigrateWithHttpMessagesAsync(fabricName, protectionContainerName, migrationItemName, migrateInput, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
             /// Disables migration.
             /// </summary>
             /// <remarks>
@@ -472,6 +924,122 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             public static async Task BeginDeleteAsync(this IReplicationMigrationItemsOperations operations, string fabricName, string protectionContainerName, string migrationItemName, CancellationToken cancellationToken = default(CancellationToken))
             {
                 (await operations.BeginDeleteWithHttpMessagesAsync(fabricName, protectionContainerName, migrationItemName, null, cancellationToken).ConfigureAwait(false)).Dispose();
+            }
+
+            /// <summary>
+            /// Test migrate item.
+            /// </summary>
+            /// <remarks>
+            /// The operation to initiate test migration of the item.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='fabricName'>
+            /// Fabric name.
+            /// </param>
+            /// <param name='protectionContainerName'>
+            /// Protection container name.
+            /// </param>
+            /// <param name='migrationItemName'>
+            /// Migration item name.
+            /// </param>
+            /// <param name='testMigrateInput'>
+            /// Test migrate input.
+            /// </param>
+            public static MigrationItem BeginTestMigrate(this IReplicationMigrationItemsOperations operations, string fabricName, string protectionContainerName, string migrationItemName, TestMigrateInput testMigrateInput)
+            {
+                return operations.BeginTestMigrateAsync(fabricName, protectionContainerName, migrationItemName, testMigrateInput).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Test migrate item.
+            /// </summary>
+            /// <remarks>
+            /// The operation to initiate test migration of the item.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='fabricName'>
+            /// Fabric name.
+            /// </param>
+            /// <param name='protectionContainerName'>
+            /// Protection container name.
+            /// </param>
+            /// <param name='migrationItemName'>
+            /// Migration item name.
+            /// </param>
+            /// <param name='testMigrateInput'>
+            /// Test migrate input.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<MigrationItem> BeginTestMigrateAsync(this IReplicationMigrationItemsOperations operations, string fabricName, string protectionContainerName, string migrationItemName, TestMigrateInput testMigrateInput, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.BeginTestMigrateWithHttpMessagesAsync(fabricName, protectionContainerName, migrationItemName, testMigrateInput, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Test migrate cleanup.
+            /// </summary>
+            /// <remarks>
+            /// The operation to initiate test migrate cleanup.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='fabricName'>
+            /// Fabric name.
+            /// </param>
+            /// <param name='protectionContainerName'>
+            /// Protection container name.
+            /// </param>
+            /// <param name='migrationItemName'>
+            /// Migration item name.
+            /// </param>
+            /// <param name='testMigrateCleanupInput'>
+            /// Test migrate cleanup input.
+            /// </param>
+            public static MigrationItem BeginTestMigrateCleanup(this IReplicationMigrationItemsOperations operations, string fabricName, string protectionContainerName, string migrationItemName, TestMigrateCleanupInput testMigrateCleanupInput)
+            {
+                return operations.BeginTestMigrateCleanupAsync(fabricName, protectionContainerName, migrationItemName, testMigrateCleanupInput).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Test migrate cleanup.
+            /// </summary>
+            /// <remarks>
+            /// The operation to initiate test migrate cleanup.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='fabricName'>
+            /// Fabric name.
+            /// </param>
+            /// <param name='protectionContainerName'>
+            /// Protection container name.
+            /// </param>
+            /// <param name='migrationItemName'>
+            /// Migration item name.
+            /// </param>
+            /// <param name='testMigrateCleanupInput'>
+            /// Test migrate cleanup input.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<MigrationItem> BeginTestMigrateCleanupAsync(this IReplicationMigrationItemsOperations operations, string fabricName, string protectionContainerName, string migrationItemName, TestMigrateCleanupInput testMigrateCleanupInput, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.BeginTestMigrateCleanupWithHttpMessagesAsync(fabricName, protectionContainerName, migrationItemName, testMigrateCleanupInput, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>

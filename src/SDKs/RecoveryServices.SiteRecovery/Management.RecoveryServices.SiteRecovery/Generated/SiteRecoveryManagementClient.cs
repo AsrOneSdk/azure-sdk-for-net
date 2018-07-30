@@ -65,19 +65,20 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
         public string ApiVersion { get; private set; }
 
         /// <summary>
-        /// Gets or sets the preferred language for the response.
+        /// The preferred language for the response.
         /// </summary>
         public string AcceptLanguage { get; set; }
 
         /// <summary>
-        /// Gets or sets the retry timeout in seconds for Long Running Operations.
-        /// Default value is 30.
+        /// The retry timeout in seconds for Long Running Operations. Default value is
+        /// 30.
         /// </summary>
         public int? LongRunningOperationRetryTimeout { get; set; }
 
         /// <summary>
-        /// When set to true a unique x-ms-client-request-id value is generated and
-        /// included in each request. Default is true.
+        /// Whether a unique x-ms-client-request-id should be generated. When set to
+        /// true a unique x-ms-client-request-id value is generated and included in
+        /// each request. Default is true.
         /// </summary>
         public bool? GenerateClientRequestId { get; set; }
 
@@ -125,6 +126,11 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
         /// Gets the IReplicationMigrationItemsOperations.
         /// </summary>
         public virtual IReplicationMigrationItemsOperations ReplicationMigrationItems { get; private set; }
+
+        /// <summary>
+        /// Gets the IMigrationRecoveryPointsOperations.
+        /// </summary>
+        public virtual IMigrationRecoveryPointsOperations MigrationRecoveryPoints { get; private set; }
 
         /// <summary>
         /// Gets the IReplicationProtectableItemsOperations.
@@ -401,6 +407,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             ReplicationNetworkMappings = new ReplicationNetworkMappingsOperations(this);
             ReplicationProtectionContainers = new ReplicationProtectionContainersOperations(this);
             ReplicationMigrationItems = new ReplicationMigrationItemsOperations(this);
+            MigrationRecoveryPoints = new MigrationRecoveryPointsOperations(this);
             ReplicationProtectableItems = new ReplicationProtectableItemsOperations(this);
             ReplicationProtectedItems = new ReplicationProtectedItemsOperations(this);
             RecoveryPoints = new RecoveryPointsOperations(this);
@@ -480,6 +487,8 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<FabricSpecificUpdateNetworkMappingInput>("instanceType"));
             SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<JobDetails>("instanceType"));
             DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<JobDetails>("instanceType"));
+            SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<MigrateProviderSpecificInput>("instanceType"));
+            DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<MigrateProviderSpecificInput>("instanceType"));
             SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<MigrationProviderSpecificSettings>("instanceType"));
             DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<MigrationProviderSpecificSettings>("instanceType"));
             SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<NetworkMappingFabricSpecificSettings>("instanceType"));
@@ -502,6 +511,10 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<ReverseReplicationProviderSpecificInput>("instanceType"));
             SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<SwitchProtectionProviderSpecificInput>("instanceType"));
             DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<SwitchProtectionProviderSpecificInput>("instanceType"));
+            SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<TestMigrateProviderSpecificInput>("instanceType"));
+            DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<TestMigrateProviderSpecificInput>("instanceType"));
+            SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<UpdateMigrationItemProviderSpecificInput>("instanceType"));
+            DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<UpdateMigrationItemProviderSpecificInput>("instanceType"));
             SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<UpdateReplicationProtectedItemProviderInput>("instanceType"));
             DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<UpdateReplicationProtectedItemProviderInput>("instanceType"));
             CustomInitialize();

@@ -54,7 +54,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<AzureOperationResponse<IPage<RecoveryPoint>>> ListByReplicationProtectedItemsWithHttpMessagesAsync(string fabricName, string protectionContainerName, string replicatedProtectedItemName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse<IPage<RecoveryPoint1>>> ListByReplicationProtectedItemsWithHttpMessagesAsync(string fabricName, string protectionContainerName, string replicatedProtectedItemName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get a recovery point.
         /// </summary>
@@ -88,7 +88,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<AzureOperationResponse<RecoveryPoint>> GetWithHttpMessagesAsync(string fabricName, string protectionContainerName, string replicatedProtectedItemName, string recoveryPointName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse<RecoveryPoint1>> GetWithHttpMessagesAsync(string fabricName, string protectionContainerName, string replicatedProtectedItemName, string recoveryPointName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get recovery points for a replication protected item.
         /// </summary>
@@ -114,6 +114,6 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<AzureOperationResponse<IPage<RecoveryPoint>>> ListByReplicationProtectedItemsNextWithHttpMessagesAsync(string nextPageLink, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse<IPage<RecoveryPoint1>>> ListByReplicationProtectedItemsNextWithHttpMessagesAsync(string nextPageLink, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

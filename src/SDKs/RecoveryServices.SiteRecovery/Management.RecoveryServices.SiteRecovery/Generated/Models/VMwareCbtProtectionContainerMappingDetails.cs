@@ -14,7 +14,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
     using System.Linq;
 
     /// <summary>
-    /// VMwareCbt provider specific settings.
+    /// VMwareCbt provider specific container mapping details.
     /// </summary>
     [Newtonsoft.Json.JsonObject("VMwareCbt")]
     public partial class VMwareCbtProtectionContainerMappingDetails : ProtectionContainerMappingProviderSpecificDetails
@@ -32,19 +32,18 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// Initializes a new instance of the
         /// VMwareCbtProtectionContainerMappingDetails class.
         /// </summary>
-        /// <param name="keyVaultArmId">The target key vault ARM Id.</param>
+        /// <param name="keyVaultId">The target key vault ARM Id.</param>
         /// <param name="keyVaultUri">The target key vault URI.</param>
-        /// <param name="storageAccountArmId">The storage account ARM
-        /// Id.</param>
+        /// <param name="storageAccountId">The storage account ARM Id.</param>
         /// <param name="storageAccountSasSecretName">The secret name of the
         /// storage account.</param>
         /// <param name="serviceBusConnectionStringSecretName">The secret name
         /// of the service bus connection string.</param>
-        public VMwareCbtProtectionContainerMappingDetails(string keyVaultArmId = default(string), string keyVaultUri = default(string), string storageAccountArmId = default(string), string storageAccountSasSecretName = default(string), string serviceBusConnectionStringSecretName = default(string))
+        public VMwareCbtProtectionContainerMappingDetails(string keyVaultId = default(string), string keyVaultUri = default(string), string storageAccountId = default(string), string storageAccountSasSecretName = default(string), string serviceBusConnectionStringSecretName = default(string))
         {
-            KeyVaultArmId = keyVaultArmId;
+            KeyVaultId = keyVaultId;
             KeyVaultUri = keyVaultUri;
-            StorageAccountArmId = storageAccountArmId;
+            StorageAccountId = storageAccountId;
             StorageAccountSasSecretName = storageAccountSasSecretName;
             ServiceBusConnectionStringSecretName = serviceBusConnectionStringSecretName;
             CustomInit();
@@ -58,8 +57,8 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// <summary>
         /// Gets or sets the target key vault ARM Id.
         /// </summary>
-        [JsonProperty(PropertyName = "keyVaultArmId")]
-        public string KeyVaultArmId { get; set; }
+        [JsonProperty(PropertyName = "keyVaultId")]
+        public string KeyVaultId { get; set; }
 
         /// <summary>
         /// Gets or sets the target key vault URI.
@@ -70,8 +69,8 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// <summary>
         /// Gets or sets the storage account ARM Id.
         /// </summary>
-        [JsonProperty(PropertyName = "storageAccountArmId")]
-        public string StorageAccountArmId { get; set; }
+        [JsonProperty(PropertyName = "storageAccountId")]
+        public string StorageAccountId { get; set; }
 
         /// <summary>
         /// Gets or sets the secret name of the storage account.

@@ -46,26 +46,24 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// Id.</param>
         /// <param name="licenseType">License type. Possible values include:
         /// 'NotSpecified', 'NoLicenseType', 'WindowsServer'</param>
-        /// <param name="targetAzureVmName">The target Azure VM name.</param>
-        /// <param name="targetAzureVmSize">The target Azure VM size.</param>
-        /// <param name="targetAzureNetworkId">The target Azure network ARM
-        /// Id.</param>
-        /// <param name="targetAzureSubnetName">The target Azure subnet
-        /// Id.</param>
+        /// <param name="targetVmName">The target VM name.</param>
+        /// <param name="targetVmSize">The target VM size.</param>
+        /// <param name="targetNetworkId">The target network ARM Id.</param>
+        /// <param name="targetSubnetName">The target subnet name.</param>
         /// <param name="targetAvailabilitySetId">The target availability set
         /// ARM Id.</param>
-        public VMwareCbtEnableMigrationInput(string vmwareMachineId, IList<VMwareCbtDiskInput> disksToInclude, string dataMoverRunAsAccountId, string snapshotRunAsAccountId, string targetResourceGroupId, string licenseType = default(string), string targetAzureVmName = default(string), string targetAzureVmSize = default(string), string targetAzureNetworkId = default(string), string targetAzureSubnetName = default(string), string targetAvailabilitySetId = default(string))
+        public VMwareCbtEnableMigrationInput(string vmwareMachineId, IList<VMwareCbtDiskInput> disksToInclude, string dataMoverRunAsAccountId, string snapshotRunAsAccountId, string targetResourceGroupId, string licenseType = default(string), string targetVmName = default(string), string targetVmSize = default(string), string targetNetworkId = default(string), string targetSubnetName = default(string), string targetAvailabilitySetId = default(string))
         {
             VmwareMachineId = vmwareMachineId;
             DisksToInclude = disksToInclude;
             LicenseType = licenseType;
             DataMoverRunAsAccountId = dataMoverRunAsAccountId;
             SnapshotRunAsAccountId = snapshotRunAsAccountId;
-            TargetAzureVmName = targetAzureVmName;
-            TargetAzureVmSize = targetAzureVmSize;
+            TargetVmName = targetVmName;
+            TargetVmSize = targetVmSize;
             TargetResourceGroupId = targetResourceGroupId;
-            TargetAzureNetworkId = targetAzureNetworkId;
-            TargetAzureSubnetName = targetAzureSubnetName;
+            TargetNetworkId = targetNetworkId;
+            TargetSubnetName = targetSubnetName;
             TargetAvailabilitySetId = targetAvailabilitySetId;
             CustomInit();
         }
@@ -107,16 +105,16 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         public string SnapshotRunAsAccountId { get; set; }
 
         /// <summary>
-        /// Gets or sets the target Azure VM name.
+        /// Gets or sets the target VM name.
         /// </summary>
-        [JsonProperty(PropertyName = "targetAzureVmName")]
-        public string TargetAzureVmName { get; set; }
+        [JsonProperty(PropertyName = "targetVmName")]
+        public string TargetVmName { get; set; }
 
         /// <summary>
-        /// Gets or sets the target Azure VM size.
+        /// Gets or sets the target VM size.
         /// </summary>
-        [JsonProperty(PropertyName = "targetAzureVmSize")]
-        public string TargetAzureVmSize { get; set; }
+        [JsonProperty(PropertyName = "targetVmSize")]
+        public string TargetVmSize { get; set; }
 
         /// <summary>
         /// Gets or sets the target resource group ARM Id.
@@ -125,16 +123,16 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         public string TargetResourceGroupId { get; set; }
 
         /// <summary>
-        /// Gets or sets the target Azure network ARM Id.
+        /// Gets or sets the target network ARM Id.
         /// </summary>
-        [JsonProperty(PropertyName = "targetAzureNetworkId")]
-        public string TargetAzureNetworkId { get; set; }
+        [JsonProperty(PropertyName = "targetNetworkId")]
+        public string TargetNetworkId { get; set; }
 
         /// <summary>
-        /// Gets or sets the target Azure subnet Id.
+        /// Gets or sets the target subnet name.
         /// </summary>
-        [JsonProperty(PropertyName = "targetAzureSubnetName")]
-        public string TargetAzureSubnetName { get; set; }
+        [JsonProperty(PropertyName = "targetSubnetName")]
+        public string TargetSubnetName { get; set; }
 
         /// <summary>
         /// Gets or sets the target availability set ARM Id.

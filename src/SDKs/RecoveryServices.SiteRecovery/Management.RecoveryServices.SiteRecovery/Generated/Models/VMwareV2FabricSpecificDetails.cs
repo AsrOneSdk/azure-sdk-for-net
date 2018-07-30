@@ -32,12 +32,11 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// Initializes a new instance of the VMwareV2FabricSpecificDetails
         /// class.
         /// </summary>
-        /// <param name="vmwareSiteArmId">The ARM Id of the VMware
-        /// site.</param>
+        /// <param name="vmwareSiteId">The ARM Id of the VMware site.</param>
         /// <param name="srsServiceEndpoint">The SRS service endpoint.</param>
-        public VMwareV2FabricSpecificDetails(string vmwareSiteArmId = default(string), string srsServiceEndpoint = default(string))
+        public VMwareV2FabricSpecificDetails(string vmwareSiteId = default(string), string srsServiceEndpoint = default(string))
         {
-            VmwareSiteArmId = vmwareSiteArmId;
+            VmwareSiteId = vmwareSiteId;
             SrsServiceEndpoint = srsServiceEndpoint;
             CustomInit();
         }
@@ -50,8 +49,8 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// <summary>
         /// Gets or sets the ARM Id of the VMware site.
         /// </summary>
-        [JsonProperty(PropertyName = "vmwareSiteArmId")]
-        public string VmwareSiteArmId { get; set; }
+        [JsonProperty(PropertyName = "vmwareSiteId")]
+        public string VmwareSiteId { get; set; }
 
         /// <summary>
         /// Gets or sets the SRS service endpoint.

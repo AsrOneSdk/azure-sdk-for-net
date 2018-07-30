@@ -41,33 +41,34 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// Id.</param>
         /// <param name="snapshotRunAsAccountId">The snapshot runas account
         /// Id.</param>
-        /// <param name="targetAzureVmName">Target Azure VM name.</param>
-        /// <param name="targetAzureVmSize">The target Azure VM size.</param>
-        /// <param name="targetResourceGroupId">The target Azure resource group
+        /// <param name="targetVmName">Target VM name.</param>
+        /// <param name="targetVmSize">The target VM size.</param>
+        /// <param name="targetLocation">The target location.</param>
+        /// <param name="targetResourceGroupId">The target resource group
         /// Id.</param>
-        /// <param name="targetAzureNetworkId">The target Azure network
+        /// <param name="targetAvailabilitySetId">The target availability set
         /// Id.</param>
-        /// <param name="targetAzureSubnetName">The target Azure subnet
-        /// name.</param>
-        /// <param name="targetAvailabilitySetId">The target Azure availability
-        /// set Id.</param>
         /// <param name="protectedDisks">The list of protected disks.</param>
+        /// <param name="targetNetworkId">The target network Id.</param>
         /// <param name="vmNics">The network details.</param>
-        public VMwareCbtMigrationDetails(string vmwareMachineId = default(string), string osType = default(string), string licenseType = default(string), string dataMoverRunAsAccountId = default(string), string snapshotRunAsAccountId = default(string), string targetAzureVmName = default(string), string targetAzureVmSize = default(string), string targetResourceGroupId = default(string), string targetAzureNetworkId = default(string), string targetAzureSubnetName = default(string), string targetAvailabilitySetId = default(string), IList<VMwareCbtProtectedDiskDetails> protectedDisks = default(IList<VMwareCbtProtectedDiskDetails>), IList<VMNicDetails> vmNics = default(IList<VMNicDetails>))
+        /// <param name="migrationRecoveryPointId">The recovery point Id to
+        /// which the VM was migrated.</param>
+        public VMwareCbtMigrationDetails(string vmwareMachineId = default(string), string osType = default(string), string licenseType = default(string), string dataMoverRunAsAccountId = default(string), string snapshotRunAsAccountId = default(string), string targetVmName = default(string), string targetVmSize = default(string), string targetLocation = default(string), string targetResourceGroupId = default(string), string targetAvailabilitySetId = default(string), IList<VMwareCbtProtectedDiskDetails> protectedDisks = default(IList<VMwareCbtProtectedDiskDetails>), string targetNetworkId = default(string), IList<VMwareCbtNicDetails> vmNics = default(IList<VMwareCbtNicDetails>), string migrationRecoveryPointId = default(string))
         {
             VmwareMachineId = vmwareMachineId;
             OsType = osType;
             LicenseType = licenseType;
             DataMoverRunAsAccountId = dataMoverRunAsAccountId;
             SnapshotRunAsAccountId = snapshotRunAsAccountId;
-            TargetAzureVmName = targetAzureVmName;
-            TargetAzureVmSize = targetAzureVmSize;
+            TargetVmName = targetVmName;
+            TargetVmSize = targetVmSize;
+            TargetLocation = targetLocation;
             TargetResourceGroupId = targetResourceGroupId;
-            TargetAzureNetworkId = targetAzureNetworkId;
-            TargetAzureSubnetName = targetAzureSubnetName;
             TargetAvailabilitySetId = targetAvailabilitySetId;
             ProtectedDisks = protectedDisks;
+            TargetNetworkId = targetNetworkId;
             VmNics = vmNics;
+            MigrationRecoveryPointId = migrationRecoveryPointId;
             CustomInit();
         }
 
@@ -107,37 +108,31 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         public string SnapshotRunAsAccountId { get; set; }
 
         /// <summary>
-        /// Gets or sets target Azure VM name.
+        /// Gets or sets target VM name.
         /// </summary>
-        [JsonProperty(PropertyName = "targetAzureVmName")]
-        public string TargetAzureVmName { get; set; }
+        [JsonProperty(PropertyName = "targetVmName")]
+        public string TargetVmName { get; set; }
 
         /// <summary>
-        /// Gets or sets the target Azure VM size.
+        /// Gets or sets the target VM size.
         /// </summary>
-        [JsonProperty(PropertyName = "targetAzureVmSize")]
-        public string TargetAzureVmSize { get; set; }
+        [JsonProperty(PropertyName = "targetVmSize")]
+        public string TargetVmSize { get; set; }
 
         /// <summary>
-        /// Gets or sets the target Azure resource group Id.
+        /// Gets or sets the target location.
+        /// </summary>
+        [JsonProperty(PropertyName = "targetLocation")]
+        public string TargetLocation { get; set; }
+
+        /// <summary>
+        /// Gets or sets the target resource group Id.
         /// </summary>
         [JsonProperty(PropertyName = "targetResourceGroupId")]
         public string TargetResourceGroupId { get; set; }
 
         /// <summary>
-        /// Gets or sets the target Azure network Id.
-        /// </summary>
-        [JsonProperty(PropertyName = "targetAzureNetworkId")]
-        public string TargetAzureNetworkId { get; set; }
-
-        /// <summary>
-        /// Gets or sets the target Azure subnet name.
-        /// </summary>
-        [JsonProperty(PropertyName = "targetAzureSubnetName")]
-        public string TargetAzureSubnetName { get; set; }
-
-        /// <summary>
-        /// Gets or sets the target Azure availability set Id.
+        /// Gets or sets the target availability set Id.
         /// </summary>
         [JsonProperty(PropertyName = "targetAvailabilitySetId")]
         public string TargetAvailabilitySetId { get; set; }
@@ -149,10 +144,22 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         public IList<VMwareCbtProtectedDiskDetails> ProtectedDisks { get; set; }
 
         /// <summary>
+        /// Gets or sets the target network Id.
+        /// </summary>
+        [JsonProperty(PropertyName = "targetNetworkId")]
+        public string TargetNetworkId { get; set; }
+
+        /// <summary>
         /// Gets or sets the network details.
         /// </summary>
         [JsonProperty(PropertyName = "vmNics")]
-        public IList<VMNicDetails> VmNics { get; set; }
+        public IList<VMwareCbtNicDetails> VmNics { get; set; }
+
+        /// <summary>
+        /// Gets or sets the recovery point Id to which the VM was migrated.
+        /// </summary>
+        [JsonProperty(PropertyName = "migrationRecoveryPointId")]
+        public string MigrationRecoveryPointId { get; set; }
 
     }
 }
