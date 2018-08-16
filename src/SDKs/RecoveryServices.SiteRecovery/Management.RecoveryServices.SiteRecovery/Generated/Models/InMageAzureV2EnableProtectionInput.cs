@@ -58,9 +58,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// <param name="targetAzureV2ResourceGroupId">The Id of the target
         /// resource group (for resource manager deployment) in which the
         /// failover VM is to be created.</param>
-        /// <param name="useManagedDisks">A value indicating whether managed
-        /// disks should be used during failover.</param>
-        public InMageAzureV2EnableProtectionInput(string storageAccountId, string masterTargetId = default(string), string processServerId = default(string), string runAsAccountId = default(string), string multiVmGroupId = default(string), string multiVmGroupName = default(string), IList<string> disksToInclude = default(IList<string>), string targetAzureNetworkId = default(string), string targetAzureSubnetId = default(string), string enableRdpOnTargetOption = default(string), string targetAzureVmName = default(string), string logStorageAccountId = default(string), string targetAzureV1ResourceGroupId = default(string), string targetAzureV2ResourceGroupId = default(string), string useManagedDisks = default(string))
+        public InMageAzureV2EnableProtectionInput(string storageAccountId, string masterTargetId = default(string), string processServerId = default(string), string runAsAccountId = default(string), string multiVmGroupId = default(string), string multiVmGroupName = default(string), IList<InMageAzureV2DiskInputDetails> disksToInclude = default(IList<InMageAzureV2DiskInputDetails>), string targetAzureNetworkId = default(string), string targetAzureSubnetId = default(string), string enableRdpOnTargetOption = default(string), string targetAzureVmName = default(string), string logStorageAccountId = default(string), string targetAzureV1ResourceGroupId = default(string), string targetAzureV2ResourceGroupId = default(string))
         {
             MasterTargetId = masterTargetId;
             ProcessServerId = processServerId;
@@ -76,7 +74,6 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
             LogStorageAccountId = logStorageAccountId;
             TargetAzureV1ResourceGroupId = targetAzureV1ResourceGroupId;
             TargetAzureV2ResourceGroupId = targetAzureV2ResourceGroupId;
-            UseManagedDisks = useManagedDisks;
             CustomInit();
         }
 
@@ -125,7 +122,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// Gets or sets the disks to include list.
         /// </summary>
         [JsonProperty(PropertyName = "disksToInclude")]
-        public IList<string> DisksToInclude { get; set; }
+        public IList<InMageAzureV2DiskInputDetails> DisksToInclude { get; set; }
 
         /// <summary>
         /// Gets or sets the selected target Azure network Id.
@@ -173,13 +170,6 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// </summary>
         [JsonProperty(PropertyName = "targetAzureV2ResourceGroupId")]
         public string TargetAzureV2ResourceGroupId { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether managed disks should be
-        /// used during failover.
-        /// </summary>
-        [JsonProperty(PropertyName = "useManagedDisks")]
-        public string UseManagedDisks { get; set; }
 
         /// <summary>
         /// Validate the object.

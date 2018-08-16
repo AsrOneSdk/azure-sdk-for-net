@@ -358,7 +358,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             }
 
             /// <summary>
-            /// Execute commit failover
+            /// Execute commit failover.
             /// </summary>
             /// <remarks>
             /// Operation to commit the failover of the replication protected item.
@@ -381,7 +381,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             }
 
             /// <summary>
-            /// Execute commit failover
+            /// Execute commit failover.
             /// </summary>
             /// <remarks>
             /// Operation to commit the failover of the replication protected item.
@@ -410,7 +410,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             }
 
             /// <summary>
-            /// Execute planned failover
+            /// Execute planned failover.
             /// </summary>
             /// <remarks>
             /// Operation to initiate a planned failover of the replication protected item.
@@ -436,7 +436,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             }
 
             /// <summary>
-            /// Execute planned failover
+            /// Execute planned failover.
             /// </summary>
             /// <remarks>
             /// Operation to initiate a planned failover of the replication protected item.
@@ -579,7 +579,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             }
 
             /// <summary>
-            /// Execute Reverse Replication\Reprotect
+            /// Execute Reverse Replication\Reprotect.
             /// </summary>
             /// <remarks>
             /// Operation to reprotect or reverse replicate a failed over replication
@@ -606,7 +606,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             }
 
             /// <summary>
-            /// Execute Reverse Replication\Reprotect
+            /// Execute Reverse Replication\Reprotect.
             /// </summary>
             /// <remarks>
             /// Operation to reprotect or reverse replicate a failed over replication
@@ -639,7 +639,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             }
 
             /// <summary>
-            /// Execute test failover
+            /// Execute test failover.
             /// </summary>
             /// <remarks>
             /// Operation to perform a test failover of the replication protected item.
@@ -665,7 +665,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             }
 
             /// <summary>
-            /// Execute test failover
+            /// Execute test failover.
             /// </summary>
             /// <remarks>
             /// Operation to perform a test failover of the replication protected item.
@@ -755,7 +755,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             }
 
             /// <summary>
-            /// Execute unplanned failover
+            /// Execute unplanned failover.
             /// </summary>
             /// <remarks>
             /// Operation to initiate a failover of the replication protected item.
@@ -781,7 +781,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             }
 
             /// <summary>
-            /// Execute unplanned failover
+            /// Execute unplanned failover.
             /// </summary>
             /// <remarks>
             /// Operation to initiate a failover of the replication protected item.
@@ -886,7 +886,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             /// </param>
             /// <param name='skipToken'>
             /// The pagination token. Possible values: "FabricId" or "FabricId_CloudId" or
-            /// null
+            /// null.
             /// </param>
             public static IPage<ReplicationProtectedItem> List(this IReplicationProtectedItemsOperations operations, ODataQuery<ProtectedItemsQueryParameter> odataQuery = default(ODataQuery<ProtectedItemsQueryParameter>), string skipToken = default(string))
             {
@@ -907,7 +907,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             /// </param>
             /// <param name='skipToken'>
             /// The pagination token. Possible values: "FabricId" or "FabricId_CloudId" or
-            /// null
+            /// null.
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
@@ -1156,7 +1156,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             }
 
             /// <summary>
-            /// Execute commit failover
+            /// Execute commit failover.
             /// </summary>
             /// <remarks>
             /// Operation to commit the failover of the replication protected item.
@@ -1179,7 +1179,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             }
 
             /// <summary>
-            /// Execute commit failover
+            /// Execute commit failover.
             /// </summary>
             /// <remarks>
             /// Operation to commit the failover of the replication protected item.
@@ -1208,7 +1208,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             }
 
             /// <summary>
-            /// Execute planned failover
+            /// Execute planned failover.
             /// </summary>
             /// <remarks>
             /// Operation to initiate a planned failover of the replication protected item.
@@ -1234,7 +1234,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             }
 
             /// <summary>
-            /// Execute planned failover
+            /// Execute planned failover.
             /// </summary>
             /// <remarks>
             /// Operation to initiate a planned failover of the replication protected item.
@@ -1377,7 +1377,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             }
 
             /// <summary>
-            /// Execute Reverse Replication\Reprotect
+            /// Execute Reverse Replication\Reprotect.
             /// </summary>
             /// <remarks>
             /// Operation to reprotect or reverse replicate a failed over replication
@@ -1404,7 +1404,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             }
 
             /// <summary>
-            /// Execute Reverse Replication\Reprotect
+            /// Execute Reverse Replication\Reprotect.
             /// </summary>
             /// <remarks>
             /// Operation to reprotect or reverse replicate a failed over replication
@@ -1437,7 +1437,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             }
 
             /// <summary>
-            /// Execute test failover
+            /// Execute test failover.
             /// </summary>
             /// <remarks>
             /// Operation to perform a test failover of the replication protected item.
@@ -1463,7 +1463,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             }
 
             /// <summary>
-            /// Execute test failover
+            /// Execute test failover.
             /// </summary>
             /// <remarks>
             /// Operation to perform a test failover of the replication protected item.
@@ -1553,7 +1553,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             }
 
             /// <summary>
-            /// Execute unplanned failover
+            /// Execute unplanned failover.
             /// </summary>
             /// <remarks>
             /// Operation to initiate a failover of the replication protected item.
@@ -1579,7 +1579,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             }
 
             /// <summary>
-            /// Execute unplanned failover
+            /// Execute unplanned failover.
             /// </summary>
             /// <remarks>
             /// Operation to initiate a failover of the replication protected item.

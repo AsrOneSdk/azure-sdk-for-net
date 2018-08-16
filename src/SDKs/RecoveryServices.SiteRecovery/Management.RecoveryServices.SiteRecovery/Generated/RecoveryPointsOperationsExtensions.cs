@@ -39,7 +39,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             /// <param name='replicatedProtectedItemName'>
             /// The replication protected item's name.
             /// </param>
-            public static IPage<RecoveryPoint> ListByReplicationProtectedItems(this IRecoveryPointsOperations operations, string fabricName, string protectionContainerName, string replicatedProtectedItemName)
+            public static IPage<RecoveryPoint1> ListByReplicationProtectedItems(this IRecoveryPointsOperations operations, string fabricName, string protectionContainerName, string replicatedProtectedItemName)
             {
                 return operations.ListByReplicationProtectedItemsAsync(fabricName, protectionContainerName, replicatedProtectedItemName).GetAwaiter().GetResult();
             }
@@ -65,7 +65,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<IPage<RecoveryPoint>> ListByReplicationProtectedItemsAsync(this IRecoveryPointsOperations operations, string fabricName, string protectionContainerName, string replicatedProtectedItemName, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<IPage<RecoveryPoint1>> ListByReplicationProtectedItemsAsync(this IRecoveryPointsOperations operations, string fabricName, string protectionContainerName, string replicatedProtectedItemName, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.ListByReplicationProtectedItemsWithHttpMessagesAsync(fabricName, protectionContainerName, replicatedProtectedItemName, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -94,7 +94,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             /// <param name='recoveryPointName'>
             /// The recovery point name.
             /// </param>
-            public static RecoveryPoint Get(this IRecoveryPointsOperations operations, string fabricName, string protectionContainerName, string replicatedProtectedItemName, string recoveryPointName)
+            public static RecoveryPoint1 Get(this IRecoveryPointsOperations operations, string fabricName, string protectionContainerName, string replicatedProtectedItemName, string recoveryPointName)
             {
                 return operations.GetAsync(fabricName, protectionContainerName, replicatedProtectedItemName, recoveryPointName).GetAwaiter().GetResult();
             }
@@ -123,7 +123,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<RecoveryPoint> GetAsync(this IRecoveryPointsOperations operations, string fabricName, string protectionContainerName, string replicatedProtectedItemName, string recoveryPointName, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<RecoveryPoint1> GetAsync(this IRecoveryPointsOperations operations, string fabricName, string protectionContainerName, string replicatedProtectedItemName, string recoveryPointName, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetWithHttpMessagesAsync(fabricName, protectionContainerName, replicatedProtectedItemName, recoveryPointName, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -143,7 +143,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             /// <param name='nextPageLink'>
             /// The NextLink from the previous successful call to List operation.
             /// </param>
-            public static IPage<RecoveryPoint> ListByReplicationProtectedItemsNext(this IRecoveryPointsOperations operations, string nextPageLink)
+            public static IPage<RecoveryPoint1> ListByReplicationProtectedItemsNext(this IRecoveryPointsOperations operations, string nextPageLink)
             {
                 return operations.ListByReplicationProtectedItemsNextAsync(nextPageLink).GetAwaiter().GetResult();
             }
@@ -163,7 +163,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<IPage<RecoveryPoint>> ListByReplicationProtectedItemsNextAsync(this IRecoveryPointsOperations operations, string nextPageLink, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<IPage<RecoveryPoint1>> ListByReplicationProtectedItemsNextAsync(this IRecoveryPointsOperations operations, string nextPageLink, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.ListByReplicationProtectedItemsNextWithHttpMessagesAsync(nextPageLink, null, cancellationToken).ConfigureAwait(false))
                 {

@@ -65,19 +65,20 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
         public string ApiVersion { get; private set; }
 
         /// <summary>
-        /// Gets or sets the preferred language for the response.
+        /// The preferred language for the response.
         /// </summary>
         public string AcceptLanguage { get; set; }
 
         /// <summary>
-        /// Gets or sets the retry timeout in seconds for Long Running Operations.
-        /// Default value is 30.
+        /// The retry timeout in seconds for Long Running Operations. Default value is
+        /// 30.
         /// </summary>
         public int? LongRunningOperationRetryTimeout { get; set; }
 
         /// <summary>
-        /// When set to true a unique x-ms-client-request-id value is generated and
-        /// included in each request. Default is true.
+        /// Whether a unique x-ms-client-request-id should be generated. When set to
+        /// true a unique x-ms-client-request-id value is generated and included in
+        /// each request. Default is true.
         /// </summary>
         public bool? GenerateClientRequestId { get; set; }
 
@@ -120,6 +121,16 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
         /// Gets the IReplicationProtectionContainersOperations.
         /// </summary>
         public virtual IReplicationProtectionContainersOperations ReplicationProtectionContainers { get; private set; }
+
+        /// <summary>
+        /// Gets the IReplicationMigrationItemsOperations.
+        /// </summary>
+        public virtual IReplicationMigrationItemsOperations ReplicationMigrationItems { get; private set; }
+
+        /// <summary>
+        /// Gets the IMigrationRecoveryPointsOperations.
+        /// </summary>
+        public virtual IMigrationRecoveryPointsOperations MigrationRecoveryPoints { get; private set; }
 
         /// <summary>
         /// Gets the IReplicationProtectableItemsOperations.
@@ -185,6 +196,19 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
         /// Gets the IReplicationVaultHealthOperations.
         /// </summary>
         public virtual IReplicationVaultHealthOperations ReplicationVaultHealth { get; private set; }
+
+        /// <summary>
+        /// Initializes a new instance of the SiteRecoveryManagementClient class.
+        /// </summary>
+        /// <param name='httpClient'>
+        /// HttpClient to be used
+        /// </param>
+        /// <param name='disposeHttpClient'>
+        /// True: will dispose the provided httpClient on calling SiteRecoveryManagementClient.Dispose(). False: will not dispose provided httpClient</param>
+        protected SiteRecoveryManagementClient(HttpClient httpClient, bool disposeHttpClient) : base(httpClient, disposeHttpClient)
+        {
+            Initialize();
+        }
 
         /// <summary>
         /// Initializes a new instance of the SiteRecoveryManagementClient class.
@@ -269,6 +293,33 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
         /// Thrown when a required parameter is null
         /// </exception>
         public SiteRecoveryManagementClient(ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
+        {
+            if (credentials == null)
+            {
+                throw new System.ArgumentNullException("credentials");
+            }
+            Credentials = credentials;
+            if (Credentials != null)
+            {
+                Credentials.InitializeServiceClient(this);
+            }
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the SiteRecoveryManagementClient class.
+        /// </summary>
+        /// <param name='credentials'>
+        /// Required. Credentials needed for the client to connect to Azure.
+        /// </param>
+        /// <param name='httpClient'>
+        /// HttpClient to be used
+        /// </param>
+        /// <param name='disposeHttpClient'>
+        /// True: will dispose the provided httpClient on calling SiteRecoveryManagementClient.Dispose(). False: will not dispose provided httpClient</param>
+        /// <exception cref="System.ArgumentNullException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        public SiteRecoveryManagementClient(ServiceClientCredentials credentials, HttpClient httpClient, bool disposeHttpClient) : this(httpClient, disposeHttpClient)
         {
             if (credentials == null)
             {
@@ -395,6 +446,8 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             ReplicationNetworks = new ReplicationNetworksOperations(this);
             ReplicationNetworkMappings = new ReplicationNetworkMappingsOperations(this);
             ReplicationProtectionContainers = new ReplicationProtectionContainersOperations(this);
+            ReplicationMigrationItems = new ReplicationMigrationItemsOperations(this);
+            MigrationRecoveryPoints = new MigrationRecoveryPointsOperations(this);
             ReplicationProtectableItems = new ReplicationProtectableItemsOperations(this);
             ReplicationProtectedItems = new ReplicationProtectedItemsOperations(this);
             RecoveryPoints = new RecoveryPointsOperations(this);
@@ -409,7 +462,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             ReplicationRecoveryPlans = new ReplicationRecoveryPlansOperations(this);
             ReplicationVaultHealth = new ReplicationVaultHealthOperations(this);
             BaseUri = new System.Uri("https://management.azure.com");
-            ApiVersion = "2018-01-10";
+            ApiVersion = "2018-07-10";
             AcceptLanguage = "en-US";
             LongRunningOperationRetryTimeout = 30;
             GenerateClientRequestId = true;
@@ -458,6 +511,8 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<RecoveryPlanActionDetails>("instanceType"));
             SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<DisableProtectionProviderSpecificInput>("instanceType"));
             DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<DisableProtectionProviderSpecificInput>("instanceType"));
+            SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<EnableMigrationProviderSpecificInput>("instanceType"));
+            DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<EnableMigrationProviderSpecificInput>("instanceType"));
             SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<EnableProtectionProviderSpecificInput>("instanceType"));
             DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<EnableProtectionProviderSpecificInput>("instanceType"));
             SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<EventProviderSpecificDetails>("instanceType"));
@@ -472,6 +527,10 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<FabricSpecificUpdateNetworkMappingInput>("instanceType"));
             SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<JobDetails>("instanceType"));
             DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<JobDetails>("instanceType"));
+            SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<MigrateProviderSpecificInput>("instanceType"));
+            DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<MigrateProviderSpecificInput>("instanceType"));
+            SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<MigrationProviderSpecificSettings>("instanceType"));
+            DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<MigrationProviderSpecificSettings>("instanceType"));
             SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<NetworkMappingFabricSpecificSettings>("instanceType"));
             DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<NetworkMappingFabricSpecificSettings>("instanceType"));
             SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<ProviderSpecificFailoverInput>("instanceType"));
@@ -492,6 +551,10 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<ReverseReplicationProviderSpecificInput>("instanceType"));
             SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<SwitchProtectionProviderSpecificInput>("instanceType"));
             DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<SwitchProtectionProviderSpecificInput>("instanceType"));
+            SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<TestMigrateProviderSpecificInput>("instanceType"));
+            DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<TestMigrateProviderSpecificInput>("instanceType"));
+            SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<UpdateMigrationItemProviderSpecificInput>("instanceType"));
+            DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<UpdateMigrationItemProviderSpecificInput>("instanceType"));
             SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<UpdateReplicationProtectedItemProviderInput>("instanceType"));
             DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<UpdateReplicationProtectedItemProviderInput>("instanceType"));
             CustomInitialize();

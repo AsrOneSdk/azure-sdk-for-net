@@ -16,7 +16,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
     using System.Linq;
 
     /// <summary>
-    /// Recovery plan custom details.
+    /// Recovery plan properties.
     /// </summary>
     public partial class RecoveryPlanProperties
     {
