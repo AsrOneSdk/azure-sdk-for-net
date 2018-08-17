@@ -41,7 +41,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             testHelper = new TestHelper();
         }
 
-        [Fact]
+        
         public void CreateSite()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -59,7 +59,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void GetSite()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -72,7 +72,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void ListSite()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -85,7 +85,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void DeleteSite()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -97,7 +97,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void PurgeSite()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -109,7 +109,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void CheckConsistency()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -146,7 +146,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void GetRSP()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -164,7 +164,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void ListRspByFabric()
         {
             using (var context = MockContext.Start(GetType().FullName))
@@ -179,7 +179,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void ListRsp()
         {
             using (var context = MockContext.Start(GetType().FullName))
@@ -193,7 +193,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void DeleteRsp()
         {
             using (var context = MockContext.Start(GetType().FullName))
@@ -206,7 +206,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void PurgeRsp()
         {
             using (var context = MockContext.Start(GetType().FullName))
@@ -220,7 +220,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void RefreshRsp()
         {
             using (var context = MockContext.Start(GetType().FullName))
@@ -235,7 +235,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void GetContainer()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -256,7 +256,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void EnumerateContainer()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -273,7 +273,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void ListAllContainers()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -290,7 +290,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void CreatePolicy()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -323,7 +323,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void GetPolicy()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -337,7 +337,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void ListPolicy()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -349,7 +349,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void UpdatePolicy()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -384,7 +384,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void DeletePolicy()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -395,7 +395,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void CreatePCMapping()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -434,7 +434,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void GetPCMapping()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -455,7 +455,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void EnumeratePCMapping()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -471,7 +471,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void ListAllPCMapping()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -483,7 +483,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void DeletePCMapping()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -502,7 +502,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void PurgePCMapping()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -518,7 +518,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void GetProtectableItem()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -542,7 +542,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void EnumerateProtectableItem()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -563,7 +563,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void CreateProtectedItem()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -619,7 +619,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void GetProtectedItem()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -637,7 +637,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void EnumerateProtectedItem()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -653,7 +653,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void ListAllProtectedItem()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -666,7 +666,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void UpdateProtectedItem()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -709,7 +709,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void DeleteProtectedItem()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -735,7 +735,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void PurgeProtectedItem()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -831,7 +831,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void PlannedFailover()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -910,7 +910,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void CommitFailover()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -973,7 +973,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void GetRecoveryPoints()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -989,7 +989,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void ListRecoveryPoints()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -1004,7 +1004,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void ApplyRecoveryPoint()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -1036,7 +1036,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void CreateRecoveryPlan()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -1081,7 +1081,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void GetRecoveryPlan()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -1093,7 +1093,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void UpdateRecoveryPlan()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -1135,7 +1135,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void DeleteRecoveryPlan()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -1318,7 +1318,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void CreateAlertSettings()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -1343,7 +1343,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void GetAlertSettings()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -1355,7 +1355,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void ListAlertSettings()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -1367,7 +1367,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void GetReplicationEvent()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -1380,7 +1380,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void ListReplicationEvent()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -1392,7 +1392,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void GetNetworks()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -1404,7 +1404,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void ListNetworks()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -1416,7 +1416,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void EnumerateNetworks()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -1428,7 +1428,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void CreateNetworkMapping()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -1455,7 +1455,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void GetNetworkMapping()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -1467,7 +1467,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void ListNetworkMapping()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -1479,7 +1479,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void EnumerateNetworkMapping()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -1491,7 +1491,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void UpdateNetworkMapping()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -1516,7 +1516,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void DeleteNetworkMapping()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -1529,7 +1529,7 @@ namespace RecoveryServices.SiteRecovery.Tests
         }
         
        
-        [Fact]
+        
         public void MigrateToAad()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -1541,7 +1541,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void ListEventByQuery()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
@@ -1554,7 +1554,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        
         public void GetHealthDetails()
         {
             using (var context = MockContext.Start(this.GetType().FullName))
