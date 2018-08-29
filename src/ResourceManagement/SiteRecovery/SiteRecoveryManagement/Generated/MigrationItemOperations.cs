@@ -1641,19 +1641,14 @@ namespace Microsoft.Azure.Management.SiteRecovery
                             providerSpecificDetailsValue["instanceType"] = "VMwareCbt";
                             VMwareCbtUpdateMigrationItemInput derived = ((VMwareCbtUpdateMigrationItemInput)input.Properties.ProviderSpecificDetails);
                             
-                            if (derived.LicenseType != null)
+                            if (derived.TargetVmName != null)
                             {
-                                providerSpecificDetailsValue["licenseType"] = derived.LicenseType;
+                                providerSpecificDetailsValue["targetVmName"] = derived.TargetVmName;
                             }
                             
-                            if (derived.TargetAzureVmName != null)
+                            if (derived.TargetVmSize != null)
                             {
-                                providerSpecificDetailsValue["targetVmName"] = derived.TargetAzureVmName;
-                            }
-                            
-                            if (derived.TargetAzureVmSize != null)
-                            {
-                                providerSpecificDetailsValue["targetVmSize"] = derived.TargetAzureVmSize;
+                                providerSpecificDetailsValue["targetVmSize"] = derived.TargetVmSize;
                             }
                             
                             if (derived.TargetResourceGroupId != null)
@@ -1664,6 +1659,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                             if (derived.TargetAvailabilitySetId != null)
                             {
                                 providerSpecificDetailsValue["targetAvailabilitySetId"] = derived.TargetAvailabilitySetId;
+                            }
+                            
+                            if (derived.TargetBootDiagnosticsStorageAccountId != null)
+                            {
+                                providerSpecificDetailsValue["targetBootDiagnosticsStorageAccountId"] = derived.TargetBootDiagnosticsStorageAccountId;
                             }
                             
                             if (derived.TargetNetworkId != null)
@@ -1696,9 +1696,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtNicInputValue["targetSubnetName"] = vmNicsItem.TargetSubnetName;
                                         }
                                         
-                                        if (vmNicsItem.StaticIPAddress != null)
+                                        if (vmNicsItem.TargetStaticIPAddress != null)
                                         {
-                                            vMwareCbtNicInputValue["staticIPAddress"] = vmNicsItem.StaticIPAddress;
+                                            vMwareCbtNicInputValue["targetStaticIPAddress"] = vmNicsItem.TargetStaticIPAddress;
                                         }
                                         
                                         if (vmNicsItem.IsSelectedForMigration != null)
@@ -1708,6 +1708,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     }
                                     providerSpecificDetailsValue["vmNics"] = vmNicsArray;
                                 }
+                            }
+                            
+                            if (derived.LicenseType != null)
+                            {
+                                providerSpecificDetailsValue["licenseType"] = derived.LicenseType;
                             }
                             
                             if (derived.Type != null)
@@ -2363,6 +2368,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtMigrationDetailsInstance.TargetAvailabilitySetId = targetAvailabilitySetIdInstance;
                                         }
                                         
+                                        JToken targetBootDiagnosticsStorageAccountIdValue = providerSpecificDetailsValue["targetBootDiagnosticsStorageAccountId"];
+                                        if (targetBootDiagnosticsStorageAccountIdValue != null && targetBootDiagnosticsStorageAccountIdValue.Type != JTokenType.Null)
+                                        {
+                                            string targetBootDiagnosticsStorageAccountIdInstance = ((string)targetBootDiagnosticsStorageAccountIdValue);
+                                            vMwareCbtMigrationDetailsInstance.TargetBootDiagnosticsStorageAccountId = targetBootDiagnosticsStorageAccountIdInstance;
+                                        }
+                                        
                                         JToken protectedDisksArray = providerSpecificDetailsValue["protectedDisks"];
                                         if (protectedDisksArray != null && protectedDisksArray.Type != JTokenType.Null)
                                         {
@@ -2385,10 +2397,17 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtProtectedDiskDetailsInstance.DiskName = diskNameInstance;
                                                 }
                                                 
+                                                JToken diskPathValue = protectedDisksValue["diskPath"];
+                                                if (diskPathValue != null && diskPathValue.Type != JTokenType.Null)
+                                                {
+                                                    string diskPathInstance = ((string)diskPathValue);
+                                                    vMwareCbtProtectedDiskDetailsInstance.DiskPath = diskPathInstance;
+                                                }
+                                                
                                                 JToken isOSDiskValue = protectedDisksValue["isOSDisk"];
                                                 if (isOSDiskValue != null && isOSDiskValue.Type != JTokenType.Null)
                                                 {
-                                                    bool isOSDiskInstance = ((bool)isOSDiskValue);
+                                                    string isOSDiskInstance = ((string)isOSDiskValue);
                                                     vMwareCbtProtectedDiskDetailsInstance.IsOSDisk = isOSDiskInstance;
                                                 }
                                                 
@@ -2482,8 +2501,22 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 JToken isPrimaryNicValue = vmNicsValue["isPrimaryNic"];
                                                 if (isPrimaryNicValue != null && isPrimaryNicValue.Type != JTokenType.Null)
                                                 {
-                                                    bool isPrimaryNicInstance = ((bool)isPrimaryNicValue);
+                                                    string isPrimaryNicInstance = ((string)isPrimaryNicValue);
                                                     vMwareCbtNicDetailsInstance.IsPrimaryNic = isPrimaryNicInstance;
+                                                }
+                                                
+                                                JToken sourceIPAddressValue = vmNicsValue["sourceIPAddress"];
+                                                if (sourceIPAddressValue != null && sourceIPAddressValue.Type != JTokenType.Null)
+                                                {
+                                                    string sourceIPAddressInstance = ((string)sourceIPAddressValue);
+                                                    vMwareCbtNicDetailsInstance.SourceIPAddress = sourceIPAddressInstance;
+                                                }
+                                                
+                                                JToken sourceIPAddressTypeValue = vmNicsValue["sourceIPAddressType"];
+                                                if (sourceIPAddressTypeValue != null && sourceIPAddressTypeValue.Type != JTokenType.Null)
+                                                {
+                                                    string sourceIPAddressTypeInstance = ((string)sourceIPAddressTypeValue);
+                                                    vMwareCbtNicDetailsInstance.SourceIPAddressType = sourceIPAddressTypeInstance;
                                                 }
                                                 
                                                 JToken sourceNetworkIdValue = vmNicsValue["sourceNetworkId"];
@@ -2493,6 +2526,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtNicDetailsInstance.SourceNetworkId = sourceNetworkIdInstance;
                                                 }
                                                 
+                                                JToken targetIPAddressValue = vmNicsValue["targetIPAddress"];
+                                                if (targetIPAddressValue != null && targetIPAddressValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetIPAddressInstance = ((string)targetIPAddressValue);
+                                                    vMwareCbtNicDetailsInstance.TargetIPAddress = targetIPAddressInstance;
+                                                }
+                                                
+                                                JToken targetIPAddressTypeValue = vmNicsValue["targetIPAddressType"];
+                                                if (targetIPAddressTypeValue != null && targetIPAddressTypeValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetIPAddressTypeInstance = ((string)targetIPAddressTypeValue);
+                                                    vMwareCbtNicDetailsInstance.TargetIPAddressType = targetIPAddressTypeInstance;
+                                                }
+                                                
                                                 JToken targetSubnetNameValue = vmNicsValue["targetSubnetName"];
                                                 if (targetSubnetNameValue != null && targetSubnetNameValue.Type != JTokenType.Null)
                                                 {
@@ -2500,24 +2547,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtNicDetailsInstance.TargetSubnetName = targetSubnetNameInstance;
                                                 }
                                                 
-                                                JToken ipAddressTypeValue = vmNicsValue["ipAddressType"];
-                                                if (ipAddressTypeValue != null && ipAddressTypeValue.Type != JTokenType.Null)
-                                                {
-                                                    string ipAddressTypeInstance = ((string)ipAddressTypeValue);
-                                                    vMwareCbtNicDetailsInstance.IpAddressType = ipAddressTypeInstance;
-                                                }
-                                                
-                                                JToken staticIPAddressValue = vmNicsValue["staticIPAddress"];
-                                                if (staticIPAddressValue != null && staticIPAddressValue.Type != JTokenType.Null)
-                                                {
-                                                    string staticIPAddressInstance = ((string)staticIPAddressValue);
-                                                    vMwareCbtNicDetailsInstance.StaticIPAddress = staticIPAddressInstance;
-                                                }
-                                                
                                                 JToken isSelectedForMigrationValue = vmNicsValue["isSelectedForMigration"];
                                                 if (isSelectedForMigrationValue != null && isSelectedForMigrationValue.Type != JTokenType.Null)
                                                 {
-                                                    bool isSelectedForMigrationInstance = ((bool)isSelectedForMigrationValue);
+                                                    string isSelectedForMigrationInstance = ((string)isSelectedForMigrationValue);
                                                     vMwareCbtNicDetailsInstance.IsSelectedForMigration = isSelectedForMigrationInstance;
                                                 }
                                             }
@@ -2528,6 +2561,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             string migrationRecoveryPointIdInstance = ((string)migrationRecoveryPointIdValue);
                                             vMwareCbtMigrationDetailsInstance.MigrationRecoveryPointId = migrationRecoveryPointIdInstance;
+                                        }
+                                        
+                                        JToken lastRecoveryPointReceivedValue = providerSpecificDetailsValue["lastRecoveryPointReceived"];
+                                        if (lastRecoveryPointReceivedValue != null && lastRecoveryPointReceivedValue.Type != JTokenType.Null)
+                                        {
+                                            DateTime lastRecoveryPointReceivedInstance = ((DateTime)lastRecoveryPointReceivedValue);
+                                            vMwareCbtMigrationDetailsInstance.LastRecoveryPointReceived = lastRecoveryPointReceivedInstance;
                                         }
                                         
                                         JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
@@ -2939,6 +2979,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtMigrationDetailsInstance.TargetAvailabilitySetId = targetAvailabilitySetIdInstance;
                                         }
                                         
+                                        JToken targetBootDiagnosticsStorageAccountIdValue = providerSpecificDetailsValue["targetBootDiagnosticsStorageAccountId"];
+                                        if (targetBootDiagnosticsStorageAccountIdValue != null && targetBootDiagnosticsStorageAccountIdValue.Type != JTokenType.Null)
+                                        {
+                                            string targetBootDiagnosticsStorageAccountIdInstance = ((string)targetBootDiagnosticsStorageAccountIdValue);
+                                            vMwareCbtMigrationDetailsInstance.TargetBootDiagnosticsStorageAccountId = targetBootDiagnosticsStorageAccountIdInstance;
+                                        }
+                                        
                                         JToken protectedDisksArray = providerSpecificDetailsValue["protectedDisks"];
                                         if (protectedDisksArray != null && protectedDisksArray.Type != JTokenType.Null)
                                         {
@@ -2961,10 +3008,17 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtProtectedDiskDetailsInstance.DiskName = diskNameInstance;
                                                 }
                                                 
+                                                JToken diskPathValue = protectedDisksValue["diskPath"];
+                                                if (diskPathValue != null && diskPathValue.Type != JTokenType.Null)
+                                                {
+                                                    string diskPathInstance = ((string)diskPathValue);
+                                                    vMwareCbtProtectedDiskDetailsInstance.DiskPath = diskPathInstance;
+                                                }
+                                                
                                                 JToken isOSDiskValue = protectedDisksValue["isOSDisk"];
                                                 if (isOSDiskValue != null && isOSDiskValue.Type != JTokenType.Null)
                                                 {
-                                                    bool isOSDiskInstance = ((bool)isOSDiskValue);
+                                                    string isOSDiskInstance = ((string)isOSDiskValue);
                                                     vMwareCbtProtectedDiskDetailsInstance.IsOSDisk = isOSDiskInstance;
                                                 }
                                                 
@@ -3058,8 +3112,22 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 JToken isPrimaryNicValue = vmNicsValue["isPrimaryNic"];
                                                 if (isPrimaryNicValue != null && isPrimaryNicValue.Type != JTokenType.Null)
                                                 {
-                                                    bool isPrimaryNicInstance = ((bool)isPrimaryNicValue);
+                                                    string isPrimaryNicInstance = ((string)isPrimaryNicValue);
                                                     vMwareCbtNicDetailsInstance.IsPrimaryNic = isPrimaryNicInstance;
+                                                }
+                                                
+                                                JToken sourceIPAddressValue = vmNicsValue["sourceIPAddress"];
+                                                if (sourceIPAddressValue != null && sourceIPAddressValue.Type != JTokenType.Null)
+                                                {
+                                                    string sourceIPAddressInstance = ((string)sourceIPAddressValue);
+                                                    vMwareCbtNicDetailsInstance.SourceIPAddress = sourceIPAddressInstance;
+                                                }
+                                                
+                                                JToken sourceIPAddressTypeValue = vmNicsValue["sourceIPAddressType"];
+                                                if (sourceIPAddressTypeValue != null && sourceIPAddressTypeValue.Type != JTokenType.Null)
+                                                {
+                                                    string sourceIPAddressTypeInstance = ((string)sourceIPAddressTypeValue);
+                                                    vMwareCbtNicDetailsInstance.SourceIPAddressType = sourceIPAddressTypeInstance;
                                                 }
                                                 
                                                 JToken sourceNetworkIdValue = vmNicsValue["sourceNetworkId"];
@@ -3069,6 +3137,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtNicDetailsInstance.SourceNetworkId = sourceNetworkIdInstance;
                                                 }
                                                 
+                                                JToken targetIPAddressValue = vmNicsValue["targetIPAddress"];
+                                                if (targetIPAddressValue != null && targetIPAddressValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetIPAddressInstance = ((string)targetIPAddressValue);
+                                                    vMwareCbtNicDetailsInstance.TargetIPAddress = targetIPAddressInstance;
+                                                }
+                                                
+                                                JToken targetIPAddressTypeValue = vmNicsValue["targetIPAddressType"];
+                                                if (targetIPAddressTypeValue != null && targetIPAddressTypeValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetIPAddressTypeInstance = ((string)targetIPAddressTypeValue);
+                                                    vMwareCbtNicDetailsInstance.TargetIPAddressType = targetIPAddressTypeInstance;
+                                                }
+                                                
                                                 JToken targetSubnetNameValue = vmNicsValue["targetSubnetName"];
                                                 if (targetSubnetNameValue != null && targetSubnetNameValue.Type != JTokenType.Null)
                                                 {
@@ -3076,24 +3158,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtNicDetailsInstance.TargetSubnetName = targetSubnetNameInstance;
                                                 }
                                                 
-                                                JToken ipAddressTypeValue = vmNicsValue["ipAddressType"];
-                                                if (ipAddressTypeValue != null && ipAddressTypeValue.Type != JTokenType.Null)
-                                                {
-                                                    string ipAddressTypeInstance = ((string)ipAddressTypeValue);
-                                                    vMwareCbtNicDetailsInstance.IpAddressType = ipAddressTypeInstance;
-                                                }
-                                                
-                                                JToken staticIPAddressValue = vmNicsValue["staticIPAddress"];
-                                                if (staticIPAddressValue != null && staticIPAddressValue.Type != JTokenType.Null)
-                                                {
-                                                    string staticIPAddressInstance = ((string)staticIPAddressValue);
-                                                    vMwareCbtNicDetailsInstance.StaticIPAddress = staticIPAddressInstance;
-                                                }
-                                                
                                                 JToken isSelectedForMigrationValue = vmNicsValue["isSelectedForMigration"];
                                                 if (isSelectedForMigrationValue != null && isSelectedForMigrationValue.Type != JTokenType.Null)
                                                 {
-                                                    bool isSelectedForMigrationInstance = ((bool)isSelectedForMigrationValue);
+                                                    string isSelectedForMigrationInstance = ((string)isSelectedForMigrationValue);
                                                     vMwareCbtNicDetailsInstance.IsSelectedForMigration = isSelectedForMigrationInstance;
                                                 }
                                             }
@@ -3104,6 +3172,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             string migrationRecoveryPointIdInstance = ((string)migrationRecoveryPointIdValue);
                                             vMwareCbtMigrationDetailsInstance.MigrationRecoveryPointId = migrationRecoveryPointIdInstance;
+                                        }
+                                        
+                                        JToken lastRecoveryPointReceivedValue = providerSpecificDetailsValue["lastRecoveryPointReceived"];
+                                        if (lastRecoveryPointReceivedValue != null && lastRecoveryPointReceivedValue.Type != JTokenType.Null)
+                                        {
+                                            DateTime lastRecoveryPointReceivedInstance = ((DateTime)lastRecoveryPointReceivedValue);
+                                            vMwareCbtMigrationDetailsInstance.LastRecoveryPointReceived = lastRecoveryPointReceivedInstance;
                                         }
                                         
                                         JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
@@ -3574,6 +3649,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtMigrationDetailsInstance.TargetAvailabilitySetId = targetAvailabilitySetIdInstance;
                                         }
                                         
+                                        JToken targetBootDiagnosticsStorageAccountIdValue = providerSpecificDetailsValue["targetBootDiagnosticsStorageAccountId"];
+                                        if (targetBootDiagnosticsStorageAccountIdValue != null && targetBootDiagnosticsStorageAccountIdValue.Type != JTokenType.Null)
+                                        {
+                                            string targetBootDiagnosticsStorageAccountIdInstance = ((string)targetBootDiagnosticsStorageAccountIdValue);
+                                            vMwareCbtMigrationDetailsInstance.TargetBootDiagnosticsStorageAccountId = targetBootDiagnosticsStorageAccountIdInstance;
+                                        }
+                                        
                                         JToken protectedDisksArray = providerSpecificDetailsValue["protectedDisks"];
                                         if (protectedDisksArray != null && protectedDisksArray.Type != JTokenType.Null)
                                         {
@@ -3596,10 +3678,17 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtProtectedDiskDetailsInstance.DiskName = diskNameInstance;
                                                 }
                                                 
+                                                JToken diskPathValue = protectedDisksValue["diskPath"];
+                                                if (diskPathValue != null && diskPathValue.Type != JTokenType.Null)
+                                                {
+                                                    string diskPathInstance = ((string)diskPathValue);
+                                                    vMwareCbtProtectedDiskDetailsInstance.DiskPath = diskPathInstance;
+                                                }
+                                                
                                                 JToken isOSDiskValue = protectedDisksValue["isOSDisk"];
                                                 if (isOSDiskValue != null && isOSDiskValue.Type != JTokenType.Null)
                                                 {
-                                                    bool isOSDiskInstance = ((bool)isOSDiskValue);
+                                                    string isOSDiskInstance = ((string)isOSDiskValue);
                                                     vMwareCbtProtectedDiskDetailsInstance.IsOSDisk = isOSDiskInstance;
                                                 }
                                                 
@@ -3693,8 +3782,22 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 JToken isPrimaryNicValue = vmNicsValue["isPrimaryNic"];
                                                 if (isPrimaryNicValue != null && isPrimaryNicValue.Type != JTokenType.Null)
                                                 {
-                                                    bool isPrimaryNicInstance = ((bool)isPrimaryNicValue);
+                                                    string isPrimaryNicInstance = ((string)isPrimaryNicValue);
                                                     vMwareCbtNicDetailsInstance.IsPrimaryNic = isPrimaryNicInstance;
+                                                }
+                                                
+                                                JToken sourceIPAddressValue = vmNicsValue["sourceIPAddress"];
+                                                if (sourceIPAddressValue != null && sourceIPAddressValue.Type != JTokenType.Null)
+                                                {
+                                                    string sourceIPAddressInstance = ((string)sourceIPAddressValue);
+                                                    vMwareCbtNicDetailsInstance.SourceIPAddress = sourceIPAddressInstance;
+                                                }
+                                                
+                                                JToken sourceIPAddressTypeValue = vmNicsValue["sourceIPAddressType"];
+                                                if (sourceIPAddressTypeValue != null && sourceIPAddressTypeValue.Type != JTokenType.Null)
+                                                {
+                                                    string sourceIPAddressTypeInstance = ((string)sourceIPAddressTypeValue);
+                                                    vMwareCbtNicDetailsInstance.SourceIPAddressType = sourceIPAddressTypeInstance;
                                                 }
                                                 
                                                 JToken sourceNetworkIdValue = vmNicsValue["sourceNetworkId"];
@@ -3704,6 +3807,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtNicDetailsInstance.SourceNetworkId = sourceNetworkIdInstance;
                                                 }
                                                 
+                                                JToken targetIPAddressValue = vmNicsValue["targetIPAddress"];
+                                                if (targetIPAddressValue != null && targetIPAddressValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetIPAddressInstance = ((string)targetIPAddressValue);
+                                                    vMwareCbtNicDetailsInstance.TargetIPAddress = targetIPAddressInstance;
+                                                }
+                                                
+                                                JToken targetIPAddressTypeValue = vmNicsValue["targetIPAddressType"];
+                                                if (targetIPAddressTypeValue != null && targetIPAddressTypeValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetIPAddressTypeInstance = ((string)targetIPAddressTypeValue);
+                                                    vMwareCbtNicDetailsInstance.TargetIPAddressType = targetIPAddressTypeInstance;
+                                                }
+                                                
                                                 JToken targetSubnetNameValue = vmNicsValue["targetSubnetName"];
                                                 if (targetSubnetNameValue != null && targetSubnetNameValue.Type != JTokenType.Null)
                                                 {
@@ -3711,24 +3828,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtNicDetailsInstance.TargetSubnetName = targetSubnetNameInstance;
                                                 }
                                                 
-                                                JToken ipAddressTypeValue = vmNicsValue["ipAddressType"];
-                                                if (ipAddressTypeValue != null && ipAddressTypeValue.Type != JTokenType.Null)
-                                                {
-                                                    string ipAddressTypeInstance = ((string)ipAddressTypeValue);
-                                                    vMwareCbtNicDetailsInstance.IpAddressType = ipAddressTypeInstance;
-                                                }
-                                                
-                                                JToken staticIPAddressValue = vmNicsValue["staticIPAddress"];
-                                                if (staticIPAddressValue != null && staticIPAddressValue.Type != JTokenType.Null)
-                                                {
-                                                    string staticIPAddressInstance = ((string)staticIPAddressValue);
-                                                    vMwareCbtNicDetailsInstance.StaticIPAddress = staticIPAddressInstance;
-                                                }
-                                                
                                                 JToken isSelectedForMigrationValue = vmNicsValue["isSelectedForMigration"];
                                                 if (isSelectedForMigrationValue != null && isSelectedForMigrationValue.Type != JTokenType.Null)
                                                 {
-                                                    bool isSelectedForMigrationInstance = ((bool)isSelectedForMigrationValue);
+                                                    string isSelectedForMigrationInstance = ((string)isSelectedForMigrationValue);
                                                     vMwareCbtNicDetailsInstance.IsSelectedForMigration = isSelectedForMigrationInstance;
                                                 }
                                             }
@@ -3739,6 +3842,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             string migrationRecoveryPointIdInstance = ((string)migrationRecoveryPointIdValue);
                                             vMwareCbtMigrationDetailsInstance.MigrationRecoveryPointId = migrationRecoveryPointIdInstance;
+                                        }
+                                        
+                                        JToken lastRecoveryPointReceivedValue = providerSpecificDetailsValue["lastRecoveryPointReceived"];
+                                        if (lastRecoveryPointReceivedValue != null && lastRecoveryPointReceivedValue.Type != JTokenType.Null)
+                                        {
+                                            DateTime lastRecoveryPointReceivedInstance = ((DateTime)lastRecoveryPointReceivedValue);
+                                            vMwareCbtMigrationDetailsInstance.LastRecoveryPointReceived = lastRecoveryPointReceivedInstance;
                                         }
                                         
                                         JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
@@ -4209,6 +4319,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtMigrationDetailsInstance.TargetAvailabilitySetId = targetAvailabilitySetIdInstance;
                                         }
                                         
+                                        JToken targetBootDiagnosticsStorageAccountIdValue = providerSpecificDetailsValue["targetBootDiagnosticsStorageAccountId"];
+                                        if (targetBootDiagnosticsStorageAccountIdValue != null && targetBootDiagnosticsStorageAccountIdValue.Type != JTokenType.Null)
+                                        {
+                                            string targetBootDiagnosticsStorageAccountIdInstance = ((string)targetBootDiagnosticsStorageAccountIdValue);
+                                            vMwareCbtMigrationDetailsInstance.TargetBootDiagnosticsStorageAccountId = targetBootDiagnosticsStorageAccountIdInstance;
+                                        }
+                                        
                                         JToken protectedDisksArray = providerSpecificDetailsValue["protectedDisks"];
                                         if (protectedDisksArray != null && protectedDisksArray.Type != JTokenType.Null)
                                         {
@@ -4231,10 +4348,17 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtProtectedDiskDetailsInstance.DiskName = diskNameInstance;
                                                 }
                                                 
+                                                JToken diskPathValue = protectedDisksValue["diskPath"];
+                                                if (diskPathValue != null && diskPathValue.Type != JTokenType.Null)
+                                                {
+                                                    string diskPathInstance = ((string)diskPathValue);
+                                                    vMwareCbtProtectedDiskDetailsInstance.DiskPath = diskPathInstance;
+                                                }
+                                                
                                                 JToken isOSDiskValue = protectedDisksValue["isOSDisk"];
                                                 if (isOSDiskValue != null && isOSDiskValue.Type != JTokenType.Null)
                                                 {
-                                                    bool isOSDiskInstance = ((bool)isOSDiskValue);
+                                                    string isOSDiskInstance = ((string)isOSDiskValue);
                                                     vMwareCbtProtectedDiskDetailsInstance.IsOSDisk = isOSDiskInstance;
                                                 }
                                                 
@@ -4328,8 +4452,22 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 JToken isPrimaryNicValue = vmNicsValue["isPrimaryNic"];
                                                 if (isPrimaryNicValue != null && isPrimaryNicValue.Type != JTokenType.Null)
                                                 {
-                                                    bool isPrimaryNicInstance = ((bool)isPrimaryNicValue);
+                                                    string isPrimaryNicInstance = ((string)isPrimaryNicValue);
                                                     vMwareCbtNicDetailsInstance.IsPrimaryNic = isPrimaryNicInstance;
+                                                }
+                                                
+                                                JToken sourceIPAddressValue = vmNicsValue["sourceIPAddress"];
+                                                if (sourceIPAddressValue != null && sourceIPAddressValue.Type != JTokenType.Null)
+                                                {
+                                                    string sourceIPAddressInstance = ((string)sourceIPAddressValue);
+                                                    vMwareCbtNicDetailsInstance.SourceIPAddress = sourceIPAddressInstance;
+                                                }
+                                                
+                                                JToken sourceIPAddressTypeValue = vmNicsValue["sourceIPAddressType"];
+                                                if (sourceIPAddressTypeValue != null && sourceIPAddressTypeValue.Type != JTokenType.Null)
+                                                {
+                                                    string sourceIPAddressTypeInstance = ((string)sourceIPAddressTypeValue);
+                                                    vMwareCbtNicDetailsInstance.SourceIPAddressType = sourceIPAddressTypeInstance;
                                                 }
                                                 
                                                 JToken sourceNetworkIdValue = vmNicsValue["sourceNetworkId"];
@@ -4339,6 +4477,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtNicDetailsInstance.SourceNetworkId = sourceNetworkIdInstance;
                                                 }
                                                 
+                                                JToken targetIPAddressValue = vmNicsValue["targetIPAddress"];
+                                                if (targetIPAddressValue != null && targetIPAddressValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetIPAddressInstance = ((string)targetIPAddressValue);
+                                                    vMwareCbtNicDetailsInstance.TargetIPAddress = targetIPAddressInstance;
+                                                }
+                                                
+                                                JToken targetIPAddressTypeValue = vmNicsValue["targetIPAddressType"];
+                                                if (targetIPAddressTypeValue != null && targetIPAddressTypeValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetIPAddressTypeInstance = ((string)targetIPAddressTypeValue);
+                                                    vMwareCbtNicDetailsInstance.TargetIPAddressType = targetIPAddressTypeInstance;
+                                                }
+                                                
                                                 JToken targetSubnetNameValue = vmNicsValue["targetSubnetName"];
                                                 if (targetSubnetNameValue != null && targetSubnetNameValue.Type != JTokenType.Null)
                                                 {
@@ -4346,24 +4498,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtNicDetailsInstance.TargetSubnetName = targetSubnetNameInstance;
                                                 }
                                                 
-                                                JToken ipAddressTypeValue = vmNicsValue["ipAddressType"];
-                                                if (ipAddressTypeValue != null && ipAddressTypeValue.Type != JTokenType.Null)
-                                                {
-                                                    string ipAddressTypeInstance = ((string)ipAddressTypeValue);
-                                                    vMwareCbtNicDetailsInstance.IpAddressType = ipAddressTypeInstance;
-                                                }
-                                                
-                                                JToken staticIPAddressValue = vmNicsValue["staticIPAddress"];
-                                                if (staticIPAddressValue != null && staticIPAddressValue.Type != JTokenType.Null)
-                                                {
-                                                    string staticIPAddressInstance = ((string)staticIPAddressValue);
-                                                    vMwareCbtNicDetailsInstance.StaticIPAddress = staticIPAddressInstance;
-                                                }
-                                                
                                                 JToken isSelectedForMigrationValue = vmNicsValue["isSelectedForMigration"];
                                                 if (isSelectedForMigrationValue != null && isSelectedForMigrationValue.Type != JTokenType.Null)
                                                 {
-                                                    bool isSelectedForMigrationInstance = ((bool)isSelectedForMigrationValue);
+                                                    string isSelectedForMigrationInstance = ((string)isSelectedForMigrationValue);
                                                     vMwareCbtNicDetailsInstance.IsSelectedForMigration = isSelectedForMigrationInstance;
                                                 }
                                             }
@@ -4374,6 +4512,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             string migrationRecoveryPointIdInstance = ((string)migrationRecoveryPointIdValue);
                                             vMwareCbtMigrationDetailsInstance.MigrationRecoveryPointId = migrationRecoveryPointIdInstance;
+                                        }
+                                        
+                                        JToken lastRecoveryPointReceivedValue = providerSpecificDetailsValue["lastRecoveryPointReceived"];
+                                        if (lastRecoveryPointReceivedValue != null && lastRecoveryPointReceivedValue.Type != JTokenType.Null)
+                                        {
+                                            DateTime lastRecoveryPointReceivedInstance = ((DateTime)lastRecoveryPointReceivedValue);
+                                            vMwareCbtMigrationDetailsInstance.LastRecoveryPointReceived = lastRecoveryPointReceivedInstance;
                                         }
                                         
                                         JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
@@ -4844,6 +4989,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtMigrationDetailsInstance.TargetAvailabilitySetId = targetAvailabilitySetIdInstance;
                                         }
                                         
+                                        JToken targetBootDiagnosticsStorageAccountIdValue = providerSpecificDetailsValue["targetBootDiagnosticsStorageAccountId"];
+                                        if (targetBootDiagnosticsStorageAccountIdValue != null && targetBootDiagnosticsStorageAccountIdValue.Type != JTokenType.Null)
+                                        {
+                                            string targetBootDiagnosticsStorageAccountIdInstance = ((string)targetBootDiagnosticsStorageAccountIdValue);
+                                            vMwareCbtMigrationDetailsInstance.TargetBootDiagnosticsStorageAccountId = targetBootDiagnosticsStorageAccountIdInstance;
+                                        }
+                                        
                                         JToken protectedDisksArray = providerSpecificDetailsValue["protectedDisks"];
                                         if (protectedDisksArray != null && protectedDisksArray.Type != JTokenType.Null)
                                         {
@@ -4866,10 +5018,17 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtProtectedDiskDetailsInstance.DiskName = diskNameInstance;
                                                 }
                                                 
+                                                JToken diskPathValue = protectedDisksValue["diskPath"];
+                                                if (diskPathValue != null && diskPathValue.Type != JTokenType.Null)
+                                                {
+                                                    string diskPathInstance = ((string)diskPathValue);
+                                                    vMwareCbtProtectedDiskDetailsInstance.DiskPath = diskPathInstance;
+                                                }
+                                                
                                                 JToken isOSDiskValue = protectedDisksValue["isOSDisk"];
                                                 if (isOSDiskValue != null && isOSDiskValue.Type != JTokenType.Null)
                                                 {
-                                                    bool isOSDiskInstance = ((bool)isOSDiskValue);
+                                                    string isOSDiskInstance = ((string)isOSDiskValue);
                                                     vMwareCbtProtectedDiskDetailsInstance.IsOSDisk = isOSDiskInstance;
                                                 }
                                                 
@@ -4963,8 +5122,22 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 JToken isPrimaryNicValue = vmNicsValue["isPrimaryNic"];
                                                 if (isPrimaryNicValue != null && isPrimaryNicValue.Type != JTokenType.Null)
                                                 {
-                                                    bool isPrimaryNicInstance = ((bool)isPrimaryNicValue);
+                                                    string isPrimaryNicInstance = ((string)isPrimaryNicValue);
                                                     vMwareCbtNicDetailsInstance.IsPrimaryNic = isPrimaryNicInstance;
+                                                }
+                                                
+                                                JToken sourceIPAddressValue = vmNicsValue["sourceIPAddress"];
+                                                if (sourceIPAddressValue != null && sourceIPAddressValue.Type != JTokenType.Null)
+                                                {
+                                                    string sourceIPAddressInstance = ((string)sourceIPAddressValue);
+                                                    vMwareCbtNicDetailsInstance.SourceIPAddress = sourceIPAddressInstance;
+                                                }
+                                                
+                                                JToken sourceIPAddressTypeValue = vmNicsValue["sourceIPAddressType"];
+                                                if (sourceIPAddressTypeValue != null && sourceIPAddressTypeValue.Type != JTokenType.Null)
+                                                {
+                                                    string sourceIPAddressTypeInstance = ((string)sourceIPAddressTypeValue);
+                                                    vMwareCbtNicDetailsInstance.SourceIPAddressType = sourceIPAddressTypeInstance;
                                                 }
                                                 
                                                 JToken sourceNetworkIdValue = vmNicsValue["sourceNetworkId"];
@@ -4974,6 +5147,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtNicDetailsInstance.SourceNetworkId = sourceNetworkIdInstance;
                                                 }
                                                 
+                                                JToken targetIPAddressValue = vmNicsValue["targetIPAddress"];
+                                                if (targetIPAddressValue != null && targetIPAddressValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetIPAddressInstance = ((string)targetIPAddressValue);
+                                                    vMwareCbtNicDetailsInstance.TargetIPAddress = targetIPAddressInstance;
+                                                }
+                                                
+                                                JToken targetIPAddressTypeValue = vmNicsValue["targetIPAddressType"];
+                                                if (targetIPAddressTypeValue != null && targetIPAddressTypeValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetIPAddressTypeInstance = ((string)targetIPAddressTypeValue);
+                                                    vMwareCbtNicDetailsInstance.TargetIPAddressType = targetIPAddressTypeInstance;
+                                                }
+                                                
                                                 JToken targetSubnetNameValue = vmNicsValue["targetSubnetName"];
                                                 if (targetSubnetNameValue != null && targetSubnetNameValue.Type != JTokenType.Null)
                                                 {
@@ -4981,24 +5168,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtNicDetailsInstance.TargetSubnetName = targetSubnetNameInstance;
                                                 }
                                                 
-                                                JToken ipAddressTypeValue = vmNicsValue["ipAddressType"];
-                                                if (ipAddressTypeValue != null && ipAddressTypeValue.Type != JTokenType.Null)
-                                                {
-                                                    string ipAddressTypeInstance = ((string)ipAddressTypeValue);
-                                                    vMwareCbtNicDetailsInstance.IpAddressType = ipAddressTypeInstance;
-                                                }
-                                                
-                                                JToken staticIPAddressValue = vmNicsValue["staticIPAddress"];
-                                                if (staticIPAddressValue != null && staticIPAddressValue.Type != JTokenType.Null)
-                                                {
-                                                    string staticIPAddressInstance = ((string)staticIPAddressValue);
-                                                    vMwareCbtNicDetailsInstance.StaticIPAddress = staticIPAddressInstance;
-                                                }
-                                                
                                                 JToken isSelectedForMigrationValue = vmNicsValue["isSelectedForMigration"];
                                                 if (isSelectedForMigrationValue != null && isSelectedForMigrationValue.Type != JTokenType.Null)
                                                 {
-                                                    bool isSelectedForMigrationInstance = ((bool)isSelectedForMigrationValue);
+                                                    string isSelectedForMigrationInstance = ((string)isSelectedForMigrationValue);
                                                     vMwareCbtNicDetailsInstance.IsSelectedForMigration = isSelectedForMigrationInstance;
                                                 }
                                             }
@@ -5009,6 +5182,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             string migrationRecoveryPointIdInstance = ((string)migrationRecoveryPointIdValue);
                                             vMwareCbtMigrationDetailsInstance.MigrationRecoveryPointId = migrationRecoveryPointIdInstance;
+                                        }
+                                        
+                                        JToken lastRecoveryPointReceivedValue = providerSpecificDetailsValue["lastRecoveryPointReceived"];
+                                        if (lastRecoveryPointReceivedValue != null && lastRecoveryPointReceivedValue.Type != JTokenType.Null)
+                                        {
+                                            DateTime lastRecoveryPointReceivedInstance = ((DateTime)lastRecoveryPointReceivedValue);
+                                            vMwareCbtMigrationDetailsInstance.LastRecoveryPointReceived = lastRecoveryPointReceivedInstance;
                                         }
                                         
                                         JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
@@ -5479,6 +5659,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtMigrationDetailsInstance.TargetAvailabilitySetId = targetAvailabilitySetIdInstance;
                                         }
                                         
+                                        JToken targetBootDiagnosticsStorageAccountIdValue = providerSpecificDetailsValue["targetBootDiagnosticsStorageAccountId"];
+                                        if (targetBootDiagnosticsStorageAccountIdValue != null && targetBootDiagnosticsStorageAccountIdValue.Type != JTokenType.Null)
+                                        {
+                                            string targetBootDiagnosticsStorageAccountIdInstance = ((string)targetBootDiagnosticsStorageAccountIdValue);
+                                            vMwareCbtMigrationDetailsInstance.TargetBootDiagnosticsStorageAccountId = targetBootDiagnosticsStorageAccountIdInstance;
+                                        }
+                                        
                                         JToken protectedDisksArray = providerSpecificDetailsValue["protectedDisks"];
                                         if (protectedDisksArray != null && protectedDisksArray.Type != JTokenType.Null)
                                         {
@@ -5501,10 +5688,17 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtProtectedDiskDetailsInstance.DiskName = diskNameInstance;
                                                 }
                                                 
+                                                JToken diskPathValue = protectedDisksValue["diskPath"];
+                                                if (diskPathValue != null && diskPathValue.Type != JTokenType.Null)
+                                                {
+                                                    string diskPathInstance = ((string)diskPathValue);
+                                                    vMwareCbtProtectedDiskDetailsInstance.DiskPath = diskPathInstance;
+                                                }
+                                                
                                                 JToken isOSDiskValue = protectedDisksValue["isOSDisk"];
                                                 if (isOSDiskValue != null && isOSDiskValue.Type != JTokenType.Null)
                                                 {
-                                                    bool isOSDiskInstance = ((bool)isOSDiskValue);
+                                                    string isOSDiskInstance = ((string)isOSDiskValue);
                                                     vMwareCbtProtectedDiskDetailsInstance.IsOSDisk = isOSDiskInstance;
                                                 }
                                                 
@@ -5598,8 +5792,22 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 JToken isPrimaryNicValue = vmNicsValue["isPrimaryNic"];
                                                 if (isPrimaryNicValue != null && isPrimaryNicValue.Type != JTokenType.Null)
                                                 {
-                                                    bool isPrimaryNicInstance = ((bool)isPrimaryNicValue);
+                                                    string isPrimaryNicInstance = ((string)isPrimaryNicValue);
                                                     vMwareCbtNicDetailsInstance.IsPrimaryNic = isPrimaryNicInstance;
+                                                }
+                                                
+                                                JToken sourceIPAddressValue = vmNicsValue["sourceIPAddress"];
+                                                if (sourceIPAddressValue != null && sourceIPAddressValue.Type != JTokenType.Null)
+                                                {
+                                                    string sourceIPAddressInstance = ((string)sourceIPAddressValue);
+                                                    vMwareCbtNicDetailsInstance.SourceIPAddress = sourceIPAddressInstance;
+                                                }
+                                                
+                                                JToken sourceIPAddressTypeValue = vmNicsValue["sourceIPAddressType"];
+                                                if (sourceIPAddressTypeValue != null && sourceIPAddressTypeValue.Type != JTokenType.Null)
+                                                {
+                                                    string sourceIPAddressTypeInstance = ((string)sourceIPAddressTypeValue);
+                                                    vMwareCbtNicDetailsInstance.SourceIPAddressType = sourceIPAddressTypeInstance;
                                                 }
                                                 
                                                 JToken sourceNetworkIdValue = vmNicsValue["sourceNetworkId"];
@@ -5609,6 +5817,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtNicDetailsInstance.SourceNetworkId = sourceNetworkIdInstance;
                                                 }
                                                 
+                                                JToken targetIPAddressValue = vmNicsValue["targetIPAddress"];
+                                                if (targetIPAddressValue != null && targetIPAddressValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetIPAddressInstance = ((string)targetIPAddressValue);
+                                                    vMwareCbtNicDetailsInstance.TargetIPAddress = targetIPAddressInstance;
+                                                }
+                                                
+                                                JToken targetIPAddressTypeValue = vmNicsValue["targetIPAddressType"];
+                                                if (targetIPAddressTypeValue != null && targetIPAddressTypeValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetIPAddressTypeInstance = ((string)targetIPAddressTypeValue);
+                                                    vMwareCbtNicDetailsInstance.TargetIPAddressType = targetIPAddressTypeInstance;
+                                                }
+                                                
                                                 JToken targetSubnetNameValue = vmNicsValue["targetSubnetName"];
                                                 if (targetSubnetNameValue != null && targetSubnetNameValue.Type != JTokenType.Null)
                                                 {
@@ -5616,24 +5838,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtNicDetailsInstance.TargetSubnetName = targetSubnetNameInstance;
                                                 }
                                                 
-                                                JToken ipAddressTypeValue = vmNicsValue["ipAddressType"];
-                                                if (ipAddressTypeValue != null && ipAddressTypeValue.Type != JTokenType.Null)
-                                                {
-                                                    string ipAddressTypeInstance = ((string)ipAddressTypeValue);
-                                                    vMwareCbtNicDetailsInstance.IpAddressType = ipAddressTypeInstance;
-                                                }
-                                                
-                                                JToken staticIPAddressValue = vmNicsValue["staticIPAddress"];
-                                                if (staticIPAddressValue != null && staticIPAddressValue.Type != JTokenType.Null)
-                                                {
-                                                    string staticIPAddressInstance = ((string)staticIPAddressValue);
-                                                    vMwareCbtNicDetailsInstance.StaticIPAddress = staticIPAddressInstance;
-                                                }
-                                                
                                                 JToken isSelectedForMigrationValue = vmNicsValue["isSelectedForMigration"];
                                                 if (isSelectedForMigrationValue != null && isSelectedForMigrationValue.Type != JTokenType.Null)
                                                 {
-                                                    bool isSelectedForMigrationInstance = ((bool)isSelectedForMigrationValue);
+                                                    string isSelectedForMigrationInstance = ((string)isSelectedForMigrationValue);
                                                     vMwareCbtNicDetailsInstance.IsSelectedForMigration = isSelectedForMigrationInstance;
                                                 }
                                             }
@@ -5644,6 +5852,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             string migrationRecoveryPointIdInstance = ((string)migrationRecoveryPointIdValue);
                                             vMwareCbtMigrationDetailsInstance.MigrationRecoveryPointId = migrationRecoveryPointIdInstance;
+                                        }
+                                        
+                                        JToken lastRecoveryPointReceivedValue = providerSpecificDetailsValue["lastRecoveryPointReceived"];
+                                        if (lastRecoveryPointReceivedValue != null && lastRecoveryPointReceivedValue.Type != JTokenType.Null)
+                                        {
+                                            DateTime lastRecoveryPointReceivedInstance = ((DateTime)lastRecoveryPointReceivedValue);
+                                            vMwareCbtMigrationDetailsInstance.LastRecoveryPointReceived = lastRecoveryPointReceivedInstance;
                                         }
                                         
                                         JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
@@ -6114,6 +6329,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtMigrationDetailsInstance.TargetAvailabilitySetId = targetAvailabilitySetIdInstance;
                                         }
                                         
+                                        JToken targetBootDiagnosticsStorageAccountIdValue = providerSpecificDetailsValue["targetBootDiagnosticsStorageAccountId"];
+                                        if (targetBootDiagnosticsStorageAccountIdValue != null && targetBootDiagnosticsStorageAccountIdValue.Type != JTokenType.Null)
+                                        {
+                                            string targetBootDiagnosticsStorageAccountIdInstance = ((string)targetBootDiagnosticsStorageAccountIdValue);
+                                            vMwareCbtMigrationDetailsInstance.TargetBootDiagnosticsStorageAccountId = targetBootDiagnosticsStorageAccountIdInstance;
+                                        }
+                                        
                                         JToken protectedDisksArray = providerSpecificDetailsValue["protectedDisks"];
                                         if (protectedDisksArray != null && protectedDisksArray.Type != JTokenType.Null)
                                         {
@@ -6136,10 +6358,17 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtProtectedDiskDetailsInstance.DiskName = diskNameInstance;
                                                 }
                                                 
+                                                JToken diskPathValue = protectedDisksValue["diskPath"];
+                                                if (diskPathValue != null && diskPathValue.Type != JTokenType.Null)
+                                                {
+                                                    string diskPathInstance = ((string)diskPathValue);
+                                                    vMwareCbtProtectedDiskDetailsInstance.DiskPath = diskPathInstance;
+                                                }
+                                                
                                                 JToken isOSDiskValue = protectedDisksValue["isOSDisk"];
                                                 if (isOSDiskValue != null && isOSDiskValue.Type != JTokenType.Null)
                                                 {
-                                                    bool isOSDiskInstance = ((bool)isOSDiskValue);
+                                                    string isOSDiskInstance = ((string)isOSDiskValue);
                                                     vMwareCbtProtectedDiskDetailsInstance.IsOSDisk = isOSDiskInstance;
                                                 }
                                                 
@@ -6233,8 +6462,22 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 JToken isPrimaryNicValue = vmNicsValue["isPrimaryNic"];
                                                 if (isPrimaryNicValue != null && isPrimaryNicValue.Type != JTokenType.Null)
                                                 {
-                                                    bool isPrimaryNicInstance = ((bool)isPrimaryNicValue);
+                                                    string isPrimaryNicInstance = ((string)isPrimaryNicValue);
                                                     vMwareCbtNicDetailsInstance.IsPrimaryNic = isPrimaryNicInstance;
+                                                }
+                                                
+                                                JToken sourceIPAddressValue = vmNicsValue["sourceIPAddress"];
+                                                if (sourceIPAddressValue != null && sourceIPAddressValue.Type != JTokenType.Null)
+                                                {
+                                                    string sourceIPAddressInstance = ((string)sourceIPAddressValue);
+                                                    vMwareCbtNicDetailsInstance.SourceIPAddress = sourceIPAddressInstance;
+                                                }
+                                                
+                                                JToken sourceIPAddressTypeValue = vmNicsValue["sourceIPAddressType"];
+                                                if (sourceIPAddressTypeValue != null && sourceIPAddressTypeValue.Type != JTokenType.Null)
+                                                {
+                                                    string sourceIPAddressTypeInstance = ((string)sourceIPAddressTypeValue);
+                                                    vMwareCbtNicDetailsInstance.SourceIPAddressType = sourceIPAddressTypeInstance;
                                                 }
                                                 
                                                 JToken sourceNetworkIdValue = vmNicsValue["sourceNetworkId"];
@@ -6244,6 +6487,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtNicDetailsInstance.SourceNetworkId = sourceNetworkIdInstance;
                                                 }
                                                 
+                                                JToken targetIPAddressValue = vmNicsValue["targetIPAddress"];
+                                                if (targetIPAddressValue != null && targetIPAddressValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetIPAddressInstance = ((string)targetIPAddressValue);
+                                                    vMwareCbtNicDetailsInstance.TargetIPAddress = targetIPAddressInstance;
+                                                }
+                                                
+                                                JToken targetIPAddressTypeValue = vmNicsValue["targetIPAddressType"];
+                                                if (targetIPAddressTypeValue != null && targetIPAddressTypeValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetIPAddressTypeInstance = ((string)targetIPAddressTypeValue);
+                                                    vMwareCbtNicDetailsInstance.TargetIPAddressType = targetIPAddressTypeInstance;
+                                                }
+                                                
                                                 JToken targetSubnetNameValue = vmNicsValue["targetSubnetName"];
                                                 if (targetSubnetNameValue != null && targetSubnetNameValue.Type != JTokenType.Null)
                                                 {
@@ -6251,24 +6508,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtNicDetailsInstance.TargetSubnetName = targetSubnetNameInstance;
                                                 }
                                                 
-                                                JToken ipAddressTypeValue = vmNicsValue["ipAddressType"];
-                                                if (ipAddressTypeValue != null && ipAddressTypeValue.Type != JTokenType.Null)
-                                                {
-                                                    string ipAddressTypeInstance = ((string)ipAddressTypeValue);
-                                                    vMwareCbtNicDetailsInstance.IpAddressType = ipAddressTypeInstance;
-                                                }
-                                                
-                                                JToken staticIPAddressValue = vmNicsValue["staticIPAddress"];
-                                                if (staticIPAddressValue != null && staticIPAddressValue.Type != JTokenType.Null)
-                                                {
-                                                    string staticIPAddressInstance = ((string)staticIPAddressValue);
-                                                    vMwareCbtNicDetailsInstance.StaticIPAddress = staticIPAddressInstance;
-                                                }
-                                                
                                                 JToken isSelectedForMigrationValue = vmNicsValue["isSelectedForMigration"];
                                                 if (isSelectedForMigrationValue != null && isSelectedForMigrationValue.Type != JTokenType.Null)
                                                 {
-                                                    bool isSelectedForMigrationInstance = ((bool)isSelectedForMigrationValue);
+                                                    string isSelectedForMigrationInstance = ((string)isSelectedForMigrationValue);
                                                     vMwareCbtNicDetailsInstance.IsSelectedForMigration = isSelectedForMigrationInstance;
                                                 }
                                             }
@@ -6279,6 +6522,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             string migrationRecoveryPointIdInstance = ((string)migrationRecoveryPointIdValue);
                                             vMwareCbtMigrationDetailsInstance.MigrationRecoveryPointId = migrationRecoveryPointIdInstance;
+                                        }
+                                        
+                                        JToken lastRecoveryPointReceivedValue = providerSpecificDetailsValue["lastRecoveryPointReceived"];
+                                        if (lastRecoveryPointReceivedValue != null && lastRecoveryPointReceivedValue.Type != JTokenType.Null)
+                                        {
+                                            DateTime lastRecoveryPointReceivedInstance = ((DateTime)lastRecoveryPointReceivedValue);
+                                            vMwareCbtMigrationDetailsInstance.LastRecoveryPointReceived = lastRecoveryPointReceivedInstance;
                                         }
                                         
                                         JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
@@ -6749,6 +6999,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtMigrationDetailsInstance.TargetAvailabilitySetId = targetAvailabilitySetIdInstance;
                                         }
                                         
+                                        JToken targetBootDiagnosticsStorageAccountIdValue = providerSpecificDetailsValue["targetBootDiagnosticsStorageAccountId"];
+                                        if (targetBootDiagnosticsStorageAccountIdValue != null && targetBootDiagnosticsStorageAccountIdValue.Type != JTokenType.Null)
+                                        {
+                                            string targetBootDiagnosticsStorageAccountIdInstance = ((string)targetBootDiagnosticsStorageAccountIdValue);
+                                            vMwareCbtMigrationDetailsInstance.TargetBootDiagnosticsStorageAccountId = targetBootDiagnosticsStorageAccountIdInstance;
+                                        }
+                                        
                                         JToken protectedDisksArray = providerSpecificDetailsValue["protectedDisks"];
                                         if (protectedDisksArray != null && protectedDisksArray.Type != JTokenType.Null)
                                         {
@@ -6771,10 +7028,17 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtProtectedDiskDetailsInstance.DiskName = diskNameInstance;
                                                 }
                                                 
+                                                JToken diskPathValue = protectedDisksValue["diskPath"];
+                                                if (diskPathValue != null && diskPathValue.Type != JTokenType.Null)
+                                                {
+                                                    string diskPathInstance = ((string)diskPathValue);
+                                                    vMwareCbtProtectedDiskDetailsInstance.DiskPath = diskPathInstance;
+                                                }
+                                                
                                                 JToken isOSDiskValue = protectedDisksValue["isOSDisk"];
                                                 if (isOSDiskValue != null && isOSDiskValue.Type != JTokenType.Null)
                                                 {
-                                                    bool isOSDiskInstance = ((bool)isOSDiskValue);
+                                                    string isOSDiskInstance = ((string)isOSDiskValue);
                                                     vMwareCbtProtectedDiskDetailsInstance.IsOSDisk = isOSDiskInstance;
                                                 }
                                                 
@@ -6868,8 +7132,22 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 JToken isPrimaryNicValue = vmNicsValue["isPrimaryNic"];
                                                 if (isPrimaryNicValue != null && isPrimaryNicValue.Type != JTokenType.Null)
                                                 {
-                                                    bool isPrimaryNicInstance = ((bool)isPrimaryNicValue);
+                                                    string isPrimaryNicInstance = ((string)isPrimaryNicValue);
                                                     vMwareCbtNicDetailsInstance.IsPrimaryNic = isPrimaryNicInstance;
+                                                }
+                                                
+                                                JToken sourceIPAddressValue = vmNicsValue["sourceIPAddress"];
+                                                if (sourceIPAddressValue != null && sourceIPAddressValue.Type != JTokenType.Null)
+                                                {
+                                                    string sourceIPAddressInstance = ((string)sourceIPAddressValue);
+                                                    vMwareCbtNicDetailsInstance.SourceIPAddress = sourceIPAddressInstance;
+                                                }
+                                                
+                                                JToken sourceIPAddressTypeValue = vmNicsValue["sourceIPAddressType"];
+                                                if (sourceIPAddressTypeValue != null && sourceIPAddressTypeValue.Type != JTokenType.Null)
+                                                {
+                                                    string sourceIPAddressTypeInstance = ((string)sourceIPAddressTypeValue);
+                                                    vMwareCbtNicDetailsInstance.SourceIPAddressType = sourceIPAddressTypeInstance;
                                                 }
                                                 
                                                 JToken sourceNetworkIdValue = vmNicsValue["sourceNetworkId"];
@@ -6879,6 +7157,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtNicDetailsInstance.SourceNetworkId = sourceNetworkIdInstance;
                                                 }
                                                 
+                                                JToken targetIPAddressValue = vmNicsValue["targetIPAddress"];
+                                                if (targetIPAddressValue != null && targetIPAddressValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetIPAddressInstance = ((string)targetIPAddressValue);
+                                                    vMwareCbtNicDetailsInstance.TargetIPAddress = targetIPAddressInstance;
+                                                }
+                                                
+                                                JToken targetIPAddressTypeValue = vmNicsValue["targetIPAddressType"];
+                                                if (targetIPAddressTypeValue != null && targetIPAddressTypeValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetIPAddressTypeInstance = ((string)targetIPAddressTypeValue);
+                                                    vMwareCbtNicDetailsInstance.TargetIPAddressType = targetIPAddressTypeInstance;
+                                                }
+                                                
                                                 JToken targetSubnetNameValue = vmNicsValue["targetSubnetName"];
                                                 if (targetSubnetNameValue != null && targetSubnetNameValue.Type != JTokenType.Null)
                                                 {
@@ -6886,24 +7178,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtNicDetailsInstance.TargetSubnetName = targetSubnetNameInstance;
                                                 }
                                                 
-                                                JToken ipAddressTypeValue = vmNicsValue["ipAddressType"];
-                                                if (ipAddressTypeValue != null && ipAddressTypeValue.Type != JTokenType.Null)
-                                                {
-                                                    string ipAddressTypeInstance = ((string)ipAddressTypeValue);
-                                                    vMwareCbtNicDetailsInstance.IpAddressType = ipAddressTypeInstance;
-                                                }
-                                                
-                                                JToken staticIPAddressValue = vmNicsValue["staticIPAddress"];
-                                                if (staticIPAddressValue != null && staticIPAddressValue.Type != JTokenType.Null)
-                                                {
-                                                    string staticIPAddressInstance = ((string)staticIPAddressValue);
-                                                    vMwareCbtNicDetailsInstance.StaticIPAddress = staticIPAddressInstance;
-                                                }
-                                                
                                                 JToken isSelectedForMigrationValue = vmNicsValue["isSelectedForMigration"];
                                                 if (isSelectedForMigrationValue != null && isSelectedForMigrationValue.Type != JTokenType.Null)
                                                 {
-                                                    bool isSelectedForMigrationInstance = ((bool)isSelectedForMigrationValue);
+                                                    string isSelectedForMigrationInstance = ((string)isSelectedForMigrationValue);
                                                     vMwareCbtNicDetailsInstance.IsSelectedForMigration = isSelectedForMigrationInstance;
                                                 }
                                             }
@@ -6914,6 +7192,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             string migrationRecoveryPointIdInstance = ((string)migrationRecoveryPointIdValue);
                                             vMwareCbtMigrationDetailsInstance.MigrationRecoveryPointId = migrationRecoveryPointIdInstance;
+                                        }
+                                        
+                                        JToken lastRecoveryPointReceivedValue = providerSpecificDetailsValue["lastRecoveryPointReceived"];
+                                        if (lastRecoveryPointReceivedValue != null && lastRecoveryPointReceivedValue.Type != JTokenType.Null)
+                                        {
+                                            DateTime lastRecoveryPointReceivedInstance = ((DateTime)lastRecoveryPointReceivedValue);
+                                            vMwareCbtMigrationDetailsInstance.LastRecoveryPointReceived = lastRecoveryPointReceivedInstance;
                                         }
                                         
                                         JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
@@ -7433,6 +7718,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtMigrationDetailsInstance.TargetAvailabilitySetId = targetAvailabilitySetIdInstance;
                                                 }
                                                 
+                                                JToken targetBootDiagnosticsStorageAccountIdValue = providerSpecificDetailsValue["targetBootDiagnosticsStorageAccountId"];
+                                                if (targetBootDiagnosticsStorageAccountIdValue != null && targetBootDiagnosticsStorageAccountIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetBootDiagnosticsStorageAccountIdInstance = ((string)targetBootDiagnosticsStorageAccountIdValue);
+                                                    vMwareCbtMigrationDetailsInstance.TargetBootDiagnosticsStorageAccountId = targetBootDiagnosticsStorageAccountIdInstance;
+                                                }
+                                                
                                                 JToken protectedDisksArray = providerSpecificDetailsValue["protectedDisks"];
                                                 if (protectedDisksArray != null && protectedDisksArray.Type != JTokenType.Null)
                                                 {
@@ -7455,10 +7747,17 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                             vMwareCbtProtectedDiskDetailsInstance.DiskName = diskNameInstance;
                                                         }
                                                         
+                                                        JToken diskPathValue = protectedDisksValue["diskPath"];
+                                                        if (diskPathValue != null && diskPathValue.Type != JTokenType.Null)
+                                                        {
+                                                            string diskPathInstance = ((string)diskPathValue);
+                                                            vMwareCbtProtectedDiskDetailsInstance.DiskPath = diskPathInstance;
+                                                        }
+                                                        
                                                         JToken isOSDiskValue = protectedDisksValue["isOSDisk"];
                                                         if (isOSDiskValue != null && isOSDiskValue.Type != JTokenType.Null)
                                                         {
-                                                            bool isOSDiskInstance = ((bool)isOSDiskValue);
+                                                            string isOSDiskInstance = ((string)isOSDiskValue);
                                                             vMwareCbtProtectedDiskDetailsInstance.IsOSDisk = isOSDiskInstance;
                                                         }
                                                         
@@ -7552,8 +7851,22 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                         JToken isPrimaryNicValue = vmNicsValue["isPrimaryNic"];
                                                         if (isPrimaryNicValue != null && isPrimaryNicValue.Type != JTokenType.Null)
                                                         {
-                                                            bool isPrimaryNicInstance = ((bool)isPrimaryNicValue);
+                                                            string isPrimaryNicInstance = ((string)isPrimaryNicValue);
                                                             vMwareCbtNicDetailsInstance.IsPrimaryNic = isPrimaryNicInstance;
+                                                        }
+                                                        
+                                                        JToken sourceIPAddressValue = vmNicsValue["sourceIPAddress"];
+                                                        if (sourceIPAddressValue != null && sourceIPAddressValue.Type != JTokenType.Null)
+                                                        {
+                                                            string sourceIPAddressInstance = ((string)sourceIPAddressValue);
+                                                            vMwareCbtNicDetailsInstance.SourceIPAddress = sourceIPAddressInstance;
+                                                        }
+                                                        
+                                                        JToken sourceIPAddressTypeValue = vmNicsValue["sourceIPAddressType"];
+                                                        if (sourceIPAddressTypeValue != null && sourceIPAddressTypeValue.Type != JTokenType.Null)
+                                                        {
+                                                            string sourceIPAddressTypeInstance = ((string)sourceIPAddressTypeValue);
+                                                            vMwareCbtNicDetailsInstance.SourceIPAddressType = sourceIPAddressTypeInstance;
                                                         }
                                                         
                                                         JToken sourceNetworkIdValue = vmNicsValue["sourceNetworkId"];
@@ -7563,6 +7876,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                             vMwareCbtNicDetailsInstance.SourceNetworkId = sourceNetworkIdInstance;
                                                         }
                                                         
+                                                        JToken targetIPAddressValue = vmNicsValue["targetIPAddress"];
+                                                        if (targetIPAddressValue != null && targetIPAddressValue.Type != JTokenType.Null)
+                                                        {
+                                                            string targetIPAddressInstance = ((string)targetIPAddressValue);
+                                                            vMwareCbtNicDetailsInstance.TargetIPAddress = targetIPAddressInstance;
+                                                        }
+                                                        
+                                                        JToken targetIPAddressTypeValue = vmNicsValue["targetIPAddressType"];
+                                                        if (targetIPAddressTypeValue != null && targetIPAddressTypeValue.Type != JTokenType.Null)
+                                                        {
+                                                            string targetIPAddressTypeInstance = ((string)targetIPAddressTypeValue);
+                                                            vMwareCbtNicDetailsInstance.TargetIPAddressType = targetIPAddressTypeInstance;
+                                                        }
+                                                        
                                                         JToken targetSubnetNameValue = vmNicsValue["targetSubnetName"];
                                                         if (targetSubnetNameValue != null && targetSubnetNameValue.Type != JTokenType.Null)
                                                         {
@@ -7570,24 +7897,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                             vMwareCbtNicDetailsInstance.TargetSubnetName = targetSubnetNameInstance;
                                                         }
                                                         
-                                                        JToken ipAddressTypeValue = vmNicsValue["ipAddressType"];
-                                                        if (ipAddressTypeValue != null && ipAddressTypeValue.Type != JTokenType.Null)
-                                                        {
-                                                            string ipAddressTypeInstance = ((string)ipAddressTypeValue);
-                                                            vMwareCbtNicDetailsInstance.IpAddressType = ipAddressTypeInstance;
-                                                        }
-                                                        
-                                                        JToken staticIPAddressValue = vmNicsValue["staticIPAddress"];
-                                                        if (staticIPAddressValue != null && staticIPAddressValue.Type != JTokenType.Null)
-                                                        {
-                                                            string staticIPAddressInstance = ((string)staticIPAddressValue);
-                                                            vMwareCbtNicDetailsInstance.StaticIPAddress = staticIPAddressInstance;
-                                                        }
-                                                        
                                                         JToken isSelectedForMigrationValue = vmNicsValue["isSelectedForMigration"];
                                                         if (isSelectedForMigrationValue != null && isSelectedForMigrationValue.Type != JTokenType.Null)
                                                         {
-                                                            bool isSelectedForMigrationInstance = ((bool)isSelectedForMigrationValue);
+                                                            string isSelectedForMigrationInstance = ((string)isSelectedForMigrationValue);
                                                             vMwareCbtNicDetailsInstance.IsSelectedForMigration = isSelectedForMigrationInstance;
                                                         }
                                                     }
@@ -7598,6 +7911,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 {
                                                     string migrationRecoveryPointIdInstance = ((string)migrationRecoveryPointIdValue);
                                                     vMwareCbtMigrationDetailsInstance.MigrationRecoveryPointId = migrationRecoveryPointIdInstance;
+                                                }
+                                                
+                                                JToken lastRecoveryPointReceivedValue = providerSpecificDetailsValue["lastRecoveryPointReceived"];
+                                                if (lastRecoveryPointReceivedValue != null && lastRecoveryPointReceivedValue.Type != JTokenType.Null)
+                                                {
+                                                    DateTime lastRecoveryPointReceivedInstance = ((DateTime)lastRecoveryPointReceivedValue);
+                                                    vMwareCbtMigrationDetailsInstance.LastRecoveryPointReceived = lastRecoveryPointReceivedInstance;
                                                 }
                                                 
                                                 JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
@@ -8068,6 +8388,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtMigrationDetailsInstance.TargetAvailabilitySetId = targetAvailabilitySetIdInstance;
                                                 }
                                                 
+                                                JToken targetBootDiagnosticsStorageAccountIdValue = providerSpecificDetailsValue["targetBootDiagnosticsStorageAccountId"];
+                                                if (targetBootDiagnosticsStorageAccountIdValue != null && targetBootDiagnosticsStorageAccountIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetBootDiagnosticsStorageAccountIdInstance = ((string)targetBootDiagnosticsStorageAccountIdValue);
+                                                    vMwareCbtMigrationDetailsInstance.TargetBootDiagnosticsStorageAccountId = targetBootDiagnosticsStorageAccountIdInstance;
+                                                }
+                                                
                                                 JToken protectedDisksArray = providerSpecificDetailsValue["protectedDisks"];
                                                 if (protectedDisksArray != null && protectedDisksArray.Type != JTokenType.Null)
                                                 {
@@ -8090,10 +8417,17 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                             vMwareCbtProtectedDiskDetailsInstance.DiskName = diskNameInstance;
                                                         }
                                                         
+                                                        JToken diskPathValue = protectedDisksValue["diskPath"];
+                                                        if (diskPathValue != null && diskPathValue.Type != JTokenType.Null)
+                                                        {
+                                                            string diskPathInstance = ((string)diskPathValue);
+                                                            vMwareCbtProtectedDiskDetailsInstance.DiskPath = diskPathInstance;
+                                                        }
+                                                        
                                                         JToken isOSDiskValue = protectedDisksValue["isOSDisk"];
                                                         if (isOSDiskValue != null && isOSDiskValue.Type != JTokenType.Null)
                                                         {
-                                                            bool isOSDiskInstance = ((bool)isOSDiskValue);
+                                                            string isOSDiskInstance = ((string)isOSDiskValue);
                                                             vMwareCbtProtectedDiskDetailsInstance.IsOSDisk = isOSDiskInstance;
                                                         }
                                                         
@@ -8187,8 +8521,22 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                         JToken isPrimaryNicValue = vmNicsValue["isPrimaryNic"];
                                                         if (isPrimaryNicValue != null && isPrimaryNicValue.Type != JTokenType.Null)
                                                         {
-                                                            bool isPrimaryNicInstance = ((bool)isPrimaryNicValue);
+                                                            string isPrimaryNicInstance = ((string)isPrimaryNicValue);
                                                             vMwareCbtNicDetailsInstance.IsPrimaryNic = isPrimaryNicInstance;
+                                                        }
+                                                        
+                                                        JToken sourceIPAddressValue = vmNicsValue["sourceIPAddress"];
+                                                        if (sourceIPAddressValue != null && sourceIPAddressValue.Type != JTokenType.Null)
+                                                        {
+                                                            string sourceIPAddressInstance = ((string)sourceIPAddressValue);
+                                                            vMwareCbtNicDetailsInstance.SourceIPAddress = sourceIPAddressInstance;
+                                                        }
+                                                        
+                                                        JToken sourceIPAddressTypeValue = vmNicsValue["sourceIPAddressType"];
+                                                        if (sourceIPAddressTypeValue != null && sourceIPAddressTypeValue.Type != JTokenType.Null)
+                                                        {
+                                                            string sourceIPAddressTypeInstance = ((string)sourceIPAddressTypeValue);
+                                                            vMwareCbtNicDetailsInstance.SourceIPAddressType = sourceIPAddressTypeInstance;
                                                         }
                                                         
                                                         JToken sourceNetworkIdValue = vmNicsValue["sourceNetworkId"];
@@ -8198,6 +8546,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                             vMwareCbtNicDetailsInstance.SourceNetworkId = sourceNetworkIdInstance;
                                                         }
                                                         
+                                                        JToken targetIPAddressValue = vmNicsValue["targetIPAddress"];
+                                                        if (targetIPAddressValue != null && targetIPAddressValue.Type != JTokenType.Null)
+                                                        {
+                                                            string targetIPAddressInstance = ((string)targetIPAddressValue);
+                                                            vMwareCbtNicDetailsInstance.TargetIPAddress = targetIPAddressInstance;
+                                                        }
+                                                        
+                                                        JToken targetIPAddressTypeValue = vmNicsValue["targetIPAddressType"];
+                                                        if (targetIPAddressTypeValue != null && targetIPAddressTypeValue.Type != JTokenType.Null)
+                                                        {
+                                                            string targetIPAddressTypeInstance = ((string)targetIPAddressTypeValue);
+                                                            vMwareCbtNicDetailsInstance.TargetIPAddressType = targetIPAddressTypeInstance;
+                                                        }
+                                                        
                                                         JToken targetSubnetNameValue = vmNicsValue["targetSubnetName"];
                                                         if (targetSubnetNameValue != null && targetSubnetNameValue.Type != JTokenType.Null)
                                                         {
@@ -8205,24 +8567,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                             vMwareCbtNicDetailsInstance.TargetSubnetName = targetSubnetNameInstance;
                                                         }
                                                         
-                                                        JToken ipAddressTypeValue = vmNicsValue["ipAddressType"];
-                                                        if (ipAddressTypeValue != null && ipAddressTypeValue.Type != JTokenType.Null)
-                                                        {
-                                                            string ipAddressTypeInstance = ((string)ipAddressTypeValue);
-                                                            vMwareCbtNicDetailsInstance.IpAddressType = ipAddressTypeInstance;
-                                                        }
-                                                        
-                                                        JToken staticIPAddressValue = vmNicsValue["staticIPAddress"];
-                                                        if (staticIPAddressValue != null && staticIPAddressValue.Type != JTokenType.Null)
-                                                        {
-                                                            string staticIPAddressInstance = ((string)staticIPAddressValue);
-                                                            vMwareCbtNicDetailsInstance.StaticIPAddress = staticIPAddressInstance;
-                                                        }
-                                                        
                                                         JToken isSelectedForMigrationValue = vmNicsValue["isSelectedForMigration"];
                                                         if (isSelectedForMigrationValue != null && isSelectedForMigrationValue.Type != JTokenType.Null)
                                                         {
-                                                            bool isSelectedForMigrationInstance = ((bool)isSelectedForMigrationValue);
+                                                            string isSelectedForMigrationInstance = ((string)isSelectedForMigrationValue);
                                                             vMwareCbtNicDetailsInstance.IsSelectedForMigration = isSelectedForMigrationInstance;
                                                         }
                                                     }
@@ -8233,6 +8581,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 {
                                                     string migrationRecoveryPointIdInstance = ((string)migrationRecoveryPointIdValue);
                                                     vMwareCbtMigrationDetailsInstance.MigrationRecoveryPointId = migrationRecoveryPointIdInstance;
+                                                }
+                                                
+                                                JToken lastRecoveryPointReceivedValue = providerSpecificDetailsValue["lastRecoveryPointReceived"];
+                                                if (lastRecoveryPointReceivedValue != null && lastRecoveryPointReceivedValue.Type != JTokenType.Null)
+                                                {
+                                                    DateTime lastRecoveryPointReceivedInstance = ((DateTime)lastRecoveryPointReceivedValue);
+                                                    vMwareCbtMigrationDetailsInstance.LastRecoveryPointReceived = lastRecoveryPointReceivedInstance;
                                                 }
                                                 
                                                 JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
@@ -8660,6 +9015,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtMigrationDetailsInstance.TargetAvailabilitySetId = targetAvailabilitySetIdInstance;
                                                 }
                                                 
+                                                JToken targetBootDiagnosticsStorageAccountIdValue = providerSpecificDetailsValue["targetBootDiagnosticsStorageAccountId"];
+                                                if (targetBootDiagnosticsStorageAccountIdValue != null && targetBootDiagnosticsStorageAccountIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetBootDiagnosticsStorageAccountIdInstance = ((string)targetBootDiagnosticsStorageAccountIdValue);
+                                                    vMwareCbtMigrationDetailsInstance.TargetBootDiagnosticsStorageAccountId = targetBootDiagnosticsStorageAccountIdInstance;
+                                                }
+                                                
                                                 JToken protectedDisksArray = providerSpecificDetailsValue["protectedDisks"];
                                                 if (protectedDisksArray != null && protectedDisksArray.Type != JTokenType.Null)
                                                 {
@@ -8682,10 +9044,17 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                             vMwareCbtProtectedDiskDetailsInstance.DiskName = diskNameInstance;
                                                         }
                                                         
+                                                        JToken diskPathValue = protectedDisksValue["diskPath"];
+                                                        if (diskPathValue != null && diskPathValue.Type != JTokenType.Null)
+                                                        {
+                                                            string diskPathInstance = ((string)diskPathValue);
+                                                            vMwareCbtProtectedDiskDetailsInstance.DiskPath = diskPathInstance;
+                                                        }
+                                                        
                                                         JToken isOSDiskValue = protectedDisksValue["isOSDisk"];
                                                         if (isOSDiskValue != null && isOSDiskValue.Type != JTokenType.Null)
                                                         {
-                                                            bool isOSDiskInstance = ((bool)isOSDiskValue);
+                                                            string isOSDiskInstance = ((string)isOSDiskValue);
                                                             vMwareCbtProtectedDiskDetailsInstance.IsOSDisk = isOSDiskInstance;
                                                         }
                                                         
@@ -8779,8 +9148,22 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                         JToken isPrimaryNicValue = vmNicsValue["isPrimaryNic"];
                                                         if (isPrimaryNicValue != null && isPrimaryNicValue.Type != JTokenType.Null)
                                                         {
-                                                            bool isPrimaryNicInstance = ((bool)isPrimaryNicValue);
+                                                            string isPrimaryNicInstance = ((string)isPrimaryNicValue);
                                                             vMwareCbtNicDetailsInstance.IsPrimaryNic = isPrimaryNicInstance;
+                                                        }
+                                                        
+                                                        JToken sourceIPAddressValue = vmNicsValue["sourceIPAddress"];
+                                                        if (sourceIPAddressValue != null && sourceIPAddressValue.Type != JTokenType.Null)
+                                                        {
+                                                            string sourceIPAddressInstance = ((string)sourceIPAddressValue);
+                                                            vMwareCbtNicDetailsInstance.SourceIPAddress = sourceIPAddressInstance;
+                                                        }
+                                                        
+                                                        JToken sourceIPAddressTypeValue = vmNicsValue["sourceIPAddressType"];
+                                                        if (sourceIPAddressTypeValue != null && sourceIPAddressTypeValue.Type != JTokenType.Null)
+                                                        {
+                                                            string sourceIPAddressTypeInstance = ((string)sourceIPAddressTypeValue);
+                                                            vMwareCbtNicDetailsInstance.SourceIPAddressType = sourceIPAddressTypeInstance;
                                                         }
                                                         
                                                         JToken sourceNetworkIdValue = vmNicsValue["sourceNetworkId"];
@@ -8790,6 +9173,20 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                             vMwareCbtNicDetailsInstance.SourceNetworkId = sourceNetworkIdInstance;
                                                         }
                                                         
+                                                        JToken targetIPAddressValue = vmNicsValue["targetIPAddress"];
+                                                        if (targetIPAddressValue != null && targetIPAddressValue.Type != JTokenType.Null)
+                                                        {
+                                                            string targetIPAddressInstance = ((string)targetIPAddressValue);
+                                                            vMwareCbtNicDetailsInstance.TargetIPAddress = targetIPAddressInstance;
+                                                        }
+                                                        
+                                                        JToken targetIPAddressTypeValue = vmNicsValue["targetIPAddressType"];
+                                                        if (targetIPAddressTypeValue != null && targetIPAddressTypeValue.Type != JTokenType.Null)
+                                                        {
+                                                            string targetIPAddressTypeInstance = ((string)targetIPAddressTypeValue);
+                                                            vMwareCbtNicDetailsInstance.TargetIPAddressType = targetIPAddressTypeInstance;
+                                                        }
+                                                        
                                                         JToken targetSubnetNameValue = vmNicsValue["targetSubnetName"];
                                                         if (targetSubnetNameValue != null && targetSubnetNameValue.Type != JTokenType.Null)
                                                         {
@@ -8797,24 +9194,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                             vMwareCbtNicDetailsInstance.TargetSubnetName = targetSubnetNameInstance;
                                                         }
                                                         
-                                                        JToken ipAddressTypeValue = vmNicsValue["ipAddressType"];
-                                                        if (ipAddressTypeValue != null && ipAddressTypeValue.Type != JTokenType.Null)
-                                                        {
-                                                            string ipAddressTypeInstance = ((string)ipAddressTypeValue);
-                                                            vMwareCbtNicDetailsInstance.IpAddressType = ipAddressTypeInstance;
-                                                        }
-                                                        
-                                                        JToken staticIPAddressValue = vmNicsValue["staticIPAddress"];
-                                                        if (staticIPAddressValue != null && staticIPAddressValue.Type != JTokenType.Null)
-                                                        {
-                                                            string staticIPAddressInstance = ((string)staticIPAddressValue);
-                                                            vMwareCbtNicDetailsInstance.StaticIPAddress = staticIPAddressInstance;
-                                                        }
-                                                        
                                                         JToken isSelectedForMigrationValue = vmNicsValue["isSelectedForMigration"];
                                                         if (isSelectedForMigrationValue != null && isSelectedForMigrationValue.Type != JTokenType.Null)
                                                         {
-                                                            bool isSelectedForMigrationInstance = ((bool)isSelectedForMigrationValue);
+                                                            string isSelectedForMigrationInstance = ((string)isSelectedForMigrationValue);
                                                             vMwareCbtNicDetailsInstance.IsSelectedForMigration = isSelectedForMigrationInstance;
                                                         }
                                                     }
@@ -8825,6 +9208,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 {
                                                     string migrationRecoveryPointIdInstance = ((string)migrationRecoveryPointIdValue);
                                                     vMwareCbtMigrationDetailsInstance.MigrationRecoveryPointId = migrationRecoveryPointIdInstance;
+                                                }
+                                                
+                                                JToken lastRecoveryPointReceivedValue = providerSpecificDetailsValue["lastRecoveryPointReceived"];
+                                                if (lastRecoveryPointReceivedValue != null && lastRecoveryPointReceivedValue.Type != JTokenType.Null)
+                                                {
+                                                    DateTime lastRecoveryPointReceivedInstance = ((DateTime)lastRecoveryPointReceivedValue);
+                                                    vMwareCbtMigrationDetailsInstance.LastRecoveryPointReceived = lastRecoveryPointReceivedInstance;
                                                 }
                                                 
                                                 JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];

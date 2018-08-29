@@ -29,35 +29,24 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class VMwareCbtNicDetails
     {
-        private string _ipAddressType;
-        
-        /// <summary>
-        /// Optional. Gets or sets IP address type.
-        /// </summary>
-        public string IpAddressType
-        {
-            get { return this._ipAddressType; }
-            set { this._ipAddressType = value; }
-        }
-        
-        private bool _isPrimaryNic;
+        private string _isPrimaryNic;
         
         /// <summary>
         /// Optional. Indicates whether this is the primary NIC.
         /// </summary>
-        public bool IsPrimaryNic
+        public string IsPrimaryNic
         {
             get { return this._isPrimaryNic; }
             set { this._isPrimaryNic = value; }
         }
         
-        private bool _isSelectedForMigration;
+        private string _isSelectedForMigration;
         
         /// <summary>
         /// Optional. Gets or sets value indicating whether this NIC is
         /// selected for migration.
         /// </summary>
-        public bool IsSelectedForMigration
+        public string IsSelectedForMigration
         {
             get { return this._isSelectedForMigration; }
             set { this._isSelectedForMigration = value; }
@@ -74,6 +63,28 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._nicId = value; }
         }
         
+        private string _sourceIPAddress;
+        
+        /// <summary>
+        /// Optional. Gets or sets source IP address.
+        /// </summary>
+        public string SourceIPAddress
+        {
+            get { return this._sourceIPAddress; }
+            set { this._sourceIPAddress = value; }
+        }
+        
+        private string _sourceIPAddressType;
+        
+        /// <summary>
+        /// Optional. Gets or sets source IP address type.
+        /// </summary>
+        public string SourceIPAddressType
+        {
+            get { return this._sourceIPAddressType; }
+            set { this._sourceIPAddressType = value; }
+        }
+        
         private string _sourceNetworkId;
         
         /// <summary>
@@ -85,15 +96,26 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._sourceNetworkId = value; }
         }
         
-        private string _staticIPAddress;
+        private string _targetIPAddress;
         
         /// <summary>
-        /// Optional. Gets or sets the static IP address.
+        /// Optional. Gets or sets the target IP address.
         /// </summary>
-        public string StaticIPAddress
+        public string TargetIPAddress
         {
-            get { return this._staticIPAddress; }
-            set { this._staticIPAddress = value; }
+            get { return this._targetIPAddress; }
+            set { this._targetIPAddress = value; }
+        }
+        
+        private string _targetIPAddressType;
+        
+        /// <summary>
+        /// Optional. Gets or sets the target IP address type.
+        /// </summary>
+        public string TargetIPAddressType
+        {
+            get { return this._targetIPAddressType; }
+            set { this._targetIPAddressType = value; }
         }
         
         private string _targetSubnetName;

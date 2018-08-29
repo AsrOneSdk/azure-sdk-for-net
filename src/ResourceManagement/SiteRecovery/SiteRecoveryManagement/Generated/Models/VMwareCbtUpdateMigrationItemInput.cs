@@ -54,32 +54,21 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._targetAvailabilitySetId = value; }
         }
         
-        private string _targetAzureVmName;
+        private string _targetBootDiagnosticsStorageAccountId;
         
         /// <summary>
-        /// Optional. Target Azure VM name.
+        /// Optional. Target boot diagnostics storage account Id.
         /// </summary>
-        public string TargetAzureVmName
+        public string TargetBootDiagnosticsStorageAccountId
         {
-            get { return this._targetAzureVmName; }
-            set { this._targetAzureVmName = value; }
-        }
-        
-        private string _targetAzureVmSize;
-        
-        /// <summary>
-        /// Optional. Target Azure VM size.
-        /// </summary>
-        public string TargetAzureVmSize
-        {
-            get { return this._targetAzureVmSize; }
-            set { this._targetAzureVmSize = value; }
+            get { return this._targetBootDiagnosticsStorageAccountId; }
+            set { this._targetBootDiagnosticsStorageAccountId = value; }
         }
         
         private string _targetNetworkId;
         
         /// <summary>
-        /// Optional. Target Azure network ARM Id.
+        /// Optional. Target network ARM Id.
         /// </summary>
         public string TargetNetworkId
         {
@@ -96,6 +85,28 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         {
             get { return this._targetResourceGroupId; }
             set { this._targetResourceGroupId = value; }
+        }
+        
+        private string _targetVmName;
+        
+        /// <summary>
+        /// Optional. Target VM name.
+        /// </summary>
+        public string TargetVmName
+        {
+            get { return this._targetVmName; }
+            set { this._targetVmName = value; }
+        }
+        
+        private string _targetVmSize;
+        
+        /// <summary>
+        /// Optional. Target VM size.
+        /// </summary>
+        public string TargetVmSize
+        {
+            get { return this._targetVmSize; }
+            set { this._targetVmSize = value; }
         }
         
         private IList<VMwareCbtNicInput> _vmNics;

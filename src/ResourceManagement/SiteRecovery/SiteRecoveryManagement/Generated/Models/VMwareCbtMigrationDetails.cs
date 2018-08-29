@@ -43,6 +43,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._dataMoverRunAsAccountId = value; }
         }
         
+        private System.DateTime? _lastRecoveryPointReceived;
+        
+        /// <summary>
+        /// Optional. Gets or sets the last recovery point received time.
+        /// </summary>
+        public System.DateTime? LastRecoveryPointReceived
+        {
+            get { return this._lastRecoveryPointReceived; }
+            set { this._lastRecoveryPointReceived = value; }
+        }
+        
         private string _licenseType;
         
         /// <summary>
@@ -107,6 +118,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         {
             get { return this._targetAvailabilitySetId; }
             set { this._targetAvailabilitySetId = value; }
+        }
+        
+        private string _targetBootDiagnosticsStorageAccountId;
+        
+        /// <summary>
+        /// Optional. Target boot diagnostics storage account ARM Id.
+        /// </summary>
+        public string TargetBootDiagnosticsStorageAccountId
+        {
+            get { return this._targetBootDiagnosticsStorageAccountId; }
+            set { this._targetBootDiagnosticsStorageAccountId = value; }
         }
         
         private string _targetNetworkId;

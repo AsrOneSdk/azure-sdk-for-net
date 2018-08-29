@@ -62,15 +62,15 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._nicId = value; }
         }
         
-        private string _staticIPAddress;
+        private string _targetStaticIPAddress;
         
         /// <summary>
         /// Optional. The static IP address.
         /// </summary>
-        public string StaticIPAddress
+        public string TargetStaticIPAddress
         {
-            get { return this._staticIPAddress; }
-            set { this._staticIPAddress = value; }
+            get { return this._targetStaticIPAddress; }
+            set { this._targetStaticIPAddress = value; }
         }
         
         private string _targetSubnetName;

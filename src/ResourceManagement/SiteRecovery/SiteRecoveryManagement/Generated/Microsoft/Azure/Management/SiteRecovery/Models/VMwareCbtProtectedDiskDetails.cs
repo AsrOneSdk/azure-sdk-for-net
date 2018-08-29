@@ -62,6 +62,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._diskName = value; }
         }
         
+        private string _diskPath;
+        
+        /// <summary>
+        /// Optional. Disk path.
+        /// </summary>
+        public string DiskPath
+        {
+            get { return this._diskPath; }
+            set { this._diskPath = value; }
+        }
+        
         private string _diskType;
         
         /// <summary>
@@ -73,12 +84,12 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._diskType = value; }
         }
         
-        private bool _isOSDisk;
+        private string _isOSDisk;
         
         /// <summary>
         /// Optional. Indicates whether the disk is the OS disk.
         /// </summary>
-        public bool IsOSDisk
+        public string IsOSDisk
         {
             get { return this._isOSDisk; }
             set { this._isOSDisk = value; }
