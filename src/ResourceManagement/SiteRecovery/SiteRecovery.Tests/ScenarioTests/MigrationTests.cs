@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text;
 using Microsoft.Azure.Management.SiteRecovery;
 using Microsoft.Azure.Management.SiteRecovery.Models;
 using Microsoft.Azure.Test;
@@ -59,16 +60,14 @@ namespace SiteRecovery.Tests.ScenarioTests
         private const string ServiceBusConnectionStringSecretName = "devbabuova1gwysbus";
 
         // Enable input.
-        private const string VMName = "lshai929MigVm";
-        private const string VMwareVmId = "/subscriptions/2a57d0a2-0955-4d1e-aa87-a0dbb87cbcab/resourceGroups/lshaibvtrg/providers/Microsoft.OffAzure/VMwareSites/lshaibvtsite/machines/10-150-209-216-a9f67797-bc63-5bf3-b8fe-9ffcc50402af_501e77b4-0b34-8aa9-d5bc-d3ae94ee52ea"; //lshai-0929-1
+        private const string VMName = "VM1";
+        private const string VMwareVmId = "/subscriptions/2a57d0a2-0955-4d1e-aa87-a0dbb87cbcab/resourceGroups/lshaibvtrg/providers/Microsoft.OffAzure/VMwareSites/lshaibvtsite/machines/10-150-209-216-a9f67797-bc63-5bf3-b8fe-9ffcc50402af_501e9f50-f3e3-e67c-0d8e-7e6bf3355cca"; //sadko-0912-1
+        // private const string VMwareVmId = "/subscriptions/2a57d0a2-0955-4d1e-aa87-a0dbb87cbcab/resourceGroups/lshaibvtrg/providers/Microsoft.OffAzure/VMwareSites/lshaibvtsite/machines/10-150-209-216-a9f67797-bc63-5bf3-b8fe-9ffcc50402af_501e77b4-0b34-8aa9-d5bc-d3ae94ee52ea"; //lshai-0929-1
         // private const string VMwareVmId = "/subscriptions/2a57d0a2-0955-4d1e-aa87-a0dbb87cbcab/resourceGroups/lshaibvtrg/providers/Microsoft.OffAzure/VMwareSites/lshaibvtsite/machines/10-150-209-216-a9f67797-bc63-5bf3-b8fe-9ffcc50402af_500f866c-d415-1d0e-7186-7c58b0c5ec28"; //lshai-0520-2
         // private const string VMwareVmId = "/subscriptions/2a57d0a2-0955-4d1e-aa87-a0dbb87cbcab/resourceGroups/lshaibvtrg/providers/Microsoft.OffAzure/VMwareSites/lshaibvtsite/machines/10-150-209-216-a9f67797-bc63-5bf3-b8fe-9ffcc50402af_500ff837-eb79-11ee-b445-bb044d4aa2aa"; //lshai-0520-1
         // private const string VMwareVmId = "/subscriptions/2a57d0a2-0955-4d1e-aa87-a0dbb87cbcab/resourceGroups/lshaibvtrg/providers/Microsoft.OffAzure/VMwareSites/lshaibvtsite/machines/10-150-209-216-a9f67797-bc63-5bf3-b8fe-9ffcc50402af_501e9205-b7ec-fb40-60dc-2b1c5a57b64b"; //lshai-0814-1
         // private const string VMwareVmId = "/subscriptions/2a57d0a2-0955-4d1e-aa87-a0dbb87cbcab/resourceGroups/lshaibvtrg/providers/Microsoft.OffAzure/VMwareSites/lshaibvtsite/machines/10-150-209-216-a9f67797-bc63-5bf3-b8fe-9ffcc50402af_501ec323-1268-ab57-199c-5d665f74f66d"; //lshai-1023-1
         // private const string VMwareVmId = "/subscriptions/2a57d0a2-0955-4d1e-aa87-a0dbb87cbcab/resourceGroups/lshaibvtrg/providers/Microsoft.OffAzure/VMwareSites/lshaibvtsite/machines/10-150-209-216-a9f67797-bc63-5bf3-b8fe-9ffcc50402af_500f4bb0-62b8-6ab9-4a2d-1949b90119f5"; //lshai-0419-1
-        // private const string VMwareVmId = "/subscriptions/2a57d0a2-0955-4d1e-aa87-a0dbb87cbcab/resourceGroups/hprabhtestdfsite1/providers/Microsoft.OffAzure/VMwareSites/hprabhtestdfsite1site/machines/hprabhtestdfsite1vcenter_500ff837-eb79-11ee-b445-bb044d4aa2aa";
-        // private const string VMwareVmId = "/subscriptions/2a57d0a2-0955-4d1e-aa87-a0dbb87cbcab/resourceGroups/hprabhtestdfsite1/providers/Microsoft.OffAzure/VMwareSites/hprabhtestdfsite1site/machines/hprabhtestdfsite1vcenter_500f866c-d415-1d0e-7186-7c58b0c5ec28";
-        // private const string VMwareVmId = "/subscriptions/2a57d0a2-0955-4d1e-aa87-a0dbb87cbcab/resourceGroups/hprabhtestdfsite1/providers/Microsoft.OffAzure/VMwareSites/hprabhtestdfsite1site/machines/hprabhtestdfsite1vcenter_500f209b-f475-ce88-1399-1e0591e4a836";
         private const string TargetResourceGroupId = "/subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/devbaburg1";
         private const string TargetNetworkId = "/subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/devbaburg1/providers/Microsoft.Network/virtualNetworks/devbabuvn1";
         private const string TargetSubnetName = "default";
@@ -405,6 +404,39 @@ namespace SiteRecovery.Tests.ScenarioTests
         }
 
         [Fact]
+        public void Migration_GetJobs()
+        {
+            using (UndoContext context = UndoContext.Current)
+            {
+                try
+                {
+                    context.Start();
+                    var client = GetSiteRecoveryClient(CustomHttpHandler, "Migration");
+
+                    var str = new StringBuilder();
+                    var jobs = client.Jobs.List(new JobQueryParameter(), RequestHeaders).Jobs.Reverse().ToList();
+
+                    foreach (var job in jobs)
+                    {
+                        str.AppendLine(job.Properties.ScenarioName);
+
+                        var extJob = client.Jobs.Get(job.Name, RequestHeaders).Job;
+                        for (int i = 0; i < extJob.Properties.Tasks.Count; i++)
+                        {
+                            var task = extJob.Properties.Tasks[i];
+                            str.AppendLine("\t\t\t\t" + i + ":" + task.Name + ":\t\t\t\t\t\t\t\t\t\t\t\t" + task.TaskFriendlyName);
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    Debugger.Break();
+                    throw;
+                }
+            }
+        }
+
+        [Fact]
         public void RestartJob()
         {
             using (UndoContext context = UndoContext.Current)
@@ -451,7 +483,7 @@ namespace SiteRecovery.Tests.ScenarioTests
                     {
                         new VMwareCbtDiskInput
                         {
-                            DiskId = "6000C29f-d758-53ff-e901-b6967d59565d",
+                            DiskId = "6000C293-e2c6-8705-78e2-e6661ef18633",
                             IsOSDisk = "true",
                             StorageAccountId = ReplicationStorageAccountId,
                             LogStorageAccountId = LogStorageAccountId,
@@ -551,13 +583,18 @@ namespace SiteRecovery.Tests.ScenarioTests
                     context.Start();
                     var client = GetSiteRecoveryClient(CustomHttpHandler, "Migration");
 
+                    var pits = client.MigrationItem.RecoveryPointList(
+                        VMwareFabricName,
+                        VMwareContainerName,
+                        VMName,
+                        RequestHeaders);
                     var migrateInput = new MigrateInput
                     {
                         Properties = new MigrateInputProperties
                         {
                             ProviderSpecificDetails = new VMwareCbtMigrateInput
                             {
-                                RecoveryPointId = "/Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/hydratestrg/providers/Microsoft.RecoveryServicesBVTD2/Vaults/hydratest/replicationFabrics/devbabuova1replicationfabric/replicationProtectionContainers/cloud_66739b5b-32bf-5afa-9657-8bf9fbd21269/replicationMigrationItems/lshai929MigVm/migrationRecoveryPoints/95bc66c5-d94a-47a3-859d-076f330c417d"
+                                RecoveryPointId = pits.MigrationRecoveryPoints.ToList().Last().Id,
                             }
                         }
                     };
@@ -625,13 +662,18 @@ namespace SiteRecovery.Tests.ScenarioTests
                     context.Start();
                     var client = GetSiteRecoveryClient(CustomHttpHandler, "Migration");
 
+                    var pits = client.MigrationItem.RecoveryPointList(
+                        VMwareFabricName,
+                        VMwareContainerName,
+                        VMName,
+                        RequestHeaders);
                     var testMigrateInput = new TestMigrateInput
                     {
                         Properties = new TestMigrateInputProperties
                         {
                             ProviderSpecificDetails = new VMwareCbtTestMigrateInput
                             {
-                                RecoveryPointId = "/Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/hydratestrg/providers/Microsoft.RecoveryServicesBVTD2/Vaults/hydratest/replicationFabrics/devbabuova1replicationfabric/replicationProtectionContainers/cloud_66739b5b-32bf-5afa-9657-8bf9fbd21269/replicationMigrationItems/lshai929MigVm/migrationRecoveryPoints/95bc66c5-d94a-47a3-859d-076f330c417d",
+                                RecoveryPointId = pits.MigrationRecoveryPoints.ToList().Last().Id,
                                 NetworkId = TfoNetworkId
                             }
                         }
