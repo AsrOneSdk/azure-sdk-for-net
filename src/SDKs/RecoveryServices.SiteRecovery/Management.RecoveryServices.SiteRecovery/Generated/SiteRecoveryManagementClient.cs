@@ -193,6 +193,11 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
         public virtual IReplicationRecoveryPlansOperations ReplicationRecoveryPlans { get; private set; }
 
         /// <summary>
+        /// Gets the IReplicationSupportedOperatingSystemsOperations.
+        /// </summary>
+        public virtual IReplicationSupportedOperatingSystemsOperations ReplicationSupportedOperatingSystems { get; private set; }
+
+        /// <summary>
         /// Gets the IReplicationVaultHealthOperations.
         /// </summary>
         public virtual IReplicationVaultHealthOperations ReplicationVaultHealth { get; private set; }
@@ -460,6 +465,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             ReplicationJobs = new ReplicationJobsOperations(this);
             ReplicationPolicies = new ReplicationPoliciesOperations(this);
             ReplicationRecoveryPlans = new ReplicationRecoveryPlansOperations(this);
+            ReplicationSupportedOperatingSystems = new ReplicationSupportedOperatingSystemsOperations(this);
             ReplicationVaultHealth = new ReplicationVaultHealthOperations(this);
             BaseUri = new System.Uri("https://management.azure.com");
             ApiVersion = "2018-07-10";

@@ -190,6 +190,11 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
         IReplicationRecoveryPlansOperations ReplicationRecoveryPlans { get; }
 
         /// <summary>
+        /// Gets the IReplicationSupportedOperatingSystemsOperations.
+        /// </summary>
+        IReplicationSupportedOperatingSystemsOperations ReplicationSupportedOperatingSystems { get; }
+
+        /// <summary>
         /// Gets the IReplicationVaultHealthOperations.
         /// </summary>
         IReplicationVaultHealthOperations ReplicationVaultHealth { get; }

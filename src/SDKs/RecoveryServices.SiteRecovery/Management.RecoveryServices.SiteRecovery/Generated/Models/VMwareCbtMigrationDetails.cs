@@ -48,12 +48,16 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// Id.</param>
         /// <param name="targetAvailabilitySetId">The target availability set
         /// Id.</param>
+        /// <param name="targetBootDiagnosticsStorageAccountId">The target boot
+        /// diagnostics storage account ARM Id.</param>
         /// <param name="protectedDisks">The list of protected disks.</param>
         /// <param name="targetNetworkId">The target network Id.</param>
         /// <param name="vmNics">The network details.</param>
         /// <param name="migrationRecoveryPointId">The recovery point Id to
         /// which the VM was migrated.</param>
-        public VMwareCbtMigrationDetails(string vmwareMachineId = default(string), string osType = default(string), string licenseType = default(string), string dataMoverRunAsAccountId = default(string), string snapshotRunAsAccountId = default(string), string targetVmName = default(string), string targetVmSize = default(string), string targetLocation = default(string), string targetResourceGroupId = default(string), string targetAvailabilitySetId = default(string), IList<VMwareCbtProtectedDiskDetails> protectedDisks = default(IList<VMwareCbtProtectedDiskDetails>), string targetNetworkId = default(string), IList<VMwareCbtNicDetails> vmNics = default(IList<VMwareCbtNicDetails>), string migrationRecoveryPointId = default(string))
+        /// <param name="lastRecoveryPointReceived">The last recovery point
+        /// received time.</param>
+        public VMwareCbtMigrationDetails(string vmwareMachineId = default(string), string osType = default(string), string licenseType = default(string), string dataMoverRunAsAccountId = default(string), string snapshotRunAsAccountId = default(string), string targetVmName = default(string), string targetVmSize = default(string), string targetLocation = default(string), string targetResourceGroupId = default(string), string targetAvailabilitySetId = default(string), string targetBootDiagnosticsStorageAccountId = default(string), IList<VMwareCbtProtectedDiskDetails> protectedDisks = default(IList<VMwareCbtProtectedDiskDetails>), string targetNetworkId = default(string), IList<VMwareCbtNicDetails> vmNics = default(IList<VMwareCbtNicDetails>), string migrationRecoveryPointId = default(string), System.DateTime? lastRecoveryPointReceived = default(System.DateTime?))
         {
             VmwareMachineId = vmwareMachineId;
             OsType = osType;
@@ -65,10 +69,12 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
             TargetLocation = targetLocation;
             TargetResourceGroupId = targetResourceGroupId;
             TargetAvailabilitySetId = targetAvailabilitySetId;
+            TargetBootDiagnosticsStorageAccountId = targetBootDiagnosticsStorageAccountId;
             ProtectedDisks = protectedDisks;
             TargetNetworkId = targetNetworkId;
             VmNics = vmNics;
             MigrationRecoveryPointId = migrationRecoveryPointId;
+            LastRecoveryPointReceived = lastRecoveryPointReceived;
             CustomInit();
         }
 
@@ -138,6 +144,12 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         public string TargetAvailabilitySetId { get; set; }
 
         /// <summary>
+        /// Gets or sets the target boot diagnostics storage account ARM Id.
+        /// </summary>
+        [JsonProperty(PropertyName = "targetBootDiagnosticsStorageAccountId")]
+        public string TargetBootDiagnosticsStorageAccountId { get; set; }
+
+        /// <summary>
         /// Gets or sets the list of protected disks.
         /// </summary>
         [JsonProperty(PropertyName = "protectedDisks")]
@@ -160,6 +172,12 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// </summary>
         [JsonProperty(PropertyName = "migrationRecoveryPointId")]
         public string MigrationRecoveryPointId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the last recovery point received time.
+        /// </summary>
+        [JsonProperty(PropertyName = "lastRecoveryPointReceived")]
+        public System.DateTime? LastRecoveryPointReceived { get; set; }
 
     }
 }

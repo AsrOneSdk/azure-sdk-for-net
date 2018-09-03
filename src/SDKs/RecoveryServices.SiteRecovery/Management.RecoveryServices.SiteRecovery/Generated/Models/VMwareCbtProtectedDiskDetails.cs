@@ -33,6 +33,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// </summary>
         /// <param name="diskId">The disk id.</param>
         /// <param name="diskName">The disk name.</param>
+        /// <param name="diskPath">The disk path.</param>
         /// <param name="isOSDisk">A value indicating whether the disk is the
         /// OS disk.</param>
         /// <param name="capacityInBytes">The disk capacity in bytes.</param>
@@ -45,10 +46,11 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// <param name="targetManagedDiskId">The ARM Id of the target managed
         /// disk.</param>
         /// <param name="diskType">The disk type.</param>
-        public VMwareCbtProtectedDiskDetails(string diskId = default(string), string diskName = default(string), bool? isOSDisk = default(bool?), long? capacityInBytes = default(long?), string logStorageAccountId = default(string), string logStorageAccountSasSecretName = default(string), string seedManagedDiskId = default(string), string targetManagedDiskId = default(string), string diskType = default(string))
+        public VMwareCbtProtectedDiskDetails(string diskId = default(string), string diskName = default(string), string diskPath = default(string), string isOSDisk = default(string), long? capacityInBytes = default(long?), string logStorageAccountId = default(string), string logStorageAccountSasSecretName = default(string), string seedManagedDiskId = default(string), string targetManagedDiskId = default(string), string diskType = default(string))
         {
             DiskId = diskId;
             DiskName = diskName;
+            DiskPath = diskPath;
             IsOSDisk = isOSDisk;
             CapacityInBytes = capacityInBytes;
             LogStorageAccountId = logStorageAccountId;
@@ -77,10 +79,16 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         public string DiskName { get; set; }
 
         /// <summary>
+        /// Gets or sets the disk path.
+        /// </summary>
+        [JsonProperty(PropertyName = "diskPath")]
+        public string DiskPath { get; set; }
+
+        /// <summary>
         /// Gets or sets a value indicating whether the disk is the OS disk.
         /// </summary>
         [JsonProperty(PropertyName = "isOSDisk")]
-        public bool? IsOSDisk { get; set; }
+        public string IsOSDisk { get; set; }
 
         /// <summary>
         /// Gets or sets the disk capacity in bytes.

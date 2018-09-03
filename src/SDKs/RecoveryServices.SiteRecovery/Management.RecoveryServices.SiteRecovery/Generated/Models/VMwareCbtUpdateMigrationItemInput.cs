@@ -36,20 +36,23 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// </summary>
         /// <param name="targetVmName">The target VM name.</param>
         /// <param name="targetVmSize">The target VM size.</param>
-        /// <param name="targetResourceGroupId">The target resource group
+        /// <param name="targetResourceGroupId">The target resource group ARM
         /// Id.</param>
         /// <param name="targetAvailabilitySetId">The target availability set
-        /// Id.</param>
-        /// <param name="targetNetworkId">The target network Id.</param>
+        /// ARM Id.</param>
+        /// <param name="targetBootDiagnosticsStorageAccountId">The target boot
+        /// diagnostics storage account ARM Id.</param>
+        /// <param name="targetNetworkId">The target network ARM Id.</param>
         /// <param name="vmNics">The list of NIC details.</param>
         /// <param name="licenseType">The license type. Possible values
         /// include: 'NotSpecified', 'NoLicenseType', 'WindowsServer'</param>
-        public VMwareCbtUpdateMigrationItemInput(string targetVmName = default(string), string targetVmSize = default(string), string targetResourceGroupId = default(string), string targetAvailabilitySetId = default(string), string targetNetworkId = default(string), IList<VMwareCbtNicInput> vmNics = default(IList<VMwareCbtNicInput>), string licenseType = default(string))
+        public VMwareCbtUpdateMigrationItemInput(string targetVmName = default(string), string targetVmSize = default(string), string targetResourceGroupId = default(string), string targetAvailabilitySetId = default(string), string targetBootDiagnosticsStorageAccountId = default(string), string targetNetworkId = default(string), IList<VMwareCbtNicInput> vmNics = default(IList<VMwareCbtNicInput>), string licenseType = default(string))
         {
             TargetVmName = targetVmName;
             TargetVmSize = targetVmSize;
             TargetResourceGroupId = targetResourceGroupId;
             TargetAvailabilitySetId = targetAvailabilitySetId;
+            TargetBootDiagnosticsStorageAccountId = targetBootDiagnosticsStorageAccountId;
             TargetNetworkId = targetNetworkId;
             VmNics = vmNics;
             LicenseType = licenseType;
@@ -74,19 +77,25 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         public string TargetVmSize { get; set; }
 
         /// <summary>
-        /// Gets or sets the target resource group Id.
+        /// Gets or sets the target resource group ARM Id.
         /// </summary>
         [JsonProperty(PropertyName = "targetResourceGroupId")]
         public string TargetResourceGroupId { get; set; }
 
         /// <summary>
-        /// Gets or sets the target availability set Id.
+        /// Gets or sets the target availability set ARM Id.
         /// </summary>
         [JsonProperty(PropertyName = "targetAvailabilitySetId")]
         public string TargetAvailabilitySetId { get; set; }
 
         /// <summary>
-        /// Gets or sets the target network Id.
+        /// Gets or sets the target boot diagnostics storage account ARM Id.
+        /// </summary>
+        [JsonProperty(PropertyName = "targetBootDiagnosticsStorageAccountId")]
+        public string TargetBootDiagnosticsStorageAccountId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the target network ARM Id.
         /// </summary>
         [JsonProperty(PropertyName = "targetNetworkId")]
         public string TargetNetworkId { get; set; }

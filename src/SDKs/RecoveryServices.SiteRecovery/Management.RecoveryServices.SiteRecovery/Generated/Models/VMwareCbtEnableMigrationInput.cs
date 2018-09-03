@@ -52,7 +52,9 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// <param name="targetSubnetName">The target subnet name.</param>
         /// <param name="targetAvailabilitySetId">The target availability set
         /// ARM Id.</param>
-        public VMwareCbtEnableMigrationInput(string vmwareMachineId, IList<VMwareCbtDiskInput> disksToInclude, string dataMoverRunAsAccountId, string snapshotRunAsAccountId, string targetResourceGroupId, string licenseType = default(string), string targetVmName = default(string), string targetVmSize = default(string), string targetNetworkId = default(string), string targetSubnetName = default(string), string targetAvailabilitySetId = default(string))
+        /// <param name="targetBootDiagnosticsStorageAccountId">The target boot
+        /// diagnostics storage account ARM Id.</param>
+        public VMwareCbtEnableMigrationInput(string vmwareMachineId, IList<VMwareCbtDiskInput> disksToInclude, string dataMoverRunAsAccountId, string snapshotRunAsAccountId, string targetResourceGroupId, string licenseType = default(string), string targetVmName = default(string), string targetVmSize = default(string), string targetNetworkId = default(string), string targetSubnetName = default(string), string targetAvailabilitySetId = default(string), string targetBootDiagnosticsStorageAccountId = default(string))
         {
             VmwareMachineId = vmwareMachineId;
             DisksToInclude = disksToInclude;
@@ -65,6 +67,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
             TargetNetworkId = targetNetworkId;
             TargetSubnetName = targetSubnetName;
             TargetAvailabilitySetId = targetAvailabilitySetId;
+            TargetBootDiagnosticsStorageAccountId = targetBootDiagnosticsStorageAccountId;
             CustomInit();
         }
 
@@ -139,6 +142,12 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// </summary>
         [JsonProperty(PropertyName = "targetAvailabilitySetId")]
         public string TargetAvailabilitySetId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the target boot diagnostics storage account ARM Id.
+        /// </summary>
+        [JsonProperty(PropertyName = "targetBootDiagnosticsStorageAccountId")]
+        public string TargetBootDiagnosticsStorageAccountId { get; set; }
 
         /// <summary>
         /// Validate the object.

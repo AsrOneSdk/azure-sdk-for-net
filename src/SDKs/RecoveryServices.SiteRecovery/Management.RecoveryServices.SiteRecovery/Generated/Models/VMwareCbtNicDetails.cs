@@ -32,20 +32,26 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// <param name="nicId">The NIC Id.</param>
         /// <param name="isPrimaryNic">A value indicating whether this is the
         /// primary NIC.</param>
+        /// <param name="sourceIPAddress">The source IP address.</param>
+        /// <param name="sourceIPAddressType">The source IP address type.
+        /// Possible values include: 'Dynamic', 'Static'</param>
         /// <param name="sourceNetworkId">Source network Id.</param>
+        /// <param name="targetIPAddress">The target IP address.</param>
+        /// <param name="targetIPAddressType">The target IP address type.
+        /// Possible values include: 'Dynamic', 'Static'</param>
         /// <param name="targetSubnetName">Target subnet name.</param>
-        /// <param name="ipAddressType">IP address type.</param>
-        /// <param name="staticIPAddress">The static IP address.</param>
         /// <param name="isSelectedForMigration">A value indicating whether
         /// this NIC is selected for migration.</param>
-        public VMwareCbtNicDetails(string nicId = default(string), bool? isPrimaryNic = default(bool?), string sourceNetworkId = default(string), string targetSubnetName = default(string), string ipAddressType = default(string), string staticIPAddress = default(string), bool? isSelectedForMigration = default(bool?))
+        public VMwareCbtNicDetails(string nicId = default(string), string isPrimaryNic = default(string), string sourceIPAddress = default(string), string sourceIPAddressType = default(string), string sourceNetworkId = default(string), string targetIPAddress = default(string), string targetIPAddressType = default(string), string targetSubnetName = default(string), string isSelectedForMigration = default(string))
         {
             NicId = nicId;
             IsPrimaryNic = isPrimaryNic;
+            SourceIPAddress = sourceIPAddress;
+            SourceIPAddressType = sourceIPAddressType;
             SourceNetworkId = sourceNetworkId;
+            TargetIPAddress = targetIPAddress;
+            TargetIPAddressType = targetIPAddressType;
             TargetSubnetName = targetSubnetName;
-            IpAddressType = ipAddressType;
-            StaticIPAddress = staticIPAddress;
             IsSelectedForMigration = isSelectedForMigration;
             CustomInit();
         }
@@ -65,7 +71,20 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// Gets or sets a value indicating whether this is the primary NIC.
         /// </summary>
         [JsonProperty(PropertyName = "isPrimaryNic")]
-        public bool? IsPrimaryNic { get; set; }
+        public string IsPrimaryNic { get; set; }
+
+        /// <summary>
+        /// Gets or sets the source IP address.
+        /// </summary>
+        [JsonProperty(PropertyName = "sourceIPAddress")]
+        public string SourceIPAddress { get; set; }
+
+        /// <summary>
+        /// Gets or sets the source IP address type. Possible values include:
+        /// 'Dynamic', 'Static'
+        /// </summary>
+        [JsonProperty(PropertyName = "sourceIPAddressType")]
+        public string SourceIPAddressType { get; set; }
 
         /// <summary>
         /// Gets or sets source network Id.
@@ -74,29 +93,30 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         public string SourceNetworkId { get; set; }
 
         /// <summary>
+        /// Gets or sets the target IP address.
+        /// </summary>
+        [JsonProperty(PropertyName = "targetIPAddress")]
+        public string TargetIPAddress { get; set; }
+
+        /// <summary>
+        /// Gets or sets the target IP address type. Possible values include:
+        /// 'Dynamic', 'Static'
+        /// </summary>
+        [JsonProperty(PropertyName = "targetIPAddressType")]
+        public string TargetIPAddressType { get; set; }
+
+        /// <summary>
         /// Gets or sets target subnet name.
         /// </summary>
         [JsonProperty(PropertyName = "targetSubnetName")]
         public string TargetSubnetName { get; set; }
 
         /// <summary>
-        /// Gets or sets IP address type.
-        /// </summary>
-        [JsonProperty(PropertyName = "ipAddressType")]
-        public string IpAddressType { get; set; }
-
-        /// <summary>
-        /// Gets or sets the static IP address.
-        /// </summary>
-        [JsonProperty(PropertyName = "staticIPAddress")]
-        public string StaticIPAddress { get; set; }
-
-        /// <summary>
         /// Gets or sets a value indicating whether this NIC is selected for
         /// migration.
         /// </summary>
         [JsonProperty(PropertyName = "isSelectedForMigration")]
-        public bool? IsSelectedForMigration { get; set; }
+        public string IsSelectedForMigration { get; set; }
 
     }
 }
