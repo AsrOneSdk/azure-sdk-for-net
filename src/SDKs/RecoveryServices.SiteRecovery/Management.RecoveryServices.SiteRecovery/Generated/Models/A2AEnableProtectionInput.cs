@@ -50,7 +50,9 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// storage account.</param>
         /// <param name="diskEncryptionInfo">The recovery disk encryption
         /// information.</param>
-        public A2AEnableProtectionInput(string fabricObjectId = default(string), string recoveryContainerId = default(string), string recoveryResourceGroupId = default(string), string recoveryCloudServiceId = default(string), string recoveryAvailabilitySetId = default(string), IList<A2AVmDiskInputDetails> vmDisks = default(IList<A2AVmDiskInputDetails>), IList<A2AVmManagedDiskInputDetails> vmManagedDisks = default(IList<A2AVmManagedDiskInputDetails>), string multiVmGroupName = default(string), string recoveryBootDiagStorageAccountId = default(string), DiskEncryptionInfo diskEncryptionInfo = default(DiskEncryptionInfo))
+        /// <param name="recoveryAvailabilityZone">The recovery availability
+        /// zone.</param>
+        public A2AEnableProtectionInput(string fabricObjectId = default(string), string recoveryContainerId = default(string), string recoveryResourceGroupId = default(string), string recoveryCloudServiceId = default(string), string recoveryAvailabilitySetId = default(string), IList<A2AVmDiskInputDetails> vmDisks = default(IList<A2AVmDiskInputDetails>), IList<A2AVmManagedDiskInputDetails> vmManagedDisks = default(IList<A2AVmManagedDiskInputDetails>), string multiVmGroupName = default(string), string recoveryBootDiagStorageAccountId = default(string), DiskEncryptionInfo diskEncryptionInfo = default(DiskEncryptionInfo), string recoveryAvailabilityZone = default(string))
         {
             FabricObjectId = fabricObjectId;
             RecoveryContainerId = recoveryContainerId;
@@ -62,6 +64,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
             MultiVmGroupName = multiVmGroupName;
             RecoveryBootDiagStorageAccountId = recoveryBootDiagStorageAccountId;
             DiskEncryptionInfo = diskEncryptionInfo;
+            RecoveryAvailabilityZone = recoveryAvailabilityZone;
             CustomInit();
         }
 
@@ -130,6 +133,12 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// </summary>
         [JsonProperty(PropertyName = "diskEncryptionInfo")]
         public DiskEncryptionInfo DiskEncryptionInfo { get; set; }
+
+        /// <summary>
+        /// Gets or sets the recovery availability zone.
+        /// </summary>
+        [JsonProperty(PropertyName = "recoveryAvailabilityZone")]
+        public string RecoveryAvailabilityZone { get; set; }
 
     }
 }
