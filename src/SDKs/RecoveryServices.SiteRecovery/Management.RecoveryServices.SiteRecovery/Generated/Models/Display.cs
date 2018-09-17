@@ -37,19 +37,19 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// the resource provider name – it is expected to also include the
         /// publisher/company responsible. It should use Title Casing and begin
         /// with "Microsoft" for 1st party services. e.g. "Microsoft Monitoring
-        /// Insights" or "Microsoft Compute."</param>
+        /// Insights" or "Microsoft Compute.".</param>
         /// <param name="resource">The resource. The localized friendly form of
         /// the resource related to this action/operation – it should match the
         /// public documentation for the resource provider. It should use Title
         /// Casing. This value should be unique for a particular URL type (e.g.
         /// nested types should *not* reuse their parent’s display.resource
         /// field). e.g. "Virtual Machines" or "Scheduler Job Collections", or
-        /// "Virtual Machine VM Sizes" or "Scheduler Jobs"</param>
+        /// "Virtual Machine VM Sizes" or "Scheduler Jobs".</param>
         /// <param name="operation">The operation. The localized friendly name
         /// for the operation, as it should be shown to the user. It should be
         /// concise (to fit in drop downs) but clear (i.e. self-documenting).
         /// It should use Title Casing. Prescriptive guidance: Read Create or
-        /// Update Delete 'ActionName'</param>
+        /// Update Delete 'ActionName'.</param>
         /// <param name="description">The description. The localized friendly
         /// description for the operation, as it should be shown to the user.
         /// It should be thorough, yet concise – it will be used in tool tips
@@ -59,7 +59,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// action on any 'display.provider' resource Prescriptive guidance for
         /// namespaces: Read any 'display.resource' Create or Update any
         /// 'display.resource' Delete any 'display.resource' 'ActionName' any
-        /// 'display.resources'</param>
+        /// 'display.resources'.</param>
         public Display(string provider = default(string), string resource = default(string), string operation = default(string), string description = default(string))
         {
             Provider = provider;
@@ -79,7 +79,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// resource provider name – it is expected to also include the
         /// publisher/company responsible. It should use Title Casing and begin
         /// with "Microsoft" for 1st party services. e.g. "Microsoft Monitoring
-        /// Insights" or "Microsoft Compute."
+        /// Insights" or "Microsoft Compute.".
         /// </summary>
         [JsonProperty(PropertyName = "provider")]
         public string Provider { get; set; }
@@ -91,7 +91,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// Casing. This value should be unique for a particular URL type (e.g.
         /// nested types should *not* reuse their parent’s display.resource
         /// field). e.g. "Virtual Machines" or "Scheduler Job Collections", or
-        /// "Virtual Machine VM Sizes" or "Scheduler Jobs"
+        /// "Virtual Machine VM Sizes" or "Scheduler Jobs".
         /// </summary>
         [JsonProperty(PropertyName = "resource")]
         public string Resource { get; set; }
@@ -101,7 +101,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// operation, as it should be shown to the user. It should be concise
         /// (to fit in drop downs) but clear (i.e. self-documenting). It should
         /// use Title Casing. Prescriptive guidance: Read Create or Update
-        /// Delete 'ActionName'
+        /// Delete 'ActionName'.
         /// </summary>
         [JsonProperty(PropertyName = "operation")]
         public string Operation { get; set; }
@@ -116,7 +116,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// action on any 'display.provider' resource Prescriptive guidance for
         /// namespaces: Read any 'display.resource' Create or Update any
         /// 'display.resource' Delete any 'display.resource' 'ActionName' any
-        /// 'display.resources'
+        /// 'display.resources'.
         /// </summary>
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }

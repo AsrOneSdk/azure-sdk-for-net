@@ -56,7 +56,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
         /// Get the details of an Azure Site Recovery job.
         /// </remarks>
         /// <param name='jobName'>
-        /// Job identifier
+        /// Job identifier.
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -81,7 +81,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
         /// The operation to cancel an Azure Site Recovery job.
         /// </remarks>
         /// <param name='jobName'>
-        /// Job indentifier.
+        /// Job identifier.
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -128,7 +128,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
         /// Resumes the specified job.
         /// </summary>
         /// <remarks>
-        /// The operation to resume an Azure Site Recovery job
+        /// The operation to resume an Azure Site Recovery job.
         /// </remarks>
         /// <param name='jobName'>
         /// Job identifier.
@@ -185,7 +185,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
         /// The operation to cancel an Azure Site Recovery job.
         /// </remarks>
         /// <param name='jobName'>
-        /// Job indentifier.
+        /// Job identifier.
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -232,7 +232,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
         /// Resumes the specified job.
         /// </summary>
         /// <remarks>
-        /// The operation to resume an Azure Site Recovery job
+        /// The operation to resume an Azure Site Recovery job.
         /// </remarks>
         /// <param name='jobName'>
         /// Job identifier.

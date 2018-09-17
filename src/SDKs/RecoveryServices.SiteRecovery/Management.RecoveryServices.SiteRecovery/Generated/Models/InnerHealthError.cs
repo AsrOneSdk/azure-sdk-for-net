@@ -44,7 +44,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// <param name="possibleCauses">Possible causes of error.</param>
         /// <param name="recommendedAction">Recommended action to resolve
         /// error.</param>
-        /// <param name="creationTimeUtc">Error creation time (UTC)</param>
+        /// <param name="creationTimeUtc">Error creation time (UTC).</param>
         /// <param name="recoveryProviderErrorMessage">DRA error
         /// message.</param>
         /// <param name="entityId">ID of the entity.</param>
@@ -125,7 +125,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         public string RecommendedAction { get; set; }
 
         /// <summary>
-        /// Gets or sets error creation time (UTC)
+        /// Gets or sets error creation time (UTC).
         /// </summary>
         [JsonProperty(PropertyName = "creationTimeUtc")]
         public System.DateTime? CreationTimeUtc { get; set; }

@@ -74,6 +74,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// <param name="lastHeartbeat">The last heartbeat received from the
         /// source server.</param>
         /// <param name="agentVersion">The agent version.</param>
+        /// <param name="agentExpiryDate">Agent expiry date.</param>
         /// <param name="isReplicationAgentUpdateRequired">A value indicating
         /// whether replication agent update is required.</param>
         /// <param name="recoveryFabricObjectId">The recovery fabric object
@@ -93,7 +94,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// <param name="rpoInSeconds">The last RPO value in seconds.</param>
         /// <param name="lastRpoCalculatedTime">The time (in UTC) when the last
         /// RPO value was calculated by Protection Service.</param>
-        public A2AReplicationDetails(string fabricObjectId = default(string), string multiVmGroupId = default(string), string multiVmGroupName = default(string), string multiVmGroupCreateOption = default(string), string managementId = default(string), IList<A2AProtectedDiskDetails> protectedDisks = default(IList<A2AProtectedDiskDetails>), IList<A2AProtectedManagedDiskDetails> protectedManagedDisks = default(IList<A2AProtectedManagedDiskDetails>), string recoveryBootDiagStorageAccountId = default(string), string primaryFabricLocation = default(string), string recoveryFabricLocation = default(string), string osType = default(string), string recoveryAzureVMSize = default(string), string recoveryAzureVMName = default(string), string recoveryAzureResourceGroupId = default(string), string recoveryCloudService = default(string), string recoveryAvailabilitySet = default(string), string selectedRecoveryAzureNetworkId = default(string), IList<VMNicDetails> vmNics = default(IList<VMNicDetails>), AzureToAzureVmSyncedConfigDetails vmSyncedConfigDetails = default(AzureToAzureVmSyncedConfigDetails), int? monitoringPercentageCompletion = default(int?), string monitoringJobType = default(string), System.DateTime? lastHeartbeat = default(System.DateTime?), string agentVersion = default(string), bool? isReplicationAgentUpdateRequired = default(bool?), string recoveryFabricObjectId = default(string), string vmProtectionState = default(string), string vmProtectionStateDescription = default(string), string lifecycleId = default(string), string testFailoverRecoveryFabricObjectId = default(string), long? rpoInSeconds = default(long?), System.DateTime? lastRpoCalculatedTime = default(System.DateTime?))
+        public A2AReplicationDetails(string fabricObjectId = default(string), string multiVmGroupId = default(string), string multiVmGroupName = default(string), string multiVmGroupCreateOption = default(string), string managementId = default(string), IList<A2AProtectedDiskDetails> protectedDisks = default(IList<A2AProtectedDiskDetails>), IList<A2AProtectedManagedDiskDetails> protectedManagedDisks = default(IList<A2AProtectedManagedDiskDetails>), string recoveryBootDiagStorageAccountId = default(string), string primaryFabricLocation = default(string), string recoveryFabricLocation = default(string), string osType = default(string), string recoveryAzureVMSize = default(string), string recoveryAzureVMName = default(string), string recoveryAzureResourceGroupId = default(string), string recoveryCloudService = default(string), string recoveryAvailabilitySet = default(string), string selectedRecoveryAzureNetworkId = default(string), IList<VMNicDetails> vmNics = default(IList<VMNicDetails>), AzureToAzureVmSyncedConfigDetails vmSyncedConfigDetails = default(AzureToAzureVmSyncedConfigDetails), int? monitoringPercentageCompletion = default(int?), string monitoringJobType = default(string), System.DateTime? lastHeartbeat = default(System.DateTime?), string agentVersion = default(string), System.DateTime? agentExpiryDate = default(System.DateTime?), bool? isReplicationAgentUpdateRequired = default(bool?), string recoveryFabricObjectId = default(string), string vmProtectionState = default(string), string vmProtectionStateDescription = default(string), string lifecycleId = default(string), string testFailoverRecoveryFabricObjectId = default(string), long? rpoInSeconds = default(long?), System.DateTime? lastRpoCalculatedTime = default(System.DateTime?))
         {
             FabricObjectId = fabricObjectId;
             MultiVmGroupId = multiVmGroupId;
@@ -118,6 +119,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
             MonitoringJobType = monitoringJobType;
             LastHeartbeat = lastHeartbeat;
             AgentVersion = agentVersion;
+            AgentExpiryDate = agentExpiryDate;
             IsReplicationAgentUpdateRequired = isReplicationAgentUpdateRequired;
             RecoveryFabricObjectId = recoveryFabricObjectId;
             VmProtectionState = vmProtectionState;
@@ -274,6 +276,12 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// </summary>
         [JsonProperty(PropertyName = "agentVersion")]
         public string AgentVersion { get; set; }
+
+        /// <summary>
+        /// Gets or sets agent expiry date.
+        /// </summary>
+        [JsonProperty(PropertyName = "agentExpiryDate")]
+        public System.DateTime? AgentExpiryDate { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether replication agent update is
