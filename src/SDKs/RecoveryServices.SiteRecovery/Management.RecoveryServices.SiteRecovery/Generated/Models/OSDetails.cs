@@ -11,12 +11,10 @@
 namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
 {
     using Newtonsoft.Json;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
-    /// Supported Operating system details.
+    /// Disk Details.
     /// </summary>
     public partial class OSDetails
     {
@@ -31,14 +29,20 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// <summary>
         /// Initializes a new instance of the OSDetails class.
         /// </summary>
-        /// <param name="osName">The name.</param>
-        /// <param name="osType">The type.</param>
-        /// <param name="osVersions">List of version for OS.</param>
-        public OSDetails(string osName = default(string), string osType = default(string), IList<OSVersionWrapper> osVersions = default(IList<OSVersionWrapper>))
+        /// <param name="osType">VM Disk details.</param>
+        /// <param name="productType">Product type.</param>
+        /// <param name="osEdition">The OSEdition.</param>
+        /// <param name="oSVersion">The OS Version.</param>
+        /// <param name="oSMajorVersion">The OS Major Version.</param>
+        /// <param name="oSMinorVersion">The OS Minor Version.</param>
+        public OSDetails(string osType = default(string), string productType = default(string), string osEdition = default(string), string oSVersion = default(string), string oSMajorVersion = default(string), string oSMinorVersion = default(string))
         {
-            OsName = osName;
             OsType = osType;
-            OsVersions = osVersions;
+            ProductType = productType;
+            OsEdition = osEdition;
+            OSVersion = oSVersion;
+            OSMajorVersion = oSMajorVersion;
+            OSMinorVersion = oSMinorVersion;
             CustomInit();
         }
 
@@ -48,22 +52,40 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets the name.
-        /// </summary>
-        [JsonProperty(PropertyName = "osName")]
-        public string OsName { get; set; }
-
-        /// <summary>
-        /// Gets or sets the type.
+        /// Gets or sets VM Disk details.
         /// </summary>
         [JsonProperty(PropertyName = "osType")]
         public string OsType { get; set; }
 
         /// <summary>
-        /// Gets or sets list of version for OS.
+        /// Gets or sets product type.
         /// </summary>
-        [JsonProperty(PropertyName = "osVersions")]
-        public IList<OSVersionWrapper> OsVersions { get; set; }
+        [JsonProperty(PropertyName = "productType")]
+        public string ProductType { get; set; }
+
+        /// <summary>
+        /// Gets or sets the OSEdition.
+        /// </summary>
+        [JsonProperty(PropertyName = "osEdition")]
+        public string OsEdition { get; set; }
+
+        /// <summary>
+        /// Gets or sets the OS Version.
+        /// </summary>
+        [JsonProperty(PropertyName = "oSVersion")]
+        public string OSVersion { get; set; }
+
+        /// <summary>
+        /// Gets or sets the OS Major Version.
+        /// </summary>
+        [JsonProperty(PropertyName = "oSMajorVersion")]
+        public string OSMajorVersion { get; set; }
+
+        /// <summary>
+        /// Gets or sets the OS Minor Version.
+        /// </summary>
+        [JsonProperty(PropertyName = "oSMinorVersion")]
+        public string OSMinorVersion { get; set; }
 
     }
 }

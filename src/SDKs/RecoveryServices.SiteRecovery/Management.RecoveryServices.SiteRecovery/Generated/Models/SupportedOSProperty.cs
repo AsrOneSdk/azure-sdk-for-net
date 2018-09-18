@@ -34,7 +34,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// <param name="instanceType">Gets the replication provider
         /// type.</param>
         /// <param name="supportedOs">List of supported OS.</param>
-        public SupportedOSProperty(string instanceType = default(string), IList<OSDetails> supportedOs = default(IList<OSDetails>))
+        public SupportedOSProperty(string instanceType = default(string), IList<SupportedOSDetails> supportedOs = default(IList<SupportedOSDetails>))
         {
             InstanceType = instanceType;
             SupportedOs = supportedOs;
@@ -56,7 +56,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// Gets or sets list of supported OS.
         /// </summary>
         [JsonProperty(PropertyName = "supportedOs")]
-        public IList<OSDetails> SupportedOs { get; set; }
+        public IList<SupportedOSDetails> SupportedOs { get; set; }
 
     }
 }
