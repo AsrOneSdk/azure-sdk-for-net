@@ -139,17 +139,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._seedManagedDiskId = value; }
         }
         
-        private string _storageAccountId;
-        
-        /// <summary>
-        /// Optional. Storage account ARM Id.
-        /// </summary>
-        public string StorageAccountId
-        {
-            get { return this._storageAccountId; }
-            set { this._storageAccountId = value; }
-        }
-        
         private string _targetBlobUri;
         
         /// <summary>

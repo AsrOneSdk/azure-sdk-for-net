@@ -275,6 +275,64 @@ namespace Microsoft.Azure.Management.SiteRecovery
         }
         
         /// <summary>
+        /// Purge migration for the given item.
+        /// </summary>
+        /// <param name='operations'>
+        /// Reference to the
+        /// Microsoft.Azure.Management.SiteRecovery.IMigrationItemOperations.
+        /// </param>
+        /// <param name='fabricName'>
+        /// Required. Fabric name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Required. Protection container name.
+        /// </param>
+        /// <param name='migrationItemName'>
+        /// Required. Migration item name.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Optional. Request header parameters.
+        /// </param>
+        /// <returns>
+        /// A standard service response for long running operations.
+        /// </returns>
+        public static LongRunningOperationResponse BeginPurgeMigration(this IMigrationItemOperations operations, string fabricName, string protectionContainerName, string migrationItemName, CustomRequestHeaders customRequestHeaders)
+        {
+            return Task.Factory.StartNew((object s) => 
+            {
+                return ((IMigrationItemOperations)s).BeginPurgeMigrationAsync(fabricName, protectionContainerName, migrationItemName, customRequestHeaders);
+            }
+            , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+        }
+        
+        /// <summary>
+        /// Purge migration for the given item.
+        /// </summary>
+        /// <param name='operations'>
+        /// Reference to the
+        /// Microsoft.Azure.Management.SiteRecovery.IMigrationItemOperations.
+        /// </param>
+        /// <param name='fabricName'>
+        /// Required. Fabric name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Required. Protection container name.
+        /// </param>
+        /// <param name='migrationItemName'>
+        /// Required. Migration item name.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Optional. Request header parameters.
+        /// </param>
+        /// <returns>
+        /// A standard service response for long running operations.
+        /// </returns>
+        public static Task<LongRunningOperationResponse> BeginPurgeMigrationAsync(this IMigrationItemOperations operations, string fabricName, string protectionContainerName, string migrationItemName, CustomRequestHeaders customRequestHeaders)
+        {
+            return operations.BeginPurgeMigrationAsync(fabricName, protectionContainerName, migrationItemName, customRequestHeaders, CancellationToken.None);
+        }
+        
+        /// <summary>
         /// Execute test migration for the given item.
         /// </summary>
         /// <param name='operations'>
@@ -904,6 +962,52 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// Service response for migration items operation.
         /// </returns>
+        public static MigrationItemOperationResponse GetPurgeMigrationStatus(this IMigrationItemOperations operations, string operationStatusLink)
+        {
+            return Task.Factory.StartNew((object s) => 
+            {
+                return ((IMigrationItemOperations)s).GetPurgeMigrationStatusAsync(operationStatusLink);
+            }
+            , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+        }
+        
+        /// <summary>
+        /// The Get Operation Status operation returns the status of the
+        /// specified operation. After calling an asynchronous operation, you
+        /// can call Get Operation Status to determine whether the operation
+        /// has succeeded, failed, or is still in progress.
+        /// </summary>
+        /// <param name='operations'>
+        /// Reference to the
+        /// Microsoft.Azure.Management.SiteRecovery.IMigrationItemOperations.
+        /// </param>
+        /// <param name='operationStatusLink'>
+        /// Required. Location value returned by the Begin operation.
+        /// </param>
+        /// <returns>
+        /// Service response for migration items operation.
+        /// </returns>
+        public static Task<MigrationItemOperationResponse> GetPurgeMigrationStatusAsync(this IMigrationItemOperations operations, string operationStatusLink)
+        {
+            return operations.GetPurgeMigrationStatusAsync(operationStatusLink, CancellationToken.None);
+        }
+        
+        /// <summary>
+        /// The Get Operation Status operation returns the status of the
+        /// specified operation. After calling an asynchronous operation, you
+        /// can call Get Operation Status to determine whether the operation
+        /// has succeeded, failed, or is still in progress.
+        /// </summary>
+        /// <param name='operations'>
+        /// Reference to the
+        /// Microsoft.Azure.Management.SiteRecovery.IMigrationItemOperations.
+        /// </param>
+        /// <param name='operationStatusLink'>
+        /// Required. Location value returned by the Begin operation.
+        /// </param>
+        /// <returns>
+        /// Service response for migration items operation.
+        /// </returns>
         public static MigrationItemOperationResponse GetTestMigrateCleanupStatus(this IMigrationItemOperations operations, string operationStatusLink)
         {
             return Task.Factory.StartNew((object s) => 
@@ -1238,6 +1342,64 @@ namespace Microsoft.Azure.Management.SiteRecovery
         public static Task<LongRunningOperationResponse> MigrateAsync(this IMigrationItemOperations operations, string fabricName, string protectionContainerName, string migrationItemName, MigrateInput input, CustomRequestHeaders customRequestHeaders)
         {
             return operations.MigrateAsync(fabricName, protectionContainerName, migrationItemName, input, customRequestHeaders, CancellationToken.None);
+        }
+        
+        /// <summary>
+        /// Purge migration for the given item.
+        /// </summary>
+        /// <param name='operations'>
+        /// Reference to the
+        /// Microsoft.Azure.Management.SiteRecovery.IMigrationItemOperations.
+        /// </param>
+        /// <param name='fabricName'>
+        /// Required. Fabric name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Required. Protection container name.
+        /// </param>
+        /// <param name='migrationItemName'>
+        /// Required. Migration item name.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Optional. Request header parameters.
+        /// </param>
+        /// <returns>
+        /// A standard service response for long running operations.
+        /// </returns>
+        public static LongRunningOperationResponse PurgeMigration(this IMigrationItemOperations operations, string fabricName, string protectionContainerName, string migrationItemName, CustomRequestHeaders customRequestHeaders)
+        {
+            return Task.Factory.StartNew((object s) => 
+            {
+                return ((IMigrationItemOperations)s).PurgeMigrationAsync(fabricName, protectionContainerName, migrationItemName, customRequestHeaders);
+            }
+            , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+        }
+        
+        /// <summary>
+        /// Purge migration for the given item.
+        /// </summary>
+        /// <param name='operations'>
+        /// Reference to the
+        /// Microsoft.Azure.Management.SiteRecovery.IMigrationItemOperations.
+        /// </param>
+        /// <param name='fabricName'>
+        /// Required. Fabric name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Required. Protection container name.
+        /// </param>
+        /// <param name='migrationItemName'>
+        /// Required. Migration item name.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Optional. Request header parameters.
+        /// </param>
+        /// <returns>
+        /// A standard service response for long running operations.
+        /// </returns>
+        public static Task<LongRunningOperationResponse> PurgeMigrationAsync(this IMigrationItemOperations operations, string fabricName, string protectionContainerName, string migrationItemName, CustomRequestHeaders customRequestHeaders)
+        {
+            return operations.PurgeMigrationAsync(fabricName, protectionContainerName, migrationItemName, customRequestHeaders, CancellationToken.None);
         }
         
         /// <summary>

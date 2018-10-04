@@ -627,11 +627,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtDiskInputValue["isOSDisk"] = disksToIncludeItem.IsOSDisk;
                                         }
                                         
-                                        if (disksToIncludeItem.StorageAccountId != null)
-                                        {
-                                            vMwareCbtDiskInputValue["storageAccountId"] = disksToIncludeItem.StorageAccountId;
-                                        }
-                                        
                                         if (disksToIncludeItem.LogStorageAccountId != null)
                                         {
                                             vMwareCbtDiskInputValue["logStorageAccountId"] = disksToIncludeItem.LogStorageAccountId;
@@ -654,6 +649,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                             if (derived.LicenseType != null)
                             {
                                 providerSpecificDetailsValue["licenseType"] = derived.LicenseType;
+                            }
+                            
+                            if (derived.StorageAccountId != null)
+                            {
+                                providerSpecificDetailsValue["storageAccountId"] = derived.StorageAccountId;
                             }
                             
                             if (derived.TargetVmName != null)
@@ -965,6 +965,202 @@ namespace Microsoft.Azure.Management.SiteRecovery
                     {
                         cancellationToken.ThrowIfCancellationRequested();
                         CloudException ex = CloudException.Create(httpRequest, requestContent, httpResponse, await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false));
+                        if (shouldTrace)
+                        {
+                            TracingAdapter.Error(invocationId, ex);
+                        }
+                        throw ex;
+                    }
+                    
+                    // Create Result
+                    LongRunningOperationResponse result = null;
+                    // Deserialize Response
+                    result = new LongRunningOperationResponse();
+                    result.StatusCode = statusCode;
+                    if (httpResponse.Headers.Contains("Azure-AsyncOperation"))
+                    {
+                        result.AsyncOperation = httpResponse.Headers.GetValues("Azure-AsyncOperation").FirstOrDefault();
+                    }
+                    if (httpResponse.Content != null && httpResponse.Content.Headers.Contains("Content-Type"))
+                    {
+                        result.ContentType = httpResponse.Content.Headers.GetValues("Content-Type").FirstOrDefault();
+                    }
+                    if (httpResponse.Headers.Contains("Date"))
+                    {
+                        result.Date = httpResponse.Headers.GetValues("Date").FirstOrDefault();
+                    }
+                    if (httpResponse.Headers.Contains("Location"))
+                    {
+                        result.Location = httpResponse.Headers.GetValues("Location").FirstOrDefault();
+                    }
+                    if (httpResponse.Headers.Contains("Retry-After"))
+                    {
+                        result.RetryAfter = int.Parse(httpResponse.Headers.GetValues("Retry-After").FirstOrDefault(), CultureInfo.InvariantCulture);
+                    }
+                    if (httpResponse.Headers.Contains("x-ms-client-request-id"))
+                    {
+                        result.ClientRequestId = httpResponse.Headers.GetValues("x-ms-client-request-id").FirstOrDefault();
+                    }
+                    if (httpResponse.Headers.Contains("x-ms-correlation-request-id"))
+                    {
+                        result.CorrelationRequestId = httpResponse.Headers.GetValues("x-ms-correlation-request-id").FirstOrDefault();
+                    }
+                    if (httpResponse.Headers.Contains("x-ms-request-id"))
+                    {
+                        result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    
+                    if (shouldTrace)
+                    {
+                        TracingAdapter.Exit(invocationId, result);
+                    }
+                    return result;
+                }
+                finally
+                {
+                    if (httpResponse != null)
+                    {
+                        httpResponse.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (httpRequest != null)
+                {
+                    httpRequest.Dispose();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Purge migration for the given item.
+        /// </summary>
+        /// <param name='fabricName'>
+        /// Required. Fabric name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Required. Protection container name.
+        /// </param>
+        /// <param name='migrationItemName'>
+        /// Required. Migration item name.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Optional. Request header parameters.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
+        /// A standard service response for long running operations.
+        /// </returns>
+        public async Task<LongRunningOperationResponse> BeginPurgeMigrationAsync(string fabricName, string protectionContainerName, string migrationItemName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        {
+            // Validate
+            if (fabricName == null)
+            {
+                throw new ArgumentNullException("fabricName");
+            }
+            if (protectionContainerName == null)
+            {
+                throw new ArgumentNullException("protectionContainerName");
+            }
+            if (migrationItemName == null)
+            {
+                throw new ArgumentNullException("migrationItemName");
+            }
+            
+            // Tracing
+            bool shouldTrace = TracingAdapter.IsEnabled;
+            string invocationId = null;
+            if (shouldTrace)
+            {
+                invocationId = TracingAdapter.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("fabricName", fabricName);
+                tracingParameters.Add("protectionContainerName", protectionContainerName);
+                tracingParameters.Add("migrationItemName", migrationItemName);
+                tracingParameters.Add("customRequestHeaders", customRequestHeaders);
+                TracingAdapter.Enter(invocationId, this, "BeginPurgeMigrationAsync", tracingParameters);
+            }
+            
+            // Construct URL
+            string url = "";
+            url = url + "/Subscriptions/";
+            if (this.Client.Credentials.SubscriptionId != null)
+            {
+                url = url + Uri.EscapeDataString(this.Client.Credentials.SubscriptionId);
+            }
+            url = url + "/resourceGroups/";
+            url = url + Uri.EscapeDataString(this.Client.ResourceGroupName);
+            url = url + "/providers/";
+            url = url + Uri.EscapeDataString(this.Client.ResourceNamespace);
+            url = url + "/";
+            url = url + Uri.EscapeDataString(this.Client.ResourceType);
+            url = url + "/";
+            url = url + Uri.EscapeDataString(this.Client.ResourceName);
+            url = url + "/replicationFabrics/";
+            url = url + Uri.EscapeDataString(fabricName);
+            url = url + "/replicationProtectionContainers/";
+            url = url + Uri.EscapeDataString(protectionContainerName);
+            url = url + "/replicationMigrationItems/";
+            url = url + Uri.EscapeDataString(migrationItemName);
+            List<string> queryParameters = new List<string>();
+            queryParameters.Add("api-version=2018-01-10");
+            if (queryParameters.Count > 0)
+            {
+                url = url + "?" + string.Join("&", queryParameters);
+            }
+            string baseUrl = this.Client.BaseUri.AbsoluteUri;
+            // Trim '/' character from the end of baseUrl and beginning of url.
+            if (baseUrl[baseUrl.Length - 1] == '/')
+            {
+                baseUrl = baseUrl.Substring(0, baseUrl.Length - 1);
+            }
+            if (url[0] == '/')
+            {
+                url = url.Substring(1);
+            }
+            url = baseUrl + "/" + url;
+            url = url.Replace(" ", "%20");
+            
+            // Create HTTP transport objects
+            HttpRequestMessage httpRequest = null;
+            try
+            {
+                httpRequest = new HttpRequestMessage();
+                httpRequest.Method = HttpMethod.Delete;
+                httpRequest.RequestUri = new Uri(url);
+                
+                // Set Headers
+                httpRequest.Headers.Add("Accept-Language", customRequestHeaders.Culture);
+                httpRequest.Headers.Add("Agent-Authentication", customRequestHeaders.AgentAuthenticationHeader);
+                httpRequest.Headers.Add("x-ms-client-request-id", customRequestHeaders.ClientRequestId);
+                httpRequest.Headers.Add("x-ms-version", "2015-01-01");
+                
+                // Set Credentials
+                cancellationToken.ThrowIfCancellationRequested();
+                await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+                
+                // Send Request
+                HttpResponseMessage httpResponse = null;
+                try
+                {
+                    if (shouldTrace)
+                    {
+                        TracingAdapter.SendRequest(invocationId, httpRequest);
+                    }
+                    cancellationToken.ThrowIfCancellationRequested();
+                    httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+                    if (shouldTrace)
+                    {
+                        TracingAdapter.ReceiveResponse(invocationId, httpResponse);
+                    }
+                    HttpStatusCode statusCode = httpResponse.StatusCode;
+                    if (statusCode != HttpStatusCode.Accepted && statusCode != HttpStatusCode.NoContent)
+                    {
+                        cancellationToken.ThrowIfCancellationRequested();
+                        CloudException ex = CloudException.Create(httpRequest, null, httpResponse, await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false));
                         if (shouldTrace)
                         {
                             TracingAdapter.Error(invocationId, ex);
@@ -2340,6 +2536,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtMigrationDetailsInstance.SnapshotRunAsAccountId = snapshotRunAsAccountIdInstance;
                                         }
                                         
+                                        JToken storageAccountIdValue = providerSpecificDetailsValue["storageAccountId"];
+                                        if (storageAccountIdValue != null && storageAccountIdValue.Type != JTokenType.Null)
+                                        {
+                                            string storageAccountIdInstance = ((string)storageAccountIdValue);
+                                            vMwareCbtMigrationDetailsInstance.StorageAccountId = storageAccountIdInstance;
+                                        }
+                                        
                                         JToken targetVmNameValue = providerSpecificDetailsValue["targetVmName"];
                                         if (targetVmNameValue != null && targetVmNameValue.Type != JTokenType.Null)
                                         {
@@ -2416,13 +2619,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 {
                                                     long capacityInBytesInstance = ((long)capacityInBytesValue);
                                                     vMwareCbtProtectedDiskDetailsInstance.CapacityInBytes = capacityInBytesInstance;
-                                                }
-                                                
-                                                JToken storageAccountIdValue = protectedDisksValue["storageAccountId"];
-                                                if (storageAccountIdValue != null && storageAccountIdValue.Type != JTokenType.Null)
-                                                {
-                                                    string storageAccountIdInstance = ((string)storageAccountIdValue);
-                                                    vMwareCbtProtectedDiskDetailsInstance.StorageAccountId = storageAccountIdInstance;
                                                 }
                                                 
                                                 JToken logStorageAccountIdValue = protectedDisksValue["logStorageAccountId"];
@@ -2951,6 +3147,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtMigrationDetailsInstance.SnapshotRunAsAccountId = snapshotRunAsAccountIdInstance;
                                         }
                                         
+                                        JToken storageAccountIdValue = providerSpecificDetailsValue["storageAccountId"];
+                                        if (storageAccountIdValue != null && storageAccountIdValue.Type != JTokenType.Null)
+                                        {
+                                            string storageAccountIdInstance = ((string)storageAccountIdValue);
+                                            vMwareCbtMigrationDetailsInstance.StorageAccountId = storageAccountIdInstance;
+                                        }
+                                        
                                         JToken targetVmNameValue = providerSpecificDetailsValue["targetVmName"];
                                         if (targetVmNameValue != null && targetVmNameValue.Type != JTokenType.Null)
                                         {
@@ -3027,13 +3230,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 {
                                                     long capacityInBytesInstance = ((long)capacityInBytesValue);
                                                     vMwareCbtProtectedDiskDetailsInstance.CapacityInBytes = capacityInBytesInstance;
-                                                }
-                                                
-                                                JToken storageAccountIdValue = protectedDisksValue["storageAccountId"];
-                                                if (storageAccountIdValue != null && storageAccountIdValue.Type != JTokenType.Null)
-                                                {
-                                                    string storageAccountIdInstance = ((string)storageAccountIdValue);
-                                                    vMwareCbtProtectedDiskDetailsInstance.StorageAccountId = storageAccountIdInstance;
                                                 }
                                                 
                                                 JToken logStorageAccountIdValue = protectedDisksValue["logStorageAccountId"];
@@ -3621,6 +3817,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtMigrationDetailsInstance.SnapshotRunAsAccountId = snapshotRunAsAccountIdInstance;
                                         }
                                         
+                                        JToken storageAccountIdValue = providerSpecificDetailsValue["storageAccountId"];
+                                        if (storageAccountIdValue != null && storageAccountIdValue.Type != JTokenType.Null)
+                                        {
+                                            string storageAccountIdInstance = ((string)storageAccountIdValue);
+                                            vMwareCbtMigrationDetailsInstance.StorageAccountId = storageAccountIdInstance;
+                                        }
+                                        
                                         JToken targetVmNameValue = providerSpecificDetailsValue["targetVmName"];
                                         if (targetVmNameValue != null && targetVmNameValue.Type != JTokenType.Null)
                                         {
@@ -3697,13 +3900,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 {
                                                     long capacityInBytesInstance = ((long)capacityInBytesValue);
                                                     vMwareCbtProtectedDiskDetailsInstance.CapacityInBytes = capacityInBytesInstance;
-                                                }
-                                                
-                                                JToken storageAccountIdValue = protectedDisksValue["storageAccountId"];
-                                                if (storageAccountIdValue != null && storageAccountIdValue.Type != JTokenType.Null)
-                                                {
-                                                    string storageAccountIdInstance = ((string)storageAccountIdValue);
-                                                    vMwareCbtProtectedDiskDetailsInstance.StorageAccountId = storageAccountIdInstance;
                                                 }
                                                 
                                                 JToken logStorageAccountIdValue = protectedDisksValue["logStorageAccountId"];
@@ -4291,6 +4487,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtMigrationDetailsInstance.SnapshotRunAsAccountId = snapshotRunAsAccountIdInstance;
                                         }
                                         
+                                        JToken storageAccountIdValue = providerSpecificDetailsValue["storageAccountId"];
+                                        if (storageAccountIdValue != null && storageAccountIdValue.Type != JTokenType.Null)
+                                        {
+                                            string storageAccountIdInstance = ((string)storageAccountIdValue);
+                                            vMwareCbtMigrationDetailsInstance.StorageAccountId = storageAccountIdInstance;
+                                        }
+                                        
                                         JToken targetVmNameValue = providerSpecificDetailsValue["targetVmName"];
                                         if (targetVmNameValue != null && targetVmNameValue.Type != JTokenType.Null)
                                         {
@@ -4367,13 +4570,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 {
                                                     long capacityInBytesInstance = ((long)capacityInBytesValue);
                                                     vMwareCbtProtectedDiskDetailsInstance.CapacityInBytes = capacityInBytesInstance;
-                                                }
-                                                
-                                                JToken storageAccountIdValue = protectedDisksValue["storageAccountId"];
-                                                if (storageAccountIdValue != null && storageAccountIdValue.Type != JTokenType.Null)
-                                                {
-                                                    string storageAccountIdInstance = ((string)storageAccountIdValue);
-                                                    vMwareCbtProtectedDiskDetailsInstance.StorageAccountId = storageAccountIdInstance;
                                                 }
                                                 
                                                 JToken logStorageAccountIdValue = protectedDisksValue["logStorageAccountId"];
@@ -4961,6 +5157,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtMigrationDetailsInstance.SnapshotRunAsAccountId = snapshotRunAsAccountIdInstance;
                                         }
                                         
+                                        JToken storageAccountIdValue = providerSpecificDetailsValue["storageAccountId"];
+                                        if (storageAccountIdValue != null && storageAccountIdValue.Type != JTokenType.Null)
+                                        {
+                                            string storageAccountIdInstance = ((string)storageAccountIdValue);
+                                            vMwareCbtMigrationDetailsInstance.StorageAccountId = storageAccountIdInstance;
+                                        }
+                                        
                                         JToken targetVmNameValue = providerSpecificDetailsValue["targetVmName"];
                                         if (targetVmNameValue != null && targetVmNameValue.Type != JTokenType.Null)
                                         {
@@ -5037,13 +5240,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 {
                                                     long capacityInBytesInstance = ((long)capacityInBytesValue);
                                                     vMwareCbtProtectedDiskDetailsInstance.CapacityInBytes = capacityInBytesInstance;
-                                                }
-                                                
-                                                JToken storageAccountIdValue = protectedDisksValue["storageAccountId"];
-                                                if (storageAccountIdValue != null && storageAccountIdValue.Type != JTokenType.Null)
-                                                {
-                                                    string storageAccountIdInstance = ((string)storageAccountIdValue);
-                                                    vMwareCbtProtectedDiskDetailsInstance.StorageAccountId = storageAccountIdInstance;
                                                 }
                                                 
                                                 JToken logStorageAccountIdValue = protectedDisksValue["logStorageAccountId"];
@@ -5390,6 +5586,676 @@ namespace Microsoft.Azure.Management.SiteRecovery
         /// <returns>
         /// Service response for migration items operation.
         /// </returns>
+        public async Task<MigrationItemOperationResponse> GetPurgeMigrationStatusAsync(string operationStatusLink, CancellationToken cancellationToken)
+        {
+            // Validate
+            if (operationStatusLink == null)
+            {
+                throw new ArgumentNullException("operationStatusLink");
+            }
+            
+            // Tracing
+            bool shouldTrace = TracingAdapter.IsEnabled;
+            string invocationId = null;
+            if (shouldTrace)
+            {
+                invocationId = TracingAdapter.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("operationStatusLink", operationStatusLink);
+                TracingAdapter.Enter(invocationId, this, "GetPurgeMigrationStatusAsync", tracingParameters);
+            }
+            
+            // Construct URL
+            string url = "";
+            url = url + operationStatusLink;
+            url = url.Replace(" ", "%20");
+            
+            // Create HTTP transport objects
+            HttpRequestMessage httpRequest = null;
+            try
+            {
+                httpRequest = new HttpRequestMessage();
+                httpRequest.Method = HttpMethod.Get;
+                httpRequest.RequestUri = new Uri(url);
+                
+                // Set Headers
+                httpRequest.Headers.Add("x-ms-client-request-id", Guid.NewGuid().ToString());
+                httpRequest.Headers.Add("x-ms-version", "2015-01-01");
+                
+                // Set Credentials
+                cancellationToken.ThrowIfCancellationRequested();
+                await this.Client.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+                
+                // Send Request
+                HttpResponseMessage httpResponse = null;
+                try
+                {
+                    if (shouldTrace)
+                    {
+                        TracingAdapter.SendRequest(invocationId, httpRequest);
+                    }
+                    cancellationToken.ThrowIfCancellationRequested();
+                    httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+                    if (shouldTrace)
+                    {
+                        TracingAdapter.ReceiveResponse(invocationId, httpResponse);
+                    }
+                    HttpStatusCode statusCode = httpResponse.StatusCode;
+                    if (statusCode != HttpStatusCode.Accepted && statusCode != HttpStatusCode.NoContent)
+                    {
+                        cancellationToken.ThrowIfCancellationRequested();
+                        CloudException ex = CloudException.Create(httpRequest, null, httpResponse, await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false));
+                        if (shouldTrace)
+                        {
+                            TracingAdapter.Error(invocationId, ex);
+                        }
+                        throw ex;
+                    }
+                    
+                    // Create Result
+                    MigrationItemOperationResponse result = null;
+                    // Deserialize Response
+                    if (statusCode == HttpStatusCode.Accepted || statusCode == HttpStatusCode.NoContent)
+                    {
+                        cancellationToken.ThrowIfCancellationRequested();
+                        string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        result = new MigrationItemOperationResponse();
+                        JToken responseDoc = null;
+                        if (string.IsNullOrEmpty(responseContent) == false)
+                        {
+                            responseDoc = JToken.Parse(responseContent);
+                        }
+                        
+                        if (responseDoc != null && responseDoc.Type != JTokenType.Null)
+                        {
+                            MigrationItem migrationItemInstance = new MigrationItem();
+                            result.MigrationItem = migrationItemInstance;
+                            
+                            JToken propertiesValue = responseDoc["properties"];
+                            if (propertiesValue != null && propertiesValue.Type != JTokenType.Null)
+                            {
+                                MigrationItemProperties propertiesInstance = new MigrationItemProperties();
+                                migrationItemInstance.Properties = propertiesInstance;
+                                
+                                JToken friendlyNameValue = propertiesValue["friendlyName"];
+                                if (friendlyNameValue != null && friendlyNameValue.Type != JTokenType.Null)
+                                {
+                                    string friendlyNameInstance = ((string)friendlyNameValue);
+                                    propertiesInstance.FriendlyName = friendlyNameInstance;
+                                }
+                                
+                                JToken policyIdValue = propertiesValue["policyId"];
+                                if (policyIdValue != null && policyIdValue.Type != JTokenType.Null)
+                                {
+                                    string policyIdInstance = ((string)policyIdValue);
+                                    propertiesInstance.PolicyId = policyIdInstance;
+                                }
+                                
+                                JToken policyFriendlyNameValue = propertiesValue["policyFriendlyName"];
+                                if (policyFriendlyNameValue != null && policyFriendlyNameValue.Type != JTokenType.Null)
+                                {
+                                    string policyFriendlyNameInstance = ((string)policyFriendlyNameValue);
+                                    propertiesInstance.PolicyFriendlyName = policyFriendlyNameInstance;
+                                }
+                                
+                                JToken recoveryServicesProviderIdValue = propertiesValue["recoveryServicesProviderId"];
+                                if (recoveryServicesProviderIdValue != null && recoveryServicesProviderIdValue.Type != JTokenType.Null)
+                                {
+                                    string recoveryServicesProviderIdInstance = ((string)recoveryServicesProviderIdValue);
+                                    propertiesInstance.RecoveryServicesProviderId = recoveryServicesProviderIdInstance;
+                                }
+                                
+                                JToken migrationStateValue = propertiesValue["migrationState"];
+                                if (migrationStateValue != null && migrationStateValue.Type != JTokenType.Null)
+                                {
+                                    string migrationStateInstance = ((string)migrationStateValue);
+                                    propertiesInstance.MigrationState = migrationStateInstance;
+                                }
+                                
+                                JToken migrationStateDescriptionValue = propertiesValue["migrationStateDescription"];
+                                if (migrationStateDescriptionValue != null && migrationStateDescriptionValue.Type != JTokenType.Null)
+                                {
+                                    string migrationStateDescriptionInstance = ((string)migrationStateDescriptionValue);
+                                    propertiesInstance.MigrationStateDescription = migrationStateDescriptionInstance;
+                                }
+                                
+                                JToken lastSuccessfulMigrateTimeValue = propertiesValue["lastSuccessfulMigrateTime"];
+                                if (lastSuccessfulMigrateTimeValue != null && lastSuccessfulMigrateTimeValue.Type != JTokenType.Null)
+                                {
+                                    DateTime lastSuccessfulMigrateTimeInstance = ((DateTime)lastSuccessfulMigrateTimeValue);
+                                    propertiesInstance.LastSuccessfulMigrateTime = lastSuccessfulMigrateTimeInstance;
+                                }
+                                
+                                JToken lastSuccessfulTestMigrateTimeValue = propertiesValue["lastSuccessfulTestMigrateTime"];
+                                if (lastSuccessfulTestMigrateTimeValue != null && lastSuccessfulTestMigrateTimeValue.Type != JTokenType.Null)
+                                {
+                                    DateTime lastSuccessfulTestMigrateTimeInstance = ((DateTime)lastSuccessfulTestMigrateTimeValue);
+                                    propertiesInstance.LastSuccessfulTestMigrateTime = lastSuccessfulTestMigrateTimeInstance;
+                                }
+                                
+                                JToken testMigrateStateValue = propertiesValue["testMigrateState"];
+                                if (testMigrateStateValue != null && testMigrateStateValue.Type != JTokenType.Null)
+                                {
+                                    string testMigrateStateInstance = ((string)testMigrateStateValue);
+                                    propertiesInstance.TestMigrateState = testMigrateStateInstance;
+                                }
+                                
+                                JToken testMigrateStateDescriptionValue = propertiesValue["testMigrateStateDescription"];
+                                if (testMigrateStateDescriptionValue != null && testMigrateStateDescriptionValue.Type != JTokenType.Null)
+                                {
+                                    string testMigrateStateDescriptionInstance = ((string)testMigrateStateDescriptionValue);
+                                    propertiesInstance.TestMigrateStateDescription = testMigrateStateDescriptionInstance;
+                                }
+                                
+                                JToken allowedOperationsArray = propertiesValue["allowedOperations"];
+                                if (allowedOperationsArray != null && allowedOperationsArray.Type != JTokenType.Null)
+                                {
+                                    foreach (JToken allowedOperationsValue in ((JArray)allowedOperationsArray))
+                                    {
+                                        propertiesInstance.AllowedOperations.Add(((string)allowedOperationsValue));
+                                    }
+                                }
+                                
+                                JToken currentScenarioValue = propertiesValue["currentScenario"];
+                                if (currentScenarioValue != null && currentScenarioValue.Type != JTokenType.Null)
+                                {
+                                    CurrentScenarioDetails currentScenarioInstance = new CurrentScenarioDetails();
+                                    propertiesInstance.CurrentScenario = currentScenarioInstance;
+                                    
+                                    JToken scenarioNameValue = currentScenarioValue["scenarioName"];
+                                    if (scenarioNameValue != null && scenarioNameValue.Type != JTokenType.Null)
+                                    {
+                                        string scenarioNameInstance = ((string)scenarioNameValue);
+                                        currentScenarioInstance.ScenarioName = scenarioNameInstance;
+                                    }
+                                    
+                                    JToken jobIdValue = currentScenarioValue["jobId"];
+                                    if (jobIdValue != null && jobIdValue.Type != JTokenType.Null)
+                                    {
+                                        string jobIdInstance = ((string)jobIdValue);
+                                        currentScenarioInstance.JobId = jobIdInstance;
+                                    }
+                                    
+                                    JToken startTimeValue = currentScenarioValue["startTime"];
+                                    if (startTimeValue != null && startTimeValue.Type != JTokenType.Null)
+                                    {
+                                        DateTime startTimeInstance = ((DateTime)startTimeValue);
+                                        currentScenarioInstance.StartTime = startTimeInstance;
+                                    }
+                                }
+                                
+                                JToken providerSpecificDetailsValue = propertiesValue["providerSpecificDetails"];
+                                if (providerSpecificDetailsValue != null && providerSpecificDetailsValue.Type != JTokenType.Null)
+                                {
+                                    string typeName = ((string)providerSpecificDetailsValue["instanceType"]);
+                                    if (typeName == "VMwareCbt")
+                                    {
+                                        VMwareCbtMigrationDetails vMwareCbtMigrationDetailsInstance = new VMwareCbtMigrationDetails();
+                                        
+                                        JToken vmwareMachineIdValue = providerSpecificDetailsValue["vmwareMachineId"];
+                                        if (vmwareMachineIdValue != null && vmwareMachineIdValue.Type != JTokenType.Null)
+                                        {
+                                            string vmwareMachineIdInstance = ((string)vmwareMachineIdValue);
+                                            vMwareCbtMigrationDetailsInstance.VMwareMachineId = vmwareMachineIdInstance;
+                                        }
+                                        
+                                        JToken osTypeValue = providerSpecificDetailsValue["osType"];
+                                        if (osTypeValue != null && osTypeValue.Type != JTokenType.Null)
+                                        {
+                                            string osTypeInstance = ((string)osTypeValue);
+                                            vMwareCbtMigrationDetailsInstance.OSType = osTypeInstance;
+                                        }
+                                        
+                                        JToken licenseTypeValue = providerSpecificDetailsValue["licenseType"];
+                                        if (licenseTypeValue != null && licenseTypeValue.Type != JTokenType.Null)
+                                        {
+                                            string licenseTypeInstance = ((string)licenseTypeValue);
+                                            vMwareCbtMigrationDetailsInstance.LicenseType = licenseTypeInstance;
+                                        }
+                                        
+                                        JToken dataMoverRunAsAccountIdValue = providerSpecificDetailsValue["dataMoverRunAsAccountId"];
+                                        if (dataMoverRunAsAccountIdValue != null && dataMoverRunAsAccountIdValue.Type != JTokenType.Null)
+                                        {
+                                            string dataMoverRunAsAccountIdInstance = ((string)dataMoverRunAsAccountIdValue);
+                                            vMwareCbtMigrationDetailsInstance.DataMoverRunAsAccountId = dataMoverRunAsAccountIdInstance;
+                                        }
+                                        
+                                        JToken snapshotRunAsAccountIdValue = providerSpecificDetailsValue["snapshotRunAsAccountId"];
+                                        if (snapshotRunAsAccountIdValue != null && snapshotRunAsAccountIdValue.Type != JTokenType.Null)
+                                        {
+                                            string snapshotRunAsAccountIdInstance = ((string)snapshotRunAsAccountIdValue);
+                                            vMwareCbtMigrationDetailsInstance.SnapshotRunAsAccountId = snapshotRunAsAccountIdInstance;
+                                        }
+                                        
+                                        JToken storageAccountIdValue = providerSpecificDetailsValue["storageAccountId"];
+                                        if (storageAccountIdValue != null && storageAccountIdValue.Type != JTokenType.Null)
+                                        {
+                                            string storageAccountIdInstance = ((string)storageAccountIdValue);
+                                            vMwareCbtMigrationDetailsInstance.StorageAccountId = storageAccountIdInstance;
+                                        }
+                                        
+                                        JToken targetVmNameValue = providerSpecificDetailsValue["targetVmName"];
+                                        if (targetVmNameValue != null && targetVmNameValue.Type != JTokenType.Null)
+                                        {
+                                            string targetVmNameInstance = ((string)targetVmNameValue);
+                                            vMwareCbtMigrationDetailsInstance.TargetVmName = targetVmNameInstance;
+                                        }
+                                        
+                                        JToken targetVmSizeValue = providerSpecificDetailsValue["targetVmSize"];
+                                        if (targetVmSizeValue != null && targetVmSizeValue.Type != JTokenType.Null)
+                                        {
+                                            string targetVmSizeInstance = ((string)targetVmSizeValue);
+                                            vMwareCbtMigrationDetailsInstance.TargetVmSize = targetVmSizeInstance;
+                                        }
+                                        
+                                        JToken targetResourceGroupIdValue = providerSpecificDetailsValue["targetResourceGroupId"];
+                                        if (targetResourceGroupIdValue != null && targetResourceGroupIdValue.Type != JTokenType.Null)
+                                        {
+                                            string targetResourceGroupIdInstance = ((string)targetResourceGroupIdValue);
+                                            vMwareCbtMigrationDetailsInstance.TargetResourceGroupId = targetResourceGroupIdInstance;
+                                        }
+                                        
+                                        JToken targetAvailabilitySetIdValue = providerSpecificDetailsValue["targetAvailabilitySetId"];
+                                        if (targetAvailabilitySetIdValue != null && targetAvailabilitySetIdValue.Type != JTokenType.Null)
+                                        {
+                                            string targetAvailabilitySetIdInstance = ((string)targetAvailabilitySetIdValue);
+                                            vMwareCbtMigrationDetailsInstance.TargetAvailabilitySetId = targetAvailabilitySetIdInstance;
+                                        }
+                                        
+                                        JToken targetBootDiagnosticsStorageAccountIdValue = providerSpecificDetailsValue["targetBootDiagnosticsStorageAccountId"];
+                                        if (targetBootDiagnosticsStorageAccountIdValue != null && targetBootDiagnosticsStorageAccountIdValue.Type != JTokenType.Null)
+                                        {
+                                            string targetBootDiagnosticsStorageAccountIdInstance = ((string)targetBootDiagnosticsStorageAccountIdValue);
+                                            vMwareCbtMigrationDetailsInstance.TargetBootDiagnosticsStorageAccountId = targetBootDiagnosticsStorageAccountIdInstance;
+                                        }
+                                        
+                                        JToken protectedDisksArray = providerSpecificDetailsValue["protectedDisks"];
+                                        if (protectedDisksArray != null && protectedDisksArray.Type != JTokenType.Null)
+                                        {
+                                            foreach (JToken protectedDisksValue in ((JArray)protectedDisksArray))
+                                            {
+                                                VMwareCbtProtectedDiskDetails vMwareCbtProtectedDiskDetailsInstance = new VMwareCbtProtectedDiskDetails();
+                                                vMwareCbtMigrationDetailsInstance.ProtectedDisks.Add(vMwareCbtProtectedDiskDetailsInstance);
+                                                
+                                                JToken diskIdValue = protectedDisksValue["diskId"];
+                                                if (diskIdValue != null && diskIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string diskIdInstance = ((string)diskIdValue);
+                                                    vMwareCbtProtectedDiskDetailsInstance.DiskId = diskIdInstance;
+                                                }
+                                                
+                                                JToken diskNameValue = protectedDisksValue["diskName"];
+                                                if (diskNameValue != null && diskNameValue.Type != JTokenType.Null)
+                                                {
+                                                    string diskNameInstance = ((string)diskNameValue);
+                                                    vMwareCbtProtectedDiskDetailsInstance.DiskName = diskNameInstance;
+                                                }
+                                                
+                                                JToken diskPathValue = protectedDisksValue["diskPath"];
+                                                if (diskPathValue != null && diskPathValue.Type != JTokenType.Null)
+                                                {
+                                                    string diskPathInstance = ((string)diskPathValue);
+                                                    vMwareCbtProtectedDiskDetailsInstance.DiskPath = diskPathInstance;
+                                                }
+                                                
+                                                JToken isOSDiskValue = protectedDisksValue["isOSDisk"];
+                                                if (isOSDiskValue != null && isOSDiskValue.Type != JTokenType.Null)
+                                                {
+                                                    string isOSDiskInstance = ((string)isOSDiskValue);
+                                                    vMwareCbtProtectedDiskDetailsInstance.IsOSDisk = isOSDiskInstance;
+                                                }
+                                                
+                                                JToken capacityInBytesValue = protectedDisksValue["capacityInBytes"];
+                                                if (capacityInBytesValue != null && capacityInBytesValue.Type != JTokenType.Null)
+                                                {
+                                                    long capacityInBytesInstance = ((long)capacityInBytesValue);
+                                                    vMwareCbtProtectedDiskDetailsInstance.CapacityInBytes = capacityInBytesInstance;
+                                                }
+                                                
+                                                JToken logStorageAccountIdValue = protectedDisksValue["logStorageAccountId"];
+                                                if (logStorageAccountIdValue != null && logStorageAccountIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string logStorageAccountIdInstance = ((string)logStorageAccountIdValue);
+                                                    vMwareCbtProtectedDiskDetailsInstance.LogStorageAccountId = logStorageAccountIdInstance;
+                                                }
+                                                
+                                                JToken logStorageAccountSasSecretNameValue = protectedDisksValue["logStorageAccountSasSecretName"];
+                                                if (logStorageAccountSasSecretNameValue != null && logStorageAccountSasSecretNameValue.Type != JTokenType.Null)
+                                                {
+                                                    string logStorageAccountSasSecretNameInstance = ((string)logStorageAccountSasSecretNameValue);
+                                                    vMwareCbtProtectedDiskDetailsInstance.LogStorageAccountSasSecretName = logStorageAccountSasSecretNameInstance;
+                                                }
+                                                
+                                                JToken seedManagedDiskIdValue = protectedDisksValue["seedManagedDiskId"];
+                                                if (seedManagedDiskIdValue != null && seedManagedDiskIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string seedManagedDiskIdInstance = ((string)seedManagedDiskIdValue);
+                                                    vMwareCbtProtectedDiskDetailsInstance.SeedManagedDiskId = seedManagedDiskIdInstance;
+                                                }
+                                                
+                                                JToken seedBlobUriValue = protectedDisksValue["seedBlobUri"];
+                                                if (seedBlobUriValue != null && seedBlobUriValue.Type != JTokenType.Null)
+                                                {
+                                                    string seedBlobUriInstance = ((string)seedBlobUriValue);
+                                                    vMwareCbtProtectedDiskDetailsInstance.SeedBlobUri = seedBlobUriInstance;
+                                                }
+                                                
+                                                JToken targetManagedDiskIdValue = protectedDisksValue["targetManagedDiskId"];
+                                                if (targetManagedDiskIdValue != null && targetManagedDiskIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetManagedDiskIdInstance = ((string)targetManagedDiskIdValue);
+                                                    vMwareCbtProtectedDiskDetailsInstance.TargetManagedDiskId = targetManagedDiskIdInstance;
+                                                }
+                                                
+                                                JToken targetBlobUriValue = protectedDisksValue["targetBlobUri"];
+                                                if (targetBlobUriValue != null && targetBlobUriValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetBlobUriInstance = ((string)targetBlobUriValue);
+                                                    vMwareCbtProtectedDiskDetailsInstance.TargetBlobUri = targetBlobUriInstance;
+                                                }
+                                                
+                                                JToken diskTypeValue = protectedDisksValue["diskType"];
+                                                if (diskTypeValue != null && diskTypeValue.Type != JTokenType.Null)
+                                                {
+                                                    string diskTypeInstance = ((string)diskTypeValue);
+                                                    vMwareCbtProtectedDiskDetailsInstance.DiskType = diskTypeInstance;
+                                                }
+                                            }
+                                        }
+                                        
+                                        JToken targetNetworkIdValue = providerSpecificDetailsValue["targetNetworkId"];
+                                        if (targetNetworkIdValue != null && targetNetworkIdValue.Type != JTokenType.Null)
+                                        {
+                                            string targetNetworkIdInstance = ((string)targetNetworkIdValue);
+                                            vMwareCbtMigrationDetailsInstance.TargetNetworkId = targetNetworkIdInstance;
+                                        }
+                                        
+                                        JToken vmNicsArray = providerSpecificDetailsValue["vmNics"];
+                                        if (vmNicsArray != null && vmNicsArray.Type != JTokenType.Null)
+                                        {
+                                            foreach (JToken vmNicsValue in ((JArray)vmNicsArray))
+                                            {
+                                                VMwareCbtNicDetails vMwareCbtNicDetailsInstance = new VMwareCbtNicDetails();
+                                                vMwareCbtMigrationDetailsInstance.VMNics.Add(vMwareCbtNicDetailsInstance);
+                                                
+                                                JToken nicIdValue = vmNicsValue["nicId"];
+                                                if (nicIdValue != null && nicIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string nicIdInstance = ((string)nicIdValue);
+                                                    vMwareCbtNicDetailsInstance.NicId = nicIdInstance;
+                                                }
+                                                
+                                                JToken isPrimaryNicValue = vmNicsValue["isPrimaryNic"];
+                                                if (isPrimaryNicValue != null && isPrimaryNicValue.Type != JTokenType.Null)
+                                                {
+                                                    string isPrimaryNicInstance = ((string)isPrimaryNicValue);
+                                                    vMwareCbtNicDetailsInstance.IsPrimaryNic = isPrimaryNicInstance;
+                                                }
+                                                
+                                                JToken sourceIPAddressValue = vmNicsValue["sourceIPAddress"];
+                                                if (sourceIPAddressValue != null && sourceIPAddressValue.Type != JTokenType.Null)
+                                                {
+                                                    string sourceIPAddressInstance = ((string)sourceIPAddressValue);
+                                                    vMwareCbtNicDetailsInstance.SourceIPAddress = sourceIPAddressInstance;
+                                                }
+                                                
+                                                JToken sourceIPAddressTypeValue = vmNicsValue["sourceIPAddressType"];
+                                                if (sourceIPAddressTypeValue != null && sourceIPAddressTypeValue.Type != JTokenType.Null)
+                                                {
+                                                    string sourceIPAddressTypeInstance = ((string)sourceIPAddressTypeValue);
+                                                    vMwareCbtNicDetailsInstance.SourceIPAddressType = sourceIPAddressTypeInstance;
+                                                }
+                                                
+                                                JToken sourceNetworkIdValue = vmNicsValue["sourceNetworkId"];
+                                                if (sourceNetworkIdValue != null && sourceNetworkIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string sourceNetworkIdInstance = ((string)sourceNetworkIdValue);
+                                                    vMwareCbtNicDetailsInstance.SourceNetworkId = sourceNetworkIdInstance;
+                                                }
+                                                
+                                                JToken targetIPAddressValue = vmNicsValue["targetIPAddress"];
+                                                if (targetIPAddressValue != null && targetIPAddressValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetIPAddressInstance = ((string)targetIPAddressValue);
+                                                    vMwareCbtNicDetailsInstance.TargetIPAddress = targetIPAddressInstance;
+                                                }
+                                                
+                                                JToken targetIPAddressTypeValue = vmNicsValue["targetIPAddressType"];
+                                                if (targetIPAddressTypeValue != null && targetIPAddressTypeValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetIPAddressTypeInstance = ((string)targetIPAddressTypeValue);
+                                                    vMwareCbtNicDetailsInstance.TargetIPAddressType = targetIPAddressTypeInstance;
+                                                }
+                                                
+                                                JToken targetSubnetNameValue = vmNicsValue["targetSubnetName"];
+                                                if (targetSubnetNameValue != null && targetSubnetNameValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetSubnetNameInstance = ((string)targetSubnetNameValue);
+                                                    vMwareCbtNicDetailsInstance.TargetSubnetName = targetSubnetNameInstance;
+                                                }
+                                                
+                                                JToken isSelectedForMigrationValue = vmNicsValue["isSelectedForMigration"];
+                                                if (isSelectedForMigrationValue != null && isSelectedForMigrationValue.Type != JTokenType.Null)
+                                                {
+                                                    string isSelectedForMigrationInstance = ((string)isSelectedForMigrationValue);
+                                                    vMwareCbtNicDetailsInstance.IsSelectedForMigration = isSelectedForMigrationInstance;
+                                                }
+                                            }
+                                        }
+                                        
+                                        JToken migrationRecoveryPointIdValue = providerSpecificDetailsValue["migrationRecoveryPointId"];
+                                        if (migrationRecoveryPointIdValue != null && migrationRecoveryPointIdValue.Type != JTokenType.Null)
+                                        {
+                                            string migrationRecoveryPointIdInstance = ((string)migrationRecoveryPointIdValue);
+                                            vMwareCbtMigrationDetailsInstance.MigrationRecoveryPointId = migrationRecoveryPointIdInstance;
+                                        }
+                                        
+                                        JToken lastRecoveryPointReceivedValue = providerSpecificDetailsValue["lastRecoveryPointReceived"];
+                                        if (lastRecoveryPointReceivedValue != null && lastRecoveryPointReceivedValue.Type != JTokenType.Null)
+                                        {
+                                            DateTime lastRecoveryPointReceivedInstance = ((DateTime)lastRecoveryPointReceivedValue);
+                                            vMwareCbtMigrationDetailsInstance.LastRecoveryPointReceived = lastRecoveryPointReceivedInstance;
+                                        }
+                                        
+                                        JToken instanceTypeValue = providerSpecificDetailsValue["instanceType"];
+                                        if (instanceTypeValue != null && instanceTypeValue.Type != JTokenType.Null)
+                                        {
+                                            string instanceTypeInstance = ((string)instanceTypeValue);
+                                            vMwareCbtMigrationDetailsInstance.InstanceType = instanceTypeInstance;
+                                        }
+                                        propertiesInstance.ProviderSpecificDetails = vMwareCbtMigrationDetailsInstance;
+                                    }
+                                }
+                            }
+                            
+                            JToken idValue = responseDoc["id"];
+                            if (idValue != null && idValue.Type != JTokenType.Null)
+                            {
+                                string idInstance = ((string)idValue);
+                                migrationItemInstance.Id = idInstance;
+                            }
+                            
+                            JToken nameValue = responseDoc["name"];
+                            if (nameValue != null && nameValue.Type != JTokenType.Null)
+                            {
+                                string nameInstance = ((string)nameValue);
+                                migrationItemInstance.Name = nameInstance;
+                            }
+                            
+                            JToken typeValue = responseDoc["type"];
+                            if (typeValue != null && typeValue.Type != JTokenType.Null)
+                            {
+                                string typeInstance = ((string)typeValue);
+                                migrationItemInstance.Type = typeInstance;
+                            }
+                            
+                            JToken locationValue = responseDoc["location"];
+                            if (locationValue != null && locationValue.Type != JTokenType.Null)
+                            {
+                                string locationInstance = ((string)locationValue);
+                                migrationItemInstance.Location = locationInstance;
+                            }
+                            
+                            JToken tagsSequenceElement = ((JToken)responseDoc["tags"]);
+                            if (tagsSequenceElement != null && tagsSequenceElement.Type != JTokenType.Null)
+                            {
+                                foreach (JProperty property in tagsSequenceElement)
+                                {
+                                    string tagsKey = ((string)property.Name);
+                                    string tagsValue = ((string)property.Value);
+                                    migrationItemInstance.Tags.Add(tagsKey, tagsValue);
+                                }
+                            }
+                            
+                            JToken locationValue2 = responseDoc["Location"];
+                            if (locationValue2 != null && locationValue2.Type != JTokenType.Null)
+                            {
+                                string locationInstance2 = ((string)locationValue2);
+                                result.Location = locationInstance2;
+                            }
+                            
+                            JToken retryAfterValue = responseDoc["RetryAfter"];
+                            if (retryAfterValue != null && retryAfterValue.Type != JTokenType.Null)
+                            {
+                                int retryAfterInstance = ((int)retryAfterValue);
+                                result.RetryAfter = retryAfterInstance;
+                            }
+                            
+                            JToken asyncOperationValue = responseDoc["AsyncOperation"];
+                            if (asyncOperationValue != null && asyncOperationValue.Type != JTokenType.Null)
+                            {
+                                string asyncOperationInstance = ((string)asyncOperationValue);
+                                result.AsyncOperation = asyncOperationInstance;
+                            }
+                            
+                            JToken statusValue = responseDoc["Status"];
+                            if (statusValue != null && statusValue.Type != JTokenType.Null)
+                            {
+                                OperationStatus statusInstance = ((OperationStatus)Enum.Parse(typeof(OperationStatus), ((string)statusValue), true));
+                                result.Status = statusInstance;
+                            }
+                            
+                            JToken cultureValue = responseDoc["Culture"];
+                            if (cultureValue != null && cultureValue.Type != JTokenType.Null)
+                            {
+                                string cultureInstance = ((string)cultureValue);
+                                result.Culture = cultureInstance;
+                            }
+                            
+                            JToken clientRequestIdValue = responseDoc["ClientRequestId"];
+                            if (clientRequestIdValue != null && clientRequestIdValue.Type != JTokenType.Null)
+                            {
+                                string clientRequestIdInstance = ((string)clientRequestIdValue);
+                                result.ClientRequestId = clientRequestIdInstance;
+                            }
+                            
+                            JToken correlationRequestIdValue = responseDoc["CorrelationRequestId"];
+                            if (correlationRequestIdValue != null && correlationRequestIdValue.Type != JTokenType.Null)
+                            {
+                                string correlationRequestIdInstance = ((string)correlationRequestIdValue);
+                                result.CorrelationRequestId = correlationRequestIdInstance;
+                            }
+                            
+                            JToken dateValue = responseDoc["Date"];
+                            if (dateValue != null && dateValue.Type != JTokenType.Null)
+                            {
+                                string dateInstance = ((string)dateValue);
+                                result.Date = dateInstance;
+                            }
+                            
+                            JToken contentTypeValue = responseDoc["ContentType"];
+                            if (contentTypeValue != null && contentTypeValue.Type != JTokenType.Null)
+                            {
+                                string contentTypeInstance = ((string)contentTypeValue);
+                                result.ContentType = contentTypeInstance;
+                            }
+                        }
+                        
+                    }
+                    result.StatusCode = statusCode;
+                    if (httpResponse.Headers.Contains("Azure-AsyncOperation"))
+                    {
+                        result.AsyncOperation = httpResponse.Headers.GetValues("Azure-AsyncOperation").FirstOrDefault();
+                    }
+                    if (httpResponse.Content != null && httpResponse.Content.Headers.Contains("Content-Type"))
+                    {
+                        result.ContentType = httpResponse.Content.Headers.GetValues("Content-Type").FirstOrDefault();
+                    }
+                    if (httpResponse.Headers.Contains("Date"))
+                    {
+                        result.Date = httpResponse.Headers.GetValues("Date").FirstOrDefault();
+                    }
+                    if (httpResponse.Headers.Contains("Location"))
+                    {
+                        result.Location = httpResponse.Headers.GetValues("Location").FirstOrDefault();
+                    }
+                    if (httpResponse.Headers.Contains("Retry-After"))
+                    {
+                        result.RetryAfter = int.Parse(httpResponse.Headers.GetValues("Retry-After").FirstOrDefault(), CultureInfo.InvariantCulture);
+                    }
+                    if (httpResponse.Headers.Contains("x-ms-client-request-id"))
+                    {
+                        result.ClientRequestId = httpResponse.Headers.GetValues("x-ms-client-request-id").FirstOrDefault();
+                    }
+                    if (httpResponse.Headers.Contains("x-ms-correlation-request-id"))
+                    {
+                        result.CorrelationRequestId = httpResponse.Headers.GetValues("x-ms-correlation-request-id").FirstOrDefault();
+                    }
+                    if (httpResponse.Headers.Contains("x-ms-request-id"))
+                    {
+                        result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    if (statusCode == HttpStatusCode.OK)
+                    {
+                        result.Status = OperationStatus.Failed;
+                    }
+                    if (statusCode == HttpStatusCode.Accepted)
+                    {
+                        result.Status = OperationStatus.InProgress;
+                    }
+                    if (statusCode == HttpStatusCode.NoContent)
+                    {
+                        result.Status = OperationStatus.Succeeded;
+                    }
+                    
+                    if (shouldTrace)
+                    {
+                        TracingAdapter.Exit(invocationId, result);
+                    }
+                    return result;
+                }
+                finally
+                {
+                    if (httpResponse != null)
+                    {
+                        httpResponse.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (httpRequest != null)
+                {
+                    httpRequest.Dispose();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// The Get Operation Status operation returns the status of the
+        /// specified operation. After calling an asynchronous operation, you
+        /// can call Get Operation Status to determine whether the operation
+        /// has succeeded, failed, or is still in progress.
+        /// </summary>
+        /// <param name='operationStatusLink'>
+        /// Required. Location value returned by the Begin operation.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
+        /// Service response for migration items operation.
+        /// </returns>
         public async Task<MigrationItemOperationResponse> GetTestMigrateCleanupStatusAsync(string operationStatusLink, CancellationToken cancellationToken)
         {
             // Validate
@@ -5631,6 +6497,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtMigrationDetailsInstance.SnapshotRunAsAccountId = snapshotRunAsAccountIdInstance;
                                         }
                                         
+                                        JToken storageAccountIdValue = providerSpecificDetailsValue["storageAccountId"];
+                                        if (storageAccountIdValue != null && storageAccountIdValue.Type != JTokenType.Null)
+                                        {
+                                            string storageAccountIdInstance = ((string)storageAccountIdValue);
+                                            vMwareCbtMigrationDetailsInstance.StorageAccountId = storageAccountIdInstance;
+                                        }
+                                        
                                         JToken targetVmNameValue = providerSpecificDetailsValue["targetVmName"];
                                         if (targetVmNameValue != null && targetVmNameValue.Type != JTokenType.Null)
                                         {
@@ -5707,13 +6580,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 {
                                                     long capacityInBytesInstance = ((long)capacityInBytesValue);
                                                     vMwareCbtProtectedDiskDetailsInstance.CapacityInBytes = capacityInBytesInstance;
-                                                }
-                                                
-                                                JToken storageAccountIdValue = protectedDisksValue["storageAccountId"];
-                                                if (storageAccountIdValue != null && storageAccountIdValue.Type != JTokenType.Null)
-                                                {
-                                                    string storageAccountIdInstance = ((string)storageAccountIdValue);
-                                                    vMwareCbtProtectedDiskDetailsInstance.StorageAccountId = storageAccountIdInstance;
                                                 }
                                                 
                                                 JToken logStorageAccountIdValue = protectedDisksValue["logStorageAccountId"];
@@ -6301,6 +7167,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtMigrationDetailsInstance.SnapshotRunAsAccountId = snapshotRunAsAccountIdInstance;
                                         }
                                         
+                                        JToken storageAccountIdValue = providerSpecificDetailsValue["storageAccountId"];
+                                        if (storageAccountIdValue != null && storageAccountIdValue.Type != JTokenType.Null)
+                                        {
+                                            string storageAccountIdInstance = ((string)storageAccountIdValue);
+                                            vMwareCbtMigrationDetailsInstance.StorageAccountId = storageAccountIdInstance;
+                                        }
+                                        
                                         JToken targetVmNameValue = providerSpecificDetailsValue["targetVmName"];
                                         if (targetVmNameValue != null && targetVmNameValue.Type != JTokenType.Null)
                                         {
@@ -6377,13 +7250,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 {
                                                     long capacityInBytesInstance = ((long)capacityInBytesValue);
                                                     vMwareCbtProtectedDiskDetailsInstance.CapacityInBytes = capacityInBytesInstance;
-                                                }
-                                                
-                                                JToken storageAccountIdValue = protectedDisksValue["storageAccountId"];
-                                                if (storageAccountIdValue != null && storageAccountIdValue.Type != JTokenType.Null)
-                                                {
-                                                    string storageAccountIdInstance = ((string)storageAccountIdValue);
-                                                    vMwareCbtProtectedDiskDetailsInstance.StorageAccountId = storageAccountIdInstance;
                                                 }
                                                 
                                                 JToken logStorageAccountIdValue = protectedDisksValue["logStorageAccountId"];
@@ -6971,6 +7837,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtMigrationDetailsInstance.SnapshotRunAsAccountId = snapshotRunAsAccountIdInstance;
                                         }
                                         
+                                        JToken storageAccountIdValue = providerSpecificDetailsValue["storageAccountId"];
+                                        if (storageAccountIdValue != null && storageAccountIdValue.Type != JTokenType.Null)
+                                        {
+                                            string storageAccountIdInstance = ((string)storageAccountIdValue);
+                                            vMwareCbtMigrationDetailsInstance.StorageAccountId = storageAccountIdInstance;
+                                        }
+                                        
                                         JToken targetVmNameValue = providerSpecificDetailsValue["targetVmName"];
                                         if (targetVmNameValue != null && targetVmNameValue.Type != JTokenType.Null)
                                         {
@@ -7047,13 +7920,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 {
                                                     long capacityInBytesInstance = ((long)capacityInBytesValue);
                                                     vMwareCbtProtectedDiskDetailsInstance.CapacityInBytes = capacityInBytesInstance;
-                                                }
-                                                
-                                                JToken storageAccountIdValue = protectedDisksValue["storageAccountId"];
-                                                if (storageAccountIdValue != null && storageAccountIdValue.Type != JTokenType.Null)
-                                                {
-                                                    string storageAccountIdInstance = ((string)storageAccountIdValue);
-                                                    vMwareCbtProtectedDiskDetailsInstance.StorageAccountId = storageAccountIdInstance;
                                                 }
                                                 
                                                 JToken logStorageAccountIdValue = protectedDisksValue["logStorageAccountId"];
@@ -7690,6 +8556,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtMigrationDetailsInstance.SnapshotRunAsAccountId = snapshotRunAsAccountIdInstance;
                                                 }
                                                 
+                                                JToken storageAccountIdValue = providerSpecificDetailsValue["storageAccountId"];
+                                                if (storageAccountIdValue != null && storageAccountIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string storageAccountIdInstance = ((string)storageAccountIdValue);
+                                                    vMwareCbtMigrationDetailsInstance.StorageAccountId = storageAccountIdInstance;
+                                                }
+                                                
                                                 JToken targetVmNameValue = providerSpecificDetailsValue["targetVmName"];
                                                 if (targetVmNameValue != null && targetVmNameValue.Type != JTokenType.Null)
                                                 {
@@ -7766,13 +8639,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                         {
                                                             long capacityInBytesInstance = ((long)capacityInBytesValue);
                                                             vMwareCbtProtectedDiskDetailsInstance.CapacityInBytes = capacityInBytesInstance;
-                                                        }
-                                                        
-                                                        JToken storageAccountIdValue = protectedDisksValue["storageAccountId"];
-                                                        if (storageAccountIdValue != null && storageAccountIdValue.Type != JTokenType.Null)
-                                                        {
-                                                            string storageAccountIdInstance = ((string)storageAccountIdValue);
-                                                            vMwareCbtProtectedDiskDetailsInstance.StorageAccountId = storageAccountIdInstance;
                                                         }
                                                         
                                                         JToken logStorageAccountIdValue = protectedDisksValue["logStorageAccountId"];
@@ -8360,6 +9226,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtMigrationDetailsInstance.SnapshotRunAsAccountId = snapshotRunAsAccountIdInstance;
                                                 }
                                                 
+                                                JToken storageAccountIdValue = providerSpecificDetailsValue["storageAccountId"];
+                                                if (storageAccountIdValue != null && storageAccountIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string storageAccountIdInstance = ((string)storageAccountIdValue);
+                                                    vMwareCbtMigrationDetailsInstance.StorageAccountId = storageAccountIdInstance;
+                                                }
+                                                
                                                 JToken targetVmNameValue = providerSpecificDetailsValue["targetVmName"];
                                                 if (targetVmNameValue != null && targetVmNameValue.Type != JTokenType.Null)
                                                 {
@@ -8436,13 +9309,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                         {
                                                             long capacityInBytesInstance = ((long)capacityInBytesValue);
                                                             vMwareCbtProtectedDiskDetailsInstance.CapacityInBytes = capacityInBytesInstance;
-                                                        }
-                                                        
-                                                        JToken storageAccountIdValue = protectedDisksValue["storageAccountId"];
-                                                        if (storageAccountIdValue != null && storageAccountIdValue.Type != JTokenType.Null)
-                                                        {
-                                                            string storageAccountIdInstance = ((string)storageAccountIdValue);
-                                                            vMwareCbtProtectedDiskDetailsInstance.StorageAccountId = storageAccountIdInstance;
                                                         }
                                                         
                                                         JToken logStorageAccountIdValue = protectedDisksValue["logStorageAccountId"];
@@ -8987,6 +9853,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtMigrationDetailsInstance.SnapshotRunAsAccountId = snapshotRunAsAccountIdInstance;
                                                 }
                                                 
+                                                JToken storageAccountIdValue = providerSpecificDetailsValue["storageAccountId"];
+                                                if (storageAccountIdValue != null && storageAccountIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string storageAccountIdInstance = ((string)storageAccountIdValue);
+                                                    vMwareCbtMigrationDetailsInstance.StorageAccountId = storageAccountIdInstance;
+                                                }
+                                                
                                                 JToken targetVmNameValue = providerSpecificDetailsValue["targetVmName"];
                                                 if (targetVmNameValue != null && targetVmNameValue.Type != JTokenType.Null)
                                                 {
@@ -9063,13 +9936,6 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                         {
                                                             long capacityInBytesInstance = ((long)capacityInBytesValue);
                                                             vMwareCbtProtectedDiskDetailsInstance.CapacityInBytes = capacityInBytesInstance;
-                                                        }
-                                                        
-                                                        JToken storageAccountIdValue = protectedDisksValue["storageAccountId"];
-                                                        if (storageAccountIdValue != null && storageAccountIdValue.Type != JTokenType.Null)
-                                                        {
-                                                            string storageAccountIdInstance = ((string)storageAccountIdValue);
-                                                            vMwareCbtProtectedDiskDetailsInstance.StorageAccountId = storageAccountIdInstance;
                                                         }
                                                         
                                                         JToken logStorageAccountIdValue = protectedDisksValue["logStorageAccountId"];
@@ -9411,6 +10277,77 @@ namespace Microsoft.Azure.Management.SiteRecovery
                 await TaskEx.Delay(delayInSeconds * 1000, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 result = await client.MigrationItem.GetMigrateStatusAsync(response.Location, cancellationToken).ConfigureAwait(false);
+                delayInSeconds = 30;
+                if (client.LongRunningOperationRetryTimeout >= 0)
+                {
+                    delayInSeconds = client.LongRunningOperationRetryTimeout;
+                }
+            }
+            
+            if (shouldTrace)
+            {
+                TracingAdapter.Exit(invocationId, result);
+            }
+            
+            return result;
+        }
+        
+        /// <summary>
+        /// Purge migration for the given item.
+        /// </summary>
+        /// <param name='fabricName'>
+        /// Required. Fabric name.
+        /// </param>
+        /// <param name='protectionContainerName'>
+        /// Required. Protection container name.
+        /// </param>
+        /// <param name='migrationItemName'>
+        /// Required. Migration item name.
+        /// </param>
+        /// <param name='customRequestHeaders'>
+        /// Optional. Request header parameters.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// Cancellation token.
+        /// </param>
+        /// <returns>
+        /// A standard service response for long running operations.
+        /// </returns>
+        public async Task<LongRunningOperationResponse> PurgeMigrationAsync(string fabricName, string protectionContainerName, string migrationItemName, CustomRequestHeaders customRequestHeaders, CancellationToken cancellationToken)
+        {
+            SiteRecoveryManagementClient client = this.Client;
+            bool shouldTrace = TracingAdapter.IsEnabled;
+            string invocationId = null;
+            if (shouldTrace)
+            {
+                invocationId = TracingAdapter.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("fabricName", fabricName);
+                tracingParameters.Add("protectionContainerName", protectionContainerName);
+                tracingParameters.Add("migrationItemName", migrationItemName);
+                tracingParameters.Add("customRequestHeaders", customRequestHeaders);
+                TracingAdapter.Enter(invocationId, this, "PurgeMigrationAsync", tracingParameters);
+            }
+            
+            cancellationToken.ThrowIfCancellationRequested();
+            LongRunningOperationResponse response = await client.MigrationItem.BeginPurgeMigrationAsync(fabricName, protectionContainerName, migrationItemName, customRequestHeaders, cancellationToken).ConfigureAwait(false);
+            if (response.Status == OperationStatus.Succeeded)
+            {
+                return response;
+            }
+            cancellationToken.ThrowIfCancellationRequested();
+            MigrationItemOperationResponse result = await client.MigrationItem.GetPurgeMigrationStatusAsync(response.Location, cancellationToken).ConfigureAwait(false);
+            int delayInSeconds = 30;
+            if (client.LongRunningOperationInitialTimeout >= 0)
+            {
+                delayInSeconds = client.LongRunningOperationInitialTimeout;
+            }
+            while (result.Status == OperationStatus.InProgress)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                await TaskEx.Delay(delayInSeconds * 1000, cancellationToken).ConfigureAwait(false);
+                cancellationToken.ThrowIfCancellationRequested();
+                result = await client.MigrationItem.GetPurgeMigrationStatusAsync(response.Location, cancellationToken).ConfigureAwait(false);
                 delayInSeconds = 30;
                 if (client.LongRunningOperationRetryTimeout >= 0)
                 {

@@ -84,17 +84,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._logStorageAccountSasSecretName = value; }
         }
         
-        private string _storageAccountId;
-        
-        /// <summary>
-        /// Optional. Storage account ARM Id.
-        /// </summary>
-        public string StorageAccountId
-        {
-            get { return this._storageAccountId; }
-            set { this._storageAccountId = value; }
-        }
-        
         /// <summary>
         /// Initializes a new instance of the VMwareCbtDiskInput class.
         /// </summary>
