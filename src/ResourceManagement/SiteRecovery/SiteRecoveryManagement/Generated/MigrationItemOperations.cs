@@ -938,6 +938,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                             {
                                 providerSpecificDetailsValue["recoveryPointId"] = derived.RecoveryPointId;
                             }
+                            
+                            if (derived.PerformShutdown != null)
+                            {
+                                providerSpecificDetailsValue["performShutdown"] = derived.PerformShutdown;
+                            }
                         }
                     }
                 }

@@ -30,6 +30,18 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class VMwareCbtMigrateInput : MigrateProviderSpecificInput
     {
+        private string _performShutdown;
+        
+        /// <summary>
+        /// Optional. Gets or sets a value indicating whether VM is to be
+        /// shutdown.
+        /// </summary>
+        public string PerformShutdown
+        {
+            get { return this._performShutdown; }
+            set { this._performShutdown = value; }
+        }
+        
         private string _recoveryPointId;
         
         /// <summary>

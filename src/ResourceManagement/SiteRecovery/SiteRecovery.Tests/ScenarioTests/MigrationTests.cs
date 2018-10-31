@@ -642,6 +642,7 @@ namespace SiteRecovery.Tests.ScenarioTests
                             ProviderSpecificDetails = new VMwareCbtMigrateInput
                             {
                                 RecoveryPointId = pits.MigrationRecoveryPoints.ToList().Last().Id,
+                                PerformShutdown = "true"
                             }
                         }
                     };
