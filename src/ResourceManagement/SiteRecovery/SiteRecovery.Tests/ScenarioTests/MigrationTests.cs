@@ -31,6 +31,7 @@ namespace SiteRecovery.Tests.ScenarioTests
         private const string VMwareFabricName = "devbabuova1replicationfabric";
         private const string VMwareContainerName = "devbabuova1replicationcontainer";
         private const string VMwareSiteId = "/subscriptions/2a57d0a2-0955-4d1e-aa87-a0dbb87cbcab/resourceGroups/lshaibvtrg/providers/Microsoft.OffAzure/VMwareSites/lshaibvtsiteeus";
+        private const string MigrationSolutionId = "/subscriptions/0b3cb7e6-93df-4966-ac73-efbf7ac0753d/resourceGroups/AMHTestRg/providers/Microsoft.Migrate/MigrateProjects/AMHTestRg-MigrateProject/Solutions/SMSSolution";
 
         // Azure fabric input.
         private const string AzureFabricName = "azurefabric1";
@@ -104,7 +105,8 @@ namespace SiteRecovery.Tests.ScenarioTests
                             CustomDetails = new VMwareV2FabricCreationInput()
                             {
                                 InstanceType = "VMwareV2",
-                                VMwareSiteId = VMwareSiteId
+                                VMwareSiteId = VMwareSiteId,
+                                MigrationSolutionId = MigrationSolutionId
                             }
                         }
                     };

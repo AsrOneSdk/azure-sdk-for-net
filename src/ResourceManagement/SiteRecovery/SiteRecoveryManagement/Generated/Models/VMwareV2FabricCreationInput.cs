@@ -30,6 +30,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class VMwareV2FabricCreationInput : FabricSpecificCreationSettings
     {
+        private string _migrationSolutionId;
+        
+        /// <summary>
+        /// Optional. Migration Solution ARM Id.
+        /// </summary>
+        public string MigrationSolutionId
+        {
+            get { return this._migrationSolutionId; }
+            set { this._migrationSolutionId = value; }
+        }
+        
         private string _vMwareSiteId;
         
         /// <summary>
