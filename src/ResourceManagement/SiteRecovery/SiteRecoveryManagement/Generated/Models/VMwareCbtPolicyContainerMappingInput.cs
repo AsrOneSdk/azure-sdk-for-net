@@ -85,6 +85,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._storageAccountSasSecretName = value; }
         }
         
+        private string _targetLocation;
+        
+        /// <summary>
+        /// Optional. The target location.
+        /// </summary>
+        public string TargetLocation
+        {
+            get { return this._targetLocation; }
+            set { this._targetLocation = value; }
+        }
+        
         /// <summary>
         /// Initializes a new instance of the
         /// VMwareCbtPolicyContainerMappingInput class.

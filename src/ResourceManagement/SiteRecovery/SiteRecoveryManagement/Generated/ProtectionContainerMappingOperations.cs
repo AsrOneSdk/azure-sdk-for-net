@@ -238,6 +238,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                             {
                                 providerSpecificInputValue["serviceBusConnectionStringSecretName"] = derived.ServiceBusConnectionStringSecretName;
                             }
+                            
+                            if (derived.TargetLocation != null)
+                            {
+                                providerSpecificInputValue["targetLocation"] = derived.TargetLocation;
+                            }
                         }
                     }
                 }
@@ -1328,6 +1333,33 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtContainerMappingDetailsInstance.ServiceBusConnectionStringSecretName = serviceBusConnectionStringSecretNameInstance;
                                         }
                                         
+                                        JToken targetLocationValue = providerSpecificDetailsValue["targetLocation"];
+                                        if (targetLocationValue != null && targetLocationValue.Type != JTokenType.Null)
+                                        {
+                                            string targetLocationInstance = ((string)targetLocationValue);
+                                            vMwareCbtContainerMappingDetailsInstance.TargetLocation = targetLocationInstance;
+                                        }
+                                        
+                                        JToken roleSizeToNicCountMapSequenceElement = ((JToken)providerSpecificDetailsValue["roleSizeToNicCountMap"]);
+                                        if (roleSizeToNicCountMapSequenceElement != null && roleSizeToNicCountMapSequenceElement.Type != JTokenType.Null)
+                                        {
+                                            foreach (JProperty property in roleSizeToNicCountMapSequenceElement)
+                                            {
+                                                string roleSizeToNicCountMapKey = ((string)property.Name);
+                                                int roleSizeToNicCountMapValue = ((int)property.Value);
+                                                vMwareCbtContainerMappingDetailsInstance.RoleSizeToNicCountMap.Add(roleSizeToNicCountMapKey, roleSizeToNicCountMapValue);
+                                            }
+                                        }
+                                        
+                                        JToken excludedSkusArray = providerSpecificDetailsValue["excludedSkus"];
+                                        if (excludedSkusArray != null && excludedSkusArray.Type != JTokenType.Null)
+                                        {
+                                            foreach (JToken excludedSkusValue in ((JArray)excludedSkusArray))
+                                            {
+                                                vMwareCbtContainerMappingDetailsInstance.ExcludedSkus.Add(((string)excludedSkusValue));
+                                            }
+                                        }
+                                        
                                         JToken instanceTypeValue2 = providerSpecificDetailsValue["instanceType"];
                                         if (instanceTypeValue2 != null && instanceTypeValue2.Type != JTokenType.Null)
                                         {
@@ -1370,10 +1402,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
                             JToken tagsSequenceElement = ((JToken)responseDoc["tags"]);
                             if (tagsSequenceElement != null && tagsSequenceElement.Type != JTokenType.Null)
                             {
-                                foreach (JProperty property in tagsSequenceElement)
+                                foreach (JProperty property2 in tagsSequenceElement)
                                 {
-                                    string tagsKey = ((string)property.Name);
-                                    string tagsValue = ((string)property.Value);
+                                    string tagsKey = ((string)property2.Name);
+                                    string tagsValue = ((string)property2.Value);
                                     protectionContainerMappingInstance.Tags.Add(tagsKey, tagsValue);
                                 }
                             }
@@ -1897,6 +1929,33 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtContainerMappingDetailsInstance.ServiceBusConnectionStringSecretName = serviceBusConnectionStringSecretNameInstance;
                                         }
                                         
+                                        JToken targetLocationValue = providerSpecificDetailsValue["targetLocation"];
+                                        if (targetLocationValue != null && targetLocationValue.Type != JTokenType.Null)
+                                        {
+                                            string targetLocationInstance = ((string)targetLocationValue);
+                                            vMwareCbtContainerMappingDetailsInstance.TargetLocation = targetLocationInstance;
+                                        }
+                                        
+                                        JToken roleSizeToNicCountMapSequenceElement = ((JToken)providerSpecificDetailsValue["roleSizeToNicCountMap"]);
+                                        if (roleSizeToNicCountMapSequenceElement != null && roleSizeToNicCountMapSequenceElement.Type != JTokenType.Null)
+                                        {
+                                            foreach (JProperty property in roleSizeToNicCountMapSequenceElement)
+                                            {
+                                                string roleSizeToNicCountMapKey = ((string)property.Name);
+                                                int roleSizeToNicCountMapValue = ((int)property.Value);
+                                                vMwareCbtContainerMappingDetailsInstance.RoleSizeToNicCountMap.Add(roleSizeToNicCountMapKey, roleSizeToNicCountMapValue);
+                                            }
+                                        }
+                                        
+                                        JToken excludedSkusArray = providerSpecificDetailsValue["excludedSkus"];
+                                        if (excludedSkusArray != null && excludedSkusArray.Type != JTokenType.Null)
+                                        {
+                                            foreach (JToken excludedSkusValue in ((JArray)excludedSkusArray))
+                                            {
+                                                vMwareCbtContainerMappingDetailsInstance.ExcludedSkus.Add(((string)excludedSkusValue));
+                                            }
+                                        }
+                                        
                                         JToken instanceTypeValue2 = providerSpecificDetailsValue["instanceType"];
                                         if (instanceTypeValue2 != null && instanceTypeValue2.Type != JTokenType.Null)
                                         {
@@ -1939,10 +1998,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
                             JToken tagsSequenceElement = ((JToken)responseDoc["tags"]);
                             if (tagsSequenceElement != null && tagsSequenceElement.Type != JTokenType.Null)
                             {
-                                foreach (JProperty property in tagsSequenceElement)
+                                foreach (JProperty property2 in tagsSequenceElement)
                                 {
-                                    string tagsKey = ((string)property.Name);
-                                    string tagsValue = ((string)property.Value);
+                                    string tagsKey = ((string)property2.Name);
+                                    string tagsValue = ((string)property2.Value);
                                     protectionContainerMappingInstance.Tags.Add(tagsKey, tagsValue);
                                 }
                             }
@@ -2679,6 +2738,33 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtContainerMappingDetailsInstance.ServiceBusConnectionStringSecretName = serviceBusConnectionStringSecretNameInstance;
                                         }
                                         
+                                        JToken targetLocationValue = providerSpecificDetailsValue["targetLocation"];
+                                        if (targetLocationValue != null && targetLocationValue.Type != JTokenType.Null)
+                                        {
+                                            string targetLocationInstance = ((string)targetLocationValue);
+                                            vMwareCbtContainerMappingDetailsInstance.TargetLocation = targetLocationInstance;
+                                        }
+                                        
+                                        JToken roleSizeToNicCountMapSequenceElement = ((JToken)providerSpecificDetailsValue["roleSizeToNicCountMap"]);
+                                        if (roleSizeToNicCountMapSequenceElement != null && roleSizeToNicCountMapSequenceElement.Type != JTokenType.Null)
+                                        {
+                                            foreach (JProperty property in roleSizeToNicCountMapSequenceElement)
+                                            {
+                                                string roleSizeToNicCountMapKey = ((string)property.Name);
+                                                int roleSizeToNicCountMapValue = ((int)property.Value);
+                                                vMwareCbtContainerMappingDetailsInstance.RoleSizeToNicCountMap.Add(roleSizeToNicCountMapKey, roleSizeToNicCountMapValue);
+                                            }
+                                        }
+                                        
+                                        JToken excludedSkusArray = providerSpecificDetailsValue["excludedSkus"];
+                                        if (excludedSkusArray != null && excludedSkusArray.Type != JTokenType.Null)
+                                        {
+                                            foreach (JToken excludedSkusValue in ((JArray)excludedSkusArray))
+                                            {
+                                                vMwareCbtContainerMappingDetailsInstance.ExcludedSkus.Add(((string)excludedSkusValue));
+                                            }
+                                        }
+                                        
                                         JToken instanceTypeValue2 = providerSpecificDetailsValue["instanceType"];
                                         if (instanceTypeValue2 != null && instanceTypeValue2.Type != JTokenType.Null)
                                         {
@@ -2721,10 +2807,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
                             JToken tagsSequenceElement = ((JToken)responseDoc["tags"]);
                             if (tagsSequenceElement != null && tagsSequenceElement.Type != JTokenType.Null)
                             {
-                                foreach (JProperty property in tagsSequenceElement)
+                                foreach (JProperty property2 in tagsSequenceElement)
                                 {
-                                    string tagsKey = ((string)property.Name);
-                                    string tagsValue = ((string)property.Value);
+                                    string tagsKey = ((string)property2.Name);
+                                    string tagsValue = ((string)property2.Value);
                                     protectionContainerMappingInstance.Tags.Add(tagsKey, tagsValue);
                                 }
                             }
@@ -3356,6 +3442,33 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtContainerMappingDetailsInstance.ServiceBusConnectionStringSecretName = serviceBusConnectionStringSecretNameInstance;
                                                 }
                                                 
+                                                JToken targetLocationValue = providerSpecificDetailsValue["targetLocation"];
+                                                if (targetLocationValue != null && targetLocationValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetLocationInstance = ((string)targetLocationValue);
+                                                    vMwareCbtContainerMappingDetailsInstance.TargetLocation = targetLocationInstance;
+                                                }
+                                                
+                                                JToken roleSizeToNicCountMapSequenceElement = ((JToken)providerSpecificDetailsValue["roleSizeToNicCountMap"]);
+                                                if (roleSizeToNicCountMapSequenceElement != null && roleSizeToNicCountMapSequenceElement.Type != JTokenType.Null)
+                                                {
+                                                    foreach (JProperty property in roleSizeToNicCountMapSequenceElement)
+                                                    {
+                                                        string roleSizeToNicCountMapKey = ((string)property.Name);
+                                                        int roleSizeToNicCountMapValue = ((int)property.Value);
+                                                        vMwareCbtContainerMappingDetailsInstance.RoleSizeToNicCountMap.Add(roleSizeToNicCountMapKey, roleSizeToNicCountMapValue);
+                                                    }
+                                                }
+                                                
+                                                JToken excludedSkusArray = providerSpecificDetailsValue["excludedSkus"];
+                                                if (excludedSkusArray != null && excludedSkusArray.Type != JTokenType.Null)
+                                                {
+                                                    foreach (JToken excludedSkusValue in ((JArray)excludedSkusArray))
+                                                    {
+                                                        vMwareCbtContainerMappingDetailsInstance.ExcludedSkus.Add(((string)excludedSkusValue));
+                                                    }
+                                                }
+                                                
                                                 JToken instanceTypeValue2 = providerSpecificDetailsValue["instanceType"];
                                                 if (instanceTypeValue2 != null && instanceTypeValue2.Type != JTokenType.Null)
                                                 {
@@ -3398,10 +3511,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     JToken tagsSequenceElement = ((JToken)valueValue["tags"]);
                                     if (tagsSequenceElement != null && tagsSequenceElement.Type != JTokenType.Null)
                                     {
-                                        foreach (JProperty property in tagsSequenceElement)
+                                        foreach (JProperty property2 in tagsSequenceElement)
                                         {
-                                            string tagsKey = ((string)property.Name);
-                                            string tagsValue = ((string)property.Value);
+                                            string tagsKey = ((string)property2.Name);
+                                            string tagsValue = ((string)property2.Value);
                                             protectionContainerMappingInstance.Tags.Add(tagsKey, tagsValue);
                                         }
                                     }
@@ -3962,6 +4075,33 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtContainerMappingDetailsInstance.ServiceBusConnectionStringSecretName = serviceBusConnectionStringSecretNameInstance;
                                                 }
                                                 
+                                                JToken targetLocationValue = providerSpecificDetailsValue["targetLocation"];
+                                                if (targetLocationValue != null && targetLocationValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetLocationInstance = ((string)targetLocationValue);
+                                                    vMwareCbtContainerMappingDetailsInstance.TargetLocation = targetLocationInstance;
+                                                }
+                                                
+                                                JToken roleSizeToNicCountMapSequenceElement = ((JToken)providerSpecificDetailsValue["roleSizeToNicCountMap"]);
+                                                if (roleSizeToNicCountMapSequenceElement != null && roleSizeToNicCountMapSequenceElement.Type != JTokenType.Null)
+                                                {
+                                                    foreach (JProperty property in roleSizeToNicCountMapSequenceElement)
+                                                    {
+                                                        string roleSizeToNicCountMapKey = ((string)property.Name);
+                                                        int roleSizeToNicCountMapValue = ((int)property.Value);
+                                                        vMwareCbtContainerMappingDetailsInstance.RoleSizeToNicCountMap.Add(roleSizeToNicCountMapKey, roleSizeToNicCountMapValue);
+                                                    }
+                                                }
+                                                
+                                                JToken excludedSkusArray = providerSpecificDetailsValue["excludedSkus"];
+                                                if (excludedSkusArray != null && excludedSkusArray.Type != JTokenType.Null)
+                                                {
+                                                    foreach (JToken excludedSkusValue in ((JArray)excludedSkusArray))
+                                                    {
+                                                        vMwareCbtContainerMappingDetailsInstance.ExcludedSkus.Add(((string)excludedSkusValue));
+                                                    }
+                                                }
+                                                
                                                 JToken instanceTypeValue2 = providerSpecificDetailsValue["instanceType"];
                                                 if (instanceTypeValue2 != null && instanceTypeValue2.Type != JTokenType.Null)
                                                 {
@@ -4004,10 +4144,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     JToken tagsSequenceElement = ((JToken)valueValue["tags"]);
                                     if (tagsSequenceElement != null && tagsSequenceElement.Type != JTokenType.Null)
                                     {
-                                        foreach (JProperty property in tagsSequenceElement)
+                                        foreach (JProperty property2 in tagsSequenceElement)
                                         {
-                                            string tagsKey = ((string)property.Name);
-                                            string tagsValue = ((string)property.Value);
+                                            string tagsKey = ((string)property2.Name);
+                                            string tagsValue = ((string)property2.Value);
                                             protectionContainerMappingInstance.Tags.Add(tagsKey, tagsValue);
                                         }
                                     }

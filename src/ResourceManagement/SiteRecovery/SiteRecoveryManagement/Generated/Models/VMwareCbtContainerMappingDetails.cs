@@ -20,7 +20,9 @@
 // code is regenerated.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using Hyak.Common;
 using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
@@ -30,6 +32,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class VMwareCbtContainerMappingDetails : MappingProviderConfigurationSettings
     {
+        private IList<string> _excludedSkus;
+        
+        /// <summary>
+        /// Optional. The SKUs to be excluded.
+        /// </summary>
+        public IList<string> ExcludedSkus
+        {
+            get { return this._excludedSkus; }
+            set { this._excludedSkus = value; }
+        }
+        
         private string _keyVaultId;
         
         /// <summary>
@@ -50,6 +63,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         {
             get { return this._keyVaultUri; }
             set { this._keyVaultUri = value; }
+        }
+        
+        private IDictionary<string, int> _roleSizeToNicCountMap;
+        
+        /// <summary>
+        /// Optional. The role size to NIC count map.
+        /// </summary>
+        public IDictionary<string, int> RoleSizeToNicCountMap
+        {
+            get { return this._roleSizeToNicCountMap; }
+            set { this._roleSizeToNicCountMap = value; }
         }
         
         private string _serviceBusConnectionStringSecretName;
@@ -85,12 +109,25 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._storageAccountSasSecretName = value; }
         }
         
+        private string _targetLocation;
+        
+        /// <summary>
+        /// Optional. The target location.
+        /// </summary>
+        public string TargetLocation
+        {
+            get { return this._targetLocation; }
+            set { this._targetLocation = value; }
+        }
+        
         /// <summary>
         /// Initializes a new instance of the VMwareCbtContainerMappingDetails
         /// class.
         /// </summary>
         public VMwareCbtContainerMappingDetails()
         {
+            this.ExcludedSkus = new LazyList<string>();
+            this.RoleSizeToNicCountMap = new LazyDictionary<string, int>();
         }
     }
 }
