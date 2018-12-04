@@ -43,48 +43,70 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._allowedOperations = value; }
         }
         
-        private CurrentScenarioDetails _currentScenario;
+        private CurrentJobDetails _currentJob;
         
         /// <summary>
-        /// Optional. The current scenario.
+        /// Optional. The current job details.
         /// </summary>
-        public CurrentScenarioDetails CurrentScenario
+        public CurrentJobDetails CurrentJob
         {
-            get { return this._currentScenario; }
-            set { this._currentScenario = value; }
+            get { return this._currentJob; }
+            set { this._currentJob = value; }
         }
         
-        private string _friendlyName;
+        private string _health;
         
         /// <summary>
-        /// Optional. Friendly name.
+        /// Optional. The consolidated health.
         /// </summary>
-        public string FriendlyName
+        public string Health
         {
-            get { return this._friendlyName; }
-            set { this._friendlyName = value; }
+            get { return this._health; }
+            set { this._health = value; }
         }
         
-        private System.DateTime? _lastSuccessfulMigrateTime;
+        private IList<HealthError> _healthErrors;
         
         /// <summary>
-        /// Optional. Gets or sets the last successful migrate time.
+        /// Optional. List of health errors.
         /// </summary>
-        public System.DateTime? LastSuccessfulMigrateTime
+        public IList<HealthError> HealthErrors
         {
-            get { return this._lastSuccessfulMigrateTime; }
-            set { this._lastSuccessfulMigrateTime = value; }
+            get { return this._healthErrors; }
+            set { this._healthErrors = value; }
         }
         
-        private System.DateTime? _lastSuccessfulTestMigrateTime;
+        private string _lastTestMigrationStatus;
         
         /// <summary>
-        /// Optional. Gets or sets the last successful test migrate time.
+        /// Optional. Gets or sets the last test migration status.
         /// </summary>
-        public System.DateTime? LastSuccessfulTestMigrateTime
+        public string LastTestMigrationStatus
         {
-            get { return this._lastSuccessfulTestMigrateTime; }
-            set { this._lastSuccessfulTestMigrateTime = value; }
+            get { return this._lastTestMigrationStatus; }
+            set { this._lastTestMigrationStatus = value; }
+        }
+        
+        private System.DateTime? _lastTestMigrationTime;
+        
+        /// <summary>
+        /// Optional. Gets or sets the last test migration time.
+        /// </summary>
+        public System.DateTime? LastTestMigrationTime
+        {
+            get { return this._lastTestMigrationTime; }
+            set { this._lastTestMigrationTime = value; }
+        }
+        
+        private string _machineName;
+        
+        /// <summary>
+        /// Optional. On-premise virtual machine name.
+        /// </summary>
+        public string MachineName
+        {
+            get { return this._machineName; }
+            set { this._machineName = value; }
         }
         
         private string _migrationState;
@@ -181,6 +203,7 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         public MigrationItemProperties()
         {
             this.AllowedOperations = new LazyList<string>();
+            this.HealthErrors = new LazyList<HealthError>();
         }
     }
 }

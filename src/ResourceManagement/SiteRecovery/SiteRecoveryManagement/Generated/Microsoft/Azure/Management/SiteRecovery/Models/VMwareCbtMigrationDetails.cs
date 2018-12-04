@@ -43,10 +43,21 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._dataMoverRunAsAccountId = value; }
         }
         
+        private int? _initialSeedingProgressPercentage;
+        
+        /// <summary>
+        /// Optional. The initial seeding progress percentage.
+        /// </summary>
+        public int? InitialSeedingProgressPercentage
+        {
+            get { return this._initialSeedingProgressPercentage; }
+            set { this._initialSeedingProgressPercentage = value; }
+        }
+        
         private System.DateTime? _lastRecoveryPointReceived;
         
         /// <summary>
-        /// Optional. Gets or sets the last recovery point received time.
+        /// Optional. The last recovery point received time.
         /// </summary>
         public System.DateTime? LastRecoveryPointReceived
         {
@@ -63,6 +74,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         {
             get { return this._licenseType; }
             set { this._licenseType = value; }
+        }
+        
+        private int? _migrationProgressPercentage;
+        
+        /// <summary>
+        /// Optional. The migration progress percentage.
+        /// </summary>
+        public int? MigrationProgressPercentage
+        {
+            get { return this._migrationProgressPercentage; }
+            set { this._migrationProgressPercentage = value; }
         }
         
         private string _migrationRecoveryPointId;

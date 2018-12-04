@@ -21,31 +21,51 @@
 
 using System;
 using System.Linq;
-using Microsoft.Azure.Management.SiteRecovery.Models;
 
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// VMwareCbt provider specific input for migrate.
+    /// Current job details.
     /// </summary>
-    public partial class VMwareCbtMigrateInput : MigrateProviderSpecificInput
+    public partial class CurrentJobDetails
     {
-        private string _performShutdown;
+        private string _jobId;
         
         /// <summary>
-        /// Optional. Gets or sets a value indicating whether VM is to be
-        /// shutdown.
+        /// Optional. Gets or sets ARM Id of the job being executed.
         /// </summary>
-        public string PerformShutdown
+        public string JobId
         {
-            get { return this._performShutdown; }
-            set { this._performShutdown = value; }
+            get { return this._jobId; }
+            set { this._jobId = value; }
+        }
+        
+        private string _jobName;
+        
+        /// <summary>
+        /// Optional. Gets or sets job name.
+        /// </summary>
+        public string JobName
+        {
+            get { return this._jobName; }
+            set { this._jobName = value; }
+        }
+        
+        private System.DateTime? _startTime;
+        
+        /// <summary>
+        /// Optional. Gets or sets Start time of the job.
+        /// </summary>
+        public System.DateTime? StartTime
+        {
+            get { return this._startTime; }
+            set { this._startTime = value; }
         }
         
         /// <summary>
-        /// Initializes a new instance of the VMwareCbtMigrateInput class.
+        /// Initializes a new instance of the CurrentJobDetails class.
         /// </summary>
-        public VMwareCbtMigrateInput()
+        public CurrentJobDetails()
         {
         }
     }

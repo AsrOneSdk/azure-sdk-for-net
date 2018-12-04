@@ -531,6 +531,7 @@ namespace SiteRecovery.Tests.ScenarioTests
                         VMwareFabricName,
                         VMwareContainerName,
                         VMName,
+                        null,
                         RequestHeaders);
 
                     // Get all items.
@@ -564,10 +565,11 @@ namespace SiteRecovery.Tests.ScenarioTests
                         VMName,
                         RequestHeaders);
 
-                    var response = client.MigrationItem.PurgeMigration(
+                    var response = client.MigrationItem.DisableMigration(
                         VMwareFabricName,
                         VMwareContainerName,
                         VMName,
+                        "PurgeMigration",
                         RequestHeaders);
 
                     // Get all items.
@@ -637,10 +639,11 @@ namespace SiteRecovery.Tests.ScenarioTests
                     context.Start();
                     var client = GetSiteRecoveryClient(CustomHttpHandler, "Migration");
 
-                    var response = client.MigrationItem.CompleteMigration(
+                    var response = client.MigrationItem.DisableMigration(
                         VMwareFabricName,
                         VMwareContainerName,
                         VMName,
+                        "CompleteMigration",
                         RequestHeaders);
 
                     // Get the item.
@@ -806,6 +809,33 @@ namespace SiteRecovery.Tests.ScenarioTests
                         VMwareContainerName,
                         VMName,
                         RequestHeaders);
+                }
+                catch (Exception)
+                {
+                    Debugger.Break();
+                    throw;
+                }
+            }
+        }
+
+        [Fact]
+        public void Migration_GetEvents()
+        {
+            using (UndoContext context = UndoContext.Current)
+            {
+                try
+                {
+                    context.Start();
+                    var client = GetSiteRecoveryClient(CustomHttpHandler, "Migration");
+
+                    // Get the original item.
+                    var migItem = client.MigrationItem.Get(
+                        VMwareFabricName,
+                        VMwareContainerName,
+                        VMName,
+                        RequestHeaders);
+
+                    var events = client.Events.List(new EventQueryParameter(), RequestHeaders);
                 }
                 catch (Exception)
                 {
