@@ -254,7 +254,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
         /// Gets the details of a vCenter.
         /// </summary>
         /// <remarks>
-        /// Gets the details of a registered vCenter server(Add vCenter server.)
+        /// Gets the details of a registered vCenter server(Add vCenter server).
         /// </remarks>
         /// <param name='fabricName'>
         /// Fabric name.
@@ -523,7 +523,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
         /// Fabric name.
         /// </param>
         /// <param name='vCenterName'>
-        /// vCeneter name
+        /// vCeneter name.
         /// </param>
         /// <param name='updateVCenterRequest'>
         /// The input to the update vCenter operation.
@@ -1154,7 +1154,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
         /// Fabric name.
         /// </param>
         /// <param name='vCenterName'>
-        /// vCeneter name
+        /// vCeneter name.
         /// </param>
         /// <param name='updateVCenterRequest'>
         /// The input to the update vCenter operation.

@@ -191,7 +191,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             /// Recovery plan name.
             /// </param>
             /// <param name='input'>
-            /// Update recovery plan input
+            /// Update recovery plan input.
             /// </param>
             public static RecoveryPlan Update(this IReplicationRecoveryPlansOperations operations, string recoveryPlanName, UpdateRecoveryPlanInput input)
             {
@@ -211,7 +211,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             /// Recovery plan name.
             /// </param>
             /// <param name='input'>
-            /// Update recovery plan input
+            /// Update recovery plan input.
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
@@ -584,7 +584,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             /// Recovery plan name.
             /// </param>
             /// <param name='input'>
-            /// Update recovery plan input
+            /// Update recovery plan input.
             /// </param>
             public static RecoveryPlan BeginUpdate(this IReplicationRecoveryPlansOperations operations, string recoveryPlanName, UpdateRecoveryPlanInput input)
             {
@@ -604,7 +604,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             /// Recovery plan name.
             /// </param>
             /// <param name='input'>
-            /// Update recovery plan input
+            /// Update recovery plan input.
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.

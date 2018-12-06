@@ -36,7 +36,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// <param name="recoveryVmCreationOption">ALR options to create
         /// alternate recovery.</param>
         /// <param name="providerIdForAlternateRecovery">Provider ID for
-        /// alternate location</param>
+        /// alternate location.</param>
         public HyperVReplicaAzureFailbackProviderInput(string dataSyncOption = default(string), string recoveryVmCreationOption = default(string), string providerIdForAlternateRecovery = default(string))
         {
             DataSyncOption = dataSyncOption;
@@ -63,7 +63,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         public string RecoveryVmCreationOption { get; set; }
 
         /// <summary>
-        /// Gets or sets provider ID for alternate location
+        /// Gets or sets provider ID for alternate location.
         /// </summary>
         [JsonProperty(PropertyName = "providerIdForAlternateRecovery")]
         public string ProviderIdForAlternateRecovery { get; set; }

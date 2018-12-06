@@ -498,7 +498,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
         /// Recovery plan name.
         /// </param>
         /// <param name='input'>
-        /// Update recovery plan input
+        /// Update recovery plan input.
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -1064,7 +1064,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
         /// Recovery plan name.
         /// </param>
         /// <param name='input'>
-        /// Update recovery plan input
+        /// Update recovery plan input.
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.

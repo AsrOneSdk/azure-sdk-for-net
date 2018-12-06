@@ -16,7 +16,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
     using System.Linq;
 
     /// <summary>
-    /// InMage provider specific settings
+    /// InMage provider specific settings.
     /// </summary>
     [Newtonsoft.Json.JsonObject("InMage")]
     public partial class InMageReplicationDetails : ReplicationProviderSpecificSettings
@@ -48,7 +48,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// <param name="vmProtectionStateDescription">The protection state
         /// description for the vm.</param>
         /// <param name="resyncDetails">The resync details of the
-        /// machine</param>
+        /// machine.</param>
         /// <param name="retentionWindowStart">The retention window start
         /// time.</param>
         /// <param name="retentionWindowEnd">The retention window end
@@ -86,9 +86,9 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// underlying Azure storage account. If the VM is not running in
         /// Azure, this value shall be set to null.</param>
         /// <param name="datastores">The datastores of the on-premise machine
-        /// Value can be list of strings that contain datastore names</param>
+        /// Value can be list of strings that contain datastore names.</param>
         /// <param name="validationErrors">The validation errors of the
-        /// on-premise machine Value can be list of validation errors</param>
+        /// on-premise machine Value can be list of validation errors.</param>
         /// <param name="lastRpoCalculatedTime">The last RPO calculated
         /// time.</param>
         /// <param name="lastUpdateReceivedTime">The last update time received
@@ -196,7 +196,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         public string VmProtectionStateDescription { get; set; }
 
         /// <summary>
-        /// Gets or sets the resync details of the machine
+        /// Gets or sets the resync details of the machine.
         /// </summary>
         [JsonProperty(PropertyName = "resyncDetails")]
         public InitialReplicationDetails ResyncDetails { get; set; }
@@ -340,14 +340,14 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
 
         /// <summary>
         /// Gets or sets the datastores of the on-premise machine Value can be
-        /// list of strings that contain datastore names
+        /// list of strings that contain datastore names.
         /// </summary>
         [JsonProperty(PropertyName = "datastores")]
         public IList<string> Datastores { get; set; }
 
         /// <summary>
         /// Gets or sets the validation errors of the on-premise machine Value
-        /// can be list of validation errors
+        /// can be list of validation errors.
         /// </summary>
         [JsonProperty(PropertyName = "validationErrors")]
         public IList<HealthError> ValidationErrors { get; set; }

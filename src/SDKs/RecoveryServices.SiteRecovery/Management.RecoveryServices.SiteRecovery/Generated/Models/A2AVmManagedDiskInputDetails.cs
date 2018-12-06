@@ -10,6 +10,7 @@
 
 namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
 {
+    using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -42,7 +43,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// <param name="recoveryTargetDiskAccountType">The target disk type
         /// after failover. Its an optional value and will be same as source
         /// disk type if not user provided.</param>
-        public A2AVmManagedDiskInputDetails(string diskId = default(string), string primaryStagingAzureStorageAccountId = default(string), string recoveryResourceGroupId = default(string), string recoveryReplicaDiskAccountType = default(string), string recoveryTargetDiskAccountType = default(string))
+        public A2AVmManagedDiskInputDetails(string diskId, string primaryStagingAzureStorageAccountId, string recoveryResourceGroupId, string recoveryReplicaDiskAccountType = default(string), string recoveryTargetDiskAccountType = default(string))
         {
             DiskId = diskId;
             PrimaryStagingAzureStorageAccountId = primaryStagingAzureStorageAccountId;
@@ -89,5 +90,26 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         [JsonProperty(PropertyName = "recoveryTargetDiskAccountType")]
         public string RecoveryTargetDiskAccountType { get; set; }
 
+        /// <summary>
+        /// Validate the object.
+        /// </summary>
+        /// <exception cref="ValidationException">
+        /// Thrown if validation fails
+        /// </exception>
+        public virtual void Validate()
+        {
+            if (DiskId == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "DiskId");
+            }
+            if (PrimaryStagingAzureStorageAccountId == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "PrimaryStagingAzureStorageAccountId");
+            }
+            if (RecoveryResourceGroupId == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "RecoveryResourceGroupId");
+            }
+        }
     }
 }

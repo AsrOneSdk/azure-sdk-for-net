@@ -16,7 +16,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
     using System.Linq;
 
     /// <summary>
-    /// VMware provider specific settings
+    /// VMware provider specific settings.
     /// </summary>
     [Newtonsoft.Json.JsonObject("VMwareVirtualMachine")]
     public partial class VMwareVirtualMachineDetails : ConfigurationSettings
@@ -46,7 +46,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         /// on.</param>
         /// <param name="vCenterInfrastructureId">The VCenter infrastructure
         /// Id.</param>
-        /// <param name="discoveryType">A value inidicating the discovery type
+        /// <param name="discoveryType">A value indicating the discovery type
         /// of the machine. Value can be vCenter or physical.</param>
         /// <param name="diskDetails">The disk details.</param>
         /// <param name="validationErrors">The validation errors.</param>
@@ -116,7 +116,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery.Models
         public string VCenterInfrastructureId { get; set; }
 
         /// <summary>
-        /// Gets or sets a value inidicating the discovery type of the machine.
+        /// Gets or sets a value indicating the discovery type of the machine.
         /// Value can be vCenter or physical.
         /// </summary>
         [JsonProperty(PropertyName = "discoveryType")]

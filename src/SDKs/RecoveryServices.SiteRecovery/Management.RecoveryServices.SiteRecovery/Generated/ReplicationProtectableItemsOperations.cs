@@ -66,6 +66,12 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
         /// <param name='odataQuery'>
         /// OData parameters to apply to the operation.
         /// </param>
+        /// <param name='take'>
+        /// take OData query parameter.
+        /// </param>
+        /// <param name='skipToken'>
+        /// skipToken OData query parameter.
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -87,7 +93,7 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<AzureOperationResponse<IPage<ProtectableItem>>> ListByReplicationProtectionContainersWithHttpMessagesAsync(string fabricName, string protectionContainerName, ODataQuery<ProtectableItemQueryParameter> odataQuery = default(ODataQuery<ProtectableItemQueryParameter>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<IPage<ProtectableItem>>> ListByReplicationProtectionContainersWithHttpMessagesAsync(string fabricName, string protectionContainerName, ODataQuery<ProtectableItemQueryParameter> odataQuery = default(ODataQuery<ProtectableItemQueryParameter>), string take = default(string), string skipToken = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (Client.ApiVersion == null)
             {
@@ -123,6 +129,8 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
                 tracingParameters.Add("odataQuery", odataQuery);
                 tracingParameters.Add("fabricName", fabricName);
                 tracingParameters.Add("protectionContainerName", protectionContainerName);
+                tracingParameters.Add("take", take);
+                tracingParameters.Add("skipToken", skipToken);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "ListByReplicationProtectionContainers", tracingParameters);
             }
@@ -146,6 +154,14 @@ namespace Microsoft.Azure.Management.RecoveryServices.SiteRecovery
             if (Client.ApiVersion != null)
             {
                 _queryParameters.Add(string.Format("api-version={0}", System.Uri.EscapeDataString(Client.ApiVersion)));
+            }
+            if (take != null)
+            {
+                _queryParameters.Add(string.Format("$take={0}", System.Uri.EscapeDataString(take)));
+            }
+            if (skipToken != null)
+            {
+                _queryParameters.Add(string.Format("$skipToken={0}", System.Uri.EscapeDataString(skipToken)));
             }
             if (_queryParameters.Count > 0)
             {
