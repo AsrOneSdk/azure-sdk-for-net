@@ -30,8 +30,8 @@ namespace SiteRecovery.Tests.ScenarioTests
         // VMware fabric input
         private const string VMwareFabricName = "devbabuova1replicationfabric";
         private const string VMwareContainerName = "devbabuova1replicationcontainer";
-        private const string VMwareSiteId = "/subscriptions/2a57d0a2-0955-4d1e-aa87-a0dbb87cbcab/resourceGroups/lshaibvtrg/providers/Microsoft.OffAzure/VMwareSites/lshaibvtsiteeus";
-        private const string MigrationSolutionId = "/subscriptions/2a57d0a2-0955-4d1e-aa87-a0dbb87cbcab/resourceGroups/SMSPutFabricTest/providers/Microsoft.Migrate/MigrateProjects/SMSPutFabricTest-MigrateProject/Solutions/SMSSolution";
+        private const string VMwareSiteId = "/subscriptions/2a57d0a2-0955-4d1e-aa87-a0dbb87cbcab/resourceGroups/lshaibvtrg/providers/Microsoft.OffAzure/VMwareSites/lshaibvtsite3";
+        private const string MigrationSolutionId = "/subscriptions/2a57d0a2-0955-4d1e-aa87-a0dbb87cbcab/resourceGroups/lshaibvtrg/providers/Microsoft.Migrate/MigrateProjects/lshaibvtrg-MigrateProject/Solutions/Servers-Migration-ServerMigration";
 
         // VMware DRA input.
         private const string VMwareDraName = "devbabuova1dra";
@@ -58,7 +58,7 @@ namespace SiteRecovery.Tests.ScenarioTests
 
         // Enable input.
         private const string VMName = "lshai522MigVm";
-        private const string VMwareVmId = "/subscriptions/2a57d0a2-0955-4d1e-aa87-a0dbb87cbcab/resourceGroups/lshaibvtrg/providers/Microsoft.OffAzure/VMwareSites/lshaibvtsiteeus/machines/10-150-209-216-a9f67797-bc63-5bf3-b8fe-9ffcc50402af_500f866c-d415-1d0e-7186-7c58b0c5ec28"; //lshai-0520-2
+        private const string VMwareVmId = "/subscriptions/2a57d0a2-0955-4d1e-aa87-a0dbb87cbcab/resourceGroups/lshaibvtrg/providers/Microsoft.OffAzure/VMwareSites/lshaibvtsite3/machines/10-150-209-216-a9f67797-bc63-5bf3-b8fe-9ffcc50402af_500f866c-d415-1d0e-7186-7c58b0c5ec28"; //lshai-0520-2
         // private const string VMwareVmId = "/subscriptions/2a57d0a2-0955-4d1e-aa87-a0dbb87cbcab/resourceGroups/lshaibvtrg/providers/Microsoft.OffAzure/VMwareSites/lshaibvtsite/machines/10-150-209-216-a9f67797-bc63-5bf3-b8fe-9ffcc50402af_501ef9d4-d83f-5c32-5195-9d570cc39eed"; //sadko-1009-1
         // private const string VMwareVmId = "/subscriptions/2a57d0a2-0955-4d1e-aa87-a0dbb87cbcab/resourceGroups/lshaibvtrg/providers/Microsoft.OffAzure/VMwareSites/lshaibvtsite/machines/10-150-209-216-a9f67797-bc63-5bf3-b8fe-9ffcc50402af_501e9f50-f3e3-e67c-0d8e-7e6bf3355cca"; //sadko-0912-1
         // private const string VMwareVmId = "/subscriptions/2a57d0a2-0955-4d1e-aa87-a0dbb87cbcab/resourceGroups/lshaibvtrg/providers/Microsoft.OffAzure/VMwareSites/lshaibvtsite/machines/10-150-209-216-a9f67797-bc63-5bf3-b8fe-9ffcc50402af_501e77b4-0b34-8aa9-d5bc-d3ae94ee52ea"; //lshai-0929-1
@@ -73,8 +73,8 @@ namespace SiteRecovery.Tests.ScenarioTests
         private const string ReplicationStorageAccountId = "/subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/devbabuova1/providers/Microsoft.Storage/storageAccounts/devbabuova1replsa";
         private const string LogStorageAccountId = "/subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/devbabuova1/providers/Microsoft.Storage/storageAccounts/devbabuova1logsa";
         private const string LogStorageAccountSasSecretName = "devbabuova1logsa-devbabuova1logsasas";
-        private const string DataMoverRunAsAccountId = "/subscriptions/2a57d0a2-0955-4d1e-aa87-a0dbb87cbcab/resourceGroups/lshaibvtrg/providers/Microsoft.OffAzure/VMwareSites/lshaibvtsiteeus/runasaccounts/a9f67797-bc63-5bf3-b8fe-9ffcc50402af";
-        private const string SnapshotRunAsAccountId = "/subscriptions/2a57d0a2-0955-4d1e-aa87-a0dbb87cbcab/resourceGroups/lshaibvtrg/providers/Microsoft.OffAzure/VMwareSites/lshaibvtsiteeus/runasaccounts/a9f67797-bc63-5bf3-b8fe-9ffcc50402af";
+        private const string DataMoverRunAsAccountId = "/subscriptions/2a57d0a2-0955-4d1e-aa87-a0dbb87cbcab/resourceGroups/lshaibvtrg/providers/Microsoft.OffAzure/VMwareSites/lshaibvtsite3/runasaccounts/a9f67797-bc63-5bf3-b8fe-9ffcc50402af";
+        private const string SnapshotRunAsAccountId = "/subscriptions/2a57d0a2-0955-4d1e-aa87-a0dbb87cbcab/resourceGroups/lshaibvtrg/providers/Microsoft.OffAzure/VMwareSites/lshaibvtsite3/runasaccounts/a9f67797-bc63-5bf3-b8fe-9ffcc50402af";
         private const string TargetAvailabilitySetId = "/subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/devbaburg1/providers/Microsoft.Compute/availabilitySets/devbabuova1avset";
         private const string TargetBootDiagnosticsStorageAccountId = "/subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourcegroups/devbabuova1/providers/Microsoft.Storage/storageAccounts/devbabuova1bootdiagsa";
 
@@ -174,7 +174,7 @@ namespace SiteRecovery.Tests.ScenarioTests
                         Properties = new CreateProtectionContainerMappingInputProperties()
                         {
                             PolicyId = vmwarePolicy.Id,
-                            TargetProtectionContainerId = "Microsot Azure",
+                            TargetProtectionContainerId = "Microsoft Azure",
                             ProviderSpecificInput = new VMwareCbtPolicyContainerMappingInput()
                             {
                                 KeyVaultId = KeyVaultId,
@@ -569,7 +569,7 @@ namespace SiteRecovery.Tests.ScenarioTests
                         VMwareFabricName,
                         VMwareContainerName,
                         VMName,
-                        "PurgeMigration",
+                        "Purge",
                         RequestHeaders);
 
                     // Get all items.
@@ -643,7 +643,7 @@ namespace SiteRecovery.Tests.ScenarioTests
                         VMwareFabricName,
                         VMwareContainerName,
                         VMName,
-                        "CompleteMigration",
+                        "Complete",
                         RequestHeaders);
 
                     // Get the item.
