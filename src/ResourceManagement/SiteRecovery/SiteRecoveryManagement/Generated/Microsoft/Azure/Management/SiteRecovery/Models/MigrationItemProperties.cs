@@ -54,6 +54,18 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._currentJob = value; }
         }
         
+        private string _eventCorrelationId;
+        
+        /// <summary>
+        /// Optional. The correlation Id for events associated with this
+        /// migration item.
+        /// </summary>
+        public string EventCorrelationId
+        {
+            get { return this._eventCorrelationId; }
+            set { this._eventCorrelationId = value; }
+        }
+        
         private string _health;
         
         /// <summary>

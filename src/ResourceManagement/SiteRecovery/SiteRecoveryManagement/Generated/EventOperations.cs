@@ -227,6 +227,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     propertiesInstance.AffectedObjectFriendlyName = affectedObjectFriendlyNameInstance;
                                 }
                                 
+                                JToken affectedObjectCorrelationIdValue = propertiesValue["affectedObjectCorrelationId"];
+                                if (affectedObjectCorrelationIdValue != null && affectedObjectCorrelationIdValue.Type != JTokenType.Null)
+                                {
+                                    string affectedObjectCorrelationIdInstance = ((string)affectedObjectCorrelationIdValue);
+                                    propertiesInstance.AffectedObjectCorrelationId = affectedObjectCorrelationIdInstance;
+                                }
+                                
                                 JToken severityValue = propertiesValue["severity"];
                                 if (severityValue != null && severityValue.Type != JTokenType.Null)
                                 {
@@ -480,6 +487,25 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         }
                                         propertiesInstance.ProviderDetails = a2AEventDetailsInstance;
                                     }
+                                    if (typeName == "VMwareCbt")
+                                    {
+                                        VMwareCbtEventDetails vMwareCbtEventDetailsInstance = new VMwareCbtEventDetails();
+                                        
+                                        JToken migrationItemNameValue = providerSpecificDetailsValue["migrationItemName"];
+                                        if (migrationItemNameValue != null && migrationItemNameValue.Type != JTokenType.Null)
+                                        {
+                                            string migrationItemNameInstance = ((string)migrationItemNameValue);
+                                            vMwareCbtEventDetailsInstance.MigrationItemName = migrationItemNameInstance;
+                                        }
+                                        
+                                        JToken instanceTypeValue6 = providerSpecificDetailsValue["instanceType"];
+                                        if (instanceTypeValue6 != null && instanceTypeValue6.Type != JTokenType.Null)
+                                        {
+                                            string instanceTypeInstance6 = ((string)instanceTypeValue6);
+                                            vMwareCbtEventDetailsInstance.InstanceType = instanceTypeInstance6;
+                                        }
+                                        propertiesInstance.ProviderDetails = vMwareCbtEventDetailsInstance;
+                                    }
                                 }
                                 
                                 JToken eventSpecificDetailsValue = propertiesValue["eventSpecificDetails"];
@@ -518,11 +544,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             jobStatusEventDetailsInstance.AffectedObjectType = affectedObjectTypeInstance;
                                         }
                                         
-                                        JToken instanceTypeValue6 = eventSpecificDetailsValue["instanceType"];
-                                        if (instanceTypeValue6 != null && instanceTypeValue6.Type != JTokenType.Null)
+                                        JToken instanceTypeValue7 = eventSpecificDetailsValue["instanceType"];
+                                        if (instanceTypeValue7 != null && instanceTypeValue7.Type != JTokenType.Null)
                                         {
-                                            string instanceTypeInstance6 = ((string)instanceTypeValue6);
-                                            jobStatusEventDetailsInstance.InstanceType = instanceTypeInstance6;
+                                            string instanceTypeInstance7 = ((string)instanceTypeValue7);
+                                            jobStatusEventDetailsInstance.InstanceType = instanceTypeInstance7;
                                         }
                                         propertiesInstance.EventSpecificDetails = jobStatusEventDetailsInstance;
                                     }
@@ -1007,6 +1033,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             propertiesInstance.AffectedObjectFriendlyName = affectedObjectFriendlyNameInstance;
                                         }
                                         
+                                        JToken affectedObjectCorrelationIdValue = propertiesValue["affectedObjectCorrelationId"];
+                                        if (affectedObjectCorrelationIdValue != null && affectedObjectCorrelationIdValue.Type != JTokenType.Null)
+                                        {
+                                            string affectedObjectCorrelationIdInstance = ((string)affectedObjectCorrelationIdValue);
+                                            propertiesInstance.AffectedObjectCorrelationId = affectedObjectCorrelationIdInstance;
+                                        }
+                                        
                                         JToken severityValue = propertiesValue["severity"];
                                         if (severityValue != null && severityValue.Type != JTokenType.Null)
                                         {
@@ -1260,6 +1293,25 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 }
                                                 propertiesInstance.ProviderDetails = a2AEventDetailsInstance;
                                             }
+                                            if (typeName == "VMwareCbt")
+                                            {
+                                                VMwareCbtEventDetails vMwareCbtEventDetailsInstance = new VMwareCbtEventDetails();
+                                                
+                                                JToken migrationItemNameValue = providerSpecificDetailsValue["migrationItemName"];
+                                                if (migrationItemNameValue != null && migrationItemNameValue.Type != JTokenType.Null)
+                                                {
+                                                    string migrationItemNameInstance = ((string)migrationItemNameValue);
+                                                    vMwareCbtEventDetailsInstance.MigrationItemName = migrationItemNameInstance;
+                                                }
+                                                
+                                                JToken instanceTypeValue6 = providerSpecificDetailsValue["instanceType"];
+                                                if (instanceTypeValue6 != null && instanceTypeValue6.Type != JTokenType.Null)
+                                                {
+                                                    string instanceTypeInstance6 = ((string)instanceTypeValue6);
+                                                    vMwareCbtEventDetailsInstance.InstanceType = instanceTypeInstance6;
+                                                }
+                                                propertiesInstance.ProviderDetails = vMwareCbtEventDetailsInstance;
+                                            }
                                         }
                                         
                                         JToken eventSpecificDetailsValue = propertiesValue["eventSpecificDetails"];
@@ -1298,11 +1350,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     jobStatusEventDetailsInstance.AffectedObjectType = affectedObjectTypeInstance;
                                                 }
                                                 
-                                                JToken instanceTypeValue6 = eventSpecificDetailsValue["instanceType"];
-                                                if (instanceTypeValue6 != null && instanceTypeValue6.Type != JTokenType.Null)
+                                                JToken instanceTypeValue7 = eventSpecificDetailsValue["instanceType"];
+                                                if (instanceTypeValue7 != null && instanceTypeValue7.Type != JTokenType.Null)
                                                 {
-                                                    string instanceTypeInstance6 = ((string)instanceTypeValue6);
-                                                    jobStatusEventDetailsInstance.InstanceType = instanceTypeInstance6;
+                                                    string instanceTypeInstance7 = ((string)instanceTypeValue7);
+                                                    jobStatusEventDetailsInstance.InstanceType = instanceTypeInstance7;
                                                 }
                                                 propertiesInstance.EventSpecificDetails = jobStatusEventDetailsInstance;
                                             }

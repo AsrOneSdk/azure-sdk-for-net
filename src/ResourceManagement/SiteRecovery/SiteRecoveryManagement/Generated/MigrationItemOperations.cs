@@ -2235,6 +2235,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     }
                                 }
                                 
+                                JToken eventCorrelationIdValue = propertiesValue["eventCorrelationId"];
+                                if (eventCorrelationIdValue != null && eventCorrelationIdValue.Type != JTokenType.Null)
+                                {
+                                    string eventCorrelationIdInstance = ((string)eventCorrelationIdValue);
+                                    propertiesInstance.EventCorrelationId = eventCorrelationIdInstance;
+                                }
+                                
                                 JToken providerSpecificDetailsValue = propertiesValue["providerSpecificDetails"];
                                 if (providerSpecificDetailsValue != null && providerSpecificDetailsValue.Type != JTokenType.Null)
                                 {
@@ -3053,6 +3060,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         DateTime startTimeInstance = ((DateTime)startTimeValue);
                                         currentJobInstance.StartTime = startTimeInstance;
                                     }
+                                }
+                                
+                                JToken eventCorrelationIdValue = propertiesValue["eventCorrelationId"];
+                                if (eventCorrelationIdValue != null && eventCorrelationIdValue.Type != JTokenType.Null)
+                                {
+                                    string eventCorrelationIdInstance = ((string)eventCorrelationIdValue);
+                                    propertiesInstance.EventCorrelationId = eventCorrelationIdInstance;
                                 }
                                 
                                 JToken providerSpecificDetailsValue = propertiesValue["providerSpecificDetails"];
@@ -3934,6 +3948,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     }
                                 }
                                 
+                                JToken eventCorrelationIdValue = propertiesValue["eventCorrelationId"];
+                                if (eventCorrelationIdValue != null && eventCorrelationIdValue.Type != JTokenType.Null)
+                                {
+                                    string eventCorrelationIdInstance = ((string)eventCorrelationIdValue);
+                                    propertiesInstance.EventCorrelationId = eventCorrelationIdInstance;
+                                }
+                                
                                 JToken providerSpecificDetailsValue = propertiesValue["providerSpecificDetails"];
                                 if (providerSpecificDetailsValue != null && providerSpecificDetailsValue.Type != JTokenType.Null)
                                 {
@@ -4811,6 +4832,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         DateTime startTimeInstance = ((DateTime)startTimeValue);
                                         currentJobInstance.StartTime = startTimeInstance;
                                     }
+                                }
+                                
+                                JToken eventCorrelationIdValue = propertiesValue["eventCorrelationId"];
+                                if (eventCorrelationIdValue != null && eventCorrelationIdValue.Type != JTokenType.Null)
+                                {
+                                    string eventCorrelationIdInstance = ((string)eventCorrelationIdValue);
+                                    propertiesInstance.EventCorrelationId = eventCorrelationIdInstance;
                                 }
                                 
                                 JToken providerSpecificDetailsValue = propertiesValue["providerSpecificDetails"];
@@ -5692,6 +5720,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     }
                                 }
                                 
+                                JToken eventCorrelationIdValue = propertiesValue["eventCorrelationId"];
+                                if (eventCorrelationIdValue != null && eventCorrelationIdValue.Type != JTokenType.Null)
+                                {
+                                    string eventCorrelationIdInstance = ((string)eventCorrelationIdValue);
+                                    propertiesInstance.EventCorrelationId = eventCorrelationIdInstance;
+                                }
+                                
                                 JToken providerSpecificDetailsValue = propertiesValue["providerSpecificDetails"];
                                 if (providerSpecificDetailsValue != null && providerSpecificDetailsValue.Type != JTokenType.Null)
                                 {
@@ -6571,6 +6606,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     }
                                 }
                                 
+                                JToken eventCorrelationIdValue = propertiesValue["eventCorrelationId"];
+                                if (eventCorrelationIdValue != null && eventCorrelationIdValue.Type != JTokenType.Null)
+                                {
+                                    string eventCorrelationIdInstance = ((string)eventCorrelationIdValue);
+                                    propertiesInstance.EventCorrelationId = eventCorrelationIdInstance;
+                                }
+                                
                                 JToken providerSpecificDetailsValue = propertiesValue["providerSpecificDetails"];
                                 if (providerSpecificDetailsValue != null && providerSpecificDetailsValue.Type != JTokenType.Null)
                                 {
@@ -7448,6 +7490,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         DateTime startTimeInstance = ((DateTime)startTimeValue);
                                         currentJobInstance.StartTime = startTimeInstance;
                                     }
+                                }
+                                
+                                JToken eventCorrelationIdValue = propertiesValue["eventCorrelationId"];
+                                if (eventCorrelationIdValue != null && eventCorrelationIdValue.Type != JTokenType.Null)
+                                {
+                                    string eventCorrelationIdInstance = ((string)eventCorrelationIdValue);
+                                    propertiesInstance.EventCorrelationId = eventCorrelationIdInstance;
                                 }
                                 
                                 JToken providerSpecificDetailsValue = propertiesValue["providerSpecificDetails"];
@@ -8378,6 +8427,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
+                                        JToken eventCorrelationIdValue = propertiesValue["eventCorrelationId"];
+                                        if (eventCorrelationIdValue != null && eventCorrelationIdValue.Type != JTokenType.Null)
+                                        {
+                                            string eventCorrelationIdInstance = ((string)eventCorrelationIdValue);
+                                            propertiesInstance.EventCorrelationId = eventCorrelationIdInstance;
+                                        }
+                                        
                                         JToken providerSpecificDetailsValue = propertiesValue["providerSpecificDetails"];
                                         if (providerSpecificDetailsValue != null && providerSpecificDetailsValue.Type != JTokenType.Null)
                                         {
@@ -9257,6 +9313,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             }
                                         }
                                         
+                                        JToken eventCorrelationIdValue = propertiesValue["eventCorrelationId"];
+                                        if (eventCorrelationIdValue != null && eventCorrelationIdValue.Type != JTokenType.Null)
+                                        {
+                                            string eventCorrelationIdInstance = ((string)eventCorrelationIdValue);
+                                            propertiesInstance.EventCorrelationId = eventCorrelationIdInstance;
+                                        }
+                                        
                                         JToken providerSpecificDetailsValue = propertiesValue["providerSpecificDetails"];
                                         if (providerSpecificDetailsValue != null && providerSpecificDetailsValue.Type != JTokenType.Null)
                                         {
@@ -10091,6 +10154,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 DateTime startTimeInstance = ((DateTime)startTimeValue);
                                                 currentJobInstance.StartTime = startTimeInstance;
                                             }
+                                        }
+                                        
+                                        JToken eventCorrelationIdValue = propertiesValue["eventCorrelationId"];
+                                        if (eventCorrelationIdValue != null && eventCorrelationIdValue.Type != JTokenType.Null)
+                                        {
+                                            string eventCorrelationIdInstance = ((string)eventCorrelationIdValue);
+                                            propertiesInstance.EventCorrelationId = eventCorrelationIdInstance;
                                         }
                                         
                                         JToken providerSpecificDetailsValue = propertiesValue["providerSpecificDetails"];

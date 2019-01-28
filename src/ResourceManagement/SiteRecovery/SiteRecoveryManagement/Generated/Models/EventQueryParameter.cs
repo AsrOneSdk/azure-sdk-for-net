@@ -29,6 +29,18 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class EventQueryParameter
     {
+        private string _affectedObjectCorrelationId;
+        
+        /// <summary>
+        /// Optional. The affected object correlationId of the events to be
+        /// queried.
+        /// </summary>
+        public string AffectedObjectCorrelationId
+        {
+            get { return this._affectedObjectCorrelationId; }
+            set { this._affectedObjectCorrelationId = value; }
+        }
+        
         private string _affectedObjectFriendlyName;
         
         /// <summary>

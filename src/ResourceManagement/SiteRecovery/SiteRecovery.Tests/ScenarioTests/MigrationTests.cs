@@ -836,6 +836,13 @@ namespace SiteRecovery.Tests.ScenarioTests
                         RequestHeaders);
 
                     var events = client.Events.List(new EventQueryParameter(), RequestHeaders);
+
+                    var eventQueryParam = new EventQueryParameter
+                    {
+                        AffectedObjectCorrelationId = migItem.MigrationItem.Properties.EventCorrelationId
+                    };
+                    var filteredEvents = client.Events.List(eventQueryParam, RequestHeaders);
+
                 }
                 catch (Exception)
                 {
