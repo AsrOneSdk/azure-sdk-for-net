@@ -119,7 +119,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(jobName);
             url = url + "/Cancel";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2018-01-10");
+            queryParameters.Add("api-version=2018-07-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);
@@ -294,7 +294,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationJobs/export";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2018-01-10");
+            queryParameters.Add("api-version=2018-07-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);
@@ -523,7 +523,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(jobName);
             url = url + "/Restart";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2018-01-10");
+            queryParameters.Add("api-version=2018-07-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);
@@ -704,7 +704,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(jobId);
             url = url + "/Resume";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2018-01-10");
+            queryParameters.Add("api-version=2018-07-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);
@@ -1031,7 +1031,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/replicationJobs/";
             url = url + Uri.EscapeDataString(jobId);
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2018-01-10");
+            queryParameters.Add("api-version=2018-07-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);
@@ -18481,7 +18481,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationJobs";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2018-01-10");
+            queryParameters.Add("api-version=2018-07-10");
             List<string> odataFilter = new List<string>();
             if (parameters != null && parameters.ToQueryString() != null)
             {

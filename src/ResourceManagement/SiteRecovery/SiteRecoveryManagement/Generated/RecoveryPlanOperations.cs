@@ -119,7 +119,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(recoveryPlanName);
             url = url + "/failoverCommit";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2018-01-10");
+            queryParameters.Add("api-version=2018-07-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);
@@ -383,7 +383,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/replicationRecoveryPlans/";
             url = url + Uri.EscapeDataString(recoveryPlanName);
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2018-01-10");
+            queryParameters.Add("api-version=2018-07-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);
@@ -815,7 +815,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/replicationRecoveryPlans/";
             url = url + Uri.EscapeDataString(recoveryPlanName);
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2018-01-10");
+            queryParameters.Add("api-version=2018-07-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);
@@ -1008,7 +1008,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(recoveryPlanName);
             url = url + "/plannedFailover";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2018-01-10");
+            queryParameters.Add("api-version=2018-07-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);
@@ -1303,7 +1303,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(recoveryPlanName);
             url = url + "/reProtect";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2018-01-10");
+            queryParameters.Add("api-version=2018-07-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);
@@ -1500,7 +1500,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(recoveryPlanName);
             url = url + "/testFailover";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2018-01-10");
+            queryParameters.Add("api-version=2018-07-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);
@@ -1819,7 +1819,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(recoveryPlanName);
             url = url + "/testFailoverCleanup";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2018-01-10");
+            queryParameters.Add("api-version=2018-07-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);
@@ -2035,7 +2035,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(recoveryPlanName);
             url = url + "/unplannedFailover";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2018-01-10");
+            queryParameters.Add("api-version=2018-07-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);
@@ -2411,7 +2411,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/replicationRecoveryPlans/";
             url = url + Uri.EscapeDataString(recoveryPlanName);
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2018-01-10");
+            queryParameters.Add("api-version=2018-07-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);
@@ -3027,7 +3027,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/replicationRecoveryPlans/";
             url = url + Uri.EscapeDataString(recoveryPlanName);
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2018-01-10");
+            queryParameters.Add("api-version=2018-07-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);
@@ -9952,7 +9952,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationRecoveryPlans";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2018-01-10");
+            queryParameters.Add("api-version=2018-07-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);

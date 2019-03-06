@@ -123,7 +123,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/replicationNetworks/";
             url = url + Uri.EscapeDataString(networkName);
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2018-01-10");
+            queryParameters.Add("api-version=2018-07-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);
@@ -422,7 +422,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationNetworks";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2018-01-10");
+            queryParameters.Add("api-version=2018-07-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);
@@ -745,7 +745,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(fabricName);
             url = url + "/replicationNetworks";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2018-01-10");
+            queryParameters.Add("api-version=2018-07-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);

@@ -133,10 +133,55 @@ namespace Microsoft.Azure.Management.SiteRecovery
         }
         
         /// <summary>
+        /// Definition of migration container mapping operations for the Site
+        /// Recovery extension.
+        /// </summary>
+        IMigrationContainerMappingOperations MigrationContainerMapping
+        {
+            get; 
+        }
+        
+        /// <summary>
+        /// Definition of migration container operations for the Site Recovery
+        /// extension.
+        /// </summary>
+        IMigrationContainerOperations MigrationContainer
+        {
+            get; 
+        }
+        
+        /// <summary>
+        /// Definition of migration fabric operations for the Site Recovery
+        /// extension.
+        /// </summary>
+        IMigrationFabricOperations MigrationFabric
+        {
+            get; 
+        }
+        
+        /// <summary>
         /// Definition of migration item operations for the Site Recovery
         /// extension.
         /// </summary>
         IMigrationItemOperations MigrationItem
+        {
+            get; 
+        }
+        
+        /// <summary>
+        /// Definition of migration policy operations for the Site Recovery
+        /// extension.
+        /// </summary>
+        IMigrationPolicyOperations MigrationPolicy
+        {
+            get; 
+        }
+        
+        /// <summary>
+        /// Definition of migration provider operations for the Site Recovery
+        /// extension.
+        /// </summary>
+        IMigrationProviderOperations MigrationProvider
         {
             get; 
         }

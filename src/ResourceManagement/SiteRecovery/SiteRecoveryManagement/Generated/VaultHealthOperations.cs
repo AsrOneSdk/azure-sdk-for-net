@@ -106,7 +106,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationVaultHealth/default/refresh";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2018-01-10");
+            queryParameters.Add("api-version=2018-07-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);
@@ -520,7 +520,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(resourceName);
             url = url + "/replicationVaultHealth";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2018-01-10");
+            queryParameters.Add("api-version=2018-07-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);

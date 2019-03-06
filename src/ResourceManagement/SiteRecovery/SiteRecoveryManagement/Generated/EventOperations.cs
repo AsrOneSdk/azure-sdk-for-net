@@ -113,7 +113,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/replicationEvents/";
             url = url + Uri.EscapeDataString(eventName);
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2018-01-10");
+            queryParameters.Add("api-version=2018-07-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);
@@ -905,7 +905,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationEvents";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2018-01-10");
+            queryParameters.Add("api-version=2018-07-10");
             List<string> odataFilter = new List<string>();
             if (parameters != null && parameters.ToQueryString() != null)
             {

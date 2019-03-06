@@ -20,6 +20,7 @@
     <Compile Include="ScenarioTests\ExportTests.cs" />
     <Compile Include="ScenarioTests\FailoverTests.cs" />
     <Compile Include="ScenarioTests\GetTests.cs" />
+    <Compile Include="ScenarioTests\MigrationTestsv2.cs" />
     <Compile Include="ScenarioTests\MigrationTests.cs" />
     <Compile Include="ScenarioTests\ProcessServerTests.cs" />
     <Compile Include="ScenarioTests\RecoveryPlanTests.cs" />

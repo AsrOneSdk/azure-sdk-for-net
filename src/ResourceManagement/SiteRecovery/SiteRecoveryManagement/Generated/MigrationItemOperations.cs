@@ -146,7 +146,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             {
                 queryParameters.Add("deleteOption=" + Uri.EscapeDataString(deleteOption));
             }
-            queryParameters.Add("api-version=2018-01-10");
+            queryParameters.Add("api-version=2018-07-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);
@@ -350,7 +350,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/replicationMigrationItems/";
             url = url + Uri.EscapeDataString(migrationItemName);
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2018-01-10");
+            queryParameters.Add("api-version=2018-07-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);
@@ -687,7 +687,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(migrationItemName);
             url = url + "/migrate";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2018-01-10");
+            queryParameters.Add("api-version=2018-07-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);
@@ -925,7 +925,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(migrationItemName);
             url = url + "/testMigrate";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2018-01-10");
+            queryParameters.Add("api-version=2018-07-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);
@@ -1168,7 +1168,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(migrationItemName);
             url = url + "/testMigrateCleanup";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2018-01-10");
+            queryParameters.Add("api-version=2018-07-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);
@@ -1394,7 +1394,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/replicationMigrationItems/";
             url = url + Uri.EscapeDataString(migrationItemName);
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2018-01-10");
+            queryParameters.Add("api-version=2018-07-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);
@@ -1847,7 +1847,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/replicationMigrationItems/";
             url = url + Uri.EscapeDataString(migrationItemName);
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2018-01-10");
+            queryParameters.Add("api-version=2018-07-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);
@@ -8034,7 +8034,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(protectionContainerName);
             url = url + "/replicationMigrationItems";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2018-01-10");
+            queryParameters.Add("api-version=2018-07-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);
@@ -8911,7 +8911,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             {
                 queryParameters.Add("skipToken=" + Uri.EscapeDataString(skipToken));
             }
-            queryParameters.Add("api-version=2018-01-10");
+            queryParameters.Add("api-version=2018-07-10");
             List<string> odataFilter = new List<string>();
             if (parameters != null && parameters.ToQueryString() != null)
             {
@@ -10742,7 +10742,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/migrationRecoveryPoints/";
             url = url + Uri.EscapeDataString(migrationRecoveryPointName);
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2018-01-10");
+            queryParameters.Add("api-version=2018-07-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);
@@ -11031,7 +11031,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(migrationItemName);
             url = url + "/migrationRecoveryPoints";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2018-01-10");
+            queryParameters.Add("api-version=2018-07-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);

@@ -168,6 +168,39 @@ namespace Microsoft.Azure.Management.SiteRecovery
             get { return this._logicalNetwork; }
         }
         
+        private IMigrationContainerMappingOperations _migrationContainerMapping;
+        
+        /// <summary>
+        /// Definition of migration container mapping operations for the Site
+        /// Recovery extension.
+        /// </summary>
+        public virtual IMigrationContainerMappingOperations MigrationContainerMapping
+        {
+            get { return this._migrationContainerMapping; }
+        }
+        
+        private IMigrationContainerOperations _migrationContainer;
+        
+        /// <summary>
+        /// Definition of migration container operations for the Site Recovery
+        /// extension.
+        /// </summary>
+        public virtual IMigrationContainerOperations MigrationContainer
+        {
+            get { return this._migrationContainer; }
+        }
+        
+        private IMigrationFabricOperations _migrationFabric;
+        
+        /// <summary>
+        /// Definition of migration fabric operations for the Site Recovery
+        /// extension.
+        /// </summary>
+        public virtual IMigrationFabricOperations MigrationFabric
+        {
+            get { return this._migrationFabric; }
+        }
+        
         private IMigrationItemOperations _migrationItem;
         
         /// <summary>
@@ -177,6 +210,28 @@ namespace Microsoft.Azure.Management.SiteRecovery
         public virtual IMigrationItemOperations MigrationItem
         {
             get { return this._migrationItem; }
+        }
+        
+        private IMigrationPolicyOperations _migrationPolicy;
+        
+        /// <summary>
+        /// Definition of migration policy operations for the Site Recovery
+        /// extension.
+        /// </summary>
+        public virtual IMigrationPolicyOperations MigrationPolicy
+        {
+            get { return this._migrationPolicy; }
+        }
+        
+        private IMigrationProviderOperations _migrationProvider;
+        
+        /// <summary>
+        /// Definition of migration provider operations for the Site Recovery
+        /// extension.
+        /// </summary>
+        public virtual IMigrationProviderOperations MigrationProvider
+        {
+            get { return this._migrationProvider; }
         }
         
         private INetworkMappingOperations _networkMapping;
@@ -340,7 +395,12 @@ namespace Microsoft.Azure.Management.SiteRecovery
             this._fabrics = new FabricOperations(this);
             this._jobs = new JobOperations(this);
             this._logicalNetwork = new LogicalNetworkOperations(this);
+            this._migrationContainerMapping = new MigrationContainerMappingOperations(this);
+            this._migrationContainer = new MigrationContainerOperations(this);
+            this._migrationFabric = new MigrationFabricOperations(this);
             this._migrationItem = new MigrationItemOperations(this);
+            this._migrationPolicy = new MigrationPolicyOperations(this);
+            this._migrationProvider = new MigrationProviderOperations(this);
             this._networkMapping = new NetworkMappingOperations(this);
             this._network = new NetworkOperations(this);
             this._policies = new PolicyOperations(this);
@@ -492,7 +552,12 @@ namespace Microsoft.Azure.Management.SiteRecovery
             this._fabrics = new FabricOperations(this);
             this._jobs = new JobOperations(this);
             this._logicalNetwork = new LogicalNetworkOperations(this);
+            this._migrationContainerMapping = new MigrationContainerMappingOperations(this);
+            this._migrationContainer = new MigrationContainerOperations(this);
+            this._migrationFabric = new MigrationFabricOperations(this);
             this._migrationItem = new MigrationItemOperations(this);
+            this._migrationPolicy = new MigrationPolicyOperations(this);
+            this._migrationProvider = new MigrationProviderOperations(this);
             this._networkMapping = new NetworkMappingOperations(this);
             this._network = new NetworkOperations(this);
             this._policies = new PolicyOperations(this);

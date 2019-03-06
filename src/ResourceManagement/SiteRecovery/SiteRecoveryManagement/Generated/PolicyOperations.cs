@@ -126,7 +126,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/replicationPolicies/";
             url = url + Uri.EscapeDataString(policyName);
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2018-01-10");
+            queryParameters.Add("api-version=2018-07-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);
@@ -533,7 +533,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/replicationPolicies/";
             url = url + Uri.EscapeDataString(name);
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2018-01-10");
+            queryParameters.Add("api-version=2018-07-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);
@@ -724,7 +724,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/replicationPolicies/";
             url = url + Uri.EscapeDataString(policyName);
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2018-01-10");
+            queryParameters.Add("api-version=2018-07-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);
@@ -1258,7 +1258,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + "/replicationPolicies/";
             url = url + Uri.EscapeDataString(policyName);
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2018-01-10");
+            queryParameters.Add("api-version=2018-07-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);
@@ -3509,7 +3509,7 @@ namespace Microsoft.Azure.Management.SiteRecovery
             url = url + Uri.EscapeDataString(this.Client.ResourceName);
             url = url + "/replicationPolicies";
             List<string> queryParameters = new List<string>();
-            queryParameters.Add("api-version=2018-01-10");
+            queryParameters.Add("api-version=2018-07-10");
             if (queryParameters.Count > 0)
             {
                 url = url + "?" + string.Join("&", queryParameters);
