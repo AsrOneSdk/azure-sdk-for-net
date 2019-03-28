@@ -244,6 +244,16 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 providerSpecificInputValue["targetLocation"] = derived.TargetLocation;
                             }
                         }
+                        if (input.Properties.ProviderSpecificInput is InMageMigrationContainerMappingInput)
+                        {
+                            providerSpecificInputValue["instanceType"] = "InMageMigration";
+                            InMageMigrationContainerMappingInput derived2 = ((InMageMigrationContainerMappingInput)input.Properties.ProviderSpecificInput);
+                            
+                            if (derived2.TargetLocation != null)
+                            {
+                                providerSpecificInputValue["targetLocation"] = derived2.TargetLocation;
+                            }
+                        }
                     }
                 }
                 
@@ -1368,6 +1378,45 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         }
                                         propertiesInstance.ProviderSpecificDetails = vMwareCbtContainerMappingDetailsInstance;
                                     }
+                                    if (typeName == "InMageMigration")
+                                    {
+                                        InMageMigrationContainerMappingDetails inMageMigrationContainerMappingDetailsInstance = new InMageMigrationContainerMappingDetails();
+                                        
+                                        JToken targetLocationValue2 = providerSpecificDetailsValue["targetLocation"];
+                                        if (targetLocationValue2 != null && targetLocationValue2.Type != JTokenType.Null)
+                                        {
+                                            string targetLocationInstance2 = ((string)targetLocationValue2);
+                                            inMageMigrationContainerMappingDetailsInstance.TargetLocation = targetLocationInstance2;
+                                        }
+                                        
+                                        JToken roleSizeToNicCountMapSequenceElement2 = ((JToken)providerSpecificDetailsValue["roleSizeToNicCountMap"]);
+                                        if (roleSizeToNicCountMapSequenceElement2 != null && roleSizeToNicCountMapSequenceElement2.Type != JTokenType.Null)
+                                        {
+                                            foreach (JProperty property2 in roleSizeToNicCountMapSequenceElement2)
+                                            {
+                                                string roleSizeToNicCountMapKey2 = ((string)property2.Name);
+                                                int roleSizeToNicCountMapValue2 = ((int)property2.Value);
+                                                inMageMigrationContainerMappingDetailsInstance.RoleSizeToNicCountMap.Add(roleSizeToNicCountMapKey2, roleSizeToNicCountMapValue2);
+                                            }
+                                        }
+                                        
+                                        JToken excludedSkusArray2 = providerSpecificDetailsValue["excludedSkus"];
+                                        if (excludedSkusArray2 != null && excludedSkusArray2.Type != JTokenType.Null)
+                                        {
+                                            foreach (JToken excludedSkusValue2 in ((JArray)excludedSkusArray2))
+                                            {
+                                                inMageMigrationContainerMappingDetailsInstance.ExcludedSkus.Add(((string)excludedSkusValue2));
+                                            }
+                                        }
+                                        
+                                        JToken instanceTypeValue3 = providerSpecificDetailsValue["instanceType"];
+                                        if (instanceTypeValue3 != null && instanceTypeValue3.Type != JTokenType.Null)
+                                        {
+                                            string instanceTypeInstance3 = ((string)instanceTypeValue3);
+                                            inMageMigrationContainerMappingDetailsInstance.InstanceType = instanceTypeInstance3;
+                                        }
+                                        propertiesInstance.ProviderSpecificDetails = inMageMigrationContainerMappingDetailsInstance;
+                                    }
                                 }
                             }
                             
@@ -1402,10 +1451,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
                             JToken tagsSequenceElement = ((JToken)responseDoc["tags"]);
                             if (tagsSequenceElement != null && tagsSequenceElement.Type != JTokenType.Null)
                             {
-                                foreach (JProperty property2 in tagsSequenceElement)
+                                foreach (JProperty property3 in tagsSequenceElement)
                                 {
-                                    string tagsKey = ((string)property2.Name);
-                                    string tagsValue = ((string)property2.Value);
+                                    string tagsKey = ((string)property3.Name);
+                                    string tagsValue = ((string)property3.Value);
                                     protectionContainerMappingInstance.Tags.Add(tagsKey, tagsValue);
                                 }
                             }
@@ -1964,6 +2013,45 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         }
                                         propertiesInstance.ProviderSpecificDetails = vMwareCbtContainerMappingDetailsInstance;
                                     }
+                                    if (typeName == "InMageMigration")
+                                    {
+                                        InMageMigrationContainerMappingDetails inMageMigrationContainerMappingDetailsInstance = new InMageMigrationContainerMappingDetails();
+                                        
+                                        JToken targetLocationValue2 = providerSpecificDetailsValue["targetLocation"];
+                                        if (targetLocationValue2 != null && targetLocationValue2.Type != JTokenType.Null)
+                                        {
+                                            string targetLocationInstance2 = ((string)targetLocationValue2);
+                                            inMageMigrationContainerMappingDetailsInstance.TargetLocation = targetLocationInstance2;
+                                        }
+                                        
+                                        JToken roleSizeToNicCountMapSequenceElement2 = ((JToken)providerSpecificDetailsValue["roleSizeToNicCountMap"]);
+                                        if (roleSizeToNicCountMapSequenceElement2 != null && roleSizeToNicCountMapSequenceElement2.Type != JTokenType.Null)
+                                        {
+                                            foreach (JProperty property2 in roleSizeToNicCountMapSequenceElement2)
+                                            {
+                                                string roleSizeToNicCountMapKey2 = ((string)property2.Name);
+                                                int roleSizeToNicCountMapValue2 = ((int)property2.Value);
+                                                inMageMigrationContainerMappingDetailsInstance.RoleSizeToNicCountMap.Add(roleSizeToNicCountMapKey2, roleSizeToNicCountMapValue2);
+                                            }
+                                        }
+                                        
+                                        JToken excludedSkusArray2 = providerSpecificDetailsValue["excludedSkus"];
+                                        if (excludedSkusArray2 != null && excludedSkusArray2.Type != JTokenType.Null)
+                                        {
+                                            foreach (JToken excludedSkusValue2 in ((JArray)excludedSkusArray2))
+                                            {
+                                                inMageMigrationContainerMappingDetailsInstance.ExcludedSkus.Add(((string)excludedSkusValue2));
+                                            }
+                                        }
+                                        
+                                        JToken instanceTypeValue3 = providerSpecificDetailsValue["instanceType"];
+                                        if (instanceTypeValue3 != null && instanceTypeValue3.Type != JTokenType.Null)
+                                        {
+                                            string instanceTypeInstance3 = ((string)instanceTypeValue3);
+                                            inMageMigrationContainerMappingDetailsInstance.InstanceType = instanceTypeInstance3;
+                                        }
+                                        propertiesInstance.ProviderSpecificDetails = inMageMigrationContainerMappingDetailsInstance;
+                                    }
                                 }
                             }
                             
@@ -1998,10 +2086,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
                             JToken tagsSequenceElement = ((JToken)responseDoc["tags"]);
                             if (tagsSequenceElement != null && tagsSequenceElement.Type != JTokenType.Null)
                             {
-                                foreach (JProperty property2 in tagsSequenceElement)
+                                foreach (JProperty property3 in tagsSequenceElement)
                                 {
-                                    string tagsKey = ((string)property2.Name);
-                                    string tagsValue = ((string)property2.Value);
+                                    string tagsKey = ((string)property3.Name);
+                                    string tagsValue = ((string)property3.Value);
                                     protectionContainerMappingInstance.Tags.Add(tagsKey, tagsValue);
                                 }
                             }
@@ -2773,6 +2861,45 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         }
                                         propertiesInstance.ProviderSpecificDetails = vMwareCbtContainerMappingDetailsInstance;
                                     }
+                                    if (typeName == "InMageMigration")
+                                    {
+                                        InMageMigrationContainerMappingDetails inMageMigrationContainerMappingDetailsInstance = new InMageMigrationContainerMappingDetails();
+                                        
+                                        JToken targetLocationValue2 = providerSpecificDetailsValue["targetLocation"];
+                                        if (targetLocationValue2 != null && targetLocationValue2.Type != JTokenType.Null)
+                                        {
+                                            string targetLocationInstance2 = ((string)targetLocationValue2);
+                                            inMageMigrationContainerMappingDetailsInstance.TargetLocation = targetLocationInstance2;
+                                        }
+                                        
+                                        JToken roleSizeToNicCountMapSequenceElement2 = ((JToken)providerSpecificDetailsValue["roleSizeToNicCountMap"]);
+                                        if (roleSizeToNicCountMapSequenceElement2 != null && roleSizeToNicCountMapSequenceElement2.Type != JTokenType.Null)
+                                        {
+                                            foreach (JProperty property2 in roleSizeToNicCountMapSequenceElement2)
+                                            {
+                                                string roleSizeToNicCountMapKey2 = ((string)property2.Name);
+                                                int roleSizeToNicCountMapValue2 = ((int)property2.Value);
+                                                inMageMigrationContainerMappingDetailsInstance.RoleSizeToNicCountMap.Add(roleSizeToNicCountMapKey2, roleSizeToNicCountMapValue2);
+                                            }
+                                        }
+                                        
+                                        JToken excludedSkusArray2 = providerSpecificDetailsValue["excludedSkus"];
+                                        if (excludedSkusArray2 != null && excludedSkusArray2.Type != JTokenType.Null)
+                                        {
+                                            foreach (JToken excludedSkusValue2 in ((JArray)excludedSkusArray2))
+                                            {
+                                                inMageMigrationContainerMappingDetailsInstance.ExcludedSkus.Add(((string)excludedSkusValue2));
+                                            }
+                                        }
+                                        
+                                        JToken instanceTypeValue3 = providerSpecificDetailsValue["instanceType"];
+                                        if (instanceTypeValue3 != null && instanceTypeValue3.Type != JTokenType.Null)
+                                        {
+                                            string instanceTypeInstance3 = ((string)instanceTypeValue3);
+                                            inMageMigrationContainerMappingDetailsInstance.InstanceType = instanceTypeInstance3;
+                                        }
+                                        propertiesInstance.ProviderSpecificDetails = inMageMigrationContainerMappingDetailsInstance;
+                                    }
                                 }
                             }
                             
@@ -2807,10 +2934,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
                             JToken tagsSequenceElement = ((JToken)responseDoc["tags"]);
                             if (tagsSequenceElement != null && tagsSequenceElement.Type != JTokenType.Null)
                             {
-                                foreach (JProperty property2 in tagsSequenceElement)
+                                foreach (JProperty property3 in tagsSequenceElement)
                                 {
-                                    string tagsKey = ((string)property2.Name);
-                                    string tagsValue = ((string)property2.Value);
+                                    string tagsKey = ((string)property3.Name);
+                                    string tagsValue = ((string)property3.Value);
                                     protectionContainerMappingInstance.Tags.Add(tagsKey, tagsValue);
                                 }
                             }
@@ -3477,6 +3604,45 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 }
                                                 propertiesInstance.ProviderSpecificDetails = vMwareCbtContainerMappingDetailsInstance;
                                             }
+                                            if (typeName == "InMageMigration")
+                                            {
+                                                InMageMigrationContainerMappingDetails inMageMigrationContainerMappingDetailsInstance = new InMageMigrationContainerMappingDetails();
+                                                
+                                                JToken targetLocationValue2 = providerSpecificDetailsValue["targetLocation"];
+                                                if (targetLocationValue2 != null && targetLocationValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetLocationInstance2 = ((string)targetLocationValue2);
+                                                    inMageMigrationContainerMappingDetailsInstance.TargetLocation = targetLocationInstance2;
+                                                }
+                                                
+                                                JToken roleSizeToNicCountMapSequenceElement2 = ((JToken)providerSpecificDetailsValue["roleSizeToNicCountMap"]);
+                                                if (roleSizeToNicCountMapSequenceElement2 != null && roleSizeToNicCountMapSequenceElement2.Type != JTokenType.Null)
+                                                {
+                                                    foreach (JProperty property2 in roleSizeToNicCountMapSequenceElement2)
+                                                    {
+                                                        string roleSizeToNicCountMapKey2 = ((string)property2.Name);
+                                                        int roleSizeToNicCountMapValue2 = ((int)property2.Value);
+                                                        inMageMigrationContainerMappingDetailsInstance.RoleSizeToNicCountMap.Add(roleSizeToNicCountMapKey2, roleSizeToNicCountMapValue2);
+                                                    }
+                                                }
+                                                
+                                                JToken excludedSkusArray2 = providerSpecificDetailsValue["excludedSkus"];
+                                                if (excludedSkusArray2 != null && excludedSkusArray2.Type != JTokenType.Null)
+                                                {
+                                                    foreach (JToken excludedSkusValue2 in ((JArray)excludedSkusArray2))
+                                                    {
+                                                        inMageMigrationContainerMappingDetailsInstance.ExcludedSkus.Add(((string)excludedSkusValue2));
+                                                    }
+                                                }
+                                                
+                                                JToken instanceTypeValue3 = providerSpecificDetailsValue["instanceType"];
+                                                if (instanceTypeValue3 != null && instanceTypeValue3.Type != JTokenType.Null)
+                                                {
+                                                    string instanceTypeInstance3 = ((string)instanceTypeValue3);
+                                                    inMageMigrationContainerMappingDetailsInstance.InstanceType = instanceTypeInstance3;
+                                                }
+                                                propertiesInstance.ProviderSpecificDetails = inMageMigrationContainerMappingDetailsInstance;
+                                            }
                                         }
                                     }
                                     
@@ -3511,10 +3677,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     JToken tagsSequenceElement = ((JToken)valueValue["tags"]);
                                     if (tagsSequenceElement != null && tagsSequenceElement.Type != JTokenType.Null)
                                     {
-                                        foreach (JProperty property2 in tagsSequenceElement)
+                                        foreach (JProperty property3 in tagsSequenceElement)
                                         {
-                                            string tagsKey = ((string)property2.Name);
-                                            string tagsValue = ((string)property2.Value);
+                                            string tagsKey = ((string)property3.Name);
+                                            string tagsValue = ((string)property3.Value);
                                             protectionContainerMappingInstance.Tags.Add(tagsKey, tagsValue);
                                         }
                                     }
@@ -4110,6 +4276,45 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 }
                                                 propertiesInstance.ProviderSpecificDetails = vMwareCbtContainerMappingDetailsInstance;
                                             }
+                                            if (typeName == "InMageMigration")
+                                            {
+                                                InMageMigrationContainerMappingDetails inMageMigrationContainerMappingDetailsInstance = new InMageMigrationContainerMappingDetails();
+                                                
+                                                JToken targetLocationValue2 = providerSpecificDetailsValue["targetLocation"];
+                                                if (targetLocationValue2 != null && targetLocationValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetLocationInstance2 = ((string)targetLocationValue2);
+                                                    inMageMigrationContainerMappingDetailsInstance.TargetLocation = targetLocationInstance2;
+                                                }
+                                                
+                                                JToken roleSizeToNicCountMapSequenceElement2 = ((JToken)providerSpecificDetailsValue["roleSizeToNicCountMap"]);
+                                                if (roleSizeToNicCountMapSequenceElement2 != null && roleSizeToNicCountMapSequenceElement2.Type != JTokenType.Null)
+                                                {
+                                                    foreach (JProperty property2 in roleSizeToNicCountMapSequenceElement2)
+                                                    {
+                                                        string roleSizeToNicCountMapKey2 = ((string)property2.Name);
+                                                        int roleSizeToNicCountMapValue2 = ((int)property2.Value);
+                                                        inMageMigrationContainerMappingDetailsInstance.RoleSizeToNicCountMap.Add(roleSizeToNicCountMapKey2, roleSizeToNicCountMapValue2);
+                                                    }
+                                                }
+                                                
+                                                JToken excludedSkusArray2 = providerSpecificDetailsValue["excludedSkus"];
+                                                if (excludedSkusArray2 != null && excludedSkusArray2.Type != JTokenType.Null)
+                                                {
+                                                    foreach (JToken excludedSkusValue2 in ((JArray)excludedSkusArray2))
+                                                    {
+                                                        inMageMigrationContainerMappingDetailsInstance.ExcludedSkus.Add(((string)excludedSkusValue2));
+                                                    }
+                                                }
+                                                
+                                                JToken instanceTypeValue3 = providerSpecificDetailsValue["instanceType"];
+                                                if (instanceTypeValue3 != null && instanceTypeValue3.Type != JTokenType.Null)
+                                                {
+                                                    string instanceTypeInstance3 = ((string)instanceTypeValue3);
+                                                    inMageMigrationContainerMappingDetailsInstance.InstanceType = instanceTypeInstance3;
+                                                }
+                                                propertiesInstance.ProviderSpecificDetails = inMageMigrationContainerMappingDetailsInstance;
+                                            }
                                         }
                                     }
                                     
@@ -4144,10 +4349,10 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     JToken tagsSequenceElement = ((JToken)valueValue["tags"]);
                                     if (tagsSequenceElement != null && tagsSequenceElement.Type != JTokenType.Null)
                                     {
-                                        foreach (JProperty property2 in tagsSequenceElement)
+                                        foreach (JProperty property3 in tagsSequenceElement)
                                         {
-                                            string tagsKey = ((string)property2.Name);
-                                            string tagsValue = ((string)property2.Value);
+                                            string tagsKey = ((string)property3.Name);
+                                            string tagsValue = ((string)property3.Value);
                                             protectionContainerMappingInstance.Tags.Add(tagsKey, tagsValue);
                                         }
                                     }

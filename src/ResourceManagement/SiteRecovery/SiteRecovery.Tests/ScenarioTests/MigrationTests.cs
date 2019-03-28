@@ -81,6 +81,11 @@ namespace SiteRecovery.Tests.ScenarioTests
         // Test migrate input.
         private const string TfoNetworkId = "/subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/devbaburg1/providers/Microsoft.Network/virtualNetworks/devbabuvn1";
 
+        // InMage migration constants.
+        private const string InMageMigrationContainerName = "nitalasuovareplicationcontainer";
+        private const string InMageMigrationPolicyName = "InMageMigration-Profile";
+        private const string InMageMigrationContainerMappingName = "inMageMigrationmapping1";
+
         [Fact]
         public void Migration_ContainerPairing()
         {
@@ -91,107 +96,40 @@ namespace SiteRecovery.Tests.ScenarioTests
                     context.Start();
                     var client = GetSiteRecoveryClient(CustomHttpHandler, "Migration");
 
-                    // Create VMware fabric.
-                    var vmwareFabricInput = new FabricCreationInput()
-                    {
-                        Properties = new FabricCreationInputProperties()
-                        {
-                            CustomDetails = new VMwareV2FabricCreationInput()
-                            {
-                                InstanceType = "VMwareV2",
-                                VMwareSiteId = VMwareSiteId,
-                                MigrationSolutionId = MigrationSolutionId
-                            }
-                        }
-                    };
-                    client.Fabrics.Create(VMwareFabricName, vmwareFabricInput, RequestHeaders);
-
-                    // Create VMware DRA.
-                    var vmwareDraInput = new RecoveryServicesProviderCreationInput()
-                    {
-                        Properties = new RecoveryServicesProviderCreationInputProperties()
-                        {
-                            MachineName = VMwareDraName,
-                            AuthenticationIdentityInput = new IdentityProviderDetails()
-                            {
-                                TenantId = TenantId,
-                                ApplicationId = ApplicationId,
-                                ObjectId = ObjectId,
-                                Audience = Audience,
-                                AadAuthority = AadAuthority
-                            },
-                            ResourceAccessIdentityInput = new IdentityProviderDetails()
-                            {
-                                TenantId = TenantId,
-                                ApplicationId = ApplicationId,
-                                ObjectId = ObjectId,
-                                Audience = Audience,
-                                AadAuthority = AadAuthority
-                            }
-                        }
-                    };
-                    client.RecoveryServicesProvider.Create(VMwareFabricName, VMwareDraName, vmwareDraInput, RequestHeaders);
+                    // Creates fabric and dra.
+                    CreateVMwareFabricAndDra(client);
 
                     // Create VMware container.
-                    var vmwareContainerInput = new CreateProtectionContainerInput()
+                    var vmwareContainerInput = new VMwareCbtContainerCreationInput()
                     {
-                        Properties = new CreateProtectionContainerInputProperties()
-                        {
-                            ProviderSpecificInputs = new List<ReplicationProviderSpecificContainerCreationInput>()
-                            {
-                                new VMwareCbtContainerCreationInput()
-                                {
-                                    InstanceType = "VMwareCbt"
-                                }
-                            }
-                        }
+                        InstanceType = "VMwareCbt"
                     };
-                    client.ProtectionContainer.Create(VMwareFabricName, VMwareContainerName, vmwareContainerInput, RequestHeaders);
+                    CreateContainer(VMwareContainerName, vmwareContainerInput, client);
 
                     // Create VMware policy.
-                    var vmwarePolicyInput = new CreatePolicyInput()
+                    var vmwarePolicyInput = new VMwareCbtPolicyCreationInput()
                     {
-                        Properties = new CreatePolicyInputProperties()
-                        {
-                            ProviderSpecificInput = new VMwareCbtPolicyCreationInput()
-                            {
-                                RecoveryPointHistoryInMinutes = RecoveryPointHistoryInMins,
-                                CrashConsistentFrequencyInMinutes = CrashIntervalInMins,
-                                AppConsistentFrequencyInMinutes = AppIntervalInMins
-                            }
-                        }
+                        RecoveryPointHistoryInMinutes = RecoveryPointHistoryInMins,
+                        CrashConsistentFrequencyInMinutes = CrashIntervalInMins,
+                        AppConsistentFrequencyInMinutes = AppIntervalInMins
                     };
-                    client.Policies.Create(VMwarePolicyName, vmwarePolicyInput, RequestHeaders);
-
+                    CreatePolicy(VMwarePolicyName, vmwarePolicyInput, client);
 
                     // Create container mappping.
-                    var vmwarePolicy = client.Policies.List(RequestHeaders).Policies
-                        .Where(x => x.Name == VMwarePolicyName)
-                        .Single();
-
-                    var mappingInput = new CreateProtectionContainerMappingInput
+                    var vmwareContainerMappingInput = new VMwareCbtPolicyContainerMappingInput()
                     {
-                        Properties = new CreateProtectionContainerMappingInputProperties()
-                        {
-                            PolicyId = vmwarePolicy.Id,
-                            TargetProtectionContainerId = "Microsoft Azure",
-                            ProviderSpecificInput = new VMwareCbtPolicyContainerMappingInput()
-                            {
-                                KeyVaultId = KeyVaultId,
-                                KeyVaultUri = KeyVaultUri,
-                                StorageAccountId = StorageAccountId,
-                                StorageAccountSasSecretName = StorageAccountSasSecretName,
-                                ServiceBusConnectionStringSecretName = ServiceBusConnectionStringSecretName,
-                                TargetLocation = TargetLocation
-                            }
-                        }
+                        KeyVaultId = KeyVaultId,
+                        KeyVaultUri = KeyVaultUri,
+                        StorageAccountId = StorageAccountId,
+                        StorageAccountSasSecretName = StorageAccountSasSecretName,
+                        ServiceBusConnectionStringSecretName = ServiceBusConnectionStringSecretName,
+                        TargetLocation = TargetLocation
                     };
-                    client.ProtectionContainerMapping.ConfigureProtection(
-                        VMwareFabricName,
-                        VMwareContainerName,
+                    CreateProtectionContainerMapping(
                         ContainerMappingName,
-                        mappingInput,
-                        RequestHeaders);
+                        VMwarePolicyName,
+                        vmwareContainerMappingInput,
+                        client);
                 }
                 catch (Exception)
                 {
@@ -851,5 +789,215 @@ namespace SiteRecovery.Tests.ScenarioTests
                 }
             }
         }
+
+        [Fact]
+        public void PhysicalMigration_ContainerPairing()
+        {
+            using (UndoContext context = UndoContext.Current)
+            {
+                try
+                {
+                    context.Start();
+                    var client = GetSiteRecoveryClient(CustomHttpHandler, "Migration");
+
+                    CreateVMwareFabricAndDra(client);
+
+                    // Create InMage migration container.
+                    var containerInput = new InMageMigrationContainerCreationInput()
+                    {
+                        InstanceType = "InMageMigration"
+                    };
+                    CreateContainer(InMageMigrationContainerName, containerInput, client);
+
+                    // Create InMage migration policy.
+                    var policyInput = new InMageMigrationPolicyCreationInput()
+                    {
+                        AppConsistentFrequencyInMinutes = AppIntervalInMins,
+                        CrashConsistentFrequencyInMinutes = CrashIntervalInMins,
+                        RecoveryPointHistoryInMinutes = RecoveryPointHistoryInMins
+                    };
+                    CreatePolicy(InMageMigrationPolicyName, policyInput, client);
+
+                    // Create container mappping.
+                    var containerMappingInput = new InMageMigrationContainerMappingInput()
+                    {
+                        TargetLocation = TargetLocation
+                    };
+                    CreateProtectionContainerMapping(
+                        InMageMigrationContainerMappingName,
+                        InMageMigrationPolicyName,
+                        containerMappingInput,
+                        client);
+                }
+                catch (Exception)
+                {
+                    Debugger.Break();
+                    throw;
+                }
+            }
+        }
+
+        [Fact]
+        public void PhysicalMigration_ContainerUnpairing()
+        {
+            using (UndoContext context = UndoContext.Current)
+            {
+                try
+                {
+                    context.Start();
+                    var client = GetSiteRecoveryClient(CustomHttpHandler, "Migration");
+
+                    // Delete container mappping.
+                    client.ProtectionContainerMapping.UnconfigureProtection(
+                        VMwareFabricName,
+                        InMageMigrationContainerName,
+                        InMageMigrationContainerMappingName,
+                        new RemoveProtectionContainerMappingInput()
+                        {
+                            Properties = new RemoveProtectionContainerMappingInputProperties()
+                            {
+                                ProviderSpecificInput = new ReplicationProviderContainerUnmappingInput()
+                            }
+                        },
+                        RequestHeaders);
+
+                    // Delete InMage migration policy.
+                    client.Policies.Delete(InMageMigrationPolicyName, RequestHeaders);
+
+                    // Delete InMage migration container/DRA/fabric.
+                    client.ProtectionContainer.Delete(
+                        VMwareFabricName,
+                        InMageMigrationContainerName,
+                        RequestHeaders);
+                    client.RecoveryServicesProvider.Delete(
+                        VMwareFabricName,
+                        VMwareDraName,
+                        RequestHeaders);
+                    client.Fabrics.Delete(VMwareFabricName, RequestHeaders);
+                }
+                catch (Exception)
+                {
+                    Debugger.Break();
+                    throw;
+                }
+            }
+        }
+
+        #region private methods
+
+        private void CreateVMwareFabricAndDra(SiteRecoveryManagementClient client)
+        {
+            // Create VMware fabric.
+            var vmwareFabricInput = new FabricCreationInput()
+            {
+                Properties = new FabricCreationInputProperties()
+                {
+                    CustomDetails = new VMwareV2FabricCreationInput()
+                    {
+                        InstanceType = "VMwareV2",
+                        VMwareSiteId = VMwareSiteId,
+                        MigrationSolutionId = MigrationSolutionId
+                    }
+                }
+            };
+            client.Fabrics.Create(VMwareFabricName, vmwareFabricInput, RequestHeaders);
+
+            // Create VMware DRA.
+            var vmwareDraInput = new RecoveryServicesProviderCreationInput()
+            {
+                Properties = new RecoveryServicesProviderCreationInputProperties()
+                {
+                    MachineName = VMwareDraName,
+                    AuthenticationIdentityInput = new IdentityProviderDetails()
+                    {
+                        TenantId = TenantId,
+                        ApplicationId = ApplicationId,
+                        ObjectId = ObjectId,
+                        Audience = Audience,
+                        AadAuthority = AadAuthority
+                    },
+                    ResourceAccessIdentityInput = new IdentityProviderDetails()
+                    {
+                        TenantId = TenantId,
+                        ApplicationId = ApplicationId,
+                        ObjectId = ObjectId,
+                        Audience = Audience,
+                        AadAuthority = AadAuthority
+                    }
+                }
+            };
+            client.RecoveryServicesProvider.Create(
+                VMwareFabricName,
+                VMwareDraName,
+                vmwareDraInput,
+                RequestHeaders);
+        }
+
+        private void CreateContainer<T>(
+            string containerName,
+            T providerSpecificContainerInput,
+            SiteRecoveryManagementClient client)
+            where T : ReplicationProviderSpecificContainerCreationInput
+        {
+            var containerInput = new CreateProtectionContainerInput()
+            {
+                Properties = new CreateProtectionContainerInputProperties()
+                {
+                    ProviderSpecificInputs = new List<ReplicationProviderSpecificContainerCreationInput>()
+                    {
+                        providerSpecificContainerInput
+                    }
+                }
+            };
+            client.ProtectionContainer.Create(
+                VMwareFabricName,
+                containerName,
+                containerInput,
+                RequestHeaders);
+        }
+
+        private void CreateProtectionContainerMapping<T>(
+            string containerMappingName,
+            string policyName,
+            T provdierSpecificcontainerMappingInput,
+            SiteRecoveryManagementClient client) where T : ReplicationProviderContainerMappingInput
+        {
+            var vmwarePolicy = client.Policies.List(RequestHeaders).Policies
+                .Where(x => x.Name == policyName)
+                .Single();
+
+            var mappingInput = new CreateProtectionContainerMappingInput
+            {
+                Properties = new CreateProtectionContainerMappingInputProperties()
+                {
+                    PolicyId = vmwarePolicy.Id,
+                    TargetProtectionContainerId = "Microsoft Azure",
+                    ProviderSpecificInput = provdierSpecificcontainerMappingInput
+                }
+            };
+            client.ProtectionContainerMapping.ConfigureProtection(
+                VMwareFabricName,
+                VMwareContainerName,
+                containerMappingName,
+                mappingInput,
+                RequestHeaders);
+        }
+
+        private void CreatePolicy<T>(
+            string policyName,
+            T providerSpecificPolicyInput,
+            SiteRecoveryManagementClient client) where T : PolicyProviderSpecificInput
+        {
+            var policyInput = new CreatePolicyInput()
+            {
+                Properties = new CreatePolicyInputProperties()
+                {
+                    ProviderSpecificInput = providerSpecificPolicyInput
+                }
+            };
+            client.Policies.Create(policyName, policyInput, RequestHeaders);
+        }
+
+        #endregion private methods
     }
 }

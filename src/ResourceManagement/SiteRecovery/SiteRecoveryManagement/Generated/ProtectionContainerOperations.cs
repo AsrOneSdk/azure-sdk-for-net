@@ -215,6 +215,16 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         replicationProviderSpecificContainerCreationInputValue["instanceType"] = derived2.InstanceType;
                                     }
                                 }
+                                if (providerSpecificInputItem is InMageMigrationContainerCreationInput)
+                                {
+                                    replicationProviderSpecificContainerCreationInputValue["instanceType"] = "InMageMigration";
+                                    InMageMigrationContainerCreationInput derived3 = ((InMageMigrationContainerCreationInput)providerSpecificInputItem);
+                                    
+                                    if (derived3.InstanceType != null)
+                                    {
+                                        replicationProviderSpecificContainerCreationInputValue["instanceType"] = derived3.InstanceType;
+                                    }
+                                }
                             }
                             propertiesValue["providerSpecificInput"] = providerSpecificInputArray;
                         }
