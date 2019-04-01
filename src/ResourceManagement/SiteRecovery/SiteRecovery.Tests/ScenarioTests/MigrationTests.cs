@@ -126,8 +126,9 @@ namespace SiteRecovery.Tests.ScenarioTests
                         TargetLocation = TargetLocation
                     };
                     CreateProtectionContainerMapping(
-                        ContainerMappingName,
+                        VMwareContainerName,
                         VMwarePolicyName,
+                        ContainerMappingName,
                         vmwareContainerMappingInput,
                         client);
                 }
@@ -824,8 +825,9 @@ namespace SiteRecovery.Tests.ScenarioTests
                         TargetLocation = TargetLocation
                     };
                     CreateProtectionContainerMapping(
-                        InMageMigrationContainerMappingName,
+                        InMageMigrationContainerName,
                         InMageMigrationPolicyName,
+                        InMageMigrationContainerMappingName,
                         containerMappingInput,
                         client);
                 }
@@ -957,8 +959,9 @@ namespace SiteRecovery.Tests.ScenarioTests
         }
 
         private void CreateProtectionContainerMapping<T>(
-            string containerMappingName,
+            string containerName,
             string policyName,
+            string containerMappingName,
             T provdierSpecificcontainerMappingInput,
             SiteRecoveryManagementClient client) where T : ReplicationProviderContainerMappingInput
         {
@@ -977,7 +980,7 @@ namespace SiteRecovery.Tests.ScenarioTests
             };
             client.ProtectionContainerMapping.ConfigureProtection(
                 VMwareFabricName,
-                VMwareContainerName,
+                containerName,
                 containerMappingName,
                 mappingInput,
                 RequestHeaders);
