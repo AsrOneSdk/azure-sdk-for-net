@@ -511,6 +511,66 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 providerSpecificDetailsValue["instanceType"] = derived.Type;
                             }
                         }
+                        if (input.Properties.ProviderSpecificDetails is InMageMigrationEnableMigrationInput)
+                        {
+                            providerSpecificDetailsValue["instanceType"] = "InMageMigration";
+                            InMageMigrationEnableMigrationInput derived2 = ((InMageMigrationEnableMigrationInput)input.Properties.ProviderSpecificDetails);
+                            
+                            if (derived2.VMwareMachineId != null)
+                            {
+                                providerSpecificDetailsValue["vmwareMachineId"] = derived2.VMwareMachineId;
+                            }
+                            
+                            if (derived2.LicenseType != null)
+                            {
+                                providerSpecificDetailsValue["licenseType"] = derived2.LicenseType;
+                            }
+                            
+                            if (derived2.StorageAccountId != null)
+                            {
+                                providerSpecificDetailsValue["storageAccountId"] = derived2.StorageAccountId;
+                            }
+                            
+                            if (derived2.TargetVmName != null)
+                            {
+                                providerSpecificDetailsValue["targetVmName"] = derived2.TargetVmName;
+                            }
+                            
+                            if (derived2.TargetVmSize != null)
+                            {
+                                providerSpecificDetailsValue["targetVmSize"] = derived2.TargetVmSize;
+                            }
+                            
+                            if (derived2.TargetResourceGroupId != null)
+                            {
+                                providerSpecificDetailsValue["targetResourceGroupId"] = derived2.TargetResourceGroupId;
+                            }
+                            
+                            if (derived2.TargetNetworkId != null)
+                            {
+                                providerSpecificDetailsValue["targetNetworkId"] = derived2.TargetNetworkId;
+                            }
+                            
+                            if (derived2.TargetSubnetName != null)
+                            {
+                                providerSpecificDetailsValue["targetSubnetName"] = derived2.TargetSubnetName;
+                            }
+                            
+                            if (derived2.TargetAvailabilitySetId != null)
+                            {
+                                providerSpecificDetailsValue["targetAvailabilitySetId"] = derived2.TargetAvailabilitySetId;
+                            }
+                            
+                            if (derived2.TargetBootDiagnosticsStorageAccountId != null)
+                            {
+                                providerSpecificDetailsValue["targetBootDiagnosticsStorageAccountId"] = derived2.TargetBootDiagnosticsStorageAccountId;
+                            }
+                            
+                            if (derived2.Type != null)
+                            {
+                                providerSpecificDetailsValue["instanceType"] = derived2.Type;
+                            }
+                        }
                     }
                 }
                 

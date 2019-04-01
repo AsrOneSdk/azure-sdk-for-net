@@ -28,13 +28,13 @@ namespace SiteRecovery.Tests.ScenarioTests
     public class MigrationTests : SiteRecoveryTestsBase
     {
         // VMware fabric input
-        private const string VMwareFabricName = "devbabuova1replicationfabric";
-        private const string VMwareContainerName = "devbabuova1replicationcontainer";
-        private const string VMwareSiteId = "/subscriptions/2a57d0a2-0955-4d1e-aa87-a0dbb87cbcab/resourceGroups/lshaibvtrg/providers/Microsoft.OffAzure/VMwareSites/lshaibvtsite3";
-        private const string MigrationSolutionId = "/subscriptions/2a57d0a2-0955-4d1e-aa87-a0dbb87cbcab/resourceGroups/lshaibvtrg/providers/Microsoft.Migrate/MigrateProjects/lshaibvtrg-MigrateProject/Solutions/Servers-Migration-ServerMigration";
+        private const string VMwareFabricName = "hikewalrova1replicationfabric";
+        private const string VMwareContainerName = "hikewalrova1replicationcontainer";
+        private const string VMwareSiteId = "/subscriptions/8d29733f-80ae-41b5-95d5-de86bb160521/resourceGroups/rohithtest/providers/Microsoft.OffAzure/VMwareSites/site1a5a06fd11bsite";
+        private const string MigrationSolutionId = "/subscriptions/8d29733f-80ae-41b5-95d5-de86bb160521/resourceGroups/rohithtest/providers/Microsoft.Migrate/MigrateProjects/rohithtest-MigrateProject/Solutions/Servers-Migration-ServerMigration";
 
         // VMware DRA input.
-        private const string VMwareDraName = "devbabuova1dra";
+        private const string VMwareDraName = "hikewalrova1dra";
         private const string TenantId = "72f988bf-86f1-41af-91ab-2d7cd011db47";
         private const string ApplicationId = "f66fce08-c0c6-47a1-beeb-0ede5ea94f90";
         private const string ObjectId = "141360b8-5686-4240-a027-5e24e6affeba";
@@ -82,9 +82,12 @@ namespace SiteRecovery.Tests.ScenarioTests
         private const string TfoNetworkId = "/subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/devbaburg1/providers/Microsoft.Network/virtualNetworks/devbabuvn1";
 
         // InMage migration constants.
-        private const string InMageMigrationContainerName = "nitalasuovareplicationcontainer";
+        private const string InMageMigrationContainerName = "hikewalrova1replicationcontainer";
         private const string InMageMigrationPolicyName = "InMageMigration-Profile";
         private const string InMageMigrationContainerMappingName = "inMageMigrationmapping1";
+
+        // InMageMigration Enable inputs
+        private const string InMageMigrationVmName = "hikewalrVM";
 
         [Fact]
         public void Migration_ContainerPairing()
@@ -876,6 +879,68 @@ namespace SiteRecovery.Tests.ScenarioTests
                         VMwareDraName,
                         RequestHeaders);
                     client.Fabrics.Delete(VMwareFabricName, RequestHeaders);
+                }
+                catch (Exception)
+                {
+                    Debugger.Break();
+                    throw;
+                }
+            }
+        }
+
+        [Fact]
+        public void PhysicalMigration_Enable()
+        {
+            using (UndoContext context = UndoContext.Current)
+            {
+                try
+                {
+                    context.Start();
+                    var client = GetSiteRecoveryClient(CustomHttpHandler, "Migration");
+
+                    var vmwareContainer = client.ProtectionContainer
+                        .List(VMwareFabricName, RequestHeaders)
+                        .ProtectionContainers
+                        .Single();
+                    var vmwarePolicy = client.Policies
+                        .List(RequestHeaders)
+                        .Policies
+                        .Where(x => x.Name == InMageMigrationPolicyName)
+                        .Single();
+
+                    var enableMigrationInput = new EnableMigrationInput
+                    {
+                        Properties = new EnableMigrationInputProperties
+                        {
+                            PolicyId = vmwarePolicy.Id,
+                            ProviderSpecificDetails = new InMageMigrationEnableMigrationInput
+                            {
+                                VMwareMachineId = VMwareVmId,
+                                LicenseType = "WindowsServer",
+                                StorageAccountId = ReplicationStorageAccountId,
+                                TargetVmName = InMageMigrationVmName,
+                                TargetVmSize = "Standard_A4",
+                                TargetResourceGroupId = TargetResourceGroupId,
+                                TargetNetworkId = TargetNetworkId,
+                                TargetSubnetName = TargetSubnetName,
+                                TargetAvailabilitySetId = string.Empty,
+                            }
+                        }
+                    };
+
+                    var response = client.MigrationItem.EnableMigration(
+                        VMwareFabricName,
+                        vmwareContainer.Name,
+                        VMName,
+                        enableMigrationInput,
+                        RequestHeaders);
+
+                    // Get single migration item.
+                    var migItem = client.MigrationItem.Get(
+                        VMwareFabricName,
+                        VMwareContainerName,
+                        VMName,
+                        RequestHeaders);
                 }
                 catch (Exception)
                 {
