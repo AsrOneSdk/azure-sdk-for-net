@@ -100,14 +100,7 @@ namespace SiteRecovery.Tests.ScenarioTests
                     var client = GetSiteRecoveryClient(CustomHttpHandler, "Migration");
 
                     // Creates fabric and dra.
-                    CreateVMwareFabricAndDra(client);
-
-                    // Create VMware container.
-                    var vmwareContainerInput = new VMwareCbtContainerCreationInput()
-                    {
-                        InstanceType = "VMwareCbt"
-                    };
-                    CreateContainer(VMwareContainerName, vmwareContainerInput, client);
+                    CreateVMwareFabric(client);
 
                     // Create VMware policy.
                     var vmwarePolicyInput = new VMwareCbtPolicyCreationInput()
@@ -804,16 +797,9 @@ namespace SiteRecovery.Tests.ScenarioTests
                     context.Start();
                     var client = GetSiteRecoveryClient(CustomHttpHandler, "Migration");
 
-                    CreateVMwareFabricAndDra(client);
+                    CreateVMwareFabric(client);
 
-                    // Create InMage migration container.
-                    var containerInput = new InMageMigrationContainerCreationInput()
-                    {
-                        InstanceType = "InMageMigration"
-                    };
-                    CreateContainer(InMageMigrationContainerName, containerInput, client);
-
-                    // Create InMage migration policy.
+                    //Create InMage migration policy.
                     var policyInput = new InMageMigrationPolicyCreationInput()
                     {
                         AppConsistentFrequencyInMinutes = AppIntervalInMins,
@@ -952,7 +938,7 @@ namespace SiteRecovery.Tests.ScenarioTests
 
         #region private methods
 
-        private void CreateVMwareFabricAndDra(SiteRecoveryManagementClient client)
+        private void CreateVMwareFabric(SiteRecoveryManagementClient client)
         {
             // Create VMware fabric.
             var vmwareFabricInput = new FabricCreationInput()
@@ -998,27 +984,18 @@ namespace SiteRecovery.Tests.ScenarioTests
                 VMwareDraName,
                 vmwareDraInput,
                 RequestHeaders);
-        }
 
-        private void CreateContainer<T>(
-            string containerName,
-            T providerSpecificContainerInput,
-            SiteRecoveryManagementClient client)
-            where T : ReplicationProviderSpecificContainerCreationInput
-        {
+            // Create both VMwareCbt and InMageMigration PUs.
             var containerInput = new CreateProtectionContainerInput()
             {
                 Properties = new CreateProtectionContainerInputProperties()
                 {
                     ProviderSpecificInputs = new List<ReplicationProviderSpecificContainerCreationInput>()
-                    {
-                        providerSpecificContainerInput
-                    }
                 }
             };
             client.ProtectionContainer.Create(
                 VMwareFabricName,
-                containerName,
+                VMwareContainerName,
                 containerInput,
                 RequestHeaders);
         }
