@@ -30,6 +30,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class InMageMigrationEnableMigrationInput : EnableMigrationProviderSpecificInput
     {
+        private string _diskType;
+        
+        /// <summary>
+        /// Optional. The disk type.
+        /// </summary>
+        public string DiskType
+        {
+            get { return this._diskType; }
+            set { this._diskType = value; }
+        }
+        
         private string _licenseType;
         
         /// <summary>
@@ -40,6 +51,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         {
             get { return this._licenseType; }
             set { this._licenseType = value; }
+        }
+        
+        private string _logStorageAccountId;
+        
+        /// <summary>
+        /// Optional. The log storage account ARM Id.
+        /// </summary>
+        public string LogStorageAccountId
+        {
+            get { return this._logStorageAccountId; }
+            set { this._logStorageAccountId = value; }
         }
         
         private string _storageAccountId;

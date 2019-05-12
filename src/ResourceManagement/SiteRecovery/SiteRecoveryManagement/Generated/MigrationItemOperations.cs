@@ -566,6 +566,16 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 providerSpecificDetailsValue["targetBootDiagnosticsStorageAccountId"] = derived2.TargetBootDiagnosticsStorageAccountId;
                             }
                             
+                            if (derived2.LogStorageAccountId != null)
+                            {
+                                providerSpecificDetailsValue["logStorageAccountId"] = derived2.LogStorageAccountId;
+                            }
+                            
+                            if (derived2.DiskType != null)
+                            {
+                                providerSpecificDetailsValue["diskType"] = derived2.DiskType;
+                            }
+                            
                             if (derived2.Type != null)
                             {
                                 providerSpecificDetailsValue["instanceType"] = derived2.Type;
