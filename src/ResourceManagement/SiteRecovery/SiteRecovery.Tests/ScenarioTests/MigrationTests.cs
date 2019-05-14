@@ -71,7 +71,7 @@ namespace SiteRecovery.Tests.ScenarioTests
         private const string TargetResourceGroupId = "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/Hitesh-TFO-Test-RG";
         private const string TargetNetworkId = "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/Hitesh-TFO-Test-RG/providers/Microsoft.Network/virtualNetworks/Hitesh-TFO-Test";
         private const string TargetSubnetName = "default";
-        private const string ReplicationStorageAccountId = "/subscriptions/7e904d88-da43-429d-a048-dff4051b211f/resourceGroups/default-storage-southeastasia/providers/Microsoft.Storage/storageAccounts/hikewalrragrs";
+        private const string ReplicationStorageAccountId = "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/default-storage-southeastasia/providers/Microsoft.Storage/storageAccounts/hikewalrragrs";
         private const string LogStorageAccountId = "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/devbabuova1/providers/Microsoft.Storage/storageAccounts/devbabuova1logsa";
         private const string LogStorageAccountSasSecretName = "devbabuova1logsa-devbabuova1logsasas";
         private const string DataMoverRunAsAccountId = "/subscriptions/2a57d0a2-0955-4d1e-aa87-a0dbb87cbcab/resourceGroups/lshaibvtrg/providers/Microsoft.OffAzure/VMwareSites/lshaibvtsite3/runasaccounts/a9f67797-bc63-5bf3-b8fe-9ffcc50402af";
