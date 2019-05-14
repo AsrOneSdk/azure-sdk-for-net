@@ -576,6 +576,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 providerSpecificDetailsValue["diskType"] = derived2.DiskType;
                             }
                             
+                            if (derived2.ProcessServerId != null)
+                            {
+                                providerSpecificDetailsValue["processServerId"] = derived2.ProcessServerId;
+                            }
+                            
                             if (derived2.Type != null)
                             {
                                 providerSpecificDetailsValue["instanceType"] = derived2.Type;

@@ -64,6 +64,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._logStorageAccountId = value; }
         }
         
+        private string _processServerId;
+        
+        /// <summary>
+        /// Optional. The process server Id.
+        /// </summary>
+        public string ProcessServerId
+        {
+            get { return this._processServerId; }
+            set { this._processServerId = value; }
+        }
+        
         private string _storageAccountId;
         
         /// <summary>

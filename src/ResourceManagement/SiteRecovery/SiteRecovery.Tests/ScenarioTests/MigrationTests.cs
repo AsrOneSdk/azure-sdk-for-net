@@ -57,7 +57,7 @@ namespace SiteRecovery.Tests.ScenarioTests
         private const string TargetLocation = "southeastasia";
 
         // Enable input.
-        private const string VMName = "lshai522MigVm";
+        private const string VMName = "hikewalrVm";
         private const string VMwareVmId = "/subscriptions/8d29733f-80ae-41b5-95d5-de86bb160521/resourceGroups/rohithtest/providers/Microsoft.OffAzure/VMwareSites/site1a5a06fd11bsite/machines/gqlvcenter-f53bc2e3-cfe8-573f-b904-d1dd8d679ca4_50020746-95dd-af13-7694-80ab17f00ad4";
         // private const string VMwareVmId = "/subscriptions/2a57d0a2-0955-4d1e-aa87-a0dbb87cbcab/resourceGroups/lshaibvtrg/providers/Microsoft.OffAzure/VMwareSites/lshaibvtsite3/machines/10-150-209-216-a9f67797-bc63-5bf3-b8fe-9ffcc50402af_500f866c-d415-1d0e-7186-7c58b0c5ec28"; //lshai-0520-2
         // private const string VMwareVmId = "/subscriptions/2a57d0a2-0955-4d1e-aa87-a0dbb87cbcab/resourceGroups/lshaibvtrg/providers/Microsoft.OffAzure/VMwareSites/lshaibvtsite/machines/10-150-209-216-a9f67797-bc63-5bf3-b8fe-9ffcc50402af_501ef9d4-d83f-5c32-5195-9d570cc39eed"; //sadko-1009-1
@@ -68,11 +68,11 @@ namespace SiteRecovery.Tests.ScenarioTests
         // private const string VMwareVmId = "/subscriptions/2a57d0a2-0955-4d1e-aa87-a0dbb87cbcab/resourceGroups/lshaibvtrg/providers/Microsoft.OffAzure/VMwareSites/lshaibvtsite/machines/10-150-209-216-a9f67797-bc63-5bf3-b8fe-9ffcc50402af_501e9205-b7ec-fb40-60dc-2b1c5a57b64b"; //lshai-0814-1
         // private const string VMwareVmId = "/subscriptions/2a57d0a2-0955-4d1e-aa87-a0dbb87cbcab/resourceGroups/lshaibvtrg/providers/Microsoft.OffAzure/VMwareSites/lshaibvtsite/machines/10-150-209-216-a9f67797-bc63-5bf3-b8fe-9ffcc50402af_501ec323-1268-ab57-199c-5d665f74f66d"; //lshai-1023-1
         // private const string VMwareVmId = "/subscriptions/2a57d0a2-0955-4d1e-aa87-a0dbb87cbcab/resourceGroups/lshaibvtrg/providers/Microsoft.OffAzure/VMwareSites/lshaibvtsite/machines/10-150-209-216-a9f67797-bc63-5bf3-b8fe-9ffcc50402af_500f4bb0-62b8-6ab9-4a2d-1949b90119f5"; //lshai-0419-1
-        private const string TargetResourceGroupId = "/subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/devbaburg1";
-        private const string TargetNetworkId = "/subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/devbaburg1/providers/Microsoft.Network/virtualNetworks/devbabuvn1";
+        private const string TargetResourceGroupId = "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/Hitesh-TFO-Test-RG";
+        private const string TargetNetworkId = "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/Hitesh-TFO-Test-RG/providers/Microsoft.Network/virtualNetworks/Hitesh-TFO-Test";
         private const string TargetSubnetName = "default";
-        private const string ReplicationStorageAccountId = "/subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/devbabuova1/providers/Microsoft.Storage/storageAccounts/devbabuova1replsa";
-        private const string LogStorageAccountId = "/subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/devbabuova1/providers/Microsoft.Storage/storageAccounts/devbabuova1logsa";
+        private const string ReplicationStorageAccountId = "/subscriptions/7e904d88-da43-429d-a048-dff4051b211f/resourceGroups/default-storage-southeastasia/providers/Microsoft.Storage/storageAccounts/hikewalrragrs";
+        private const string LogStorageAccountId = "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/devbabuova1/providers/Microsoft.Storage/storageAccounts/devbabuova1logsa";
         private const string LogStorageAccountSasSecretName = "devbabuova1logsa-devbabuova1logsasas";
         private const string DataMoverRunAsAccountId = "/subscriptions/2a57d0a2-0955-4d1e-aa87-a0dbb87cbcab/resourceGroups/lshaibvtrg/providers/Microsoft.OffAzure/VMwareSites/lshaibvtsite3/runasaccounts/a9f67797-bc63-5bf3-b8fe-9ffcc50402af";
         private const string SnapshotRunAsAccountId = "/subscriptions/2a57d0a2-0955-4d1e-aa87-a0dbb87cbcab/resourceGroups/lshaibvtrg/providers/Microsoft.OffAzure/VMwareSites/lshaibvtsite3/runasaccounts/a9f67797-bc63-5bf3-b8fe-9ffcc50402af";
@@ -884,7 +884,7 @@ namespace SiteRecovery.Tests.ScenarioTests
                 {
                     context.Start();
                     var client = GetSiteRecoveryClient(CustomHttpHandler, "Migration");
-
+                    
                     var vmwareContainer = client.ProtectionContainer
                         .List(VMwareFabricName, RequestHeaders)
                         .ProtectionContainers
@@ -912,6 +912,8 @@ namespace SiteRecovery.Tests.ScenarioTests
                                 TargetNetworkId = TargetNetworkId,
                                 TargetSubnetName = TargetSubnetName,
                                 TargetAvailabilitySetId = string.Empty,
+                                DiskType = "Standard_LRS",
+                                ProcessServerId = Guid.NewGuid().ToString()
                             }
                         }
                     };
