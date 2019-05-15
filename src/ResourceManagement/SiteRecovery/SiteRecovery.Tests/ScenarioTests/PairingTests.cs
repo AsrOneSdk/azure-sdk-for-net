@@ -261,15 +261,15 @@ namespace SiteRecovery.Tests
             using (UndoContext context = UndoContext.Current)
             {
                 context.Start();
-                var client = GetSiteRecoveryClient(CustomHttpHandler);
-                string policyName = "Hitesh-VMwareAzureV2-Profile";
+                var client = GetSiteRecoveryClient(CustomHttpHandler, "Migration");
+                string policyName = "V2A-Profile";
                 var input = new InMageAzureV2PolicyInput
                 {
-                    AppConsistentFrequencyInMinutes = 15,
-                    CrashConsistentFrequencyInMinutes = 15,
+                    AppConsistentFrequencyInMinutes = 60,
+                    CrashConsistentFrequencyInMinutes = 60,
                     MultiVmSyncStatus = "Disable",
                     RecoveryPointHistory = 15,
-                    RecoveryPointThresholdInMinutes = 30
+                    RecoveryPointThresholdInMinutes = 60
                 };
 
                 CreatePolicyInputProperties createInputProp = new CreatePolicyInputProperties()
@@ -420,12 +420,13 @@ namespace SiteRecovery.Tests
             }
         }
 
+        [Fact]
         public void CreateVMwareAzureV2Mapping()
         {
             using (UndoContext context = UndoContext.Current)
             {
                 context.Start();
-                var client = GetSiteRecoveryClient(CustomHttpHandler);
+                var client = GetSiteRecoveryClient(CustomHttpHandler, "Migration");
 
                 var responseServers = client.Fabrics.List(RequestHeaders);
 
@@ -450,13 +451,13 @@ namespace SiteRecovery.Tests
                 Assert.NotEmpty(policyResponse.Policies);
 
                 var policy = policyResponse.Policies.First(
-                    p => p.Properties.ProviderSpecificDetails.InstanceType == "VMwareAzureV2");
+                    p => p.Properties.ProviderSpecificDetails.InstanceType == "InMageAzureV2");
                 Assert.NotNull(policy);
 
                 var response = client.ProtectionContainerMapping.ConfigureProtection(
                     vmWareFabric.Name,
                     containersResponse.ProtectionContainers[0].Name,
-                    "Hitesh-VMwareAzureV2-Mapping",
+                    "V2A-Mapping",
                     new CreateProtectionContainerMappingInput
                     {
                         Properties = new CreateProtectionContainerMappingInputProperties

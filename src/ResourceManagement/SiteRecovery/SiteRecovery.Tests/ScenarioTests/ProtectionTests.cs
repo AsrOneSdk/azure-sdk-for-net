@@ -195,10 +195,10 @@ namespace SiteRecovery.Tests
             using (UndoContext context = UndoContext.Current)
             {
                 context.Start();
-                var client = this.GetSiteRecoveryClient(this.CustomHttpHandler);
+                var client = this.GetSiteRecoveryClient(this.CustomHttpHandler, "Migration");
 
-                string vmId = "7192c867-b38e-11e5-af2b-0050569e66ab";
-                string vmAccount = "vm";
+                string vmId = "e8d0c1e4-7706-11e9-b06d-0050568f3aae";
+                string vmAccount = "Administrator";
 
                 var responseServers = client.Fabrics.List(RequestHeaders);
 
@@ -252,8 +252,8 @@ namespace SiteRecovery.Tests
                 Assert.NotNull(policy);
 
                 Random random = new Random(100);
-                string storageAccountSubscriptionId = "c183865e-6077-46f2-a3b1-deb0f4f4650a";
-                string storageAccountId = "/subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/Default-Storage-WestUS/providers/Microsoft.ClassicStorage/storageAccounts/hikewalrstoragewestus";
+                string storageAccountSubscriptionId = "7c943c1b-5122-4097-90c8-861411bdd574";
+                string storageAccountId = "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/default-storage-southeastasia/providers/Microsoft.Storage/storageAccounts/hikewalrragrs";
                 var response = client.ReplicationProtectedItem.EnableProtection(
                     vmWareFabric.Name,
                     containersResponse.ProtectionContainers[0].Name,
@@ -272,7 +272,9 @@ namespace SiteRecovery.Tests
                                 RunAsAccountId = runAsAccount.AccountId,
                                 StorageAccountId = storageAccountId,
                                 StorageSubscriptionId = storageAccountSubscriptionId,
-                                MasterTargetId = vmWareDetails.MasterTargetServers[0].Id
+                                MasterTargetId = vmWareDetails.MasterTargetServers[0].Id,
+                                TargetAzureNetworkId = "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/Hitesh-TFO-Test-RG/providers/Microsoft.Network/virtualNetworks/Hitesh-TFO-Test",
+                                TargetAzureV2ResourceGroupId = "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/Hitesh-TFO-Test-RG"
                             }
                         }
                     },
