@@ -2612,6 +2612,116 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         }
                                         propertiesInstance.ProviderSpecificDetails = vMwareCbtMigrationDetailsInstance;
                                     }
+                                    if (typeName == "InMageMigration")
+                                    {
+                                        InMageMigrationProviderSpecificDetails inMageMigrationProviderSpecificDetailsInstance = new InMageMigrationProviderSpecificDetails();
+                                        
+                                        JToken vmwareMachineIdValue2 = providerSpecificDetailsValue["vmwareMachineId"];
+                                        if (vmwareMachineIdValue2 != null && vmwareMachineIdValue2.Type != JTokenType.Null)
+                                        {
+                                            string vmwareMachineIdInstance2 = ((string)vmwareMachineIdValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.VMwareMachineId = vmwareMachineIdInstance2;
+                                        }
+                                        
+                                        JToken processServerIdValue = providerSpecificDetailsValue["processServerId"];
+                                        if (processServerIdValue != null && processServerIdValue.Type != JTokenType.Null)
+                                        {
+                                            string processServerIdInstance = ((string)processServerIdValue);
+                                            inMageMigrationProviderSpecificDetailsInstance.ProcessServerId = processServerIdInstance;
+                                        }
+                                        
+                                        JToken osTypeValue2 = providerSpecificDetailsValue["osType"];
+                                        if (osTypeValue2 != null && osTypeValue2.Type != JTokenType.Null)
+                                        {
+                                            string osTypeInstance2 = ((string)osTypeValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.OSType = osTypeInstance2;
+                                        }
+                                        
+                                        JToken licenseTypeValue2 = providerSpecificDetailsValue["licenseType"];
+                                        if (licenseTypeValue2 != null && licenseTypeValue2.Type != JTokenType.Null)
+                                        {
+                                            string licenseTypeInstance2 = ((string)licenseTypeValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.LicenseType = licenseTypeInstance2;
+                                        }
+                                        
+                                        JToken targetVmNameValue2 = providerSpecificDetailsValue["targetVmName"];
+                                        if (targetVmNameValue2 != null && targetVmNameValue2.Type != JTokenType.Null)
+                                        {
+                                            string targetVmNameInstance2 = ((string)targetVmNameValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetVmName = targetVmNameInstance2;
+                                        }
+                                        
+                                        JToken targetVmSizeValue2 = providerSpecificDetailsValue["targetVmSize"];
+                                        if (targetVmSizeValue2 != null && targetVmSizeValue2.Type != JTokenType.Null)
+                                        {
+                                            string targetVmSizeInstance2 = ((string)targetVmSizeValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetVmSize = targetVmSizeInstance2;
+                                        }
+                                        
+                                        JToken targetLocationValue = providerSpecificDetailsValue["targetLocation"];
+                                        if (targetLocationValue != null && targetLocationValue.Type != JTokenType.Null)
+                                        {
+                                            string targetLocationInstance = ((string)targetLocationValue);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetLocation = targetLocationInstance;
+                                        }
+                                        
+                                        JToken targetResourceGroupIdValue2 = providerSpecificDetailsValue["targetResourceGroupId"];
+                                        if (targetResourceGroupIdValue2 != null && targetResourceGroupIdValue2.Type != JTokenType.Null)
+                                        {
+                                            string targetResourceGroupIdInstance2 = ((string)targetResourceGroupIdValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetResourceGroupId = targetResourceGroupIdInstance2;
+                                        }
+                                        
+                                        JToken targetAvailabilitySetIdValue2 = providerSpecificDetailsValue["targetAvailabilitySetId"];
+                                        if (targetAvailabilitySetIdValue2 != null && targetAvailabilitySetIdValue2.Type != JTokenType.Null)
+                                        {
+                                            string targetAvailabilitySetIdInstance2 = ((string)targetAvailabilitySetIdValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetAvailabilitySetId = targetAvailabilitySetIdInstance2;
+                                        }
+                                        
+                                        JToken targetBootDiagnosticsStorageAccountIdValue2 = providerSpecificDetailsValue["targetBootDiagnosticsStorageAccountId"];
+                                        if (targetBootDiagnosticsStorageAccountIdValue2 != null && targetBootDiagnosticsStorageAccountIdValue2.Type != JTokenType.Null)
+                                        {
+                                            string targetBootDiagnosticsStorageAccountIdInstance2 = ((string)targetBootDiagnosticsStorageAccountIdValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetBootDiagnosticsStorageAccountId = targetBootDiagnosticsStorageAccountIdInstance2;
+                                        }
+                                        
+                                        JToken targetNetworkIdValue2 = providerSpecificDetailsValue["targetNetworkId"];
+                                        if (targetNetworkIdValue2 != null && targetNetworkIdValue2.Type != JTokenType.Null)
+                                        {
+                                            string targetNetworkIdInstance2 = ((string)targetNetworkIdValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetNetworkId = targetNetworkIdInstance2;
+                                        }
+                                        
+                                        JToken logStorageAccountIdValue2 = providerSpecificDetailsValue["logStorageAccountId"];
+                                        if (logStorageAccountIdValue2 != null && logStorageAccountIdValue2.Type != JTokenType.Null)
+                                        {
+                                            string logStorageAccountIdInstance2 = ((string)logStorageAccountIdValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.LogStorageAccountId = logStorageAccountIdInstance2;
+                                        }
+                                        
+                                        JToken protectedDisksValue2 = providerSpecificDetailsValue["protectedDisks"];
+                                        if (protectedDisksValue2 != null && protectedDisksValue2.Type != JTokenType.Null)
+                                        {
+                                            List<InMageMigrationProtectedDiskDetails> protectedDisksInstance = ((string)protectedDisksValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.ProtectedDisks = protectedDisksInstance;
+                                        }
+                                        
+                                        JToken vmNicsValue2 = providerSpecificDetailsValue["vmNics"];
+                                        if (vmNicsValue2 != null && vmNicsValue2.Type != JTokenType.Null)
+                                        {
+                                            List<InMageMigrationNicDetails> vmNicsInstance = ((string)vmNicsValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.VMNics = vmNicsInstance;
+                                        }
+                                        
+                                        JToken instanceTypeValue2 = providerSpecificDetailsValue["instanceType"];
+                                        if (instanceTypeValue2 != null && instanceTypeValue2.Type != JTokenType.Null)
+                                        {
+                                            string instanceTypeInstance2 = ((string)instanceTypeValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.InstanceType = instanceTypeInstance2;
+                                        }
+                                        propertiesInstance.ProviderSpecificDetails = inMageMigrationProviderSpecificDetailsInstance;
+                                    }
                                 }
                             }
                             
@@ -3438,6 +3548,116 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtMigrationDetailsInstance.InstanceType = instanceTypeInstance;
                                         }
                                         propertiesInstance.ProviderSpecificDetails = vMwareCbtMigrationDetailsInstance;
+                                    }
+                                    if (typeName == "InMageMigration")
+                                    {
+                                        InMageMigrationProviderSpecificDetails inMageMigrationProviderSpecificDetailsInstance = new InMageMigrationProviderSpecificDetails();
+                                        
+                                        JToken vmwareMachineIdValue2 = providerSpecificDetailsValue["vmwareMachineId"];
+                                        if (vmwareMachineIdValue2 != null && vmwareMachineIdValue2.Type != JTokenType.Null)
+                                        {
+                                            string vmwareMachineIdInstance2 = ((string)vmwareMachineIdValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.VMwareMachineId = vmwareMachineIdInstance2;
+                                        }
+                                        
+                                        JToken processServerIdValue = providerSpecificDetailsValue["processServerId"];
+                                        if (processServerIdValue != null && processServerIdValue.Type != JTokenType.Null)
+                                        {
+                                            string processServerIdInstance = ((string)processServerIdValue);
+                                            inMageMigrationProviderSpecificDetailsInstance.ProcessServerId = processServerIdInstance;
+                                        }
+                                        
+                                        JToken osTypeValue2 = providerSpecificDetailsValue["osType"];
+                                        if (osTypeValue2 != null && osTypeValue2.Type != JTokenType.Null)
+                                        {
+                                            string osTypeInstance2 = ((string)osTypeValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.OSType = osTypeInstance2;
+                                        }
+                                        
+                                        JToken licenseTypeValue2 = providerSpecificDetailsValue["licenseType"];
+                                        if (licenseTypeValue2 != null && licenseTypeValue2.Type != JTokenType.Null)
+                                        {
+                                            string licenseTypeInstance2 = ((string)licenseTypeValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.LicenseType = licenseTypeInstance2;
+                                        }
+                                        
+                                        JToken targetVmNameValue2 = providerSpecificDetailsValue["targetVmName"];
+                                        if (targetVmNameValue2 != null && targetVmNameValue2.Type != JTokenType.Null)
+                                        {
+                                            string targetVmNameInstance2 = ((string)targetVmNameValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetVmName = targetVmNameInstance2;
+                                        }
+                                        
+                                        JToken targetVmSizeValue2 = providerSpecificDetailsValue["targetVmSize"];
+                                        if (targetVmSizeValue2 != null && targetVmSizeValue2.Type != JTokenType.Null)
+                                        {
+                                            string targetVmSizeInstance2 = ((string)targetVmSizeValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetVmSize = targetVmSizeInstance2;
+                                        }
+                                        
+                                        JToken targetLocationValue = providerSpecificDetailsValue["targetLocation"];
+                                        if (targetLocationValue != null && targetLocationValue.Type != JTokenType.Null)
+                                        {
+                                            string targetLocationInstance = ((string)targetLocationValue);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetLocation = targetLocationInstance;
+                                        }
+                                        
+                                        JToken targetResourceGroupIdValue2 = providerSpecificDetailsValue["targetResourceGroupId"];
+                                        if (targetResourceGroupIdValue2 != null && targetResourceGroupIdValue2.Type != JTokenType.Null)
+                                        {
+                                            string targetResourceGroupIdInstance2 = ((string)targetResourceGroupIdValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetResourceGroupId = targetResourceGroupIdInstance2;
+                                        }
+                                        
+                                        JToken targetAvailabilitySetIdValue2 = providerSpecificDetailsValue["targetAvailabilitySetId"];
+                                        if (targetAvailabilitySetIdValue2 != null && targetAvailabilitySetIdValue2.Type != JTokenType.Null)
+                                        {
+                                            string targetAvailabilitySetIdInstance2 = ((string)targetAvailabilitySetIdValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetAvailabilitySetId = targetAvailabilitySetIdInstance2;
+                                        }
+                                        
+                                        JToken targetBootDiagnosticsStorageAccountIdValue2 = providerSpecificDetailsValue["targetBootDiagnosticsStorageAccountId"];
+                                        if (targetBootDiagnosticsStorageAccountIdValue2 != null && targetBootDiagnosticsStorageAccountIdValue2.Type != JTokenType.Null)
+                                        {
+                                            string targetBootDiagnosticsStorageAccountIdInstance2 = ((string)targetBootDiagnosticsStorageAccountIdValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetBootDiagnosticsStorageAccountId = targetBootDiagnosticsStorageAccountIdInstance2;
+                                        }
+                                        
+                                        JToken targetNetworkIdValue2 = providerSpecificDetailsValue["targetNetworkId"];
+                                        if (targetNetworkIdValue2 != null && targetNetworkIdValue2.Type != JTokenType.Null)
+                                        {
+                                            string targetNetworkIdInstance2 = ((string)targetNetworkIdValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetNetworkId = targetNetworkIdInstance2;
+                                        }
+                                        
+                                        JToken logStorageAccountIdValue2 = providerSpecificDetailsValue["logStorageAccountId"];
+                                        if (logStorageAccountIdValue2 != null && logStorageAccountIdValue2.Type != JTokenType.Null)
+                                        {
+                                            string logStorageAccountIdInstance2 = ((string)logStorageAccountIdValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.LogStorageAccountId = logStorageAccountIdInstance2;
+                                        }
+                                        
+                                        JToken protectedDisksValue2 = providerSpecificDetailsValue["protectedDisks"];
+                                        if (protectedDisksValue2 != null && protectedDisksValue2.Type != JTokenType.Null)
+                                        {
+                                            List<InMageMigrationProtectedDiskDetails> protectedDisksInstance = ((string)protectedDisksValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.ProtectedDisks = protectedDisksInstance;
+                                        }
+                                        
+                                        JToken vmNicsValue2 = providerSpecificDetailsValue["vmNics"];
+                                        if (vmNicsValue2 != null && vmNicsValue2.Type != JTokenType.Null)
+                                        {
+                                            List<InMageMigrationNicDetails> vmNicsInstance = ((string)vmNicsValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.VMNics = vmNicsInstance;
+                                        }
+                                        
+                                        JToken instanceTypeValue2 = providerSpecificDetailsValue["instanceType"];
+                                        if (instanceTypeValue2 != null && instanceTypeValue2.Type != JTokenType.Null)
+                                        {
+                                            string instanceTypeInstance2 = ((string)instanceTypeValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.InstanceType = instanceTypeInstance2;
+                                        }
+                                        propertiesInstance.ProviderSpecificDetails = inMageMigrationProviderSpecificDetailsInstance;
                                     }
                                 }
                             }
@@ -4325,6 +4545,116 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         }
                                         propertiesInstance.ProviderSpecificDetails = vMwareCbtMigrationDetailsInstance;
                                     }
+                                    if (typeName == "InMageMigration")
+                                    {
+                                        InMageMigrationProviderSpecificDetails inMageMigrationProviderSpecificDetailsInstance = new InMageMigrationProviderSpecificDetails();
+                                        
+                                        JToken vmwareMachineIdValue2 = providerSpecificDetailsValue["vmwareMachineId"];
+                                        if (vmwareMachineIdValue2 != null && vmwareMachineIdValue2.Type != JTokenType.Null)
+                                        {
+                                            string vmwareMachineIdInstance2 = ((string)vmwareMachineIdValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.VMwareMachineId = vmwareMachineIdInstance2;
+                                        }
+                                        
+                                        JToken processServerIdValue = providerSpecificDetailsValue["processServerId"];
+                                        if (processServerIdValue != null && processServerIdValue.Type != JTokenType.Null)
+                                        {
+                                            string processServerIdInstance = ((string)processServerIdValue);
+                                            inMageMigrationProviderSpecificDetailsInstance.ProcessServerId = processServerIdInstance;
+                                        }
+                                        
+                                        JToken osTypeValue2 = providerSpecificDetailsValue["osType"];
+                                        if (osTypeValue2 != null && osTypeValue2.Type != JTokenType.Null)
+                                        {
+                                            string osTypeInstance2 = ((string)osTypeValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.OSType = osTypeInstance2;
+                                        }
+                                        
+                                        JToken licenseTypeValue2 = providerSpecificDetailsValue["licenseType"];
+                                        if (licenseTypeValue2 != null && licenseTypeValue2.Type != JTokenType.Null)
+                                        {
+                                            string licenseTypeInstance2 = ((string)licenseTypeValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.LicenseType = licenseTypeInstance2;
+                                        }
+                                        
+                                        JToken targetVmNameValue2 = providerSpecificDetailsValue["targetVmName"];
+                                        if (targetVmNameValue2 != null && targetVmNameValue2.Type != JTokenType.Null)
+                                        {
+                                            string targetVmNameInstance2 = ((string)targetVmNameValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetVmName = targetVmNameInstance2;
+                                        }
+                                        
+                                        JToken targetVmSizeValue2 = providerSpecificDetailsValue["targetVmSize"];
+                                        if (targetVmSizeValue2 != null && targetVmSizeValue2.Type != JTokenType.Null)
+                                        {
+                                            string targetVmSizeInstance2 = ((string)targetVmSizeValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetVmSize = targetVmSizeInstance2;
+                                        }
+                                        
+                                        JToken targetLocationValue = providerSpecificDetailsValue["targetLocation"];
+                                        if (targetLocationValue != null && targetLocationValue.Type != JTokenType.Null)
+                                        {
+                                            string targetLocationInstance = ((string)targetLocationValue);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetLocation = targetLocationInstance;
+                                        }
+                                        
+                                        JToken targetResourceGroupIdValue2 = providerSpecificDetailsValue["targetResourceGroupId"];
+                                        if (targetResourceGroupIdValue2 != null && targetResourceGroupIdValue2.Type != JTokenType.Null)
+                                        {
+                                            string targetResourceGroupIdInstance2 = ((string)targetResourceGroupIdValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetResourceGroupId = targetResourceGroupIdInstance2;
+                                        }
+                                        
+                                        JToken targetAvailabilitySetIdValue2 = providerSpecificDetailsValue["targetAvailabilitySetId"];
+                                        if (targetAvailabilitySetIdValue2 != null && targetAvailabilitySetIdValue2.Type != JTokenType.Null)
+                                        {
+                                            string targetAvailabilitySetIdInstance2 = ((string)targetAvailabilitySetIdValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetAvailabilitySetId = targetAvailabilitySetIdInstance2;
+                                        }
+                                        
+                                        JToken targetBootDiagnosticsStorageAccountIdValue2 = providerSpecificDetailsValue["targetBootDiagnosticsStorageAccountId"];
+                                        if (targetBootDiagnosticsStorageAccountIdValue2 != null && targetBootDiagnosticsStorageAccountIdValue2.Type != JTokenType.Null)
+                                        {
+                                            string targetBootDiagnosticsStorageAccountIdInstance2 = ((string)targetBootDiagnosticsStorageAccountIdValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetBootDiagnosticsStorageAccountId = targetBootDiagnosticsStorageAccountIdInstance2;
+                                        }
+                                        
+                                        JToken targetNetworkIdValue2 = providerSpecificDetailsValue["targetNetworkId"];
+                                        if (targetNetworkIdValue2 != null && targetNetworkIdValue2.Type != JTokenType.Null)
+                                        {
+                                            string targetNetworkIdInstance2 = ((string)targetNetworkIdValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetNetworkId = targetNetworkIdInstance2;
+                                        }
+                                        
+                                        JToken logStorageAccountIdValue2 = providerSpecificDetailsValue["logStorageAccountId"];
+                                        if (logStorageAccountIdValue2 != null && logStorageAccountIdValue2.Type != JTokenType.Null)
+                                        {
+                                            string logStorageAccountIdInstance2 = ((string)logStorageAccountIdValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.LogStorageAccountId = logStorageAccountIdInstance2;
+                                        }
+                                        
+                                        JToken protectedDisksValue2 = providerSpecificDetailsValue["protectedDisks"];
+                                        if (protectedDisksValue2 != null && protectedDisksValue2.Type != JTokenType.Null)
+                                        {
+                                            List<InMageMigrationProtectedDiskDetails> protectedDisksInstance = ((string)protectedDisksValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.ProtectedDisks = protectedDisksInstance;
+                                        }
+                                        
+                                        JToken vmNicsValue2 = providerSpecificDetailsValue["vmNics"];
+                                        if (vmNicsValue2 != null && vmNicsValue2.Type != JTokenType.Null)
+                                        {
+                                            List<InMageMigrationNicDetails> vmNicsInstance = ((string)vmNicsValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.VMNics = vmNicsInstance;
+                                        }
+                                        
+                                        JToken instanceTypeValue2 = providerSpecificDetailsValue["instanceType"];
+                                        if (instanceTypeValue2 != null && instanceTypeValue2.Type != JTokenType.Null)
+                                        {
+                                            string instanceTypeInstance2 = ((string)instanceTypeValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.InstanceType = instanceTypeInstance2;
+                                        }
+                                        propertiesInstance.ProviderSpecificDetails = inMageMigrationProviderSpecificDetailsInstance;
+                                    }
                                 }
                             }
                             
@@ -5210,6 +5540,116 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtMigrationDetailsInstance.InstanceType = instanceTypeInstance;
                                         }
                                         propertiesInstance.ProviderSpecificDetails = vMwareCbtMigrationDetailsInstance;
+                                    }
+                                    if (typeName == "InMageMigration")
+                                    {
+                                        InMageMigrationProviderSpecificDetails inMageMigrationProviderSpecificDetailsInstance = new InMageMigrationProviderSpecificDetails();
+                                        
+                                        JToken vmwareMachineIdValue2 = providerSpecificDetailsValue["vmwareMachineId"];
+                                        if (vmwareMachineIdValue2 != null && vmwareMachineIdValue2.Type != JTokenType.Null)
+                                        {
+                                            string vmwareMachineIdInstance2 = ((string)vmwareMachineIdValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.VMwareMachineId = vmwareMachineIdInstance2;
+                                        }
+                                        
+                                        JToken processServerIdValue = providerSpecificDetailsValue["processServerId"];
+                                        if (processServerIdValue != null && processServerIdValue.Type != JTokenType.Null)
+                                        {
+                                            string processServerIdInstance = ((string)processServerIdValue);
+                                            inMageMigrationProviderSpecificDetailsInstance.ProcessServerId = processServerIdInstance;
+                                        }
+                                        
+                                        JToken osTypeValue2 = providerSpecificDetailsValue["osType"];
+                                        if (osTypeValue2 != null && osTypeValue2.Type != JTokenType.Null)
+                                        {
+                                            string osTypeInstance2 = ((string)osTypeValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.OSType = osTypeInstance2;
+                                        }
+                                        
+                                        JToken licenseTypeValue2 = providerSpecificDetailsValue["licenseType"];
+                                        if (licenseTypeValue2 != null && licenseTypeValue2.Type != JTokenType.Null)
+                                        {
+                                            string licenseTypeInstance2 = ((string)licenseTypeValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.LicenseType = licenseTypeInstance2;
+                                        }
+                                        
+                                        JToken targetVmNameValue2 = providerSpecificDetailsValue["targetVmName"];
+                                        if (targetVmNameValue2 != null && targetVmNameValue2.Type != JTokenType.Null)
+                                        {
+                                            string targetVmNameInstance2 = ((string)targetVmNameValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetVmName = targetVmNameInstance2;
+                                        }
+                                        
+                                        JToken targetVmSizeValue2 = providerSpecificDetailsValue["targetVmSize"];
+                                        if (targetVmSizeValue2 != null && targetVmSizeValue2.Type != JTokenType.Null)
+                                        {
+                                            string targetVmSizeInstance2 = ((string)targetVmSizeValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetVmSize = targetVmSizeInstance2;
+                                        }
+                                        
+                                        JToken targetLocationValue = providerSpecificDetailsValue["targetLocation"];
+                                        if (targetLocationValue != null && targetLocationValue.Type != JTokenType.Null)
+                                        {
+                                            string targetLocationInstance = ((string)targetLocationValue);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetLocation = targetLocationInstance;
+                                        }
+                                        
+                                        JToken targetResourceGroupIdValue2 = providerSpecificDetailsValue["targetResourceGroupId"];
+                                        if (targetResourceGroupIdValue2 != null && targetResourceGroupIdValue2.Type != JTokenType.Null)
+                                        {
+                                            string targetResourceGroupIdInstance2 = ((string)targetResourceGroupIdValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetResourceGroupId = targetResourceGroupIdInstance2;
+                                        }
+                                        
+                                        JToken targetAvailabilitySetIdValue2 = providerSpecificDetailsValue["targetAvailabilitySetId"];
+                                        if (targetAvailabilitySetIdValue2 != null && targetAvailabilitySetIdValue2.Type != JTokenType.Null)
+                                        {
+                                            string targetAvailabilitySetIdInstance2 = ((string)targetAvailabilitySetIdValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetAvailabilitySetId = targetAvailabilitySetIdInstance2;
+                                        }
+                                        
+                                        JToken targetBootDiagnosticsStorageAccountIdValue2 = providerSpecificDetailsValue["targetBootDiagnosticsStorageAccountId"];
+                                        if (targetBootDiagnosticsStorageAccountIdValue2 != null && targetBootDiagnosticsStorageAccountIdValue2.Type != JTokenType.Null)
+                                        {
+                                            string targetBootDiagnosticsStorageAccountIdInstance2 = ((string)targetBootDiagnosticsStorageAccountIdValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetBootDiagnosticsStorageAccountId = targetBootDiagnosticsStorageAccountIdInstance2;
+                                        }
+                                        
+                                        JToken targetNetworkIdValue2 = providerSpecificDetailsValue["targetNetworkId"];
+                                        if (targetNetworkIdValue2 != null && targetNetworkIdValue2.Type != JTokenType.Null)
+                                        {
+                                            string targetNetworkIdInstance2 = ((string)targetNetworkIdValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetNetworkId = targetNetworkIdInstance2;
+                                        }
+                                        
+                                        JToken logStorageAccountIdValue2 = providerSpecificDetailsValue["logStorageAccountId"];
+                                        if (logStorageAccountIdValue2 != null && logStorageAccountIdValue2.Type != JTokenType.Null)
+                                        {
+                                            string logStorageAccountIdInstance2 = ((string)logStorageAccountIdValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.LogStorageAccountId = logStorageAccountIdInstance2;
+                                        }
+                                        
+                                        JToken protectedDisksValue2 = providerSpecificDetailsValue["protectedDisks"];
+                                        if (protectedDisksValue2 != null && protectedDisksValue2.Type != JTokenType.Null)
+                                        {
+                                            List<InMageMigrationProtectedDiskDetails> protectedDisksInstance = ((string)protectedDisksValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.ProtectedDisks = protectedDisksInstance;
+                                        }
+                                        
+                                        JToken vmNicsValue2 = providerSpecificDetailsValue["vmNics"];
+                                        if (vmNicsValue2 != null && vmNicsValue2.Type != JTokenType.Null)
+                                        {
+                                            List<InMageMigrationNicDetails> vmNicsInstance = ((string)vmNicsValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.VMNics = vmNicsInstance;
+                                        }
+                                        
+                                        JToken instanceTypeValue2 = providerSpecificDetailsValue["instanceType"];
+                                        if (instanceTypeValue2 != null && instanceTypeValue2.Type != JTokenType.Null)
+                                        {
+                                            string instanceTypeInstance2 = ((string)instanceTypeValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.InstanceType = instanceTypeInstance2;
+                                        }
+                                        propertiesInstance.ProviderSpecificDetails = inMageMigrationProviderSpecificDetailsInstance;
                                     }
                                 }
                             }
@@ -6097,6 +6537,116 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         }
                                         propertiesInstance.ProviderSpecificDetails = vMwareCbtMigrationDetailsInstance;
                                     }
+                                    if (typeName == "InMageMigration")
+                                    {
+                                        InMageMigrationProviderSpecificDetails inMageMigrationProviderSpecificDetailsInstance = new InMageMigrationProviderSpecificDetails();
+                                        
+                                        JToken vmwareMachineIdValue2 = providerSpecificDetailsValue["vmwareMachineId"];
+                                        if (vmwareMachineIdValue2 != null && vmwareMachineIdValue2.Type != JTokenType.Null)
+                                        {
+                                            string vmwareMachineIdInstance2 = ((string)vmwareMachineIdValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.VMwareMachineId = vmwareMachineIdInstance2;
+                                        }
+                                        
+                                        JToken processServerIdValue = providerSpecificDetailsValue["processServerId"];
+                                        if (processServerIdValue != null && processServerIdValue.Type != JTokenType.Null)
+                                        {
+                                            string processServerIdInstance = ((string)processServerIdValue);
+                                            inMageMigrationProviderSpecificDetailsInstance.ProcessServerId = processServerIdInstance;
+                                        }
+                                        
+                                        JToken osTypeValue2 = providerSpecificDetailsValue["osType"];
+                                        if (osTypeValue2 != null && osTypeValue2.Type != JTokenType.Null)
+                                        {
+                                            string osTypeInstance2 = ((string)osTypeValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.OSType = osTypeInstance2;
+                                        }
+                                        
+                                        JToken licenseTypeValue2 = providerSpecificDetailsValue["licenseType"];
+                                        if (licenseTypeValue2 != null && licenseTypeValue2.Type != JTokenType.Null)
+                                        {
+                                            string licenseTypeInstance2 = ((string)licenseTypeValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.LicenseType = licenseTypeInstance2;
+                                        }
+                                        
+                                        JToken targetVmNameValue2 = providerSpecificDetailsValue["targetVmName"];
+                                        if (targetVmNameValue2 != null && targetVmNameValue2.Type != JTokenType.Null)
+                                        {
+                                            string targetVmNameInstance2 = ((string)targetVmNameValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetVmName = targetVmNameInstance2;
+                                        }
+                                        
+                                        JToken targetVmSizeValue2 = providerSpecificDetailsValue["targetVmSize"];
+                                        if (targetVmSizeValue2 != null && targetVmSizeValue2.Type != JTokenType.Null)
+                                        {
+                                            string targetVmSizeInstance2 = ((string)targetVmSizeValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetVmSize = targetVmSizeInstance2;
+                                        }
+                                        
+                                        JToken targetLocationValue = providerSpecificDetailsValue["targetLocation"];
+                                        if (targetLocationValue != null && targetLocationValue.Type != JTokenType.Null)
+                                        {
+                                            string targetLocationInstance = ((string)targetLocationValue);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetLocation = targetLocationInstance;
+                                        }
+                                        
+                                        JToken targetResourceGroupIdValue2 = providerSpecificDetailsValue["targetResourceGroupId"];
+                                        if (targetResourceGroupIdValue2 != null && targetResourceGroupIdValue2.Type != JTokenType.Null)
+                                        {
+                                            string targetResourceGroupIdInstance2 = ((string)targetResourceGroupIdValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetResourceGroupId = targetResourceGroupIdInstance2;
+                                        }
+                                        
+                                        JToken targetAvailabilitySetIdValue2 = providerSpecificDetailsValue["targetAvailabilitySetId"];
+                                        if (targetAvailabilitySetIdValue2 != null && targetAvailabilitySetIdValue2.Type != JTokenType.Null)
+                                        {
+                                            string targetAvailabilitySetIdInstance2 = ((string)targetAvailabilitySetIdValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetAvailabilitySetId = targetAvailabilitySetIdInstance2;
+                                        }
+                                        
+                                        JToken targetBootDiagnosticsStorageAccountIdValue2 = providerSpecificDetailsValue["targetBootDiagnosticsStorageAccountId"];
+                                        if (targetBootDiagnosticsStorageAccountIdValue2 != null && targetBootDiagnosticsStorageAccountIdValue2.Type != JTokenType.Null)
+                                        {
+                                            string targetBootDiagnosticsStorageAccountIdInstance2 = ((string)targetBootDiagnosticsStorageAccountIdValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetBootDiagnosticsStorageAccountId = targetBootDiagnosticsStorageAccountIdInstance2;
+                                        }
+                                        
+                                        JToken targetNetworkIdValue2 = providerSpecificDetailsValue["targetNetworkId"];
+                                        if (targetNetworkIdValue2 != null && targetNetworkIdValue2.Type != JTokenType.Null)
+                                        {
+                                            string targetNetworkIdInstance2 = ((string)targetNetworkIdValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetNetworkId = targetNetworkIdInstance2;
+                                        }
+                                        
+                                        JToken logStorageAccountIdValue2 = providerSpecificDetailsValue["logStorageAccountId"];
+                                        if (logStorageAccountIdValue2 != null && logStorageAccountIdValue2.Type != JTokenType.Null)
+                                        {
+                                            string logStorageAccountIdInstance2 = ((string)logStorageAccountIdValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.LogStorageAccountId = logStorageAccountIdInstance2;
+                                        }
+                                        
+                                        JToken protectedDisksValue2 = providerSpecificDetailsValue["protectedDisks"];
+                                        if (protectedDisksValue2 != null && protectedDisksValue2.Type != JTokenType.Null)
+                                        {
+                                            List<InMageMigrationProtectedDiskDetails> protectedDisksInstance = ((string)protectedDisksValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.ProtectedDisks = protectedDisksInstance;
+                                        }
+                                        
+                                        JToken vmNicsValue2 = providerSpecificDetailsValue["vmNics"];
+                                        if (vmNicsValue2 != null && vmNicsValue2.Type != JTokenType.Null)
+                                        {
+                                            List<InMageMigrationNicDetails> vmNicsInstance = ((string)vmNicsValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.VMNics = vmNicsInstance;
+                                        }
+                                        
+                                        JToken instanceTypeValue2 = providerSpecificDetailsValue["instanceType"];
+                                        if (instanceTypeValue2 != null && instanceTypeValue2.Type != JTokenType.Null)
+                                        {
+                                            string instanceTypeInstance2 = ((string)instanceTypeValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.InstanceType = instanceTypeInstance2;
+                                        }
+                                        propertiesInstance.ProviderSpecificDetails = inMageMigrationProviderSpecificDetailsInstance;
+                                    }
                                 }
                             }
                             
@@ -6983,6 +7533,116 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         }
                                         propertiesInstance.ProviderSpecificDetails = vMwareCbtMigrationDetailsInstance;
                                     }
+                                    if (typeName == "InMageMigration")
+                                    {
+                                        InMageMigrationProviderSpecificDetails inMageMigrationProviderSpecificDetailsInstance = new InMageMigrationProviderSpecificDetails();
+                                        
+                                        JToken vmwareMachineIdValue2 = providerSpecificDetailsValue["vmwareMachineId"];
+                                        if (vmwareMachineIdValue2 != null && vmwareMachineIdValue2.Type != JTokenType.Null)
+                                        {
+                                            string vmwareMachineIdInstance2 = ((string)vmwareMachineIdValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.VMwareMachineId = vmwareMachineIdInstance2;
+                                        }
+                                        
+                                        JToken processServerIdValue = providerSpecificDetailsValue["processServerId"];
+                                        if (processServerIdValue != null && processServerIdValue.Type != JTokenType.Null)
+                                        {
+                                            string processServerIdInstance = ((string)processServerIdValue);
+                                            inMageMigrationProviderSpecificDetailsInstance.ProcessServerId = processServerIdInstance;
+                                        }
+                                        
+                                        JToken osTypeValue2 = providerSpecificDetailsValue["osType"];
+                                        if (osTypeValue2 != null && osTypeValue2.Type != JTokenType.Null)
+                                        {
+                                            string osTypeInstance2 = ((string)osTypeValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.OSType = osTypeInstance2;
+                                        }
+                                        
+                                        JToken licenseTypeValue2 = providerSpecificDetailsValue["licenseType"];
+                                        if (licenseTypeValue2 != null && licenseTypeValue2.Type != JTokenType.Null)
+                                        {
+                                            string licenseTypeInstance2 = ((string)licenseTypeValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.LicenseType = licenseTypeInstance2;
+                                        }
+                                        
+                                        JToken targetVmNameValue2 = providerSpecificDetailsValue["targetVmName"];
+                                        if (targetVmNameValue2 != null && targetVmNameValue2.Type != JTokenType.Null)
+                                        {
+                                            string targetVmNameInstance2 = ((string)targetVmNameValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetVmName = targetVmNameInstance2;
+                                        }
+                                        
+                                        JToken targetVmSizeValue2 = providerSpecificDetailsValue["targetVmSize"];
+                                        if (targetVmSizeValue2 != null && targetVmSizeValue2.Type != JTokenType.Null)
+                                        {
+                                            string targetVmSizeInstance2 = ((string)targetVmSizeValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetVmSize = targetVmSizeInstance2;
+                                        }
+                                        
+                                        JToken targetLocationValue = providerSpecificDetailsValue["targetLocation"];
+                                        if (targetLocationValue != null && targetLocationValue.Type != JTokenType.Null)
+                                        {
+                                            string targetLocationInstance = ((string)targetLocationValue);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetLocation = targetLocationInstance;
+                                        }
+                                        
+                                        JToken targetResourceGroupIdValue2 = providerSpecificDetailsValue["targetResourceGroupId"];
+                                        if (targetResourceGroupIdValue2 != null && targetResourceGroupIdValue2.Type != JTokenType.Null)
+                                        {
+                                            string targetResourceGroupIdInstance2 = ((string)targetResourceGroupIdValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetResourceGroupId = targetResourceGroupIdInstance2;
+                                        }
+                                        
+                                        JToken targetAvailabilitySetIdValue2 = providerSpecificDetailsValue["targetAvailabilitySetId"];
+                                        if (targetAvailabilitySetIdValue2 != null && targetAvailabilitySetIdValue2.Type != JTokenType.Null)
+                                        {
+                                            string targetAvailabilitySetIdInstance2 = ((string)targetAvailabilitySetIdValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetAvailabilitySetId = targetAvailabilitySetIdInstance2;
+                                        }
+                                        
+                                        JToken targetBootDiagnosticsStorageAccountIdValue2 = providerSpecificDetailsValue["targetBootDiagnosticsStorageAccountId"];
+                                        if (targetBootDiagnosticsStorageAccountIdValue2 != null && targetBootDiagnosticsStorageAccountIdValue2.Type != JTokenType.Null)
+                                        {
+                                            string targetBootDiagnosticsStorageAccountIdInstance2 = ((string)targetBootDiagnosticsStorageAccountIdValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetBootDiagnosticsStorageAccountId = targetBootDiagnosticsStorageAccountIdInstance2;
+                                        }
+                                        
+                                        JToken targetNetworkIdValue2 = providerSpecificDetailsValue["targetNetworkId"];
+                                        if (targetNetworkIdValue2 != null && targetNetworkIdValue2.Type != JTokenType.Null)
+                                        {
+                                            string targetNetworkIdInstance2 = ((string)targetNetworkIdValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetNetworkId = targetNetworkIdInstance2;
+                                        }
+                                        
+                                        JToken logStorageAccountIdValue2 = providerSpecificDetailsValue["logStorageAccountId"];
+                                        if (logStorageAccountIdValue2 != null && logStorageAccountIdValue2.Type != JTokenType.Null)
+                                        {
+                                            string logStorageAccountIdInstance2 = ((string)logStorageAccountIdValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.LogStorageAccountId = logStorageAccountIdInstance2;
+                                        }
+                                        
+                                        JToken protectedDisksValue2 = providerSpecificDetailsValue["protectedDisks"];
+                                        if (protectedDisksValue2 != null && protectedDisksValue2.Type != JTokenType.Null)
+                                        {
+                                            List<InMageMigrationProtectedDiskDetails> protectedDisksInstance = ((string)protectedDisksValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.ProtectedDisks = protectedDisksInstance;
+                                        }
+                                        
+                                        JToken vmNicsValue2 = providerSpecificDetailsValue["vmNics"];
+                                        if (vmNicsValue2 != null && vmNicsValue2.Type != JTokenType.Null)
+                                        {
+                                            List<InMageMigrationNicDetails> vmNicsInstance = ((string)vmNicsValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.VMNics = vmNicsInstance;
+                                        }
+                                        
+                                        JToken instanceTypeValue2 = providerSpecificDetailsValue["instanceType"];
+                                        if (instanceTypeValue2 != null && instanceTypeValue2.Type != JTokenType.Null)
+                                        {
+                                            string instanceTypeInstance2 = ((string)instanceTypeValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.InstanceType = instanceTypeInstance2;
+                                        }
+                                        propertiesInstance.ProviderSpecificDetails = inMageMigrationProviderSpecificDetailsInstance;
+                                    }
                                 }
                             }
                             
@@ -7868,6 +8528,116 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareCbtMigrationDetailsInstance.InstanceType = instanceTypeInstance;
                                         }
                                         propertiesInstance.ProviderSpecificDetails = vMwareCbtMigrationDetailsInstance;
+                                    }
+                                    if (typeName == "InMageMigration")
+                                    {
+                                        InMageMigrationProviderSpecificDetails inMageMigrationProviderSpecificDetailsInstance = new InMageMigrationProviderSpecificDetails();
+                                        
+                                        JToken vmwareMachineIdValue2 = providerSpecificDetailsValue["vmwareMachineId"];
+                                        if (vmwareMachineIdValue2 != null && vmwareMachineIdValue2.Type != JTokenType.Null)
+                                        {
+                                            string vmwareMachineIdInstance2 = ((string)vmwareMachineIdValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.VMwareMachineId = vmwareMachineIdInstance2;
+                                        }
+                                        
+                                        JToken processServerIdValue = providerSpecificDetailsValue["processServerId"];
+                                        if (processServerIdValue != null && processServerIdValue.Type != JTokenType.Null)
+                                        {
+                                            string processServerIdInstance = ((string)processServerIdValue);
+                                            inMageMigrationProviderSpecificDetailsInstance.ProcessServerId = processServerIdInstance;
+                                        }
+                                        
+                                        JToken osTypeValue2 = providerSpecificDetailsValue["osType"];
+                                        if (osTypeValue2 != null && osTypeValue2.Type != JTokenType.Null)
+                                        {
+                                            string osTypeInstance2 = ((string)osTypeValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.OSType = osTypeInstance2;
+                                        }
+                                        
+                                        JToken licenseTypeValue2 = providerSpecificDetailsValue["licenseType"];
+                                        if (licenseTypeValue2 != null && licenseTypeValue2.Type != JTokenType.Null)
+                                        {
+                                            string licenseTypeInstance2 = ((string)licenseTypeValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.LicenseType = licenseTypeInstance2;
+                                        }
+                                        
+                                        JToken targetVmNameValue2 = providerSpecificDetailsValue["targetVmName"];
+                                        if (targetVmNameValue2 != null && targetVmNameValue2.Type != JTokenType.Null)
+                                        {
+                                            string targetVmNameInstance2 = ((string)targetVmNameValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetVmName = targetVmNameInstance2;
+                                        }
+                                        
+                                        JToken targetVmSizeValue2 = providerSpecificDetailsValue["targetVmSize"];
+                                        if (targetVmSizeValue2 != null && targetVmSizeValue2.Type != JTokenType.Null)
+                                        {
+                                            string targetVmSizeInstance2 = ((string)targetVmSizeValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetVmSize = targetVmSizeInstance2;
+                                        }
+                                        
+                                        JToken targetLocationValue = providerSpecificDetailsValue["targetLocation"];
+                                        if (targetLocationValue != null && targetLocationValue.Type != JTokenType.Null)
+                                        {
+                                            string targetLocationInstance = ((string)targetLocationValue);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetLocation = targetLocationInstance;
+                                        }
+                                        
+                                        JToken targetResourceGroupIdValue2 = providerSpecificDetailsValue["targetResourceGroupId"];
+                                        if (targetResourceGroupIdValue2 != null && targetResourceGroupIdValue2.Type != JTokenType.Null)
+                                        {
+                                            string targetResourceGroupIdInstance2 = ((string)targetResourceGroupIdValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetResourceGroupId = targetResourceGroupIdInstance2;
+                                        }
+                                        
+                                        JToken targetAvailabilitySetIdValue2 = providerSpecificDetailsValue["targetAvailabilitySetId"];
+                                        if (targetAvailabilitySetIdValue2 != null && targetAvailabilitySetIdValue2.Type != JTokenType.Null)
+                                        {
+                                            string targetAvailabilitySetIdInstance2 = ((string)targetAvailabilitySetIdValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetAvailabilitySetId = targetAvailabilitySetIdInstance2;
+                                        }
+                                        
+                                        JToken targetBootDiagnosticsStorageAccountIdValue2 = providerSpecificDetailsValue["targetBootDiagnosticsStorageAccountId"];
+                                        if (targetBootDiagnosticsStorageAccountIdValue2 != null && targetBootDiagnosticsStorageAccountIdValue2.Type != JTokenType.Null)
+                                        {
+                                            string targetBootDiagnosticsStorageAccountIdInstance2 = ((string)targetBootDiagnosticsStorageAccountIdValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetBootDiagnosticsStorageAccountId = targetBootDiagnosticsStorageAccountIdInstance2;
+                                        }
+                                        
+                                        JToken targetNetworkIdValue2 = providerSpecificDetailsValue["targetNetworkId"];
+                                        if (targetNetworkIdValue2 != null && targetNetworkIdValue2.Type != JTokenType.Null)
+                                        {
+                                            string targetNetworkIdInstance2 = ((string)targetNetworkIdValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.TargetNetworkId = targetNetworkIdInstance2;
+                                        }
+                                        
+                                        JToken logStorageAccountIdValue2 = providerSpecificDetailsValue["logStorageAccountId"];
+                                        if (logStorageAccountIdValue2 != null && logStorageAccountIdValue2.Type != JTokenType.Null)
+                                        {
+                                            string logStorageAccountIdInstance2 = ((string)logStorageAccountIdValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.LogStorageAccountId = logStorageAccountIdInstance2;
+                                        }
+                                        
+                                        JToken protectedDisksValue2 = providerSpecificDetailsValue["protectedDisks"];
+                                        if (protectedDisksValue2 != null && protectedDisksValue2.Type != JTokenType.Null)
+                                        {
+                                            List<InMageMigrationProtectedDiskDetails> protectedDisksInstance = ((string)protectedDisksValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.ProtectedDisks = protectedDisksInstance;
+                                        }
+                                        
+                                        JToken vmNicsValue2 = providerSpecificDetailsValue["vmNics"];
+                                        if (vmNicsValue2 != null && vmNicsValue2.Type != JTokenType.Null)
+                                        {
+                                            List<InMageMigrationNicDetails> vmNicsInstance = ((string)vmNicsValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.VMNics = vmNicsInstance;
+                                        }
+                                        
+                                        JToken instanceTypeValue2 = providerSpecificDetailsValue["instanceType"];
+                                        if (instanceTypeValue2 != null && instanceTypeValue2.Type != JTokenType.Null)
+                                        {
+                                            string instanceTypeInstance2 = ((string)instanceTypeValue2);
+                                            inMageMigrationProviderSpecificDetailsInstance.InstanceType = instanceTypeInstance2;
+                                        }
+                                        propertiesInstance.ProviderSpecificDetails = inMageMigrationProviderSpecificDetailsInstance;
                                     }
                                 }
                             }
@@ -8804,6 +9574,116 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 }
                                                 propertiesInstance.ProviderSpecificDetails = vMwareCbtMigrationDetailsInstance;
                                             }
+                                            if (typeName == "InMageMigration")
+                                            {
+                                                InMageMigrationProviderSpecificDetails inMageMigrationProviderSpecificDetailsInstance = new InMageMigrationProviderSpecificDetails();
+                                                
+                                                JToken vmwareMachineIdValue2 = providerSpecificDetailsValue["vmwareMachineId"];
+                                                if (vmwareMachineIdValue2 != null && vmwareMachineIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string vmwareMachineIdInstance2 = ((string)vmwareMachineIdValue2);
+                                                    inMageMigrationProviderSpecificDetailsInstance.VMwareMachineId = vmwareMachineIdInstance2;
+                                                }
+                                                
+                                                JToken processServerIdValue = providerSpecificDetailsValue["processServerId"];
+                                                if (processServerIdValue != null && processServerIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string processServerIdInstance = ((string)processServerIdValue);
+                                                    inMageMigrationProviderSpecificDetailsInstance.ProcessServerId = processServerIdInstance;
+                                                }
+                                                
+                                                JToken osTypeValue2 = providerSpecificDetailsValue["osType"];
+                                                if (osTypeValue2 != null && osTypeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string osTypeInstance2 = ((string)osTypeValue2);
+                                                    inMageMigrationProviderSpecificDetailsInstance.OSType = osTypeInstance2;
+                                                }
+                                                
+                                                JToken licenseTypeValue2 = providerSpecificDetailsValue["licenseType"];
+                                                if (licenseTypeValue2 != null && licenseTypeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string licenseTypeInstance2 = ((string)licenseTypeValue2);
+                                                    inMageMigrationProviderSpecificDetailsInstance.LicenseType = licenseTypeInstance2;
+                                                }
+                                                
+                                                JToken targetVmNameValue2 = providerSpecificDetailsValue["targetVmName"];
+                                                if (targetVmNameValue2 != null && targetVmNameValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetVmNameInstance2 = ((string)targetVmNameValue2);
+                                                    inMageMigrationProviderSpecificDetailsInstance.TargetVmName = targetVmNameInstance2;
+                                                }
+                                                
+                                                JToken targetVmSizeValue2 = providerSpecificDetailsValue["targetVmSize"];
+                                                if (targetVmSizeValue2 != null && targetVmSizeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetVmSizeInstance2 = ((string)targetVmSizeValue2);
+                                                    inMageMigrationProviderSpecificDetailsInstance.TargetVmSize = targetVmSizeInstance2;
+                                                }
+                                                
+                                                JToken targetLocationValue = providerSpecificDetailsValue["targetLocation"];
+                                                if (targetLocationValue != null && targetLocationValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetLocationInstance = ((string)targetLocationValue);
+                                                    inMageMigrationProviderSpecificDetailsInstance.TargetLocation = targetLocationInstance;
+                                                }
+                                                
+                                                JToken targetResourceGroupIdValue2 = providerSpecificDetailsValue["targetResourceGroupId"];
+                                                if (targetResourceGroupIdValue2 != null && targetResourceGroupIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetResourceGroupIdInstance2 = ((string)targetResourceGroupIdValue2);
+                                                    inMageMigrationProviderSpecificDetailsInstance.TargetResourceGroupId = targetResourceGroupIdInstance2;
+                                                }
+                                                
+                                                JToken targetAvailabilitySetIdValue2 = providerSpecificDetailsValue["targetAvailabilitySetId"];
+                                                if (targetAvailabilitySetIdValue2 != null && targetAvailabilitySetIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetAvailabilitySetIdInstance2 = ((string)targetAvailabilitySetIdValue2);
+                                                    inMageMigrationProviderSpecificDetailsInstance.TargetAvailabilitySetId = targetAvailabilitySetIdInstance2;
+                                                }
+                                                
+                                                JToken targetBootDiagnosticsStorageAccountIdValue2 = providerSpecificDetailsValue["targetBootDiagnosticsStorageAccountId"];
+                                                if (targetBootDiagnosticsStorageAccountIdValue2 != null && targetBootDiagnosticsStorageAccountIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetBootDiagnosticsStorageAccountIdInstance2 = ((string)targetBootDiagnosticsStorageAccountIdValue2);
+                                                    inMageMigrationProviderSpecificDetailsInstance.TargetBootDiagnosticsStorageAccountId = targetBootDiagnosticsStorageAccountIdInstance2;
+                                                }
+                                                
+                                                JToken targetNetworkIdValue2 = providerSpecificDetailsValue["targetNetworkId"];
+                                                if (targetNetworkIdValue2 != null && targetNetworkIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetNetworkIdInstance2 = ((string)targetNetworkIdValue2);
+                                                    inMageMigrationProviderSpecificDetailsInstance.TargetNetworkId = targetNetworkIdInstance2;
+                                                }
+                                                
+                                                JToken logStorageAccountIdValue2 = providerSpecificDetailsValue["logStorageAccountId"];
+                                                if (logStorageAccountIdValue2 != null && logStorageAccountIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string logStorageAccountIdInstance2 = ((string)logStorageAccountIdValue2);
+                                                    inMageMigrationProviderSpecificDetailsInstance.LogStorageAccountId = logStorageAccountIdInstance2;
+                                                }
+                                                
+                                                JToken protectedDisksValue2 = providerSpecificDetailsValue["protectedDisks"];
+                                                if (protectedDisksValue2 != null && protectedDisksValue2.Type != JTokenType.Null)
+                                                {
+                                                    List<InMageMigrationProtectedDiskDetails> protectedDisksInstance = ((string)protectedDisksValue2);
+                                                    inMageMigrationProviderSpecificDetailsInstance.ProtectedDisks = protectedDisksInstance;
+                                                }
+                                                
+                                                JToken vmNicsValue2 = providerSpecificDetailsValue["vmNics"];
+                                                if (vmNicsValue2 != null && vmNicsValue2.Type != JTokenType.Null)
+                                                {
+                                                    List<InMageMigrationNicDetails> vmNicsInstance = ((string)vmNicsValue2);
+                                                    inMageMigrationProviderSpecificDetailsInstance.VMNics = vmNicsInstance;
+                                                }
+                                                
+                                                JToken instanceTypeValue2 = providerSpecificDetailsValue["instanceType"];
+                                                if (instanceTypeValue2 != null && instanceTypeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string instanceTypeInstance2 = ((string)instanceTypeValue2);
+                                                    inMageMigrationProviderSpecificDetailsInstance.InstanceType = instanceTypeInstance2;
+                                                }
+                                                propertiesInstance.ProviderSpecificDetails = inMageMigrationProviderSpecificDetailsInstance;
+                                            }
                                         }
                                     }
                                     
@@ -9690,6 +10570,116 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 }
                                                 propertiesInstance.ProviderSpecificDetails = vMwareCbtMigrationDetailsInstance;
                                             }
+                                            if (typeName == "InMageMigration")
+                                            {
+                                                InMageMigrationProviderSpecificDetails inMageMigrationProviderSpecificDetailsInstance = new InMageMigrationProviderSpecificDetails();
+                                                
+                                                JToken vmwareMachineIdValue2 = providerSpecificDetailsValue["vmwareMachineId"];
+                                                if (vmwareMachineIdValue2 != null && vmwareMachineIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string vmwareMachineIdInstance2 = ((string)vmwareMachineIdValue2);
+                                                    inMageMigrationProviderSpecificDetailsInstance.VMwareMachineId = vmwareMachineIdInstance2;
+                                                }
+                                                
+                                                JToken processServerIdValue = providerSpecificDetailsValue["processServerId"];
+                                                if (processServerIdValue != null && processServerIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string processServerIdInstance = ((string)processServerIdValue);
+                                                    inMageMigrationProviderSpecificDetailsInstance.ProcessServerId = processServerIdInstance;
+                                                }
+                                                
+                                                JToken osTypeValue2 = providerSpecificDetailsValue["osType"];
+                                                if (osTypeValue2 != null && osTypeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string osTypeInstance2 = ((string)osTypeValue2);
+                                                    inMageMigrationProviderSpecificDetailsInstance.OSType = osTypeInstance2;
+                                                }
+                                                
+                                                JToken licenseTypeValue2 = providerSpecificDetailsValue["licenseType"];
+                                                if (licenseTypeValue2 != null && licenseTypeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string licenseTypeInstance2 = ((string)licenseTypeValue2);
+                                                    inMageMigrationProviderSpecificDetailsInstance.LicenseType = licenseTypeInstance2;
+                                                }
+                                                
+                                                JToken targetVmNameValue2 = providerSpecificDetailsValue["targetVmName"];
+                                                if (targetVmNameValue2 != null && targetVmNameValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetVmNameInstance2 = ((string)targetVmNameValue2);
+                                                    inMageMigrationProviderSpecificDetailsInstance.TargetVmName = targetVmNameInstance2;
+                                                }
+                                                
+                                                JToken targetVmSizeValue2 = providerSpecificDetailsValue["targetVmSize"];
+                                                if (targetVmSizeValue2 != null && targetVmSizeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetVmSizeInstance2 = ((string)targetVmSizeValue2);
+                                                    inMageMigrationProviderSpecificDetailsInstance.TargetVmSize = targetVmSizeInstance2;
+                                                }
+                                                
+                                                JToken targetLocationValue = providerSpecificDetailsValue["targetLocation"];
+                                                if (targetLocationValue != null && targetLocationValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetLocationInstance = ((string)targetLocationValue);
+                                                    inMageMigrationProviderSpecificDetailsInstance.TargetLocation = targetLocationInstance;
+                                                }
+                                                
+                                                JToken targetResourceGroupIdValue2 = providerSpecificDetailsValue["targetResourceGroupId"];
+                                                if (targetResourceGroupIdValue2 != null && targetResourceGroupIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetResourceGroupIdInstance2 = ((string)targetResourceGroupIdValue2);
+                                                    inMageMigrationProviderSpecificDetailsInstance.TargetResourceGroupId = targetResourceGroupIdInstance2;
+                                                }
+                                                
+                                                JToken targetAvailabilitySetIdValue2 = providerSpecificDetailsValue["targetAvailabilitySetId"];
+                                                if (targetAvailabilitySetIdValue2 != null && targetAvailabilitySetIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetAvailabilitySetIdInstance2 = ((string)targetAvailabilitySetIdValue2);
+                                                    inMageMigrationProviderSpecificDetailsInstance.TargetAvailabilitySetId = targetAvailabilitySetIdInstance2;
+                                                }
+                                                
+                                                JToken targetBootDiagnosticsStorageAccountIdValue2 = providerSpecificDetailsValue["targetBootDiagnosticsStorageAccountId"];
+                                                if (targetBootDiagnosticsStorageAccountIdValue2 != null && targetBootDiagnosticsStorageAccountIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetBootDiagnosticsStorageAccountIdInstance2 = ((string)targetBootDiagnosticsStorageAccountIdValue2);
+                                                    inMageMigrationProviderSpecificDetailsInstance.TargetBootDiagnosticsStorageAccountId = targetBootDiagnosticsStorageAccountIdInstance2;
+                                                }
+                                                
+                                                JToken targetNetworkIdValue2 = providerSpecificDetailsValue["targetNetworkId"];
+                                                if (targetNetworkIdValue2 != null && targetNetworkIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetNetworkIdInstance2 = ((string)targetNetworkIdValue2);
+                                                    inMageMigrationProviderSpecificDetailsInstance.TargetNetworkId = targetNetworkIdInstance2;
+                                                }
+                                                
+                                                JToken logStorageAccountIdValue2 = providerSpecificDetailsValue["logStorageAccountId"];
+                                                if (logStorageAccountIdValue2 != null && logStorageAccountIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string logStorageAccountIdInstance2 = ((string)logStorageAccountIdValue2);
+                                                    inMageMigrationProviderSpecificDetailsInstance.LogStorageAccountId = logStorageAccountIdInstance2;
+                                                }
+                                                
+                                                JToken protectedDisksValue2 = providerSpecificDetailsValue["protectedDisks"];
+                                                if (protectedDisksValue2 != null && protectedDisksValue2.Type != JTokenType.Null)
+                                                {
+                                                    List<InMageMigrationProtectedDiskDetails> protectedDisksInstance = ((string)protectedDisksValue2);
+                                                    inMageMigrationProviderSpecificDetailsInstance.ProtectedDisks = protectedDisksInstance;
+                                                }
+                                                
+                                                JToken vmNicsValue2 = providerSpecificDetailsValue["vmNics"];
+                                                if (vmNicsValue2 != null && vmNicsValue2.Type != JTokenType.Null)
+                                                {
+                                                    List<InMageMigrationNicDetails> vmNicsInstance = ((string)vmNicsValue2);
+                                                    inMageMigrationProviderSpecificDetailsInstance.VMNics = vmNicsInstance;
+                                                }
+                                                
+                                                JToken instanceTypeValue2 = providerSpecificDetailsValue["instanceType"];
+                                                if (instanceTypeValue2 != null && instanceTypeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string instanceTypeInstance2 = ((string)instanceTypeValue2);
+                                                    inMageMigrationProviderSpecificDetailsInstance.InstanceType = instanceTypeInstance2;
+                                                }
+                                                propertiesInstance.ProviderSpecificDetails = inMageMigrationProviderSpecificDetailsInstance;
+                                            }
                                         }
                                     }
                                     
@@ -10532,6 +11522,116 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     vMwareCbtMigrationDetailsInstance.InstanceType = instanceTypeInstance;
                                                 }
                                                 propertiesInstance.ProviderSpecificDetails = vMwareCbtMigrationDetailsInstance;
+                                            }
+                                            if (typeName == "InMageMigration")
+                                            {
+                                                InMageMigrationProviderSpecificDetails inMageMigrationProviderSpecificDetailsInstance = new InMageMigrationProviderSpecificDetails();
+                                                
+                                                JToken vmwareMachineIdValue2 = providerSpecificDetailsValue["vmwareMachineId"];
+                                                if (vmwareMachineIdValue2 != null && vmwareMachineIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string vmwareMachineIdInstance2 = ((string)vmwareMachineIdValue2);
+                                                    inMageMigrationProviderSpecificDetailsInstance.VMwareMachineId = vmwareMachineIdInstance2;
+                                                }
+                                                
+                                                JToken processServerIdValue = providerSpecificDetailsValue["processServerId"];
+                                                if (processServerIdValue != null && processServerIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string processServerIdInstance = ((string)processServerIdValue);
+                                                    inMageMigrationProviderSpecificDetailsInstance.ProcessServerId = processServerIdInstance;
+                                                }
+                                                
+                                                JToken osTypeValue2 = providerSpecificDetailsValue["osType"];
+                                                if (osTypeValue2 != null && osTypeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string osTypeInstance2 = ((string)osTypeValue2);
+                                                    inMageMigrationProviderSpecificDetailsInstance.OSType = osTypeInstance2;
+                                                }
+                                                
+                                                JToken licenseTypeValue2 = providerSpecificDetailsValue["licenseType"];
+                                                if (licenseTypeValue2 != null && licenseTypeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string licenseTypeInstance2 = ((string)licenseTypeValue2);
+                                                    inMageMigrationProviderSpecificDetailsInstance.LicenseType = licenseTypeInstance2;
+                                                }
+                                                
+                                                JToken targetVmNameValue2 = providerSpecificDetailsValue["targetVmName"];
+                                                if (targetVmNameValue2 != null && targetVmNameValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetVmNameInstance2 = ((string)targetVmNameValue2);
+                                                    inMageMigrationProviderSpecificDetailsInstance.TargetVmName = targetVmNameInstance2;
+                                                }
+                                                
+                                                JToken targetVmSizeValue2 = providerSpecificDetailsValue["targetVmSize"];
+                                                if (targetVmSizeValue2 != null && targetVmSizeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetVmSizeInstance2 = ((string)targetVmSizeValue2);
+                                                    inMageMigrationProviderSpecificDetailsInstance.TargetVmSize = targetVmSizeInstance2;
+                                                }
+                                                
+                                                JToken targetLocationValue = providerSpecificDetailsValue["targetLocation"];
+                                                if (targetLocationValue != null && targetLocationValue.Type != JTokenType.Null)
+                                                {
+                                                    string targetLocationInstance = ((string)targetLocationValue);
+                                                    inMageMigrationProviderSpecificDetailsInstance.TargetLocation = targetLocationInstance;
+                                                }
+                                                
+                                                JToken targetResourceGroupIdValue2 = providerSpecificDetailsValue["targetResourceGroupId"];
+                                                if (targetResourceGroupIdValue2 != null && targetResourceGroupIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetResourceGroupIdInstance2 = ((string)targetResourceGroupIdValue2);
+                                                    inMageMigrationProviderSpecificDetailsInstance.TargetResourceGroupId = targetResourceGroupIdInstance2;
+                                                }
+                                                
+                                                JToken targetAvailabilitySetIdValue2 = providerSpecificDetailsValue["targetAvailabilitySetId"];
+                                                if (targetAvailabilitySetIdValue2 != null && targetAvailabilitySetIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetAvailabilitySetIdInstance2 = ((string)targetAvailabilitySetIdValue2);
+                                                    inMageMigrationProviderSpecificDetailsInstance.TargetAvailabilitySetId = targetAvailabilitySetIdInstance2;
+                                                }
+                                                
+                                                JToken targetBootDiagnosticsStorageAccountIdValue2 = providerSpecificDetailsValue["targetBootDiagnosticsStorageAccountId"];
+                                                if (targetBootDiagnosticsStorageAccountIdValue2 != null && targetBootDiagnosticsStorageAccountIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetBootDiagnosticsStorageAccountIdInstance2 = ((string)targetBootDiagnosticsStorageAccountIdValue2);
+                                                    inMageMigrationProviderSpecificDetailsInstance.TargetBootDiagnosticsStorageAccountId = targetBootDiagnosticsStorageAccountIdInstance2;
+                                                }
+                                                
+                                                JToken targetNetworkIdValue2 = providerSpecificDetailsValue["targetNetworkId"];
+                                                if (targetNetworkIdValue2 != null && targetNetworkIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetNetworkIdInstance2 = ((string)targetNetworkIdValue2);
+                                                    inMageMigrationProviderSpecificDetailsInstance.TargetNetworkId = targetNetworkIdInstance2;
+                                                }
+                                                
+                                                JToken logStorageAccountIdValue2 = providerSpecificDetailsValue["logStorageAccountId"];
+                                                if (logStorageAccountIdValue2 != null && logStorageAccountIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string logStorageAccountIdInstance2 = ((string)logStorageAccountIdValue2);
+                                                    inMageMigrationProviderSpecificDetailsInstance.LogStorageAccountId = logStorageAccountIdInstance2;
+                                                }
+                                                
+                                                JToken protectedDisksValue2 = providerSpecificDetailsValue["protectedDisks"];
+                                                if (protectedDisksValue2 != null && protectedDisksValue2.Type != JTokenType.Null)
+                                                {
+                                                    List<InMageMigrationProtectedDiskDetails> protectedDisksInstance = ((string)protectedDisksValue2);
+                                                    inMageMigrationProviderSpecificDetailsInstance.ProtectedDisks = protectedDisksInstance;
+                                                }
+                                                
+                                                JToken vmNicsValue2 = providerSpecificDetailsValue["vmNics"];
+                                                if (vmNicsValue2 != null && vmNicsValue2.Type != JTokenType.Null)
+                                                {
+                                                    List<InMageMigrationNicDetails> vmNicsInstance = ((string)vmNicsValue2);
+                                                    inMageMigrationProviderSpecificDetailsInstance.VMNics = vmNicsInstance;
+                                                }
+                                                
+                                                JToken instanceTypeValue2 = providerSpecificDetailsValue["instanceType"];
+                                                if (instanceTypeValue2 != null && instanceTypeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string instanceTypeInstance2 = ((string)instanceTypeValue2);
+                                                    inMageMigrationProviderSpecificDetailsInstance.InstanceType = instanceTypeInstance2;
+                                                }
+                                                propertiesInstance.ProviderSpecificDetails = inMageMigrationProviderSpecificDetailsInstance;
                                             }
                                         }
                                     }
