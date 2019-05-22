@@ -2700,18 +2700,157 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             inMageMigrationProviderSpecificDetailsInstance.LogStorageAccountId = logStorageAccountIdInstance2;
                                         }
                                         
-                                        JToken protectedDisksValue2 = providerSpecificDetailsValue["protectedDisks"];
-                                        if (protectedDisksValue2 != null && protectedDisksValue2.Type != JTokenType.Null)
+                                        JToken protectedDisksArray2 = providerSpecificDetailsValue["protectedDisks"];
+                                        if (protectedDisksArray2 != null && protectedDisksArray2.Type != JTokenType.Null)
                                         {
-                                            List<InMageMigrationProtectedDiskDetails> protectedDisksInstance = ((string)protectedDisksValue2);
-                                            inMageMigrationProviderSpecificDetailsInstance.ProtectedDisks = protectedDisksInstance;
+                                            foreach (JToken protectedDisksValue2 in ((JArray)protectedDisksArray2))
+                                            {
+                                                InMageMigrationProtectedDiskDetails vMwareCbtProtectedDiskDetailsInstance2 = new InMageMigrationProtectedDiskDetails();
+                                                inMageMigrationProviderSpecificDetailsInstance.ProtectedDisks.Add(vMwareCbtProtectedDiskDetailsInstance2);
+                                                
+                                                JToken diskIdValue2 = protectedDisksValue2["diskId"];
+                                                if (diskIdValue2 != null && diskIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string diskIdInstance2 = ((string)diskIdValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.DiskId = diskIdInstance2;
+                                                }
+                                                
+                                                JToken diskNameValue2 = protectedDisksValue2["diskName"];
+                                                if (diskNameValue2 != null && diskNameValue2.Type != JTokenType.Null)
+                                                {
+                                                    string diskNameInstance2 = ((string)diskNameValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.DiskName = diskNameInstance2;
+                                                }
+                                                
+                                                JToken isOSDiskValue2 = protectedDisksValue2["isOSDisk"];
+                                                if (isOSDiskValue2 != null && isOSDiskValue2.Type != JTokenType.Null)
+                                                {
+                                                    bool isOSDiskInstance2 = ((bool)isOSDiskValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.IsOSDisk = isOSDiskInstance2;
+                                                }
+                                                
+                                                JToken capacityInBytesValue2 = protectedDisksValue2["capacityInBytes"];
+                                                if (capacityInBytesValue2 != null && capacityInBytesValue2.Type != JTokenType.Null)
+                                                {
+                                                    long capacityInBytesInstance2 = ((long)capacityInBytesValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.CapacityInBytes = capacityInBytesInstance2;
+                                                }
+                                                
+                                                JToken logStorageAccountIdValue3 = protectedDisksValue2["logStorageAccountId"];
+                                                if (logStorageAccountIdValue3 != null && logStorageAccountIdValue3.Type != JTokenType.Null)
+                                                {
+                                                    string logStorageAccountIdInstance3 = ((string)logStorageAccountIdValue3);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.LogStorageAccountId = logStorageAccountIdInstance3;
+                                                }
+                                                
+                                                JToken seedManagedDiskIdValue2 = protectedDisksValue2["seedManagedDiskId"];
+                                                if (seedManagedDiskIdValue2 != null && seedManagedDiskIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string seedManagedDiskIdInstance2 = ((string)seedManagedDiskIdValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.SeedManagedDiskId = seedManagedDiskIdInstance2;
+                                                }
+                                                
+                                                JToken seedBlobUriValue2 = protectedDisksValue2["seedBlobUri"];
+                                                if (seedBlobUriValue2 != null && seedBlobUriValue2.Type != JTokenType.Null)
+                                                {
+                                                    string seedBlobUriInstance2 = ((string)seedBlobUriValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.SeedBlobUri = seedBlobUriInstance2;
+                                                }
+                                                
+                                                JToken targetManagedDiskIdValue2 = protectedDisksValue2["targetManagedDiskId"];
+                                                if (targetManagedDiskIdValue2 != null && targetManagedDiskIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetManagedDiskIdInstance2 = ((string)targetManagedDiskIdValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.TargetManagedDiskId = targetManagedDiskIdInstance2;
+                                                }
+                                                
+                                                JToken targetBlobUriValue2 = protectedDisksValue2["targetBlobUri"];
+                                                if (targetBlobUriValue2 != null && targetBlobUriValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetBlobUriInstance2 = ((string)targetBlobUriValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.TargetBlobUri = targetBlobUriInstance2;
+                                                }
+                                                
+                                                JToken diskTypeValue2 = protectedDisksValue2["diskType"];
+                                                if (diskTypeValue2 != null && diskTypeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string diskTypeInstance2 = ((string)diskTypeValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.DiskType = diskTypeInstance2;
+                                                }
+                                            }
                                         }
                                         
-                                        JToken vmNicsValue2 = providerSpecificDetailsValue["vmNics"];
-                                        if (vmNicsValue2 != null && vmNicsValue2.Type != JTokenType.Null)
+                                        JToken vmNicsArray2 = providerSpecificDetailsValue["vmNics"];
+                                        if (vmNicsArray2 != null && vmNicsArray2.Type != JTokenType.Null)
                                         {
-                                            List<InMageMigrationNicDetails> vmNicsInstance = ((string)vmNicsValue2);
-                                            inMageMigrationProviderSpecificDetailsInstance.VMNics = vmNicsInstance;
+                                            foreach (JToken vmNicsValue2 in ((JArray)vmNicsArray2))
+                                            {
+                                                InMageMigrationNicDetails inMageMigrationNicDetailsInstance = new InMageMigrationNicDetails();
+                                                inMageMigrationProviderSpecificDetailsInstance.VMNics.Add(inMageMigrationNicDetailsInstance);
+                                                
+                                                JToken nicIdValue2 = vmNicsValue2["nicId"];
+                                                if (nicIdValue2 != null && nicIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string nicIdInstance2 = ((string)nicIdValue2);
+                                                    inMageMigrationNicDetailsInstance.NicId = nicIdInstance2;
+                                                }
+                                                
+                                                JToken isPrimaryNicValue2 = vmNicsValue2["isPrimaryNic"];
+                                                if (isPrimaryNicValue2 != null && isPrimaryNicValue2.Type != JTokenType.Null)
+                                                {
+                                                    string isPrimaryNicInstance2 = ((string)isPrimaryNicValue2);
+                                                    inMageMigrationNicDetailsInstance.IsPrimaryNic = isPrimaryNicInstance2;
+                                                }
+                                                
+                                                JToken sourceIPAddressValue2 = vmNicsValue2["sourceIPAddress"];
+                                                if (sourceIPAddressValue2 != null && sourceIPAddressValue2.Type != JTokenType.Null)
+                                                {
+                                                    string sourceIPAddressInstance2 = ((string)sourceIPAddressValue2);
+                                                    inMageMigrationNicDetailsInstance.SourceIPAddress = sourceIPAddressInstance2;
+                                                }
+                                                
+                                                JToken sourceIPAddressTypeValue2 = vmNicsValue2["sourceIPAddressType"];
+                                                if (sourceIPAddressTypeValue2 != null && sourceIPAddressTypeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string sourceIPAddressTypeInstance2 = ((string)sourceIPAddressTypeValue2);
+                                                    inMageMigrationNicDetailsInstance.SourceIPAddressType = sourceIPAddressTypeInstance2;
+                                                }
+                                                
+                                                JToken sourceNetworkIdValue2 = vmNicsValue2["sourceNetworkId"];
+                                                if (sourceNetworkIdValue2 != null && sourceNetworkIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string sourceNetworkIdInstance2 = ((string)sourceNetworkIdValue2);
+                                                    inMageMigrationNicDetailsInstance.SourceNetworkId = sourceNetworkIdInstance2;
+                                                }
+                                                
+                                                JToken targetIPAddressValue2 = vmNicsValue2["targetIPAddress"];
+                                                if (targetIPAddressValue2 != null && targetIPAddressValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetIPAddressInstance2 = ((string)targetIPAddressValue2);
+                                                    inMageMigrationNicDetailsInstance.TargetIPAddress = targetIPAddressInstance2;
+                                                }
+                                                
+                                                JToken targetIPAddressTypeValue2 = vmNicsValue2["targetIPAddressType"];
+                                                if (targetIPAddressTypeValue2 != null && targetIPAddressTypeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetIPAddressTypeInstance2 = ((string)targetIPAddressTypeValue2);
+                                                    inMageMigrationNicDetailsInstance.TargetIPAddressType = targetIPAddressTypeInstance2;
+                                                }
+                                                
+                                                JToken targetSubnetNameValue2 = vmNicsValue2["targetSubnetName"];
+                                                if (targetSubnetNameValue2 != null && targetSubnetNameValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetSubnetNameInstance2 = ((string)targetSubnetNameValue2);
+                                                    inMageMigrationNicDetailsInstance.TargetSubnetName = targetSubnetNameInstance2;
+                                                }
+                                                
+                                                JToken isSelectedForMigrationValue2 = vmNicsValue2["isSelectedForMigration"];
+                                                if (isSelectedForMigrationValue2 != null && isSelectedForMigrationValue2.Type != JTokenType.Null)
+                                                {
+                                                    string isSelectedForMigrationInstance2 = ((string)isSelectedForMigrationValue2);
+                                                    inMageMigrationNicDetailsInstance.IsSelectedForMigration = isSelectedForMigrationInstance2;
+                                                }
+                                            }
                                         }
                                         
                                         JToken instanceTypeValue2 = providerSpecificDetailsValue["instanceType"];
@@ -3637,18 +3776,157 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             inMageMigrationProviderSpecificDetailsInstance.LogStorageAccountId = logStorageAccountIdInstance2;
                                         }
                                         
-                                        JToken protectedDisksValue2 = providerSpecificDetailsValue["protectedDisks"];
-                                        if (protectedDisksValue2 != null && protectedDisksValue2.Type != JTokenType.Null)
+                                        JToken protectedDisksArray2 = providerSpecificDetailsValue["protectedDisks"];
+                                        if (protectedDisksArray2 != null && protectedDisksArray2.Type != JTokenType.Null)
                                         {
-                                            List<InMageMigrationProtectedDiskDetails> protectedDisksInstance = ((string)protectedDisksValue2);
-                                            inMageMigrationProviderSpecificDetailsInstance.ProtectedDisks = protectedDisksInstance;
+                                            foreach (JToken protectedDisksValue2 in ((JArray)protectedDisksArray2))
+                                            {
+                                                InMageMigrationProtectedDiskDetails vMwareCbtProtectedDiskDetailsInstance2 = new InMageMigrationProtectedDiskDetails();
+                                                inMageMigrationProviderSpecificDetailsInstance.ProtectedDisks.Add(vMwareCbtProtectedDiskDetailsInstance2);
+                                                
+                                                JToken diskIdValue2 = protectedDisksValue2["diskId"];
+                                                if (diskIdValue2 != null && diskIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string diskIdInstance2 = ((string)diskIdValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.DiskId = diskIdInstance2;
+                                                }
+                                                
+                                                JToken diskNameValue2 = protectedDisksValue2["diskName"];
+                                                if (diskNameValue2 != null && diskNameValue2.Type != JTokenType.Null)
+                                                {
+                                                    string diskNameInstance2 = ((string)diskNameValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.DiskName = diskNameInstance2;
+                                                }
+                                                
+                                                JToken isOSDiskValue2 = protectedDisksValue2["isOSDisk"];
+                                                if (isOSDiskValue2 != null && isOSDiskValue2.Type != JTokenType.Null)
+                                                {
+                                                    bool isOSDiskInstance2 = ((bool)isOSDiskValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.IsOSDisk = isOSDiskInstance2;
+                                                }
+                                                
+                                                JToken capacityInBytesValue2 = protectedDisksValue2["capacityInBytes"];
+                                                if (capacityInBytesValue2 != null && capacityInBytesValue2.Type != JTokenType.Null)
+                                                {
+                                                    long capacityInBytesInstance2 = ((long)capacityInBytesValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.CapacityInBytes = capacityInBytesInstance2;
+                                                }
+                                                
+                                                JToken logStorageAccountIdValue3 = protectedDisksValue2["logStorageAccountId"];
+                                                if (logStorageAccountIdValue3 != null && logStorageAccountIdValue3.Type != JTokenType.Null)
+                                                {
+                                                    string logStorageAccountIdInstance3 = ((string)logStorageAccountIdValue3);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.LogStorageAccountId = logStorageAccountIdInstance3;
+                                                }
+                                                
+                                                JToken seedManagedDiskIdValue2 = protectedDisksValue2["seedManagedDiskId"];
+                                                if (seedManagedDiskIdValue2 != null && seedManagedDiskIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string seedManagedDiskIdInstance2 = ((string)seedManagedDiskIdValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.SeedManagedDiskId = seedManagedDiskIdInstance2;
+                                                }
+                                                
+                                                JToken seedBlobUriValue2 = protectedDisksValue2["seedBlobUri"];
+                                                if (seedBlobUriValue2 != null && seedBlobUriValue2.Type != JTokenType.Null)
+                                                {
+                                                    string seedBlobUriInstance2 = ((string)seedBlobUriValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.SeedBlobUri = seedBlobUriInstance2;
+                                                }
+                                                
+                                                JToken targetManagedDiskIdValue2 = protectedDisksValue2["targetManagedDiskId"];
+                                                if (targetManagedDiskIdValue2 != null && targetManagedDiskIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetManagedDiskIdInstance2 = ((string)targetManagedDiskIdValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.TargetManagedDiskId = targetManagedDiskIdInstance2;
+                                                }
+                                                
+                                                JToken targetBlobUriValue2 = protectedDisksValue2["targetBlobUri"];
+                                                if (targetBlobUriValue2 != null && targetBlobUriValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetBlobUriInstance2 = ((string)targetBlobUriValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.TargetBlobUri = targetBlobUriInstance2;
+                                                }
+                                                
+                                                JToken diskTypeValue2 = protectedDisksValue2["diskType"];
+                                                if (diskTypeValue2 != null && diskTypeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string diskTypeInstance2 = ((string)diskTypeValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.DiskType = diskTypeInstance2;
+                                                }
+                                            }
                                         }
                                         
-                                        JToken vmNicsValue2 = providerSpecificDetailsValue["vmNics"];
-                                        if (vmNicsValue2 != null && vmNicsValue2.Type != JTokenType.Null)
+                                        JToken vmNicsArray2 = providerSpecificDetailsValue["vmNics"];
+                                        if (vmNicsArray2 != null && vmNicsArray2.Type != JTokenType.Null)
                                         {
-                                            List<InMageMigrationNicDetails> vmNicsInstance = ((string)vmNicsValue2);
-                                            inMageMigrationProviderSpecificDetailsInstance.VMNics = vmNicsInstance;
+                                            foreach (JToken vmNicsValue2 in ((JArray)vmNicsArray2))
+                                            {
+                                                InMageMigrationNicDetails inMageMigrationNicDetailsInstance = new InMageMigrationNicDetails();
+                                                inMageMigrationProviderSpecificDetailsInstance.VMNics.Add(inMageMigrationNicDetailsInstance);
+                                                
+                                                JToken nicIdValue2 = vmNicsValue2["nicId"];
+                                                if (nicIdValue2 != null && nicIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string nicIdInstance2 = ((string)nicIdValue2);
+                                                    inMageMigrationNicDetailsInstance.NicId = nicIdInstance2;
+                                                }
+                                                
+                                                JToken isPrimaryNicValue2 = vmNicsValue2["isPrimaryNic"];
+                                                if (isPrimaryNicValue2 != null && isPrimaryNicValue2.Type != JTokenType.Null)
+                                                {
+                                                    string isPrimaryNicInstance2 = ((string)isPrimaryNicValue2);
+                                                    inMageMigrationNicDetailsInstance.IsPrimaryNic = isPrimaryNicInstance2;
+                                                }
+                                                
+                                                JToken sourceIPAddressValue2 = vmNicsValue2["sourceIPAddress"];
+                                                if (sourceIPAddressValue2 != null && sourceIPAddressValue2.Type != JTokenType.Null)
+                                                {
+                                                    string sourceIPAddressInstance2 = ((string)sourceIPAddressValue2);
+                                                    inMageMigrationNicDetailsInstance.SourceIPAddress = sourceIPAddressInstance2;
+                                                }
+                                                
+                                                JToken sourceIPAddressTypeValue2 = vmNicsValue2["sourceIPAddressType"];
+                                                if (sourceIPAddressTypeValue2 != null && sourceIPAddressTypeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string sourceIPAddressTypeInstance2 = ((string)sourceIPAddressTypeValue2);
+                                                    inMageMigrationNicDetailsInstance.SourceIPAddressType = sourceIPAddressTypeInstance2;
+                                                }
+                                                
+                                                JToken sourceNetworkIdValue2 = vmNicsValue2["sourceNetworkId"];
+                                                if (sourceNetworkIdValue2 != null && sourceNetworkIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string sourceNetworkIdInstance2 = ((string)sourceNetworkIdValue2);
+                                                    inMageMigrationNicDetailsInstance.SourceNetworkId = sourceNetworkIdInstance2;
+                                                }
+                                                
+                                                JToken targetIPAddressValue2 = vmNicsValue2["targetIPAddress"];
+                                                if (targetIPAddressValue2 != null && targetIPAddressValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetIPAddressInstance2 = ((string)targetIPAddressValue2);
+                                                    inMageMigrationNicDetailsInstance.TargetIPAddress = targetIPAddressInstance2;
+                                                }
+                                                
+                                                JToken targetIPAddressTypeValue2 = vmNicsValue2["targetIPAddressType"];
+                                                if (targetIPAddressTypeValue2 != null && targetIPAddressTypeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetIPAddressTypeInstance2 = ((string)targetIPAddressTypeValue2);
+                                                    inMageMigrationNicDetailsInstance.TargetIPAddressType = targetIPAddressTypeInstance2;
+                                                }
+                                                
+                                                JToken targetSubnetNameValue2 = vmNicsValue2["targetSubnetName"];
+                                                if (targetSubnetNameValue2 != null && targetSubnetNameValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetSubnetNameInstance2 = ((string)targetSubnetNameValue2);
+                                                    inMageMigrationNicDetailsInstance.TargetSubnetName = targetSubnetNameInstance2;
+                                                }
+                                                
+                                                JToken isSelectedForMigrationValue2 = vmNicsValue2["isSelectedForMigration"];
+                                                if (isSelectedForMigrationValue2 != null && isSelectedForMigrationValue2.Type != JTokenType.Null)
+                                                {
+                                                    string isSelectedForMigrationInstance2 = ((string)isSelectedForMigrationValue2);
+                                                    inMageMigrationNicDetailsInstance.IsSelectedForMigration = isSelectedForMigrationInstance2;
+                                                }
+                                            }
                                         }
                                         
                                         JToken instanceTypeValue2 = providerSpecificDetailsValue["instanceType"];
@@ -4633,18 +4911,157 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             inMageMigrationProviderSpecificDetailsInstance.LogStorageAccountId = logStorageAccountIdInstance2;
                                         }
                                         
-                                        JToken protectedDisksValue2 = providerSpecificDetailsValue["protectedDisks"];
-                                        if (protectedDisksValue2 != null && protectedDisksValue2.Type != JTokenType.Null)
+                                        JToken protectedDisksArray2 = providerSpecificDetailsValue["protectedDisks"];
+                                        if (protectedDisksArray2 != null && protectedDisksArray2.Type != JTokenType.Null)
                                         {
-                                            List<InMageMigrationProtectedDiskDetails> protectedDisksInstance = ((string)protectedDisksValue2);
-                                            inMageMigrationProviderSpecificDetailsInstance.ProtectedDisks = protectedDisksInstance;
+                                            foreach (JToken protectedDisksValue2 in ((JArray)protectedDisksArray2))
+                                            {
+                                                InMageMigrationProtectedDiskDetails vMwareCbtProtectedDiskDetailsInstance2 = new InMageMigrationProtectedDiskDetails();
+                                                inMageMigrationProviderSpecificDetailsInstance.ProtectedDisks.Add(vMwareCbtProtectedDiskDetailsInstance2);
+                                                
+                                                JToken diskIdValue2 = protectedDisksValue2["diskId"];
+                                                if (diskIdValue2 != null && diskIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string diskIdInstance2 = ((string)diskIdValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.DiskId = diskIdInstance2;
+                                                }
+                                                
+                                                JToken diskNameValue2 = protectedDisksValue2["diskName"];
+                                                if (diskNameValue2 != null && diskNameValue2.Type != JTokenType.Null)
+                                                {
+                                                    string diskNameInstance2 = ((string)diskNameValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.DiskName = diskNameInstance2;
+                                                }
+                                                
+                                                JToken isOSDiskValue2 = protectedDisksValue2["isOSDisk"];
+                                                if (isOSDiskValue2 != null && isOSDiskValue2.Type != JTokenType.Null)
+                                                {
+                                                    bool isOSDiskInstance2 = ((bool)isOSDiskValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.IsOSDisk = isOSDiskInstance2;
+                                                }
+                                                
+                                                JToken capacityInBytesValue2 = protectedDisksValue2["capacityInBytes"];
+                                                if (capacityInBytesValue2 != null && capacityInBytesValue2.Type != JTokenType.Null)
+                                                {
+                                                    long capacityInBytesInstance2 = ((long)capacityInBytesValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.CapacityInBytes = capacityInBytesInstance2;
+                                                }
+                                                
+                                                JToken logStorageAccountIdValue3 = protectedDisksValue2["logStorageAccountId"];
+                                                if (logStorageAccountIdValue3 != null && logStorageAccountIdValue3.Type != JTokenType.Null)
+                                                {
+                                                    string logStorageAccountIdInstance3 = ((string)logStorageAccountIdValue3);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.LogStorageAccountId = logStorageAccountIdInstance3;
+                                                }
+                                                
+                                                JToken seedManagedDiskIdValue2 = protectedDisksValue2["seedManagedDiskId"];
+                                                if (seedManagedDiskIdValue2 != null && seedManagedDiskIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string seedManagedDiskIdInstance2 = ((string)seedManagedDiskIdValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.SeedManagedDiskId = seedManagedDiskIdInstance2;
+                                                }
+                                                
+                                                JToken seedBlobUriValue2 = protectedDisksValue2["seedBlobUri"];
+                                                if (seedBlobUriValue2 != null && seedBlobUriValue2.Type != JTokenType.Null)
+                                                {
+                                                    string seedBlobUriInstance2 = ((string)seedBlobUriValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.SeedBlobUri = seedBlobUriInstance2;
+                                                }
+                                                
+                                                JToken targetManagedDiskIdValue2 = protectedDisksValue2["targetManagedDiskId"];
+                                                if (targetManagedDiskIdValue2 != null && targetManagedDiskIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetManagedDiskIdInstance2 = ((string)targetManagedDiskIdValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.TargetManagedDiskId = targetManagedDiskIdInstance2;
+                                                }
+                                                
+                                                JToken targetBlobUriValue2 = protectedDisksValue2["targetBlobUri"];
+                                                if (targetBlobUriValue2 != null && targetBlobUriValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetBlobUriInstance2 = ((string)targetBlobUriValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.TargetBlobUri = targetBlobUriInstance2;
+                                                }
+                                                
+                                                JToken diskTypeValue2 = protectedDisksValue2["diskType"];
+                                                if (diskTypeValue2 != null && diskTypeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string diskTypeInstance2 = ((string)diskTypeValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.DiskType = diskTypeInstance2;
+                                                }
+                                            }
                                         }
                                         
-                                        JToken vmNicsValue2 = providerSpecificDetailsValue["vmNics"];
-                                        if (vmNicsValue2 != null && vmNicsValue2.Type != JTokenType.Null)
+                                        JToken vmNicsArray2 = providerSpecificDetailsValue["vmNics"];
+                                        if (vmNicsArray2 != null && vmNicsArray2.Type != JTokenType.Null)
                                         {
-                                            List<InMageMigrationNicDetails> vmNicsInstance = ((string)vmNicsValue2);
-                                            inMageMigrationProviderSpecificDetailsInstance.VMNics = vmNicsInstance;
+                                            foreach (JToken vmNicsValue2 in ((JArray)vmNicsArray2))
+                                            {
+                                                InMageMigrationNicDetails inMageMigrationNicDetailsInstance = new InMageMigrationNicDetails();
+                                                inMageMigrationProviderSpecificDetailsInstance.VMNics.Add(inMageMigrationNicDetailsInstance);
+                                                
+                                                JToken nicIdValue2 = vmNicsValue2["nicId"];
+                                                if (nicIdValue2 != null && nicIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string nicIdInstance2 = ((string)nicIdValue2);
+                                                    inMageMigrationNicDetailsInstance.NicId = nicIdInstance2;
+                                                }
+                                                
+                                                JToken isPrimaryNicValue2 = vmNicsValue2["isPrimaryNic"];
+                                                if (isPrimaryNicValue2 != null && isPrimaryNicValue2.Type != JTokenType.Null)
+                                                {
+                                                    string isPrimaryNicInstance2 = ((string)isPrimaryNicValue2);
+                                                    inMageMigrationNicDetailsInstance.IsPrimaryNic = isPrimaryNicInstance2;
+                                                }
+                                                
+                                                JToken sourceIPAddressValue2 = vmNicsValue2["sourceIPAddress"];
+                                                if (sourceIPAddressValue2 != null && sourceIPAddressValue2.Type != JTokenType.Null)
+                                                {
+                                                    string sourceIPAddressInstance2 = ((string)sourceIPAddressValue2);
+                                                    inMageMigrationNicDetailsInstance.SourceIPAddress = sourceIPAddressInstance2;
+                                                }
+                                                
+                                                JToken sourceIPAddressTypeValue2 = vmNicsValue2["sourceIPAddressType"];
+                                                if (sourceIPAddressTypeValue2 != null && sourceIPAddressTypeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string sourceIPAddressTypeInstance2 = ((string)sourceIPAddressTypeValue2);
+                                                    inMageMigrationNicDetailsInstance.SourceIPAddressType = sourceIPAddressTypeInstance2;
+                                                }
+                                                
+                                                JToken sourceNetworkIdValue2 = vmNicsValue2["sourceNetworkId"];
+                                                if (sourceNetworkIdValue2 != null && sourceNetworkIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string sourceNetworkIdInstance2 = ((string)sourceNetworkIdValue2);
+                                                    inMageMigrationNicDetailsInstance.SourceNetworkId = sourceNetworkIdInstance2;
+                                                }
+                                                
+                                                JToken targetIPAddressValue2 = vmNicsValue2["targetIPAddress"];
+                                                if (targetIPAddressValue2 != null && targetIPAddressValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetIPAddressInstance2 = ((string)targetIPAddressValue2);
+                                                    inMageMigrationNicDetailsInstance.TargetIPAddress = targetIPAddressInstance2;
+                                                }
+                                                
+                                                JToken targetIPAddressTypeValue2 = vmNicsValue2["targetIPAddressType"];
+                                                if (targetIPAddressTypeValue2 != null && targetIPAddressTypeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetIPAddressTypeInstance2 = ((string)targetIPAddressTypeValue2);
+                                                    inMageMigrationNicDetailsInstance.TargetIPAddressType = targetIPAddressTypeInstance2;
+                                                }
+                                                
+                                                JToken targetSubnetNameValue2 = vmNicsValue2["targetSubnetName"];
+                                                if (targetSubnetNameValue2 != null && targetSubnetNameValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetSubnetNameInstance2 = ((string)targetSubnetNameValue2);
+                                                    inMageMigrationNicDetailsInstance.TargetSubnetName = targetSubnetNameInstance2;
+                                                }
+                                                
+                                                JToken isSelectedForMigrationValue2 = vmNicsValue2["isSelectedForMigration"];
+                                                if (isSelectedForMigrationValue2 != null && isSelectedForMigrationValue2.Type != JTokenType.Null)
+                                                {
+                                                    string isSelectedForMigrationInstance2 = ((string)isSelectedForMigrationValue2);
+                                                    inMageMigrationNicDetailsInstance.IsSelectedForMigration = isSelectedForMigrationInstance2;
+                                                }
+                                            }
                                         }
                                         
                                         JToken instanceTypeValue2 = providerSpecificDetailsValue["instanceType"];
@@ -5629,18 +6046,157 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             inMageMigrationProviderSpecificDetailsInstance.LogStorageAccountId = logStorageAccountIdInstance2;
                                         }
                                         
-                                        JToken protectedDisksValue2 = providerSpecificDetailsValue["protectedDisks"];
-                                        if (protectedDisksValue2 != null && protectedDisksValue2.Type != JTokenType.Null)
+                                        JToken protectedDisksArray2 = providerSpecificDetailsValue["protectedDisks"];
+                                        if (protectedDisksArray2 != null && protectedDisksArray2.Type != JTokenType.Null)
                                         {
-                                            List<InMageMigrationProtectedDiskDetails> protectedDisksInstance = ((string)protectedDisksValue2);
-                                            inMageMigrationProviderSpecificDetailsInstance.ProtectedDisks = protectedDisksInstance;
+                                            foreach (JToken protectedDisksValue2 in ((JArray)protectedDisksArray2))
+                                            {
+                                                InMageMigrationProtectedDiskDetails vMwareCbtProtectedDiskDetailsInstance2 = new InMageMigrationProtectedDiskDetails();
+                                                inMageMigrationProviderSpecificDetailsInstance.ProtectedDisks.Add(vMwareCbtProtectedDiskDetailsInstance2);
+                                                
+                                                JToken diskIdValue2 = protectedDisksValue2["diskId"];
+                                                if (diskIdValue2 != null && diskIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string diskIdInstance2 = ((string)diskIdValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.DiskId = diskIdInstance2;
+                                                }
+                                                
+                                                JToken diskNameValue2 = protectedDisksValue2["diskName"];
+                                                if (diskNameValue2 != null && diskNameValue2.Type != JTokenType.Null)
+                                                {
+                                                    string diskNameInstance2 = ((string)diskNameValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.DiskName = diskNameInstance2;
+                                                }
+                                                
+                                                JToken isOSDiskValue2 = protectedDisksValue2["isOSDisk"];
+                                                if (isOSDiskValue2 != null && isOSDiskValue2.Type != JTokenType.Null)
+                                                {
+                                                    bool isOSDiskInstance2 = ((bool)isOSDiskValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.IsOSDisk = isOSDiskInstance2;
+                                                }
+                                                
+                                                JToken capacityInBytesValue2 = protectedDisksValue2["capacityInBytes"];
+                                                if (capacityInBytesValue2 != null && capacityInBytesValue2.Type != JTokenType.Null)
+                                                {
+                                                    long capacityInBytesInstance2 = ((long)capacityInBytesValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.CapacityInBytes = capacityInBytesInstance2;
+                                                }
+                                                
+                                                JToken logStorageAccountIdValue3 = protectedDisksValue2["logStorageAccountId"];
+                                                if (logStorageAccountIdValue3 != null && logStorageAccountIdValue3.Type != JTokenType.Null)
+                                                {
+                                                    string logStorageAccountIdInstance3 = ((string)logStorageAccountIdValue3);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.LogStorageAccountId = logStorageAccountIdInstance3;
+                                                }
+                                                
+                                                JToken seedManagedDiskIdValue2 = protectedDisksValue2["seedManagedDiskId"];
+                                                if (seedManagedDiskIdValue2 != null && seedManagedDiskIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string seedManagedDiskIdInstance2 = ((string)seedManagedDiskIdValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.SeedManagedDiskId = seedManagedDiskIdInstance2;
+                                                }
+                                                
+                                                JToken seedBlobUriValue2 = protectedDisksValue2["seedBlobUri"];
+                                                if (seedBlobUriValue2 != null && seedBlobUriValue2.Type != JTokenType.Null)
+                                                {
+                                                    string seedBlobUriInstance2 = ((string)seedBlobUriValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.SeedBlobUri = seedBlobUriInstance2;
+                                                }
+                                                
+                                                JToken targetManagedDiskIdValue2 = protectedDisksValue2["targetManagedDiskId"];
+                                                if (targetManagedDiskIdValue2 != null && targetManagedDiskIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetManagedDiskIdInstance2 = ((string)targetManagedDiskIdValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.TargetManagedDiskId = targetManagedDiskIdInstance2;
+                                                }
+                                                
+                                                JToken targetBlobUriValue2 = protectedDisksValue2["targetBlobUri"];
+                                                if (targetBlobUriValue2 != null && targetBlobUriValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetBlobUriInstance2 = ((string)targetBlobUriValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.TargetBlobUri = targetBlobUriInstance2;
+                                                }
+                                                
+                                                JToken diskTypeValue2 = protectedDisksValue2["diskType"];
+                                                if (diskTypeValue2 != null && diskTypeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string diskTypeInstance2 = ((string)diskTypeValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.DiskType = diskTypeInstance2;
+                                                }
+                                            }
                                         }
                                         
-                                        JToken vmNicsValue2 = providerSpecificDetailsValue["vmNics"];
-                                        if (vmNicsValue2 != null && vmNicsValue2.Type != JTokenType.Null)
+                                        JToken vmNicsArray2 = providerSpecificDetailsValue["vmNics"];
+                                        if (vmNicsArray2 != null && vmNicsArray2.Type != JTokenType.Null)
                                         {
-                                            List<InMageMigrationNicDetails> vmNicsInstance = ((string)vmNicsValue2);
-                                            inMageMigrationProviderSpecificDetailsInstance.VMNics = vmNicsInstance;
+                                            foreach (JToken vmNicsValue2 in ((JArray)vmNicsArray2))
+                                            {
+                                                InMageMigrationNicDetails inMageMigrationNicDetailsInstance = new InMageMigrationNicDetails();
+                                                inMageMigrationProviderSpecificDetailsInstance.VMNics.Add(inMageMigrationNicDetailsInstance);
+                                                
+                                                JToken nicIdValue2 = vmNicsValue2["nicId"];
+                                                if (nicIdValue2 != null && nicIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string nicIdInstance2 = ((string)nicIdValue2);
+                                                    inMageMigrationNicDetailsInstance.NicId = nicIdInstance2;
+                                                }
+                                                
+                                                JToken isPrimaryNicValue2 = vmNicsValue2["isPrimaryNic"];
+                                                if (isPrimaryNicValue2 != null && isPrimaryNicValue2.Type != JTokenType.Null)
+                                                {
+                                                    string isPrimaryNicInstance2 = ((string)isPrimaryNicValue2);
+                                                    inMageMigrationNicDetailsInstance.IsPrimaryNic = isPrimaryNicInstance2;
+                                                }
+                                                
+                                                JToken sourceIPAddressValue2 = vmNicsValue2["sourceIPAddress"];
+                                                if (sourceIPAddressValue2 != null && sourceIPAddressValue2.Type != JTokenType.Null)
+                                                {
+                                                    string sourceIPAddressInstance2 = ((string)sourceIPAddressValue2);
+                                                    inMageMigrationNicDetailsInstance.SourceIPAddress = sourceIPAddressInstance2;
+                                                }
+                                                
+                                                JToken sourceIPAddressTypeValue2 = vmNicsValue2["sourceIPAddressType"];
+                                                if (sourceIPAddressTypeValue2 != null && sourceIPAddressTypeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string sourceIPAddressTypeInstance2 = ((string)sourceIPAddressTypeValue2);
+                                                    inMageMigrationNicDetailsInstance.SourceIPAddressType = sourceIPAddressTypeInstance2;
+                                                }
+                                                
+                                                JToken sourceNetworkIdValue2 = vmNicsValue2["sourceNetworkId"];
+                                                if (sourceNetworkIdValue2 != null && sourceNetworkIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string sourceNetworkIdInstance2 = ((string)sourceNetworkIdValue2);
+                                                    inMageMigrationNicDetailsInstance.SourceNetworkId = sourceNetworkIdInstance2;
+                                                }
+                                                
+                                                JToken targetIPAddressValue2 = vmNicsValue2["targetIPAddress"];
+                                                if (targetIPAddressValue2 != null && targetIPAddressValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetIPAddressInstance2 = ((string)targetIPAddressValue2);
+                                                    inMageMigrationNicDetailsInstance.TargetIPAddress = targetIPAddressInstance2;
+                                                }
+                                                
+                                                JToken targetIPAddressTypeValue2 = vmNicsValue2["targetIPAddressType"];
+                                                if (targetIPAddressTypeValue2 != null && targetIPAddressTypeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetIPAddressTypeInstance2 = ((string)targetIPAddressTypeValue2);
+                                                    inMageMigrationNicDetailsInstance.TargetIPAddressType = targetIPAddressTypeInstance2;
+                                                }
+                                                
+                                                JToken targetSubnetNameValue2 = vmNicsValue2["targetSubnetName"];
+                                                if (targetSubnetNameValue2 != null && targetSubnetNameValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetSubnetNameInstance2 = ((string)targetSubnetNameValue2);
+                                                    inMageMigrationNicDetailsInstance.TargetSubnetName = targetSubnetNameInstance2;
+                                                }
+                                                
+                                                JToken isSelectedForMigrationValue2 = vmNicsValue2["isSelectedForMigration"];
+                                                if (isSelectedForMigrationValue2 != null && isSelectedForMigrationValue2.Type != JTokenType.Null)
+                                                {
+                                                    string isSelectedForMigrationInstance2 = ((string)isSelectedForMigrationValue2);
+                                                    inMageMigrationNicDetailsInstance.IsSelectedForMigration = isSelectedForMigrationInstance2;
+                                                }
+                                            }
                                         }
                                         
                                         JToken instanceTypeValue2 = providerSpecificDetailsValue["instanceType"];
@@ -6625,18 +7181,157 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             inMageMigrationProviderSpecificDetailsInstance.LogStorageAccountId = logStorageAccountIdInstance2;
                                         }
                                         
-                                        JToken protectedDisksValue2 = providerSpecificDetailsValue["protectedDisks"];
-                                        if (protectedDisksValue2 != null && protectedDisksValue2.Type != JTokenType.Null)
+                                        JToken protectedDisksArray2 = providerSpecificDetailsValue["protectedDisks"];
+                                        if (protectedDisksArray2 != null && protectedDisksArray2.Type != JTokenType.Null)
                                         {
-                                            List<InMageMigrationProtectedDiskDetails> protectedDisksInstance = ((string)protectedDisksValue2);
-                                            inMageMigrationProviderSpecificDetailsInstance.ProtectedDisks = protectedDisksInstance;
+                                            foreach (JToken protectedDisksValue2 in ((JArray)protectedDisksArray2))
+                                            {
+                                                InMageMigrationProtectedDiskDetails vMwareCbtProtectedDiskDetailsInstance2 = new InMageMigrationProtectedDiskDetails();
+                                                inMageMigrationProviderSpecificDetailsInstance.ProtectedDisks.Add(vMwareCbtProtectedDiskDetailsInstance2);
+                                                
+                                                JToken diskIdValue2 = protectedDisksValue2["diskId"];
+                                                if (diskIdValue2 != null && diskIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string diskIdInstance2 = ((string)diskIdValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.DiskId = diskIdInstance2;
+                                                }
+                                                
+                                                JToken diskNameValue2 = protectedDisksValue2["diskName"];
+                                                if (diskNameValue2 != null && diskNameValue2.Type != JTokenType.Null)
+                                                {
+                                                    string diskNameInstance2 = ((string)diskNameValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.DiskName = diskNameInstance2;
+                                                }
+                                                
+                                                JToken isOSDiskValue2 = protectedDisksValue2["isOSDisk"];
+                                                if (isOSDiskValue2 != null && isOSDiskValue2.Type != JTokenType.Null)
+                                                {
+                                                    bool isOSDiskInstance2 = ((bool)isOSDiskValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.IsOSDisk = isOSDiskInstance2;
+                                                }
+                                                
+                                                JToken capacityInBytesValue2 = protectedDisksValue2["capacityInBytes"];
+                                                if (capacityInBytesValue2 != null && capacityInBytesValue2.Type != JTokenType.Null)
+                                                {
+                                                    long capacityInBytesInstance2 = ((long)capacityInBytesValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.CapacityInBytes = capacityInBytesInstance2;
+                                                }
+                                                
+                                                JToken logStorageAccountIdValue3 = protectedDisksValue2["logStorageAccountId"];
+                                                if (logStorageAccountIdValue3 != null && logStorageAccountIdValue3.Type != JTokenType.Null)
+                                                {
+                                                    string logStorageAccountIdInstance3 = ((string)logStorageAccountIdValue3);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.LogStorageAccountId = logStorageAccountIdInstance3;
+                                                }
+                                                
+                                                JToken seedManagedDiskIdValue2 = protectedDisksValue2["seedManagedDiskId"];
+                                                if (seedManagedDiskIdValue2 != null && seedManagedDiskIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string seedManagedDiskIdInstance2 = ((string)seedManagedDiskIdValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.SeedManagedDiskId = seedManagedDiskIdInstance2;
+                                                }
+                                                
+                                                JToken seedBlobUriValue2 = protectedDisksValue2["seedBlobUri"];
+                                                if (seedBlobUriValue2 != null && seedBlobUriValue2.Type != JTokenType.Null)
+                                                {
+                                                    string seedBlobUriInstance2 = ((string)seedBlobUriValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.SeedBlobUri = seedBlobUriInstance2;
+                                                }
+                                                
+                                                JToken targetManagedDiskIdValue2 = protectedDisksValue2["targetManagedDiskId"];
+                                                if (targetManagedDiskIdValue2 != null && targetManagedDiskIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetManagedDiskIdInstance2 = ((string)targetManagedDiskIdValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.TargetManagedDiskId = targetManagedDiskIdInstance2;
+                                                }
+                                                
+                                                JToken targetBlobUriValue2 = protectedDisksValue2["targetBlobUri"];
+                                                if (targetBlobUriValue2 != null && targetBlobUriValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetBlobUriInstance2 = ((string)targetBlobUriValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.TargetBlobUri = targetBlobUriInstance2;
+                                                }
+                                                
+                                                JToken diskTypeValue2 = protectedDisksValue2["diskType"];
+                                                if (diskTypeValue2 != null && diskTypeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string diskTypeInstance2 = ((string)diskTypeValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.DiskType = diskTypeInstance2;
+                                                }
+                                            }
                                         }
                                         
-                                        JToken vmNicsValue2 = providerSpecificDetailsValue["vmNics"];
-                                        if (vmNicsValue2 != null && vmNicsValue2.Type != JTokenType.Null)
+                                        JToken vmNicsArray2 = providerSpecificDetailsValue["vmNics"];
+                                        if (vmNicsArray2 != null && vmNicsArray2.Type != JTokenType.Null)
                                         {
-                                            List<InMageMigrationNicDetails> vmNicsInstance = ((string)vmNicsValue2);
-                                            inMageMigrationProviderSpecificDetailsInstance.VMNics = vmNicsInstance;
+                                            foreach (JToken vmNicsValue2 in ((JArray)vmNicsArray2))
+                                            {
+                                                InMageMigrationNicDetails inMageMigrationNicDetailsInstance = new InMageMigrationNicDetails();
+                                                inMageMigrationProviderSpecificDetailsInstance.VMNics.Add(inMageMigrationNicDetailsInstance);
+                                                
+                                                JToken nicIdValue2 = vmNicsValue2["nicId"];
+                                                if (nicIdValue2 != null && nicIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string nicIdInstance2 = ((string)nicIdValue2);
+                                                    inMageMigrationNicDetailsInstance.NicId = nicIdInstance2;
+                                                }
+                                                
+                                                JToken isPrimaryNicValue2 = vmNicsValue2["isPrimaryNic"];
+                                                if (isPrimaryNicValue2 != null && isPrimaryNicValue2.Type != JTokenType.Null)
+                                                {
+                                                    string isPrimaryNicInstance2 = ((string)isPrimaryNicValue2);
+                                                    inMageMigrationNicDetailsInstance.IsPrimaryNic = isPrimaryNicInstance2;
+                                                }
+                                                
+                                                JToken sourceIPAddressValue2 = vmNicsValue2["sourceIPAddress"];
+                                                if (sourceIPAddressValue2 != null && sourceIPAddressValue2.Type != JTokenType.Null)
+                                                {
+                                                    string sourceIPAddressInstance2 = ((string)sourceIPAddressValue2);
+                                                    inMageMigrationNicDetailsInstance.SourceIPAddress = sourceIPAddressInstance2;
+                                                }
+                                                
+                                                JToken sourceIPAddressTypeValue2 = vmNicsValue2["sourceIPAddressType"];
+                                                if (sourceIPAddressTypeValue2 != null && sourceIPAddressTypeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string sourceIPAddressTypeInstance2 = ((string)sourceIPAddressTypeValue2);
+                                                    inMageMigrationNicDetailsInstance.SourceIPAddressType = sourceIPAddressTypeInstance2;
+                                                }
+                                                
+                                                JToken sourceNetworkIdValue2 = vmNicsValue2["sourceNetworkId"];
+                                                if (sourceNetworkIdValue2 != null && sourceNetworkIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string sourceNetworkIdInstance2 = ((string)sourceNetworkIdValue2);
+                                                    inMageMigrationNicDetailsInstance.SourceNetworkId = sourceNetworkIdInstance2;
+                                                }
+                                                
+                                                JToken targetIPAddressValue2 = vmNicsValue2["targetIPAddress"];
+                                                if (targetIPAddressValue2 != null && targetIPAddressValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetIPAddressInstance2 = ((string)targetIPAddressValue2);
+                                                    inMageMigrationNicDetailsInstance.TargetIPAddress = targetIPAddressInstance2;
+                                                }
+                                                
+                                                JToken targetIPAddressTypeValue2 = vmNicsValue2["targetIPAddressType"];
+                                                if (targetIPAddressTypeValue2 != null && targetIPAddressTypeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetIPAddressTypeInstance2 = ((string)targetIPAddressTypeValue2);
+                                                    inMageMigrationNicDetailsInstance.TargetIPAddressType = targetIPAddressTypeInstance2;
+                                                }
+                                                
+                                                JToken targetSubnetNameValue2 = vmNicsValue2["targetSubnetName"];
+                                                if (targetSubnetNameValue2 != null && targetSubnetNameValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetSubnetNameInstance2 = ((string)targetSubnetNameValue2);
+                                                    inMageMigrationNicDetailsInstance.TargetSubnetName = targetSubnetNameInstance2;
+                                                }
+                                                
+                                                JToken isSelectedForMigrationValue2 = vmNicsValue2["isSelectedForMigration"];
+                                                if (isSelectedForMigrationValue2 != null && isSelectedForMigrationValue2.Type != JTokenType.Null)
+                                                {
+                                                    string isSelectedForMigrationInstance2 = ((string)isSelectedForMigrationValue2);
+                                                    inMageMigrationNicDetailsInstance.IsSelectedForMigration = isSelectedForMigrationInstance2;
+                                                }
+                                            }
                                         }
                                         
                                         JToken instanceTypeValue2 = providerSpecificDetailsValue["instanceType"];
@@ -7621,18 +8316,157 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             inMageMigrationProviderSpecificDetailsInstance.LogStorageAccountId = logStorageAccountIdInstance2;
                                         }
                                         
-                                        JToken protectedDisksValue2 = providerSpecificDetailsValue["protectedDisks"];
-                                        if (protectedDisksValue2 != null && protectedDisksValue2.Type != JTokenType.Null)
+                                        JToken protectedDisksArray2 = providerSpecificDetailsValue["protectedDisks"];
+                                        if (protectedDisksArray2 != null && protectedDisksArray2.Type != JTokenType.Null)
                                         {
-                                            List<InMageMigrationProtectedDiskDetails> protectedDisksInstance = ((string)protectedDisksValue2);
-                                            inMageMigrationProviderSpecificDetailsInstance.ProtectedDisks = protectedDisksInstance;
+                                            foreach (JToken protectedDisksValue2 in ((JArray)protectedDisksArray2))
+                                            {
+                                                InMageMigrationProtectedDiskDetails vMwareCbtProtectedDiskDetailsInstance2 = new InMageMigrationProtectedDiskDetails();
+                                                inMageMigrationProviderSpecificDetailsInstance.ProtectedDisks.Add(vMwareCbtProtectedDiskDetailsInstance2);
+                                                
+                                                JToken diskIdValue2 = protectedDisksValue2["diskId"];
+                                                if (diskIdValue2 != null && diskIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string diskIdInstance2 = ((string)diskIdValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.DiskId = diskIdInstance2;
+                                                }
+                                                
+                                                JToken diskNameValue2 = protectedDisksValue2["diskName"];
+                                                if (diskNameValue2 != null && diskNameValue2.Type != JTokenType.Null)
+                                                {
+                                                    string diskNameInstance2 = ((string)diskNameValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.DiskName = diskNameInstance2;
+                                                }
+                                                
+                                                JToken isOSDiskValue2 = protectedDisksValue2["isOSDisk"];
+                                                if (isOSDiskValue2 != null && isOSDiskValue2.Type != JTokenType.Null)
+                                                {
+                                                    bool isOSDiskInstance2 = ((bool)isOSDiskValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.IsOSDisk = isOSDiskInstance2;
+                                                }
+                                                
+                                                JToken capacityInBytesValue2 = protectedDisksValue2["capacityInBytes"];
+                                                if (capacityInBytesValue2 != null && capacityInBytesValue2.Type != JTokenType.Null)
+                                                {
+                                                    long capacityInBytesInstance2 = ((long)capacityInBytesValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.CapacityInBytes = capacityInBytesInstance2;
+                                                }
+                                                
+                                                JToken logStorageAccountIdValue3 = protectedDisksValue2["logStorageAccountId"];
+                                                if (logStorageAccountIdValue3 != null && logStorageAccountIdValue3.Type != JTokenType.Null)
+                                                {
+                                                    string logStorageAccountIdInstance3 = ((string)logStorageAccountIdValue3);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.LogStorageAccountId = logStorageAccountIdInstance3;
+                                                }
+                                                
+                                                JToken seedManagedDiskIdValue2 = protectedDisksValue2["seedManagedDiskId"];
+                                                if (seedManagedDiskIdValue2 != null && seedManagedDiskIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string seedManagedDiskIdInstance2 = ((string)seedManagedDiskIdValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.SeedManagedDiskId = seedManagedDiskIdInstance2;
+                                                }
+                                                
+                                                JToken seedBlobUriValue2 = protectedDisksValue2["seedBlobUri"];
+                                                if (seedBlobUriValue2 != null && seedBlobUriValue2.Type != JTokenType.Null)
+                                                {
+                                                    string seedBlobUriInstance2 = ((string)seedBlobUriValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.SeedBlobUri = seedBlobUriInstance2;
+                                                }
+                                                
+                                                JToken targetManagedDiskIdValue2 = protectedDisksValue2["targetManagedDiskId"];
+                                                if (targetManagedDiskIdValue2 != null && targetManagedDiskIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetManagedDiskIdInstance2 = ((string)targetManagedDiskIdValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.TargetManagedDiskId = targetManagedDiskIdInstance2;
+                                                }
+                                                
+                                                JToken targetBlobUriValue2 = protectedDisksValue2["targetBlobUri"];
+                                                if (targetBlobUriValue2 != null && targetBlobUriValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetBlobUriInstance2 = ((string)targetBlobUriValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.TargetBlobUri = targetBlobUriInstance2;
+                                                }
+                                                
+                                                JToken diskTypeValue2 = protectedDisksValue2["diskType"];
+                                                if (diskTypeValue2 != null && diskTypeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string diskTypeInstance2 = ((string)diskTypeValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.DiskType = diskTypeInstance2;
+                                                }
+                                            }
                                         }
                                         
-                                        JToken vmNicsValue2 = providerSpecificDetailsValue["vmNics"];
-                                        if (vmNicsValue2 != null && vmNicsValue2.Type != JTokenType.Null)
+                                        JToken vmNicsArray2 = providerSpecificDetailsValue["vmNics"];
+                                        if (vmNicsArray2 != null && vmNicsArray2.Type != JTokenType.Null)
                                         {
-                                            List<InMageMigrationNicDetails> vmNicsInstance = ((string)vmNicsValue2);
-                                            inMageMigrationProviderSpecificDetailsInstance.VMNics = vmNicsInstance;
+                                            foreach (JToken vmNicsValue2 in ((JArray)vmNicsArray2))
+                                            {
+                                                InMageMigrationNicDetails inMageMigrationNicDetailsInstance = new InMageMigrationNicDetails();
+                                                inMageMigrationProviderSpecificDetailsInstance.VMNics.Add(inMageMigrationNicDetailsInstance);
+                                                
+                                                JToken nicIdValue2 = vmNicsValue2["nicId"];
+                                                if (nicIdValue2 != null && nicIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string nicIdInstance2 = ((string)nicIdValue2);
+                                                    inMageMigrationNicDetailsInstance.NicId = nicIdInstance2;
+                                                }
+                                                
+                                                JToken isPrimaryNicValue2 = vmNicsValue2["isPrimaryNic"];
+                                                if (isPrimaryNicValue2 != null && isPrimaryNicValue2.Type != JTokenType.Null)
+                                                {
+                                                    string isPrimaryNicInstance2 = ((string)isPrimaryNicValue2);
+                                                    inMageMigrationNicDetailsInstance.IsPrimaryNic = isPrimaryNicInstance2;
+                                                }
+                                                
+                                                JToken sourceIPAddressValue2 = vmNicsValue2["sourceIPAddress"];
+                                                if (sourceIPAddressValue2 != null && sourceIPAddressValue2.Type != JTokenType.Null)
+                                                {
+                                                    string sourceIPAddressInstance2 = ((string)sourceIPAddressValue2);
+                                                    inMageMigrationNicDetailsInstance.SourceIPAddress = sourceIPAddressInstance2;
+                                                }
+                                                
+                                                JToken sourceIPAddressTypeValue2 = vmNicsValue2["sourceIPAddressType"];
+                                                if (sourceIPAddressTypeValue2 != null && sourceIPAddressTypeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string sourceIPAddressTypeInstance2 = ((string)sourceIPAddressTypeValue2);
+                                                    inMageMigrationNicDetailsInstance.SourceIPAddressType = sourceIPAddressTypeInstance2;
+                                                }
+                                                
+                                                JToken sourceNetworkIdValue2 = vmNicsValue2["sourceNetworkId"];
+                                                if (sourceNetworkIdValue2 != null && sourceNetworkIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string sourceNetworkIdInstance2 = ((string)sourceNetworkIdValue2);
+                                                    inMageMigrationNicDetailsInstance.SourceNetworkId = sourceNetworkIdInstance2;
+                                                }
+                                                
+                                                JToken targetIPAddressValue2 = vmNicsValue2["targetIPAddress"];
+                                                if (targetIPAddressValue2 != null && targetIPAddressValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetIPAddressInstance2 = ((string)targetIPAddressValue2);
+                                                    inMageMigrationNicDetailsInstance.TargetIPAddress = targetIPAddressInstance2;
+                                                }
+                                                
+                                                JToken targetIPAddressTypeValue2 = vmNicsValue2["targetIPAddressType"];
+                                                if (targetIPAddressTypeValue2 != null && targetIPAddressTypeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetIPAddressTypeInstance2 = ((string)targetIPAddressTypeValue2);
+                                                    inMageMigrationNicDetailsInstance.TargetIPAddressType = targetIPAddressTypeInstance2;
+                                                }
+                                                
+                                                JToken targetSubnetNameValue2 = vmNicsValue2["targetSubnetName"];
+                                                if (targetSubnetNameValue2 != null && targetSubnetNameValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetSubnetNameInstance2 = ((string)targetSubnetNameValue2);
+                                                    inMageMigrationNicDetailsInstance.TargetSubnetName = targetSubnetNameInstance2;
+                                                }
+                                                
+                                                JToken isSelectedForMigrationValue2 = vmNicsValue2["isSelectedForMigration"];
+                                                if (isSelectedForMigrationValue2 != null && isSelectedForMigrationValue2.Type != JTokenType.Null)
+                                                {
+                                                    string isSelectedForMigrationInstance2 = ((string)isSelectedForMigrationValue2);
+                                                    inMageMigrationNicDetailsInstance.IsSelectedForMigration = isSelectedForMigrationInstance2;
+                                                }
+                                            }
                                         }
                                         
                                         JToken instanceTypeValue2 = providerSpecificDetailsValue["instanceType"];
@@ -8617,18 +9451,157 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             inMageMigrationProviderSpecificDetailsInstance.LogStorageAccountId = logStorageAccountIdInstance2;
                                         }
                                         
-                                        JToken protectedDisksValue2 = providerSpecificDetailsValue["protectedDisks"];
-                                        if (protectedDisksValue2 != null && protectedDisksValue2.Type != JTokenType.Null)
+                                        JToken protectedDisksArray2 = providerSpecificDetailsValue["protectedDisks"];
+                                        if (protectedDisksArray2 != null && protectedDisksArray2.Type != JTokenType.Null)
                                         {
-                                            List<InMageMigrationProtectedDiskDetails> protectedDisksInstance = ((string)protectedDisksValue2);
-                                            inMageMigrationProviderSpecificDetailsInstance.ProtectedDisks = protectedDisksInstance;
+                                            foreach (JToken protectedDisksValue2 in ((JArray)protectedDisksArray2))
+                                            {
+                                                InMageMigrationProtectedDiskDetails vMwareCbtProtectedDiskDetailsInstance2 = new InMageMigrationProtectedDiskDetails();
+                                                inMageMigrationProviderSpecificDetailsInstance.ProtectedDisks.Add(vMwareCbtProtectedDiskDetailsInstance2);
+                                                
+                                                JToken diskIdValue2 = protectedDisksValue2["diskId"];
+                                                if (diskIdValue2 != null && diskIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string diskIdInstance2 = ((string)diskIdValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.DiskId = diskIdInstance2;
+                                                }
+                                                
+                                                JToken diskNameValue2 = protectedDisksValue2["diskName"];
+                                                if (diskNameValue2 != null && diskNameValue2.Type != JTokenType.Null)
+                                                {
+                                                    string diskNameInstance2 = ((string)diskNameValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.DiskName = diskNameInstance2;
+                                                }
+                                                
+                                                JToken isOSDiskValue2 = protectedDisksValue2["isOSDisk"];
+                                                if (isOSDiskValue2 != null && isOSDiskValue2.Type != JTokenType.Null)
+                                                {
+                                                    bool isOSDiskInstance2 = ((bool)isOSDiskValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.IsOSDisk = isOSDiskInstance2;
+                                                }
+                                                
+                                                JToken capacityInBytesValue2 = protectedDisksValue2["capacityInBytes"];
+                                                if (capacityInBytesValue2 != null && capacityInBytesValue2.Type != JTokenType.Null)
+                                                {
+                                                    long capacityInBytesInstance2 = ((long)capacityInBytesValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.CapacityInBytes = capacityInBytesInstance2;
+                                                }
+                                                
+                                                JToken logStorageAccountIdValue3 = protectedDisksValue2["logStorageAccountId"];
+                                                if (logStorageAccountIdValue3 != null && logStorageAccountIdValue3.Type != JTokenType.Null)
+                                                {
+                                                    string logStorageAccountIdInstance3 = ((string)logStorageAccountIdValue3);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.LogStorageAccountId = logStorageAccountIdInstance3;
+                                                }
+                                                
+                                                JToken seedManagedDiskIdValue2 = protectedDisksValue2["seedManagedDiskId"];
+                                                if (seedManagedDiskIdValue2 != null && seedManagedDiskIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string seedManagedDiskIdInstance2 = ((string)seedManagedDiskIdValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.SeedManagedDiskId = seedManagedDiskIdInstance2;
+                                                }
+                                                
+                                                JToken seedBlobUriValue2 = protectedDisksValue2["seedBlobUri"];
+                                                if (seedBlobUriValue2 != null && seedBlobUriValue2.Type != JTokenType.Null)
+                                                {
+                                                    string seedBlobUriInstance2 = ((string)seedBlobUriValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.SeedBlobUri = seedBlobUriInstance2;
+                                                }
+                                                
+                                                JToken targetManagedDiskIdValue2 = protectedDisksValue2["targetManagedDiskId"];
+                                                if (targetManagedDiskIdValue2 != null && targetManagedDiskIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetManagedDiskIdInstance2 = ((string)targetManagedDiskIdValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.TargetManagedDiskId = targetManagedDiskIdInstance2;
+                                                }
+                                                
+                                                JToken targetBlobUriValue2 = protectedDisksValue2["targetBlobUri"];
+                                                if (targetBlobUriValue2 != null && targetBlobUriValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetBlobUriInstance2 = ((string)targetBlobUriValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.TargetBlobUri = targetBlobUriInstance2;
+                                                }
+                                                
+                                                JToken diskTypeValue2 = protectedDisksValue2["diskType"];
+                                                if (diskTypeValue2 != null && diskTypeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string diskTypeInstance2 = ((string)diskTypeValue2);
+                                                    vMwareCbtProtectedDiskDetailsInstance2.DiskType = diskTypeInstance2;
+                                                }
+                                            }
                                         }
                                         
-                                        JToken vmNicsValue2 = providerSpecificDetailsValue["vmNics"];
-                                        if (vmNicsValue2 != null && vmNicsValue2.Type != JTokenType.Null)
+                                        JToken vmNicsArray2 = providerSpecificDetailsValue["vmNics"];
+                                        if (vmNicsArray2 != null && vmNicsArray2.Type != JTokenType.Null)
                                         {
-                                            List<InMageMigrationNicDetails> vmNicsInstance = ((string)vmNicsValue2);
-                                            inMageMigrationProviderSpecificDetailsInstance.VMNics = vmNicsInstance;
+                                            foreach (JToken vmNicsValue2 in ((JArray)vmNicsArray2))
+                                            {
+                                                InMageMigrationNicDetails inMageMigrationNicDetailsInstance = new InMageMigrationNicDetails();
+                                                inMageMigrationProviderSpecificDetailsInstance.VMNics.Add(inMageMigrationNicDetailsInstance);
+                                                
+                                                JToken nicIdValue2 = vmNicsValue2["nicId"];
+                                                if (nicIdValue2 != null && nicIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string nicIdInstance2 = ((string)nicIdValue2);
+                                                    inMageMigrationNicDetailsInstance.NicId = nicIdInstance2;
+                                                }
+                                                
+                                                JToken isPrimaryNicValue2 = vmNicsValue2["isPrimaryNic"];
+                                                if (isPrimaryNicValue2 != null && isPrimaryNicValue2.Type != JTokenType.Null)
+                                                {
+                                                    string isPrimaryNicInstance2 = ((string)isPrimaryNicValue2);
+                                                    inMageMigrationNicDetailsInstance.IsPrimaryNic = isPrimaryNicInstance2;
+                                                }
+                                                
+                                                JToken sourceIPAddressValue2 = vmNicsValue2["sourceIPAddress"];
+                                                if (sourceIPAddressValue2 != null && sourceIPAddressValue2.Type != JTokenType.Null)
+                                                {
+                                                    string sourceIPAddressInstance2 = ((string)sourceIPAddressValue2);
+                                                    inMageMigrationNicDetailsInstance.SourceIPAddress = sourceIPAddressInstance2;
+                                                }
+                                                
+                                                JToken sourceIPAddressTypeValue2 = vmNicsValue2["sourceIPAddressType"];
+                                                if (sourceIPAddressTypeValue2 != null && sourceIPAddressTypeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string sourceIPAddressTypeInstance2 = ((string)sourceIPAddressTypeValue2);
+                                                    inMageMigrationNicDetailsInstance.SourceIPAddressType = sourceIPAddressTypeInstance2;
+                                                }
+                                                
+                                                JToken sourceNetworkIdValue2 = vmNicsValue2["sourceNetworkId"];
+                                                if (sourceNetworkIdValue2 != null && sourceNetworkIdValue2.Type != JTokenType.Null)
+                                                {
+                                                    string sourceNetworkIdInstance2 = ((string)sourceNetworkIdValue2);
+                                                    inMageMigrationNicDetailsInstance.SourceNetworkId = sourceNetworkIdInstance2;
+                                                }
+                                                
+                                                JToken targetIPAddressValue2 = vmNicsValue2["targetIPAddress"];
+                                                if (targetIPAddressValue2 != null && targetIPAddressValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetIPAddressInstance2 = ((string)targetIPAddressValue2);
+                                                    inMageMigrationNicDetailsInstance.TargetIPAddress = targetIPAddressInstance2;
+                                                }
+                                                
+                                                JToken targetIPAddressTypeValue2 = vmNicsValue2["targetIPAddressType"];
+                                                if (targetIPAddressTypeValue2 != null && targetIPAddressTypeValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetIPAddressTypeInstance2 = ((string)targetIPAddressTypeValue2);
+                                                    inMageMigrationNicDetailsInstance.TargetIPAddressType = targetIPAddressTypeInstance2;
+                                                }
+                                                
+                                                JToken targetSubnetNameValue2 = vmNicsValue2["targetSubnetName"];
+                                                if (targetSubnetNameValue2 != null && targetSubnetNameValue2.Type != JTokenType.Null)
+                                                {
+                                                    string targetSubnetNameInstance2 = ((string)targetSubnetNameValue2);
+                                                    inMageMigrationNicDetailsInstance.TargetSubnetName = targetSubnetNameInstance2;
+                                                }
+                                                
+                                                JToken isSelectedForMigrationValue2 = vmNicsValue2["isSelectedForMigration"];
+                                                if (isSelectedForMigrationValue2 != null && isSelectedForMigrationValue2.Type != JTokenType.Null)
+                                                {
+                                                    string isSelectedForMigrationInstance2 = ((string)isSelectedForMigrationValue2);
+                                                    inMageMigrationNicDetailsInstance.IsSelectedForMigration = isSelectedForMigrationInstance2;
+                                                }
+                                            }
                                         }
                                         
                                         JToken instanceTypeValue2 = providerSpecificDetailsValue["instanceType"];
@@ -9662,18 +10635,157 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     inMageMigrationProviderSpecificDetailsInstance.LogStorageAccountId = logStorageAccountIdInstance2;
                                                 }
                                                 
-                                                JToken protectedDisksValue2 = providerSpecificDetailsValue["protectedDisks"];
-                                                if (protectedDisksValue2 != null && protectedDisksValue2.Type != JTokenType.Null)
+                                                JToken protectedDisksArray2 = providerSpecificDetailsValue["protectedDisks"];
+                                                if (protectedDisksArray2 != null && protectedDisksArray2.Type != JTokenType.Null)
                                                 {
-                                                    List<InMageMigrationProtectedDiskDetails> protectedDisksInstance = ((string)protectedDisksValue2);
-                                                    inMageMigrationProviderSpecificDetailsInstance.ProtectedDisks = protectedDisksInstance;
+                                                    foreach (JToken protectedDisksValue2 in ((JArray)protectedDisksArray2))
+                                                    {
+                                                        InMageMigrationProtectedDiskDetails vMwareCbtProtectedDiskDetailsInstance2 = new InMageMigrationProtectedDiskDetails();
+                                                        inMageMigrationProviderSpecificDetailsInstance.ProtectedDisks.Add(vMwareCbtProtectedDiskDetailsInstance2);
+                                                        
+                                                        JToken diskIdValue2 = protectedDisksValue2["diskId"];
+                                                        if (diskIdValue2 != null && diskIdValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string diskIdInstance2 = ((string)diskIdValue2);
+                                                            vMwareCbtProtectedDiskDetailsInstance2.DiskId = diskIdInstance2;
+                                                        }
+                                                        
+                                                        JToken diskNameValue2 = protectedDisksValue2["diskName"];
+                                                        if (diskNameValue2 != null && diskNameValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string diskNameInstance2 = ((string)diskNameValue2);
+                                                            vMwareCbtProtectedDiskDetailsInstance2.DiskName = diskNameInstance2;
+                                                        }
+                                                        
+                                                        JToken isOSDiskValue2 = protectedDisksValue2["isOSDisk"];
+                                                        if (isOSDiskValue2 != null && isOSDiskValue2.Type != JTokenType.Null)
+                                                        {
+                                                            bool isOSDiskInstance2 = ((bool)isOSDiskValue2);
+                                                            vMwareCbtProtectedDiskDetailsInstance2.IsOSDisk = isOSDiskInstance2;
+                                                        }
+                                                        
+                                                        JToken capacityInBytesValue2 = protectedDisksValue2["capacityInBytes"];
+                                                        if (capacityInBytesValue2 != null && capacityInBytesValue2.Type != JTokenType.Null)
+                                                        {
+                                                            long capacityInBytesInstance2 = ((long)capacityInBytesValue2);
+                                                            vMwareCbtProtectedDiskDetailsInstance2.CapacityInBytes = capacityInBytesInstance2;
+                                                        }
+                                                        
+                                                        JToken logStorageAccountIdValue3 = protectedDisksValue2["logStorageAccountId"];
+                                                        if (logStorageAccountIdValue3 != null && logStorageAccountIdValue3.Type != JTokenType.Null)
+                                                        {
+                                                            string logStorageAccountIdInstance3 = ((string)logStorageAccountIdValue3);
+                                                            vMwareCbtProtectedDiskDetailsInstance2.LogStorageAccountId = logStorageAccountIdInstance3;
+                                                        }
+                                                        
+                                                        JToken seedManagedDiskIdValue2 = protectedDisksValue2["seedManagedDiskId"];
+                                                        if (seedManagedDiskIdValue2 != null && seedManagedDiskIdValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string seedManagedDiskIdInstance2 = ((string)seedManagedDiskIdValue2);
+                                                            vMwareCbtProtectedDiskDetailsInstance2.SeedManagedDiskId = seedManagedDiskIdInstance2;
+                                                        }
+                                                        
+                                                        JToken seedBlobUriValue2 = protectedDisksValue2["seedBlobUri"];
+                                                        if (seedBlobUriValue2 != null && seedBlobUriValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string seedBlobUriInstance2 = ((string)seedBlobUriValue2);
+                                                            vMwareCbtProtectedDiskDetailsInstance2.SeedBlobUri = seedBlobUriInstance2;
+                                                        }
+                                                        
+                                                        JToken targetManagedDiskIdValue2 = protectedDisksValue2["targetManagedDiskId"];
+                                                        if (targetManagedDiskIdValue2 != null && targetManagedDiskIdValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string targetManagedDiskIdInstance2 = ((string)targetManagedDiskIdValue2);
+                                                            vMwareCbtProtectedDiskDetailsInstance2.TargetManagedDiskId = targetManagedDiskIdInstance2;
+                                                        }
+                                                        
+                                                        JToken targetBlobUriValue2 = protectedDisksValue2["targetBlobUri"];
+                                                        if (targetBlobUriValue2 != null && targetBlobUriValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string targetBlobUriInstance2 = ((string)targetBlobUriValue2);
+                                                            vMwareCbtProtectedDiskDetailsInstance2.TargetBlobUri = targetBlobUriInstance2;
+                                                        }
+                                                        
+                                                        JToken diskTypeValue2 = protectedDisksValue2["diskType"];
+                                                        if (diskTypeValue2 != null && diskTypeValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string diskTypeInstance2 = ((string)diskTypeValue2);
+                                                            vMwareCbtProtectedDiskDetailsInstance2.DiskType = diskTypeInstance2;
+                                                        }
+                                                    }
                                                 }
                                                 
-                                                JToken vmNicsValue2 = providerSpecificDetailsValue["vmNics"];
-                                                if (vmNicsValue2 != null && vmNicsValue2.Type != JTokenType.Null)
+                                                JToken vmNicsArray2 = providerSpecificDetailsValue["vmNics"];
+                                                if (vmNicsArray2 != null && vmNicsArray2.Type != JTokenType.Null)
                                                 {
-                                                    List<InMageMigrationNicDetails> vmNicsInstance = ((string)vmNicsValue2);
-                                                    inMageMigrationProviderSpecificDetailsInstance.VMNics = vmNicsInstance;
+                                                    foreach (JToken vmNicsValue2 in ((JArray)vmNicsArray2))
+                                                    {
+                                                        InMageMigrationNicDetails inMageMigrationNicDetailsInstance = new InMageMigrationNicDetails();
+                                                        inMageMigrationProviderSpecificDetailsInstance.VMNics.Add(inMageMigrationNicDetailsInstance);
+                                                        
+                                                        JToken nicIdValue2 = vmNicsValue2["nicId"];
+                                                        if (nicIdValue2 != null && nicIdValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string nicIdInstance2 = ((string)nicIdValue2);
+                                                            inMageMigrationNicDetailsInstance.NicId = nicIdInstance2;
+                                                        }
+                                                        
+                                                        JToken isPrimaryNicValue2 = vmNicsValue2["isPrimaryNic"];
+                                                        if (isPrimaryNicValue2 != null && isPrimaryNicValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string isPrimaryNicInstance2 = ((string)isPrimaryNicValue2);
+                                                            inMageMigrationNicDetailsInstance.IsPrimaryNic = isPrimaryNicInstance2;
+                                                        }
+                                                        
+                                                        JToken sourceIPAddressValue2 = vmNicsValue2["sourceIPAddress"];
+                                                        if (sourceIPAddressValue2 != null && sourceIPAddressValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string sourceIPAddressInstance2 = ((string)sourceIPAddressValue2);
+                                                            inMageMigrationNicDetailsInstance.SourceIPAddress = sourceIPAddressInstance2;
+                                                        }
+                                                        
+                                                        JToken sourceIPAddressTypeValue2 = vmNicsValue2["sourceIPAddressType"];
+                                                        if (sourceIPAddressTypeValue2 != null && sourceIPAddressTypeValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string sourceIPAddressTypeInstance2 = ((string)sourceIPAddressTypeValue2);
+                                                            inMageMigrationNicDetailsInstance.SourceIPAddressType = sourceIPAddressTypeInstance2;
+                                                        }
+                                                        
+                                                        JToken sourceNetworkIdValue2 = vmNicsValue2["sourceNetworkId"];
+                                                        if (sourceNetworkIdValue2 != null && sourceNetworkIdValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string sourceNetworkIdInstance2 = ((string)sourceNetworkIdValue2);
+                                                            inMageMigrationNicDetailsInstance.SourceNetworkId = sourceNetworkIdInstance2;
+                                                        }
+                                                        
+                                                        JToken targetIPAddressValue2 = vmNicsValue2["targetIPAddress"];
+                                                        if (targetIPAddressValue2 != null && targetIPAddressValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string targetIPAddressInstance2 = ((string)targetIPAddressValue2);
+                                                            inMageMigrationNicDetailsInstance.TargetIPAddress = targetIPAddressInstance2;
+                                                        }
+                                                        
+                                                        JToken targetIPAddressTypeValue2 = vmNicsValue2["targetIPAddressType"];
+                                                        if (targetIPAddressTypeValue2 != null && targetIPAddressTypeValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string targetIPAddressTypeInstance2 = ((string)targetIPAddressTypeValue2);
+                                                            inMageMigrationNicDetailsInstance.TargetIPAddressType = targetIPAddressTypeInstance2;
+                                                        }
+                                                        
+                                                        JToken targetSubnetNameValue2 = vmNicsValue2["targetSubnetName"];
+                                                        if (targetSubnetNameValue2 != null && targetSubnetNameValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string targetSubnetNameInstance2 = ((string)targetSubnetNameValue2);
+                                                            inMageMigrationNicDetailsInstance.TargetSubnetName = targetSubnetNameInstance2;
+                                                        }
+                                                        
+                                                        JToken isSelectedForMigrationValue2 = vmNicsValue2["isSelectedForMigration"];
+                                                        if (isSelectedForMigrationValue2 != null && isSelectedForMigrationValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string isSelectedForMigrationInstance2 = ((string)isSelectedForMigrationValue2);
+                                                            inMageMigrationNicDetailsInstance.IsSelectedForMigration = isSelectedForMigrationInstance2;
+                                                        }
+                                                    }
                                                 }
                                                 
                                                 JToken instanceTypeValue2 = providerSpecificDetailsValue["instanceType"];
@@ -10658,18 +11770,157 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     inMageMigrationProviderSpecificDetailsInstance.LogStorageAccountId = logStorageAccountIdInstance2;
                                                 }
                                                 
-                                                JToken protectedDisksValue2 = providerSpecificDetailsValue["protectedDisks"];
-                                                if (protectedDisksValue2 != null && protectedDisksValue2.Type != JTokenType.Null)
+                                                JToken protectedDisksArray2 = providerSpecificDetailsValue["protectedDisks"];
+                                                if (protectedDisksArray2 != null && protectedDisksArray2.Type != JTokenType.Null)
                                                 {
-                                                    List<InMageMigrationProtectedDiskDetails> protectedDisksInstance = ((string)protectedDisksValue2);
-                                                    inMageMigrationProviderSpecificDetailsInstance.ProtectedDisks = protectedDisksInstance;
+                                                    foreach (JToken protectedDisksValue2 in ((JArray)protectedDisksArray2))
+                                                    {
+                                                        InMageMigrationProtectedDiskDetails vMwareCbtProtectedDiskDetailsInstance2 = new InMageMigrationProtectedDiskDetails();
+                                                        inMageMigrationProviderSpecificDetailsInstance.ProtectedDisks.Add(vMwareCbtProtectedDiskDetailsInstance2);
+                                                        
+                                                        JToken diskIdValue2 = protectedDisksValue2["diskId"];
+                                                        if (diskIdValue2 != null && diskIdValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string diskIdInstance2 = ((string)diskIdValue2);
+                                                            vMwareCbtProtectedDiskDetailsInstance2.DiskId = diskIdInstance2;
+                                                        }
+                                                        
+                                                        JToken diskNameValue2 = protectedDisksValue2["diskName"];
+                                                        if (diskNameValue2 != null && diskNameValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string diskNameInstance2 = ((string)diskNameValue2);
+                                                            vMwareCbtProtectedDiskDetailsInstance2.DiskName = diskNameInstance2;
+                                                        }
+                                                        
+                                                        JToken isOSDiskValue2 = protectedDisksValue2["isOSDisk"];
+                                                        if (isOSDiskValue2 != null && isOSDiskValue2.Type != JTokenType.Null)
+                                                        {
+                                                            bool isOSDiskInstance2 = ((bool)isOSDiskValue2);
+                                                            vMwareCbtProtectedDiskDetailsInstance2.IsOSDisk = isOSDiskInstance2;
+                                                        }
+                                                        
+                                                        JToken capacityInBytesValue2 = protectedDisksValue2["capacityInBytes"];
+                                                        if (capacityInBytesValue2 != null && capacityInBytesValue2.Type != JTokenType.Null)
+                                                        {
+                                                            long capacityInBytesInstance2 = ((long)capacityInBytesValue2);
+                                                            vMwareCbtProtectedDiskDetailsInstance2.CapacityInBytes = capacityInBytesInstance2;
+                                                        }
+                                                        
+                                                        JToken logStorageAccountIdValue3 = protectedDisksValue2["logStorageAccountId"];
+                                                        if (logStorageAccountIdValue3 != null && logStorageAccountIdValue3.Type != JTokenType.Null)
+                                                        {
+                                                            string logStorageAccountIdInstance3 = ((string)logStorageAccountIdValue3);
+                                                            vMwareCbtProtectedDiskDetailsInstance2.LogStorageAccountId = logStorageAccountIdInstance3;
+                                                        }
+                                                        
+                                                        JToken seedManagedDiskIdValue2 = protectedDisksValue2["seedManagedDiskId"];
+                                                        if (seedManagedDiskIdValue2 != null && seedManagedDiskIdValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string seedManagedDiskIdInstance2 = ((string)seedManagedDiskIdValue2);
+                                                            vMwareCbtProtectedDiskDetailsInstance2.SeedManagedDiskId = seedManagedDiskIdInstance2;
+                                                        }
+                                                        
+                                                        JToken seedBlobUriValue2 = protectedDisksValue2["seedBlobUri"];
+                                                        if (seedBlobUriValue2 != null && seedBlobUriValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string seedBlobUriInstance2 = ((string)seedBlobUriValue2);
+                                                            vMwareCbtProtectedDiskDetailsInstance2.SeedBlobUri = seedBlobUriInstance2;
+                                                        }
+                                                        
+                                                        JToken targetManagedDiskIdValue2 = protectedDisksValue2["targetManagedDiskId"];
+                                                        if (targetManagedDiskIdValue2 != null && targetManagedDiskIdValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string targetManagedDiskIdInstance2 = ((string)targetManagedDiskIdValue2);
+                                                            vMwareCbtProtectedDiskDetailsInstance2.TargetManagedDiskId = targetManagedDiskIdInstance2;
+                                                        }
+                                                        
+                                                        JToken targetBlobUriValue2 = protectedDisksValue2["targetBlobUri"];
+                                                        if (targetBlobUriValue2 != null && targetBlobUriValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string targetBlobUriInstance2 = ((string)targetBlobUriValue2);
+                                                            vMwareCbtProtectedDiskDetailsInstance2.TargetBlobUri = targetBlobUriInstance2;
+                                                        }
+                                                        
+                                                        JToken diskTypeValue2 = protectedDisksValue2["diskType"];
+                                                        if (diskTypeValue2 != null && diskTypeValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string diskTypeInstance2 = ((string)diskTypeValue2);
+                                                            vMwareCbtProtectedDiskDetailsInstance2.DiskType = diskTypeInstance2;
+                                                        }
+                                                    }
                                                 }
                                                 
-                                                JToken vmNicsValue2 = providerSpecificDetailsValue["vmNics"];
-                                                if (vmNicsValue2 != null && vmNicsValue2.Type != JTokenType.Null)
+                                                JToken vmNicsArray2 = providerSpecificDetailsValue["vmNics"];
+                                                if (vmNicsArray2 != null && vmNicsArray2.Type != JTokenType.Null)
                                                 {
-                                                    List<InMageMigrationNicDetails> vmNicsInstance = ((string)vmNicsValue2);
-                                                    inMageMigrationProviderSpecificDetailsInstance.VMNics = vmNicsInstance;
+                                                    foreach (JToken vmNicsValue2 in ((JArray)vmNicsArray2))
+                                                    {
+                                                        InMageMigrationNicDetails inMageMigrationNicDetailsInstance = new InMageMigrationNicDetails();
+                                                        inMageMigrationProviderSpecificDetailsInstance.VMNics.Add(inMageMigrationNicDetailsInstance);
+                                                        
+                                                        JToken nicIdValue2 = vmNicsValue2["nicId"];
+                                                        if (nicIdValue2 != null && nicIdValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string nicIdInstance2 = ((string)nicIdValue2);
+                                                            inMageMigrationNicDetailsInstance.NicId = nicIdInstance2;
+                                                        }
+                                                        
+                                                        JToken isPrimaryNicValue2 = vmNicsValue2["isPrimaryNic"];
+                                                        if (isPrimaryNicValue2 != null && isPrimaryNicValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string isPrimaryNicInstance2 = ((string)isPrimaryNicValue2);
+                                                            inMageMigrationNicDetailsInstance.IsPrimaryNic = isPrimaryNicInstance2;
+                                                        }
+                                                        
+                                                        JToken sourceIPAddressValue2 = vmNicsValue2["sourceIPAddress"];
+                                                        if (sourceIPAddressValue2 != null && sourceIPAddressValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string sourceIPAddressInstance2 = ((string)sourceIPAddressValue2);
+                                                            inMageMigrationNicDetailsInstance.SourceIPAddress = sourceIPAddressInstance2;
+                                                        }
+                                                        
+                                                        JToken sourceIPAddressTypeValue2 = vmNicsValue2["sourceIPAddressType"];
+                                                        if (sourceIPAddressTypeValue2 != null && sourceIPAddressTypeValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string sourceIPAddressTypeInstance2 = ((string)sourceIPAddressTypeValue2);
+                                                            inMageMigrationNicDetailsInstance.SourceIPAddressType = sourceIPAddressTypeInstance2;
+                                                        }
+                                                        
+                                                        JToken sourceNetworkIdValue2 = vmNicsValue2["sourceNetworkId"];
+                                                        if (sourceNetworkIdValue2 != null && sourceNetworkIdValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string sourceNetworkIdInstance2 = ((string)sourceNetworkIdValue2);
+                                                            inMageMigrationNicDetailsInstance.SourceNetworkId = sourceNetworkIdInstance2;
+                                                        }
+                                                        
+                                                        JToken targetIPAddressValue2 = vmNicsValue2["targetIPAddress"];
+                                                        if (targetIPAddressValue2 != null && targetIPAddressValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string targetIPAddressInstance2 = ((string)targetIPAddressValue2);
+                                                            inMageMigrationNicDetailsInstance.TargetIPAddress = targetIPAddressInstance2;
+                                                        }
+                                                        
+                                                        JToken targetIPAddressTypeValue2 = vmNicsValue2["targetIPAddressType"];
+                                                        if (targetIPAddressTypeValue2 != null && targetIPAddressTypeValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string targetIPAddressTypeInstance2 = ((string)targetIPAddressTypeValue2);
+                                                            inMageMigrationNicDetailsInstance.TargetIPAddressType = targetIPAddressTypeInstance2;
+                                                        }
+                                                        
+                                                        JToken targetSubnetNameValue2 = vmNicsValue2["targetSubnetName"];
+                                                        if (targetSubnetNameValue2 != null && targetSubnetNameValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string targetSubnetNameInstance2 = ((string)targetSubnetNameValue2);
+                                                            inMageMigrationNicDetailsInstance.TargetSubnetName = targetSubnetNameInstance2;
+                                                        }
+                                                        
+                                                        JToken isSelectedForMigrationValue2 = vmNicsValue2["isSelectedForMigration"];
+                                                        if (isSelectedForMigrationValue2 != null && isSelectedForMigrationValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string isSelectedForMigrationInstance2 = ((string)isSelectedForMigrationValue2);
+                                                            inMageMigrationNicDetailsInstance.IsSelectedForMigration = isSelectedForMigrationInstance2;
+                                                        }
+                                                    }
                                                 }
                                                 
                                                 JToken instanceTypeValue2 = providerSpecificDetailsValue["instanceType"];
@@ -11611,18 +12862,157 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     inMageMigrationProviderSpecificDetailsInstance.LogStorageAccountId = logStorageAccountIdInstance2;
                                                 }
                                                 
-                                                JToken protectedDisksValue2 = providerSpecificDetailsValue["protectedDisks"];
-                                                if (protectedDisksValue2 != null && protectedDisksValue2.Type != JTokenType.Null)
+                                                JToken protectedDisksArray2 = providerSpecificDetailsValue["protectedDisks"];
+                                                if (protectedDisksArray2 != null && protectedDisksArray2.Type != JTokenType.Null)
                                                 {
-                                                    List<InMageMigrationProtectedDiskDetails> protectedDisksInstance = ((string)protectedDisksValue2);
-                                                    inMageMigrationProviderSpecificDetailsInstance.ProtectedDisks = protectedDisksInstance;
+                                                    foreach (JToken protectedDisksValue2 in ((JArray)protectedDisksArray2))
+                                                    {
+                                                        InMageMigrationProtectedDiskDetails vMwareCbtProtectedDiskDetailsInstance2 = new InMageMigrationProtectedDiskDetails();
+                                                        inMageMigrationProviderSpecificDetailsInstance.ProtectedDisks.Add(vMwareCbtProtectedDiskDetailsInstance2);
+                                                        
+                                                        JToken diskIdValue2 = protectedDisksValue2["diskId"];
+                                                        if (diskIdValue2 != null && diskIdValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string diskIdInstance2 = ((string)diskIdValue2);
+                                                            vMwareCbtProtectedDiskDetailsInstance2.DiskId = diskIdInstance2;
+                                                        }
+                                                        
+                                                        JToken diskNameValue2 = protectedDisksValue2["diskName"];
+                                                        if (diskNameValue2 != null && diskNameValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string diskNameInstance2 = ((string)diskNameValue2);
+                                                            vMwareCbtProtectedDiskDetailsInstance2.DiskName = diskNameInstance2;
+                                                        }
+                                                        
+                                                        JToken isOSDiskValue2 = protectedDisksValue2["isOSDisk"];
+                                                        if (isOSDiskValue2 != null && isOSDiskValue2.Type != JTokenType.Null)
+                                                        {
+                                                            bool isOSDiskInstance2 = ((bool)isOSDiskValue2);
+                                                            vMwareCbtProtectedDiskDetailsInstance2.IsOSDisk = isOSDiskInstance2;
+                                                        }
+                                                        
+                                                        JToken capacityInBytesValue2 = protectedDisksValue2["capacityInBytes"];
+                                                        if (capacityInBytesValue2 != null && capacityInBytesValue2.Type != JTokenType.Null)
+                                                        {
+                                                            long capacityInBytesInstance2 = ((long)capacityInBytesValue2);
+                                                            vMwareCbtProtectedDiskDetailsInstance2.CapacityInBytes = capacityInBytesInstance2;
+                                                        }
+                                                        
+                                                        JToken logStorageAccountIdValue3 = protectedDisksValue2["logStorageAccountId"];
+                                                        if (logStorageAccountIdValue3 != null && logStorageAccountIdValue3.Type != JTokenType.Null)
+                                                        {
+                                                            string logStorageAccountIdInstance3 = ((string)logStorageAccountIdValue3);
+                                                            vMwareCbtProtectedDiskDetailsInstance2.LogStorageAccountId = logStorageAccountIdInstance3;
+                                                        }
+                                                        
+                                                        JToken seedManagedDiskIdValue2 = protectedDisksValue2["seedManagedDiskId"];
+                                                        if (seedManagedDiskIdValue2 != null && seedManagedDiskIdValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string seedManagedDiskIdInstance2 = ((string)seedManagedDiskIdValue2);
+                                                            vMwareCbtProtectedDiskDetailsInstance2.SeedManagedDiskId = seedManagedDiskIdInstance2;
+                                                        }
+                                                        
+                                                        JToken seedBlobUriValue2 = protectedDisksValue2["seedBlobUri"];
+                                                        if (seedBlobUriValue2 != null && seedBlobUriValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string seedBlobUriInstance2 = ((string)seedBlobUriValue2);
+                                                            vMwareCbtProtectedDiskDetailsInstance2.SeedBlobUri = seedBlobUriInstance2;
+                                                        }
+                                                        
+                                                        JToken targetManagedDiskIdValue2 = protectedDisksValue2["targetManagedDiskId"];
+                                                        if (targetManagedDiskIdValue2 != null && targetManagedDiskIdValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string targetManagedDiskIdInstance2 = ((string)targetManagedDiskIdValue2);
+                                                            vMwareCbtProtectedDiskDetailsInstance2.TargetManagedDiskId = targetManagedDiskIdInstance2;
+                                                        }
+                                                        
+                                                        JToken targetBlobUriValue2 = protectedDisksValue2["targetBlobUri"];
+                                                        if (targetBlobUriValue2 != null && targetBlobUriValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string targetBlobUriInstance2 = ((string)targetBlobUriValue2);
+                                                            vMwareCbtProtectedDiskDetailsInstance2.TargetBlobUri = targetBlobUriInstance2;
+                                                        }
+                                                        
+                                                        JToken diskTypeValue2 = protectedDisksValue2["diskType"];
+                                                        if (diskTypeValue2 != null && diskTypeValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string diskTypeInstance2 = ((string)diskTypeValue2);
+                                                            vMwareCbtProtectedDiskDetailsInstance2.DiskType = diskTypeInstance2;
+                                                        }
+                                                    }
                                                 }
                                                 
-                                                JToken vmNicsValue2 = providerSpecificDetailsValue["vmNics"];
-                                                if (vmNicsValue2 != null && vmNicsValue2.Type != JTokenType.Null)
+                                                JToken vmNicsArray2 = providerSpecificDetailsValue["vmNics"];
+                                                if (vmNicsArray2 != null && vmNicsArray2.Type != JTokenType.Null)
                                                 {
-                                                    List<InMageMigrationNicDetails> vmNicsInstance = ((string)vmNicsValue2);
-                                                    inMageMigrationProviderSpecificDetailsInstance.VMNics = vmNicsInstance;
+                                                    foreach (JToken vmNicsValue2 in ((JArray)vmNicsArray2))
+                                                    {
+                                                        InMageMigrationNicDetails inMageMigrationNicDetailsInstance = new InMageMigrationNicDetails();
+                                                        inMageMigrationProviderSpecificDetailsInstance.VMNics.Add(inMageMigrationNicDetailsInstance);
+                                                        
+                                                        JToken nicIdValue2 = vmNicsValue2["nicId"];
+                                                        if (nicIdValue2 != null && nicIdValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string nicIdInstance2 = ((string)nicIdValue2);
+                                                            inMageMigrationNicDetailsInstance.NicId = nicIdInstance2;
+                                                        }
+                                                        
+                                                        JToken isPrimaryNicValue2 = vmNicsValue2["isPrimaryNic"];
+                                                        if (isPrimaryNicValue2 != null && isPrimaryNicValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string isPrimaryNicInstance2 = ((string)isPrimaryNicValue2);
+                                                            inMageMigrationNicDetailsInstance.IsPrimaryNic = isPrimaryNicInstance2;
+                                                        }
+                                                        
+                                                        JToken sourceIPAddressValue2 = vmNicsValue2["sourceIPAddress"];
+                                                        if (sourceIPAddressValue2 != null && sourceIPAddressValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string sourceIPAddressInstance2 = ((string)sourceIPAddressValue2);
+                                                            inMageMigrationNicDetailsInstance.SourceIPAddress = sourceIPAddressInstance2;
+                                                        }
+                                                        
+                                                        JToken sourceIPAddressTypeValue2 = vmNicsValue2["sourceIPAddressType"];
+                                                        if (sourceIPAddressTypeValue2 != null && sourceIPAddressTypeValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string sourceIPAddressTypeInstance2 = ((string)sourceIPAddressTypeValue2);
+                                                            inMageMigrationNicDetailsInstance.SourceIPAddressType = sourceIPAddressTypeInstance2;
+                                                        }
+                                                        
+                                                        JToken sourceNetworkIdValue2 = vmNicsValue2["sourceNetworkId"];
+                                                        if (sourceNetworkIdValue2 != null && sourceNetworkIdValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string sourceNetworkIdInstance2 = ((string)sourceNetworkIdValue2);
+                                                            inMageMigrationNicDetailsInstance.SourceNetworkId = sourceNetworkIdInstance2;
+                                                        }
+                                                        
+                                                        JToken targetIPAddressValue2 = vmNicsValue2["targetIPAddress"];
+                                                        if (targetIPAddressValue2 != null && targetIPAddressValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string targetIPAddressInstance2 = ((string)targetIPAddressValue2);
+                                                            inMageMigrationNicDetailsInstance.TargetIPAddress = targetIPAddressInstance2;
+                                                        }
+                                                        
+                                                        JToken targetIPAddressTypeValue2 = vmNicsValue2["targetIPAddressType"];
+                                                        if (targetIPAddressTypeValue2 != null && targetIPAddressTypeValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string targetIPAddressTypeInstance2 = ((string)targetIPAddressTypeValue2);
+                                                            inMageMigrationNicDetailsInstance.TargetIPAddressType = targetIPAddressTypeInstance2;
+                                                        }
+                                                        
+                                                        JToken targetSubnetNameValue2 = vmNicsValue2["targetSubnetName"];
+                                                        if (targetSubnetNameValue2 != null && targetSubnetNameValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string targetSubnetNameInstance2 = ((string)targetSubnetNameValue2);
+                                                            inMageMigrationNicDetailsInstance.TargetSubnetName = targetSubnetNameInstance2;
+                                                        }
+                                                        
+                                                        JToken isSelectedForMigrationValue2 = vmNicsValue2["isSelectedForMigration"];
+                                                        if (isSelectedForMigrationValue2 != null && isSelectedForMigrationValue2.Type != JTokenType.Null)
+                                                        {
+                                                            string isSelectedForMigrationInstance2 = ((string)isSelectedForMigrationValue2);
+                                                            inMageMigrationNicDetailsInstance.IsSelectedForMigration = isSelectedForMigrationInstance2;
+                                                        }
+                                                    }
                                                 }
                                                 
                                                 JToken instanceTypeValue2 = providerSpecificDetailsValue["instanceType"];
