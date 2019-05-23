@@ -430,7 +430,7 @@ namespace SiteRecovery.Tests
             using (UndoContext context = UndoContext.Current)
             {
                 context.Start();
-                var client = GetSiteRecoveryClient(CustomHttpHandler);
+                var client = GetSiteRecoveryClient(CustomHttpHandler, "Migration");
 
                 var fabrics = client.Fabrics.List(RequestHeaders);
 
