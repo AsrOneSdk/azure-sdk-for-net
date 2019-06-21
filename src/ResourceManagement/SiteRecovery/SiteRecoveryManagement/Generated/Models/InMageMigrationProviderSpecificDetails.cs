@@ -32,6 +32,28 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
     /// </summary>
     public partial class InMageMigrationProviderSpecificDetails : MigrationProviderSpecificSettings
     {
+        private string _discoveryType;
+        
+        /// <summary>
+        /// Optional. The type of the discovered machine.
+        /// </summary>
+        public string DiscoveryType
+        {
+            get { return this._discoveryType; }
+            set { this._discoveryType = value; }
+        }
+        
+        private string _fabricDiscoveryMachineId;
+        
+        /// <summary>
+        /// Optional. The ARM Id of the discovered machine.
+        /// </summary>
+        public string FabricDiscoveryMachineId
+        {
+            get { return this._fabricDiscoveryMachineId; }
+            set { this._fabricDiscoveryMachineId = value; }
+        }
+        
         private string _licenseType;
         
         /// <summary>
@@ -173,17 +195,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         {
             get { return this._vMNics; }
             set { this._vMNics = value; }
-        }
-        
-        private string _vMwareMachineId;
-        
-        /// <summary>
-        /// Optional. The ARM Id of the VM discovered in VMware.
-        /// </summary>
-        public string VMwareMachineId
-        {
-            get { return this._vMwareMachineId; }
-            set { this._vMwareMachineId = value; }
         }
         
         /// <summary>

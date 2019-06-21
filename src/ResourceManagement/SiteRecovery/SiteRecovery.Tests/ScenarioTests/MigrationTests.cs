@@ -32,6 +32,7 @@ namespace SiteRecovery.Tests.ScenarioTests
         private const string VMwareContainerName = "hikewalrova1replicationcontainer";
         private const string VMwareSiteId = "/subscriptions/8d29733f-80ae-41b5-95d5-de86bb160521/resourceGroups/rohithtest/providers/Microsoft.OffAzure/VMwareSites/site1a5a06fd11bsite";
         private const string MigrationSolutionId = "/subscriptions/8d29733f-80ae-41b5-95d5-de86bb160521/resourceGroups/rohithtest/providers/Microsoft.Migrate/MigrateProjects/rohithtest-MigrateProject/Solutions/Servers-Migration-ServerMigration";
+        private const string PhysicalSiteId = "/subscriptions/8d29733f-80ae-41b5-95d5-de86bb160521/resourceGroups/migrationOneBox/providers/Microsoft.OffAzure/ServerSites/physicaltest";
 
         // VMware DRA input.
         private const string VMwareDraName = "hikewalrova1dra";
@@ -68,6 +69,8 @@ namespace SiteRecovery.Tests.ScenarioTests
         // private const string VMwareVmId = "/subscriptions/2a57d0a2-0955-4d1e-aa87-a0dbb87cbcab/resourceGroups/lshaibvtrg/providers/Microsoft.OffAzure/VMwareSites/lshaibvtsite/machines/10-150-209-216-a9f67797-bc63-5bf3-b8fe-9ffcc50402af_501e9205-b7ec-fb40-60dc-2b1c5a57b64b"; //lshai-0814-1
         // private const string VMwareVmId = "/subscriptions/2a57d0a2-0955-4d1e-aa87-a0dbb87cbcab/resourceGroups/lshaibvtrg/providers/Microsoft.OffAzure/VMwareSites/lshaibvtsite/machines/10-150-209-216-a9f67797-bc63-5bf3-b8fe-9ffcc50402af_501ec323-1268-ab57-199c-5d665f74f66d"; //lshai-1023-1
         // private const string VMwareVmId = "/subscriptions/2a57d0a2-0955-4d1e-aa87-a0dbb87cbcab/resourceGroups/lshaibvtrg/providers/Microsoft.OffAzure/VMwareSites/lshaibvtsite/machines/10-150-209-216-a9f67797-bc63-5bf3-b8fe-9ffcc50402af_500f4bb0-62b8-6ab9-4a2d-1949b90119f5"; //lshai-0419-1
+        private const string PhysicalMachineName = "hikewalrPhysicalMachine";
+        private const string PhysicalMachineId = "/subscriptions/8d29733f-80ae-41b5-95d5-de86bb160521/resourceGroups/migrationOneBox/providers/Microsoft.OffAzure/ServerSites/physicaltest/machines/machine33";
         private const string TargetResourceGroupId = "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/Hitesh-TFO-Test-RG";
         private const string TargetNetworkId = "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/Hitesh-TFO-Test-RG/providers/Microsoft.Network/virtualNetworks/Hitesh-TFO-Test";
         private const string TargetSubnetName = "default";
@@ -876,7 +879,7 @@ namespace SiteRecovery.Tests.ScenarioTests
         }
 
         [Fact]
-        public void PhysicalMigration_Enable()
+        public void InMageMigration_EnableVMwareMachine()
         {
             using (UndoContext context = UndoContext.Current)
             {
@@ -902,7 +905,7 @@ namespace SiteRecovery.Tests.ScenarioTests
                             PolicyId = vmwarePolicy.Id,
                             ProviderSpecificDetails = new InMageMigrationEnableMigrationInput
                             {
-                                VMwareMachineId = VMwareVmId,
+                                FabricDiscoveryMachineId = VMwareVmId,
                                 LicenseType = "WindowsServer",
                                 LogStorageAccountId = ReplicationStorageAccountId,
                                 StorageAccountId = ReplicationStorageAccountId,
@@ -940,6 +943,71 @@ namespace SiteRecovery.Tests.ScenarioTests
             }
         }
 
+        [Fact]
+        public void InMageMigration_EnablePhysicalMachine()
+        {
+            using (UndoContext context = UndoContext.Current)
+            {
+                try
+                {
+                    context.Start();
+                    var client = GetSiteRecoveryClient(CustomHttpHandler, "Migration");
+
+                    var vmwareContainer = client.ProtectionContainer
+                        .List(VMwareFabricName, RequestHeaders)
+                        .ProtectionContainers
+                        .Single();
+                    var vmwarePolicy = client.Policies
+                        .List(RequestHeaders)
+                        .Policies
+                        .Where(x => x.Name == InMageMigrationPolicyName)
+                        .Single();
+
+                    var enableMigrationInput = new EnableMigrationInput
+                    {
+                        Properties = new EnableMigrationInputProperties
+                        {
+                            PolicyId = vmwarePolicy.Id,
+                            ProviderSpecificDetails = new InMageMigrationEnableMigrationInput
+                            {
+                                FabricDiscoveryMachineId = PhysicalMachineId,
+                                LicenseType = "WindowsServer",
+                                LogStorageAccountId = ReplicationStorageAccountId,
+                                StorageAccountId = ReplicationStorageAccountId,
+                                TargetVmName = InMageMigrationVmName,
+                                TargetVmSize = "Standard_A4",
+                                TargetResourceGroupId = TargetResourceGroupId,
+                                TargetNetworkId = TargetNetworkId,
+                                TargetSubnetName = TargetSubnetName,
+                                TargetAvailabilitySetId = string.Empty,
+                                DiskType = "Standard_LRS",
+                                ProcessServerId = Guid.NewGuid().ToString()
+                            }
+                        }
+                    };
+
+                    var response = client.MigrationItem.EnableMigration(
+                        VMwareFabricName,
+                        vmwareContainer.Name,
+                        PhysicalMachineName,
+                        enableMigrationInput,
+                        RequestHeaders);
+
+                    // Get single migration item.
+                    var migItem = client.MigrationItem.Get(
+                        VMwareFabricName,
+                        VMwareContainerName,
+                        PhysicalMachineName,
+                        RequestHeaders);
+                }
+                catch (Exception)
+                {
+                    Debugger.Break();
+                    throw;
+                }
+            }
+        }
+
         #region private methods
 
         private void CreateVMwareFabric(SiteRecoveryManagementClient client)
@@ -953,7 +1021,8 @@ namespace SiteRecovery.Tests.ScenarioTests
                     {
                         InstanceType = "VMwareV2",
                         VMwareSiteId = VMwareSiteId,
-                        MigrationSolutionId = MigrationSolutionId
+                        MigrationSolutionId = MigrationSolutionId,
+                        PhysicalSiteId = PhysicalSiteId
                     }
                 }
             };

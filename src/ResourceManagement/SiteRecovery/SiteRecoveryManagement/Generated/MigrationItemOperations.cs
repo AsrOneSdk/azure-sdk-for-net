@@ -516,9 +516,9 @@ namespace Microsoft.Azure.Management.SiteRecovery
                             providerSpecificDetailsValue["instanceType"] = "InMageMigration";
                             InMageMigrationEnableMigrationInput derived2 = ((InMageMigrationEnableMigrationInput)input.Properties.ProviderSpecificDetails);
                             
-                            if (derived2.VMwareMachineId != null)
+                            if (derived2.FabricDiscoveryMachineId != null)
                             {
-                                providerSpecificDetailsValue["vmwareMachineId"] = derived2.VMwareMachineId;
+                                providerSpecificDetailsValue["fabricDiscoveryMachineId"] = derived2.FabricDiscoveryMachineId;
                             }
                             
                             if (derived2.LicenseType != null)
@@ -2616,11 +2616,18 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     {
                                         InMageMigrationProviderSpecificDetails inMageMigrationProviderSpecificDetailsInstance = new InMageMigrationProviderSpecificDetails();
                                         
-                                        JToken vmwareMachineIdValue2 = providerSpecificDetailsValue["vmwareMachineId"];
-                                        if (vmwareMachineIdValue2 != null && vmwareMachineIdValue2.Type != JTokenType.Null)
+                                        JToken fabricDiscoveryMachineIdValue = providerSpecificDetailsValue["fabricDiscoveryMachineId"];
+                                        if (fabricDiscoveryMachineIdValue != null && fabricDiscoveryMachineIdValue.Type != JTokenType.Null)
                                         {
-                                            string vmwareMachineIdInstance2 = ((string)vmwareMachineIdValue2);
-                                            inMageMigrationProviderSpecificDetailsInstance.VMwareMachineId = vmwareMachineIdInstance2;
+                                            string fabricDiscoveryMachineIdInstance = ((string)fabricDiscoveryMachineIdValue);
+                                            inMageMigrationProviderSpecificDetailsInstance.FabricDiscoveryMachineId = fabricDiscoveryMachineIdInstance;
+                                        }
+                                        
+                                        JToken discoveryTypeValue = providerSpecificDetailsValue["discoveryType"];
+                                        if (discoveryTypeValue != null && discoveryTypeValue.Type != JTokenType.Null)
+                                        {
+                                            string discoveryTypeInstance = ((string)discoveryTypeValue);
+                                            inMageMigrationProviderSpecificDetailsInstance.DiscoveryType = discoveryTypeInstance;
                                         }
                                         
                                         JToken processServerIdValue = providerSpecificDetailsValue["processServerId"];
@@ -3692,11 +3699,18 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     {
                                         InMageMigrationProviderSpecificDetails inMageMigrationProviderSpecificDetailsInstance = new InMageMigrationProviderSpecificDetails();
                                         
-                                        JToken vmwareMachineIdValue2 = providerSpecificDetailsValue["vmwareMachineId"];
-                                        if (vmwareMachineIdValue2 != null && vmwareMachineIdValue2.Type != JTokenType.Null)
+                                        JToken fabricDiscoveryMachineIdValue = providerSpecificDetailsValue["fabricDiscoveryMachineId"];
+                                        if (fabricDiscoveryMachineIdValue != null && fabricDiscoveryMachineIdValue.Type != JTokenType.Null)
                                         {
-                                            string vmwareMachineIdInstance2 = ((string)vmwareMachineIdValue2);
-                                            inMageMigrationProviderSpecificDetailsInstance.VMwareMachineId = vmwareMachineIdInstance2;
+                                            string fabricDiscoveryMachineIdInstance = ((string)fabricDiscoveryMachineIdValue);
+                                            inMageMigrationProviderSpecificDetailsInstance.FabricDiscoveryMachineId = fabricDiscoveryMachineIdInstance;
+                                        }
+                                        
+                                        JToken discoveryTypeValue = providerSpecificDetailsValue["discoveryType"];
+                                        if (discoveryTypeValue != null && discoveryTypeValue.Type != JTokenType.Null)
+                                        {
+                                            string discoveryTypeInstance = ((string)discoveryTypeValue);
+                                            inMageMigrationProviderSpecificDetailsInstance.DiscoveryType = discoveryTypeInstance;
                                         }
                                         
                                         JToken processServerIdValue = providerSpecificDetailsValue["processServerId"];
@@ -4827,11 +4841,18 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     {
                                         InMageMigrationProviderSpecificDetails inMageMigrationProviderSpecificDetailsInstance = new InMageMigrationProviderSpecificDetails();
                                         
-                                        JToken vmwareMachineIdValue2 = providerSpecificDetailsValue["vmwareMachineId"];
-                                        if (vmwareMachineIdValue2 != null && vmwareMachineIdValue2.Type != JTokenType.Null)
+                                        JToken fabricDiscoveryMachineIdValue = providerSpecificDetailsValue["fabricDiscoveryMachineId"];
+                                        if (fabricDiscoveryMachineIdValue != null && fabricDiscoveryMachineIdValue.Type != JTokenType.Null)
                                         {
-                                            string vmwareMachineIdInstance2 = ((string)vmwareMachineIdValue2);
-                                            inMageMigrationProviderSpecificDetailsInstance.VMwareMachineId = vmwareMachineIdInstance2;
+                                            string fabricDiscoveryMachineIdInstance = ((string)fabricDiscoveryMachineIdValue);
+                                            inMageMigrationProviderSpecificDetailsInstance.FabricDiscoveryMachineId = fabricDiscoveryMachineIdInstance;
+                                        }
+                                        
+                                        JToken discoveryTypeValue = providerSpecificDetailsValue["discoveryType"];
+                                        if (discoveryTypeValue != null && discoveryTypeValue.Type != JTokenType.Null)
+                                        {
+                                            string discoveryTypeInstance = ((string)discoveryTypeValue);
+                                            inMageMigrationProviderSpecificDetailsInstance.DiscoveryType = discoveryTypeInstance;
                                         }
                                         
                                         JToken processServerIdValue = providerSpecificDetailsValue["processServerId"];
@@ -5962,11 +5983,18 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     {
                                         InMageMigrationProviderSpecificDetails inMageMigrationProviderSpecificDetailsInstance = new InMageMigrationProviderSpecificDetails();
                                         
-                                        JToken vmwareMachineIdValue2 = providerSpecificDetailsValue["vmwareMachineId"];
-                                        if (vmwareMachineIdValue2 != null && vmwareMachineIdValue2.Type != JTokenType.Null)
+                                        JToken fabricDiscoveryMachineIdValue = providerSpecificDetailsValue["fabricDiscoveryMachineId"];
+                                        if (fabricDiscoveryMachineIdValue != null && fabricDiscoveryMachineIdValue.Type != JTokenType.Null)
                                         {
-                                            string vmwareMachineIdInstance2 = ((string)vmwareMachineIdValue2);
-                                            inMageMigrationProviderSpecificDetailsInstance.VMwareMachineId = vmwareMachineIdInstance2;
+                                            string fabricDiscoveryMachineIdInstance = ((string)fabricDiscoveryMachineIdValue);
+                                            inMageMigrationProviderSpecificDetailsInstance.FabricDiscoveryMachineId = fabricDiscoveryMachineIdInstance;
+                                        }
+                                        
+                                        JToken discoveryTypeValue = providerSpecificDetailsValue["discoveryType"];
+                                        if (discoveryTypeValue != null && discoveryTypeValue.Type != JTokenType.Null)
+                                        {
+                                            string discoveryTypeInstance = ((string)discoveryTypeValue);
+                                            inMageMigrationProviderSpecificDetailsInstance.DiscoveryType = discoveryTypeInstance;
                                         }
                                         
                                         JToken processServerIdValue = providerSpecificDetailsValue["processServerId"];
@@ -7097,11 +7125,18 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     {
                                         InMageMigrationProviderSpecificDetails inMageMigrationProviderSpecificDetailsInstance = new InMageMigrationProviderSpecificDetails();
                                         
-                                        JToken vmwareMachineIdValue2 = providerSpecificDetailsValue["vmwareMachineId"];
-                                        if (vmwareMachineIdValue2 != null && vmwareMachineIdValue2.Type != JTokenType.Null)
+                                        JToken fabricDiscoveryMachineIdValue = providerSpecificDetailsValue["fabricDiscoveryMachineId"];
+                                        if (fabricDiscoveryMachineIdValue != null && fabricDiscoveryMachineIdValue.Type != JTokenType.Null)
                                         {
-                                            string vmwareMachineIdInstance2 = ((string)vmwareMachineIdValue2);
-                                            inMageMigrationProviderSpecificDetailsInstance.VMwareMachineId = vmwareMachineIdInstance2;
+                                            string fabricDiscoveryMachineIdInstance = ((string)fabricDiscoveryMachineIdValue);
+                                            inMageMigrationProviderSpecificDetailsInstance.FabricDiscoveryMachineId = fabricDiscoveryMachineIdInstance;
+                                        }
+                                        
+                                        JToken discoveryTypeValue = providerSpecificDetailsValue["discoveryType"];
+                                        if (discoveryTypeValue != null && discoveryTypeValue.Type != JTokenType.Null)
+                                        {
+                                            string discoveryTypeInstance = ((string)discoveryTypeValue);
+                                            inMageMigrationProviderSpecificDetailsInstance.DiscoveryType = discoveryTypeInstance;
                                         }
                                         
                                         JToken processServerIdValue = providerSpecificDetailsValue["processServerId"];
@@ -8232,11 +8267,18 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     {
                                         InMageMigrationProviderSpecificDetails inMageMigrationProviderSpecificDetailsInstance = new InMageMigrationProviderSpecificDetails();
                                         
-                                        JToken vmwareMachineIdValue2 = providerSpecificDetailsValue["vmwareMachineId"];
-                                        if (vmwareMachineIdValue2 != null && vmwareMachineIdValue2.Type != JTokenType.Null)
+                                        JToken fabricDiscoveryMachineIdValue = providerSpecificDetailsValue["fabricDiscoveryMachineId"];
+                                        if (fabricDiscoveryMachineIdValue != null && fabricDiscoveryMachineIdValue.Type != JTokenType.Null)
                                         {
-                                            string vmwareMachineIdInstance2 = ((string)vmwareMachineIdValue2);
-                                            inMageMigrationProviderSpecificDetailsInstance.VMwareMachineId = vmwareMachineIdInstance2;
+                                            string fabricDiscoveryMachineIdInstance = ((string)fabricDiscoveryMachineIdValue);
+                                            inMageMigrationProviderSpecificDetailsInstance.FabricDiscoveryMachineId = fabricDiscoveryMachineIdInstance;
+                                        }
+                                        
+                                        JToken discoveryTypeValue = providerSpecificDetailsValue["discoveryType"];
+                                        if (discoveryTypeValue != null && discoveryTypeValue.Type != JTokenType.Null)
+                                        {
+                                            string discoveryTypeInstance = ((string)discoveryTypeValue);
+                                            inMageMigrationProviderSpecificDetailsInstance.DiscoveryType = discoveryTypeInstance;
                                         }
                                         
                                         JToken processServerIdValue = providerSpecificDetailsValue["processServerId"];
@@ -9367,11 +9409,18 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                     {
                                         InMageMigrationProviderSpecificDetails inMageMigrationProviderSpecificDetailsInstance = new InMageMigrationProviderSpecificDetails();
                                         
-                                        JToken vmwareMachineIdValue2 = providerSpecificDetailsValue["vmwareMachineId"];
-                                        if (vmwareMachineIdValue2 != null && vmwareMachineIdValue2.Type != JTokenType.Null)
+                                        JToken fabricDiscoveryMachineIdValue = providerSpecificDetailsValue["fabricDiscoveryMachineId"];
+                                        if (fabricDiscoveryMachineIdValue != null && fabricDiscoveryMachineIdValue.Type != JTokenType.Null)
                                         {
-                                            string vmwareMachineIdInstance2 = ((string)vmwareMachineIdValue2);
-                                            inMageMigrationProviderSpecificDetailsInstance.VMwareMachineId = vmwareMachineIdInstance2;
+                                            string fabricDiscoveryMachineIdInstance = ((string)fabricDiscoveryMachineIdValue);
+                                            inMageMigrationProviderSpecificDetailsInstance.FabricDiscoveryMachineId = fabricDiscoveryMachineIdInstance;
+                                        }
+                                        
+                                        JToken discoveryTypeValue = providerSpecificDetailsValue["discoveryType"];
+                                        if (discoveryTypeValue != null && discoveryTypeValue.Type != JTokenType.Null)
+                                        {
+                                            string discoveryTypeInstance = ((string)discoveryTypeValue);
+                                            inMageMigrationProviderSpecificDetailsInstance.DiscoveryType = discoveryTypeInstance;
                                         }
                                         
                                         JToken processServerIdValue = providerSpecificDetailsValue["processServerId"];
@@ -10551,11 +10600,18 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             {
                                                 InMageMigrationProviderSpecificDetails inMageMigrationProviderSpecificDetailsInstance = new InMageMigrationProviderSpecificDetails();
                                                 
-                                                JToken vmwareMachineIdValue2 = providerSpecificDetailsValue["vmwareMachineId"];
-                                                if (vmwareMachineIdValue2 != null && vmwareMachineIdValue2.Type != JTokenType.Null)
+                                                JToken fabricDiscoveryMachineIdValue = providerSpecificDetailsValue["fabricDiscoveryMachineId"];
+                                                if (fabricDiscoveryMachineIdValue != null && fabricDiscoveryMachineIdValue.Type != JTokenType.Null)
                                                 {
-                                                    string vmwareMachineIdInstance2 = ((string)vmwareMachineIdValue2);
-                                                    inMageMigrationProviderSpecificDetailsInstance.VMwareMachineId = vmwareMachineIdInstance2;
+                                                    string fabricDiscoveryMachineIdInstance = ((string)fabricDiscoveryMachineIdValue);
+                                                    inMageMigrationProviderSpecificDetailsInstance.FabricDiscoveryMachineId = fabricDiscoveryMachineIdInstance;
+                                                }
+                                                
+                                                JToken discoveryTypeValue = providerSpecificDetailsValue["discoveryType"];
+                                                if (discoveryTypeValue != null && discoveryTypeValue.Type != JTokenType.Null)
+                                                {
+                                                    string discoveryTypeInstance = ((string)discoveryTypeValue);
+                                                    inMageMigrationProviderSpecificDetailsInstance.DiscoveryType = discoveryTypeInstance;
                                                 }
                                                 
                                                 JToken processServerIdValue = providerSpecificDetailsValue["processServerId"];
@@ -11686,11 +11742,18 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             {
                                                 InMageMigrationProviderSpecificDetails inMageMigrationProviderSpecificDetailsInstance = new InMageMigrationProviderSpecificDetails();
                                                 
-                                                JToken vmwareMachineIdValue2 = providerSpecificDetailsValue["vmwareMachineId"];
-                                                if (vmwareMachineIdValue2 != null && vmwareMachineIdValue2.Type != JTokenType.Null)
+                                                JToken fabricDiscoveryMachineIdValue = providerSpecificDetailsValue["fabricDiscoveryMachineId"];
+                                                if (fabricDiscoveryMachineIdValue != null && fabricDiscoveryMachineIdValue.Type != JTokenType.Null)
                                                 {
-                                                    string vmwareMachineIdInstance2 = ((string)vmwareMachineIdValue2);
-                                                    inMageMigrationProviderSpecificDetailsInstance.VMwareMachineId = vmwareMachineIdInstance2;
+                                                    string fabricDiscoveryMachineIdInstance = ((string)fabricDiscoveryMachineIdValue);
+                                                    inMageMigrationProviderSpecificDetailsInstance.FabricDiscoveryMachineId = fabricDiscoveryMachineIdInstance;
+                                                }
+                                                
+                                                JToken discoveryTypeValue = providerSpecificDetailsValue["discoveryType"];
+                                                if (discoveryTypeValue != null && discoveryTypeValue.Type != JTokenType.Null)
+                                                {
+                                                    string discoveryTypeInstance = ((string)discoveryTypeValue);
+                                                    inMageMigrationProviderSpecificDetailsInstance.DiscoveryType = discoveryTypeInstance;
                                                 }
                                                 
                                                 JToken processServerIdValue = providerSpecificDetailsValue["processServerId"];
@@ -12778,11 +12841,18 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             {
                                                 InMageMigrationProviderSpecificDetails inMageMigrationProviderSpecificDetailsInstance = new InMageMigrationProviderSpecificDetails();
                                                 
-                                                JToken vmwareMachineIdValue2 = providerSpecificDetailsValue["vmwareMachineId"];
-                                                if (vmwareMachineIdValue2 != null && vmwareMachineIdValue2.Type != JTokenType.Null)
+                                                JToken fabricDiscoveryMachineIdValue = providerSpecificDetailsValue["fabricDiscoveryMachineId"];
+                                                if (fabricDiscoveryMachineIdValue != null && fabricDiscoveryMachineIdValue.Type != JTokenType.Null)
                                                 {
-                                                    string vmwareMachineIdInstance2 = ((string)vmwareMachineIdValue2);
-                                                    inMageMigrationProviderSpecificDetailsInstance.VMwareMachineId = vmwareMachineIdInstance2;
+                                                    string fabricDiscoveryMachineIdInstance = ((string)fabricDiscoveryMachineIdValue);
+                                                    inMageMigrationProviderSpecificDetailsInstance.FabricDiscoveryMachineId = fabricDiscoveryMachineIdInstance;
+                                                }
+                                                
+                                                JToken discoveryTypeValue = providerSpecificDetailsValue["discoveryType"];
+                                                if (discoveryTypeValue != null && discoveryTypeValue.Type != JTokenType.Null)
+                                                {
+                                                    string discoveryTypeInstance = ((string)discoveryTypeValue);
+                                                    inMageMigrationProviderSpecificDetailsInstance.DiscoveryType = discoveryTypeInstance;
                                                 }
                                                 
                                                 JToken processServerIdValue = providerSpecificDetailsValue["processServerId"];

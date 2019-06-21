@@ -385,6 +385,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 customDetailsValue["migrationSolutionId"] = derived2.MigrationSolutionId;
                             }
                             
+                            if (derived2.PhysicalSiteId != null)
+                            {
+                                customDetailsValue["physicalSiteId"] = derived2.PhysicalSiteId;
+                            }
+                            
                             if (derived2.InstanceType != null)
                             {
                                 customDetailsValue["instanceType"] = derived2.InstanceType;
@@ -3556,6 +3561,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareV2FabricSpecificDetailsInstance.ServiceEndpoint = serviceEndpointInstance;
                                         }
                                         
+                                        JToken physicalSiteIdValue = customDetailsValue["physicalSiteId"];
+                                        if (physicalSiteIdValue != null && physicalSiteIdValue.Type != JTokenType.Null)
+                                        {
+                                            string physicalSiteIdInstance = ((string)physicalSiteIdValue);
+                                            vMwareV2FabricSpecificDetailsInstance.PhysicalSiteId = physicalSiteIdInstance;
+                                        }
+                                        
                                         JToken instanceTypeValue5 = customDetailsValue["instanceType"];
                                         if (instanceTypeValue5 != null && instanceTypeValue5.Type != JTokenType.Null)
                                         {
@@ -5670,6 +5682,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             string serviceEndpointInstance = ((string)serviceEndpointValue);
                                             vMwareV2FabricSpecificDetailsInstance.ServiceEndpoint = serviceEndpointInstance;
+                                        }
+                                        
+                                        JToken physicalSiteIdValue = customDetailsValue["physicalSiteId"];
+                                        if (physicalSiteIdValue != null && physicalSiteIdValue.Type != JTokenType.Null)
+                                        {
+                                            string physicalSiteIdInstance = ((string)physicalSiteIdValue);
+                                            vMwareV2FabricSpecificDetailsInstance.PhysicalSiteId = physicalSiteIdInstance;
                                         }
                                         
                                         JToken instanceTypeValue5 = customDetailsValue["instanceType"];
@@ -7845,6 +7864,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             string serviceEndpointInstance = ((string)serviceEndpointValue);
                                             vMwareV2FabricSpecificDetailsInstance.ServiceEndpoint = serviceEndpointInstance;
+                                        }
+                                        
+                                        JToken physicalSiteIdValue = customDetailsValue["physicalSiteId"];
+                                        if (physicalSiteIdValue != null && physicalSiteIdValue.Type != JTokenType.Null)
+                                        {
+                                            string physicalSiteIdInstance = ((string)physicalSiteIdValue);
+                                            vMwareV2FabricSpecificDetailsInstance.PhysicalSiteId = physicalSiteIdInstance;
                                         }
                                         
                                         JToken instanceTypeValue5 = customDetailsValue["instanceType"];
@@ -10253,6 +10279,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             vMwareV2FabricSpecificDetailsInstance.ServiceEndpoint = serviceEndpointInstance;
                                         }
                                         
+                                        JToken physicalSiteIdValue = customDetailsValue["physicalSiteId"];
+                                        if (physicalSiteIdValue != null && physicalSiteIdValue.Type != JTokenType.Null)
+                                        {
+                                            string physicalSiteIdInstance = ((string)physicalSiteIdValue);
+                                            vMwareV2FabricSpecificDetailsInstance.PhysicalSiteId = physicalSiteIdInstance;
+                                        }
+                                        
                                         JToken instanceTypeValue5 = customDetailsValue["instanceType"];
                                         if (instanceTypeValue5 != null && instanceTypeValue5.Type != JTokenType.Null)
                                         {
@@ -12195,6 +12228,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             string serviceEndpointInstance = ((string)serviceEndpointValue);
                                             vMwareV2FabricSpecificDetailsInstance.ServiceEndpoint = serviceEndpointInstance;
+                                        }
+                                        
+                                        JToken physicalSiteIdValue = customDetailsValue["physicalSiteId"];
+                                        if (physicalSiteIdValue != null && physicalSiteIdValue.Type != JTokenType.Null)
+                                        {
+                                            string physicalSiteIdInstance = ((string)physicalSiteIdValue);
+                                            vMwareV2FabricSpecificDetailsInstance.PhysicalSiteId = physicalSiteIdInstance;
                                         }
                                         
                                         JToken instanceTypeValue5 = customDetailsValue["instanceType"];
@@ -14168,6 +14208,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 {
                                                     string serviceEndpointInstance = ((string)serviceEndpointValue);
                                                     vMwareV2FabricSpecificDetailsInstance.ServiceEndpoint = serviceEndpointInstance;
+                                                }
+                                                
+                                                JToken physicalSiteIdValue = customDetailsValue["physicalSiteId"];
+                                                if (physicalSiteIdValue != null && physicalSiteIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string physicalSiteIdInstance = ((string)physicalSiteIdValue);
+                                                    vMwareV2FabricSpecificDetailsInstance.PhysicalSiteId = physicalSiteIdInstance;
                                                 }
                                                 
                                                 JToken instanceTypeValue5 = customDetailsValue["instanceType"];

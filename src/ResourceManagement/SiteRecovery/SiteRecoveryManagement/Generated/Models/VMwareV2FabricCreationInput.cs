@@ -41,6 +41,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._migrationSolutionId = value; }
         }
         
+        private string _physicalSiteId;
+        
+        /// <summary>
+        /// Optional. The ARM Id of the physical site.
+        /// </summary>
+        public string PhysicalSiteId
+        {
+            get { return this._physicalSiteId; }
+            set { this._physicalSiteId = value; }
+        }
+        
         private string _vMwareSiteId;
         
         /// <summary>

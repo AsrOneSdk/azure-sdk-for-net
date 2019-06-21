@@ -41,6 +41,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._diskType = value; }
         }
         
+        private string _fabricDiscoveryMachineId;
+        
+        /// <summary>
+        /// Optional. The ARM Id of the discovered machine.
+        /// </summary>
+        public string FabricDiscoveryMachineId
+        {
+            get { return this._fabricDiscoveryMachineId; }
+            set { this._fabricDiscoveryMachineId = value; }
+        }
+        
         private string _licenseType;
         
         /// <summary>
@@ -162,17 +173,6 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         {
             get { return this._targetVmSize; }
             set { this._targetVmSize = value; }
-        }
-        
-        private string _vMwareMachineId;
-        
-        /// <summary>
-        /// Optional. The ARM Id of the discovered VMware machine.
-        /// </summary>
-        public string VMwareMachineId
-        {
-            get { return this._vMwareMachineId; }
-            set { this._vMwareMachineId = value; }
         }
         
         /// <summary>
