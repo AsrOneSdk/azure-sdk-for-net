@@ -1008,6 +1008,83 @@ namespace SiteRecovery.Tests.ScenarioTests
             }
         }
 
+        [Fact]
+        public void InMageMigration_DisableVMwareMachine()
+        {
+            using (UndoContext context = UndoContext.Current)
+            {
+                try
+                {
+                    context.Start();
+                    var client = GetSiteRecoveryClient(CustomHttpHandler, "Migration");
+
+                    // Get single migration item.
+                    var migItem = client.MigrationItem.Get(
+                        VMwareFabricName,
+                        VMwareContainerName,
+                        VMName,
+                        RequestHeaders);
+
+                    var response = client.MigrationItem.DisableMigration(
+                        VMwareFabricName,
+                        VMwareContainerName,
+                        VMName,
+                        null,
+                        RequestHeaders);
+
+                    // Get all items.
+                    var items = client.MigrationItem.List(
+                        VMwareFabricName,
+                        VMwareContainerName,
+                        RequestHeaders);
+                }
+                catch (Exception)
+                {
+                    Debugger.Break();
+                    throw;
+                }
+            }
+        }
+
+
+        [Fact]
+        public void InMageMigration_DisablePhysicalMachine()
+        {
+            using (UndoContext context = UndoContext.Current)
+            {
+                try
+                {
+                    context.Start();
+                    var client = GetSiteRecoveryClient(CustomHttpHandler, "Migration");
+
+                    // Get single migration item.
+                    var migItem = client.MigrationItem.Get(
+                        VMwareFabricName,
+                        VMwareContainerName,
+                        PhysicalMachineName,
+                        RequestHeaders);
+
+                    var response = client.MigrationItem.DisableMigration(
+                        VMwareFabricName,
+                        VMwareContainerName,
+                        PhysicalMachineName,
+                        null,
+                        RequestHeaders);
+
+                    // Get all items.
+                    var items = client.MigrationItem.List(
+                        VMwareFabricName,
+                        VMwareContainerName,
+                        RequestHeaders);
+                }
+                catch (Exception)
+                {
+                    Debugger.Break();
+                    throw;
+                }
+            }
+        }
+
         #region private methods
 
         private void CreateVMwareFabric(SiteRecoveryManagementClient client)
