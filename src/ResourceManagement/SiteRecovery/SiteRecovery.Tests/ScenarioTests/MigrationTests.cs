@@ -792,7 +792,7 @@ namespace SiteRecovery.Tests.ScenarioTests
         }
 
         [Fact]
-        public void PhysicalMigration_ContainerPairing()
+        public void InMageMigration_ContainerPairing()
         {
             using (UndoContext context = UndoContext.Current)
             {
@@ -998,6 +998,76 @@ namespace SiteRecovery.Tests.ScenarioTests
                         VMwareFabricName,
                         VMwareContainerName,
                         PhysicalMachineName,
+                        RequestHeaders);
+                }
+                catch (Exception)
+                {
+                    Debugger.Break();
+                    throw;
+                }
+            }
+        }
+
+
+
+        [Fact]
+        public void InMageMigration_UpdateVMwareMigrationItem()
+        {
+            using (UndoContext context = UndoContext.Current)
+            {
+                try
+                {
+                    context.Start();
+                    var client = GetSiteRecoveryClient(CustomHttpHandler, "Migration");
+
+                    // Get the original item.
+                    var migItem = client.MigrationItem.Get(
+                        VMwareFabricName,
+                        VMwareContainerName,
+                        VMName,
+                        RequestHeaders);
+
+                    var nicsInput = new List<InMageMigrationUpdateNicInput>
+                    {
+                        new InMageMigrationUpdateNicInput
+                        {
+                            NicId = "4000",
+                            IsPrimaryNic = "true",
+                            TargetSubnetName = "subnet-1",
+                            TargetStaticIPAddress = "10.2.1.14",
+                            IsSelectedForMigration = "true"
+                        }
+                    };
+
+                    var input = new UpdateMigrationItemInput
+                    {
+                        Properties = new UpdateMigrationItemInputProperties
+                        {
+                            ProviderSpecificDetails = new InMageMigrationUpdateMigrationItemInput()
+                            {
+                                TargetVmName = "522updatedname",
+                                TargetVmSize = "Standard_A7",
+                                TargetAvailabilitySetId = TargetAvailabilitySetId,
+                                TargetBootDiagnosticsStorageAccountId = TargetBootDiagnosticsStorageAccountId,
+                                VmNics = nicsInput,
+                                TargetNetworkId = TargetNetworkId
+                            }
+                        }
+                    };
+
+                    // Update the item.
+                    var response = client.MigrationItem.UpdateMigrationItem(
+                        VMwareFabricName,
+                        VMwareContainerName,
+                        VMName,
+                        input,
+                        RequestHeaders);
+
+                    // Get the updated item.
+                    var migItemUpd = client.MigrationItem.Get(
+                        VMwareFabricName,
+                        VMwareContainerName,
+                        VMName,
                         RequestHeaders);
                 }
                 catch (Exception)

@@ -28,14 +28,14 @@ using Microsoft.Azure.Management.SiteRecovery.Models;
 namespace Microsoft.Azure.Management.SiteRecovery.Models
 {
     /// <summary>
-    /// The VMwareCbt update migration item input.
+    /// The InMageMigration update migration item input.
     /// </summary>
-    public partial class VMwareCbtUpdateMigrationItemInput : UpdateMigrationItemProviderSpecificInput
+    public partial class InMageMigrationUpdateMigrationItemInput : UpdateMigrationItemProviderSpecificInput
     {
         private string _licenseType;
         
         /// <summary>
-        /// Optional. Gets or sets License Type of the VM.
+        /// Optional. The license type
         /// </summary>
         public string LicenseType
         {
@@ -46,7 +46,7 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         private string _targetAvailabilitySetId;
         
         /// <summary>
-        /// Optional. Target availability set Id.
+        /// Optional. The target availability set ARM Id
         /// </summary>
         public string TargetAvailabilitySetId
         {
@@ -57,7 +57,7 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         private string _targetBootDiagnosticsStorageAccountId;
         
         /// <summary>
-        /// Optional. Target boot diagnostics storage account Id.
+        /// Optional. The target boot diagnostics storage account ARM Id
         /// </summary>
         public string TargetBootDiagnosticsStorageAccountId
         {
@@ -68,7 +68,7 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         private string _targetNetworkId;
         
         /// <summary>
-        /// Optional. Target network ARM Id.
+        /// Optional. The target network ARM Id
         /// </summary>
         public string TargetNetworkId
         {
@@ -79,7 +79,7 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         private string _targetResourceGroupId;
         
         /// <summary>
-        /// Optional. Target resource group Id.
+        /// Optional. The target resource group ARM Id
         /// </summary>
         public string TargetResourceGroupId
         {
@@ -90,7 +90,7 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         private string _targetVmName;
         
         /// <summary>
-        /// Optional. Target VM name.
+        /// Optional. The target VM name
         /// </summary>
         public string TargetVmName
         {
@@ -101,7 +101,7 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
         private string _targetVmSize;
         
         /// <summary>
-        /// Optional. Target VM size.
+        /// Optional. The target VM size
         /// </summary>
         public string TargetVmSize
         {
@@ -109,38 +109,24 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._targetVmSize = value; }
         }
         
-        private IList<VMwareCbtNicInput> _vmNics;
+        private IList<InMageMigrationUpdateNicInput> _vmNics;
         
         /// <summary>
-        /// Required. Gets or sets VM Nic Details
+        /// Optional. The list of NIC details
         /// </summary>
-        public IList<VMwareCbtNicInput> VmNics
+        public IList<InMageMigrationUpdateNicInput> VmNics
         {
             get { return this._vmNics; }
             set { this._vmNics = value; }
         }
         
         /// <summary>
-        /// Initializes a new instance of the VMwareCbtUpdateMigrationItemInput
-        /// class.
+        /// Initializes a new instance of the
+        /// InMageMigrationUpdateMigrationItemInput class.
         /// </summary>
-        public VMwareCbtUpdateMigrationItemInput()
+        public InMageMigrationUpdateMigrationItemInput()
         {
-            this.VmNics = new LazyList<VMwareCbtNicInput>();
-        }
-        
-        /// <summary>
-        /// Initializes a new instance of the VMwareCbtUpdateMigrationItemInput
-        /// class with required arguments.
-        /// </summary>
-        public VMwareCbtUpdateMigrationItemInput(List<VMwareCbtNicInput> vmNics)
-            : this()
-        {
-            if (vmNics == null)
-            {
-                throw new ArgumentNullException("vmNics");
-            }
-            this.VmNics = vmNics;
+            this.VmNics = new LazyList<InMageMigrationUpdateNicInput>();
         }
     }
 }

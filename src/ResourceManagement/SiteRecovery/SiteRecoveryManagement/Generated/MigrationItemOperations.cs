@@ -1605,6 +1605,90 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 providerSpecificDetailsValue["instanceType"] = derived.Type;
                             }
                         }
+                        if (input.Properties.ProviderSpecificDetails is InMageMigrationUpdateMigrationItemInput)
+                        {
+                            providerSpecificDetailsValue["instanceType"] = "InMageMigration";
+                            InMageMigrationUpdateMigrationItemInput derived2 = ((InMageMigrationUpdateMigrationItemInput)input.Properties.ProviderSpecificDetails);
+                            
+                            if (derived2.TargetVmName != null)
+                            {
+                                providerSpecificDetailsValue["targetVmName"] = derived2.TargetVmName;
+                            }
+                            
+                            if (derived2.TargetVmSize != null)
+                            {
+                                providerSpecificDetailsValue["targetVmSize"] = derived2.TargetVmSize;
+                            }
+                            
+                            if (derived2.TargetResourceGroupId != null)
+                            {
+                                providerSpecificDetailsValue["targetResourceGroupId"] = derived2.TargetResourceGroupId;
+                            }
+                            
+                            if (derived2.TargetAvailabilitySetId != null)
+                            {
+                                providerSpecificDetailsValue["targetAvailabilitySetId"] = derived2.TargetAvailabilitySetId;
+                            }
+                            
+                            if (derived2.TargetBootDiagnosticsStorageAccountId != null)
+                            {
+                                providerSpecificDetailsValue["targetBootDiagnosticsStorageAccountId"] = derived2.TargetBootDiagnosticsStorageAccountId;
+                            }
+                            
+                            if (derived2.TargetNetworkId != null)
+                            {
+                                providerSpecificDetailsValue["targetNetworkId"] = derived2.TargetNetworkId;
+                            }
+                            
+                            if (derived2.VmNics != null)
+                            {
+                                if (derived2.VmNics is ILazyCollection == false || ((ILazyCollection)derived2.VmNics).IsInitialized)
+                                {
+                                    JArray vmNicsArray2 = new JArray();
+                                    foreach (InMageMigrationUpdateNicInput vmNicsItem2 in derived2.VmNics)
+                                    {
+                                        JObject inMageMigrationUpdateNicInputValue = new JObject();
+                                        vmNicsArray2.Add(inMageMigrationUpdateNicInputValue);
+                                        
+                                        if (vmNicsItem2.NicId != null)
+                                        {
+                                            inMageMigrationUpdateNicInputValue["nicId"] = vmNicsItem2.NicId;
+                                        }
+                                        
+                                        if (vmNicsItem2.IsPrimaryNic != null)
+                                        {
+                                            inMageMigrationUpdateNicInputValue["isPrimaryNic"] = vmNicsItem2.IsPrimaryNic;
+                                        }
+                                        
+                                        if (vmNicsItem2.TargetSubnetName != null)
+                                        {
+                                            inMageMigrationUpdateNicInputValue["targetSubnetName"] = vmNicsItem2.TargetSubnetName;
+                                        }
+                                        
+                                        if (vmNicsItem2.TargetStaticIPAddress != null)
+                                        {
+                                            inMageMigrationUpdateNicInputValue["targetStaticIPAddress"] = vmNicsItem2.TargetStaticIPAddress;
+                                        }
+                                        
+                                        if (vmNicsItem2.IsSelectedForMigration != null)
+                                        {
+                                            inMageMigrationUpdateNicInputValue["isSelectedForMigration"] = vmNicsItem2.IsSelectedForMigration;
+                                        }
+                                    }
+                                    providerSpecificDetailsValue["vmNics"] = vmNicsArray2;
+                                }
+                            }
+                            
+                            if (derived2.LicenseType != null)
+                            {
+                                providerSpecificDetailsValue["licenseType"] = derived2.LicenseType;
+                            }
+                            
+                            if (derived2.Type != null)
+                            {
+                                providerSpecificDetailsValue["instanceType"] = derived2.Type;
+                            }
+                        }
                     }
                 }
                 
