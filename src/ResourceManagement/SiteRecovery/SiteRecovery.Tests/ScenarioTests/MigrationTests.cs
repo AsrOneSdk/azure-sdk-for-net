@@ -59,6 +59,7 @@ namespace SiteRecovery.Tests.ScenarioTests
 
         // Enable input.
         private const string VMName = "hikewalrVm";
+        private const string RunAsAccountId = "/subscriptions/8d29733f-80ae-41b5-95d5-de86bb160521/resourceGroups/rohithtest/providers/Microsoft.OffAzure/VMwareSites/site1a5a06fd11bsite/runasaccounts/dummy";
         private const string VMwareVmId = "/subscriptions/8d29733f-80ae-41b5-95d5-de86bb160521/resourceGroups/rohithtest/providers/Microsoft.OffAzure/VMwareSites/site1a5a06fd11bsite/machines/gqlvcenter-f53bc2e3-cfe8-573f-b904-d1dd8d679ca4_50020746-95dd-af13-7694-80ab17f00ad4";
         // private const string VMwareVmId = "/subscriptions/2a57d0a2-0955-4d1e-aa87-a0dbb87cbcab/resourceGroups/lshaibvtrg/providers/Microsoft.OffAzure/VMwareSites/lshaibvtsite3/machines/10-150-209-216-a9f67797-bc63-5bf3-b8fe-9ffcc50402af_500f866c-d415-1d0e-7186-7c58b0c5ec28"; //lshai-0520-2
         // private const string VMwareVmId = "/subscriptions/2a57d0a2-0955-4d1e-aa87-a0dbb87cbcab/resourceGroups/lshaibvtrg/providers/Microsoft.OffAzure/VMwareSites/lshaibvtsite/machines/10-150-209-216-a9f67797-bc63-5bf3-b8fe-9ffcc50402af_501ef9d4-d83f-5c32-5195-9d570cc39eed"; //sadko-1009-1
@@ -910,13 +911,14 @@ namespace SiteRecovery.Tests.ScenarioTests
                                 LogStorageAccountId = ReplicationStorageAccountId,
                                 StorageAccountId = ReplicationStorageAccountId,
                                 TargetVmName = InMageMigrationVmName,
-                                TargetVmSize = "Standard_A4",
+                                TargetVmSize = "Standard_F16",
                                 TargetResourceGroupId = TargetResourceGroupId,
                                 TargetNetworkId = TargetNetworkId,
                                 TargetSubnetName = TargetSubnetName,
                                 TargetAvailabilitySetId = string.Empty,
                                 DiskType = "Standard_LRS",
-                                ProcessServerId = Guid.NewGuid().ToString()
+                                ProcessServerId = Guid.NewGuid().ToString(),
+                                RunAsAccountId = RunAsAccountId
                             }
                         }
                     };
@@ -935,10 +937,10 @@ namespace SiteRecovery.Tests.ScenarioTests
                         VMName,
                         RequestHeaders);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     Debugger.Break();
-                    throw;
+                    throw ex;
                 }
             }
         }
