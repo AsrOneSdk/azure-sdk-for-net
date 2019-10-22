@@ -581,6 +581,11 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 providerSpecificDetailsValue["processServerId"] = derived2.ProcessServerId;
                             }
                             
+                            if (derived2.RunAsAccountId != null)
+                            {
+                                providerSpecificDetailsValue["runAsAccountId"] = derived2.RunAsAccountId;
+                            }
+                            
                             if (derived2.Type != null)
                             {
                                 providerSpecificDetailsValue["instanceType"] = derived2.Type;
@@ -2746,6 +2751,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             inMageMigrationProviderSpecificDetailsInstance.ProcessServerId = processServerIdInstance;
                                         }
                                         
+                                        JToken runAsAccountIdValue = providerSpecificDetailsValue["runAsAccountId"];
+                                        if (runAsAccountIdValue != null && runAsAccountIdValue.Type != JTokenType.Null)
+                                        {
+                                            string runAsAccountIdInstance = ((string)runAsAccountIdValue);
+                                            inMageMigrationProviderSpecificDetailsInstance.RunAsAccountId = runAsAccountIdInstance;
+                                        }
+                                        
                                         JToken osTypeValue2 = providerSpecificDetailsValue["osType"];
                                         if (osTypeValue2 != null && osTypeValue2.Type != JTokenType.Null)
                                         {
@@ -3827,6 +3839,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             string processServerIdInstance = ((string)processServerIdValue);
                                             inMageMigrationProviderSpecificDetailsInstance.ProcessServerId = processServerIdInstance;
+                                        }
+                                        
+                                        JToken runAsAccountIdValue = providerSpecificDetailsValue["runAsAccountId"];
+                                        if (runAsAccountIdValue != null && runAsAccountIdValue.Type != JTokenType.Null)
+                                        {
+                                            string runAsAccountIdInstance = ((string)runAsAccountIdValue);
+                                            inMageMigrationProviderSpecificDetailsInstance.RunAsAccountId = runAsAccountIdInstance;
                                         }
                                         
                                         JToken osTypeValue2 = providerSpecificDetailsValue["osType"];
@@ -4971,6 +4990,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             inMageMigrationProviderSpecificDetailsInstance.ProcessServerId = processServerIdInstance;
                                         }
                                         
+                                        JToken runAsAccountIdValue = providerSpecificDetailsValue["runAsAccountId"];
+                                        if (runAsAccountIdValue != null && runAsAccountIdValue.Type != JTokenType.Null)
+                                        {
+                                            string runAsAccountIdInstance = ((string)runAsAccountIdValue);
+                                            inMageMigrationProviderSpecificDetailsInstance.RunAsAccountId = runAsAccountIdInstance;
+                                        }
+                                        
                                         JToken osTypeValue2 = providerSpecificDetailsValue["osType"];
                                         if (osTypeValue2 != null && osTypeValue2.Type != JTokenType.Null)
                                         {
@@ -6111,6 +6137,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             string processServerIdInstance = ((string)processServerIdValue);
                                             inMageMigrationProviderSpecificDetailsInstance.ProcessServerId = processServerIdInstance;
+                                        }
+                                        
+                                        JToken runAsAccountIdValue = providerSpecificDetailsValue["runAsAccountId"];
+                                        if (runAsAccountIdValue != null && runAsAccountIdValue.Type != JTokenType.Null)
+                                        {
+                                            string runAsAccountIdInstance = ((string)runAsAccountIdValue);
+                                            inMageMigrationProviderSpecificDetailsInstance.RunAsAccountId = runAsAccountIdInstance;
                                         }
                                         
                                         JToken osTypeValue2 = providerSpecificDetailsValue["osType"];
@@ -7255,6 +7288,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             inMageMigrationProviderSpecificDetailsInstance.ProcessServerId = processServerIdInstance;
                                         }
                                         
+                                        JToken runAsAccountIdValue = providerSpecificDetailsValue["runAsAccountId"];
+                                        if (runAsAccountIdValue != null && runAsAccountIdValue.Type != JTokenType.Null)
+                                        {
+                                            string runAsAccountIdInstance = ((string)runAsAccountIdValue);
+                                            inMageMigrationProviderSpecificDetailsInstance.RunAsAccountId = runAsAccountIdInstance;
+                                        }
+                                        
                                         JToken osTypeValue2 = providerSpecificDetailsValue["osType"];
                                         if (osTypeValue2 != null && osTypeValue2.Type != JTokenType.Null)
                                         {
@@ -8397,6 +8437,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                             inMageMigrationProviderSpecificDetailsInstance.ProcessServerId = processServerIdInstance;
                                         }
                                         
+                                        JToken runAsAccountIdValue = providerSpecificDetailsValue["runAsAccountId"];
+                                        if (runAsAccountIdValue != null && runAsAccountIdValue.Type != JTokenType.Null)
+                                        {
+                                            string runAsAccountIdInstance = ((string)runAsAccountIdValue);
+                                            inMageMigrationProviderSpecificDetailsInstance.RunAsAccountId = runAsAccountIdInstance;
+                                        }
+                                        
                                         JToken osTypeValue2 = providerSpecificDetailsValue["osType"];
                                         if (osTypeValue2 != null && osTypeValue2.Type != JTokenType.Null)
                                         {
@@ -9537,6 +9584,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                         {
                                             string processServerIdInstance = ((string)processServerIdValue);
                                             inMageMigrationProviderSpecificDetailsInstance.ProcessServerId = processServerIdInstance;
+                                        }
+                                        
+                                        JToken runAsAccountIdValue = providerSpecificDetailsValue["runAsAccountId"];
+                                        if (runAsAccountIdValue != null && runAsAccountIdValue.Type != JTokenType.Null)
+                                        {
+                                            string runAsAccountIdInstance = ((string)runAsAccountIdValue);
+                                            inMageMigrationProviderSpecificDetailsInstance.RunAsAccountId = runAsAccountIdInstance;
                                         }
                                         
                                         JToken osTypeValue2 = providerSpecificDetailsValue["osType"];
@@ -10730,6 +10784,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     inMageMigrationProviderSpecificDetailsInstance.ProcessServerId = processServerIdInstance;
                                                 }
                                                 
+                                                JToken runAsAccountIdValue = providerSpecificDetailsValue["runAsAccountId"];
+                                                if (runAsAccountIdValue != null && runAsAccountIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string runAsAccountIdInstance = ((string)runAsAccountIdValue);
+                                                    inMageMigrationProviderSpecificDetailsInstance.RunAsAccountId = runAsAccountIdInstance;
+                                                }
+                                                
                                                 JToken osTypeValue2 = providerSpecificDetailsValue["osType"];
                                                 if (osTypeValue2 != null && osTypeValue2.Type != JTokenType.Null)
                                                 {
@@ -11872,6 +11933,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                     inMageMigrationProviderSpecificDetailsInstance.ProcessServerId = processServerIdInstance;
                                                 }
                                                 
+                                                JToken runAsAccountIdValue = providerSpecificDetailsValue["runAsAccountId"];
+                                                if (runAsAccountIdValue != null && runAsAccountIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string runAsAccountIdInstance = ((string)runAsAccountIdValue);
+                                                    inMageMigrationProviderSpecificDetailsInstance.RunAsAccountId = runAsAccountIdInstance;
+                                                }
+                                                
                                                 JToken osTypeValue2 = providerSpecificDetailsValue["osType"];
                                                 if (osTypeValue2 != null && osTypeValue2.Type != JTokenType.Null)
                                                 {
@@ -12969,6 +13037,13 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                                 {
                                                     string processServerIdInstance = ((string)processServerIdValue);
                                                     inMageMigrationProviderSpecificDetailsInstance.ProcessServerId = processServerIdInstance;
+                                                }
+                                                
+                                                JToken runAsAccountIdValue = providerSpecificDetailsValue["runAsAccountId"];
+                                                if (runAsAccountIdValue != null && runAsAccountIdValue.Type != JTokenType.Null)
+                                                {
+                                                    string runAsAccountIdInstance = ((string)runAsAccountIdValue);
+                                                    inMageMigrationProviderSpecificDetailsInstance.RunAsAccountId = runAsAccountIdInstance;
                                                 }
                                                 
                                                 JToken osTypeValue2 = providerSpecificDetailsValue["osType"];

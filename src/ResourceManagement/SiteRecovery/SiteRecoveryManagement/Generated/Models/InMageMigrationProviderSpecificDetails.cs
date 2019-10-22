@@ -109,6 +109,17 @@ namespace Microsoft.Azure.Management.SiteRecovery.Models
             set { this._protectedDisks = value; }
         }
         
+        private string _runAsAccountId;
+        
+        /// <summary>
+        /// Optional. Run-as account Id.
+        /// </summary>
+        public string RunAsAccountId
+        {
+            get { return this._runAsAccountId; }
+            set { this._runAsAccountId = value; }
+        }
+        
         private string _targetAvailabilitySetId;
         
         /// <summary>
