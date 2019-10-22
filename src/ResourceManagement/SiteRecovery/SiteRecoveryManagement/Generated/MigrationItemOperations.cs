@@ -824,6 +824,16 @@ namespace Microsoft.Azure.Management.SiteRecovery
                                 providerSpecificDetailsValue["performShutdown"] = derived.PerformShutdown;
                             }
                         }
+                        if (input.Properties.ProviderSpecificDetails is InMageMigrationMigrateInput)
+                        {
+                            providerSpecificDetailsValue["instanceType"] = "InMageMigration";
+                            InMageMigrationMigrateInput derived2 = ((InMageMigrationMigrateInput)input.Properties.ProviderSpecificDetails);
+                            
+                            if (derived2.PerformShutdown != null)
+                            {
+                                providerSpecificDetailsValue["performShutdown"] = derived2.PerformShutdown;
+                            }
+                        }
                     }
                 }
                 
@@ -1065,6 +1075,21 @@ namespace Microsoft.Azure.Management.SiteRecovery
                             if (derived.NetworkId != null)
                             {
                                 providerSpecificDetailsValue["networkId"] = derived.NetworkId;
+                            }
+                        }
+                        if (input.Properties.ProviderSpecificDetails is InMageMigrationTestMigrateInput)
+                        {
+                            providerSpecificDetailsValue["instanceType"] = "InMageMigration";
+                            InMageMigrationTestMigrateInput derived2 = ((InMageMigrationTestMigrateInput)input.Properties.ProviderSpecificDetails);
+                            
+                            if (derived2.RecoveryPointId != null)
+                            {
+                                providerSpecificDetailsValue["recoveryPointId"] = derived2.RecoveryPointId;
+                            }
+                            
+                            if (derived2.NetworkId != null)
+                            {
+                                providerSpecificDetailsValue["networkId"] = derived2.NetworkId;
                             }
                         }
                     }
