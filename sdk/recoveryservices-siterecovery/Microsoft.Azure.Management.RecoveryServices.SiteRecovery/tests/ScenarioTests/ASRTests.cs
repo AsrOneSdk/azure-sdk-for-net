@@ -15,24 +15,24 @@ namespace RecoveryServices.SiteRecovery.Tests
 {
     public class ASRTests : SiteRecoveryTestsBase
     {
-        private const string targetResourceGroup = "/subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/siterecoveryprod1";
-        private const string storageAccountId = "/subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/siterecoveryprod1/providers/Microsoft.Storage/storageAccounts/storavrai";
-        private const string azureNetworkId = "/subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/siterecoveryProd1/providers/Microsoft.Network/virtualNetworks/vnetavrai";
+        private const string targetResourceGroup = "/subscriptions/b364ed8d-4279-4bf8-8fd1-56f8fa0ae05c/resourceGroups/prakccyrg";
+        private const string storageAccountId = "/subscriptions/b364ed8d-4279-4bf8-8fd1-56f8fa0ae05c/resourceGroups/Arpita-air/providers/Microsoft.Storage/storageAccounts/sah2atest";
+        private const string azureNetworkId = "/subscriptions/b364ed8d-4279-4bf8-8fd1-56f8fa0ae05c/resourceGroups/Arpita-air/providers/Microsoft.Network/virtualNetworks/vnh2atest";
         private const string siteName = "SiteRecoveryTestSite1";
-        private const string vmmFabric = "d188dc378a78c819bfb8b1f07eba2c15511e1788c41ba27792d9433fc6a4e087";
-        private const string location = "westus";
-        private const string providerName = "ba2a2d25-377f-4f4b-94a4-2981c79b0998";
-        private const string policyName = "protectionprofile1";
+        private const string vmmFabric = "ca667d2536f540cc57a566ae639081b123ad508d93caef2859237ca22f265866";
+        private const string location = "centraluseuap";
+        private const string providerName = "9938a1bf-2de6-4c6d-a758-58a1f2cc4fe4";
+        private const string policyName = "protectionprofile2";
         private const string recoveryCloud = "Microsoft Azure";
         private const string protectionContainerMappingName = "PCMapping";
         private const string networkMappingName = "NWMapping";
-        private const string vmName = "vm1";
-        private const string vmId = "f8491e4f-817a-40dd-a90c-af773978c75b";
-        private const string vmName2 = "vm2";
+        private const string vmName = "VMforSDKFirst";
+        private const string vmId = "193ca098-991d-4a6f-be78-da2c6e7bd290";
+        private const string vmName2 = "VMforSDK";
         private const string rpName = "rpTest1";
-        private const string emailAddress = "ronehr@microsoft.com";
+        private const string emailAddress = "arpgup@microsoft.com";
         private const string alertSettingName = "defaultAlertSetting";
-        private const string vmNetworkName = "c41eda86-96d5-4541-a6f8-c47d4b75a24a";
+        private const string vmNetworkName = "4f704b8f-946c-4705-9844-11167e90102f";
 
         private const string a2aPrimaryLocation = "westeurope";
         private const string a2aRecoveryLocation = "northeurope";
@@ -557,8 +557,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact(Skip = "ReRecord due to CR change")]
-        [Trait("ReRecord", "CR Changes")]
+        [Fact]
         public void RenewCertificate()
         {
             using (var context = MockContext.Start(this.GetType()))
@@ -649,9 +648,8 @@ namespace RecoveryServices.SiteRecovery.Tests
                 testHelper.Initialize(context);
                 var client = testHelper.SiteRecoveryClient;
 
-                string rspName = "74ef040f-fa15-4f71-9652-c27d5d19d575";
                 var fabric = client.ReplicationFabrics.Get(siteName);
-                client.ReplicationRecoveryServicesProviders.Purge(fabric.Name, rspName);
+                client.ReplicationRecoveryServicesProviders.Purge(fabric.Name, providerName);
             }
         }
 
@@ -798,7 +796,7 @@ namespace RecoveryServices.SiteRecovery.Tests
                     ApplicationConsistentSnapshotFrequencyInHours = 2,
                     ReplicationInterval = 300,
                     OnlineReplicationStartTime = null,
-                    StorageAccounts = new List<string>() { "/subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/siterecoveryprod1/providers/Microsoft.Storage/storageAccounts/storavrai" }
+                    StorageAccounts = new List<string>() { "/subscriptions/b364ed8d-4279-4bf8-8fd1-56f8fa0ae05c/resourceGroups/Arpita-air/providers/Microsoft.Storage/storageAccounts/sah2atest2" }
                 };
 
                 UpdatePolicyInputProperties inputProperties = new UpdatePolicyInputProperties()
@@ -1067,7 +1065,7 @@ namespace RecoveryServices.SiteRecovery.Tests
                 var protectionContainer = client.ReplicationProtectionContainers.Get(siteName,
                     protectionContainerList.FirstOrDefault().Name);
 
-                var protectedItem = client.ReplicationProtectedItems.Get(siteName, protectionContainer.Name, vmName);
+                var protectedItem = client.ReplicationProtectedItems.Get(siteName, protectionContainer.Name, vmId);
                 Assert.NotNull(protectedItem.Id);
             }
         }
@@ -1112,11 +1110,16 @@ namespace RecoveryServices.SiteRecovery.Tests
                 var protectionContainer =
                     client.ReplicationProtectionContainers.ListByReplicationFabrics(siteName).FirstOrDefault();
                 var protectedItem = client.ReplicationProtectedItems.Get(siteName, protectionContainer.Name, vmName2);
+                var ipconfig = new IPConfigInputDetails{
+                    RecoverySubnetName = "Subnet1"
+                };
+                var ipconfigs = new List<IPConfigInputDetails>();
+                ipconfigs.Add(ipconfig);
 
                 VMNicInputDetails nicInput = new VMNicInputDetails()
                 {
                     NicId = (protectedItem.Properties.ProviderSpecificDetails as HyperVReplicaAzureReplicationDetails).VmNics[0].NicId,
-                    RecoveryVMSubnetName = "Subnet1",
+                    IpConfigs = ipconfigs,
                     SelectionType = "SelectedByUser"
                 };
 
@@ -1143,6 +1146,7 @@ namespace RecoveryServices.SiteRecovery.Tests
                 var updatedProtecteditem = client.ReplicationProtectedItems.Get(siteName, protectionContainer.Name, vmName2);
             }
         }
+        
 
         [Fact]
         public void DeleteProtectedItem()
@@ -1181,11 +1185,11 @@ namespace RecoveryServices.SiteRecovery.Tests
                 var protectionContainer =
                     client.ReplicationProtectionContainers.ListByReplicationFabrics(siteName).FirstOrDefault();
 
-                client.ReplicationProtectedItems.Purge(siteName, protectionContainer.Name, vmName);
+                client.ReplicationProtectedItems.Purge(siteName, protectionContainer.Name, vmId);
             }
         }
 
-        [Fact(Skip = "ReRecord due to CR change")]
+        [Fact]
         public void RepairReplication()
         {
             using (var context = MockContext.Start(this.GetType()))
@@ -1203,7 +1207,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact(Skip = "ReRecord due to CR change")]
+        [Fact]
         public void TestFailover()
         {
             using (var context = MockContext.Start(this.GetType()))
@@ -1213,20 +1217,16 @@ namespace RecoveryServices.SiteRecovery.Tests
 
                 var protectionContainer =
                     client.ReplicationProtectionContainers.ListByReplicationFabrics(siteName).FirstOrDefault();
-                var protectedItem = client.ReplicationProtectedItems.Get(siteName, protectionContainer.Name, vmName);
+                var protectedItem = client.ReplicationProtectedItems.Get(siteName, protectionContainer.Name, vmId);
 
                 string networkId = (protectedItem.Properties.ProviderSpecificDetails as HyperVReplicaAzureReplicationDetails)
                         .SelectedRecoveryAzureNetworkId;
-                HyperVReplicaAzureFailoverProviderInput h2AFOInput = new HyperVReplicaAzureFailoverProviderInput()
-                {
-                    VaultLocation = "West US",
-                };
+                TestFailoverProviderSpecificInput h2AFOInput = new TestFailoverProviderSpecificInput();
 
                 TestFailoverInputProperties tfoInputProperties = new TestFailoverInputProperties()
                 {
                     NetworkId = networkId,
                     NetworkType = string.IsNullOrEmpty(networkId) ? null : "VmNetworkAsInput",
-                    SkipTestFailoverCleanup = true.ToString(),
                     ProviderSpecificDetails = h2AFOInput
                 };
 
@@ -1235,11 +1235,11 @@ namespace RecoveryServices.SiteRecovery.Tests
                     Properties = tfoInputProperties
                 };
 
-                var response = client.ReplicationProtectedItems.TestFailover(siteName, protectionContainer.Name, vmName, tfoInput);
+                var response = client.ReplicationProtectedItems.TestFailover(siteName, protectionContainer.Name, vmId, tfoInput);
             }
         }
 
-        [Fact(Skip = "ReRecord due to CR change")]
+        [Fact]
         public void TestFailoverCleanup()
         {
             using (var context = MockContext.Start(this.GetType()))
@@ -1249,7 +1249,7 @@ namespace RecoveryServices.SiteRecovery.Tests
 
                 var protectionContainer =
                     client.ReplicationProtectionContainers.ListByReplicationFabrics(siteName).FirstOrDefault();
-                var protectedItem = client.ReplicationProtectedItems.Get(siteName, protectionContainer.Name, vmName);
+                var protectedItem = client.ReplicationProtectedItems.Get(siteName, protectionContainer.Name, vmId);
 
                 TestFailoverCleanupInputProperties inputProperties = new TestFailoverCleanupInputProperties()
                 {
@@ -1262,7 +1262,7 @@ namespace RecoveryServices.SiteRecovery.Tests
                 };
 
                 client.ReplicationProtectedItems.TestFailoverCleanup(
-                    siteName, protectionContainer.Name, vmName, input);
+                    siteName, protectionContainer.Name, vmId, input);
             }
         }
 
@@ -1292,10 +1292,7 @@ namespace RecoveryServices.SiteRecovery.Tests
                 }
                 else
                 {
-                    HyperVReplicaAzureFailoverProviderInput h2AFailoverInput = new HyperVReplicaAzureFailoverProviderInput()
-                    {
-                        VaultLocation = "West US"
-                    };
+                    PlannedFailoverProviderSpecificFailoverInput h2AFailoverInput = new PlannedFailoverProviderSpecificFailoverInput();
 
                     inputProperties.ProviderSpecificDetails = h2AFailoverInput;
                 }
@@ -1309,7 +1306,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact(Skip = "ReRecord due to CR change")]
+        [Fact]
         public void UnplannedFailover()
         {
             using (var context = MockContext.Start(this.GetType()))
@@ -1322,10 +1319,7 @@ namespace RecoveryServices.SiteRecovery.Tests
 
                 var protectedItem = client.ReplicationProtectedItems.Get(siteName, protectionContainer.Name, vmName2);
 
-                HyperVReplicaAzureFailoverProviderInput h2AFailoverInput = new HyperVReplicaAzureFailoverProviderInput()
-                {
-                    VaultLocation = "West US"
-                };
+                UnplannedFailoverProviderSpecificInput h2AFailoverInput = new UnplannedFailoverProviderSpecificInput();
 
                 UnplannedFailoverInputProperties inputProperties = new UnplannedFailoverInputProperties()
                 {
@@ -1360,7 +1354,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact(Skip = "ReRecord due to CR change")]
+        [Fact]
         public void Reprotect()
         {
             using (var context = MockContext.Start(this.GetType()))
@@ -1435,7 +1429,7 @@ namespace RecoveryServices.SiteRecovery.Tests
                 var protectionContainer =
                     client.ReplicationProtectionContainers.ListByReplicationFabrics(siteName).FirstOrDefault();
 
-                var rps = client.RecoveryPoints.ListByReplicationProtectedItems(siteName, protectionContainer.Name, vmName);
+                var rps = client.RecoveryPoints.ListByReplicationProtectedItems(siteName, protectionContainer.Name, vmId);
             }
         }
 
@@ -1451,10 +1445,7 @@ namespace RecoveryServices.SiteRecovery.Tests
                     client.ReplicationProtectionContainers.ListByReplicationFabrics(siteName).FirstOrDefault();
 
                 var rps = client.RecoveryPoints.ListByReplicationProtectedItems(siteName, protectionContainer.Name, vmName2).ToList();
-                HyperVReplicaAzureApplyRecoveryPointInput h2APitInput = new HyperVReplicaAzureApplyRecoveryPointInput()
-                {
-                    VaultLocation = "West US"
-                };
+                HyperVReplicaAzureApplyRecoveryPointInput h2APitInput = new HyperVReplicaAzureApplyRecoveryPointInput();
 
                 ApplyRecoveryPointInputProperties inputProperties = new ApplyRecoveryPointInputProperties()
                 {
@@ -1481,7 +1472,7 @@ namespace RecoveryServices.SiteRecovery.Tests
 
                 var fabric = client.ReplicationFabrics.Get(siteName);
                 var protectionContainer = client.ReplicationProtectionContainers.ListByReplicationFabrics(siteName).FirstOrDefault();
-                var protectedItem1 = client.ReplicationProtectedItems.Get(siteName, protectionContainer.Name, vmName);
+                var protectedItem1 = client.ReplicationProtectedItems.Get(siteName, protectionContainer.Name, vmId);
 
                 RecoveryPlanProtectedItem rpVm1 = new RecoveryPlanProtectedItem()
                 {
@@ -1582,7 +1573,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact(Skip = "ReRecord due to CR change")]
+        [Fact]
         public void RPTestFailover()
         {
             using (var context = MockContext.Start(this.GetType()))
@@ -1590,16 +1581,13 @@ namespace RecoveryServices.SiteRecovery.Tests
                 testHelper.Initialize(context);
                 var client = testHelper.SiteRecoveryClient;
 
-                RecoveryPlanHyperVReplicaAzureFailoverInput h2AInput = new RecoveryPlanHyperVReplicaAzureFailoverInput()
-                {
-                    VaultLocation = "West US"
-                };
+                RecoveryPlanHyperVReplicaAzureFailoverInput h2AInput = new RecoveryPlanHyperVReplicaAzureFailoverInput();
 
                 RecoveryPlanTestFailoverInputProperties inputProperties = new RecoveryPlanTestFailoverInputProperties()
                 {
                     NetworkId = azureNetworkId,
+                    FailoverDirection = PossibleOperationsDirections.PrimaryToRecovery,
                     NetworkType = string.IsNullOrEmpty(azureNetworkId) ? null : "VmNetworkAsInput",
-                    SkipTestFailoverCleanup = true.ToString(),
                     ProviderSpecificDetails = new List<RecoveryPlanProviderSpecificFailoverInput>() { h2AInput }
                 };
 
@@ -1614,7 +1602,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact(Skip = "ReRecord due to CR change")]
+        [Fact]
         public void RPTestFailoverCleanup()
         {
             using (var context = MockContext.Start(this.GetType()))
@@ -1637,7 +1625,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact(Skip = "ReRecord due to CR change")]
+        [Fact]
         public void RPPlannedFailover()
         {
             using (var context = MockContext.Start(this.GetType()))
@@ -1645,10 +1633,7 @@ namespace RecoveryServices.SiteRecovery.Tests
                 testHelper.Initialize(context);
                 var client = testHelper.SiteRecoveryClient;
 
-                RecoveryPlanHyperVReplicaAzureFailoverInput h2AInput = new RecoveryPlanHyperVReplicaAzureFailoverInput()
-                {
-                    VaultLocation = "West US"
-                };
+                RecoveryPlanHyperVReplicaAzureFailoverInput h2AInput = new RecoveryPlanHyperVReplicaAzureFailoverInput();
 
                 RecoveryPlanPlannedFailoverInputProperties inputProperties = new RecoveryPlanPlannedFailoverInputProperties()
                 {
@@ -1666,7 +1651,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact(Skip = "ReRecord due to CR change")]
+        [Fact]
         public void RPUnplannedFailover()
         {
             using (var context = MockContext.Start(this.GetType()))
@@ -1674,10 +1659,7 @@ namespace RecoveryServices.SiteRecovery.Tests
                 testHelper.Initialize(context);
                 var client = testHelper.SiteRecoveryClient;
 
-                RecoveryPlanHyperVReplicaAzureFailoverInput h2AInput = new RecoveryPlanHyperVReplicaAzureFailoverInput()
-                {
-                    VaultLocation = "West US"
-                };
+                RecoveryPlanHyperVReplicaAzureFailoverInput h2AInput = new RecoveryPlanHyperVReplicaAzureFailoverInput();
 
                 RecoveryPlanUnplannedFailoverInputProperties inputProperties = new RecoveryPlanUnplannedFailoverInputProperties()
                 {
@@ -1696,7 +1678,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact(Skip = "ReRecord due to CR change")]
+        [Fact]
         public void RPFailoverCommit()
         {
             using (var context = MockContext.Start(this.GetType()))
@@ -1709,7 +1691,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact(Skip = "ReRecord due to CR change")]
+        [Fact]
         public void RPFailback()
         {
             using (var context = MockContext.Start(this.GetType()))
@@ -1739,7 +1721,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact(Skip = "ReRecord due to CR change")]
+        [Fact]
         public void RPReprotect()
         {
             using (var context = MockContext.Start(this.GetType()))
@@ -1963,25 +1945,12 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
         
-       
-        [Fact]
-        public void MigrateToAad()
-        {
-            using (var context = MockContext.Start(this.GetType()))
-            {
-                testHelper.Initialize(context, "canaryexproute", "IbizaV2ATest");
-                var client = testHelper.SiteRecoveryClient;
-
-                client.ReplicationFabrics.MigrateToAad("38de67c62c2b231fb647b060df06a8a69da7e305c44db6646693b7470d709c87");
-            }
-        }
-
         [Fact]
         public void ListEventByQuery()
         {
             using (var context = MockContext.Start(this.GetType()))
             {
-                testHelper.Initialize(context, "canaryexproute", "IbizaV2ATest");
+                testHelper.Initialize(context);
                 var client = testHelper.SiteRecoveryClient;
 
                 var querydata = new ODataQuery<EventQueryParameter>("Severity  eq 'Critical'");
@@ -1994,7 +1963,7 @@ namespace RecoveryServices.SiteRecovery.Tests
         {
             using (var context = MockContext.Start(this.GetType()))
             {
-                testHelper.Initialize(context, "canaryexproute", "IbizaV2ATest");
+                testHelper.Initialize(context);
                 var client = testHelper.SiteRecoveryClient;
 
                 client.ReplicationVaultHealth.Get();
