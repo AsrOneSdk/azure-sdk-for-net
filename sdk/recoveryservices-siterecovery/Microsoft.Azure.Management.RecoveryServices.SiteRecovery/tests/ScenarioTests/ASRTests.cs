@@ -1217,9 +1217,8 @@ namespace RecoveryServices.SiteRecovery.Tests
 
                 string networkId = (protectedItem.Properties.ProviderSpecificDetails as HyperVReplicaAzureReplicationDetails)
                         .SelectedRecoveryAzureNetworkId;
-                HyperVReplicaAzureFailoverProviderInput h2AFOInput = new HyperVReplicaAzureFailoverProviderInput()
+                TestFailoverProviderSpecificInput h2AFOInput = new TestFailoverProviderSpecificInput()
                 {
-                    VaultLocation = "West US",
                 };
 
                 TestFailoverInputProperties tfoInputProperties = new TestFailoverInputProperties()
@@ -1322,9 +1321,8 @@ namespace RecoveryServices.SiteRecovery.Tests
 
                 var protectedItem = client.ReplicationProtectedItems.Get(siteName, protectionContainer.Name, vmName2);
 
-                HyperVReplicaAzureFailoverProviderInput h2AFailoverInput = new HyperVReplicaAzureFailoverProviderInput()
+                UnplannedFailoverProviderSpecificInput h2AFailoverInput = new UnplannedFailoverProviderSpecificInput()
                 {
-                    VaultLocation = "West US"
                 };
 
                 UnplannedFailoverInputProperties inputProperties = new UnplannedFailoverInputProperties()
