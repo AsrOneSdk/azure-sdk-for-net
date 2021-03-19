@@ -21,7 +21,7 @@ namespace RecoveryServices.SiteRecovery.Tests
         private const string siteName = "SiteRecoveryTestSite1";
         private const string vmmFabric = "ca667d2536f540cc57a566ae639081b123ad508d93caef2859237ca22f265866";
         private const string location = "centraluseuap";
-        private const string providerName = "d4f5707e-16df-4e60-92df-fea789694c62";
+        private const string providerName = "71f21bed-b00f-4869-9dbf-288e7cb4051d";
         private const string policyName = "protectionprofile2";
         private const string recoveryCloud = "Microsoft Azure";
         private const string protectionContainerMappingName = "PCMapping";
@@ -694,8 +694,9 @@ namespace RecoveryServices.SiteRecovery.Tests
                 testHelper.Initialize(context);
                 var client = testHelper.SiteRecoveryClient;
 
+                var purgeProviderName = "d4f5707e-16df-4e60-92df-fea789694c62";
                 var fabric = client.ReplicationFabrics.Get(siteName);
-                client.ReplicationRecoveryServicesProviders.Purge(fabric.Name, providerName);
+                client.ReplicationRecoveryServicesProviders.Purge(fabric.Name, purgeProviderName);
             }
         }
 
