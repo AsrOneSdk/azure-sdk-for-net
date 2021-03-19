@@ -266,6 +266,52 @@ namespace RecoveryServices.SiteRecovery.Tests
         }
 
         [Fact]
+        public void CreateA2AReplicationProtectionIntent()
+        {
+            using (var context = MockContext.Start(this.GetType()))
+            {
+                testHelper.Initialize(context);
+                var client = testHelper.SiteRecoveryClient;
+
+                string a2aVirtualMachine = "/subscriptions/509099b2-9d2c-4636-b43e-bd5cafb6be69/resourceGroups/sdkRG/providers/Microsoft.Compute/virtualMachines/sdkPrimaryVm";
+                string a2aRecoveryResourceGroup = "/subscriptions/b364ed8d-4279-4bf8-8fd1-56f8fa0ae05c/resourceGroups/adkRecovery";
+                var a2aCreateProtectionIntentInput = new A2ACreateProtectionIntentInput();
+                a2aCreateProtectionIntentInput.FabricObjectId = a2aVirtualMachine;
+                a2aCreateProtectionIntentInput.AutoProtectionOfDataDisk = "Enabled";
+                a2aCreateProtectionIntentInput.PrimaryLocation = "uksouth";
+                a2aCreateProtectionIntentInput.RecoveryLocation = "ukwest";
+                a2aCreateProtectionIntentInput.RecoverySubscriptionId = "b364ed8d-4279-4bf8-8fd1-56f8fa0ae05c";
+                a2aCreateProtectionIntentInput.RecoveryResourceGroupId = a2aRecoveryResourceGroup;
+                a2aCreateProtectionIntentInput.RecoveryAvailabilityType = "Single";
+                a2aCreateProtectionIntentInput.ProtectionProfileCustomInput = new NewProtectionProfile
+                {
+                    PolicyName = "intentPolicy",
+                    RecoveryPointHistory = 1440,
+                    CrashConsistentFrequencyInMinutes = 10,
+                    AppConsistentFrequencyInMinutes = 60,
+                    MultiVmSyncStatus = "Enable"
+
+            };
+
+                var createProtectionIntentInput = new CreateProtectionIntentInput
+                {
+                    Properties = new CreateProtectionIntentProperties()
+                };
+
+                createProtectionIntentInput.Properties.ProviderSpecificDetails = a2aCreateProtectionIntentInput;
+
+                string a2aReplicationProtectionIntentName =  "intentName";
+                var replicationProtectionIntent =
+                    client.ReplicationProtectionIntents.Create(
+                        a2aReplicationProtectionIntentName,
+                        createProtectionIntentInput);
+                Assert.True(
+                    replicationProtectionIntent.Name == a2aReplicationProtectionIntentName,
+                    "Resource name can not be different.");
+            }
+        }
+
+        [Fact]
         public void GetA2AResources()
         {
             using (var context = MockContext.Start(this.GetType()))
@@ -1067,6 +1113,30 @@ namespace RecoveryServices.SiteRecovery.Tests
 
                 var protectedItem = client.ReplicationProtectedItems.Get(siteName, protectionContainer.Name, vmId);
                 Assert.NotNull(protectedItem.Id);
+            }
+        }
+
+        [Fact]
+        public void ListProtectionIntents()
+        {
+            using (var context = MockContext.Start(this.GetType()))
+            {
+                testHelper.Initialize(context);
+                var client = testHelper.SiteRecoveryClient;
+
+                var protectionItents = client.ReplicationProtectionIntents.List();
+            }
+        }
+
+        [Fact]
+        public void GetProtectionIntent()
+        {
+            using (var context = MockContext.Start(this.GetType()))
+            {
+                testHelper.Initialize(context);
+                var client = testHelper.SiteRecoveryClient;
+
+                var protectionItent = client.ReplicationProtectionIntents.Get("intentName");
             }
         }
 
