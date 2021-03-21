@@ -1,13 +1,13 @@
 {
   "Entries": [
     {
-      "RequestUri": "/subscriptions/b364ed8d-4279-4bf8-8fd1-56f8fa0ae05c/resourceGroups/intentccyVt/providers/Microsoft.RecoveryServices/vaults/intentCCY/replicationProtectionIntents/intentName?api-version=2021-02-10",
-      "EncodedRequestUri": "L3N1YnNjcmlwdGlvbnMvYjM2NGVkOGQtNDI3OS00YmY4LThmZDEtNTZmOGZhMGFlMDVjL3Jlc291cmNlR3JvdXBzL2ludGVudGNjeVZ0L3Byb3ZpZGVycy9NaWNyb3NvZnQuUmVjb3ZlcnlTZXJ2aWNlcy92YXVsdHMvaW50ZW50Q0NZL3JlcGxpY2F0aW9uUHJvdGVjdGlvbkludGVudHMvaW50ZW50TmFtZT9hcGktdmVyc2lvbj0yMDIxLTAyLTEw",
+      "RequestUri": "/subscriptions/b364ed8d-4279-4bf8-8fd1-56f8fa0ae05c/resourceGroups/sdkVTRG/providers/Microsoft.RecoveryServices/vaults/sdkVault1/replicationProtectionIntents/intentName1?api-version=2021-02-10",
+      "EncodedRequestUri": "L3N1YnNjcmlwdGlvbnMvYjM2NGVkOGQtNDI3OS00YmY4LThmZDEtNTZmOGZhMGFlMDVjL3Jlc291cmNlR3JvdXBzL3Nka1ZUUkcvcHJvdmlkZXJzL01pY3Jvc29mdC5SZWNvdmVyeVNlcnZpY2VzL3ZhdWx0cy9zZGtWYXVsdDEvcmVwbGljYXRpb25Qcm90ZWN0aW9uSW50ZW50cy9pbnRlbnROYW1lMT9hcGktdmVyc2lvbj0yMDIxLTAyLTEw",
       "RequestMethod": "PUT",
-      "RequestBody": "{\r\n  \"properties\": {\r\n    \"providerSpecificDetails\": {\r\n      \"instanceType\": \"A2A\",\r\n      \"fabricObjectId\": \"/subscriptions/509099b2-9d2c-4636-b43e-bd5cafb6be69/resourceGroups/sdkRG/providers/Microsoft.Compute/virtualMachines/sdkPrimaryVm\",\r\n      \"primaryLocation\": \"uksouth\",\r\n      \"recoveryLocation\": \"ukwest\",\r\n      \"recoverySubscriptionId\": \"b364ed8d-4279-4bf8-8fd1-56f8fa0ae05c\",\r\n      \"recoveryAvailabilityType\": \"Single\",\r\n      \"protectionProfileCustomInput\": {\r\n        \"resourceType\": \"New\",\r\n        \"policyName\": \"intentPolicy\",\r\n        \"recoveryPointHistory\": 1440,\r\n        \"crashConsistentFrequencyInMinutes\": 10,\r\n        \"appConsistentFrequencyInMinutes\": 60,\r\n        \"multiVmSyncStatus\": \"Enable\"\r\n      },\r\n      \"recoveryResourceGroupId\": \"/subscriptions/b364ed8d-4279-4bf8-8fd1-56f8fa0ae05c/resourceGroups/adkRecovery\",\r\n      \"autoProtectionOfDataDisk\": \"Enabled\"\r\n    }\r\n  }\r\n}",
+      "RequestBody": "{\r\n  \"properties\": {\r\n    \"providerSpecificDetails\": {\r\n      \"instanceType\": \"A2A\",\r\n      \"fabricObjectId\": \"/subscriptions/b364ed8d-4279-4bf8-8fd1-56f8fa0ae05c/resourceGroups/sdkTestVMRG/providers/Microsoft.Compute/virtualMachines/sdkTestVM1\",\r\n      \"primaryLocation\": \"westeurope\",\r\n      \"recoveryLocation\": \"northeurope\",\r\n      \"recoverySubscriptionId\": \"b364ed8d-4279-4bf8-8fd1-56f8fa0ae05c\",\r\n      \"recoveryAvailabilityType\": \"Single\",\r\n      \"protectionProfileCustomInput\": {\r\n        \"resourceType\": \"New\",\r\n        \"policyName\": \"intentPolicy\",\r\n        \"recoveryPointHistory\": 1440,\r\n        \"crashConsistentFrequencyInMinutes\": 10,\r\n        \"appConsistentFrequencyInMinutes\": 60,\r\n        \"multiVmSyncStatus\": \"Enable\"\r\n      },\r\n      \"recoveryResourceGroupId\": \"/subscriptions/b364ed8d-4279-4bf8-8fd1-56f8fa0ae05c/resourceGroups/sdkTestVMRG-asr\",\r\n      \"autoProtectionOfDataDisk\": \"Enabled\"\r\n    }\r\n  }\r\n}",
       "RequestHeaders": {
         "x-ms-client-request-id": [
-          "a7f95d37-787d-45ac-856d-82a182d92744"
+          "10d596f2-0834-4ec6-a256-1bcb3180a8d9"
         ],
         "Accept-Language": [
           "en-US"
@@ -22,7 +22,7 @@
           "application/json; charset=utf-8"
         ],
         "Content-Length": [
-          "908"
+          "924"
         ]
       },
       "ResponseHeaders": {
@@ -43,25 +43,25 @@
           "max-age=31536000; includeSubDomains"
         ],
         "x-ms-request-id": [
-          "a7f95d37-787d-45ac-856d-82a182d92744 3/19/2021 7:09:03 AM"
+          "10d596f2-0834-4ec6-a256-1bcb3180a8d9 3/21/2021 6:34:42 AM"
         ],
         "X-Content-Type-Options": [
           "nosniff"
         ],
         "x-ms-client-request-id": [
-          "a7f95d37-787d-45ac-856d-82a182d92744"
+          "10d596f2-0834-4ec6-a256-1bcb3180a8d9"
         ],
         "x-ms-correlation-request-id": [
-          "5360b4e9-ba7a-4a31-943a-160f9c2db5f7"
+          "4e2e56a8-1403-4c8c-8fcf-05f2d198e054"
         ],
         "x-ms-routing-request-id": [
-          "CENTRALUSEUAP:20210319T070903Z:5360b4e9-ba7a-4a31-943a-160f9c2db5f7"
+          "CENTRALUSEUAP:20210321T063442Z:4e2e56a8-1403-4c8c-8fcf-05f2d198e054"
         ],
         "Date": [
-          "Fri, 19 Mar 2021 07:09:03 GMT"
+          "Sun, 21 Mar 2021 06:34:42 GMT"
         ],
         "Content-Length": [
-          "1610"
+          "1621"
         ],
         "Content-Type": [
           "application/json"
@@ -70,7 +70,7 @@
           "-1"
         ]
       },
-      "ResponseBody": "{\r\n  \"id\": \"/Subscriptions/b364ed8d-4279-4bf8-8fd1-56f8fa0ae05c/resourceGroups/intentccyVt/providers/Microsoft.RecoveryServices/vaults/intentCCY/replicationProtectionIntents/intentName\",\r\n  \"name\": \"intentName\",\r\n  \"type\": \"Microsoft.RecoveryServices/vaults/replicationProtectionIntents\",\r\n  \"properties\": {\r\n    \"friendlyName\": \"intentName\",\r\n    \"jobId\": \"/Subscriptions/b364ed8d-4279-4bf8-8fd1-56f8fa0ae05c/resourceGroups/intentccyVt/providers/Microsoft.RecoveryServices/vaults/intentCCY/replicationJobs/3ed88434-329c-45cf-9d02-c23c64ecd98b\",\r\n    \"jobState\": \"NotStarted\",\r\n    \"isActive\": true,\r\n    \"creationTimeUTC\": \"3/19/2021 7:09:02 AM\",\r\n    \"providerSpecificDetails\": {\r\n      \"instanceType\": \"A2A\",\r\n      \"fabricObjectId\": \"/subscriptions/509099b2-9d2c-4636-b43e-bd5cafb6be69/resourceGroups/sdkRG/providers/Microsoft.Compute/virtualMachines/sdkPrimaryVm\",\r\n      \"primaryLocation\": \"uksouth\",\r\n      \"recoveryLocation\": \"ukwest\",\r\n      \"recoverySubscriptionId\": \"b364ed8d-4279-4bf8-8fd1-56f8fa0ae05c\",\r\n      \"vmDisks\": null,\r\n      \"vmManagedDisks\": null,\r\n      \"recoveryResourceGroupId\": \"/subscriptions/b364ed8d-4279-4bf8-8fd1-56f8fa0ae05c/resourceGroups/adkRecovery\",\r\n      \"protectionProfile\": {\r\n        \"policyName\": \"intentPolicy\",\r\n        \"recoveryPointHistory\": 1440,\r\n        \"crashConsistentFrequencyInMinutes\": 10,\r\n        \"appConsistentFrequencyInMinutes\": 60,\r\n        \"multiVmSyncStatus\": \"Enable\",\r\n        \"resourceType\": \"New\"\r\n      },\r\n      \"primaryStagingStorageAccount\": null,\r\n      \"recoveryAvailabilitySet\": null,\r\n      \"recoveryVirtualNetwork\": null,\r\n      \"recoveryProximityPlacementGroup\": null,\r\n      \"autoProtectionOfDataDisk\": \"Enabled\",\r\n      \"multiVmGroupName\": null,\r\n      \"multiVmGroupId\": null,\r\n      \"recoveryBootDiagStorageAccount\": null,\r\n      \"diskEncryptionInfo\": null,\r\n      \"recoveryAvailabilityZone\": null,\r\n      \"recoveryAvailabilityType\": \"Single\"\r\n    }\r\n  }\r\n}",
+      "ResponseBody": "{\r\n  \"id\": \"/Subscriptions/b364ed8d-4279-4bf8-8fd1-56f8fa0ae05c/resourceGroups/sdkVTRG/providers/Microsoft.RecoveryServices/vaults/sdkVault1/replicationProtectionIntents/intentName1\",\r\n  \"name\": \"intentName1\",\r\n  \"type\": \"Microsoft.RecoveryServices/vaults/replicationProtectionIntents\",\r\n  \"properties\": {\r\n    \"friendlyName\": \"intentName1\",\r\n    \"jobId\": \"/Subscriptions/b364ed8d-4279-4bf8-8fd1-56f8fa0ae05c/resourceGroups/sdkVTRG/providers/Microsoft.RecoveryServices/vaults/sdkVault1/replicationJobs/946c3f97-2016-4434-85a2-4b1fce112872\",\r\n    \"jobState\": \"InProgress\",\r\n    \"isActive\": true,\r\n    \"creationTimeUTC\": \"3/21/2021 6:34:41 AM\",\r\n    \"providerSpecificDetails\": {\r\n      \"instanceType\": \"A2A\",\r\n      \"fabricObjectId\": \"/subscriptions/b364ed8d-4279-4bf8-8fd1-56f8fa0ae05c/resourceGroups/sdkTestVMRG/providers/Microsoft.Compute/virtualMachines/sdkTestVM1\",\r\n      \"primaryLocation\": \"westeurope\",\r\n      \"recoveryLocation\": \"northeurope\",\r\n      \"recoverySubscriptionId\": \"b364ed8d-4279-4bf8-8fd1-56f8fa0ae05c\",\r\n      \"vmDisks\": null,\r\n      \"vmManagedDisks\": null,\r\n      \"recoveryResourceGroupId\": \"/subscriptions/b364ed8d-4279-4bf8-8fd1-56f8fa0ae05c/resourceGroups/sdkTestVMRG-asr\",\r\n      \"protectionProfile\": {\r\n        \"policyName\": \"intentPolicy\",\r\n        \"recoveryPointHistory\": 1440,\r\n        \"crashConsistentFrequencyInMinutes\": 10,\r\n        \"appConsistentFrequencyInMinutes\": 60,\r\n        \"multiVmSyncStatus\": \"Enable\",\r\n        \"resourceType\": \"New\"\r\n      },\r\n      \"primaryStagingStorageAccount\": null,\r\n      \"recoveryAvailabilitySet\": null,\r\n      \"recoveryVirtualNetwork\": null,\r\n      \"recoveryProximityPlacementGroup\": null,\r\n      \"autoProtectionOfDataDisk\": \"Enabled\",\r\n      \"multiVmGroupName\": null,\r\n      \"multiVmGroupId\": null,\r\n      \"recoveryBootDiagStorageAccount\": null,\r\n      \"diskEncryptionInfo\": null,\r\n      \"recoveryAvailabilityZone\": null,\r\n      \"recoveryAvailabilityType\": \"Single\"\r\n    }\r\n  }\r\n}",
       "StatusCode": 200
     }
   ],

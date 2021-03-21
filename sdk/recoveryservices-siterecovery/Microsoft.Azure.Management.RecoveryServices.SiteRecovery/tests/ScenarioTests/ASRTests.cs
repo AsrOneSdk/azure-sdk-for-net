@@ -44,15 +44,16 @@ namespace RecoveryServices.SiteRecovery.Tests
         private const string a2aPrimaryRecoveryContainerMappingName = "primaryToRecovery";
         private const string a2aRecoveryPrimaryContainerMappingName = "recoveryToPrimary";
         private const string a2aVirtualMachineToProtect =
-            "/subscriptions/a7d8f9d0-930c-4dc8-9c14-1526ba255c20/resourceGroups/sdkTestVmRG/providers/Microsoft.Compute/virtualMachines/sdkTestVm1";
+            "/subscriptions/b364ed8d-4279-4bf8-8fd1-56f8fa0ae05c/resourceGroups/sdkTestVMRG/providers/Microsoft.Compute/virtualMachines/sdkTestVM1";
         private const string a2aVirtualMachineDiskToProtect =
-            "/subscriptions/a7d8f9d0-930c-4dc8-9c14-1526ba255c20/resourceGroups/SDKTESTVMRG/providers/Microsoft.Compute/disks/sdkTestVm1_OsDisk_1_3b1dd430d52044f18fb996d34617f609";
+            "/subscriptions/b364ed8d-4279-4bf8-8fd1-56f8fa0ae05c/resourceGroups/sdkTestVMRG/providers/Microsoft.Compute/disks/sdkTestVM1_OsDisk_1_719b58f929ca4b97ba638f272b166a96";
         private const string a2aStagingStorageAccount =
-            "/subscriptions/a7d8f9d0-930c-4dc8-9c14-1526ba255c20/resourceGroups/siterecoveryprod1/providers/Microsoft.Storage/storageAccounts/do00nssdkvaultasrcache";
+            "/subscriptions/b364ed8d-4279-4bf8-8fd1-56f8fa0ae05c/resourceGroups/sdkTestVMRG/providers/Microsoft.Storage/storageAccounts/sdkcache";
         private const string a2aRecoveryResourceGroup =
-            "/subscriptions/a7d8f9d0-930c-4dc8-9c14-1526ba255c20/resourceGroups/sdkTestVmRG-asr";
+            "/subscriptions/b364ed8d-4279-4bf8-8fd1-56f8fa0ae05c/resourceGroups/sdkTestVMRG-asr";
         private const string a2aReplicationProtectedItemName = "sdkTestVm1";
         private const string a2aVirtualMachineToValidate = "testVm1";
+        private const string a2aReplicationProtectionIntentName = "intentName1";
 
         TestHelper testHelper { get; set; }
 
@@ -66,7 +67,7 @@ namespace RecoveryServices.SiteRecovery.Tests
         {
             using (var context = MockContext.Start(this.GetType()))
             {
-                testHelper.Initialize(context);
+                testHelper.Initialize(context, "sdkVTRG", "sdkVault1");
                 var client = testHelper.SiteRecoveryClient;
 
                 var a2aPolicyCreationInput = new A2APolicyCreationInput
@@ -96,7 +97,7 @@ namespace RecoveryServices.SiteRecovery.Tests
         {
             using (var context = MockContext.Start(this.GetType()))
             {
-                testHelper.Initialize(context);
+                testHelper.Initialize(context, "sdkVTRG", "sdkVault1");
                 var client = testHelper.SiteRecoveryClient;
 
                 var fabricCreationInput = new FabricCreationInput();
@@ -132,7 +133,7 @@ namespace RecoveryServices.SiteRecovery.Tests
         {
             using (var context = MockContext.Start(this.GetType()))
             {
-                testHelper.Initialize(context);
+                testHelper.Initialize(context, "sdkVTRG", "sdkVault1");
                 var client = testHelper.SiteRecoveryClient;
 
                 var createProtectionContainerInput =
@@ -166,7 +167,7 @@ namespace RecoveryServices.SiteRecovery.Tests
         {
             using (var context = MockContext.Start(this.GetType()))
             {
-                testHelper.Initialize(context);
+                testHelper.Initialize(context, "sdkVTRG", "sdkVault1");
                 var client = testHelper.SiteRecoveryClient;
 
                 var createProtectionContainerMappingInput =
@@ -222,7 +223,7 @@ namespace RecoveryServices.SiteRecovery.Tests
         {
             using (var context = MockContext.Start(this.GetType()))
             {
-                testHelper.Initialize(context);
+                testHelper.Initialize(context, "sdkVTRG", "sdkVault1");
                 var client = testHelper.SiteRecoveryClient;
 
                 var policy = client.ReplicationPolicies.Get(a2aPolicyName);
@@ -266,57 +267,11 @@ namespace RecoveryServices.SiteRecovery.Tests
         }
 
         [Fact]
-        public void CreateA2AReplicationProtectionIntent()
-        {
-            using (var context = MockContext.Start(this.GetType()))
-            {
-                testHelper.Initialize(context);
-                var client = testHelper.SiteRecoveryClient;
-
-                string a2aVirtualMachine = "/subscriptions/509099b2-9d2c-4636-b43e-bd5cafb6be69/resourceGroups/sdkRG/providers/Microsoft.Compute/virtualMachines/sdkPrimaryVm";
-                string a2aRecoveryResourceGroup = "/subscriptions/b364ed8d-4279-4bf8-8fd1-56f8fa0ae05c/resourceGroups/adkRecovery";
-                var a2aCreateProtectionIntentInput = new A2ACreateProtectionIntentInput();
-                a2aCreateProtectionIntentInput.FabricObjectId = a2aVirtualMachine;
-                a2aCreateProtectionIntentInput.AutoProtectionOfDataDisk = "Enabled";
-                a2aCreateProtectionIntentInput.PrimaryLocation = "uksouth";
-                a2aCreateProtectionIntentInput.RecoveryLocation = "ukwest";
-                a2aCreateProtectionIntentInput.RecoverySubscriptionId = "b364ed8d-4279-4bf8-8fd1-56f8fa0ae05c";
-                a2aCreateProtectionIntentInput.RecoveryResourceGroupId = a2aRecoveryResourceGroup;
-                a2aCreateProtectionIntentInput.RecoveryAvailabilityType = "Single";
-                a2aCreateProtectionIntentInput.ProtectionProfileCustomInput = new NewProtectionProfile
-                {
-                    PolicyName = "intentPolicy",
-                    RecoveryPointHistory = 1440,
-                    CrashConsistentFrequencyInMinutes = 10,
-                    AppConsistentFrequencyInMinutes = 60,
-                    MultiVmSyncStatus = "Enable"
-
-            };
-
-                var createProtectionIntentInput = new CreateProtectionIntentInput
-                {
-                    Properties = new CreateProtectionIntentProperties()
-                };
-
-                createProtectionIntentInput.Properties.ProviderSpecificDetails = a2aCreateProtectionIntentInput;
-
-                string a2aReplicationProtectionIntentName =  "intentName";
-                var replicationProtectionIntent =
-                    client.ReplicationProtectionIntents.Create(
-                        a2aReplicationProtectionIntentName,
-                        createProtectionIntentInput);
-                Assert.True(
-                    replicationProtectionIntent.Name == a2aReplicationProtectionIntentName,
-                    "Resource name can not be different.");
-            }
-        }
-
-        [Fact]
         public void GetA2AResources()
         {
             using (var context = MockContext.Start(this.GetType()))
             {
-                testHelper.Initialize(context);
+                testHelper.Initialize(context, "sdkVTRG", "sdkVault1");
                 var client = testHelper.SiteRecoveryClient;
 
                 var policy = client.ReplicationPolicies.Get(a2aPolicyName);
@@ -382,7 +337,7 @@ namespace RecoveryServices.SiteRecovery.Tests
         {
             using (var context = MockContext.Start(this.GetType()))
             {
-                testHelper.Initialize(context);
+                testHelper.Initialize(context, "sdkVTRG", "sdkVault1");
                 var client = testHelper.SiteRecoveryClient;
 
                 var policies= client.ReplicationPolicies.List();
@@ -412,7 +367,7 @@ namespace RecoveryServices.SiteRecovery.Tests
         {
             using (var context = MockContext.Start(this.GetType()))
             {
-                testHelper.Initialize(context);
+                testHelper.Initialize(context, "sdkVTRG", "sdkVault1");
                 var client = testHelper.SiteRecoveryClient;
 
                 var disableProtectionInput = new DisableProtectionInput
@@ -440,7 +395,7 @@ namespace RecoveryServices.SiteRecovery.Tests
         {
             using (var context = MockContext.Start(this.GetType()))
             {
-                testHelper.Initialize(context);
+                testHelper.Initialize(context, "sdkVTRG", "sdkVault1");
                 var client = testHelper.SiteRecoveryClient;
 
                 var removeProtectionContainerMappingInput =
@@ -474,7 +429,7 @@ namespace RecoveryServices.SiteRecovery.Tests
         {
             using (var context = MockContext.Start(this.GetType()))
             {
-                testHelper.Initialize(context);
+                testHelper.Initialize(context, "sdkVTRG", "sdkVault1");
                 var client = testHelper.SiteRecoveryClient;
 
                 client.ReplicationProtectionContainers.Delete(
@@ -496,7 +451,7 @@ namespace RecoveryServices.SiteRecovery.Tests
         {
             using (var context = MockContext.Start(this.GetType()))
             {
-                testHelper.Initialize(context);
+                testHelper.Initialize(context, "sdkVTRG", "sdkVault1");
                 var client = testHelper.SiteRecoveryClient;
 
                 client.ReplicationFabrics.Delete(a2aPrimaryFabricName);
@@ -512,13 +467,80 @@ namespace RecoveryServices.SiteRecovery.Tests
         {
             using (var context = MockContext.Start(this.GetType()))
             {
-                testHelper.Initialize(context);
+                testHelper.Initialize(context, "sdkVTRG", "sdkVault1");
                 var client = testHelper.SiteRecoveryClient;
 
                 client.ReplicationPolicies.Delete(a2aPolicyName);
 
                 var policies = client.ReplicationPolicies.List();
                 Assert.True(policies.Count() == 0, "Delted the policy that got created via test.");
+            }
+        }
+
+        [Fact]
+        public void CreateA2AReplicationProtectionIntent()
+        {
+            using (var context = MockContext.Start(this.GetType()))
+            {
+                testHelper.Initialize(context, "sdkVTRG", "sdkVault1");
+                var client = testHelper.SiteRecoveryClient;
+
+                var a2aCreateProtectionIntentInput = new A2ACreateProtectionIntentInput();
+                a2aCreateProtectionIntentInput.FabricObjectId = a2aVirtualMachineToProtect;
+                a2aCreateProtectionIntentInput.AutoProtectionOfDataDisk = "Enabled";
+                a2aCreateProtectionIntentInput.PrimaryLocation = a2aPrimaryLocation;
+                a2aCreateProtectionIntentInput.RecoveryLocation = a2aRecoveryLocation;
+                a2aCreateProtectionIntentInput.RecoverySubscriptionId = "b364ed8d-4279-4bf8-8fd1-56f8fa0ae05c";
+                a2aCreateProtectionIntentInput.RecoveryResourceGroupId = a2aRecoveryResourceGroup;
+                a2aCreateProtectionIntentInput.RecoveryAvailabilityType = "Single";
+                a2aCreateProtectionIntentInput.ProtectionProfileCustomInput = new NewProtectionProfile
+                {
+                    PolicyName = "intentPolicy",
+                    RecoveryPointHistory = 1440,
+                    CrashConsistentFrequencyInMinutes = 10,
+                    AppConsistentFrequencyInMinutes = 60,
+                    MultiVmSyncStatus = "Enable"
+
+                };
+
+                var createProtectionIntentInput = new CreateProtectionIntentInput
+                {
+                    Properties = new CreateProtectionIntentProperties()
+                };
+
+                createProtectionIntentInput.Properties.ProviderSpecificDetails = a2aCreateProtectionIntentInput;
+
+                var replicationProtectionIntent =
+                    client.ReplicationProtectionIntents.Create(
+                        a2aReplicationProtectionIntentName,
+                        createProtectionIntentInput);
+                Assert.True(
+                    replicationProtectionIntent.Name == a2aReplicationProtectionIntentName,
+                    "Resource name can not be different.");
+            }
+        }
+
+        [Fact]
+        public void ListA2AProtectionIntents()
+        {
+            using (var context = MockContext.Start(this.GetType()))
+            {
+                testHelper.Initialize(context, "sdkVTRG", "sdkVault1");
+                var client = testHelper.SiteRecoveryClient;
+
+                var protectionItents = client.ReplicationProtectionIntents.List();
+            }
+        }
+
+        [Fact]
+        public void GetA2AProtectionIntent()
+        {
+            using (var context = MockContext.Start(this.GetType()))
+            {
+                testHelper.Initialize(context, "sdkVTRG", "sdkVault1");
+                var client = testHelper.SiteRecoveryClient;
+
+                var protectionItent = client.ReplicationProtectionIntents.Get(a2aReplicationProtectionIntentName);
             }
         }
 
@@ -1114,30 +1136,6 @@ namespace RecoveryServices.SiteRecovery.Tests
 
                 var protectedItem = client.ReplicationProtectedItems.Get(siteName, protectionContainer.Name, vmId);
                 Assert.NotNull(protectedItem.Id);
-            }
-        }
-
-        [Fact]
-        public void ListProtectionIntents()
-        {
-            using (var context = MockContext.Start(this.GetType()))
-            {
-                testHelper.Initialize(context);
-                var client = testHelper.SiteRecoveryClient;
-
-                var protectionItents = client.ReplicationProtectionIntents.List();
-            }
-        }
-
-        [Fact]
-        public void GetProtectionIntent()
-        {
-            using (var context = MockContext.Start(this.GetType()))
-            {
-                testHelper.Initialize(context);
-                var client = testHelper.SiteRecoveryClient;
-
-                var protectionItent = client.ReplicationProtectionIntents.Get("intentName");
             }
         }
 
