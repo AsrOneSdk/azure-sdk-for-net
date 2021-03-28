@@ -5,7 +5,6 @@ using System;
 using System.Threading.Tasks;
 using Azure.Core.TestFramework;
 using NUnit.Framework;
-using System.Linq;
 
 namespace Azure.Containers.ContainerRegistry.Tests
 {
@@ -13,14 +12,14 @@ namespace Azure.Containers.ContainerRegistry.Tests
     {
         public ContainerRegistryClientLiveTests(bool isAsync) : base(isAsync)
         {
+            Sanitizer = new ContainerRegistryRecordedTestSanitizer();
         }
 
         private ContainerRegistryClient CreateClient()
         {
             return InstrumentClient(new ContainerRegistryClient(
                 new Uri(TestEnvironment.Endpoint),
-                TestEnvironment.UserName,
-                TestEnvironment.Password,
+                TestEnvironment.Credential,
                 InstrumentClientOptions(new ContainerRegistryClientOptions())
             ));
         }

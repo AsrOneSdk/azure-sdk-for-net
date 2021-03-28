@@ -5,45 +5,46 @@ using System;
 using System.Collections.Specialized;
 using System.Threading;
 using System.Web;
+
 using Azure.Core;
 using Azure.Core.Pipeline;
 
 namespace Azure.Containers.ContainerRegistry
 {
-    /// <summary> The Repository service client. </summary>
+    /// <summary> The registry service client. </summary>
     public partial class ContainerRegistryClient
     {
         private readonly Uri _endpoint;
         private readonly HttpPipeline _pipeline;
+        private readonly HttpPipeline _acrAuthPipeline;
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly RepositoryRestClient _restClient;
+        private readonly ContainerRegistryRestClient _restClient;
+
+        private readonly AuthenticationRestClient _acrAuthClient;
+        private readonly string AcrAadScope = "https://management.core.windows.net/.default";
 
         /// <summary>
-        /// <paramref name="endpoint"/>
         /// </summary>
-        public ContainerRegistryClient(Uri endpoint, string username, string password) : this(endpoint, username, password,  new ContainerRegistryClientOptions())
+        public ContainerRegistryClient(Uri endpoint, TokenCredential credential) : this(endpoint, credential, new ContainerRegistryClientOptions())
         {
         }
 
         /// <summary>
         /// </summary>
-        /// <param name="endpoint"></param>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <param name="options"></param>
-        public ContainerRegistryClient(Uri endpoint, string username, string password, ContainerRegistryClientOptions options)
+        public ContainerRegistryClient(Uri endpoint, TokenCredential credential, ContainerRegistryClientOptions options)
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(credential, nameof(credential));
             Argument.AssertNotNull(options, nameof(options));
 
-            // The HttpPipelineBuilder.Build method, builds up a pipeline with client options, and any number of additional policies.
-            _pipeline = HttpPipelineBuilder.Build(options, new BasicAuthenticationPolicy(username, password));
-
+            _endpoint = endpoint;
             _clientDiagnostics = new ClientDiagnostics(options);
 
-            _endpoint = endpoint;
+            _acrAuthPipeline = HttpPipelineBuilder.Build(options);
+            _acrAuthClient = new AuthenticationRestClient(_clientDiagnostics, _acrAuthPipeline, endpoint.AbsoluteUri);
 
-            _restClient = new RepositoryRestClient(_clientDiagnostics, _pipeline, _endpoint.AbsoluteUri);
+            _pipeline = HttpPipelineBuilder.Build(options, new ContainerRegistryChallengeAuthenticationPolicy(credential, AcrAadScope, _acrAuthClient));
+            _restClient = new ContainerRegistryRestClient(_clientDiagnostics, _pipeline, _endpoint.AbsoluteUri);
         }
 
         /// <summary> Initializes a new instance of RepositoryClient for mocking. </summary>
@@ -61,22 +62,22 @@ namespace Azure.Containers.ContainerRegistry
                 scope.Start();
                 try
                 {
-                    ResponseWithHeaders<Repositories, RepositoryGetListHeaders> response =
-                        await _restClient.GetListAsync(
+                    Response<Repositories> response =
+                        await _restClient.GetRepositoriesAsync(
                             continuationToken,
                             pageSizeHint,
                             cancellationToken)
                        .ConfigureAwait(false);
 
                     string lastRepository = null;
-                    if (!string.IsNullOrEmpty(response.Headers.Link))
+                    if (!string.IsNullOrEmpty(response.Value.Link))
                     {
-                        Uri nextLink = new Uri(response.Headers.Link);
+                        Uri nextLink = new Uri(response.Value.Link);
                         NameValueCollection queryParams = HttpUtility.ParseQueryString(nextLink.Query);
                         lastRepository = queryParams["last"];
                     }
 
-                    return Page<string>.FromValues(response.Value.Names, lastRepository, response.GetRawResponse());
+                    return Page<string>.FromValues(response.Value.RepositoriesValue, lastRepository, response.GetRawResponse());
                 }
                 catch (Exception ex)
                 {
@@ -96,21 +97,21 @@ namespace Azure.Containers.ContainerRegistry
                 scope.Start();
                 try
                 {
-                    ResponseWithHeaders<Repositories, RepositoryGetListHeaders> response =
-                        _restClient.GetList(
+                    Response<Repositories> response =
+                        _restClient.GetRepositories(
                             continuationToken,
                             pageSizeHint,
                             cancellationToken);
 
                     string lastRepository = null;
-                    if (!string.IsNullOrEmpty(response.Headers.Link))
+                    if (!string.IsNullOrEmpty(response.Value.Link))
                     {
-                        Uri nextLink = new Uri(response.Headers.Link);
+                        Uri nextLink = new Uri(response.Value.Link);
                         NameValueCollection queryParams = HttpUtility.ParseQueryString(nextLink.Query);
                         lastRepository = queryParams["last"];
                     }
 
-                    return Page<string>.FromValues(response.Value.Names, lastRepository, response.GetRawResponse());
+                    return Page<string>.FromValues(response.Value.RepositoriesValue, lastRepository, response.GetRawResponse());
                 }
                 catch (Exception ex)
                 {

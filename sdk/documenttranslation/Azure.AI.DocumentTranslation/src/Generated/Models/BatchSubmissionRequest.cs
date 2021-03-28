@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Azure.AI.DocumentTranslation;
 
 namespace Azure.AI.DocumentTranslation.Models
 {
@@ -17,7 +18,7 @@ namespace Azure.AI.DocumentTranslation.Models
         /// <summary> Initializes a new instance of BatchSubmissionRequest. </summary>
         /// <param name="inputs"> The input list of documents or folders containing documents. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="inputs"/> is null. </exception>
-        public BatchSubmissionRequest(IEnumerable<TranslationConfiguration> inputs)
+        public BatchSubmissionRequest(IEnumerable<DocumentTranslationInput> inputs)
         {
             if (inputs == null)
             {
@@ -28,6 +29,6 @@ namespace Azure.AI.DocumentTranslation.Models
         }
 
         /// <summary> The input list of documents or folders containing documents. </summary>
-        public IList<TranslationConfiguration> Inputs { get; }
+        public IList<DocumentTranslationInput> Inputs { get; }
     }
 }

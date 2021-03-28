@@ -21,7 +21,7 @@ namespace RecoveryServices.SiteRecovery.Tests
         private const string siteName = "SiteRecoveryTestSite1";
         private const string vmmFabric = "ca667d2536f540cc57a566ae639081b123ad508d93caef2859237ca22f265866";
         private const string location = "centraluseuap";
-        private const string providerName = "9938a1bf-2de6-4c6d-a758-58a1f2cc4fe4";
+        private const string providerName = "71f21bed-b00f-4869-9dbf-288e7cb4051d";
         private const string policyName = "protectionprofile2";
         private const string recoveryCloud = "Microsoft Azure";
         private const string protectionContainerMappingName = "PCMapping";
@@ -716,8 +716,9 @@ namespace RecoveryServices.SiteRecovery.Tests
                 testHelper.Initialize(context);
                 var client = testHelper.SiteRecoveryClient;
 
+                var purgeProviderName = "d4f5707e-16df-4e60-92df-fea789694c62";
                 var fabric = client.ReplicationFabrics.Get(siteName);
-                client.ReplicationRecoveryServicesProviders.Purge(fabric.Name, providerName);
+                client.ReplicationRecoveryServicesProviders.Purge(fabric.Name, purgeProviderName);
             }
         }
 
@@ -1289,7 +1290,8 @@ namespace RecoveryServices.SiteRecovery.Tests
 
                 string networkId = (protectedItem.Properties.ProviderSpecificDetails as HyperVReplicaAzureReplicationDetails)
                         .SelectedRecoveryAzureNetworkId;
-                TestFailoverProviderSpecificInput h2AFOInput = new TestFailoverProviderSpecificInput();
+
+                HyperVReplicaAzureTestFailoverInput h2AFOInput = new HyperVReplicaAzureTestFailoverInput();
 
                 TestFailoverInputProperties tfoInputProperties = new TestFailoverInputProperties()
                 {
@@ -1360,7 +1362,7 @@ namespace RecoveryServices.SiteRecovery.Tests
                 }
                 else
                 {
-                    PlannedFailoverProviderSpecificFailoverInput h2AFailoverInput = new PlannedFailoverProviderSpecificFailoverInput();
+                    HyperVReplicaAzurePlannedFailoverProviderInput h2AFailoverInput = new HyperVReplicaAzurePlannedFailoverProviderInput();
 
                     inputProperties.ProviderSpecificDetails = h2AFailoverInput;
                 }
@@ -1387,7 +1389,7 @@ namespace RecoveryServices.SiteRecovery.Tests
 
                 var protectedItem = client.ReplicationProtectedItems.Get(siteName, protectionContainer.Name, vmName2);
 
-                UnplannedFailoverProviderSpecificInput h2AFailoverInput = new UnplannedFailoverProviderSpecificInput();
+                HyperVReplicaAzureUnplannedFailoverInput h2AFailoverInput = new HyperVReplicaAzureUnplannedFailoverInput();
 
                 UnplannedFailoverInputProperties inputProperties = new UnplannedFailoverInputProperties()
                 {

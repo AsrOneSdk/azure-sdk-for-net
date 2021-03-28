@@ -139,6 +139,10 @@ namespace Microsoft.Azure.WebJobs.EventHubs
 
         internal Action<ExceptionReceivedEventArgs> ExceptionHandler { get; set; }
 
+        /// <summary>
+        /// Returns a string representation of this <see cref="EventHubOptions"/> instance.
+        /// </summary>
+        /// <returns>A string representation of this <see cref="EventHubOptions"/> instance.</returns>
         string IOptionsFormatter.Format()
         {
             JObject options = new JObject
@@ -177,8 +181,8 @@ namespace Microsoft.Azure.WebJobs.EventHubs
         private JObject ConstructInitialOffsetOptions() =>
             new JObject
                 {
-                    { nameof(InitialOffsetOptions.Type), InitialOffsetOptions.Type },
-                    { nameof(InitialOffsetOptions.EnqueuedTimeUTC), InitialOffsetOptions.EnqueuedTimeUTC },
+                    { nameof(InitialOffsetOptions.Type), InitialOffsetOptions.Type.ToString() },
+                    { nameof(InitialOffsetOptions.EnqueuedTimeUtc), InitialOffsetOptions.EnqueuedTimeUtc },
                 };
     }
 }
