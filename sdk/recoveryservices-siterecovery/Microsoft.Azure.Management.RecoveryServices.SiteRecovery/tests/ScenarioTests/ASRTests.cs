@@ -1290,6 +1290,7 @@ namespace RecoveryServices.SiteRecovery.Tests
 
                 string networkId = (protectedItem.Properties.ProviderSpecificDetails as HyperVReplicaAzureReplicationDetails)
                         .SelectedRecoveryAzureNetworkId;
+
                 HyperVReplicaAzureTestFailoverInput h2AFOInput = new HyperVReplicaAzureTestFailoverInput();
 
                 TestFailoverInputProperties tfoInputProperties = new TestFailoverInputProperties()
