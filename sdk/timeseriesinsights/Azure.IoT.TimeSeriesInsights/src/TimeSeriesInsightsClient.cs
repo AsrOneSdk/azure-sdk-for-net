@@ -1080,7 +1080,15 @@ namespace Azure.IoT.TimeSeriesInsights
 
             try
             {
-                return QueryEventsInternalAsync(timeSeriesId, startTime, endTime, options, cancellationToken);
+                var searchSpan = new DateTimeRange(startTime, endTime);
+                var queryRequest = new QueryRequest
+                {
+                    GetEvents = new GetEvents(timeSeriesId, searchSpan)
+                };
+
+                BuildEventsRequestOptions(options, queryRequest);
+
+                return QueryInternalAsync(queryRequest, options?.StoreType?.ToString(), cancellationToken);
             }
             catch (Exception ex)
             {
@@ -1110,7 +1118,15 @@ namespace Azure.IoT.TimeSeriesInsights
 
             try
             {
-                return QueryEventsInternal(timeSeriesId, startTime, endTime, options, cancellationToken);
+                var searchSpan = new DateTimeRange(startTime, endTime);
+                var queryRequest = new QueryRequest
+                {
+                    GetEvents = new GetEvents(timeSeriesId, searchSpan)
+                };
+
+                BuildEventsRequestOptions(options, queryRequest);
+
+                return QueryInternal(queryRequest, options?.StoreType?.ToString(), cancellationToken);
             }
             catch (Exception ex)
             {
@@ -1143,7 +1159,15 @@ namespace Azure.IoT.TimeSeriesInsights
             {
                 DateTimeOffset rangeEndTime = endTime ?? DateTimeOffset.UtcNow;
                 DateTimeOffset rangeStartTime = rangeEndTime - timeSpan;
-                return QueryEventsInternalAsync(timeSeriesId, rangeStartTime, rangeEndTime, options, cancellationToken);
+                var searchSpan = new DateTimeRange(rangeStartTime, rangeEndTime);
+                var queryRequest = new QueryRequest
+                {
+                    GetEvents = new GetEvents(timeSeriesId, searchSpan)
+                };
+
+                BuildEventsRequestOptions(options, queryRequest);
+
+                return QueryInternalAsync(queryRequest, options?.StoreType?.ToString(), cancellationToken);
             }
             catch (Exception ex)
             {
@@ -1175,7 +1199,171 @@ namespace Azure.IoT.TimeSeriesInsights
             {
                 DateTimeOffset rangeEndTime = endTime ?? DateTimeOffset.UtcNow;
                 DateTimeOffset rangeStartTime = rangeEndTime - timeSpan;
-                return QueryEventsInternal(timeSeriesId, rangeStartTime, rangeEndTime, options, cancellationToken);
+                var searchSpan = new DateTimeRange(rangeStartTime, rangeEndTime);
+                var queryRequest = new QueryRequest
+                {
+                    GetEvents = new GetEvents(timeSeriesId, searchSpan)
+                };
+
+                BuildEventsRequestOptions(options, queryRequest);
+
+                return QueryInternal(queryRequest, options?.StoreType?.ToString(), cancellationToken);
+            }
+            catch (Exception ex)
+            {
+                scope.Failed(ex);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Retrieve series events for a given Time Series Id asynchronously.
+        /// </summary>
+        /// <param name="timeSeriesId">The Time Series Id to retrieve series events for.</param>
+        /// <param name="startTime">Start timestamp of the time range. Events that have this timestamp are included.</param>
+        /// <param name="endTime">End timestamp of the time range. Events that match this timestamp are excluded.</param>
+        /// <param name="options">Optional parameters to use when querying for series events.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>The pageable list <see cref="AsyncPageable{QueryResultPage}"/> of query result frames.</returns>
+        public virtual AsyncPageable<QueryResultPage> QuerySeriesAsync(
+            TimeSeriesId timeSeriesId,
+            DateTimeOffset startTime,
+            DateTimeOffset endTime,
+            QuerySeriesRequestOptions options = null,
+            CancellationToken cancellationToken = default)
+        {
+            using DiagnosticScope scope = _clientDiagnostics.CreateScope($"{nameof(TimeSeriesInsightsClient)}.{nameof(QuerySeries)}");
+            scope.Start();
+
+            try
+            {
+                var searchSpan = new DateTimeRange(startTime, endTime);
+                var queryRequest = new QueryRequest
+                {
+                    GetSeries = new GetSeries(timeSeriesId, searchSpan)
+                };
+
+                BuildSeriesRequestOptions(options, queryRequest);
+
+                return QueryInternalAsync(queryRequest, options?.StoreType?.ToString(), cancellationToken);
+            }
+            catch (Exception ex)
+            {
+                scope.Failed(ex);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Retrieve series events for a given Time Series Id synchronously.
+        /// </summary>
+        /// <param name="timeSeriesId">The Time Series Id to retrieve series events for.</param>
+        /// <param name="startTime">Start timestamp of the time range. Events that have this timestamp are included.</param>
+        /// <param name="endTime">End timestamp of the time range. Events that match this timestamp are excluded.</param>
+        /// <param name="options">Optional parameters to use when querying for series events.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>The pageable list <see cref="AsyncPageable{QueryResultPage}"/> of query result frames.</returns>
+        public virtual Pageable<QueryResultPage> QuerySeries(
+            TimeSeriesId timeSeriesId,
+            DateTimeOffset startTime,
+            DateTimeOffset endTime,
+            QuerySeriesRequestOptions options = null,
+            CancellationToken cancellationToken = default)
+        {
+            using DiagnosticScope scope = _clientDiagnostics.CreateScope($"{nameof(TimeSeriesInsightsClient)}.{nameof(QuerySeries)}");
+            scope.Start();
+
+            try
+            {
+                var searchSpan = new DateTimeRange(startTime, endTime);
+                var queryRequest = new QueryRequest
+                {
+                    GetSeries = new GetSeries(timeSeriesId, searchSpan)
+                };
+
+                BuildSeriesRequestOptions(options, queryRequest);
+
+                return QueryInternal(queryRequest, options?.StoreType?.ToString(), cancellationToken);
+            }
+            catch (Exception ex)
+            {
+                scope.Failed(ex);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Retrieve series events for a given Time Series Id over a specified time interval asynchronously.
+        /// </summary>
+        /// <param name="timeSeriesId">The Time Series Id to retrieve series events for.</param>
+        /// <param name="timeSpan">The time interval over which to query data.</param>
+        /// <param name="endTime">End timestamp of the time range. Events that match this timestamp are excluded. If null is provided, <c>DateTimeOffset.UtcNow</c> is used.</param>
+        /// <param name="options">Optional parameters to use when querying for series events.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>The pageable list <see cref="AsyncPageable{QueryResultPage}"/> of query result frames.</returns>
+        public virtual AsyncPageable<QueryResultPage> QuerySeriesAsync(
+            TimeSeriesId timeSeriesId,
+            TimeSpan timeSpan,
+            DateTimeOffset? endTime = null,
+            QuerySeriesRequestOptions options = null,
+            CancellationToken cancellationToken = default)
+        {
+            using DiagnosticScope scope = _clientDiagnostics.CreateScope($"{nameof(TimeSeriesInsightsClient)}.{nameof(QuerySeries)}");
+            scope.Start();
+
+            try
+            {
+                DateTimeOffset rangeEndTime = endTime ?? DateTimeOffset.UtcNow;
+                DateTimeOffset rangeStartTime = rangeEndTime - timeSpan;
+                var searchSpan = new DateTimeRange(rangeStartTime, rangeEndTime);
+                var queryRequest = new QueryRequest
+                {
+                    GetSeries = new GetSeries(timeSeriesId, searchSpan)
+                };
+
+                BuildSeriesRequestOptions(options, queryRequest);
+
+                return QueryInternalAsync(queryRequest, options?.StoreType?.ToString(), cancellationToken);
+            }
+            catch (Exception ex)
+            {
+                scope.Failed(ex);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Retrieve series events for a given Time Series Id over a certain time interval synchronously.
+        /// </summary>
+        /// <param name="timeSeriesId">The Time Series Id to retrieve series events for.</param>
+        /// <param name="timeSpan">The time interval over which to query data.</param>
+        /// <param name="endTime">End timestamp of the time range. Events that match this timestamp are excluded. If null is provided, <c>DateTimeOffset.UtcNow</c> is used.</param>
+        /// <param name="options">Optional parameters to use when querying for series events.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>The pageable list <see cref="AsyncPageable{QueryResultPage}"/> of query result frames.</returns>
+        public virtual Pageable<QueryResultPage> QuerySeries(
+            TimeSeriesId timeSeriesId,
+            TimeSpan timeSpan,
+            DateTimeOffset? endTime = null,
+            QuerySeriesRequestOptions options = null,
+            CancellationToken cancellationToken = default)
+        {
+            using DiagnosticScope scope = _clientDiagnostics.CreateScope($"{nameof(TimeSeriesInsightsClient)}.{nameof(QuerySeries)}");
+            scope.Start();
+
+            try
+            {
+                DateTimeOffset rangeEndTime = endTime ?? DateTimeOffset.UtcNow;
+                DateTimeOffset rangeStartTime = rangeEndTime - timeSpan;
+                var searchSpan = new DateTimeRange(rangeStartTime, rangeEndTime);
+                var queryRequest = new QueryRequest
+                {
+                    GetSeries = new GetSeries(timeSeriesId, searchSpan)
+                };
+
+                BuildSeriesRequestOptions(options, queryRequest);
+
+                return QueryInternal(queryRequest, options?.StoreType?.ToString(), cancellationToken);
             }
             catch (Exception ex)
             {
@@ -1508,21 +1696,319 @@ namespace Azure.IoT.TimeSeriesInsights
             }
         }
 
-        private AsyncPageable<QueryResultPage> QueryEventsInternalAsync(
-            TimeSeriesId timeSeriesId,
-            DateTimeOffset startTime,
-            DateTimeOffset endTime,
-            QueryEventsRequestOptions options,
-            CancellationToken cancellationToken)
+        /// <summary>
+        /// Creates Time Series instances types asynchronously. If a provided instance type is already in use, then this will attempt to replace the existing instance type with the provided Time Series Instance.
+        /// </summary>
+        /// <param name="timeSeriesTypes">The Time Series instances types to be created or replaced.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>
+        /// List of error objects corresponding by position to the <paramref name="timeSeriesTypes"/> array in the request.
+        /// An error object will be set when operation is unsuccessful.
+        /// </returns>
+        /// <remarks>
+        /// For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/timeseriesinsights/Azure.IoT.TimeSeriesInsights/samples">our repo samples</see>.
+        /// </remarks>
+        /// <exception cref="ArgumentNullException">
+        /// The exception is thrown when <paramref name="timeSeriesTypes"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// The exception is thrown when <paramref name="timeSeriesTypes"/> is empty.
+        /// </exception>
+        public virtual async Task<Response<TimeSeriesOperationError[]>> CreateOrReplaceTimeSeriesTypesAsync(
+            IEnumerable<TimeSeriesType> timeSeriesTypes,
+            CancellationToken cancellationToken = default)
         {
-            var searchSpan = new DateTimeRange(startTime, endTime);
-            var queryRequest = new QueryRequest
+            using DiagnosticScope scope = _clientDiagnostics
+                .CreateScope($"{nameof(TimeSeriesInsightsClient)}.{nameof(CreateOrReplaceTimeSeriesTypes)}");
+            scope.Start();
+
+            try
             {
-                GetEvents = new GetEvents(timeSeriesId, searchSpan)
-            };
+                Argument.AssertNotNullOrEmpty(timeSeriesTypes, nameof(timeSeriesTypes));
 
-            BuildRequestOptions(options, queryRequest);
+                var batchRequest = new TypesBatchRequest();
 
+                foreach (TimeSeriesType type in timeSeriesTypes)
+                {
+                    batchRequest.Put.Add(type);
+                }
+
+                Response<TypesBatchResponse> executeBatchResponse = await _timeSeriesTypesRestClient
+                    .ExecuteBatchAsync(batchRequest, _clientSessionId, cancellationToken)
+                    .ConfigureAwait(false);
+
+                // Extract the errors array from the response. If there was an error with creating or replacing one of the types,
+                // it will be placed at the same index location that corresponds to its place in the input array.
+                IEnumerable<TimeSeriesOperationError> errorResults = executeBatchResponse.Value.Put.Select((result) => result.Error);
+
+                return Response.FromValue(errorResults.ToArray(), executeBatchResponse.GetRawResponse());
+            }
+            catch (Exception ex)
+            {
+                scope.Failed(ex);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Creates Time Series instances types asynchronously. If a provided instance type is already in use, then this will attempt to replace the existing instance type with the provided Time Series Instance.
+        /// </summary>
+        /// <param name="timeSeriesTypes">The Time Series instances types to be created or replaced.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>
+        /// List of error objects corresponding by position to the <paramref name="timeSeriesTypes"/> array in the request.
+        /// An error object will be set when operation is unsuccessful.
+        /// </returns>
+        /// <seealso cref="CreateOrReplaceTimeSeriesInstancesAsync(IEnumerable{TimeSeriesInstance}, CancellationToken)">
+        /// See the asynchronous version of this method for examples.
+        /// </seealso>
+        /// <exception cref="ArgumentNullException">
+        /// The exception is thrown when <paramref name="timeSeriesTypes"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// The exception is thrown when <paramref name="timeSeriesTypes"/> is empty.
+        /// </exception>
+        public virtual Response<TimeSeriesOperationError[]> CreateOrReplaceTimeSeriesTypes(
+            IEnumerable<TimeSeriesType> timeSeriesTypes,
+            CancellationToken cancellationToken = default)
+        {
+            using DiagnosticScope scope = _clientDiagnostics.CreateScope($"{nameof(TimeSeriesInsightsClient)}.{nameof(CreateOrReplaceTimeSeriesInstances)}");
+            scope.Start();
+
+            try
+            {
+                Argument.AssertNotNullOrEmpty(timeSeriesTypes, nameof(timeSeriesTypes));
+
+                var batchRequest = new TypesBatchRequest();
+
+                foreach (TimeSeriesType type in timeSeriesTypes)
+                {
+                    batchRequest.Put.Add(type);
+                }
+
+                Response<TypesBatchResponse> executeBatchResponse = _timeSeriesTypesRestClient
+                    .ExecuteBatch(batchRequest, _clientSessionId, cancellationToken);
+
+                // Extract the errors array from the response. If there was an error with creating or replacing one of the types,
+                // it will be placed at the same index location that corresponds to its place in the input array.
+                IEnumerable<TimeSeriesOperationError> errorResults = executeBatchResponse.Value.Put.Select((result) => result.Error);
+
+                return Response.FromValue(errorResults.ToArray(), executeBatchResponse.GetRawResponse());
+            }
+            catch (Exception ex)
+            {
+                scope.Failed(ex);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Deletes Time Series Insights types by type names asynchronously.
+        /// </summary>
+        /// <param name="timeSeriesTypeNames">List of names of the Time Series types to delete.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>
+        /// List of type or error objects corresponding by position to the array in the request.
+        /// Type object is set when operation is successful and error object is set when operation is unsuccessful.
+        /// </returns>
+        /// <remarks>
+        /// For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/timeseriesinsights/Azure.IoT.TimeSeriesInsights/samples">our repo samples</see>.
+        /// </remarks>
+        /// <exception cref="ArgumentNullException">
+        /// The exception is thrown when <paramref name="timeSeriesTypeNames"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// The exception is thrown when <paramref name="timeSeriesTypeNames"/> is empty.
+        /// </exception>
+        public virtual async Task<Response<TimeSeriesOperationError[]>> DeleteTimeSeriesTypesByNamesAsync(
+            IEnumerable<string> timeSeriesTypeNames,
+            CancellationToken cancellationToken = default)
+        {
+            using DiagnosticScope scope = _clientDiagnostics.CreateScope($"{nameof(TimeSeriesInsightsClient)}.{nameof(DeleteTimeSeriesTypesByNames)}");
+            scope.Start();
+
+            try
+            {
+                Argument.AssertNotNullOrEmpty(timeSeriesTypeNames, nameof(timeSeriesTypeNames));
+
+                var batchRequest = new TypesBatchRequest
+                {
+                    Delete = new TypesRequestBatchGetOrDelete()
+                };
+
+                foreach (string timeSeriesName in timeSeriesTypeNames)
+                {
+                    batchRequest.Delete.Names.Add(timeSeriesName);
+                }
+
+                Response<TypesBatchResponse> executeBatchResponse = await _timeSeriesTypesRestClient
+                    .ExecuteBatchAsync(batchRequest, _clientSessionId, cancellationToken)
+                    .ConfigureAwait(false);
+
+                return Response.FromValue(executeBatchResponse.Value.Delete.ToArray(), executeBatchResponse.GetRawResponse());
+            }
+            catch (Exception ex)
+            {
+                scope.Failed(ex);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Deletes Time Series Insights types by type names asynchronously.
+        /// </summary>
+        /// <param name="timeSeriesTypeNames">List of names of the Time Series types to delete.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>
+        /// List of type or error objects corresponding by position to the array in the request.
+        /// Type object is set when operation is successful and error object is set when operation is unsuccessful.
+        /// </returns>
+        /// <seealso cref="DeleteTimeSeriesTypesByNamesAsync(IEnumerable{string}, CancellationToken)">
+        /// See the asynchronous version of this method for examples.
+        /// </seealso>
+        /// <exception cref="ArgumentNullException">
+        /// The exception is thrown when <paramref name="timeSeriesTypeNames"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// The exception is thrown when <paramref name="timeSeriesTypeNames"/> is empty.
+        /// </exception>
+        public virtual Response<TimeSeriesOperationError[]> DeleteTimeSeriesTypesByNames(
+            IEnumerable<string> timeSeriesTypeNames,
+            CancellationToken cancellationToken = default)
+        {
+            using DiagnosticScope scope = _clientDiagnostics.CreateScope($"{nameof(TimeSeriesInsightsClient)}.{nameof(DeleteTimeSeriesTypesByNames)}");
+            scope.Start();
+
+            try
+            {
+                Argument.AssertNotNullOrEmpty(timeSeriesTypeNames, nameof(timeSeriesTypeNames));
+
+                var batchRequest = new TypesBatchRequest
+                {
+                    Delete = new TypesRequestBatchGetOrDelete()
+                };
+
+                foreach (string timeSeriesName in timeSeriesTypeNames)
+                {
+                    batchRequest.Delete.Names.Add(timeSeriesName);
+                }
+
+                Response<TypesBatchResponse> executeBatchResponse = _timeSeriesTypesRestClient
+                    .ExecuteBatch(batchRequest, _clientSessionId, cancellationToken);
+
+                return Response.FromValue(executeBatchResponse.Value.Delete.ToArray(), executeBatchResponse.GetRawResponse());
+            }
+            catch (Exception ex)
+            {
+                scope.Failed(ex);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Deletes Time Series Insights types by type Ids asynchronously.
+        /// </summary>
+        /// <param name="timeSeriesTypeIds">List of Time Series type Ids of the Time Series types to delete.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>
+        /// List of type or error objects corresponding by position to the array in the request.
+        /// Type object is set when operation is successful and error object is set when operation is unsuccessful.
+        /// </returns>
+        /// <remarks>
+        /// For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/timeseriesinsights/Azure.IoT.TimeSeriesInsights/samples">our repo samples</see>.
+        /// </remarks>
+        /// <exception cref="ArgumentNullException">
+        /// The exception is thrown when <paramref name="timeSeriesTypeIds"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// The exception is thrown when <paramref name="timeSeriesTypeIds"/> is empty.
+        /// </exception>
+        public virtual async Task<Response<TimeSeriesOperationError[]>> DeleteTimeSeriesTypesbyIdAsync(
+            IEnumerable<string> timeSeriesTypeIds,
+            CancellationToken cancellationToken = default)
+        {
+            using DiagnosticScope scope = _clientDiagnostics.CreateScope($"{nameof(TimeSeriesInsightsClient)}.{nameof(DeleteInstances)}");
+            scope.Start();
+
+            try
+            {
+                Argument.AssertNotNullOrEmpty(timeSeriesTypeIds, nameof(timeSeriesTypeIds));
+
+                var batchRequest = new TypesBatchRequest
+                {
+                    Delete = new TypesRequestBatchGetOrDelete()
+                };
+
+                foreach (string typeId in timeSeriesTypeIds)
+                {
+                    batchRequest.Delete.TypeIds.Add(typeId);
+                }
+
+                Response<TypesBatchResponse> executeBatchResponse = await _timeSeriesTypesRestClient
+                    .ExecuteBatchAsync(batchRequest, _clientSessionId, cancellationToken)
+                    .ConfigureAwait(false);
+
+                return Response.FromValue(executeBatchResponse.Value.Delete.ToArray(), executeBatchResponse.GetRawResponse());
+            }
+            catch (Exception ex)
+            {
+                scope.Failed(ex);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Deletes Time Series instances from the environment by Time Series Ids synchronously.
+        /// </summary>
+        /// <param name="timeSeriesTypeIds">List of Ids of the Time Series instances to delete.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>
+        /// List of error objects corresponding by position to the array in the request. Null means the instance has been deleted, or did not exist.
+        /// Error object is set when operation is unsuccessful.
+        /// </returns>
+        /// <seealso cref="DeleteInstancesAsync(IEnumerable{TimeSeriesId}, CancellationToken)">
+        /// See the asynchronous version of this method for examples.
+        /// </seealso>
+        /// <exception cref="ArgumentNullException">
+        /// The exception is thrown when <paramref name="timeSeriesTypeIds"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// The exception is thrown when <paramref name="timeSeriesTypeIds"/> is empty.
+        /// </exception>
+        public virtual Response<TimeSeriesOperationError[]> DeleteTimeSeriesTypesbyId(
+            IEnumerable<string> timeSeriesTypeIds,
+            CancellationToken cancellationToken = default)
+        {
+            using DiagnosticScope scope = _clientDiagnostics.CreateScope($"{nameof(TimeSeriesInsightsClient)}.{nameof(DeleteInstances)}");
+            scope.Start();
+            try
+            {
+                Argument.AssertNotNullOrEmpty(timeSeriesTypeIds, nameof(timeSeriesTypeIds));
+
+                var batchRequest = new TypesBatchRequest
+                {
+                    Delete = new TypesRequestBatchGetOrDelete()
+                };
+
+                foreach (string typeId in timeSeriesTypeIds ?? Enumerable.Empty<string>())
+                {
+                    batchRequest.Delete.TypeIds.Add(typeId);
+                }
+                Response<TypesBatchResponse> executeBatchResponse = _timeSeriesTypesRestClient
+                    .ExecuteBatch(batchRequest, _clientSessionId, cancellationToken);
+                return Response.FromValue(executeBatchResponse.Value.Delete.ToArray(), executeBatchResponse.GetRawResponse());
+            }
+            catch (Exception ex)
+            {
+                scope.Failed(ex);
+                throw;
+            }
+        }
+
+        private AsyncPageable<QueryResultPage> QueryInternalAsync(
+                    QueryRequest queryRequest,
+                    string storeType, CancellationToken cancellationToken)
+        {
             async Task<Page<QueryResultPage>> FirstPageFunc(int? pageSizeHint)
             {
                 using DiagnosticScope scope = _clientDiagnostics.CreateScope($"{nameof(TimeSeriesInsightsClient)}.{nameof(QueryEvents)}");
@@ -1530,7 +2016,7 @@ namespace Azure.IoT.TimeSeriesInsights
                 try
                 {
                     Response<QueryResultPage> response = await _queryRestClient
-                        .ExecuteAsync(queryRequest, options?.StoreType?.ToString(), null, null, cancellationToken)
+                        .ExecuteAsync(queryRequest, storeType, null, null, cancellationToken)
                         .ConfigureAwait(false);
 
                     var frame = new QueryResultPage[]
@@ -1554,7 +2040,7 @@ namespace Azure.IoT.TimeSeriesInsights
                 try
                 {
                     Response<QueryResultPage> response = await _queryRestClient
-                        .ExecuteAsync(queryRequest, options?.StoreType?.ToString(), nextLink, null, cancellationToken)
+                        .ExecuteAsync(queryRequest, storeType, nextLink, null, cancellationToken)
                         .ConfigureAwait(false);
 
                     var frame = new QueryResultPage[]
@@ -1574,29 +2060,19 @@ namespace Azure.IoT.TimeSeriesInsights
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        private Pageable<QueryResultPage> QueryEventsInternal(
-            TimeSeriesId timeSeriesId,
-            DateTimeOffset startTime,
-            DateTimeOffset endTime,
-            QueryEventsRequestOptions options,
+        private Pageable<QueryResultPage> QueryInternal(
+            QueryRequest queryRequest,
+            string storeType,
             CancellationToken cancellationToken)
         {
-            var searchSpan = new DateTimeRange(startTime, endTime);
-            var queryRequest = new QueryRequest
-            {
-                GetEvents = new GetEvents(timeSeriesId, searchSpan)
-            };
-
-            BuildRequestOptions(options, queryRequest);
-
             Page<QueryResultPage> FirstPageFunc(int? pageSizeHint)
             {
-                using DiagnosticScope scope = _clientDiagnostics.CreateScope($"{nameof(TimeSeriesInsightsClient)}.{nameof(QueryEvents)}");
+                using DiagnosticScope scope = _clientDiagnostics.CreateScope($"{nameof(TimeSeriesInsightsClient)}.{nameof(QueryInternal)}");
                 scope.Start();
                 try
                 {
                     Response<QueryResultPage> response = _queryRestClient
-                        .Execute(queryRequest, options?.StoreType?.ToString(), null, null, cancellationToken);
+                        .Execute(queryRequest, storeType, null, null, cancellationToken);
 
                     var frame = new QueryResultPage[]
                     {
@@ -1614,12 +2090,12 @@ namespace Azure.IoT.TimeSeriesInsights
 
             Page<QueryResultPage> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using DiagnosticScope scope = _clientDiagnostics.CreateScope($"{nameof(TimeSeriesInsightsClient)}.{nameof(QueryEvents)}");
+                using DiagnosticScope scope = _clientDiagnostics.CreateScope($"{nameof(TimeSeriesInsightsClient)}.{nameof(QueryInternal)}");
                 scope.Start();
                 try
                 {
                     Response<QueryResultPage> response = _queryRestClient
-                        .Execute(queryRequest, options?.StoreType?.ToString(), nextLink, null, cancellationToken);
+                        .Execute(queryRequest, storeType, nextLink, null, cancellationToken);
 
                     var frame = new QueryResultPage[]
                     {
@@ -1638,7 +2114,7 @@ namespace Azure.IoT.TimeSeriesInsights
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        private static void BuildRequestOptions(QueryEventsRequestOptions options, QueryRequest queryRequest)
+        private static void BuildEventsRequestOptions(QueryEventsRequestOptions options, QueryRequest queryRequest)
         {
             if (options != null)
             {
@@ -1656,6 +2132,35 @@ namespace Azure.IoT.TimeSeriesInsights
                 }
 
                 queryRequest.GetEvents.Take = options.MaximumNumberOfEvents;
+            }
+        }
+
+        private static void BuildSeriesRequestOptions(QuerySeriesRequestOptions options, QueryRequest queryRequest)
+        {
+            if (options != null)
+            {
+                if (options.Filter != null)
+                {
+                    queryRequest.GetSeries.Filter = new TimeSeriesExpression(options.Filter);
+                }
+
+                if (options.ProjectedVariables != null)
+                {
+                    foreach (string projectedVariable in options.ProjectedVariables)
+                    {
+                        queryRequest.GetSeries.ProjectedVariables.Add(projectedVariable);
+                    }
+                }
+
+                if (options.InlineVariables != null)
+                {
+                    foreach (string inlineVariableKey in options.InlineVariables.Keys)
+                    {
+                        queryRequest.GetSeries.InlineVariables[inlineVariableKey] = options.InlineVariables[inlineVariableKey];
+                    }
+                }
+
+                queryRequest.GetSeries.Take = options.MaximumNumberOfEvents;
             }
         }
     }

@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading;
@@ -25,22 +26,22 @@ namespace Azure.AI.DocumentTranslation
         private readonly ClientDiagnostics _diagnostics;
 
         /// <summary>
-        /// Operation created time.
+        /// The date time when the translation operation was created.
         /// </summary>
         public DateTimeOffset CreatedOn => _createdOn;
 
         /// <summary>
-        /// Time at which the operation's status has been updated.
+        /// The date time when the translation operation's status was last updated.
         /// </summary>
         public DateTimeOffset LastModified => _lastModified;
 
         /// <summary>
-        /// The current status of the operation.
+        /// The current status of the translation operation.
         /// </summary>
         public TranslationStatus Status => _status;
 
         /// <summary>
-        /// Total number of documents.
+        /// Total number of expected translated documents.
         /// </summary>
         public int DocumentsTotal => _documentsTotal;
 
@@ -80,7 +81,7 @@ namespace Azure.AI.DocumentTranslation
         private TranslationStatus _status;
 
         /// <summary>
-        /// Gets an ID representing the operation that can be used to poll for the status
+        /// Gets an ID representing the translation operation that can be used to poll for the status
         /// of the long-running operation.
         /// </summary>
         public override string Id { get; }
@@ -282,7 +283,8 @@ namespace Azure.AI.DocumentTranslation
                     }
                     else if (update.Value.Status == TranslationStatus.ValidationFailed)
                     {
-                        _requestFailedException = _diagnostics.CreateRequestFailedException(_response);
+                        DocumentTranslationError error = update.Value.Error;
+                        _requestFailedException = _diagnostics.CreateRequestFailedException(_response, error.Message, error.ErrorCode.ToString(), CreateAdditionalInformation(error));
                         _hasCompleted = true;
                         throw _requestFailedException;
                     }
@@ -298,7 +300,7 @@ namespace Azure.AI.DocumentTranslation
         }
 
         /// <summary>
-        /// Get the status of a specific document in the operation.
+        /// Get the status of a specific document in the translation operation.
         /// </summary>
         /// <param name="documentId">ID of the document.</param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> used for the service call.</param>
@@ -319,13 +321,13 @@ namespace Azure.AI.DocumentTranslation
         }
 
         /// <summary>
-        /// Get the status of a specific document in the operation.
+        /// Get the status of a specific document in the translation operation.
         /// </summary>
         /// <param name="documentId">ID of the document.</param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> used for the service call.</param>
         public virtual async Task<Response<DocumentStatusResult>> GetDocumentStatusAsync(string documentId, CancellationToken cancellationToken = default)
         {
-            using DiagnosticScope scope = _diagnostics.CreateScope($"{nameof(DocumentTranslationOperation)}.{nameof(GetDocumentStatusAsync)}");
+            using DiagnosticScope scope = _diagnostics.CreateScope($"{nameof(DocumentTranslationOperation)}.{nameof(GetDocumentStatus)}");
             scope.Start();
 
             try
@@ -340,7 +342,7 @@ namespace Azure.AI.DocumentTranslation
         }
 
         /// <summary>
-        /// Get the status of a all documents in the operation.
+        /// Get the status of all documents in the translation operation.
         /// </summary>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> used for the service call.</param>
         public virtual Pageable<DocumentStatusResult> GetAllDocumentStatuses(CancellationToken cancellationToken = default)
@@ -352,7 +354,7 @@ namespace Azure.AI.DocumentTranslation
 
                 try
                 {
-                    var response = _serviceClient.GetOperationDocumentsStatus(new Guid(Id), null, null, cancellationToken);
+                    var response = _serviceClient.GetOperationDocumentsStatus(new Guid(Id), cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -383,19 +385,19 @@ namespace Azure.AI.DocumentTranslation
         }
 
         /// <summary>
-        /// Get the status of a all documents in the operation.
+        /// Get the status of all documents in the translation operation.
         /// </summary>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> used for the service call.</param>
         public virtual AsyncPageable<DocumentStatusResult> GetAllDocumentStatusesAsync(CancellationToken cancellationToken = default)
         {
             async Task<Page<DocumentStatusResult>> FirstPageFunc(int? pageSizeHint)
             {
-                using DiagnosticScope scope = _diagnostics.CreateScope($"{nameof(DocumentTranslationOperation)}.{nameof(GetAllDocumentStatusesAsync)}");
+                using DiagnosticScope scope = _diagnostics.CreateScope($"{nameof(DocumentTranslationOperation)}.{nameof(GetAllDocumentStatuses)}");
                 scope.Start();
 
                 try
                 {
-                    var response = await _serviceClient.GetOperationDocumentsStatusAsync(new Guid(Id), null, null, cancellationToken).ConfigureAwait(false);
+                    var response = await _serviceClient.GetOperationDocumentsStatusAsync(new Guid(Id), cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -407,7 +409,7 @@ namespace Azure.AI.DocumentTranslation
 
             async Task<Page<DocumentStatusResult>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using DiagnosticScope scope = _diagnostics.CreateScope($"{nameof(DocumentTranslationOperation)}.{nameof(GetAllDocumentStatusesAsync)}");
+                using DiagnosticScope scope = _diagnostics.CreateScope($"{nameof(DocumentTranslationOperation)}.{nameof(GetAllDocumentStatuses)}");
                 scope.Start();
 
                 try
@@ -452,7 +454,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> used for the service call.</param>
         public virtual async Task CancelAsync(CancellationToken cancellationToken)
         {
-            using DiagnosticScope scope = _diagnostics.CreateScope($"{nameof(DocumentTranslationOperation)}.{nameof(CancelAsync)}");
+            using DiagnosticScope scope = _diagnostics.CreateScope($"{nameof(DocumentTranslationOperation)}.{nameof(Cancel)}");
             scope.Start();
 
             try
@@ -499,6 +501,13 @@ namespace Azure.AI.DocumentTranslation
                 throw new InvalidOperationException("The operation has not completed yet.");
             if (!HasValue)
                 throw _requestFailedException;
+        }
+
+        private static IDictionary<string, string> CreateAdditionalInformation(DocumentTranslationError error)
+        {
+            if (string.IsNullOrEmpty(error.Target))
+                return null;
+            return new Dictionary<string, string> { { "Target", error.Target } };
         }
     }
 }

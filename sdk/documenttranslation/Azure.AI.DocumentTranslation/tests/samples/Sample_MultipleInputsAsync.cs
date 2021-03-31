@@ -4,10 +4,11 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Azure.AI.DocumentTranslation.Tests;
 using Azure.Core.TestFramework;
 using NUnit.Framework;
 
-namespace Azure.AI.DocumentTranslation.Tests.Samples
+namespace Azure.AI.DocumentTranslation.Samples
 {
     [LiveOnly]
     public partial class DocumentTranslationSamples : SamplesBase<DocumentTranslationTestEnvironment>
@@ -36,12 +37,13 @@ namespace Azure.AI.DocumentTranslation.Tests.Samples
             //@@ Uri arabicTargetSasUri = <arabic target SAS URI>;
             //@@ Uri spanishTargetSasUri = <spanish target SAS URI>;
             //@@ Uri frenchGlossarySasUri = <french glossary SAS URI>;
+            var glossaryFormat = "TSV";
 
-            var input1 = new DocumentTranslationInput(source1SasUriUri, frenchTargetSasUri, "fr", new TranslationGlossary(frenchGlossarySasUri));
+            var input1 = new DocumentTranslationInput(source1SasUriUri, frenchTargetSasUri, "fr", new TranslationGlossary(frenchGlossarySasUri, glossaryFormat));
             input1.AddTarget(spanishTargetSasUri, "es");
 
             var input2 = new DocumentTranslationInput(source2SasUri, arabicTargetSasUri, "ar");
-            input2.AddTarget(frenchTargetSasUri, "fr", new TranslationGlossary(frenchGlossarySasUri));
+            input2.AddTarget(frenchTargetSasUri, "fr", new TranslationGlossary(frenchGlossarySasUri, glossaryFormat));
 
             var inputs = new List<DocumentTranslationInput>()
                 {
@@ -74,11 +76,13 @@ namespace Azure.AI.DocumentTranslation.Tests.Samples
                 Console.WriteLine($"  Status:{document.Status}");
                 if (document.Status == TranslationStatus.Succeeded)
                 {
-                    Console.WriteLine($"  URI: {document.TranslatedDocumentUri}");
+                    Console.WriteLine($"  Translated Document Uri: {document.TranslatedDocumentUri}");
                     Console.WriteLine($"  Translated to language: {document.TranslateTo}.");
+                    Console.WriteLine($"  Document source Uri: {document.SourceDocumentUri}");
                 }
                 else
                 {
+                    Console.WriteLine($"  Document source Uri: {document.SourceDocumentUri}");
                     Console.WriteLine($"  Error Code: {document.Error.ErrorCode}");
                     Console.WriteLine($"  Message: {document.Error.Message}");
                 }

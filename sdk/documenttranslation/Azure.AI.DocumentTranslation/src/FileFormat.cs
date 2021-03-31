@@ -6,11 +6,18 @@ using Azure.Core;
 
 namespace Azure.AI.DocumentTranslation
 {
+    /// <summary>
+    /// Possible file formats supported by the Document Translation service.
+    /// </summary>
     [CodeGenModel("FileFormat")]
     public partial class FileFormat
     {
-        /// <summary> Supported Version. </summary>
+        /// <summary> Supported format versions. </summary>
         [CodeGenMember("Versions")]
         public IReadOnlyList<string> FormatVersions { get; }
+
+        /// <summary> Default format version if none is specified. </summary>
+        [CodeGenMember("DefaultVersion")]
+        public string DefaultFormatVersion { get; }
     }
 }
