@@ -1854,7 +1854,7 @@ namespace RecoveryServices.SiteRecovery.Tests
             }
         }
 
-        [Fact]
+        [Fact(Skip = "Understand test scenario")]
         public void GetReplicationEvent()
         {
             using (var context = MockContext.Start(this.GetType()))
